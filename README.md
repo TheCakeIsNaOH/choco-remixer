@@ -1,8 +1,21 @@
+## What is this?
+
+This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-recompile-packages) select Chocolatey packages.
+
+## Why? 
+
+- Because relying on software to be available at a specific URL on the internet in perpetuity is not a good idea.
+- Manually downloading and internalizing for each package version is a lot of work.
+- The [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that also has [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages) is-
+ 
+   - Not open source
+   - Too expensive for home users at $640/year
+
 ## Requirements
 
 - PowerShell - tested so far with v5.1 on windows, should be compatible with 6+ and other OSes without too much effort
 - `choco` on your path
-- Chocolatey `.nupgk` files that do not include all files in the package.
+- Chocolatey `.nupgk` files that are include all files in the package (i.e. not internal).
 - A local chocolatey repository. Proget is ideal
 
 ## Setup 
@@ -33,6 +46,7 @@
 - Turn into proper module
 - Automatic push/copy and auto add to personal packages, todo after error checking is much better
 - Make individual package functions better
+  - Support multiple function for different package versions
 - Speed up searching for `.nupkgs`
     ### Long term
   
