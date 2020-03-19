@@ -16,7 +16,7 @@ $ExecutionContext.InvokeCommand.InvokeScript($false, ([scriptblock]::Create([io.
 Function Get-ZipInstallScript ($nupkgPath) {
 	#open the nupkg as readonly
 	$archive = [System.IO.Compression.ZipFile]::OpenRead($nupkgPath)
-	
+
 	#check if installscript in inside nuspec
 	if ($archive.Entries.name -notcontains "chocolateyInstall.ps1") {
 		$script:installScript = $null
@@ -64,7 +64,7 @@ Function Find-InstallHelpers {
 	$SupportedHelpers   = "Install-ChocolateyZipPackage","Install-ChocolateyPackage","Get-ChocolateyWebFile"
 	
 	Foreach ($helper in $UnsupportedHelpers) {
-		if ($installScript | sls -pattern $helper -allmatches) {
+		if ($installScript | Select-String -pattern $helper -allmatches) {
 			$script:status      = "UnsupportedHelper"
 			$script:foundHelper = $helper
 		}
@@ -72,13 +72,13 @@ Function Find-InstallHelpers {
 	
 	If ($script:status -ne "UnsupportedHelper") {
 		Foreach ($helper in $SupportedHelpers) {
-			if ($installScript | sls -allmatches -pattern $helper) {
+			if ($installScript | Select-String -allmatches -pattern $helper) {
 				$script:foundHelper = $helper
 			}
 		}
 	}
 		
-	If ($script:foundHelper -eq $null) {
+	If ($null -eq $script:foundHelper) {
 		$script:status = "NoHelper"
 	}
 
@@ -99,8 +99,8 @@ Function Write-ZipInstallScript ($nupkgObj) {
 
 Function Internalize-InstallCPkg ($obj) {
 	#fixup into general installscript modifier?
-	$filePath32 = '$file 				   = (Join-Path $toolsDir "' + $obj.filename32 + '")'
-	$filePath64 = '$file 				   = (Join-Path $toolsDir "' + $obj.filename64 + '")'
+	#$filePath32 = '$file 				   = (Join-Path $toolsDir "' + $obj.filename32 + '")'
+	#$filePath64 = '$file 				   = (Join-Path $toolsDir "' + $obj.filename64 + '")'
 	
 	$obj.installScriptMod = $obj.installScriptMod.replace("Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage")
 
@@ -111,16 +111,16 @@ Function Internalize-InstallCPkg ($obj) {
 	
 	
 	if ($obj.needsToolsDir -ieq  'yes') {
-		# write-host $obj.nuspecID
+		# Write-Output $obj.nuspecID
 		$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-		# Write-Host $obj.installScriptMod
+		# Write-Output $obj.installScriptMod
 	}
 	
 	if ($obj.needsStopAction -ieq  'yes') {
-		#write-host $obj.nuspecID
+		#Write-Output $obj.nuspecID
 		$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
 		#add insert stop action here
-		#Write-Host $obj.installScriptMod
+		#Write-Output $obj.installScriptMod
 	}
 	
 	
@@ -137,19 +137,19 @@ Function Write-ZipToolsFiles ([string]$nupkg, $toolsDir) {
 	#don't need with seperate pack
 
 	$compressionLevel = [System.IO.Compression.CompressionLevel]::NoCompression
-	#Write-Host $nupkg
+	#Write-Output $nupkg
 	
 
 	$filetype = "*" + $obj.filetype
-	#Write-Host $filetype
+	#Write-Output $filetype
 
 	$fileList = Get-Childitem $toolsDir -filter $filetype
 
-	#Write-Host $fileList
+	#Write-Output $fileList
 
 	$archive = [System.IO.Compression.ZipFile]::Open($nupkg, 'update')
 
-	$fileList | % { 
+	$fileList | ForEach-Object { 
 		
 		$filename = $_.name
 		[System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $_.fullname, "tools\$filename" , $compressionLevel)
@@ -243,6 +243,8 @@ $internalizedDir = $personalpackagesXMLcontent.mypackages.paths.internalizedDir.
 #need this as normal PWSH arrays are slow to add an element
 [System.Collections.ArrayList]$nupkgObjArray = @()
 
+
+
 #add switch here to select from other options to get list of nupkgs
 $nupkgArray = (Get-ChildItem $downloadDir -Filter "*.nupkg" -Recurse)
 
@@ -258,7 +260,9 @@ $nupkgArray | ForEach-Object {
 	$newpath = $null
 	Get-NuspecVersion -NupkgPath $_.fullname
 	
-	$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | where {$_.id -eq "$nuspecID" }).version
+	
+	
+	 $internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -eq "$nuspecID" }).version
 	
 	if ($packagesXMLcontent.packages.internal.id -contains $nuspecID) {
 		#package from chocolatey.org is internal by default
@@ -273,17 +277,17 @@ $nupkgArray | ForEach-Object {
 		#add something here? verbose logging?
 		
 	} elseif ($packagesXMLcontent.packages.notImplemented.id -contains $nuspecID) {
-		Write-Host $nuspecID $nuspecVersion ' not implemented, requires manual internalization' #$nuspecVersion
+		Write-Output $nuspecID $nuspecVersion ' not implemented, requires manual internalization' #$nuspecVersion
 		#package is not supported, due to bad choco install script that is hard to internalize
 		#add something here? verbose logging?
 	
  	} elseif ($packagesXMLcontent.packages.custom.pkg.id -contains $nuspecID) {
 	
-		Get-ZipInstallScript -NupkgPath $_.fullname
+		 Get-ZipInstallScript -NupkgPath $_.fullname
 		
 		if ($script:status -eq "noscript") {
-			Write-Host 'You may want to add ' $nuspecID $nuspecVersion ' to the internal list CHANGE?'
-			#Write-Host '<id>'$nuspecID'</id>'
+			Write-Output 'You may want to add ' $nuspecID $nuspecVersion ' to the internal list CHANGE?'
+			#Write-Output '<id>'$nuspecID'</id>'
 			
 		} else {
 			Find-InstallHelpers
@@ -314,24 +318,24 @@ $nupkgArray | ForEach-Object {
 
 			}
 			
-			$nupkgObjArray.add($obj) | Out-Null
+			$nupkgObjArray.add($obj) | Out-Null 
 			
-			#Write-Host $nuspecID $nuspecVersion
+			#Write-Output $nuspecID $nuspecVersion
 			
-		}
+		} 
 	
 		
 	} else {
-		#Write-Host '<id>'$nuspecID'</id>'
+		#Write-Output '<id>'$nuspecID'</id>'
 		
-		Write-Host $nuspecID $nuspecVersion ' is new, id unknown'
+		Write-Output $nuspecID $nuspecVersion ' is new, id unknown'
 		
 		<#Get-InstallScript -NupkgPath $_.fullname
 	
 		if (!($script:InstallScript -like "*http*")) {
-			write-host '<id>'$nuspecID'</id>'
+			Write-Output '<id>'$nuspecID'</id>'
 		} #>
-	}
+	} 
 }
 
 #don't need the list anymore, use nupkgObjArray
@@ -340,7 +344,7 @@ $nupkgArray = $null
 #Setup the directories for internalizing
 Foreach ($obj in $nupkgObjArray) {
 	
-	#write-host $obj.helper
+	#Write-Output $obj.helper
 	
 	if (!(Test-Path $obj.idDir)) {
 		mkdir $obj.idDir | Out-Null
@@ -361,7 +365,7 @@ Foreach ($obj in $nupkgObjArray) {
 	if (!(Test-Path (Join-Path $obj.versionDir $obj.nupkgName))) {
 		
 	} else {
-		#Write-Host $obj.nupkgName $obj.Version ' is already copied'
+		#Write-Output $obj.nupkgName $obj.Version ' is already copied'
 	}
 	$obj.status = "copied"
 	
@@ -369,24 +373,22 @@ Foreach ($obj in $nupkgObjArray) {
 
 }
 
-
-
 Foreach ($obj in $nupkgObjArray) {
 	
 
-	if (($obj.functionName -ne $null) -and ($obj.functionName -ne "")) {
+	if (($null -ne $obj.functionName) -and ($obj.functionName -ne "")) {
 		Extract-Nupkg -obj $obj
 
-		#Write-Host $obj.functionName
+		#Write-Output $obj.functionName
 		$tempFuncName = $obj.functionName
 		$tempFuncName = $tempFuncName + ' -obj $obj'
-		iex $tempFuncName
+		Invoke-Expression $tempFuncName
 		$tempFuncName = $null
 		
-		#Write-Host $obj.filename64 
+		#Write-Output $obj.filename64 
 		#Write-InstallScript -nupkgObj $obj
-		#Write-Host "should show up only once"
-		#Write-Host $obj.nuspecID $obj.version
+		#Write-Output "should show up only once"
+		#Write-Output $obj.nuspecID $obj.version
 
 		#OLD
 		#Write-ToolsFiles -nupkg $obj.newPath -toolsDir $obj.toolsDir
@@ -409,11 +411,11 @@ Foreach ($obj in $nupkgObjArray) {
 }
 
 <# for (($i = 0), ($i -le $count), ($i++)) {
-	Write-Host "`n"
+	Write-Output "`n"
 }
  #>
 
-#Write-Host "completed"
+#Write-Output "completed"
 
 # Get-ChildItem -Recurse -Path '..\.nugetv2\F1' -Filter "*.nupkg" | % { Copy-Item $_.fullname . }
 

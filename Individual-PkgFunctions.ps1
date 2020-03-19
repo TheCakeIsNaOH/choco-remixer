@@ -20,20 +20,20 @@ Add-Member -InputObject $obj -NotePropertyName url64 -NotePropertyValue $url64
 	# $dlwd = New-Object net.webclient
 
 	# if (Test-Path $dlwdFile32) {
-		# Write-Host $dlwdFile32 ' appears to be downloaded'
+		# Write-Output $dlwdFile32 ' appears to be downloaded'
 	# } else {
 		# $dlwd.DownloadFile($url32, $dlwdFile32)
 	# }
 	
 	# if (Test-Path $dlwdFile64) {
-		# Write-Host $dlwdFile64 ' appears to be downloaded'
+		# Write-Output $dlwdFile64 ' appears to be downloaded'
 	# } else {
 		# $dlwd.DownloadFile($url64, $dlwdFile64)
 	# }
 
 	# $dlwd.dispose()
 
-	#Write-Host $obj.installScriptMod
+	#Write-Output $obj.installScriptMod
 
 	# $dlwd = New-Object net.webclient
 
@@ -76,13 +76,13 @@ Function download-fileBoth {
 	$dlwd = New-Object net.webclient
 
 	if (Test-Path $dlwdFile32) {
-		Write-Host $dlwdFile32 ' appears to be downloaded'
+		Write-Output $dlwdFile32 ' appears to be downloaded'
 	} else {
 		$dlwd.DownloadFile($url32, $dlwdFile32)
 	}
 	
 	if (Test-Path $dlwdFile64) {
-		Write-Host $dlwdFile64 ' appears to be downloaded'
+		Write-Output $dlwdFile64 ' appears to be downloaded'
 	} else {
 		$dlwd.DownloadFile($url64, $dlwdFile64)
 	}
@@ -106,7 +106,7 @@ Function download-fileSingle {
 	$dlwd = New-Object net.webclient
 
 	if (Test-Path $dlwdFile) {
-		Write-Host $dlwdFile ' appears to be downloaded'
+		Write-Output $dlwdFile ' appears to be downloaded'
 	} else {
 		$dlwd.DownloadFile($url, $dlwdFile)
 	}
@@ -216,11 +216,11 @@ Function mod-4k-youtube-to-mp3 ($obj) {
 
 
 Function mod-vscodium-install ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern "Url ").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | sls -pattern "Url64bit ").tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url ").tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit ").tostring()
 
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | sls -Pattern "http").tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -237,13 +237,11 @@ Function mod-vscodium-install ($obj) {
 
 
 Function mod-adoptopenjdk8 ($obj) {
-	$version = $obj.version
-	
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern "Url = ").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | sls -pattern "Url64bit = ").tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url = ").tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit = ").tostring()
 
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | sls -Pattern "http").tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -263,13 +261,11 @@ Function mod-adoptopenjdk8 ($obj) {
 
 
 Function mod-adoptopenjdk8jre ($obj) {
-	$version = $obj.version
-	
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern "Url = ").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | sls -pattern "Url64bit = ").tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url = ").tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit = ").tostring()
 
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | sls -Pattern "http").tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -311,7 +307,7 @@ Function mod-nextcloud-client ($obj) {
  	#$dlwd = New-Object net.webclient
 
 	if (Test-Path $dlwdFile32) {
-		Write-Host $dlwdFile32 ' appears to be downloaded'
+		Write-Output $dlwdFile32 ' appears to be downloaded'
 	} else {
 		#$dlwd.DownloadFile($url32, $dlwdFile32)
 		#invoke webrequest needed as with it downloadfile it 429s
@@ -384,7 +380,7 @@ Function mod-hwmonitor ($obj) {
  	#$dlwd = New-Object net.webclient
 
 	if (Test-Path $dlwdFile32) {
-		Write-Host $dlwdFile32 ' appears to be downloaded'
+		Write-Output $dlwdFile32 ' appears to be downloaded'
 	} else {
 		#$dlwd.DownloadFile($url32, $dlwdFile32)
 		#invoke webrequest needed as with it downloadfile it 429s
@@ -496,13 +492,11 @@ Function mod-bitwarden ($obj) {
 
 
 Function mod-dotnetcore-sdk ($obj) {
-	$version = $obj.version
-	
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -Pattern '^\$url ').tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | sls -Pattern '^\$url64 ').tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
 
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | sls -Pattern "http").tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -561,7 +555,7 @@ Function mod-firefox ($obj) {
 Function mod-gimp ($obj) {
 
 	$version = $obj.version
-	$partVersion = ($version -split "\." | select -First 2) -join "."
+	$partVersion = ($version -split "\." | Select-Object -First 2) -join "."
 	
 	$url32 = "https://download.gimp.org/mirror/pub/gimp/v" + $partVersion + "/windows/gimp-" + $version + "-setup.exe"
 	$filename32 = "gimp-" + $version + "-setup.exe"
@@ -578,8 +572,8 @@ Function mod-gimp ($obj) {
 
 Function mod-github-desktop ($obj) {
 
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern "Url").tostring()
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url").tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
 
 	$filename32 = "GitHubDesktopSetup.exe"
 	
@@ -614,13 +608,11 @@ Function mod-kdenlive ($obj) {
 
 
 Function mod-mono ($obj) {
-	$version = $obj.version
-	
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern "Url ").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | sls -pattern "Url64bit ").tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url ").tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit ").tostring()
 
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | sls -Pattern "http").tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -638,13 +630,11 @@ Function mod-mono ($obj) {
 
 
 Function mod-shotcut-install ($obj) {
-	$version = $obj.version
-	
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern '^\$Url32 ').tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | sls -pattern '^\$Url64 ').tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url32 ').tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
 
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | sls -Pattern "http").tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -662,11 +652,8 @@ Function mod-shotcut-install ($obj) {
 
 
 Function mod-krita ($obj) {
-	$version = $obj.version
-	
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern 'Url ').tostring()
-
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'Url ').tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
 
 	$filename32 = "krita-x86-" + $version + "-setup.exe"
 	$filename64 = "krita-x64-" + $version + "-setup.exe"
@@ -724,12 +711,9 @@ Function mod-vivaldi-install ($obj) {
 
 
 Function mod-resharper-platform ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url ').tostring()
 
-	$version = $obj.version
-	
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern '^\$Url ').tostring()
-
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
 
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 
@@ -740,9 +724,6 @@ Function mod-resharper-platform ($obj) {
 
 
 Function mod-steam ($obj) {
-
-	$version = $obj.version
-	
 	$url32 = "http://media.steampowered.com/client/installer/SteamSetup.exe"
 	$filename32 = "SteamSetup.exe"
 	
@@ -757,8 +738,8 @@ Function mod-steam ($obj) {
 
 
 Function mod-skype ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern 'url ').tostring()
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'url ').tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
 
@@ -771,9 +752,6 @@ Function mod-skype ($obj) {
 
 
 Function mod-origin ($obj) {
-
-	$version = $obj.version
-	
 	$url32 = "https://download.dm.origin.com/origin/live/OriginSetup.exe"
 	$filename32 = "OriginSetup.exe"
 	
@@ -808,11 +786,11 @@ Function mod-powershell-core ($obj) {
 Function mod-libreoffice-fresh ($obj) {
 	$version = $obj.version
 	
-	# $fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern 'url  ').tostring()
-	# $fullurl64 = ($obj.installScriptOrig -split "`n" | sls -pattern 'url64bit ').tostring()
+	# $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'url  ').tostring()
+	# $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'url64bit ').tostring()
 
-	# $url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
-	# $url64 = ($fullurl64 -split "'" | sls -Pattern "http").tostring()
+	# $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	# $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
 	# $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	# $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -836,11 +814,11 @@ Function mod-libreoffice-fresh ($obj) {
 
 
 Function mod-ds4windows ($obj) { 
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern '^\$Url ').tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | sls -pattern '^\$Url64 ').tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url ').tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
 
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | sls -Pattern "http").tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -859,25 +837,25 @@ Function mod-ds4windows ($obj) {
 
 
 Function mod-icecat ($obj) {
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | sls -pattern 'url64 ').tostring()
-	$url64 = ($fullurl64 -split "'" | sls -Pattern "http").tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'url64 ').tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
 	$filePath64 = 'file64     = (Join-Path $toolsDir "' + $filename64 + '")'
 
 	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath64"
 	
 	download-fileSingle -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
 
 Function mod-hexchat ($obj) { 
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | sls -pattern '^\$Url ').tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | sls -pattern '^\$Url64 ').tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url ').tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
 
-	$url32 = ($fullurl32 -split "'" | sls -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | sls -Pattern "http").tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring().replace('%20', '-')
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring().replace('%20', '-')
@@ -914,13 +892,13 @@ Function mod-cutepdf ($obj) {
 
 
 Function mod-nvidia-driver ($obj) {
-	$fullurlwin7  = ($obj.installScriptOrig -split "`n" | sls -pattern "packageArgs\['url64'\]      = 'https").tostring()
-	$fullurlwin10 = ($obj.installScriptOrig -split "`n" | sls -pattern "Url64   ").tostring()
-	$fullurlDCH   = ($obj.installScriptOrig -split "`n" | sls -pattern "packageArgsDCHURL      = 'https").tostring()
+	$fullurlwin7  = ($obj.installScriptOrig -split "`n" | Select-String -pattern "packageArgs\['url64'\]      = 'https").tostring()
+	$fullurlwin10 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64   ").tostring()
+	$fullurlDCH   = ($obj.installScriptOrig -split "`n" | Select-String -pattern "packageArgsDCHURL      = 'https").tostring()
 
-	$urlwin7  = ($fullurlwin7 -split "'" | sls -Pattern "http").tostring()
-	$urlwin10 = ($fullurlwin10 -split "'" | sls -Pattern "http").tostring()
-	$urlDCH   = ($fullurlDCH -split "'" | sls -Pattern "http").tostring()
+	$urlwin7  = ($fullurlwin7 -split "'" | Select-String -Pattern "http").tostring()
+	$urlwin10 = ($fullurlwin10 -split "'" | Select-String -Pattern "http").tostring()
+	$urlDCH   = ($fullurlDCH -split "'" | Select-String -Pattern "http").tostring()
 
 	$filenamewin7  = ($urlwin7 -split "/" | Select-Object -Last 1).tostring()
 	$filenamewin10 = ($urlwin10 -split "/" | Select-Object -Last 1).tostring()
@@ -947,19 +925,19 @@ Function mod-nvidia-driver ($obj) {
 	$dlwd = New-Object net.webclient
 
 	if (Test-Path $dlwdFilewin7) {
-		Write-Host $dlwdFilewin7 ' appears to be downloaded'
+		Write-Output $dlwdFilewin7 ' appears to be downloaded'
 	} else {
 		$dlwd.DownloadFile($urlwin7, $dlwdFilewin7)
 	}
 	
 	if (Test-Path $dlwdFilewin10) {
-		Write-Host $dlwdFilewin10 ' appears to be downloaded'
+		Write-Output $dlwdFilewin10 ' appears to be downloaded'
 	} else {
 		$dlwd.DownloadFile($urlwin10, $dlwdFilewin10)
 	}
 
 	if (Test-Path $dlwdFileDCH) {
-		Write-Host $dlwdFileDCH ' appears to be downloaded'
+		Write-Output $dlwdFileDCH ' appears to be downloaded'
 	} else {
 		$dlwd.DownloadFile($urlDCH, $dlwdFileDCH)
 	}
