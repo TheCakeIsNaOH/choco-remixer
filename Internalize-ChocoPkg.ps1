@@ -1,0 +1,419 @@
+param (
+	[string]$pkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
+	[string]$PersonalPkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml')
+)
+
+#needed for accessing dotnet zip functions
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+#dot source functions from other file
+$functionsFile = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'Individual-PkgFunctions.ps1')
+$ExecutionContext.InvokeCommand.InvokeScript($false, ([scriptblock]::Create([io.file]::ReadAllText($functionsFile, [Text.Encoding]::UTF8))), $null, $null)
+
+#default dot source, too slow
+#. (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'Custom-internalizer-funcs.ps1')
+
+Function Get-ZipInstallScript ($nupkgPath) {
+	#open the nupkg as readonly
+	$archive = [System.IO.Compression.ZipFile]::OpenRead($nupkgPath)
+	
+	#check if installscript in inside nuspec
+	if ($archive.Entries.name -notcontains "chocolateyInstall.ps1") {
+		$script:installScript = $null
+		$script:status = "noscript"
+	} else {
+		#get path inside nupkg
+		$ScriptPath = ($archive.Entries | Where-Object { $_.FullName -like "*chocolateyInstall.ps1" })
+
+		#open the path
+		$scriptStream = $ScriptPath.open()
+		$reader = New-Object Io.streamreader($scriptStream)
+		
+		#read install script into installscript variable
+		$Script:installScript = $reader.Readtoend()
+		
+		$scriptStream.close()
+		$reader.close()
+		
+	}
+	$archive.dispose()
+}
+
+Function Get-NuspecVersion ($nupkgPath) {
+	$archive = [System.IO.Compression.ZipFile]::OpenRead($nupkgPath)
+
+ 	$nuspecStream = ($archive.Entries | Where-Object { $_.FullName -like "*.nuspec" }).open()
+	$nuspecReader = New-Object Io.streamreader($nuspecStream)
+	$nuspecString = $nuspecReader.ReadToEnd()
+
+	#cleanup opened variables
+	$nuspecStream.close()
+	$nuspecReader.close()
+	$archive.dispose()
+	
+	$script:nuspecVersion = ([XML]$nuspecString).package.metadata.version
+	$script:nuspecID = ([XML]$nuspecString).package.metadata.id
+	
+}
+
+Function Find-InstallHelpers {
+	
+	#probably don't need this one anymore?
+
+	$UnsupportedHelpers = "Install-ChocolateyVsixPackage","Install-ChocolateyPowershellCommand","Get-FtpFile","Get-WebFile","Install-WindowsUpdate"
+	$SupportedHelpers   = "Install-ChocolateyZipPackage","Install-ChocolateyPackage","Get-ChocolateyWebFile"
+	
+	Foreach ($helper in $UnsupportedHelpers) {
+		if ($installScript | sls -pattern $helper -allmatches) {
+			$script:status      = "UnsupportedHelper"
+			$script:foundHelper = $helper
+		}
+	}
+	
+	If ($script:status -ne "UnsupportedHelper") {
+		Foreach ($helper in $SupportedHelpers) {
+			if ($installScript | sls -allmatches -pattern $helper) {
+				$script:foundHelper = $helper
+			}
+		}
+	}
+		
+	If ($script:foundHelper -eq $null) {
+		$script:status = "NoHelper"
+	}
+
+}
+
+Function Write-ZipInstallScript ($nupkgObj) {
+	#also don't need?
+	$archive = [System.IO.Compression.ZipFile]::Open($nupkgObj.newpath, 'update')
+	$ScriptStream = ($archive.Entries | Where-Object { $_.FullName -like "*chocolateyInstall.ps1" }).open()
+	$writer = New-Object Io.StreamWriter($scriptStream)
+	$writer.WriteLine($nupkgObj.installScriptMod)
+	$writer.Flush()
+	
+	$writer.close()
+	$scriptStream.close()
+	$archive.dispose()
+}
+
+Function Internalize-InstallCPkg ($obj) {
+	#fixup into general installscript modifier?
+	$filePath32 = '$file 				   = (Join-Path $toolsDir "' + $obj.filename32 + '")'
+	$filePath64 = '$file 				   = (Join-Path $toolsDir "' + $obj.filename64 + '")'
+	
+	$obj.installScriptMod = $obj.installScriptMod.replace("Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage")
+
+	# if ($obj.installScriptMod -notlike "*Install-ChocolateyPackage*") {
+		# echo $obj.nuspecID
+	# }
+
+	
+	
+	if ($obj.needsToolsDir -ieq  'yes') {
+		# write-host $obj.nuspecID
+		$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+		# Write-Host $obj.installScriptMod
+	}
+	
+	if ($obj.needsStopAction -ieq  'yes') {
+		#write-host $obj.nuspecID
+		$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+		#add insert stop action here
+		#Write-Host $obj.installScriptMod
+	}
+	
+	
+
+	
+	#add in $file $file64
+		#unsure about file name, how to grep that? extra grep in xml?
+	
+	#grep for package args, 
+		#unsure for replaceing url with file, direct vs named vs packageargs
+}
+
+Function Write-ZipToolsFiles ([string]$nupkg, $toolsDir) {
+	#don't need with seperate pack
+
+	$compressionLevel = [System.IO.Compression.CompressionLevel]::NoCompression
+	#Write-Host $nupkg
+	
+
+	$filetype = "*" + $obj.filetype
+	#Write-Host $filetype
+
+	$fileList = Get-Childitem $toolsDir -filter $filetype
+
+	#Write-Host $fileList
+
+	$archive = [System.IO.Compression.ZipFile]::Open($nupkg, 'update')
+
+	$fileList | % { 
+		
+		$filename = $_.name
+		[System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $_.fullname, "tools\$filename" , $compressionLevel)
+	}
+
+	$archive.dispose()
+
+}
+
+Function Update-ContentTypes ($nupkgPath) {
+	#don't need with seperate choco pack
+
+	$archive = [System.IO.Compression.ZipFile]::OpenRead($nupkgPath)
+	
+	$contentPath = ($archive.Entries | Where-Object { $_.FullName -like "*Content_Types].xml" })
+	$contentStream = $contentPath.open()
+	$reader = New-Object Io.streamreader($contentStream)
+		
+	[XML]$contentXml = $reader.Readtoend()
+		
+	$contentStream.close()
+	$reader.close()
+
+	$archive.dispose()
+
+	$newnode = $contentXML.CreateNode("element","Default","")
+	$newnode.SetAttribute("Extension", "msi")
+	$newnode.SetAttribute("ContentType", "application/octet")
+	$contentXML.types.AppendChild($newnode)
+
+	#manually stripping out xml namepace declaration, not ideal but could not stop it from adding
+	$contentXML = [xml] $contentXML.OuterXml.Replace(" xmlns=`"`"", "")
+
+ 	$archive = [System.IO.Compression.ZipFile]::Open($nupkgPath, 'update')
+	$contentStream = ($archive.Entries | Where-Object { $_.FullName -like "*Content_Types].xml" }).open()
+
+	$writer = New-Object Io.StreamWriter($contentStream)
+
+	
+	$content = $contentXML.outerxml.tostring()
+	#$content
+	
+	$writer.WriteLine($content)
+
+	$writer.Flush()
+	
+	$writer.close()
+	$contentStream.close()
+	$archive.dispose()
+
+	
+}
+
+Function Extract-Nupkg ($obj) {
+	[System.IO.Compression.ZipFile]::ExtractToDirectory($obj.newpath, $obj.versionDir)
+
+	#force needed due to wacky permissions after extract
+	Remove-Item -Force -Recurse -LiteralPath (Join-Path $obj.versionDir '_rels')
+	Remove-Item -Force -Recurse -ea 0 -LiteralPath (Join-Path $obj.versionDir "package")
+	Remove-Item -ea 0 -LiteralPath (Join-Path $obj.versionDir '[Content_Types].xml')
+	Remove-Item -Force -Recurse -ea 0 -LiteralPath (Join-Path $obj.versionDir '__MACOSX')
+
+}
+
+Function Write-UnzippedInstallScript ($obj) {
+	$scriptPath = Join-Path $obj.toolsDir 'ChocolateyInstall.ps1'
+	Set-Content -Path $scriptPath -Value $obj.installScriptMod
+
+}
+
+
+if (!(Test-Path $pkgXML)) {
+	Write-Error "packages.xml not found, please specify valid path"
+	throw
+}
+if (!(Test-Path $PersonalPkgXML)) {
+	Write-Error "personal-packages.xml not found, please specify valid path"
+	throw
+}
+
+[XML]$packagesXMLcontent = Get-Content $pkgXML
+[XML]$personalpackagesXMLcontent = Get-Content $PersonalPkgXML
+
+#change these to paramters? XML file?
+#add check that internalizeddir is not subdir of download dir
+#add drop-path
+$downloadDir = $personalpackagesXMLcontent.mypackages.paths.downloadDir.tostring()
+$internalizedDir = $personalpackagesXMLcontent.mypackages.paths.internalizedDir.tostring()
+
+
+#need this as normal PWSH arrays are slow to add an element
+[System.Collections.ArrayList]$nupkgObjArray = @()
+
+#add switch here to select from other options to get list of nupkgs
+$nupkgArray = (Get-ChildItem $downloadDir -Filter "*.nupkg" -Recurse)
+
+#echo $nupkgArray.fullname
+
+$nupkgArray | ForEach-Object {
+	$script:status = "ready"
+	$script:helper = $null
+	$script:foundHelper = $null
+	$script:InstallScript = $null 
+	$helper = $null
+	$versionDir	= $null
+	$newpath = $null
+	Get-NuspecVersion -NupkgPath $_.fullname
+	
+	$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | where {$_.id -eq "$nuspecID" }).version
+	
+	if ($packagesXMLcontent.packages.internal.id -contains $nuspecID) {
+		#package from chocolatey.org is internal by default
+		#add something here? verbose logging?
+	
+	} elseif ($personalpackagesXMLcontent.mypackages.personal.id -contains $nuspecID) {
+		#package is personal custom package and is internal
+		#add something here? verbose logging?
+	
+	} elseif ($internalizedVersions -contains $nuspecVersion) {
+		#package is internalized by user
+		#add something here? verbose logging?
+		
+	} elseif ($packagesXMLcontent.packages.notImplemented.id -contains $nuspecID) {
+		Write-Host $nuspecID $nuspecVersion ' not implemented, requires manual internalization' #$nuspecVersion
+		#package is not supported, due to bad choco install script that is hard to internalize
+		#add something here? verbose logging?
+	
+ 	} elseif ($packagesXMLcontent.packages.custom.pkg.id -contains $nuspecID) {
+	
+		Get-ZipInstallScript -NupkgPath $_.fullname
+		
+		if ($script:status -eq "noscript") {
+			Write-Host 'You may want to add ' $nuspecID $nuspecVersion ' to the internal list CHANGE?'
+			#Write-Host '<id>'$nuspecID'</id>'
+			
+		} else {
+			Find-InstallHelpers
+		
+			$idDir      = (Join-Path $internalizedDir $Script:nuspecID)
+			$versionDir = (Join-Path $idDir $Script:nuspecVersion)
+			$newpath    = (Join-Path $Script:versionDir $_.name)
+			$customXml  = $packagesXMLcontent.packages.custom.pkg | where-object id -eq $nuspecID			
+			$toolsDir   = (Join-Path $Script:versionDir "tools")
+
+			$obj = [PSCustomObject]@{
+				nupkgName     = $_.name
+				origPath      = $_.fullname
+				version       = $nuspecVersion
+				nuspecID      = $nuspecID
+				status        = $status
+				foundHelper   = $foundHelper
+				idDir         = $idDir
+				versionDir    = $versionDir
+				toolsDir      = $toolsDir
+				newPath       = $newpath
+				#xmlHelper     = $customXml.helper
+				#needsToolsDir = $customXml.needsToolsDir
+				functionName   = $customXml.functionName
+				#needsStopAction   = $customXml.needsStopAction
+				installScriptOrig = $script:InstallScript
+				installScriptMod  = $script:InstallScript
+
+			}
+			
+			$nupkgObjArray.add($obj) | Out-Null
+			
+			#Write-Host $nuspecID $nuspecVersion
+			
+		}
+	
+		
+	} else {
+		#Write-Host '<id>'$nuspecID'</id>'
+		
+		Write-Host $nuspecID $nuspecVersion ' is new, id unknown'
+		
+		<#Get-InstallScript -NupkgPath $_.fullname
+	
+		if (!($script:InstallScript -like "*http*")) {
+			write-host '<id>'$nuspecID'</id>'
+		} #>
+	}
+}
+
+#don't need the list anymore, use nupkgObjArray
+$nupkgArray = $null
+
+#Setup the directories for internalizing
+Foreach ($obj in $nupkgObjArray) {
+	
+	#write-host $obj.helper
+	
+	if (!(Test-Path $obj.idDir)) {
+		mkdir $obj.idDir | Out-Null
+	}
+	
+	if (!(Test-Path $obj.versionDir)) {
+		mkdir $obj.versionDir | Out-Null
+	}
+	
+	#$DwnldToolsDir = (Join-Path $obj.versionDir "tools")
+	
+	if (!(Test-Path $obj.toolsDir)) {
+		mkdir $obj.toolsDir | Out-Null
+	}
+	
+	Copy-Item $obj.OrigPath $obj.versionDir
+	
+	if (!(Test-Path (Join-Path $obj.versionDir $obj.nupkgName))) {
+		
+	} else {
+		#Write-Host $obj.nupkgName $obj.Version ' is already copied'
+	}
+	$obj.status = "copied"
+	
+	
+
+}
+
+
+
+Foreach ($obj in $nupkgObjArray) {
+	
+
+	if (($obj.functionName -ne $null) -and ($obj.functionName -ne "")) {
+		Extract-Nupkg -obj $obj
+
+		#Write-Host $obj.functionName
+		$tempFuncName = $obj.functionName
+		$tempFuncName = $tempFuncName + ' -obj $obj'
+		iex $tempFuncName
+		$tempFuncName = $null
+		
+		#Write-Host $obj.filename64 
+		#Write-InstallScript -nupkgObj $obj
+		#Write-Host "should show up only once"
+		#Write-Host $obj.nuspecID $obj.version
+
+		#OLD
+		#Write-ToolsFiles -nupkg $obj.newPath -toolsDir $obj.toolsDir
+		#Update-ContentTypes -nupkgPath $obj.newPath
+		
+
+		Write-UnzippedInstallScript -obj $obj
+
+		# OLD
+		# $nuspec = Join-Path $obj.versionDir (Get-Childitem $obj.versionDir -Filter "*.nuspec").name
+		# $versionDir = $obj.versionDir
+		# $args = "pack $nuspec --out $versionDir"
+
+		#start choco pack in the correct directory
+		Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait
+		#[int]$count += 1
+	}
+	
+	
+}
+
+<# for (($i = 0), ($i -le $count), ($i++)) {
+	Write-Host "`n"
+}
+ #>
+
+#Write-Host "completed"
+
+# Get-ChildItem -Recurse -Path '..\.nugetv2\F1' -Filter "*.nupkg" | % { Copy-Item $_.fullname . }
+
