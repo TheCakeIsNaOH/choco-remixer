@@ -1,6 +1,7 @@
 ﻿param (
 	[string]$pkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
-	[string]$PersonalPkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml')
+	[string]$PersonalPkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml') ,
+	[switch]$Thoroughist
 )
 
 #needed for accessing dotnet zip functions
@@ -246,7 +247,18 @@ $internalizedDir = $personalpackagesXMLcontent.mypackages.paths.internalizedDir.
 
 
 #add switch here to select from other options to get list of nupkgs
-$nupkgArray = (Get-ChildItem $downloadDir -Filter "*.nupkg" -Recurse)
+if ($ThoroughList) {
+	$nupkgArray = (Get-ChildItem $downloadDir -File -Filter "*.nupkg" -Recurse)
+} else {
+	#filters based on folder name, therefore less files to open later, but may not be useful in all circumstances. 
+	$nupkgArray = (Get-ChildItem $downloadDir -File -Filter "*.nupkg" -Recurse) | Where-Object { 
+		($_.directory.name -notin $packagesXMLcontent.packages.internal.id) `
+		-and ($_.directory.Parent.name -notin $packagesXMLcontent.packages.internal.id) `
+		-and ($_.directory.name -notin $personalpackagesXMLcontent.mypackages.personal.id) `
+		-and ($_.directory.Parent.name -notin $personalpackagesXMLcontent.mypackages.personal.id) `
+		}
+}
+
 
 #echo $nupkgArray.fullname
 
@@ -259,26 +271,23 @@ $nupkgArray | ForEach-Object {
 	$versionDir	= $null
 	$newpath = $null
 	Get-NuspecVersion -NupkgPath $_.fullname
+	$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -eq "$nuspecID" }).version
 
-
-
-	 $internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -eq "$nuspecID" }).version
-
-	if ($packagesXMLcontent.packages.internal.id -contains $nuspecID) {
-		#package from chocolatey.org is internal by default
+	if ($internalizedVersions -contains $nuspecVersion) {
+		#package is internalized by user
+		#add something here? verbose logging?
+		
+	} elseif ($packagesXMLcontent.packages.notImplemented.id -contains $nuspecID) {
+		Write-Output $nuspecID $nuspecVersion ' not implemented, requires manual internalization' #$nuspecVersion
+		#package is not supported, due to bad choco install script that is hard to internalize
 		#add something here? verbose logging?
 
 	} elseif ($personalpackagesXMLcontent.mypackages.personal.id -contains $nuspecID) {
 		#package is personal custom package and is internal
 		#add something here? verbose logging?
 
-	} elseif ($internalizedVersions -contains $nuspecVersion) {
-		#package is internalized by user
-		#add something here? verbose logging?
-
-	} elseif ($packagesXMLcontent.packages.notImplemented.id -contains $nuspecID) {
-		Write-Output $nuspecID $nuspecVersion ' not implemented, requires manual internalization' #$nuspecVersion
-		#package is not supported, due to bad choco install script that is hard to internalize
+	} elseif ($packagesXMLcontent.packages.internal.id -contains $nuspecID) {
+		#package from chocolatey.org is internal by default
 		#add something here? verbose logging?
 
  	} elseif ($packagesXMLcontent.packages.custom.pkg.id -contains $nuspecID) {
