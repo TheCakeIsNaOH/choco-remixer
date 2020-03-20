@@ -363,22 +363,12 @@ Foreach ($obj in $nupkgObjArray) {
 		mkdir $obj.versionDir | Out-Null
 	}
 
-	#$DwnldToolsDir = (Join-Path $obj.versionDir "tools")
-
 	if (!(Test-Path $obj.toolsDir)) {
 		mkdir $obj.toolsDir | Out-Null
 	}
 
 	Copy-Item $obj.OrigPath $obj.versionDir
-
-	if (!(Test-Path (Join-Path $obj.versionDir $obj.nupkgName))) {
-
-	} else {
-		#Write-Output $obj.nupkgName $obj.Version ' is already copied'
-	}
 	$obj.status = "copied"
-
-
 
 }
 
@@ -406,23 +396,12 @@ Foreach ($obj in $nupkgObjArray) {
 
 		Write-UnzippedInstallScript -obj $obj
 
-		# OLD
-		# $nuspec = Join-Path $obj.versionDir (Get-Childitem $obj.versionDir -Filter "*.nuspec").name
-		# $versionDir = $obj.versionDir
-		# $args = "pack $nuspec --out $versionDir"
-
 		#start choco pack in the correct directory
 		Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait
-		#[int]$count += 1
 	}
 
 
 }
-
-<# for (($i = 0), ($i -le $count), ($i++)) {
-	Write-Output "`n"
-}
- #>
 
 #Write-Output "completed"
 
