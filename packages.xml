@@ -80,6 +80,7 @@
 		<id>jackett</id>
 		<id>javaruntime</id>
 		<id>jdk8</id>
+		<id>keepassxc</id>
 		<id>kubernetes-cli</id>
 		<id>lgs.g700s</id>
 		<id>libreoffice</id>
@@ -445,18 +446,11 @@
 			<functionName>mod-nvidia-driver</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
-		</pkg>
-		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<id>microsoft-edge</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-edge</functionName>
 		</pkg>
 		<pkg>
 			<id></id>
