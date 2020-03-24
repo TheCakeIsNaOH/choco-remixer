@@ -969,10 +969,33 @@ Function mod-edge ($obj) {
 }
 
 
+Function mod-malwarebytes ($obj) {
+
+	$url32 = "https://downloads.malwarebytes.com/file/mb-windows"
+	$filename32 = "MBSetup.exe"
+
+	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
+
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
 
 
+Function mod-anydesk-install ($obj) {
 
+	$url32 = "https://download.anydesk.com/AnyDesk.msi"
+	$filename32 = "AnyDesk.msi"
 
+	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
+
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
 
 
 

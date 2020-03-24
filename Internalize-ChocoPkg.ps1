@@ -278,7 +278,7 @@ $nupkgArray | ForEach-Object {
 		#add something here? verbose logging?
 		
 	} elseif ($packagesXMLcontent.packages.notImplemented.id -contains $nuspecID) {
-		Write-Output $nuspecID $nuspecVersion ' not implemented, requires manual internalization' #$nuspecVersion
+		Write-Output "$nuspecID $nuspecVersion  not implemented, requires manual internalization" #$nuspecVersion
 		#package is not supported, due to bad choco install script that is hard to internalize
 		#add something here? verbose logging?
 
@@ -337,7 +337,7 @@ $nupkgArray | ForEach-Object {
 	} else {
 		#Write-Output '<id>'$nuspecID'</id>'
 
-		Write-Output $nuspecID $nuspecVersion ' is new, id unknown'
+		Write-Output "$nuspecID $nuspecVersion is new, id unknown"
 
 		<#Get-InstallScript -NupkgPath $_.fullname
 

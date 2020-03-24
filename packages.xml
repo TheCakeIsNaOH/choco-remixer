@@ -103,6 +103,7 @@
 		<id>putty.install</id>
 		<id>python2</id>
 		<id>python3</id>
+		<id>pwsh</id>
 		<id>qbittorrent</id>
 		<id>qtox</id>
 		<id>rapidee</id>
@@ -453,6 +454,27 @@
 			<functionName>mod-edge</functionName>
 		</pkg>
 		<pkg>
+			<id>malwarebytes</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-malwarebytes</functionName>
+		</pkg>
+		<pkg>
+			<id>anydesk.install</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-anydesk-install</functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>		
+		<pkg>
 			<id></id>
 			<helper></helper>
 			<needsStopAction></needsStopAction>
@@ -471,6 +493,7 @@
 
 
 
+
 	</custom>
 
 
@@ -479,7 +502,6 @@
 	
 	<notImplemented>
 		<id>adobereader</id>
-		<id>malwarebytes</id>
 		<id>minecraft</id>
 		<id>office365proplus</id>
 		<id>origin</id>
