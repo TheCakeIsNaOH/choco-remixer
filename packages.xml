@@ -476,6 +476,13 @@
 			<functionName>mod-joplin</functionName>
 		</pkg>		
 		<pkg>
+			<id>ds4windows</id>
+			<helper>Install-ChocolateyZipPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-ds4windows</functionName>
+		</pkg>
+		<pkg>
 			<id></id>
 			<helper></helper>
 			<needsStopAction></needsStopAction>
@@ -489,6 +496,50 @@
 			<needsToolsDir></needsToolsDir>
 			<functionName></functionName>
 		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+
+
 
 
 
