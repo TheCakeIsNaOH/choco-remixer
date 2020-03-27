@@ -85,10 +85,11 @@
 		<id>lgs.g700s</id>
 		<id>libreoffice</id>
 		<id>linux-reader</id>
-		<id>macrium-reflect-free</id>
+		<id>make</id>
 		<id>microsoft-message-analyzer</id>
 		<id>mp3tag</id>
 		<id>mumble</id>
+		<id>nextcloud-client</id>
 		<id>nodejs.install</id>
 		<id>nodejs</id>
 		<id>notepadplusplus.install</id>
@@ -468,11 +469,11 @@
 			<functionName>mod-anydesk-install</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<id>joplin</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>yes</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-joplin</functionName>
 		</pkg>		
 		<pkg>
 			<id></id>

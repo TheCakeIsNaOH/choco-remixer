@@ -998,6 +998,17 @@ Function mod-anydesk-install ($obj) {
 }
 
 
-
-
-
+Function mod-joplin ($obj) {
+	$version = $obj.version
+	$url32 = 'https://github.com/laurent22/joplin/releases/download/v' + $version + '/Joplin-Setup-' + $version + '.exe'
+	$filename32 = 'Joplin-Setup-' + $version + '.exe'
+	$filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
+	
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace '\$url \$url64' , '$file'
+	$obj.installScriptMod = $filePath32 + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+	
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
