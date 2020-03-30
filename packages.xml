@@ -34,7 +34,6 @@
 		<id>bibletime</id>
 		<id>blender</id>
 		<id>bulk-crap-uninstaller</id>
-		<id>calibre</id>
 		<id>cdburnerxp</id>
 		<id>checksum</id>
 		<id>choco-cleaner</id>
@@ -101,6 +100,7 @@
 		<id>pandoc</id>
 		<id>picard</id>
 		<id>powertoys</id>
+		<id>putty</id>
 		<id>putty.install</id>
 		<id>python2</id>
 		<id>python3</id>
@@ -483,11 +483,39 @@
 			<functionName>mod-ds4windows</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
+			<id>calibre</id>
+			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-calibre</functionName>
+		</pkg>
+		<pkg>
+			<id>adoptopenjdkjre</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>yes</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-adoptopenjdkjre</functionName>
+		</pkg>
+		<pkg>
+			<id>msiafterburner</id>
+			<helper>Get-ChocolateyWebFile</helper>
+			<needsStopAction>yes</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-msiafterburner</functionName>
+		</pkg>
+		<pkg>
+			<id>slack</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-slack</functionName>
+		</pkg>
+		<pkg>
+			<id>zoom</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-zoom</functionName>
 		</pkg>
 		<pkg>
 			<id></id>
@@ -531,16 +559,6 @@
 			<needsToolsDir></needsToolsDir>
 			<functionName></functionName>
 		</pkg>
-		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
-		</pkg>
-
-
-
 
 
 
