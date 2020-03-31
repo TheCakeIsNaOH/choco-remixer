@@ -1120,7 +1120,36 @@ Function mod-zoom ($obj) {
 }
 
 
+Function mod-adobereader ($obj) {
+	$secondDir = (Join-Path $obj.toolsDir 'tools')
+	If (Test-Path $secondDir) {
+		Get-Childitem -Path $secondDir |  Move-Item -Destination $obj.toolsDir
+		Remove-Item $secondDir -ea 0 -force
+	}
 
+	$MUIurlFull    = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$MUIurl ').tostring()
+	$MUImspURLFull = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$MUImspURL ').tostring()
+
+	$MUIurl   = ($MUIurlFull    -split "'" | Select-String -Pattern "http").tostring()
+	$MUImspURL = ($MUImspURLFull -split "'" | Select-String -Pattern "http").tostring()
+
+	$filenameMUI = ($MUIurl -split "/" | Select-Object -Last 1).tostring()
+	$filenameMSP = ($MUImspURL -split "/" | Select-Object -Last 1).tostring()
+
+	$muiPath = '$MUIexePath = (Join-Path $toolsDir "' + $filenameMUI + '")'
+	$mspPath = '$mspPath    = (Join-Path $toolsDir "' + $filenameMSP + '")'
+
+
+	$obj.installScriptMod = $muiPath + "`n" + $mspPath + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace '\$DownloadArgs' , '<# $DownloadArgs'
+	$obj.installScriptMod = $obj.installScriptMod -replace '@DownloadArgs' , '$& #>'
+	$obj.installScriptMod = $obj.installScriptMod + "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
+
+	Write-Output $obj.toolsDir
+
+	download-fileBoth -url32 $MUIurl -url64 $MUImspURL -filename32 $filenameUI -filename64 $filenameMSP -toolsDir $obj.toolsDir
+}
 
 
 

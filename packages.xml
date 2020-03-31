@@ -518,11 +518,11 @@
 			<functionName>mod-zoom</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<id>adobereader</id>
+			<helper>Get-ChocolateyWebFile</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-adobereader</functionName>
 		</pkg>
 		<pkg>
 			<id></id>
@@ -571,7 +571,6 @@
 	</dualUrl>
 	
 	<notImplemented>
-		<id>adobereader</id>
 		<id>minecraft</id>
 		<id>office365proplus</id>
 		<id>origin</id>
