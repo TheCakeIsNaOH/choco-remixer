@@ -89,6 +89,7 @@
 		<id>mp3tag</id>
 		<id>mumble</id>
 		<id>nextcloud-client</id>
+		<id>nmap</id>
 		<id>nodejs.install</id>
 		<id>nodejs</id>
 		<id>notepadplusplus.install</id>
@@ -96,6 +97,7 @@
 		<id>nuget.commandline</id>
 		<id>obs-studio.install</id>
 		<id>obs-studio</id>
+		<id>open-shell</id>
 		<id>openssl</id>
 		<id>pandoc</id>
 		<id>picard</id>
