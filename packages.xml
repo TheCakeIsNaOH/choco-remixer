@@ -74,6 +74,7 @@
 		<id>handbrake</id>
 		<id>hashtab</id>
 		<id>hxd</id>
+		<id>imagemagick</id>
 		<id>innoextract</id>
 		<id>iperf2</id>
 		<id>jackett</id>
@@ -184,7 +185,7 @@
 			<helper>Install-ChocolateyZipPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
-			<functionName></functionName>
+			<functionName>mod-adb</functionName>
 		</pkg>
 		<pkg>
 			<id>adoptopenjdk8</id>
@@ -288,14 +289,14 @@
 			<functionName>mod-krita</functionName>
 
 		</pkg>	
-		<pkg>
+		<!--<pkg>
 			<id>maven</id>
 			<helper>Custom</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName></functionName>
 
-		</pkg>	
+		</pkg>	-->
 		<pkg>
 			<id>mono</id>
 			<helper>Install-ChocolateyPackage</helper>
@@ -304,14 +305,14 @@
 			<functionName>mod-mono</functionName>
 
 		</pkg>	
-		<pkg>
+		<!-- <pkg>
 			<id>mupdf</id>
 			<helper>Install-ChocolateyZipPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName></functionName>
 
-		</pkg>	
+		</pkg> -->	
 		<pkg>
 			<id>nextcloud-client</id>
 			<helper>Install-ChocolateyPackage</helper>
@@ -527,11 +528,11 @@
 			<functionName>mod-adobereader</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<id>imagemagick.app</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>yes</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-imagemagick</functionName>
 		</pkg>
 		<pkg>
 			<id></id>

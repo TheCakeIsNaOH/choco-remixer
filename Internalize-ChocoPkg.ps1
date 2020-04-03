@@ -329,7 +329,7 @@ $nupkgArray | ForEach-Object {
 
 			$nupkgObjArray.add($obj) | Out-Null
 
-			#Write-Output $nuspecID $nuspecVersion
+			Write-Output "Internalizing $nuspecID $nuspecVersion"
 
 		}
 
