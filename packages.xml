@@ -535,6 +535,27 @@
 			<functionName>mod-imagemagick</functionName>
 		</pkg>
 		<pkg>
+			<id>uplay</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-uplay</functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
 			<id></id>
 			<helper></helper>
 			<needsStopAction></needsStopAction>
@@ -562,6 +583,15 @@
 			<needsToolsDir></needsToolsDir>
 			<functionName></functionName>
 		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+
+
 
 
 
