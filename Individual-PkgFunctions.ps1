@@ -1326,7 +1326,17 @@ Function mod-ssms ($obj) {
 }
 
 
+Function mod-anydesk ($obj) {
+	$url32 = "https://download.anydesk.com/AnyDesk.exe"
+	$filename32 = "AnyDesk.exe"
+	$filePath32 = 'file           = (Join-Path $toolsDir "' + $filename32 + '")'
 
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
+
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
 
 
 
