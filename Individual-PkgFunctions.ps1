@@ -1120,6 +1120,20 @@ Function mod-zoom ($obj) {
 }
 
 
+Function mod-zoom-client ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url ').tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
+
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
 Function mod-adobereader ($obj) {
 	$secondDir = (Join-Path $obj.toolsDir 'tools')
 	If (Test-Path $secondDir) {
@@ -1208,19 +1222,108 @@ Function mod-uplay ($obj) {
 
 
 
+Function mod-riot-web ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url ").tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64 ").tostring()
+
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+	$filename32 = (($url32 -split "/" | Select-Object -Last 1).tostring() -replace '%20' , " " )
+	$filename64 = ((($url64 -split "/" | Select-Object -Last 1).tostring() -replace '%20' , " " ) -replace '\.exe' , '_x64.exe' )
+
+
+	$filePath32 = 'file           = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath64 = 'file64	      = (Join-Path $toolsDir "' + $filename64 + '")'
+
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
+
+
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+}
 
 
 
 
+Function mod-sqlserver-cmdlineutils ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
+
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = $filename64 -replace '.msi' , '_x64.msi'
+
+	$filePath32 = '$File          = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath64 = '$File64        = (Join-Path $toolsDir "' + $filename64 + '")'
+
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackagep"
+	$obj.installScriptMod = $obj.installScriptMod -replace '\$url" "\$url64' , '$file" "$file64'
+	$obj.installScriptMod = $filePath64 + "`n" + $filePath32 + "`n" + $obj.InstallScriptMod
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+	
+
+
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+}
+
+
+Function mod-sqlserver-odbcdriver ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
+
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = $filename64 -replace '.msi' , '_x64.msi'
+
+	$filePath32 = '$File          = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath64 = '$File64        = (Join-Path $toolsDir "' + $filename64 + '")'
+
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackagep"
+	$obj.installScriptMod = $obj.installScriptMod -replace '\$url" "\$url64' , '$file" "$file64'
+	$obj.installScriptMod = $filePath64 + "`n" + $filePath32 + "`n" + $obj.InstallScriptMod
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+	
+
+
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+}
 
 
 
+Function mod-ssms ($obj) {
+	$fullurlfull    = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$fullUrl =').tostring()
+	$fullurlupgrade = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$upgradeUrl =').tostring()
 
+	$urlfull    = ($fullurlfull    -split "'" | Select-String -Pattern "http").tostring()
+	$urlupgrade = ($fullurlupgrade -split "'" | Select-String -Pattern "http").tostring()
 
+	$filenamefull    = ($urlfull    -split "/" | Select-Object -Last 1).tostring()
+	$filenameupgrade = ($urlupgrade -split "/" | Select-Object -Last 1).tostring()
 
+	$filePathfull    = '$packageArgs.file    = (Join-Path $toolsDir "' + $filenamefull + '")'
+	$filePathupgrade = '$packageArgs.file    = (Join-Path $toolsDir "' + $filenameupgrade + '")'
+	$filePathEmpty   = "file          = ''"
 
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePathEmpty"
+	$obj.installScriptMod = $obj.installScriptMod -replace "ssms180\) {" , "$&`n    $filePathUpgrade"
+	$obj.installScriptMod = $obj.installScriptMod -replace "} else {" , "$&`n    $filePathFull"
 
-
+	download-fileBoth -url32 $urlfull -url64 $urlupgrade -filename32 $filenamefull -filename64 $filenameupgrade -toolsDir $obj.toolsDir
+}
 
 
 

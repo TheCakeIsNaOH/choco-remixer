@@ -295,7 +295,7 @@ $nupkgArray | ForEach-Object {
 		 Get-ZipInstallScript -NupkgPath $_.fullname
 
 		if ($script:status -eq "noscript") {
-			Write-Output 'You may want to add ' $nuspecID $nuspecVersion ' to the internal list CHANGE?'
+			Write-Output "You may want to add $nuspecID $nuspecVersion to the internal list"
 			#Write-Output '<id>'$nuspecID'</id>'
 
 		} else {
