@@ -132,6 +132,7 @@
 		<id>winscp.install</id>
 		<id>winscp</id>
 		<id>wireshark</id>
+		<id>wireguard</id>
 		<id>wixtoolset</id>
 		<id>wsl</id>
 		<id>youtube-dl</id>
@@ -584,18 +585,18 @@
 			<functionName>mod-anydesk</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<id>discord.install</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-discord-install</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<id>openshot</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-openshot</functionName>
 		</pkg>
 		<pkg>
 			<id></id>
