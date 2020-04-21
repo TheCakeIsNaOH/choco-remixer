@@ -1201,7 +1201,7 @@ Function mod-adb ($obj) {
 	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "#Install-ChocolateyZipPackage"
 	$obj.installScriptMod = $obj.installScriptMod -replace '64 \$checksumType' , '$&
-	  Get-ChocolateyUnzip -FullFilePath $file -Destination $unziplocation -PackageName $packagename'
+	  Get-ChocolateyUnzip -FileFullPath $file -Destination $unziplocation -PackageName $packagename'
 
 	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
@@ -1350,8 +1350,8 @@ Function mod-discord-install ($obj) {
 	$filename64 = ((($url64 -split "/" | Select-Object -Last 1).tostring() -replace '%20' , " " ) -replace '\.exe' , '_x64.exe' )
 
 
-	$filePath32 = 'file              = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64            = (Join-Path $toolsDir "' + $filename64 + '")'
+	$filePath32 = 'file          = (Join-Path $toolsPath "' + $filename32 + '")'
+	$filePath64 = 'file64        = (Join-Path $toolsPath "' + $filename64 + '")'
 
 
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
