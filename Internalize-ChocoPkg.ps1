@@ -223,7 +223,7 @@ Function Write-UnzippedInstallScript ($obj) {
 
 }
 
-Function Write-PerPkgs ($obj) {
+Function Write-PerPkg ($obj) {
 	$version = $obj.version
 	$nuspecID = $obj.nuspecID
 
@@ -464,7 +464,7 @@ Foreach ($obj in $nupkgObjArray) {
 				Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $dropPath
 			}
 			if ($writePerPkgs -eq "yes") {
-				Write-PerPkgs -obj $obj
+				Write-PerPkg -obj $obj
 			}			
 			$obj.status = "done"
 		} Catch {
