@@ -3,6 +3,7 @@
 	[string]$PersonalPkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml') ,
 	[switch]$Thoroughist
 )
+$ErrorActionPreference = 'Stop'
 
 #needed for accessing dotnet zip functions
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -318,6 +319,10 @@ $nupkgArray | ForEach-Object {
 			$customXml  = $packagesXMLcontent.packages.custom.pkg | where-object id -eq $nuspecID
 			$toolsDir   = (Join-Path $Script:versionDir "tools")
 
+			if (($null -eq $customXml.functionName) -or ($customXml.functionName -eq "")) {
+				Throw "Could not find function for $nuspecID"
+			}
+			
 			$obj = [PSCustomObject]@{
 				nupkgName     = $_.name
 				origPath      = $_.fullname
@@ -363,60 +368,60 @@ $nupkgArray = $null
 
 #Setup the directories for internalizing
 Foreach ($obj in $nupkgObjArray) {
-	Try {
+	try {
 		#Write-Output $obj.helper
 
 		if (!(Test-Path $obj.idDir)) {
 			mkdir $obj.idDir | Out-Null
 		}
 
-		if (!(Test-Path $obj.versionDir)) {
+		if (Test-Path $obj.versionDir) {
+			New-Item -Path $obj.versionDir -Name "temp.txt" -ItemType file | Out-Null
+			Remove-Item -ea 0 -Path (Get-ChildItem -Path $obj.versionDir -Exclude "tools")
+		} else {
 			mkdir $obj.versionDir | Out-Null
 		}
 
-		if (!(Test-Path $obj.toolsDir)) {
+		if (Test-Path $obj.toolsDir) {
+			New-Item -Path $obj.toolsDir -Name "temp.txt" -ItemType file | Out-Null 
+			Remove-Item -Path (Get-ChildItem -Path $obj.toolsDir -Recurse -Exclude "*.exe","*.msi","*.msu","*.zip")
+		} else {
 			mkdir $obj.toolsDir | Out-Null
 		}
 
-		Copy-Item $obj.OrigPath $obj.versionDir
+		Copy-Item $obj.OrigPath $obj.versionDir 
 		$obj.status = "copied"
-	}
-	Catch {
+	} catch {
 		$obj.status = "not-copied"
-		Write-Host "$obj.nuspecID $obj.version failed to copy"
+		Write-Host "failed to copy" $obj.nuspecID $obj.version
 	}
-
+	
 }
 
-Foreach ($obj in $nupkgObjArray) {
+$nupkgObjArray | Where-Object -Property "status" -eq "copied" | ForEach-Object {
 
+	Extract-Nupkg -obj $obj
 
-	if (($null -ne $obj.functionName) -and ($obj.functionName -ne "")) {
-		Extract-Nupkg -obj $obj
-
-		#Write-Output $obj.functionName
-		$tempFuncName = $obj.functionName
-		$tempFuncName = $tempFuncName + ' -obj $obj'
-		Invoke-Expression $tempFuncName
-		$tempFuncName = $null
+	#Write-Output $obj.functionName
+	$tempFuncName = $obj.functionName
+	$tempFuncName = $tempFuncName + ' -obj $obj'
+	Invoke-Expression $tempFuncName
+	$tempFuncName = $null
 		
-		#Write-Output $obj.filename64
-		#Write-InstallScript -nupkgObj $obj
-		#Write-Output "should show up only once"
-		#Write-Output $obj.nuspecID $obj.version
+	#Write-Output $obj.filename64
+	#Write-InstallScript -nupkgObj $obj
+	#Write-Output "should show up only once"
+	#Write-Output $obj.nuspecID $obj.version
 
-		#OLD
-		#Write-ToolsFiles -nupkg $obj.newPath -toolsDir $obj.toolsDir
-		#Update-ContentTypes -nupkgPath $obj.newPath
-
-
-		Write-UnzippedInstallScript -obj $obj
-
-		#start choco pack in the correct directory
-		Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait
-	}
+	#OLD
+	#Write-ToolsFiles -nupkg $obj.newPath -toolsDir $obj.toolsDir
+	#Update-ContentTypes -nupkgPath $obj.newPath
 
 
+	Write-UnzippedInstallScript -obj $obj
+
+	#start choco pack in the correct directory
+	Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait
 }
 
 #Write-Output "completed"
