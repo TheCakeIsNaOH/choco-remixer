@@ -28,8 +28,8 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 ## Operation 
 
 - Run `Internalize-ChocoPkg.ps1` in PowerShell
-- When it has completed, check in the `internalizedDir` that the packages have downloaded files correctly and modified the `chocolateyinstall.ps1` files as needed.
-- Push the packages to your local repository, or in the case of Proget, copy to the drop path.
+- If you have `useDropPath` disabled, push the packages to your local repository, or in the case of Proget, copy to the drop path.
+- If you have `writePerPkgs` disabled, add the package versions to `personal-packages.xml` under the correct IDs.
 
 ## Caveats
 
@@ -44,12 +44,11 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - Logging, and support verbose
 - Error checking and handling
 - Turn into proper module
-- Automatic push/copy and auto add to personal packages, todo after error checking is much better
+- Automatic push
 - Make individual package functions better
   - Support multiple function for different package versions
-- Speed up searching for `.nupkgs`
     ### Long term
   
   - Async/Parallelize file searching, copying, packing, possibly downloading 
-  - Drop dependency on `choco`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip.
+  - Drop dependency on `choco`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip after pack.
   - Ability to bump version of nupkg
