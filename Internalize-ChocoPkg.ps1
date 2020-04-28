@@ -224,7 +224,23 @@ Function Write-UnzippedInstallScript ($obj) {
 }
 
 Function Write-PerPkgs ($obj) {
+	$version = $obj.version
+	$nuspecID = $obj.nuspecID
 
+	if ($personalpackagesXMLcontent.mypackages.internalized.pkg.id -notcontains "$nuspecID") {
+		$addID = $personalpackagesXMLcontent.CreateElement("pkg")
+		$addID.SetAttribute("id","$nuspecID")
+		$personalpackagesXMLcontent.mypackages.internalized.AppendChild($addID)  | Out-Null
+		$personalpackagesXMLcontent.save($PersonalPkgXML)
+		
+		[XML]$personalpackagesXMLcontent = Get-Content $PersonalPkgXML
+	}
+		
+	$addVersion = $personalpackagesXMLcontent.CreateElement("version")
+	$addVersionText = $addVersion.AppendChild($personalpackagesXMLcontent.CreateTextNode("$version"))
+	$personalpackagesXMLcontent.SelectSingleNode("//pkg[@id=""$nuspecID""]").appendchild($addVersion) | Out-Null
+	$personalpackagesXMLcontent.save($PersonalPkgXML)
+	
 }
 
 
