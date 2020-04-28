@@ -223,12 +223,10 @@ Function Write-UnzippedInstallScript ($obj) {
 
 
 if (!(Test-Path $pkgXML)) {
-	Write-Error "packages.xml not found, please specify valid path"
-	throw
+	throw "packages.xml not found, please specify valid path"
 }
 if (!(Test-Path $PersonalPkgXML)) {
-	Write-Error "personal-packages.xml not found, please specify valid path"
-	throw
+	throw "personal-packages.xml not found, please specify valid path"
 }
 
 [XML]$packagesXMLcontent = Get-Content $pkgXML
@@ -237,9 +235,22 @@ if (!(Test-Path $PersonalPkgXML)) {
 #change these to paramters? XML file?
 #add check that internalizeddir is not subdir of download dir
 #add drop-path
-$downloadDir = $personalpackagesXMLcontent.mypackages.paths.downloadDir.tostring()
-$internalizedDir = $personalpackagesXMLcontent.mypackages.paths.internalizedDir.tostring()
+$downloadDir = $personalpackagesXMLcontent.mypackages.options.downloadDir.tostring()
+$internalizedDir = $personalpackagesXMLcontent.mypackages.options.internalizedDir.tostring()
+$dropPath = $personalpackagesXMLcontent.mypackages.options.DropPath.tostring()
+$useDropPath = $personalpackagesXMLcontent.mypackages.options.useDropPath.tostring()
 
+if (!(Test-Path $downloadDir)) {
+	throw "downloadDir not found, please specify valid path"
+}
+if (!(Test-Path $internalizedDir)) {
+	throw "internalizedDir not found, please specify valid path"
+}
+if ($useDropPath) {
+	if (!(Test-Path $dropPath)) {
+		throw "Drop path not found, please specify valid path"
+	}
+}
 
 #need this as normal PWSH arrays are slow to add an element
 [System.Collections.ArrayList]$nupkgObjArray = @()
@@ -250,7 +261,7 @@ $internalizedDir = $personalpackagesXMLcontent.mypackages.paths.internalizedDir.
 if ($ThoroughList) {
 	$nupkgArray = (Get-ChildItem $downloadDir -File -Filter "*.nupkg" -Recurse)
 } else {
-	#filters based on folder name, therefore less files to open later, but may not be useful in all circumstances. 
+	#filters based on folder name, therefore less files to open later and therefore faster, but may not be useful in all circumstances. 
 	$nupkgArray = (Get-ChildItem $downloadDir -File -Filter "*.nupkg" -Recurse) | Where-Object { 
 		($_.directory.name -notin $packagesXMLcontent.packages.internal.id) `
 		-and ($_.directory.Parent.name -notin $packagesXMLcontent.packages.internal.id) `
@@ -329,7 +340,7 @@ $nupkgArray | ForEach-Object {
 
 			$nupkgObjArray.add($obj) | Out-Null
 
-			Write-Output "Internalizing $nuspecID $nuspecVersion"
+			Write-Output "Found $nuspecID $nuspecVersion to internalize"
 
 		}
 
@@ -352,23 +363,28 @@ $nupkgArray = $null
 
 #Setup the directories for internalizing
 Foreach ($obj in $nupkgObjArray) {
+	Try {
+		#Write-Output $obj.helper
 
-	#Write-Output $obj.helper
+		if (!(Test-Path $obj.idDir)) {
+			mkdir $obj.idDir | Out-Null
+		}
 
-	if (!(Test-Path $obj.idDir)) {
-		mkdir $obj.idDir | Out-Null
+		if (!(Test-Path $obj.versionDir)) {
+			mkdir $obj.versionDir | Out-Null
+		}
+
+		if (!(Test-Path $obj.toolsDir)) {
+			mkdir $obj.toolsDir | Out-Null
+		}
+
+		Copy-Item $obj.OrigPath $obj.versionDir
+		$obj.status = "copied"
 	}
-
-	if (!(Test-Path $obj.versionDir)) {
-		mkdir $obj.versionDir | Out-Null
+	Catch {
+		$obj.status = "not-copied"
+		Write-Host "$obj.nuspecID $obj.version failed to copy"
 	}
-
-	if (!(Test-Path $obj.toolsDir)) {
-		mkdir $obj.toolsDir | Out-Null
-	}
-
-	Copy-Item $obj.OrigPath $obj.versionDir
-	$obj.status = "copied"
 
 }
 
@@ -383,7 +399,7 @@ Foreach ($obj in $nupkgObjArray) {
 		$tempFuncName = $tempFuncName + ' -obj $obj'
 		Invoke-Expression $tempFuncName
 		$tempFuncName = $null
-
+		
 		#Write-Output $obj.filename64
 		#Write-InstallScript -nupkgObj $obj
 		#Write-Output "should show up only once"
