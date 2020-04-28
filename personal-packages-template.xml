@@ -16,5 +16,6 @@
 		<internalizedDir>C:\path\to\modify\packages\in</internalizedDir>
 		<dropPath>C:\path\to\droppath</dropPath>
 		<useDropPath>no</useDropPath>
+		<writePerPkgs>no</writePerPkgs>
 	</paths>
 </mypackages>

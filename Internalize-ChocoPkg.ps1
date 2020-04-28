@@ -88,6 +88,7 @@ Function Find-InstallHelpers {
 
 Function Write-ZipInstallScript ($nupkgObj) {
 	#also don't need?
+	#BROKEN
 	$archive = [System.IO.Compression.ZipFile]::Open($nupkgObj.newpath, 'update')
 	$ScriptStream = ($archive.Entries | Where-Object { $_.FullName -like "*chocolateyInstall.ps1" }).open()
 	$writer = New-Object Io.StreamWriter($scriptStream)
@@ -206,7 +207,7 @@ Function Update-ContentTypes ($nupkgPath) {
 }
 
 Function Extract-Nupkg ($obj) {
-	[System.IO.Compression.ZipFile]::ExtractToDirectory($obj.newpath, $obj.versionDir)
+	[System.IO.Compression.ZipFile]::ExtractToDirectory($obj.origPath, $obj.versionDir)
 
 	#force needed due to wacky permissions after extract
 	Remove-Item -Force -Recurse -LiteralPath (Join-Path $obj.versionDir '_rels')
@@ -219,6 +220,10 @@ Function Extract-Nupkg ($obj) {
 Function Write-UnzippedInstallScript ($obj) {
 	$scriptPath = Join-Path $obj.toolsDir 'ChocolateyInstall.ps1'
 	Set-Content -Path $scriptPath -Value $obj.installScriptMod
+
+}
+
+Function Write-PerPkgs ($obj) {
 
 }
 
@@ -240,6 +245,7 @@ $downloadDir = $personalpackagesXMLcontent.mypackages.options.downloadDir.tostri
 $internalizedDir = $personalpackagesXMLcontent.mypackages.options.internalizedDir.tostring()
 $dropPath = $personalpackagesXMLcontent.mypackages.options.DropPath.tostring()
 $useDropPath = $personalpackagesXMLcontent.mypackages.options.useDropPath.tostring()
+$writePerPkgs = $personalpackagesXMLcontent.mypackages.options.writePerPkgs.tostring()
 
 if (!(Test-Path $downloadDir)) {
 	throw "downloadDir not found, please specify valid path"
@@ -389,56 +395,71 @@ Foreach ($obj in $nupkgObjArray) {
 			mkdir $obj.toolsDir | Out-Null
 		}
 
-		Copy-Item $obj.OrigPath $obj.versionDir 
-		$obj.status = "copied"
+		#Copy-Item $obj.OrigPath $obj.versionDir 
+		$obj.status = "setup"
 	} catch {
-		$obj.status = "not-copied"
-		Write-Host "failed to copy" $obj.nuspecID $obj.version
+		$obj.status = "not-setup"
+		Write-Host "failed to setup" $obj.nuspecID $obj.version
 	}
 	
 }
 
-$nupkgObjArray | Where-Object -Property "status" -eq "copied" | ForEach-Object {
+Foreach ($obj in $nupkgObjArray) {
+	if ($obj.status -eq "setup") {
+		Try { 
+			Extract-Nupkg -obj $obj  
 
-	Try { 
-		Extract-Nupkg -obj $_  
+			#Write-Output $obj.functionName
+			$tempFuncName = $obj.functionName
+			$tempFuncName = $tempFuncName + ' -obj $obj'
+			Invoke-Expression $tempFuncName
+			$tempFuncName = $null
+				
+			#Write-Output $obj.filename64
+			#Write-InstallScript -nupkgObj $obj
+			#Write-Output "should show up only once"
+			#Write-Output $obj.nuspecID $obj.version
 
-		#Write-Output $obj.functionName
-		$tempFuncName = $_.functionName
-		$tempFuncName = $tempFuncName + ' -obj $_'
-		Invoke-Expression $tempFuncName
-		$tempFuncName = $null
+			#OLD
+			#Write-ToolsFiles -nupkg $obj.newPath -toolsDir $obj.toolsDir
+			#Update-ContentTypes -nupkgPath $obj.newPath
+
+
+			Write-UnzippedInstallScript -obj $obj
+
+			#start choco pack in the correct directory
+			$packcode = Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
 			
-		#Write-Output $obj.filename64
-		#Write-InstallScript -nupkgObj $obj
-		#Write-Output "should show up only once"
-		#Write-Output $obj.nuspecID $obj.version
-
-		#OLD
-		#Write-ToolsFiles -nupkg $obj.newPath -toolsDir $obj.toolsDir
-		#Update-ContentTypes -nupkgPath $obj.newPath
-
-
-		Write-UnzippedInstallScript -obj $_
-
-		#start choco pack in the correct directory
-		$packcode = Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $_.versionDir -NoNewWindow -Wait -PassThru
-		
-		if ($packcode.exitcode -ne "0") {
-			$_.status = "pack failed"
-		} else {
-			$_.status = "internalized"
+			if ($packcode.exitcode -ne "0") {
+				$obj.status = "pack failed"
+			} else {
+				$obj.status = "internalized"
+			}
+		} Catch {
+			$obj.status = "internalization failed"
 		}
-			
-	} Catch {
-		$_.status = "internalization failed"
 	}
 }
 
-$nupkgObjArray | Where-Object -Property "status" -eq "internalized" | ForEach-Object {
-	Write-Host $_.status
+Foreach ($obj in $nupkgObjArray) {
+	if ($obj.status -eq "internalized") {
+		Try {
+			if ($useDropPath -eq "yes") {
+				Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $dropPath
+			}
+			if ($writePerPkgs -eq "yes") {
+				Write-PerPkgs -obj $obj
+			}			
+			$obj.status = "done"
+		} Catch {
+			$obj.status = "failed copy or write"
+		} 
+	}
 }
 
+$nupkgObjArray | ForEach-Object {
+	Write-Host $_.nuspecID $_.Version $_.status
+}
 #Write-Output "completed"
 
 # Get-ChildItem -Recurse -Path '..\.nugetv2\F1' -Filter "*.nupkg" | % { Copy-Item $_.fullname . }
