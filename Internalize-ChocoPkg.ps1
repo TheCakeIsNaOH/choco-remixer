@@ -400,28 +400,43 @@ Foreach ($obj in $nupkgObjArray) {
 
 $nupkgObjArray | Where-Object -Property "status" -eq "copied" | ForEach-Object {
 
-	Extract-Nupkg -obj $obj
+	Try { 
+		Extract-Nupkg -obj $_  
 
-	#Write-Output $obj.functionName
-	$tempFuncName = $obj.functionName
-	$tempFuncName = $tempFuncName + ' -obj $obj'
-	Invoke-Expression $tempFuncName
-	$tempFuncName = $null
+		#Write-Output $obj.functionName
+		$tempFuncName = $_.functionName
+		$tempFuncName = $tempFuncName + ' -obj $_'
+		Invoke-Expression $tempFuncName
+		$tempFuncName = $null
+			
+		#Write-Output $obj.filename64
+		#Write-InstallScript -nupkgObj $obj
+		#Write-Output "should show up only once"
+		#Write-Output $obj.nuspecID $obj.version
+
+		#OLD
+		#Write-ToolsFiles -nupkg $obj.newPath -toolsDir $obj.toolsDir
+		#Update-ContentTypes -nupkgPath $obj.newPath
+
+
+		Write-UnzippedInstallScript -obj $_
+
+		#start choco pack in the correct directory
+		$packcode = Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $_.versionDir -NoNewWindow -Wait -PassThru
 		
-	#Write-Output $obj.filename64
-	#Write-InstallScript -nupkgObj $obj
-	#Write-Output "should show up only once"
-	#Write-Output $obj.nuspecID $obj.version
+		if ($packcode.exitcode -ne "0") {
+			$_.status = "pack failed"
+		} else {
+			$_.status = "internalized"
+		}
+			
+	} Catch {
+		$_.status = "internalization failed"
+	}
+}
 
-	#OLD
-	#Write-ToolsFiles -nupkg $obj.newPath -toolsDir $obj.toolsDir
-	#Update-ContentTypes -nupkgPath $obj.newPath
-
-
-	Write-UnzippedInstallScript -obj $obj
-
-	#start choco pack in the correct directory
-	Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait
+$nupkgObjArray | Where-Object -Property "status" -eq "internalized" | ForEach-Object {
+	Write-Host $_.status
 }
 
 #Write-Output "completed"
