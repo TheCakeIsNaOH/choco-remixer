@@ -262,6 +262,8 @@ $internalizedDir = $personalpackagesXMLcontent.mypackages.options.internalizedDi
 $dropPath = $personalpackagesXMLcontent.mypackages.options.DropPath.tostring()
 $useDropPath = $personalpackagesXMLcontent.mypackages.options.useDropPath.tostring()
 $writePerPkgs = $personalpackagesXMLcontent.mypackages.options.writePerPkgs.tostring()
+$pushURL = $personalpackagesXMLcontent.mypackages.options.pushURL.tostring()
+$pushPkgs = $personalpackagesXMLcontent.mypackages.options.pushPkgs.tostring()
 
 if (!(Test-Path $downloadDir)) {
 	throw "downloadDir not found, please specify valid path"
@@ -457,6 +459,9 @@ Foreach ($obj in $nupkgObjArray) {
 	}
 }
 
+
+
+
 Foreach ($obj in $nupkgObjArray) {
 	if ($obj.status -eq "internalized") {
 		Try {
@@ -465,8 +470,17 @@ Foreach ($obj in $nupkgObjArray) {
 			}
 			if ($writePerPkgs -eq "yes") {
 				Write-PerPkg -obj $obj
-			}			
-			$obj.status = "done"
+			}
+			if ($pushPkgs -eq "yes") {
+				$pushArgs = 'push -r -s ' + $pushURL
+				$pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
+			}
+			
+			if ($pushcode.exitcode -ne "0") {
+				$obj.status = "push failed"
+			} else {
+				$obj.status = "done"
+			}
 		} Catch {
 			$obj.status = "failed copy or write"
 		} 

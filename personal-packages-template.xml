@@ -17,5 +17,7 @@
 		<dropPath>C:\path\to\droppath</dropPath>
 		<useDropPath>no</useDropPath>
 		<writePerPkgs>no</writePerPkgs>
+		<pushPkgs>no</pushPkgs>
+		<pushURL>https://my.repo/feed</pushURL>
 	</paths>
 </mypackages>
