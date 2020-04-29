@@ -23,13 +23,14 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - Copy `personal-packages-template.xml` to `personal-packages.xml` and open it.
 - Set `downloadDir` to the directory your `.nupkg` files to internalize are.
 - Set `internalizedDir` to the directory where you want the `.nupkg`s to be internalized in.
+- If wanted, change `useDropPath` and/or `pushPkgs` to `yes` and change the `pushURL`/`dropPath` accordingly. These auto copy or push the internalized packages to your repository.
 - If you have any custom packages, their IDs can be added to the personal section
 
 ## Operation 
 
 - Run `Internalize-ChocoPkg.ps1` in PowerShell
-- If you have `useDropPath` disabled, push the packages to your local repository, or in the case of Proget, copy to the drop path.
-- If you have `writePerPkgs` disabled, add the package versions to `personal-packages.xml` under the correct IDs.
+- If you have `useDropPath` and `pushPkgs` disabled, push the packages to your local repository, or in the case of Proget, copy to the drop path.
+- If you have `writePerPkgs` disabled, add the package versions to `personal-packages.xml` under the correct IDs. 
 
 ## Caveats
 
@@ -44,7 +45,6 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - Logging, and support verbose
 - Error checking and handling
 - Turn into proper module
-- Automatic push
 - Make individual package functions better
   - Support multiple function for different package versions
     ### Long term
