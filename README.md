@@ -40,7 +40,6 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 ## Todo
 
-- Extract files individually rather then extracting all and removing excess
 - Checksum downloads
 - Logging, and support verbose
 - Error checking and handling
@@ -52,3 +51,4 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
   - Async/Parallelize file searching, copying, packing, possibly downloading 
   - Drop dependency on `choco`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip after pack.
   - Ability to bump version of nupkg
+  - Extract files individually rather then extracting all and removing excess, difficult because of packages like virtualbox that have files in root dir
