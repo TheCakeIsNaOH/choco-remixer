@@ -11,7 +11,7 @@
 		<id>my-custom-internal-package-id</id>
 	</personal>
 	
-	<paths>
+	<options>
 		<downloadDir>C:\path\to\get\packages\from</downloadDir>
 		<internalizedDir>C:\path\to\modify\packages\in</internalizedDir>
 		<dropPath>C:\path\to\droppath</dropPath>
@@ -19,5 +19,5 @@
 		<writePerPkgs>no</writePerPkgs>
 		<pushPkgs>no</pushPkgs>
 		<pushURL>https://my.repo/feed</pushURL>
-	</paths>
+	</options>
 </mypackages>

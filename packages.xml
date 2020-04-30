@@ -353,13 +353,13 @@
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-vagrant</functionName>
 		</pkg>
-<!-- no tools dir, all in root dir		<pkg>
+        <pkg>
 			<id>virtualbox</id>
 			<helper>Custom</helper>
 			<needsStopAction>yes</needsStopAction>
-			<needsToolsDir>yes</needsToolsDir>
-			<functionName></functionName>
-		</pkg> -->
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-virtualbox</functionName>
+		</pkg>
 		<pkg>
 			<id>vscodium.install</id>
 			<helper>Install-ChocolateyPackage</helper>
@@ -666,7 +666,6 @@
 		<id>origin</id>
 		<id>powershell</id>
 		<id>reflect-free</id>
-		<id>virtualbox</id>
 		<id>shexview</id>
 		<id>shmnview</id>
 		<id>maven</id>

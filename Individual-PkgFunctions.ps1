@@ -65,13 +65,8 @@ Function download-fileBoth {
 		[string]$toolsDir = $null
 	)
 
-	if ($filename32) {
 	$dlwdFile32 = (Join-Path $obj.toolsDir "$filename32")
-	}
-	if ($filename64) {
 	$dlwdFile64 = (Join-Path $obj.toolsDir "$filename64")
-	}
-
 
 	$dlwd = New-Object net.webclient
 
@@ -99,10 +94,7 @@ Function download-fileSingle {
 		[string]$toolsDir = $null
 	)
 
-	if ($filename) {
 	$dlwdFile = (Join-Path $obj.toolsDir "$filename")
-	}
-
 	$dlwd = New-Object net.webclient
 
 	if (Test-Path $dlwdFile) {
@@ -110,7 +102,6 @@ Function download-fileSingle {
 	} else {
 		$dlwd.DownloadFile($url, $dlwdFile)
 	}
-
 
 	$dlwd.dispose()
 	# download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
@@ -1385,7 +1376,35 @@ Function mod-openshot ($obj) {
 }
 
 
+Function mod-virtualbox ($obj) {
+	$obj.toolsDir = $obj.versionDir
+	
+ 	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url .*http").tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit ").tostring()
+	$fullurlep = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$Url_ep .*http').tostring()
 
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+	$urlep = ($fullurlep -split "'" | Select-String -Pattern "http").tostring()
+
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring().replace(".exe" , "-x64.exe")
+	$filenameep = ($urlep -split "/" | Select-Object -Last 1).tostring()
+
+	$filePath32 = 'file          = (Join-Path $toolsPath "' + $filename32 + '")'
+	$filePath64 = 'file64        = (Join-Path $toolsPath "' + $filename64 + '")'
+	$filePathep = '(Join-Path $toolsPath "' + $filenameep + '")'
+
+	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
+	$obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "<# Get-ChocolateyWebFile"
+	$obj.installScriptMod = $obj.installScriptMod -replace "ChecksumType64 *'sha256'" , "$& #>"
+	$obj.installScriptMod = $obj.installScriptMod -replace "file_path_ep.*Get-Package.*" , "file_path_ep = $filepathep"
+	
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	download-fileSingle -url $urlep -filename $filenameep -toolsDir $obj.toolsDir
+}
 
 
 

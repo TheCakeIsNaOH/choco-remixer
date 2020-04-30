@@ -271,7 +271,7 @@ if (!(Test-Path $downloadDir)) {
 if (!(Test-Path $internalizedDir)) {
 	throw "internalizedDir not found, please specify valid path"
 }
-if ($useDropPath) {
+if ($useDropPath -eq "yes") {
 	if (!(Test-Path $dropPath)) {
 		throw "Drop path not found, please specify valid path"
 	}
@@ -401,7 +401,7 @@ Foreach ($obj in $nupkgObjArray) {
 
 		if (Test-Path $obj.versionDir) {
 			New-Item -Path $obj.versionDir -Name "temp.txt" -ItemType file | Out-Null
-			Remove-Item -ea 0 -Path (Get-ChildItem -Path $obj.versionDir -Exclude "tools")
+			Remove-Item -ea 0 -Path (Get-ChildItem -Path $obj.versionDir -Exclude "tools,*.exe","*.msi","*.msu","*.zip")
 		} else {
 			mkdir $obj.versionDir | Out-Null
 		}
@@ -476,7 +476,7 @@ Foreach ($obj in $nupkgObjArray) {
 				$pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
 			}
 			
-			if ($pushcode.exitcode -ne "0") {
+			if (($pushcode.exitcode -ne "0") -and ($pushPkgs -eq "yes")) {
 				$obj.status = "push failed"
 			} else {
 				$obj.status = "done"
