@@ -1407,10 +1407,43 @@ Function mod-virtualbox ($obj) {
 }
 
 
+Function mod-sysinternals ($obj) {
+	$fullurl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
+	$fullurlnano = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'Args.url ').tostring()
+
+	$url = ($fullurl -split "'" | Select-String -Pattern "http").tostring()
+	$urlnano = ($fullurlnano -split "'" | Select-String -Pattern "http").tostring()
+
+	$filename = ($url -split "/" | Select-Object -Last 1).tostring()
+	$filenamenano = ($urlnano -split "/" | Select-Object -Last 1).tostring()
+
+	$filePath = 'FileFullPath  = (Join-Path $toolsPath "' + $filename + '")'
+	$filePathnano = '$packageArgs.FileFullPath = (Join-Path $toolsPath "' + $filenamenano + '")'
+
+	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace 'unzipLocation' , 'Destination  '
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath"
+	$obj.installScriptMod = $obj.installScriptMod -replace "Is-NanoServer.*" , "$&`n  $filepathnano"
+
+	download-fileBoth -url32 $url -url64 $urlnano -filename32 $filename -filename64 $filenamenano -toolsDir $obj.toolsDir
+}
 
 
+Function mod-cpuz ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url ').tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
 
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
+	$obj.installScriptMod = $obj.installScriptMod -replace " url " , "#url "
+	$obj.installScriptMod = $obj.installScriptMod -replace " url64bit " , "#url64bit "
 
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
 
 
 
