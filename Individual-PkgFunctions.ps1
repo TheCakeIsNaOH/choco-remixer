@@ -228,6 +228,12 @@ Function mod-vscodium-install ($obj) {
 
 
 Function mod-adoptopenjdk8 ($obj) {
+	#$nuspecDir = Split-Path $obj.toolsDir
+	#$nuspecFile = (Get-childitem $nuspecDir -Filter "*.nuspec").fullname
+	#[XML]$nuspecXML = Get-Content $nuspecFile
+	#$nuspecXML.package.metadata.id = $nuspecXML.package.metadata.id.tolower()
+	#$nuspecXML.save($nuspecFile)
+	remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
 	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url = ").tostring()
 	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit = ").tostring()
 
@@ -545,11 +551,9 @@ Function mod-firefox ($obj) {
 
 Function mod-gimp ($obj) {
 
-	$version = $obj.version
-	$partVersion = ($version -split "\." | Select-Object -First 2) -join "."
-
-	$url32 = "https://download.gimp.org/mirror/pub/gimp/v" + $partVersion + "/windows/gimp-" + $version + "-setup.exe"
-	$filename32 = "gimp-" + $version + "-setup.exe"
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url").tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 
 	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
 
@@ -1042,6 +1046,7 @@ Function mod-calibre ($obj) {
 
 
 Function mod-adoptopenjdkjre ($obj) {
+	remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
 	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url = ").tostring()
 	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit = ").tostring()
 

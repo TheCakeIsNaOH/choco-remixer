@@ -1,7 +1,7 @@
 ﻿param (
 	[string]$pkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
-	[string]$PersonalPkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml') ,
-	[switch]$Thoroughist
+	[string]$PersonalPkgXML,
+	[switch]$ThoroughList
 )
 $ErrorActionPreference = 'Stop'
 
@@ -244,12 +244,37 @@ Function Write-PerPkg ($obj) {
 }
 
 
+if (!($IsWindows) -or ($IsWindows -eq $true)) {
+	$tempPathA = [IO.Path]::Combine($env:APPDATA, "internalizer", "personal-packages.xml" )
+} elseif ($IsLinux -eq $true) {
+	$tempPathA = [IO.Path]::Combine( $env:HOME, ".config" , "internalizer", "personal-packages.xml" )
+} elseif ($IsMacOS -eq $true) {
+	Throw "MacOS not supported"
+} else {
+	Throw "Something went wrong detecting OS"
+}
+
+$tempPathB = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml')
+
+if (!($PSBoundParameters.ContainsKey('PersonalPkgXML'))) {
+	if (Test-Path $tempPathA) {
+		$PersonalPkgXML = $tempPathA
+	} elseif (Test-Path $tempPathB) {
+		$PersonalPkgXML = $tempPathB
+	} else {
+		Throw "Cannot find personal-packages.xml, please specify path to it"
+	}
+	
+} elseif (!(Test-Path $PersonalPkgXML)) {
+	throw "personal-packages.xml not found, please specify valid path"
+}
+
+#(Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml')
+
 if (!(Test-Path $pkgXML)) {
 	throw "packages.xml not found, please specify valid path"
 }
-if (!(Test-Path $PersonalPkgXML)) {
-	throw "personal-packages.xml not found, please specify valid path"
-}
+
 
 [XML]$packagesXMLcontent = Get-Content $pkgXML
 [XML]$personalpackagesXMLcontent = Get-Content $PersonalPkgXML
@@ -280,11 +305,10 @@ if ($useDropPath -eq "yes") {
 #need this as normal PWSH arrays are slow to add an element
 [System.Collections.ArrayList]$nupkgObjArray = @()
 
-
-
 #add switch here to select from other options to get list of nupkgs
 if ($ThoroughList) {
-	$nupkgArray = (Get-ChildItem $downloadDir -File -Filter "*.nupkg" -Recurse)
+	#Get-ChildItem $downloadDir -File -Filter "*adopt*.nupkg" -Recurse
+	$nupkgArray = Get-ChildItem $downloadDir -File -Filter "*.nupkg" -Recurse
 } else {
 	#filters based on folder name, therefore less files to open later and therefore faster, but may not be useful in all circumstances. 
 	$nupkgArray = (Get-ChildItem $downloadDir -File -Filter "*.nupkg" -Recurse) | Where-Object { 
@@ -294,7 +318,6 @@ if ($ThoroughList) {
 		-and ($_.directory.Parent.name -notin $personalpackagesXMLcontent.mypackages.personal.id) `
 		}
 }
-
 
 #echo $nupkgArray.fullname
 
@@ -309,24 +332,24 @@ $nupkgArray | ForEach-Object {
 	Get-NuspecVersion -NupkgPath $_.fullname
 	$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -eq "$nuspecID" }).version
 
-	if ($internalizedVersions -contains $nuspecVersion) {
+	if ($internalizedVersions -icontains $nuspecVersion) {
 		#package is internalized by user
 		#add something here? verbose logging?
 		
-	} elseif ($packagesXMLcontent.packages.notImplemented.id -contains $nuspecID) {
+	} elseif ($packagesXMLcontent.packages.notImplemented.id -icontains $nuspecID) {
 		Write-Output "$nuspecID $nuspecVersion  not implemented, requires manual internalization" #$nuspecVersion
 		#package is not supported, due to bad choco install script that is hard to internalize
 		#add something here? verbose logging?
 
-	} elseif ($personalpackagesXMLcontent.mypackages.personal.id -contains $nuspecID) {
+	} elseif ($personalpackagesXMLcontent.mypackages.personal.id -icontains $nuspecID) {
 		#package is personal custom package and is internal
 		#add something here? verbose logging?
 
-	} elseif ($packagesXMLcontent.packages.internal.id -contains $nuspecID) {
+	} elseif ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
 		#package from chocolatey.org is internal by default
 		#add something here? verbose logging?
 
- 	} elseif ($packagesXMLcontent.packages.custom.pkg.id -contains $nuspecID) {
+ 	} elseif ($packagesXMLcontent.packages.custom.pkg.id -icontains $nuspecID) {
 
 		 Get-ZipInstallScript -NupkgPath $_.fullname
 
@@ -370,6 +393,7 @@ $nupkgArray | ForEach-Object {
 			$nupkgObjArray.add($obj) | Out-Null
 
 			Write-Output "Found $nuspecID $nuspecVersion to internalize"
+			#Write-Output $_.fullname
 
 		}
 
@@ -401,14 +425,14 @@ Foreach ($obj in $nupkgObjArray) {
 
 		if (Test-Path $obj.versionDir) {
 			New-Item -Path $obj.versionDir -Name "temp.txt" -ItemType file | Out-Null
-			Remove-Item -ea 0 -Path (Get-ChildItem -Path $obj.versionDir -Exclude "tools,*.exe","*.msi","*.msu","*.zip")
+			Remove-Item -ea 0 -Path (Get-ChildItem -Path $obj.versionDir -Exclude "tools","*.exe","*.msi","*.msu","*.zip")
 		} else {
 			mkdir $obj.versionDir | Out-Null
 		}
 
 		if (Test-Path $obj.toolsDir) {
 			New-Item -Path $obj.toolsDir -Name "temp.txt" -ItemType file | Out-Null 
-			Remove-Item -Path (Get-ChildItem -Path $obj.toolsDir -Recurse -Exclude "*.exe","*.msi","*.msu","*.zip")
+			Remove-Item -Path (Get-ChildItem -Path $obj.toolsDir -Recurse -Exclude "*.exe","*.msi","*.msu","*.zip","tools")
 		} else {
 			mkdir $obj.toolsDir | Out-Null
 		}
@@ -464,7 +488,7 @@ Foreach ($obj in $nupkgObjArray) {
 
 Foreach ($obj in $nupkgObjArray) {
 	if ($obj.status -eq "internalized") {
-		Try {
+		#Try {
 			if ($useDropPath -eq "yes") {
 				Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $dropPath
 			}
@@ -476,14 +500,14 @@ Foreach ($obj in $nupkgObjArray) {
 				$pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
 			}
 			
-			if (($pushcode.exitcode -ne "0") -and ($pushPkgs -eq "yes")) {
+			if (($pushPkgs -eq "yes") -and ($pushcode.exitcode -ne "0")) {
 				$obj.status = "push failed"
 			} else {
 				$obj.status = "done"
 			}
-		} Catch {
-			$obj.status = "failed copy or write"
-		} 
+		#} Catch {
+			#$obj.status = "failed copy or write"
+		#} 
 	}
 }
 

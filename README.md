@@ -10,12 +10,13 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
  
    - Not open source
    - Too expensive for home users at $640/year
+   - May require an ongoing license to continue to use packages internalized. 
 
 ## Requirements
 
 - PowerShell - tested so far with v5.1 on windows, should be compatible with 6+ and other OSes without too much effort
-- `choco` on your path
-- Chocolatey `.nupgk` files that are include all files in the package (i.e. not internal).
+- `choco` installed and on your path
+- Chocolatey `.nupgk` files that do not include all files in the package (i.e. not internal).
 - A local chocolatey repository. Proget is ideal
 
 ## Setup 
@@ -25,6 +26,7 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - Set `internalizedDir` to the directory where you want the `.nupkg`s to be internalized in.
 - If wanted, change `useDropPath` and/or `pushPkgs` to `yes` and change the `pushURL`/`dropPath` accordingly. These auto copy or push the internalized packages to your repository.
 - If you have any custom packages, their IDs can be added to the personal section
+- `personal-packages.xml` is searched for first in `%appdata%` or `.config` in the internalizer folder, then in the same folder that internalizer runs from. You can also provide a custom path to it. 
 
 ## Operation 
 
