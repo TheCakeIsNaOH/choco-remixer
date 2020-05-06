@@ -488,7 +488,7 @@ Foreach ($obj in $nupkgObjArray) {
 
 Foreach ($obj in $nupkgObjArray) {
 	if ($obj.status -eq "internalized") {
-		#Try {
+		Try {
 			if ($useDropPath -eq "yes") {
 				Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $dropPath
 			}
@@ -505,9 +505,9 @@ Foreach ($obj in $nupkgObjArray) {
 			} else {
 				$obj.status = "done"
 			}
-		#} Catch {
-			#$obj.status = "failed copy or write"
-		#} 
+		} Catch {
+			$obj.status = "failed copy or write"
+		} 
 	}
 }
 

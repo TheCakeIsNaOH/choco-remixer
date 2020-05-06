@@ -47,10 +47,11 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - Error checking and handling
 - Turn into proper module
 - Make individual package functions better
-  - Support multiple function for different package versions
+  
     ### Long term
   
   - Async/Parallelize file searching, copying, packing, possibly downloading 
   - Drop dependency on `choco`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip after pack.
   - Ability to bump version of nupkg
   - Extract files individually rather then extracting all and removing excess, difficult because of packages like virtualbox that have files in root dir
+  - Add option to trust names
