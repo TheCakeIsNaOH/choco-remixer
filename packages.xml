@@ -145,7 +145,7 @@
 			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
-			<functionName>mod-4k-slideshow-maker</functionName>
+			<functionName>mod-4k-slideshow</functionName>
 		</pkg>
 		<pkg>
 			<id>4k-video-downloader</id>

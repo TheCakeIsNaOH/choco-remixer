@@ -55,14 +55,20 @@ Add-Member -InputObject $obj -NotePropertyName url64 -NotePropertyValue $url64
 	#Add-Member -InputObject $obj -NotePropertyName filename32 -NotePropertyValue $filename32
 	#Add-Member -InputObject $obj -NotePropertyName filename64 -NotePropertyValue $filename64
 
+	#$nuspecDir = Split-Path $obj.toolsDir
+	#$nuspecFile = (Get-childitem $nuspecDir -Filter "*.nuspec").fullname
+	#[XML]$nuspecXML = Get-Content $nuspecFile
+	#$nuspecXML.package.metadata.id = $nuspecXML.package.metadata.id.tolower()
+	#$nuspecXML.save($nuspecFile)
+
 #>
 Function download-fileBoth {
 	param (
-		[string]$url32 = $null,
-		[string]$url64 = $null,
-		[string]$filename32 = $null,
-		[string]$filename64 = $null,
-		[string]$toolsDir = $null
+		[parameter(Mandatory=$true)][string]$url32 = $null,
+		[parameter(Mandatory=$true)][string]$url64 = $null,
+		[parameter(Mandatory=$true)][string]$filename32 = $null,
+		[parameter(Mandatory=$true)][string]$filename64 = $null,
+		[parameter(Mandatory=$true)][string]$toolsDir = $null
 	)
 
 	$dlwdFile32 = (Join-Path $obj.toolsDir "$filename32")
@@ -89,9 +95,9 @@ Function download-fileBoth {
 
 Function download-fileSingle {
 	param (
-		[string]$url = $null,
-		[string]$filename = $null,
-		[string]$toolsDir = $null
+		[parameter(Mandatory=$true)][string]$url = $null,
+		[parameter(Mandatory=$true)][string]$filename = $null,
+		[parameter(Mandatory=$true)][string]$toolsDir = $null
 	)
 
 	$dlwdFile = (Join-Path $obj.toolsDir "$filename")
@@ -108,210 +114,97 @@ Function download-fileSingle {
 }
 
 
-Function mod-4k-slideshow-maker ($obj) {
+Function mod-installcpkg-both {
+	param ( 
+		[parameter(Mandatory=$true)]$obj,
+		[parameter(Mandatory=$true)][int]$urltype,
+		[parameter(Mandatory=$true)][int]$argstype,
+		[switch]$needsTools,
+		[switch]$needsEA,
+		[switch]$stripQueryString,
+		[switch]$checksum,
+		[int]$checksumType
+	)
+	
+	
+	
+	if ($urltype -eq 0) {
+		$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url ").tostring()
+		$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit ").tostring()
+	} elseif ($urltype -eq 1) {
+		$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url32 ').tostring()
+		$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
+	} else {
+		Write-Error "could not find url type"
+	}
 
-	$version = $obj.version
 
-	$url32 = "https://dl.4kdownload.com/app/4kslideshowmaker_" + $version + ".msi?source=chocolatey"
-	$url64 = "https://dl.4kdownload.com/app/4kslideshowmaker_" + $version + "_x64.msi?source=chocolatey"
-	$filename32 = "4kslideshowmaker_" + $version + ".msi"
-	$filename64 = "4kslideshowmaker_" + $version + "_x64.msi"
+	
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
+	if ($stripQueryString) {
+		$url32 = $url32 -split "\?" | select-object -First 1
+		$url64 = $url64 -split "\?" | select-object -First 1
+	}
+	
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+
+	if ($argstype -eq 0) {
+		$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+		$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
+		$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+	} else {
+		Write-Error "could not find args type"
+	}
 
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32`n   $filePath64"
+
+
+	if ($needsTools) {
+		$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	}
+	if ($needsEA) {
+		$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+	}
 
 	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	#add checksum here, or in download file?
+
+}
+
+
+
+
+Function mod-4k-slideshow ($obj) {
+	mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -stripQueryString
 }
 
 
 Function mod-4k-video-downloader ($obj) {
-
-	$version = $obj.version
-
-	$url32 = "https://dl.4kdownload.com/app/4kvideodownloader_" + $version + ".msi?source=chocolatey"
-	$url64 = "https://dl.4kdownload.com/app/4kvideodownloader_" + $version + "_x64.msi?source=chocolatey"
-	$filename32 = "4kvideodownloader_" + $version + ".msi"
-	$filename64 = "4kvideodownloader_" + $version + "_x64.msi"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32`n   $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-
+	mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -stripQueryString	
 }
 
 
 Function mod-4k-stogram ($obj) {
-
-	$version = $obj.version
-
-	$url32 = "https://dl.4kdownload.com/app/4kstogram_" + $version + ".msi?source=chocolatey"
-	$url64 = "https://dl.4kdownload.com/app/4kstogram_" + $version + "_x64.msi?source=chocolatey"
-	$filename32 = "4kstogram_" + $version + ".msi"
-	$filename64 = "4kstogram_" + $version + "_x64.msi"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32`n   $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -stripQueryString
 }
 
 
 Function mod-4k-video-to-mp3 ($obj) {
-
-	$version = $obj.version
-
-	$url32 = "https://dl.4kdownload.com/app/4kvideotomp3_" + $version + ".msi?source=chocolatey"
-	$url64 = "https://dl.4kdownload.com/app/4kvideotomp3_" + $version + "_x64.msi?source=chocolatey"
-	$filename32 = "4kvideotomp3_" + $version + ".msi"
-	$filename64 = "4kvideotomp3_" + $version + "_x64.msi"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32`n   $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -stripQueryString
 }
 
 
 Function mod-4k-youtube-to-mp3 ($obj) {
-
-	$version = $obj.version
-
-	$url32 = "https://dl.4kdownload.com/app/4kyoutubetomp3_" + $version + ".msi?source=chocolatey"
-	$url64 = "https://dl.4kdownload.com/app/4kyoutubetomp3_" + $version + "_x64.msi?source=chocolatey"
-	$filename32 = "4kyoutubetomp3_" + $version + ".msi"
-	$filename64 = "4kyoutubetomp3_" + $version + "_x64.msi"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32`n   $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -stripQueryString
 }
 
 
 Function mod-vscodium-install ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url ").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit ").tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-
-}
-
-
-Function mod-adoptopenjdk8 ($obj) {
-	#$nuspecDir = Split-Path $obj.toolsDir
-	#$nuspecFile = (Get-childitem $nuspecDir -Filter "*.nuspec").fullname
-	#[XML]$nuspecXML = Get-Content $nuspecFile
-	#$nuspecXML.package.metadata.id = $nuspecXML.package.metadata.id.tolower()
-	#$nuspecXML.save($nuspecFile)
-	remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url = ").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit = ").tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-}
-
-
-Function mod-adoptopenjdk8jre ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url = ").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit = ").tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-}
-
-
-Function mod-nextcloud-client ($obj) {
-
-	$version = $obj.version
-
-	$url32 = "https://download.nextcloud.com/desktop/releases/Windows/Nextcloud-" + $version + "-setup.exe"
-	$filename32 = "Nextcloud-" + $version + "-setup.exe"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32"
-
-
-
-	$dlwdFile32 = (Join-Path $obj.toolsDir "$filename32")
-
- 	#$dlwd = New-Object net.webclient
-
-	if (Test-Path $dlwdFile32) {
-		Write-Output $dlwdFile32 ' appears to be downloaded'
-	} else {
-		#$dlwd.DownloadFile($url32, $dlwdFile32)
-		#invoke webrequest needed as with it downloadfile it 429s
-		Invoke-WebRequest -Uri $url32 -OutFile $dlwdFile32
-	}
-
-	#$dlwd.dispose()
+	mod-installcpkg-both -obj $obj -urltype 0 -argstype 0
 }
 
 
@@ -1045,30 +938,6 @@ Function mod-calibre ($obj) {
 }
 
 
-Function mod-adoptopenjdkjre ($obj) {
-	remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url = ").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit = ").tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
-
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-}
-
 
 Function mod-msiafterburner ($obj) {
 	$url32 = 'http://download.msi.com/uti_exe/vga/MSIAfterburnerSetup.zip'
@@ -1378,60 +1247,6 @@ Function mod-openshot ($obj) {
 
 
 	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-}
-
-
-Function mod-virtualbox ($obj) {
-	$obj.toolsDir = $obj.versionDir
-	
- 	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url .*http").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit ").tostring()
-	$fullurlep = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$Url_ep .*http').tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-	$urlep = ($fullurlep -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring().replace(".exe" , "-x64.exe")
-	$filenameep = ($urlep -split "/" | Select-Object -Last 1).tostring()
-
-	$filePath32 = 'file          = (Join-Path $toolsPath "' + $filename32 + '")'
-	$filePath64 = 'file64        = (Join-Path $toolsPath "' + $filename64 + '")'
-	$filePathep = '(Join-Path $toolsPath "' + $filenameep + '")'
-
-	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
-	$obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "<# Get-ChocolateyWebFile"
-	$obj.installScriptMod = $obj.installScriptMod -replace "ChecksumType64 *'sha256'" , "$& #>"
-	$obj.installScriptMod = $obj.installScriptMod -replace "file_path_ep.*Get-Package.*" , "file_path_ep = $filepathep"
-	
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-	download-fileSingle -url $urlep -filename $filenameep -toolsDir $obj.toolsDir
-}
-
-
-Function mod-sysinternals ($obj) {
-	$fullurl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
-	$fullurlnano = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'Args.url ').tostring()
-
-	$url = ($fullurl -split "'" | Select-String -Pattern "http").tostring()
-	$urlnano = ($fullurlnano -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename = ($url -split "/" | Select-Object -Last 1).tostring()
-	$filenamenano = ($urlnano -split "/" | Select-Object -Last 1).tostring()
-
-	$filePath = 'FileFullPath  = (Join-Path $toolsPath "' + $filename + '")'
-	$filePathnano = '$packageArgs.FileFullPath = (Join-Path $toolsPath "' + $filenamenano + '")'
-
-	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace 'unzipLocation' , 'Destination  '
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath"
-	$obj.installScriptMod = $obj.installScriptMod -replace "Is-NanoServer.*" , "$&`n  $filepathnano"
-
-	download-fileBoth -url32 $url -url64 $urlnano -filename32 $filename -filename64 $filenamenano -toolsDir $obj.toolsDir
 }
 
 

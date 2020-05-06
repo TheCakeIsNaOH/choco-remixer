@@ -9,8 +9,10 @@ $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 #dot source functions from other file
-$functionsFile = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'Individual-PkgFunctions.ps1')
-$ExecutionContext.InvokeCommand.InvokeScript($false, ([scriptblock]::Create([io.file]::ReadAllText($functionsFile, [Text.Encoding]::UTF8))), $null, $null)
+$functionsFileA = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-normal.ps1')
+$functionsFileB = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-special.ps1')
+$ExecutionContext.InvokeCommand.InvokeScript($false, ([scriptblock]::Create([io.file]::ReadAllText($functionsFileA, [Text.Encoding]::UTF8))), $null, $null)
+$ExecutionContext.InvokeCommand.InvokeScript($false, ([scriptblock]::Create([io.file]::ReadAllText($functionsFileB, [Text.Encoding]::UTF8))), $null, $null)
 
 #default dot source, too slow
 #. (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'Custom-internalizer-funcs.ps1')
@@ -448,7 +450,7 @@ Foreach ($obj in $nupkgObjArray) {
 
 Foreach ($obj in $nupkgObjArray) {
 	if ($obj.status -eq "setup") {
-		Try { 
+		#Try { 
 			Extract-Nupkg -obj $obj  
 
 			#Write-Output $obj.functionName
@@ -477,9 +479,9 @@ Foreach ($obj in $nupkgObjArray) {
 			} else {
 				$obj.status = "internalized"
 			}
-		} Catch {
-			$obj.status = "internalization failed"
-		}
+		#} Catch {
+		#	$obj.status = "internalization failed"
+		#}
 	}
 }
 

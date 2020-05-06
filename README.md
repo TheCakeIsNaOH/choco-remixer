@@ -47,6 +47,7 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - Error checking and handling
 - Turn into proper module
 - Make individual package functions better
+	- generalize more functionality and make available as functions. 
   
     ### Long term
   
