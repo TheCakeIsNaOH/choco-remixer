@@ -8,6 +8,9 @@ $ErrorActionPreference = 'Stop'
 #needed for accessing dotnet zip functions
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
+#needed to use [Microsoft.PowerShell.Commands.PSUserAgent] when running in pwsh
+Import-Module Microsoft.PowerShell.Utility
+
 #dot source functions from other file
 $functionsFileA = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-normal.ps1')
 $functionsFileB = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-special.ps1')
@@ -102,42 +105,6 @@ Function Write-ZipInstallScript ($nupkgObj) {
 	$archive.dispose()
 }
 
-Function Internalize-InstallCPkg ($obj) {
-	#fixup into general installscript modifier?
-	#$filePath32 = '$file 				   = (Join-Path $toolsDir "' + $obj.filename32 + '")'
-	#$filePath64 = '$file 				   = (Join-Path $toolsDir "' + $obj.filename64 + '")'
-
-	$obj.installScriptMod = $obj.installScriptMod.replace("Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage")
-
-	# if ($obj.installScriptMod -notlike "*Install-ChocolateyPackage*") {
-		# echo $obj.nuspecID
-	# }
-
-
-
-	if ($obj.needsToolsDir -ieq  'yes') {
-		# Write-Output $obj.nuspecID
-		$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-		# Write-Output $obj.installScriptMod
-	}
-
-	if ($obj.needsStopAction -ieq  'yes') {
-		#Write-Output $obj.nuspecID
-		$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-		#add insert stop action here
-		#Write-Output $obj.installScriptMod
-	}
-
-
-
-
-	#add in $file $file64
-		#unsure about file name, how to grep that? extra grep in xml?
-
-	#grep for package args,
-		#unsure for replaceing url with file, direct vs named vs packageargs
-}
-
 Function Write-ZipToolsFiles ([string]$nupkg, $toolsDir) {
 	#don't need with seperate pack
 
@@ -220,7 +187,8 @@ Function Extract-Nupkg ($obj) {
 }
 
 Function Write-UnzippedInstallScript ($obj) {
-	$scriptPath = Join-Path $obj.toolsDir 'ChocolateyInstall.ps1'
+	#fix this if ChocolateyInstall.ps1 with uppercase available
+	$scriptPath = Join-Path $obj.toolsDir 'chocolateyinstall.ps1'
 	Set-Content -Path $scriptPath -Value $obj.installScriptMod
 
 }
@@ -322,8 +290,8 @@ if ($ThoroughList) {
 }
 
 #echo $nupkgArray.fullname
-
-$nupkgArray | ForEach-Object {
+#unique needed to workaround bug if accessing from samba that some things show up twice
+$nupkgArray | select -Unique | ForEach-Object {
 	$script:status = "ready"
 	$script:helper = $null
 	$script:foundHelper = $null
@@ -360,6 +328,7 @@ $nupkgArray | ForEach-Object {
 			#Write-Output '<id>'$nuspecID'</id>'
 
 		} else {
+			
 			Find-InstallHelpers
 
 			$idDir      = (Join-Path $internalizedDir $Script:nuspecID)
@@ -451,6 +420,7 @@ Foreach ($obj in $nupkgObjArray) {
 Foreach ($obj in $nupkgObjArray) {
 	if ($obj.status -eq "setup") {
 		#Try { 
+			Write-Host "Starting " $obj.nuspecID
 			Extract-Nupkg -obj $obj  
 
 			#Write-Output $obj.functionName

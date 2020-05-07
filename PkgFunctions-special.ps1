@@ -169,12 +169,191 @@ Function mod-nextcloud-client ($obj) {
 
 
 
+Function mod-hwmonitor ($obj) {
+
+	$version = $obj.version
+
+	$url32 = "http://download.cpuid.com/hwmonitor/hwmonitor_" + $version + ".exe"
+	$filename32 = "hwmonitor_" + $version + ".exe"
+
+	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32"
+
+
+
+	#$dlwdFile32 = (Join-Path $obj.toolsDir "$filename32")
+
+ 	#$dlwd = New-Object net.webclient
+
+	if (Test-Path $dlwdFile32) {
+		Write-Output $dlwdFile32 ' appears to be downloaded'
+	} else {
+		#$dlwd.DownloadFile($url32, $dlwdFile32)
+		#invoke webrequest needed as with it downloadfile it 429s
+		Invoke-WebRequest -Uri $url32 -OutFile $dlwdFile32
+	}
+
+	#$dlwd.dispose()
+}
+
+Function mod-nvidia-driver ($obj) {
+	$fullurlwin7  = ($obj.installScriptOrig -split "`n" | Select-String -pattern "packageArgs\['url64'\]      = 'https").tostring()
+	$fullurlwin10 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64   ").tostring()
+	$fullurlDCH   = ($obj.installScriptOrig -split "`n" | Select-String -pattern "packageArgsDCHURL      = 'https").tostring()
+
+	$urlwin7  = ($fullurlwin7 -split "'" | Select-String -Pattern "http").tostring()
+	$urlwin10 = ($fullurlwin10 -split "'" | Select-String -Pattern "http").tostring()
+	$urlDCH   = ($fullurlDCH -split "'" | Select-String -Pattern "http").tostring()
+
+	$filenamewin7  = ($urlwin7 -split "/" | Select-Object -Last 1).tostring()
+	$filenamewin10 = ($urlwin10 -split "/" | Select-Object -Last 1).tostring()
+	$filenameDCH   = ($urlDCH  -split "/" | Select-Object -Last 1).tostring()
+
+	$filePathwin7  = '$packageArgs[''file'']    =  (Join-Path $toolsDir "' + $filenamewin7 + '")'
+	$filePathwin10 = '    file    = (Join-Path $toolsDir "' + $filenamewin10 + '")'
+	$filePathDCH   = '$packageArgs[''file'']    = (Join-Path $toolsDir "' + $filenameDCH + '")'
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace '\$packageArgs\[''file''\] = "\$\{' , "#$&"
+	#$obj.installScriptMod = $obj.installScriptMod -replace '^\$packageArgs\[''file''\].*=.*"\$\{ENV' , '#'
+	#'^$packageArgs.{5,30}nvidiadriver'   , '#$&'
+
+	$obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n $filePathwin10"
+	$obj.installScriptMod = $obj.installScriptMod -replace "OSVersion\.Version\.Major -ne '10' \) \{" , "$&`n    $filePathwin7"
+	$obj.installScriptMod = $obj.installScriptMod -replace "-eq 'true'\) \{" , "$&`n    $filePathDCH"
+
+	$dlwdFilewin7 = (Join-Path $obj.toolsDir "$filenamewin7")
+	$dlwdFilewin10 = (Join-Path $obj.toolsDir "$filenamewin10")
+	$dlwdFileDCH = (Join-Path $obj.toolsDir "$filenameDCH")
+
+	$dlwd = New-Object net.webclient
+
+	if (Test-Path $dlwdFilewin7) {
+		Write-Output $dlwdFilewin7 ' appears to be downloaded'
+	} else {
+		$dlwd.DownloadFile($urlwin7, $dlwdFilewin7)
+	}
+
+	if (Test-Path $dlwdFilewin10) {
+		Write-Output $dlwdFilewin10 ' appears to be downloaded'
+	} else {
+		$dlwd.DownloadFile($urlwin10, $dlwdFilewin10)
+	}
+
+	if (Test-Path $dlwdFileDCH) {
+		Write-Output $dlwdFileDCH ' appears to be downloaded'
+	} else {
+		$dlwd.DownloadFile($urlDCH, $dlwdFileDCH)
+	}
+
+	$dlwd.dispose()
+
+}
+
+
+Function mod-ds4windows ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
+
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+	$filePath32 = 'FileFullPath  = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath64 = 'FileFullPath64= (Join-Path $toolsDir "' + $filename64 + '")'
+
+	$obj.installScriptMod = $obj.installScriptMod -replace 'unzipLocation' , 'Destination  '
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
+
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+}
+
+
+Function mod-ds4windows ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url ').tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
+
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+	$filePath32 = 'FileFullPath     = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath64 = 'FileFullPath64	= (Join-Path $toolsDir "' + $filename64 + '")'
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "#>`n`nInstall-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+	$obj.installScriptMod = $obj.installScriptMod -replace "if \(\-not" , "<#if \(\-not"
+
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+
+}
+
+
+Function mod-adobereader ($obj) {
+	$secondDir = (Join-Path $obj.toolsDir 'tools')
+	If (Test-Path $secondDir) {
+		Get-Childitem -Path $secondDir |  Move-Item -Destination $obj.toolsDir
+		Remove-Item $secondDir -ea 0 -force
+	}
+
+	$MUIurlFull    = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$MUIurl ').tostring()
+	$MUImspURLFull = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$MUImspURL ').tostring()
+
+	$MUIurl   = ($MUIurlFull    -split "'" | Select-String -Pattern "http").tostring()
+	$MUImspURL = ($MUImspURLFull -split "'" | Select-String -Pattern "http").tostring()
+
+	$filenameMUI = ($MUIurl -split "/" | Select-Object -Last 1).tostring()
+	$filenameMSP = ($MUImspURL -split "/" | Select-Object -Last 1).tostring()
+
+	$muiPath = '$MUIexePath = (Join-Path $toolsDir "' + $filenameMUI + '")'
+	$mspPath = '$mspPath    = (Join-Path $toolsDir "' + $filenameMSP + '")'
+
+
+	$obj.installScriptMod = $muiPath + "`n" + $mspPath + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace '\$DownloadArgs' , '<# $DownloadArgs'
+	$obj.installScriptMod = $obj.installScriptMod -replace '@DownloadArgs' , '$& #>'
+	$obj.installScriptMod = $obj.installScriptMod + "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
+
+	Write-Output $obj.toolsDir
+
+	download-fileBoth -url32 $MUIurl -url64 $MUImspURL -filename32 $filenameUI -filename64 $filenameMSP -toolsDir $obj.toolsDir
+}
 
 
 
 
+Function mod-ssms ($obj) {
+	$fullurlfull    = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$fullUrl =').tostring()
+	$fullurlupgrade = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$upgradeUrl =').tostring()
 
+	$urlfull    = ($fullurlfull    -split "'" | Select-String -Pattern "http").tostring()
+	$urlupgrade = ($fullurlupgrade -split "'" | Select-String -Pattern "http").tostring()
 
+	$filenamefull    = ($urlfull    -split "/" | Select-Object -Last 1).tostring()
+	$filenameupgrade = ($urlupgrade -split "/" | Select-Object -Last 1).tostring()
 
+	$filePathfull    = '$packageArgs.file    = (Join-Path $toolsDir "' + $filenamefull + '")'
+	$filePathupgrade = '$packageArgs.file    = (Join-Path $toolsDir "' + $filenameupgrade + '")'
+	$filePathEmpty   = "file          = ''"
 
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePathEmpty"
+	$obj.installScriptMod = $obj.installScriptMod -replace "ssms180\) {" , "$&`n    $filePathUpgrade"
+	$obj.installScriptMod = $obj.installScriptMod -replace "} else {" , "$&`n    $filePathFull"
+
+	download-fileBoth -url32 $urlfull -url64 $urlupgrade -filename32 $filenamefull -filename64 $filenameupgrade -toolsDir $obj.toolsDir
+}
 
