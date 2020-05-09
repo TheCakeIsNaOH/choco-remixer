@@ -139,6 +139,9 @@ Function mod-installcpkg-both {
 	} elseif ($urltype -eq 2) {
 		$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url ').tostring()
 		$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
+	} elseif ($urltype -eq 3) {
+		$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url ").tostring()
+		$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64 ").tostring()
 	} else {
 		Write-Error "could not find url type"
 	}
@@ -219,152 +222,27 @@ Function mod-google-backup-and-sync ($obj) {
 
 
 Function mod-googlechrome ($obj) {
-
-	$url32 = 'https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise.msi'
-	$url64 = 'https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi'
-
-	$filename32 = 'googlechromestandaloneenterprise.msi'
-	$filename64 = 'googlechromestandaloneenterprise64.msi'
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA
 }
 
 
 Function mod-vagrant ($obj) {
-	$version = $obj.version
-
-	$url32 = "https://releases.hashicorp.com/vagrant/" + $version + "/vagrant_" + $version + "_i686.msi"
-	$url64 = "https://releases.hashicorp.com/vagrant/" + $version + "/vagrant_" + $version + "_x86_64.msi"
-	$filename32 = "vagrant_" + $version + "_i686.msi"
-	$filename64 = "vagrant_" + $version + "_x86_64.msi"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-}
-
-
-Function mod-thunderbird ($obj) {
-	$version = $obj.version
-
-	$url32 = "https://download.mozilla.org/?product=thunderbird-" + $version + "-SSL&os=win&lang=en-US"
-	$url64 = "https://download.mozilla.org/?product=thunderbird-" + $version + "-SSL&os=win64&lang=en-US"
-
-	$filename32 = "Thunderbird-Setup-" + $version + ".exe"
-	$filename64 = "Thunderbird-Setup-x64-" + $version + ".exe"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = '$packageArgs.file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n"
-    $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools
 }
 
 
 Function mod-onlyoffice ($obj) {
-	$version = $obj.version
-
-	$url32 = "https://github.com/ONLYOFFICE/DesktopEditors/releases/download/ONLYOFFICE-DesktopEditors-" + $version + "/DesktopEditors_x86.exe"
-	$url64 = "https://github.com/ONLYOFFICE/DesktopEditors/releases/download/ONLYOFFICE-DesktopEditors-" + $version + "/DesktopEditors_x64.exe"
-
-	$filename32 = "DesktopEditors_x86.exe"
-	$filename64 = "DesktopEditors_x64.exe"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 3 -argstype 0 -needsTools
 }
 
 
 Function mod-dotnetcore-sdk ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-}
-
-
-Function mod-firefox ($obj) {
-
-	$version = $obj.version
-
-	$url32 = "https://download.mozilla.org/?product=firefox-" + $version + "-ssl&os=win&lang=en-US"
-	$url64 = "https://download.mozilla.org/?product=firefox-" + $version + "-ssl&os=win64&lang=en-US"
-
-	$filename32 = "Firefox-Setup-" + $version + ".exe"
-	$filename64 = "Firefox-Setup-x64-" + $version + ".exe"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = '$packageArgs.file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n"
-    $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 2 -argstype 0 -needsTools
 }
 
 
 Function mod-mono ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url ").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit ").tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools
 }
 
 
@@ -387,6 +265,7 @@ Function mod-shotcut-install ($obj) {
 	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
 
 	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -needsTools
 }
 
 

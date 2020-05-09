@@ -357,3 +357,45 @@ Function mod-ssms ($obj) {
 	download-fileBoth -url32 $urlfull -url64 $urlupgrade -filename32 $filenamefull -filename64 $filenameupgrade -toolsDir $obj.toolsDir
 }
 
+Function mod-thunderbird ($obj) {
+	$version = $obj.version
+
+	$url32 = "https://download.mozilla.org/?product=thunderbird-" + $version + "-SSL&os=win&lang=en-US"
+	$url64 = "https://download.mozilla.org/?product=thunderbird-" + $version + "-SSL&os=win64&lang=en-US"
+
+	$filename32 = "Thunderbird-Setup-" + $version + ".exe"
+	$filename64 = "Thunderbird-Setup-x64-" + $version + ".exe"
+
+	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath64 = '$packageArgs.file64	= (Join-Path $toolsDir "' + $filename64 + '")'
+
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n"
+    $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
+
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+}
+
+
+Function mod-firefox ($obj) {
+
+	$version = $obj.version
+
+	$url32 = "https://download.mozilla.org/?product=firefox-" + $version + "-ssl&os=win&lang=en-US"
+	$url64 = "https://download.mozilla.org/?product=firefox-" + $version + "-ssl&os=win64&lang=en-US"
+
+	$filename32 = "Firefox-Setup-" + $version + ".exe"
+	$filename64 = "Firefox-Setup-x64-" + $version + ".exe"
+
+	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath64 = '$packageArgs.file64	= (Join-Path $toolsDir "' + $filename64 + '")'
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n"
+    $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
+
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+}

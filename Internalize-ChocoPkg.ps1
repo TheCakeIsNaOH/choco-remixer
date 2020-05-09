@@ -179,9 +179,9 @@ Function Extract-Nupkg ($obj) {
 	[System.IO.Compression.ZipFile]::ExtractToDirectory($obj.origPath, $obj.versionDir)
 
 	#force needed due to wacky permissions after extract
-	Remove-Item -Force -Recurse -LiteralPath (Join-Path $obj.versionDir '_rels')
+	Remove-Item -Force -Recurse -ea 0 -LiteralPath (Join-Path $obj.versionDir '_rels')
 	Remove-Item -Force -Recurse -ea 0 -LiteralPath (Join-Path $obj.versionDir "package")
-	Remove-Item -ea 0 -LiteralPath (Join-Path $obj.versionDir '[Content_Types].xml')
+	Remove-Item -Force -Recurse -ea 0 -LiteralPath (Join-Path $obj.versionDir '[Content_Types].xml')
 	Remove-Item -Force -Recurse -ea 0 -LiteralPath (Join-Path $obj.versionDir '__MACOSX')
 
 }
@@ -189,7 +189,7 @@ Function Extract-Nupkg ($obj) {
 Function Write-UnzippedInstallScript ($obj) {
 	#fix this if ChocolateyInstall.ps1 with uppercase available
 	$scriptPath = Join-Path $obj.toolsDir 'chocolateyinstall.ps1'
-	Set-Content -Path $scriptPath -Value $obj.installScriptMod
+	Out-File -FilePath $scriptPath -InputObject $obj.installScriptMod -Force
 
 }
 
@@ -395,15 +395,15 @@ Foreach ($obj in $nupkgObjArray) {
 		}
 
 		if (Test-Path $obj.versionDir) {
-			New-Item -Path $obj.versionDir -Name "temp.txt" -ItemType file | Out-Null
-			Remove-Item -ea 0 -Path (Get-ChildItem -Path $obj.versionDir -Exclude "tools","*.exe","*.msi","*.msu","*.zip")
+			New-Item -Path $obj.versionDir -Name "temp.txt" -ItemType file -ea 0 | Out-Null
+			Remove-Item -ea 0 -Recurse -Path (Get-ChildItem -Path $obj.versionDir -Exclude "tools","*.exe","*.msi","*.msu","*.zip")
 		} else {
 			mkdir $obj.versionDir | Out-Null
 		}
 
 		if (Test-Path $obj.toolsDir) {
-			New-Item -Path $obj.toolsDir -Name "temp.txt" -ItemType file | Out-Null 
-			Remove-Item -Path (Get-ChildItem -Path $obj.toolsDir -Recurse -Exclude "*.exe","*.msi","*.msu","*.zip","tools")
+			New-Item -Path $obj.toolsDir -Name "temp.txt" -ItemType file -ea 0 | Out-Null 
+			Remove-Item -ea 0 -Recurse -Path (Get-ChildItem -Path $obj.toolsDir -Exclude "*.exe","*.msi","*.msu","*.zip")
 		} else {
 			mkdir $obj.toolsDir | Out-Null
 		}
