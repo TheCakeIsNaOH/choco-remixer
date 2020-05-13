@@ -83,6 +83,7 @@
 		<id>keepassxc</id>
 		<id>kubernetes-cli</id>
 		<id>lgs.g700s</id>
+		<id>libdvdcss-2</id>
 		<id>libreoffice</id>
 		<id>linux-reader</id>
 		<id>make</id>
@@ -99,6 +100,7 @@
 		<id>obs-studio.install</id>
 		<id>obs-studio</id>
 		<id>open-shell</id>
+		<id>openlp</id>
 		<id>openssl</id>
 		<id>pandoc</id>
 		<id>picard</id>
@@ -134,8 +136,10 @@
 		<id>wireshark</id>
 		<id>wireguard</id>
 		<id>wixtoolset</id>
+		<id>wsus-offline-update</id>
 		<id>wsl</id>
 		<id>youtube-dl</id>
+		<id>zfsin</id>
 		<id>zoom-client</id>
 	</internal>
 	
@@ -614,11 +618,11 @@
 			<functionName>mod-cpuz</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<id>advanced-installer</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-advanced-installer</functionName>
 		</pkg>
 		<pkg>
 			<id></id>

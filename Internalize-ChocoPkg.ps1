@@ -189,7 +189,7 @@ Function Extract-Nupkg ($obj) {
 Function Write-UnzippedInstallScript ($obj) {
 	#fix this if ChocolateyInstall.ps1 with uppercase available
 	$scriptPath = Join-Path $obj.toolsDir 'chocolateyinstall.ps1'
-	Out-File -FilePath $scriptPath -InputObject $obj.installScriptMod -Force
+	Out-File -FilePath $scriptPath -InputObject $obj.installScriptMod -Force | Out-Null
 
 }
 
@@ -396,14 +396,14 @@ Foreach ($obj in $nupkgObjArray) {
 
 		if (Test-Path $obj.versionDir) {
 			New-Item -Path $obj.versionDir -Name "temp.txt" -ItemType file -ea 0 | Out-Null
-			Remove-Item -ea 0 -Recurse -Path (Get-ChildItem -Path $obj.versionDir -Exclude "tools","*.exe","*.msi","*.msu","*.zip")
+			Remove-Item -ea 0 -Force -Recurse -Path (Get-ChildItem -Path $obj.versionDir -Exclude "tools","*.exe","*.msi","*.msu","*.zip")
 		} else {
 			mkdir $obj.versionDir | Out-Null
 		}
 
 		if (Test-Path $obj.toolsDir) {
 			New-Item -Path $obj.toolsDir -Name "temp.txt" -ItemType file -ea 0 | Out-Null 
-			Remove-Item -ea 0 -Recurse -Path (Get-ChildItem -Path $obj.toolsDir -Exclude "*.exe","*.msi","*.msu","*.zip")
+			Remove-Item -ea 0 -Force -Recurse -Path (Get-ChildItem -Path $obj.toolsDir -Exclude "*.exe","*.msi","*.msu","*.zip")
 		} else {
 			mkdir $obj.toolsDir | Out-Null
 		}

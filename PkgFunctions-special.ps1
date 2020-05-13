@@ -329,7 +329,7 @@ Function mod-adobereader ($obj) {
 
 	Write-Output $obj.toolsDir
 
-	download-fileBoth -url32 $MUIurl -url64 $MUImspURL -filename32 $filenameUI -filename64 $filenameMSP -toolsDir $obj.toolsDir
+	download-fileBoth -url32 $MUIurl -url64 $MUImspURL -filename32 $filenameMUI -filename64 $filenameMSP -toolsDir $obj.toolsDir
 }
 
 
