@@ -187,7 +187,7 @@ Function Extract-Nupkg ($obj) {
 }
 
 Function Write-UnzippedInstallScript ($obj) {
-	#fix this if ChocolateyInstall.ps1 with uppercase available
+	(Get-ChildItem $obj.toolsDir -Filter "*chocolateyinstall.ps1").fullname | % { Remove-Item -Force -Recurse -ea 0 -Path $_ }
 	$scriptPath = Join-Path $obj.toolsDir 'chocolateyinstall.ps1'
 	Out-File -FilePath $scriptPath -InputObject $obj.installScriptMod -Force | Out-Null
 
@@ -413,6 +413,7 @@ Foreach ($obj in $nupkgObjArray) {
 	} catch {
 		$obj.status = "not-setup"
 		Write-Host "failed to setup" $obj.nuspecID $obj.version
+		Remove-Item -ea 0 -Force -Recurse -Path $obj.versionDir
 	}
 	
 }
