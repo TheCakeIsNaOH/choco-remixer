@@ -29,6 +29,7 @@
 		<id>audacity-lame</id>
 		<id>audacity</id>
 		<id>autohotkey.portable</id>
+		<id>autohotkey.install</id>
 		<id>balabolka</id>
 		<id>bfg-repo-cleaner</id>
 		<id>bibletime</id>
@@ -89,9 +90,11 @@
 		<id>make</id>
 		<id>microsoft-message-analyzer</id>
 		<id>mp3tag</id>
+		<id>msys2</id>
 		<id>mumble</id>
 		<id>nextcloud-client</id>
 		<id>nmap</id>
+		<id>nsis</id>
 		<id>nodejs.install</id>
 		<id>nodejs</id>
 		<id>notepadplusplus.install</id>
@@ -625,11 +628,11 @@
 			<functionName>mod-advanced-installer</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<id>nsis.install</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-nsis-install</functionName>
 		</pkg>
 		<pkg>
 			<id></id>
