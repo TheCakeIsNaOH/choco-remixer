@@ -574,6 +574,25 @@ Function mod-openshot ($obj) {
 }
 
 
+Function mod-virt-viewer ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
+
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = $filename64 -replace '.msi' , '_x64.msi'
+
+	$filePath32 = '$File          = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath64 = '$File64        = (Join-Path $toolsDir "' + $filename64 + '")'
+	
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
+
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+}
 
 
 
@@ -983,7 +1002,17 @@ Function mod-nsis-install ($obj) {
 }
 
 
+Function mod-epicgames ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url ').tostring()
+	$url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
 
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
+
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
 
 
 

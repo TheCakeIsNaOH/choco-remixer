@@ -278,7 +278,7 @@ if ($useDropPath -eq "yes") {
 #add switch here to select from other options to get list of nupkgs
 if ($ThoroughList) {
 	#Get-ChildItem $downloadDir -File -Filter "*adopt*.nupkg" -Recurse
-	$nupkgArray = Get-ChildItem $downloadDir -File -Filter "*.nupkg" -Recurse
+	$nupkgArray = Get-ChildItem -File $downloadDir -Filter "*.nupkg" -Recurse
 } else {
 	#filters based on folder name, therefore less files to open later and therefore faster, but may not be useful in all circumstances. 
 	$nupkgArray = (Get-ChildItem $downloadDir -File -Filter "*.nupkg" -Recurse) | Where-Object { 
@@ -328,6 +328,7 @@ $nupkgArray | select -Unique | ForEach-Object {
 			#Write-Output '<id>'$nuspecID'</id>'
 
 		} else {
+			
 			
 			Find-InstallHelpers
 

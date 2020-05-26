@@ -92,6 +92,7 @@
 		<id>mp3tag</id>
 		<id>msys2</id>
 		<id>mumble</id>
+		<id>msi.template</id>
 		<id>nextcloud-client</id>
 		<id>nmap</id>
 		<id>nsis</id>
@@ -635,6 +636,34 @@
 			<functionName>mod-nsis-install</functionName>
 		</pkg>
 		<pkg>
+			<id>epicgameslauncher</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-epicgames</functionName>
+		</pkg>
+		<pkg>
+			<id>virt-viewer</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-virt-viewer</functionName>
+		</pkg>
+		<pkg>
+			<id>vcredist140</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-vcredist140</functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
 			<id></id>
 			<helper></helper>
 			<needsStopAction></needsStopAction>
@@ -655,8 +684,6 @@
 			<needsToolsDir></needsToolsDir>
 			<functionName></functionName>
 		</pkg>
-
-
 
 
 
