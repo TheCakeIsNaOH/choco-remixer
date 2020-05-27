@@ -125,6 +125,8 @@ Function mod-installcpkg-both {
 		[switch]$needsEA,
 		[switch]$stripQueryString,
 		[switch]$checksum,
+		[switch]$x64NameExt,
+		[switch]$DeEncodeSpace,
 		[int]$checksumType
 	)
 	
@@ -142,6 +144,9 @@ Function mod-installcpkg-both {
 	} elseif ($urltype -eq 3) {
 		$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url ").tostring()
 		$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64 ").tostring()
+	} elseif ($urltype -eq 4) {
+		$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url ").tostring()
+		$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64 ").tostring()
 	} else {
 		Write-Error "could not find url type"
 	}
@@ -158,6 +163,15 @@ Function mod-installcpkg-both {
 	
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+	
+	if ($DeEncodeSpace) {
+		$filename32 = $filename32 -replace '%20' , " "
+		$filename64 = $filename64 -replace '%20' , " "
+	}
+
+	if ($x64NameExt) {
+		$filename64 = $filename64.Insert(($temp.Length - 4), "_x64")
+	}
 
 
 	if ($argstype -eq 0) {
@@ -167,6 +181,7 @@ Function mod-installcpkg-both {
 	} else {
 		Write-Error "could not find args type"
 	}
+
 
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 
@@ -247,230 +262,37 @@ Function mod-mono ($obj) {
 
 
 Function mod-shotcut-install ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url32 ').tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 	mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -needsTools
 }
 
 
 Function mod-vivaldi-portable ($obj) {
-
-	$version = $obj.version
-
-	$url32 = 'https://downloads.vivaldi.com/stable-auto/Vivaldi.' + $version + '.exe'
-	$url64 = 'https://downloads.vivaldi.com/stable-auto/Vivaldi.' + $version + '.x64.exe'
-	$filename32 = 'Vivaldi.' + $version + ".exe"
-	$filename64 = 'Vivaldi.' + $version + ".x64.exe"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32`n    $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools
 }
 
 
 Function mod-vivaldi-install ($obj) {
-
-	$version = $obj.version
-
-	$url32 = 'https://downloads.vivaldi.com/stable-auto/Vivaldi.' + $version + '.exe'
-	$url64 = 'https://downloads.vivaldi.com/stable-auto/Vivaldi.' + $version + '.x64.exe'
-	$filename32 = 'Vivaldi.' + $version + ".exe"
-	$filename64 = 'Vivaldi.' + $version + ".x64.exe"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32`n    $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-}
-
-
-Function mod-powershell-core ($obj) {
-	$version = $obj.version
-
-	$url32 = "https://github.com/PowerShell/PowerShell/releases/download/v" + $version + "/PowerShell-" + $version + "-win-x86.msi"
-	$url64 = "https://github.com/PowerShell/PowerShell/releases/download/v" + $version + "/PowerShell-" + $version + "-win-x64.msi"
-	$filename32 = "PowerShell-" + $version + "-win-x86.msi"
-	$filename64 = "PowerShell-" + $version + "-win-x64.msi"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-}
-
-
-Function mod-libreoffice-fresh ($obj) {
-	$version = $obj.version
-
-	# $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'url  ').tostring()
-	# $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'url64bit ').tostring()
-
-	# $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	# $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	# $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	# $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-	$url32 = "https://download.documentfoundation.org/libreoffice/stable/" + $version + "/win/x86/LibreOffice_" + $version + "_Win_x86.msi"
-	$url64 = "https://download.documentfoundation.org/libreoffice/stable/" + $version + "/win/x86_64/LibreOffice_" + $version + "_Win_x64.msi"
-	$filename32 = "LibreOffice_" + $version + "_Win_x86.msi"
-	$filename64 = "LibreOffice_" + $version + "_Win_x64.msi"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "#>`n`nInstall-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-	$obj.installScriptMod = $obj.installScriptMod -replace "if \(\-not" , "<#if \(\-not"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-}
-
-
-Function mod-hexchat ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url ').tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring().replace('%20', '-')
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring().replace('%20', '-')
-
-	$filePath32 = '$File     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = '$File64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = "$filePath32`n$filePath64`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "#Install-ChocolateyPackage"
-	$obj.installScriptMod = $obj.installScriptMod + "`n" + 'Install-ChocolateyInstallPackage "$packageName" "$installerType" "$silentArgs" "$file" "$file64" -validExitCodes $validExitCodes'
-
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-
+	mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools
 }
 
 
 Function mod-edge ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url32 ').tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -needsTools
 }
 
 
 Function mod-slack ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url32 ').tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = $filename64 -replace '.msi' , '_x64.msi'
-
-	$filePath32 = 'File          = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'File64        = (Join-Path $toolsDir "' + $filename64 + '")'
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackagep"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -x64NameExt
 }
 
 
 Function mod-imagemagick ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url ").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64 ").tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-	$filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	     = (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
-
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA
 }
 
 
 Function mod-riot-web ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url ").tostring()
-	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64 ").tostring()
-
-	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = (($url32 -split "/" | Select-Object -Last 1).tostring() -replace '%20' , " " )
-	$filename64 = ((($url64 -split "/" | Select-Object -Last 1).tostring() -replace '%20' , " " ) -replace '\.exe' , '_x64.exe' )
-
-
-	$filePath32 = 'file           = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	      = (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
-
-
-	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+	mod-installcpkg-both -obj $obj -urltype 4 -argstype 0 -needsTools -x64NameExt -DeEncodeSpace
 }
 
 
