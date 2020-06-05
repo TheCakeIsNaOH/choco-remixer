@@ -95,8 +95,10 @@
 		<id>mumble</id>
 		<id>msi.template</id>
 		<id>nextcloud-client</id>
+		<id>nginx</id>
 		<id>nmap</id>
 		<id>nsis</id>
+		<id>nssm</id>
 		<id>nodejs.install</id>
 		<id>nodejs</id>
 		<id>notepadplusplus.install</id>
