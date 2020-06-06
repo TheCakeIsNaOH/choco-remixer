@@ -193,6 +193,7 @@ Function mod-installcpkg-both {
 		$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
 	}
 
+	Write-Output "Downloading $($obj.NuspecID) files"
 	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 	#add checksum here, or in download file?
 
@@ -592,17 +593,11 @@ Function mod-kdenlive ($obj) {
 
 
 
-
 Function mod-krita ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'Url ').tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' Url ').tostring()
 	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-
-	$filename32 = "krita-x86-" + $version + "-setup.exe"
-	$filename64 = "krita-x64-" + $version + "-setup.exe"
-
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
-
 
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
@@ -835,6 +830,31 @@ Function mod-epicgames ($obj) {
 
 	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
+
+Function mod-openhashtab ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url ').tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
+
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

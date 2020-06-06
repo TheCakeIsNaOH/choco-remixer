@@ -533,7 +533,7 @@
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-zoom</functionName>
 		</pkg>
-		<!-- <pkg>
+		<!--Now a metapackage pointing to `zoom` <pkg>
 			<id>zoom-client</id>
 			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
@@ -660,11 +660,11 @@
 			<functionName>mod-vcredist140</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<id>openhashtab</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-openhashtab</functionName>
 		</pkg>
 		<pkg>
 			<id></id>
