@@ -195,7 +195,7 @@ Function Write-UnzippedInstallScript ($obj) {
 
 Function Write-PerPkg ($obj) {
 	$version = $obj.version
-	$nuspecID = $obj.nuspecID
+	$nuspecID = $obj.nuspecID.tolower()
 
 	if ($personalpackagesXMLcontent.mypackages.internalized.pkg.id -notcontains "$nuspecID") {
 		$addID = $personalpackagesXMLcontent.CreateElement("pkg")
