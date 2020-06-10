@@ -159,10 +159,7 @@ Function Update-ContentTypes ($nupkgPath) {
 	$contentStream = ($archive.Entries | Where-Object { $_.FullName -like "*Content_Types].xml" }).open()
 
 	$writer = New-Object Io.StreamWriter($contentStream)
-
-
 	$content = $contentXML.outerxml.tostring()
-	#$content
 
 	$writer.WriteLine($content)
 

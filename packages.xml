@@ -101,6 +101,7 @@
 		<id>nssm</id>
 		<id>nodejs.install</id>
 		<id>nodejs</id>
+		<id>nomacs</id>
 		<id>notepadplusplus.install</id>
 		<id>notepadplusplus</id>
 		<id>nuget.commandline</id>
