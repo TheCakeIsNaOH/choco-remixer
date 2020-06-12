@@ -91,6 +91,7 @@
 		<id>make</id>
 		<id>microsoft-message-analyzer</id>
 		<id>mp3tag</id>
+		<id>moonlight-qt.install</id>
 		<id>msys2</id>
 		<id>mumble</id>
 		<id>msi.template</id>
@@ -666,6 +667,20 @@
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-openhashtab</functionName>
+		</pkg>
+		<pkg>
+			<id>geforce-experience</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>yes</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-geforce-experience</functionName>
+		</pkg>
+		<pkg>
+			<id>geforce-game-ready-driver</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-geforce-driver</functionName>
 		</pkg>
 		<pkg>
 			<id></id>

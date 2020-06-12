@@ -256,6 +256,59 @@ Function mod-nvidia-driver ($obj) {
 }
 
 
+Function mod-geforce-driver ($obj) {
+	$fullurlwin7  = ($obj.installScriptOrig -split "`n" | Select-String -pattern "packageArgs\['url64'\]      = 'https").tostring()
+	$fullurlwin10 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64   ").tostring()
+	$fullurlDCH   = ($obj.installScriptOrig -split "`n" | Select-String -pattern "packageArgsDCHURL      = 'https").tostring()
+
+	$urlwin7  = ($fullurlwin7 -split "'" | Select-String -Pattern "http").tostring()
+	$urlwin10 = ($fullurlwin10 -split "'" | Select-String -Pattern "http").tostring()
+	$urlDCH   = ($fullurlDCH -split "'" | Select-String -Pattern "http").tostring()
+
+	$filenamewin7  = ($urlwin7 -split "/" | Select-Object -Last 1).tostring()
+	$filenamewin10 = ($urlwin10 -split "/" | Select-Object -Last 1).tostring()
+	$filenameDCH   = ($urlDCH  -split "/" | Select-Object -Last 1).tostring()
+
+ 	$filePathwin7  = '$packageArgs[''file64'']    =  (Join-Path $toolsDir "' + $filenamewin7 + '")'
+	$filePathwin10 = '    file64    = (Join-Path $toolsDir "' + $filenamewin10 + '")'
+	$filePathDCH   = '$packageArgs[''file64'']    = (Join-Path $toolsDir "' + $filenameDCH + '")'
+	
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n $filePathwin10"
+	$obj.installScriptMod = $obj.installScriptMod -replace "OSVersion\.Version\.Major -ne '10' \) \{" , "$&`n    $filePathwin7"
+	$obj.installScriptMod = $obj.installScriptMod -replace "-eq 'true'\) \{" , "$&`n    $filePathDCH"
+
+	$dlwdFilewin7 = (Join-Path $obj.toolsDir "$filenamewin7")
+	$dlwdFilewin10 = (Join-Path $obj.toolsDir "$filenamewin10")
+	$dlwdFileDCH = (Join-Path $obj.toolsDir "$filenameDCH")
+	
+	Write-Output "Downloading geforce-game-ready-driver files"
+	$dlwd = New-Object net.webclient
+
+	if (Test-Path $dlwdFilewin7) {
+		Write-Output $dlwdFilewin7 ' appears to be downloaded'
+	} else {
+		$dlwd.DownloadFile($urlwin7, $dlwdFilewin7)
+	}
+
+	if (Test-Path $dlwdFilewin10) {
+		Write-Output $dlwdFilewin10 ' appears to be downloaded'
+	} else {
+		$dlwd.DownloadFile($urlwin10, $dlwdFilewin10)
+	}
+
+	if (Test-Path $dlwdFileDCH) {
+		Write-Output $dlwdFileDCH ' appears to be downloaded'
+	} else {
+		$dlwd.DownloadFile($urlDCH, $dlwdFileDCH)
+	}
+
+	$dlwd.dispose()
+
+}
+
+
 Function mod-ds4windows ($obj) {
 	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url ').tostring()
 	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
