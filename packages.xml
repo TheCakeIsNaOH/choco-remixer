@@ -5,35 +5,24 @@
 		<id>7zip.install</id>
 		<id>7zip.portable</id>
 		<id>7zip</id>
-		<id>Boxstarter.Bootstrapper</id>
-		<id>Boxstarter.Chocolatey</id>
-		<id>Boxstarter.Common</id>
-		<id>Boxstarter.HyperV</id>
-		<id>Boxstarter.WinConfig</id>
-		<id>Boxstarter</id>
-		<id>DotNet3.5</id>
-		<id>Everything</id>
-		<id>Ghostscript.app</id>
-		<id>InkScape</id>
-		<id>InnoSetup</id>
-		<id>NugetPackageExplorer</id>
-		<id>ReSharper</id>
-		<id>Shotcut</id>
-		<id>Sudo</id>
-		<id>VirtualBox.ExtensionPack</id>
-		<id>Wget</id>
 		<id>android-sdk</id>
 		<id>angryip</id>
 		<id>attributechanger</id>
 		<id>au</id>
 		<id>audacity-lame</id>
 		<id>audacity</id>
-		<id>autohotkey.portable</id>
 		<id>autohotkey.install</id>
+		<id>autohotkey.portable</id>
 		<id>balabolka</id>
 		<id>bfg-repo-cleaner</id>
 		<id>bibletime</id>
 		<id>blender</id>
+		<id>boxstarter.bootstrapper</id>
+		<id>boxstarter.chocolatey</id>
+		<id>boxstarter.common</id>
+		<id>boxstarter.hyperv</id>
+		<id>boxstarter.winconfig</id>
+		<id>boxstarter</id>
 		<id>bulk-crap-uninstaller</id>
 		<id>cdburnerxp</id>
 		<id>checksum</id>
@@ -46,9 +35,9 @@
 		<id>chocolatey-misc-helpers.extension</id>
 		<id>chocolatey-visualstudio.extension</id>
 		<id>chocolatey-windowsupdate.extension</id>
-		<id>chocolatey</id>
 		<id>chocolatey.extension</id>
 		<id>chocolatey.server</id>
+		<id>chocolatey</id>
 		<id>chocolateygui</id>
 		<id>chocolateypowershell</id>
 		<id>chromium</id>
@@ -57,7 +46,9 @@
 		<id>curl</id>
 		<id>discord</id>
 		<id>docker-kitematic</id>
+		<id>dotnet3.5</id>
 		<id>duplicati</id>
+		<id>everything</id>
 		<id>ext2fsd</id>
 		<id>fastcopy.portable</id>
 		<id>fastcopy</id>
@@ -67,6 +58,7 @@
 		<id>filezilla</id>
 		<id>foobar2000</id>
 		<id>gh</id>
+		<id>ghostscript.app</id>
 		<id>git.install</id>
 		<id>git</id>
 		<id>gpu-z</id>
@@ -77,7 +69,9 @@
 		<id>hashtab</id>
 		<id>hxd</id>
 		<id>imagemagick</id>
+		<id>inkscape</id>
 		<id>innoextract</id>
+		<id>innosetup</id>
 		<id>iperf2</id>
 		<id>jackett</id>
 		<id>javaruntime</id>
@@ -90,22 +84,23 @@
 		<id>linux-reader</id>
 		<id>make</id>
 		<id>microsoft-message-analyzer</id>
-		<id>mp3tag</id>
 		<id>moonlight-qt.install</id>
+		<id>mp3tag</id>
+		<id>msi.template</id>
 		<id>msys2</id>
 		<id>mumble</id>
-		<id>msi.template</id>
 		<id>nextcloud-client</id>
 		<id>nginx</id>
 		<id>nmap</id>
-		<id>nsis</id>
-		<id>nssm</id>
 		<id>nodejs.install</id>
 		<id>nodejs</id>
 		<id>nomacs</id>
 		<id>notepadplusplus.install</id>
 		<id>notepadplusplus</id>
+		<id>nsis</id>
+		<id>nssm</id>
 		<id>nuget.commandline</id>
+		<id>nugetpackageexplorer</id>
 		<id>obs-studio.install</id>
 		<id>obs-studio</id>
 		<id>open-shell</id>
@@ -114,17 +109,20 @@
 		<id>pandoc</id>
 		<id>picard</id>
 		<id>powertoys</id>
-		<id>putty</id>
 		<id>putty.install</id>
+		<id>putty</id>
+		<id>pwsh</id>
 		<id>python2</id>
 		<id>python3</id>
-		<id>pwsh</id>
 		<id>qbittorrent</id>
 		<id>qtox</id>
 		<id>rapidee</id>
 		<id>regeditor</id>
+		<id>resharper</id>
 		<id>ruby</id>
 		<id>rufus</id>
+		<id>shotcut</id>
+		<id>sudo</id>
 		<id>sumatrapdf</id>
 		<id>tablacus</id>
 		<id>tor-browser</id>
@@ -132,21 +130,23 @@
 		<id>vcredist-all</id>
 		<id>vcredist2015</id>
 		<id>vcredist2017</id>
+		<id>virtualbox.extensionpack</id>
 		<id>vivaldi</id>
 		<id>vlc</id>
 		<id>vscodium</id>
 		<id>waterfox</id>
+		<id>wget</id>
 		<id>winbtrfs</id>
 		<id>wincdemu</id>
 		<id>windirstat</id>
 		<id>winmd</id>
 		<id>winscp.install</id>
 		<id>winscp</id>
-		<id>wireshark</id>
 		<id>wireguard</id>
+		<id>wireshark</id>
 		<id>wixtoolset</id>
-		<id>wsus-offline-update</id>
 		<id>wsl</id>
+		<id>wsus-offline-update</id>
 		<id>youtube-dl</id>
 		<id>zfsin</id>
 		<id>zoom-client</id>
