@@ -127,6 +127,7 @@ Function mod-installcpkg-both {
 		[switch]$checksum,
 		[switch]$x64NameExt,
 		[switch]$DeEncodeSpace,
+		[switch]$removeEXE,
 		[int]$checksumType
 	)
 	
@@ -170,7 +171,7 @@ Function mod-installcpkg-both {
 	}
 
 	if ($x64NameExt) {
-		$filename64 = $filename64.Insert(($temp.Length - 4), "_x64")
+		$filename64 = $filename64.Insert(($filename64.Length - 4), "_x64")
 	}
 
 
@@ -192,6 +193,11 @@ Function mod-installcpkg-both {
 	if ($needsEA) {
 		$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
 	}
+	if ($removeEXE) {
+		$exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
+		$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+	}
+
 
 	Write-Output "Downloading $($obj.NuspecID) files"
 	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
@@ -228,7 +234,7 @@ Function mod-4k-youtube-to-mp3 ($obj) {
 
 
 Function mod-vscodium-install ($obj) {
-	mod-installcpkg-both -obj $obj -urltype 0 -argstype 0
+	mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -removeEXE
 }
 
 
@@ -293,7 +299,7 @@ Function mod-imagemagick ($obj) {
 
 
 Function mod-riot-web ($obj) {
-	mod-installcpkg-both -obj $obj -urltype 4 -argstype 0 -needsTools -x64NameExt -DeEncodeSpace
+	mod-installcpkg-both -obj $obj -urltype 4 -argstype 0 -needsTools -x64NameExt -DeEncodeSpace -removeEXE
 }
 
 
@@ -364,11 +370,11 @@ Function mod-discord-install ($obj) {
 
 	$filePath32 = 'file          = (Join-Path $toolsPath "' + $filename32 + '")'
 	$filePath64 = 'file64        = (Join-Path $toolsPath "' + $filename64 + '")'
-
+	$exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
 
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
-
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
 	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
@@ -391,6 +397,10 @@ Function mod-openshot ($obj) {
 	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
+
+	
+	$exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
 
 	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
@@ -617,7 +627,19 @@ Function mod-resharper-platform ($obj) {
 
 	$obj.installScriptMod = $obj.installScriptMod -replace 'Get-ChocolateyWebFile' , '#Get-ChocolateyWebFile'
 
-	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+	#download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+	$dlwdFile = (Join-Path $(Split-Path $obj.toolsDir) "$filename")
+	$dlwd = New-Object net.webclient
+	$dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
+	
+	if (Test-Path $dlwdFile) {
+		Write-Output "$dlwdFile appears to be downloaded"
+	} else {
+		$dlwd.DownloadFile($url, $dlwdFile)
+	}
+
+	$dlwd.dispose()
+	
 }
 
 
@@ -708,19 +730,6 @@ Function mod-malwarebytes ($obj) {
 	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
-
-Function mod-anydesk-install ($obj) {
-
-	$url32 = "https://download.anydesk.com/AnyDesk.msi"
-	$filename32 = "AnyDesk.msi"
-
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
-
-	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-}
 
 
 Function mod-joplin ($obj) {

@@ -37,11 +37,11 @@ Function mod-adoptopenjdk8jre ($obj) {
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
 
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
+	$filePath32 = 'file     = (Join-Path $toolsDir2 "' + $filename32 + '")'
+	$filePath64 = 'file64	= (Join-Path $toolsDir2 "' + $filename64 + '")'
 
 
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = '$toolsDir2   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
 	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
 
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
@@ -128,6 +128,11 @@ Function mod-virtualbox ($obj) {
 	$obj.installScriptMod = $obj.installScriptMod -replace "ChecksumType64 *'sha256'" , "$& #>"
 	$obj.installScriptMod = $obj.installScriptMod -replace "file_path_ep.*Get-Package.*" , "file_path_ep = $filepathep"
 	
+	$exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+
+
+	
 	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 	download-fileSingle -url $urlep -filename $filenameep -toolsDir $obj.toolsDir
 }
@@ -162,6 +167,8 @@ Function mod-nextcloud-client ($obj) {
 		#invoke webrequest needed as with it downloadfile it 429s
 		Invoke-WebRequest -Uri $url32 -OutFile $dlwdFile32
 	}
+	
+
 
 	#$dlwd.dispose()
 }
@@ -382,6 +389,9 @@ Function mod-ssms ($obj) {
 	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePathEmpty"
 	$obj.installScriptMod = $obj.installScriptMod -replace "ssms180\) {" , "$&`n    $filePathUpgrade"
 	$obj.installScriptMod = $obj.installScriptMod -replace "} else {" , "$&`n    $filePathFull"
+	
+	$exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
 	download-fileBoth -url32 $urlfull -url64 $urlupgrade -filename32 $filenamefull -filename64 $filenameupgrade -toolsDir $obj.toolsDir
 }
@@ -404,6 +414,11 @@ Function mod-thunderbird ($obj) {
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n"
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
+	
+	$exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+
+
 
 	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
@@ -532,7 +547,26 @@ Function mod-hexchat ($obj) {
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "#Install-ChocolateyPackage"
 	$obj.installScriptMod = $obj.installScriptMod + "`n" + 'Install-ChocolateyInstallPackage "$packageName" "$installerType" "$silentArgs" "$file" "$file64" -validExitCodes $validExitCodes'
 
+	$exeRemoveString =	"`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
 	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 
+}
+
+
+Function mod-anydesk-install ($obj) {
+
+	$url32 = "https://download.anydesk.com/AnyDesk.msi"
+	$filename32 = "AnyDesk.msi"
+
+	$filePath32 = '$packageArgs["file"]     = (Join-Path $toolsDir "' + $filename32 + '")'
+
+	$obj.installScriptMod = $obj.installScriptMod -replace " Install-ChocolateyPackage " , " Install-ChocolateyInstallPackage "
+	#$obj.installScriptMod = $obj.installScriptMod -replace "(.*)Install-ChocolateyPackage(.*)", "`$1Install-ChocolateyInstallPackage`$2"
+	
+	
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyInstallPackage" , "$filePath32`n $&"
+
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }

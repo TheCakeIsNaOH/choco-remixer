@@ -13,6 +13,7 @@
 		<id>audacity</id>
 		<id>autohotkey.install</id>
 		<id>autohotkey.portable</id>
+		<id>avidemux</id>
 		<id>balabolka</id>
 		<id>bfg-repo-cleaner</id>
 		<id>bibletime</id>
@@ -31,6 +32,7 @@
 		<id>choco-package-list-backup</id>
 		<id>choco-protocol-support</id>
 		<id>chocolatey-core.extension</id>
+		<id>chocolatey-dotnetfx.extension</id>
 		<id>chocolatey-fastanswers.extension</id>
 		<id>chocolatey-misc-helpers.extension</id>
 		<id>chocolatey-visualstudio.extension</id>
@@ -43,6 +45,8 @@
 		<id>chromium</id>
 		<id>cpu-z</id>
 		<id>crystaldiskinfo</id>
+		<id>crystaldiskinfo.portable</id>
+		<id>crystaldiskinfo.install</id>
 		<id>curl</id>
 		<id>discord</id>
 		<id>docker-kitematic</id>
@@ -57,6 +61,7 @@
 		<id>fiddler</id>
 		<id>filezilla</id>
 		<id>foobar2000</id>
+		<id>gawk</id>
 		<id>gh</id>
 		<id>ghostscript.app</id>
 		<id>git.install</id>
@@ -107,6 +112,7 @@
 		<id>openlp</id>
 		<id>openssl</id>
 		<id>pandoc</id>
+		<id>pcsx2.portable</id>
 		<id>picard</id>
 		<id>powertoys</id>
 		<id>putty.install</id>
@@ -124,6 +130,9 @@
 		<id>shotcut</id>
 		<id>sudo</id>
 		<id>sumatrapdf</id>
+		<id>sumatrapdf.portable</id>
+		<id>sumatrapdf.install</id>
+		<id>sumatrapdf.commandline</id>
 		<id>tablacus</id>
 		<id>tor-browser</id>
 		<id>totalcommander</id>
