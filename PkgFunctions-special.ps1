@@ -317,6 +317,7 @@ Function mod-geforce-driver ($obj) {
 
 
 Function mod-ds4windows ($obj) {
+	throw "broken rn"
 	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url ').tostring()
 	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
 
@@ -330,7 +331,7 @@ Function mod-ds4windows ($obj) {
 	$filePath64 = 'FileFullPath64	= (Join-Path $toolsDir "' + $filename64 + '")'
 
 	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "#>`n`nInstall-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "#>`n`nInstall-ChocolateyInstallPackage"
 	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
 	$obj.installScriptMod = $obj.installScriptMod -replace "if \(\-not" , "<#if \(\-not"
 
@@ -569,4 +570,25 @@ Function mod-anydesk-install ($obj) {
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyInstallPackage" , "$filePath32`n $&"
 
 	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+Function mod-tor-browser ($obj) {
+
+	Function Get-PackageParameters { Return "mockup" }
+	. $(Join-Path $obj.toolsDir 'helpers.ps1')
+	$data = GetDownloadInformation -toolsPath $obj.toolsDir
+	$url32 = $data.url32
+	$url64 = $data.url64
+	
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+	$filePath32 = 'file         = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath64 = 'file64       = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
+
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+
 }

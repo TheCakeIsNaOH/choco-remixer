@@ -134,7 +134,6 @@
 		<id>sumatrapdf.install</id>
 		<id>sumatrapdf.commandline</id>
 		<id>tablacus</id>
-		<id>tor-browser</id>
 		<id>totalcommander</id>
 		<id>vcredist-all</id>
 		<id>vcredist2015</id>
@@ -586,13 +585,13 @@
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-sqlserver-cmdlineutils</functionName>
 		</pkg>
-		<pkg>
+<!-- borken		<pkg>
 			<id>sqlserver-odbcdriver</id>
 			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-sqlserver-odbcdriver</functionName>
-		</pkg>
+		</pkg> -->
 		<pkg>
 			<id>sql-server-management-studio</id>
 			<helper>Install-ChocolateyPackage</helper>
@@ -692,11 +691,11 @@
 			<functionName>mod-geforce-driver</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<id>tor-browser</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-tor-browser</functionName>
 		</pkg>
 		<pkg>
 			<id></id>
@@ -732,7 +731,7 @@
 		<id>shexview</id>
 		<id>shmnview</id>
 		<id>maven</id>
-		<id></id>
+		<id>dotnetfx</id>
 		<id></id>
 		<id></id>
 	</notImplemented>

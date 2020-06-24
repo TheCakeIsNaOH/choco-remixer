@@ -317,7 +317,7 @@ Function mod-sqlserver-cmdlineutils ($obj) {
 	$filePath32 = '$File          = (Join-Path $toolsDir "' + $filename32 + '")'
 	$filePath64 = '$File64        = (Join-Path $toolsDir "' + $filename64 + '")'
 
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackagep"
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 	$obj.installScriptMod = $obj.installScriptMod -replace '\$url" "\$url64' , '$file" "$file64'
 	$obj.installScriptMod = $filePath64 + "`n" + $filePath32 + "`n" + $obj.InstallScriptMod
 
@@ -344,7 +344,7 @@ Function mod-sqlserver-odbcdriver ($obj) {
 	$filePath32 = '$File          = (Join-Path $toolsDir "' + $filename32 + '")'
 	$filePath64 = '$File64        = (Join-Path $toolsDir "' + $filename64 + '")'
 
-	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackagep"
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 	$obj.installScriptMod = $obj.installScriptMod -replace '\$url" "\$url64' , '$file" "$file64'
 	$obj.installScriptMod = $filePath64 + "`n" + $filePath32 + "`n" + $obj.InstallScriptMod
 
