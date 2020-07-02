@@ -734,6 +734,34 @@
 			<functionName>mod-ringcentral-classic</functionName>
 		</pkg>
 		<pkg>
+			<id>google-drive-file-stream</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-google-drive-file-stream</functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<helper></helper>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
 			<id></id>
 			<helper></helper>
 			<needsStopAction></needsStopAction>
