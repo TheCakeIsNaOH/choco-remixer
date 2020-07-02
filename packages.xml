@@ -86,6 +86,7 @@
 		<id>lgs.g700s</id>
 		<id>libdvdcss-2</id>
 		<id>libreoffice</id>
+		<id>lightshot</id>
 		<id>linux-reader</id>
 		<id>make</id>
 		<id>microsoft-message-analyzer</id>
@@ -698,11 +699,39 @@
 			<functionName>mod-tor-browser</functionName>
 		</pkg>
 		<pkg>
-			<id></id>
-			<helper></helper>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
+			<id>dropbox</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-dropbox</functionName>
+		</pkg>
+		<pkg>
+			<id>lightshot.install</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-lightshot</functionName>
+		</pkg>
+		<pkg>
+			<id>gotomeeting</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-gotomeeting</functionName>
+		</pkg>
+		<pkg>
+			<id>box-drive</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-box-drive</functionName>
+		</pkg>
+		<pkg>
+			<id>ringcentral-classic</id>
+			<helper>Install-ChocolateyPackage</helper>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-ringcentral-classic</functionName>
 		</pkg>
 		<pkg>
 			<id></id>

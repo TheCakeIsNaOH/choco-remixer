@@ -233,6 +233,9 @@ Function mod-nvidia-driver ($obj) {
 	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n $filePathwin10"
 	$obj.installScriptMod = $obj.installScriptMod -replace "OSVersion\.Version\.Major -ne '10' \) \{" , "$&`n    $filePathwin7"
 	$obj.installScriptMod = $obj.installScriptMod -replace "-eq 'true'\) \{" , "$&`n    $filePathDCH"
+	
+	$exeRemoveString =	"`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
 	$dlwdFilewin7 = (Join-Path $obj.toolsDir "$filenamewin7")
 	$dlwdFilewin10 = (Join-Path $obj.toolsDir "$filenamewin10")
@@ -289,6 +292,9 @@ Function mod-geforce-driver ($obj) {
 	$dlwdFilewin7 = (Join-Path $obj.toolsDir "$filenamewin7")
 	$dlwdFilewin10 = (Join-Path $obj.toolsDir "$filenamewin10")
 	$dlwdFileDCH = (Join-Path $obj.toolsDir "$filenameDCH")
+	
+	$exeRemoveString =	"`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 	
 	Write-Output "Downloading geforce-game-ready-driver files"
 	$dlwd = New-Object net.webclient

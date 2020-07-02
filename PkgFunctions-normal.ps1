@@ -420,7 +420,7 @@ Function mod-virt-viewer ($obj) {
 
 	$filePath32 = '$File          = (Join-Path $toolsDir "' + $filename32 + '")'
 	$filePath64 = '$File64        = (Join-Path $toolsDir "' + $filename64 + '")'
-	
+
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
 
@@ -428,6 +428,51 @@ Function mod-virt-viewer ($obj) {
 }
 
 
+Function mod-box-drive ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url64 ').tostring()
+
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+	$filePath32 = 'File          = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath64 = 'File64        = (Join-Path $toolsDir "' + $filename64 + '")'
+	
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
+
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+}
+
+
+Function mod-ringcentral-classic ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url32bit ').tostring()
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url64bit ').tostring()
+
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+	$filename32 = $filename32 -replace '%20' , " "
+	$filename64 = $filename64 -replace '%20' , " "
+
+	$filePath32 = 'File          = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath64 = 'File64        = (Join-Path $toolsDir "' + $filename64 + '")'
+	
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
+	$exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+
+	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+}
 
 
 # SINGLE --------------------------
@@ -869,14 +914,46 @@ Function mod-geforce-experience ($obj) {
 }
 
 
+Function mod-dropbox ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url ').tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filename32 = $filename32 -replace '%20' , " "
+	$filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs        = @{" , "$&`n  $filePath32"
+	
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
 
 
+Function mod-lightshot ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url = ').tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
 
 
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "$packageArgs = @{" , "$&`n  $filePath32"
+	
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
 
+Function mod-gotomeeting ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url = ').tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString().Split('?') |  Select -First 1
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
 
-
-
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "$packageArgs = @{" , "$&`n  $filePath32"
+	
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
 
 
 
