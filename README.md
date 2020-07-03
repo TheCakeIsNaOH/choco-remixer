@@ -1,3 +1,7 @@
+## Notice
+
+Currently undergoing changes to add features and switch the main repository type over to nexus
+
 ## What is this?
 
 This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-recompile-packages) select Chocolatey packages.
@@ -17,7 +21,7 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - PowerShell - tested so far with v5.1 on windows, should be compatible with 6+ and other OSes without too much effort
 - `choco` installed and on your path
 - Chocolatey `.nupgk` files that do not include all files in the package (i.e. not internal).
-- A local chocolatey repository. Proget is ideal
+- A nuget repository.
 
 ## Setup 
 

@@ -287,7 +287,7 @@ if ($ThoroughList) {
 	$nupkgArray = Get-ChildItem -File $downloadDir -Filter "*.nupkg" -Recurse
 } else {
 	#filters based on folder name, therefore less files to open later and therefore faster, but may not be useful in all circumstances. 
-	$nupkgArray = (Get-ChildItem $downloadDir -File -Filter "*.nupkg" -Recurse) | Where-Object { 
+	$nupkgArray = (Get-ChildItem -File $downloadDir  -Filter "*.nupkg" -Recurse) | Where-Object { 
 		($_.directory.name -notin $packagesXMLcontent.packages.internal.id) `
 		-and ($_.directory.Parent.name -notin $packagesXMLcontent.packages.internal.id) `
 		-and ($_.directory.name -notin $personalpackagesXMLcontent.mypackages.personal.id) `
@@ -465,10 +465,9 @@ Foreach ($obj in $nupkgObjArray) {
 
 
 
-
 Foreach ($obj in $nupkgObjArray) {
 	if ($obj.status -eq "internalized") {
-		Try {
+		#Try {
 			if ($useDropPath -eq "yes") {
 				Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $dropPath
 			}
@@ -485,11 +484,13 @@ Foreach ($obj in $nupkgObjArray) {
 			} else {
 				$obj.status = "done"
 			}
-		} Catch {
-			$obj.status = "failed copy or write"
-		} 
+		#} Catch {
+		#	$obj.status = "failed copy or write"
+		#} 
 	}
 }
+
+
 
 $nupkgObjArray | ForEach-Object {
 	Write-Host $_.nuspecID $_.Version $_.status
