@@ -58,21 +58,21 @@ if (!(Test-Path $pkgXML)) {
 [XML]$personalpackagesXMLcontent = Get-Content $PersonalPkgXML
 
 #change these to paramters? XML file?
-#add check that internalizeddir is not subdir of download dir
+#add check that workDir is not subdir of download dir
 #add drop-path
-$downloadDir = $personalpackagesXMLcontent.mypackages.options.downloadDir.tostring()
-$internalizedDir = $personalpackagesXMLcontent.mypackages.options.internalizedDir.tostring()
+$searchDir = $personalpackagesXMLcontent.mypackages.options.searchDir.tostring()
+$workDir = $personalpackagesXMLcontent.mypackages.options.workDir.tostring()
 $dropPath = $personalpackagesXMLcontent.mypackages.options.DropPath.tostring()
 $useDropPath = $personalpackagesXMLcontent.mypackages.options.useDropPath.tostring()
 $writePerPkgs = $personalpackagesXMLcontent.mypackages.options.writePerPkgs.tostring()
 $pushURL = $personalpackagesXMLcontent.mypackages.options.pushURL.tostring()
 $pushPkgs = $personalpackagesXMLcontent.mypackages.options.pushPkgs.tostring()
 
-if (!(Test-Path $downloadDir)) {
-	throw "downloadDir not found, please specify valid path"
+if (!(Test-Path $searchDir)) {
+	throw "searchDir not found, please specify valid path"
 }
-if (!(Test-Path $internalizedDir)) {
-	throw "internalizedDir not found, please specify valid path"
+if (!(Test-Path $workDir)) {
+	throw "workDir not found, please specify valid path"
 }
 if ($useDropPath -eq "yes") {
 	if (!(Test-Path $dropPath)) {
@@ -94,11 +94,11 @@ if ($useDropPath -eq "yes") {
 
 #add switch here to select from other options to get list of nupkgs
 if ($ThoroughList) {
-	#Get-ChildItem $downloadDir -File -Filter "*adopt*.nupkg" -Recurse
-	$nupkgArray = Get-ChildItem -File $downloadDir -Filter "*.nupkg" -Recurse
+	#Get-ChildItem $searchDir -File -Filter "*adopt*.nupkg" -Recurse
+	$nupkgArray = Get-ChildItem -File $searchDir -Filter "*.nupkg" -Recurse
 } else {
 	#filters based on folder name, therefore less files to open later and therefore faster, but may not be useful in all circumstances. 
-	$nupkgArray = (Get-ChildItem -File $downloadDir  -Filter "*.nupkg" -Recurse) | Where-Object { 
+	$nupkgArray = (Get-ChildItem -File $searchDir  -Filter "*.nupkg" -Recurse) | Where-Object { 
 		($_.directory.name -notin $packagesXMLcontent.packages.internal.id) `
 		-and ($_.directory.Parent.name -notin $packagesXMLcontent.packages.internal.id) `
 		-and ($_.directory.name -notin $personalpackagesXMLcontent.mypackages.personal.id) `
@@ -149,7 +149,7 @@ $nupkgArray | select -Unique | ForEach-Object {
 			
 			Find-InstallHelpers
 
-			$idDir      = (Join-Path $internalizedDir $Script:nuspecID)
+			$idDir      = (Join-Path $workDir $Script:nuspecID)
 			$versionDir = (Join-Path $idDir $Script:nuspecVersion)
 			$newpath    = (Join-Path $Script:versionDir $_.name)
 			$customXml  = $packagesXMLcontent.packages.custom.pkg | where-object id -eq $nuspecID
