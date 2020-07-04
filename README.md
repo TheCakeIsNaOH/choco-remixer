@@ -13,8 +13,8 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - The [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that also has [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages) is-
  
    - Not open source
-   - Too expensive for home users at $640/year
-   - May require an ongoing license to continue to use packages internalized. 
+   - Too expensive for almost all non-business users because it starts at $640/year
+   - May require an ongoing license to continue to use the packages that where internalized. 
 
 ## Requirements
 
@@ -45,6 +45,10 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - Error checking and logging are limited
 
 ## Todo
+
+- move more packages to no custom function, all declared in xml`
+- implement nexus stuff
+- change fuctions to use all passed things, not script variables
 
 - Checksum downloads
 - Logging, and support verbose
