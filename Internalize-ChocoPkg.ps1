@@ -110,10 +110,7 @@ if ($ThoroughList) {
 #unique needed to workaround bug if accessing from samba that some things show up twice
 $nupkgArray | select -Unique | ForEach-Object {
 	$script:status = "ready"
-	$script:helper = $null
-	$script:foundHelper = $null
 	$script:InstallScript = $null
-	$helper = $null
 	$versionDir	= $null
 	$newpath = $null
 	Get-NuspecVersion -NupkgPath $_.fullname
@@ -145,9 +142,6 @@ $nupkgArray | select -Unique | ForEach-Object {
 			#Write-Output '<id>'$nuspecID'</id>'
 
 		} else {
-			
-			
-			Find-InstallHelpers
 
 			$idDir      = (Join-Path $workDir $Script:nuspecID)
 			$versionDir = (Join-Path $idDir $Script:nuspecVersion)
@@ -165,12 +159,10 @@ $nupkgArray | select -Unique | ForEach-Object {
 				version       = $nuspecVersion
 				nuspecID      = $nuspecID
 				status        = $status
-				foundHelper   = $foundHelper
 				idDir         = $idDir
 				versionDir    = $versionDir
 				toolsDir      = $toolsDir
 				newPath       = $newpath
-				#xmlHelper     = $customXml.helper
 				#needsToolsDir = $customXml.needsToolsDir
 				functionName   = $customXml.functionName
 				#needsStopAction   = $customXml.needsStopAction
@@ -206,8 +198,7 @@ $nupkgArray = $null
 #Setup the directories for internalizing
 Foreach ($obj in $nupkgObjArray) {
 	try {
-		#Write-Output $obj.helper
-
+	
 		if (!(Test-Path $obj.idDir)) {
 			mkdir $obj.idDir | Out-Null
 		}

@@ -164,70 +164,60 @@
 	<custom>
 		<pkg>
 			<id>4k-slideshow-maker</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-4k-slideshow</functionName>
 		</pkg>
 		<pkg>
 			<id>4k-video-downloader</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-4k-video-downloader</functionName>
 		</pkg>
 		<pkg>
 			<id>4k-stogram</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-4k-stogram</functionName>
 		</pkg>
 		<pkg>
 			<id>4k-video-to-mp3</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-4k-video-to-mp3</functionName>
 		</pkg>
 		<pkg>
 			<id>4k-youtube-to-mp3</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-4k-youtube-to-mp3</functionName>
 		</pkg>
 		<pkg>
 			<id>libreoffice-fresh</id>
-			<helper></helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-libreoffice-fresh</functionName>
 		</pkg>
 		<pkg>
 			<id>adb</id>
-			<helper>Install-ChocolateyZipPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-adb</functionName>
 		</pkg>
 		<pkg>
 			<id>adoptopenjdk8</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-adoptopenjdk8</functionName>
 		</pkg>
 		<pkg>
 			<id>adoptopenjdk8jre</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-adoptopenjdk8jre</functionName>
 		</pkg>
 		<pkg>
 			<id>bitwarden</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-bitwarden</functionName>
@@ -235,7 +225,6 @@
 		</pkg>
 		<pkg>
 			<id>dotnetcore-sdk</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-dotnetcore-sdk</functionName>
@@ -243,7 +232,6 @@
 		</pkg>
 		<pkg>
 			<id>etcher</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-etcher</functionName>
@@ -251,7 +239,6 @@
 		</pkg>
 		<pkg>
 			<id>firefox</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-firefox</functionName>
@@ -259,7 +246,6 @@
 		</pkg>
 		<pkg>
 			<id>gimp</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-gimp</functionName>
@@ -267,7 +253,6 @@
 		</pkg>
 		<pkg>
 			<id>github-desktop</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-github-desktop</functionName>
@@ -275,7 +260,6 @@
 		</pkg>
 		<pkg>
 			<id>google-backup-and-sync</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-google-backup-and-sync</functionName>
@@ -283,7 +267,6 @@
 		</pkg>
 		<pkg>
 			<id>googlechrome</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-googlechrome</functionName>
@@ -291,7 +274,6 @@
 		</pkg>		
 <!-- Url is problem		<pkg>
 			<id>hwmonitor</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName></functionName>
@@ -299,7 +281,6 @@
 		</pkg>	 -->
 		<pkg>
 			<id>kdenlive</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-kdenlive</functionName>
@@ -307,7 +288,6 @@
 		</pkg>	
 		<pkg>
 			<id>krita</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-krita</functionName>
@@ -315,7 +295,6 @@
 		</pkg>	
 		<!--<pkg>
 			<id>maven</id>
-			<helper>Custom</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName></functionName>
@@ -323,7 +302,6 @@
 		</pkg>	-->
 		<pkg>
 			<id>mono</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-mono</functionName>
@@ -331,7 +309,6 @@
 		</pkg>	
 		<!-- <pkg>
 			<id>mupdf</id>
-			<helper>Install-ChocolateyZipPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName></functionName>
@@ -339,7 +316,6 @@
 		</pkg> -->	
 		<pkg>
 			<id>nextcloud-client</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-nextcloud-client</functionName>
@@ -347,7 +323,6 @@
 		</pkg>
 		<pkg>
 			<id>nordvpn</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-nordvpn</functionName>
@@ -355,7 +330,6 @@
 		</pkg>
 		<pkg>
 			<id>onlyoffice</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-onlyoffice</functionName>
@@ -363,7 +337,6 @@
 		</pkg>
 		<pkg>
 			<id>thunderbird</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-thunderbird</functionName>
@@ -371,399 +344,342 @@
 		</pkg>
 		<pkg>
 			<id>vagrant</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-vagrant</functionName>
 		</pkg>
         <pkg>
 			<id>virtualbox</id>
-			<helper>Custom</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-virtualbox</functionName>
 		</pkg>
 		<pkg>
 			<id>vscodium.install</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-vscodium-install</functionName>
 		</pkg>
 		<pkg>
 			<id>shotcut.install</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-shotcut-install</functionName>
 		</pkg>
 		<pkg>
 			<id>vivaldi.portable</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-vivaldi-portable</functionName>
 		</pkg>
 		<pkg>
 			<id>vivaldi.install</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-vivaldi-install</functionName>
 		</pkg>
 		<pkg>
 			<id>resharper-platform</id>
-			<helper>Get-ChocolateyWebFile</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-resharper-platform</functionName>
 		</pkg>
 		<pkg>
 			<id>steam</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-steam</functionName>
 		</pkg>
 		<pkg>
 			<id>skype</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-skype</functionName>
 		</pkg>
 <!-- pgk doing stuff I don't understand yet		<pkg>
 			<id>origin</id>
-			<helper>Install-ChocolateyZipPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>Yes</needsToolsDir>
 			<functionName>mod-origin</functionName>
 		</pkg> -->
 		<pkg>
 			<id>powershell-core</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>No</needsStopAction>
 			<needsToolsDir>No</needsToolsDir>
 			<functionName>mod-powershell-core</functionName>
 		</pkg>
 		<pkg>
 			<id>icecat</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-icecat</functionName>
 		</pkg>
 		<pkg>
 			<id>hexchat</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-hexchat</functionName>
 		</pkg>
 		<pkg>
 			<id>cutepdf</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>No</needsStopAction>
 			<needsToolsDir>Yes</needsToolsDir>
 			<functionName>mod-cutepdf</functionName>
 		</pkg>
 		<pkg>
 			<id>nvidia-display-driver</id>
-			<helper>Get-ChocolateyUnzip</helper>
 			<needsStopAction>No</needsStopAction>
 			<needsToolsDir>Yes</needsToolsDir>
 			<functionName>mod-nvidia-driver</functionName>
 		</pkg>
 		<pkg>
 			<id>microsoft-edge</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-edge</functionName>
 		</pkg>
 		<pkg>
 			<id>malwarebytes</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-malwarebytes</functionName>
 		</pkg>
 		<pkg>
 			<id>anydesk.install</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-anydesk-install</functionName>
 		</pkg>
 		<pkg>
 			<id>joplin</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-joplin</functionName>
 		</pkg>		
 		<pkg>
 			<id>ds4windows</id>
-			<helper>Install-ChocolateyZipPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-ds4windows</functionName>
 		</pkg>
 		<pkg>
 			<id>calibre</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction></needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-calibre</functionName>
 		</pkg>
 		<pkg>
 			<id>adoptopenjdkjre</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-adoptopenjdkjre</functionName>
 		</pkg>
 		<pkg>
 			<id>msiafterburner</id>
-			<helper>Get-ChocolateyWebFile</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-msiafterburner</functionName>
 		</pkg>
 		<pkg>
 			<id>slack</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-slack</functionName>
 		</pkg>
 		<pkg>
 			<id>zoom</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-zoom</functionName>
 		</pkg>
 		<!--Now a metapackage pointing to `zoom` <pkg>
 			<id>zoom-client</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-zoom-client</functionName>
 		</pkg> -->
 		<pkg>
 			<id>adobereader</id>
-			<helper>Get-ChocolateyWebFile</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-adobereader</functionName>
 		</pkg>
 		<pkg>
 			<id>imagemagick.app</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-imagemagick</functionName>
 		</pkg>
 		<pkg>
 			<id>uplay</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-uplay</functionName>
 		</pkg>
 		<pkg>
 			<id>riot-web</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-riot-web</functionName>
 		</pkg>
 		<pkg>
 			<id>sqlserver-cmdlineutils</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-sqlserver-cmdlineutils</functionName>
 		</pkg>
 <!-- borken		<pkg>
 			<id>sqlserver-odbcdriver</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-sqlserver-odbcdriver</functionName>
 		</pkg> -->
 		<pkg>
 			<id>sql-server-management-studio</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-ssms</functionName>
 		</pkg>
 		<pkg>
 			<id>anydesk</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-anydesk</functionName>
 		</pkg>
 		<pkg>
 			<id>discord.install</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-discord-install</functionName>
 		</pkg>
 		<pkg>
 			<id>openshot</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-openshot</functionName>
 		</pkg>
 		<pkg>
 			<id>sysinternals</id>
-			<helper>Install-ChocolateyZipPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-sysinternals</functionName>
 		</pkg>
 		<pkg>
 			<id>cpu-z.install</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-cpuz</functionName>
 		</pkg>
 		<pkg>
 			<id>advanced-installer</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-advanced-installer</functionName>
 		</pkg>
 		<pkg>
 			<id>nsis.install</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-nsis-install</functionName>
 		</pkg>
 		<pkg>
 			<id>epicgameslauncher</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-epicgames</functionName>
 		</pkg>
 		<pkg>
 			<id>virt-viewer</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-virt-viewer</functionName>
 		</pkg>
 		<pkg>
 			<id>vcredist140</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-vcredist140</functionName>
 		</pkg>
 		<pkg>
 			<id>openhashtab</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-openhashtab</functionName>
 		</pkg>
 		<pkg>
 			<id>geforce-experience</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-geforce-experience</functionName>
 		</pkg>
 		<pkg>
 			<id>geforce-game-ready-driver</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-geforce-driver</functionName>
 		</pkg>
 		<pkg>
 			<id>tor-browser</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-tor-browser</functionName>
 		</pkg>
 		<pkg>
 			<id>dropbox</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-dropbox</functionName>
 		</pkg>
 		<pkg>
 			<id>lightshot.install</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-lightshot</functionName>
 		</pkg>
 		<pkg>
 			<id>gotomeeting</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-gotomeeting</functionName>
 		</pkg>
 		<pkg>
 			<id>box-drive</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-box-drive</functionName>
 		</pkg>
 		<pkg>
 			<id>ringcentral-classic</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-ringcentral-classic</functionName>
 		</pkg>
 		<pkg>
 			<id>google-drive-file-stream</id>
-			<helper>Install-ChocolateyPackage</helper>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-google-drive-file-stream</functionName>
 		</pkg>
 		<pkg>
 			<id></id>
-			<helper></helper>
 			<needsStopAction></needsStopAction>
 			<needsToolsDir></needsToolsDir>
 			<functionName></functionName>
 		</pkg>
 		<pkg>
 			<id></id>
-			<helper></helper>
 			<needsStopAction></needsStopAction>
 			<needsToolsDir></needsToolsDir>
 			<functionName></functionName>
 		</pkg>
 		<pkg>
 			<id></id>
-			<helper></helper>
 			<needsStopAction></needsStopAction>
 			<needsToolsDir></needsToolsDir>
 			<functionName></functionName>
 		</pkg>
 		<pkg>
 			<id></id>
-			<helper></helper>
 			<needsStopAction></needsStopAction>
 			<needsToolsDir></needsToolsDir>
 			<functionName></functionName>
