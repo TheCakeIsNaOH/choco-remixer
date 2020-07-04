@@ -1,12 +1,14 @@
-#fixme return variables
-Function Get-ZipInstallScript ($nupkgPath) {
+Function Get-ZippedInstallScript ($nupkgPath) {
+	#needed for accessing dotnet zip functions
+	Add-Type -AssemblyName System.IO.Compression.FileSystem
+
 	#open the nupkg as readonly
 	$archive = [System.IO.Compression.ZipFile]::OpenRead($nupkgPath)
 
 	#check if installscript in inside nuspec
 	if ($archive.Entries.name -notcontains "chocolateyInstall.ps1") {
-		$script:installScript = $null
-		$script:status = "noscript"
+		$installScript = $null
+		$status = "noscript"
 	} else {
 		#get path inside nupkg
 		$ScriptPath = ($archive.Entries | Where-Object { $_.FullName -like "*chocolateyInstall.ps1" })
@@ -16,7 +18,8 @@ Function Get-ZipInstallScript ($nupkgPath) {
 		$reader = New-Object Io.streamreader($scriptStream)
 
 		#read install script into installscript variable
-		$Script:installScript = $reader.Readtoend()
+		$installScript = $reader.Readtoend()
+		$status = "ready"
 
 		$scriptStream.close()
 		$reader.close()
@@ -24,10 +27,14 @@ Function Get-ZipInstallScript ($nupkgPath) {
 	}
 	$archive.dispose()
 	
+	return $status, $installScript
 }
 
-#fixme return variables
+
 Function Get-NuspecVersion ($nupkgPath) {
+	#needed for accessing dotnet zip functions
+	Add-Type -AssemblyName System.IO.Compression.FileSystem
+
 	$archive = [System.IO.Compression.ZipFile]::OpenRead($nupkgPath)
 
  	$nuspecStream = ($archive.Entries | Where-Object { $_.FullName -like "*.nuspec" }).open()
@@ -38,16 +45,16 @@ Function Get-NuspecVersion ($nupkgPath) {
 	$nuspecStream.close()
 	$nuspecReader.close()
 	$archive.dispose()
-
-	$script:nuspecVersion = ([XML]$nuspecString).package.metadata.version
-	$script:nuspecID = ([XML]$nuspecString).package.metadata.id
-
+	
+	return ([XML]$nuspecString).package.metadata.version, ([XML]$nuspecString).package.metadata.id
 }
 
 
 #no need return stuff
 #changeme to work with individual strings
 Function Extract-Nupkg ($obj) {
+	#needed for accessing dotnet zip functions
+	Add-Type -AssemblyName System.IO.Compression.FileSystem
 	[System.IO.Compression.ZipFile]::ExtractToDirectory($obj.origPath, $obj.versionDir)
 
 	#force needed due to wacky permissions after extract

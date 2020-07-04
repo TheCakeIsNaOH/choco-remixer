@@ -1,7 +1,7 @@
 ﻿param (
 	[string]$pkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
-	[string]$PersonalPkgXML,
-	[switch]$ThoroughList
+	[string]$personalPkgXML,
+	[switch]$thoroughList
 )
 $ErrorActionPreference = 'Stop'
 
@@ -11,11 +11,12 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 #needed to use [Microsoft.PowerShell.Commands.PSUserAgent] when running in pwsh
 Import-Module Microsoft.PowerShell.Utility
 
-#default dot source
+#default dot source for needed functions
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-normal.ps1')
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-special.ps1')
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'OtherFunctions.ps1')
 
+#Check for personal-packages.xml in user profile
 if (!($IsWindows) -or ($IsWindows -eq $true)) {
 	$profileXMLPath = [IO.Path]::Combine($env:APPDATA, "internalizer", "personal-packages.xml" )
 } elseif ($IsLinux -eq $true) {
@@ -26,18 +27,19 @@ if (!($IsWindows) -or ($IsWindows -eq $true)) {
 	Throw "Something went wrong detecting OS"
 }
 
-$gitXMLPath = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml')
+#select which personal-packages.xml to use
+if (!($PSBoundParameters.ContainsKey('personalPkgXML'))) {
 
-if (!($PSBoundParameters.ContainsKey('PersonalPkgXML'))) {
+	$gitXMLPath = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml')
 	if (Test-Path $profileXMLPath) {
-		$PersonalPkgXML = $profileXMLPath
+		$personalPkgXML = $profileXMLPath
 	} elseif (Test-Path $gitXMLPath) {
-		$PersonalPkgXML = $gitXMLPath
+		$personalPkgXML = $gitXMLPath
 	} else {
 		Throw "Cannot find personal-packages.xml, please specify path to it"
 	}
 	
-} elseif (!(Test-Path $PersonalPkgXML)) {
+} elseif (!(Test-Path $personalPkgXML)) {
 	throw "personal-packages.xml not found, please specify valid path"
 }
 
@@ -45,9 +47,9 @@ if (!(Test-Path $pkgXML)) {
 	throw "packages.xml not found, please specify valid path"
 }
 
-
+#changeme?
 [XML]$packagesXMLcontent = Get-Content $pkgXML
-[XML]$personalpackagesXMLcontent = Get-Content $PersonalPkgXML
+[XML]$personalpackagesXMLcontent = Get-Content $personalPkgXML
 
 #change these to paramters? XML file?
 #add check that workDir is not subdir of download dir
@@ -81,11 +83,11 @@ if ($useDropPath -eq "yes") {
 	}
 }
 
-#need this as normal PWSH arrays are slow to add an element
+#need this as normal PWSH arrays are slow to add an element, this can add them quickly
 [System.Collections.ArrayList]$nupkgObjArray = @()
 
 #add switch here to select from other options to get list of nupkgs
-if ($ThoroughList) {
+if ($thoroughList) {
 	#Get-ChildItem $searchDir -File -Filter "*adopt*.nupkg" -Recurse
 	$nupkgArray = Get-ChildItem -File $searchDir -Filter "*.nupkg" -Recurse
 } else {
@@ -98,15 +100,13 @@ if ($ThoroughList) {
 		}
 }
 
-#echo $nupkgArray.fullname
-#unique needed to workaround bug if accessing from samba that some things show up twice
+
+#unique needed to workaround a bug if accessing searchDir from a samba share where things show up twice if there are directories with the same name but different case.
 $nupkgArray | select -Unique | ForEach-Object {
-	$script:status = "ready"
-	$script:InstallScript = $null
-	$versionDir	= $null
-	$newpath = $null
-	Get-NuspecVersion -NupkgPath $_.fullname
 	$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -eq "$nuspecID" }).version
+	$nuspecDetails = Get-NuspecVersion -NupkgPath $_.fullname
+	$nuspecVersion = $nuspecDetails[0]
+	$nuspecID = $nuspecDetails[1]
 
 	if ($internalizedVersions -icontains $nuspecVersion) {
 		#package is internalized by user
@@ -127,19 +127,21 @@ $nupkgArray | select -Unique | ForEach-Object {
 
  	} elseif ($packagesXMLcontent.packages.custom.pkg.id -icontains $nuspecID) {
 
-		 Get-ZipInstallScript -NupkgPath $_.fullname
+		 $installScriptDetails = Get-ZippedInstallScript -NupkgPath $_.fullname
+		 $status = $installScriptDetails[0]
+		 $installScript = $installScriptDetails[1]
 
-		if ($script:status -eq "noscript") {
+		if ($installScriptDetails[0] -eq "noscript") {
 			Write-Output "You may want to add $nuspecID $nuspecVersion to the internal list"
 			#Write-Output '<id>'$nuspecID'</id>'
 
 		} else {
 
-			$idDir      = (Join-Path $workDir $Script:nuspecID)
-			$versionDir = (Join-Path $idDir $Script:nuspecVersion)
-			$newpath    = (Join-Path $Script:versionDir $_.name)
+			$idDir      = (Join-Path $workDir $nuspecID)
+			$versionDir = (Join-Path $idDir $nuspecVersion)
+			$newpath    = (Join-Path $versionDir $_.name)
 			$customXml  = $packagesXMLcontent.packages.custom.pkg | where-object id -eq $nuspecID
-			$toolsDir   = (Join-Path $Script:versionDir "tools")
+			$toolsDir   = (Join-Path $versionDir "tools")
 
 			if (($null -eq $customXml.functionName) -or ($customXml.functionName -eq "")) {
 				Throw "Could not find function for $nuspecID"
@@ -155,11 +157,11 @@ $nupkgArray | select -Unique | ForEach-Object {
 				versionDir    = $versionDir
 				toolsDir      = $toolsDir
 				newPath       = $newpath
-				#needsToolsDir = $customXml.needsToolsDir
+				needsToolsDir = $customXml.needsToolsDir
 				functionName   = $customXml.functionName
-				#needsStopAction   = $customXml.needsStopAction
-				installScriptOrig = $script:InstallScript
-				installScriptMod  = $script:InstallScript
+				needsStopAction   = $customXml.needsStopAction
+				installScriptOrig = $installScript
+				installScriptMod  = $installScript
 
 			}
 
@@ -167,20 +169,11 @@ $nupkgArray | select -Unique | ForEach-Object {
 
 			Write-Output "Found $nuspecID $nuspecVersion to internalize"
 			#Write-Output $_.fullname
-
 		}
-
-
+		
 	} else {
-		#Write-Output '<id>'$nuspecID'</id>'
-
+		
 		Write-Output "$nuspecID $nuspecVersion is new, id unknown"
-
-		<#Get-InstallScript -NupkgPath $_.fullname
-
-		if (!($script:InstallScript -like "*http*")) {
-			Write-Output '<id>'$nuspecID'</id>'
-		} #>
 	}
 }
 
