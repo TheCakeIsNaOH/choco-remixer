@@ -51,9 +51,7 @@ if (!(Test-Path $pkgXML)) {
 [XML]$packagesXMLcontent = Get-Content $pkgXML
 [XML]$personalpackagesXMLcontent = Get-Content $personalPkgXML
 
-#change these to paramters? XML file?
-#add check that workDir is not subdir of download dir
-#add drop-path
+#add these to parameters?
 $searchDir = $personalpackagesXMLcontent.mypackages.options.searchDir.tostring()
 $workDir = $personalpackagesXMLcontent.mypackages.options.workDir.tostring()
 $dropPath = $personalpackagesXMLcontent.mypackages.options.DropPath.tostring()
@@ -63,11 +61,15 @@ $pushURL = $personalpackagesXMLcontent.mypackages.options.pushURL.tostring()
 $pushPkgs = $personalpackagesXMLcontent.mypackages.options.pushPkgs.tostring()
 
 if (!(Test-Path $searchDir)) {
-	throw "searchDir not found, please specify valid path"
+	throw "$searchDir not found, please specify valid searchDir"
 }
 if (!(Test-Path $workDir)) {
-	throw "workDir not found, please specify valid path"
+	throw "$workDir not found, please specify valid workDir"
 }
+if ($workDir.ToLower().StartsWith($searchDir.ToLower())) {
+	throw "workDir cannot be a sub directory of the searchDir"
+}
+
 if ($useDropPath -eq "yes") {
 	if (!(Test-Path $dropPath)) {
 		throw "Drop path not found, please specify valid path"
