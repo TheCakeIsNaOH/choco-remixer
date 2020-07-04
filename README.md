@@ -26,8 +26,8 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 ## Setup 
 
 - Copy `personal-packages-template.xml` to `personal-packages.xml` and open it.
-- Set `downloadDir` to the directory your `.nupkg` files to internalize are.
-- Set `internalizedDir` to the directory where you want the `.nupkg`s to be internalized in.
+- Set `searchDir` to the directory your `.nupkg` files to internalize are.
+- Set `workDir` to the directory where you want the `.nupkg`s to be internalized in.
 - If wanted, change `useDropPath` and/or `pushPkgs` to `yes` and change the `pushURL`/`dropPath` accordingly. These auto copy or push the internalized packages to your repository.
 - If you have any custom packages, their IDs can be added to the personal section
 - `personal-packages.xml` is searched for first in `%appdata%` or `.config` in the internalizer folder, then in the same folder that internalizer runs from. You can also provide a custom path to it. 
