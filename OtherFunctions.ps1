@@ -1,3 +1,4 @@
+#fixme return variables
 Function Get-ZipInstallScript ($nupkgPath) {
 	#open the nupkg as readonly
 	$archive = [System.IO.Compression.ZipFile]::OpenRead($nupkgPath)
@@ -22,8 +23,10 @@ Function Get-ZipInstallScript ($nupkgPath) {
 
 	}
 	$archive.dispose()
+	
 }
 
+#fixme return variables
 Function Get-NuspecVersion ($nupkgPath) {
 	$archive = [System.IO.Compression.ZipFile]::OpenRead($nupkgPath)
 
@@ -42,7 +45,8 @@ Function Get-NuspecVersion ($nupkgPath) {
 }
 
 
-
+#no need return stuff
+#changeme to work with individual strings
 Function Extract-Nupkg ($obj) {
 	[System.IO.Compression.ZipFile]::ExtractToDirectory($obj.origPath, $obj.versionDir)
 
@@ -54,6 +58,9 @@ Function Extract-Nupkg ($obj) {
 
 }
 
+
+#no need return stuff
+#changeme to work with individual strings
 Function Write-UnzippedInstallScript ($obj) {
 	(Get-ChildItem $obj.toolsDir -Filter "*chocolateyinstall.ps1").fullname | % { Remove-Item -Force -Recurse -ea 0 -Path $_ } -ea 0
 	$scriptPath = Join-Path $obj.toolsDir 'chocolateyinstall.ps1'
@@ -61,6 +68,9 @@ Function Write-UnzippedInstallScript ($obj) {
 
 }
 
+
+#fixme to work with multiple versions and packages at one time, returning?
+#changeme to work with individual strings
 Function Write-PerPkg ($obj) {
 	$version = $obj.version
 	$nuspecID = $obj.nuspecID.tolower()
@@ -81,6 +91,8 @@ Function Write-PerPkg ($obj) {
 	
 }
 
+#no need return stuff
+#changeme to work with single
 Function download-fileBoth {
 	param (
 		[parameter(Mandatory=$true)][string]$url32 = $null,
@@ -113,6 +125,7 @@ Function download-fileBoth {
 }
 
 
+#no need return stuff
 Function download-fileSingle {
 	param (
 		[parameter(Mandatory=$true)][string]$url = $null,
@@ -135,6 +148,8 @@ Function download-fileSingle {
 }
 
 
+#no need return stuff
+#changeme to work single
 Function mod-installcpkg-both {
 	param ( 
 		[parameter(Mandatory=$true)]$obj,

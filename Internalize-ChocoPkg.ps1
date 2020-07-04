@@ -11,34 +11,28 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 #needed to use [Microsoft.PowerShell.Commands.PSUserAgent] when running in pwsh
 Import-Module Microsoft.PowerShell.Utility
 
-#dot source functions from other file
-$functionsFileA = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-normal.ps1')
-$functionsFileB = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-special.ps1')
-$functionsFileC = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'OtherFunction.ps1')
-$ExecutionContext.InvokeCommand.InvokeScript($false, ([scriptblock]::Create([io.file]::ReadAllText($functionsFileA, [Text.Encoding]::UTF8))), $null, $null)
-$ExecutionContext.InvokeCommand.InvokeScript($false, ([scriptblock]::Create([io.file]::ReadAllText($functionsFileB, [Text.Encoding]::UTF8))), $null, $null)
-$ExecutionContext.InvokeCommand.InvokeScript($false, ([scriptblock]::Create([io.file]::ReadAllText($functionsFileC, [Text.Encoding]::UTF8))), $null, $null)
-
-#default dot source, too slow
-#. (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'Custom-internalizer-funcs.ps1')
+#default dot source
+. (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-normal.ps1')
+. (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-special.ps1')
+. (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'OtherFunctions.ps1')
 
 if (!($IsWindows) -or ($IsWindows -eq $true)) {
-	$tempPathA = [IO.Path]::Combine($env:APPDATA, "internalizer", "personal-packages.xml" )
+	$profileXMLPath = [IO.Path]::Combine($env:APPDATA, "internalizer", "personal-packages.xml" )
 } elseif ($IsLinux -eq $true) {
-	$tempPathA = [IO.Path]::Combine( $env:HOME, ".config" , "internalizer", "personal-packages.xml" )
+	$profileXMLPath = [IO.Path]::Combine( $env:HOME, ".config" , "internalizer", "personal-packages.xml" )
 } elseif ($IsMacOS -eq $true) {
 	Throw "MacOS not supported"
 } else {
 	Throw "Something went wrong detecting OS"
 }
 
-$tempPathB = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml')
+$gitXMLPath = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml')
 
 if (!($PSBoundParameters.ContainsKey('PersonalPkgXML'))) {
-	if (Test-Path $tempPathA) {
-		$PersonalPkgXML = $tempPathA
-	} elseif (Test-Path $tempPathB) {
-		$PersonalPkgXML = $tempPathB
+	if (Test-Path $profileXMLPath) {
+		$PersonalPkgXML = $profileXMLPath
+	} elseif (Test-Path $gitXMLPath) {
+		$PersonalPkgXML = $gitXMLPath
 	} else {
 		Throw "Cannot find personal-packages.xml, please specify path to it"
 	}
@@ -46,8 +40,6 @@ if (!($PSBoundParameters.ContainsKey('PersonalPkgXML'))) {
 } elseif (!(Test-Path $PersonalPkgXML)) {
 	throw "personal-packages.xml not found, please specify valid path"
 }
-
-#(Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'personal-packages.xml')
 
 if (!(Test-Path $pkgXML)) {
 	throw "packages.xml not found, please specify valid path"
