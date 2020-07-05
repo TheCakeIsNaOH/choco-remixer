@@ -59,6 +59,7 @@ $dropPath         = $options.DropPath.tostring()
 $useDropPath      = $options.useDropPath.tostring()
 $writePerPkgs     = $options.writePerPkgs.tostring()
 $pushURL          = $options.pushURL.tostring()
+#add apikey?
 $pushPkgs         = $options.pushPkgs.tostring()
 $repoCheck        = $options.repoCheck.tostring()
 $publicRepoURL    = $options.publicRepoURL.tostring()
@@ -88,7 +89,8 @@ if ($useDropPath -eq "yes") {
 	if ($null -ne $(Get-ChildItem -Path $dropPath -Filter "*.nupkg")) {
 		Write-Warning "There are still files in the drop path"
 	}
-} elseif ($useDropPath -eq "no") { } else {
+} elseif ($useDropPath -eq "no") { 
+} else {
 	Throw "bad useDropPath value in personal-packages.xml, must be yes or no"
 }
 
@@ -105,18 +107,56 @@ if ($pushPkgs -eq "yes") {
 
 	if ($null -eq $page.StatusCode) {
 		Throw "bad pushURL in personal-packages.xml"
-	} elseif ($page.StatusCode  -eq  200) { } else {
-		Write-Warning "push url exists, but did not return ok. This is expected if it requiest authentication"
+	} elseif ($page.StatusCode  -eq  200) { 
+	} else {
+		Write-Warning "pushURL exists, but did not return ok. This is expected if it requires authentication"
 	}
 	
 } elseif ($pushPkgs -eq "no") { } else {
-	Throw "bad repoCheck value in personal-packages.xml, must be yes or no"
+	Throw "bad pushPkgs value in personal-packages.xml, must be yes or no"
 }
 
-if ($pushPkgs -eq "yes") {
-	#validation of urls, get creds if needed, etc
-} elseif ($pushPkgs -eq "no") { } else {
-	Throw "bad pushPkgs value in personal-packages.xml, must be yes or no"
+if ($repocheck -eq "yes") {
+	if ($null -eq $publicRepoURL) {
+		Throw "no publicRepoURL in personal-packages.xml"
+	}
+	try { $page = Invoke-WebRequest -UseBasicParsing -Uri $publicRepoURL -method head } 
+	catch { $page = $_.Exception.Response }
+
+	if ($null -eq $page.StatusCode) {
+		Throw "bad publicRepoURL in personal-packages.xml"
+	} elseif ($page.StatusCode  -eq  200) { 
+	} else {
+		Write-Warning "publicRepoURL exists, but did not return ok. This is expected if it requires authentication"
+	}
+
+	if ($null -eq $privateRepoCreds) {
+		Throw "privateRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
+	} elseif ($privateRepoCreds -eq "no") { 
+	} elseif ($privateRepoCreds -eq "yes") {
+		Throw "not implemented yes, later will give option to give creds here"
+	}
+
+	if ($null -eq $privateRepoURL) {
+		Throw "no privateRepoURL in personal-packages.xml"
+	}
+	try { 
+		$page = Invoke-WebRequest -UseBasicParsing -Uri $privateRepoURL -method head  
+		#todo, add if for webrequest with $privateRepoCreds auth here
+	} catch { $page = $_.Exception.Response }
+	
+	if ($null -eq $page.StatusCode) {
+		Throw "bad privateRepoURL in personal-packages.xml"
+	} elseif ($page.StatusCode  -eq  200) { 
+	} else {
+		Write-Warning "privateRepoURL exists, but did not return ok. If it reques credentials, please check that they are correct"
+	}
+	
+
+	
+} elseif ($repoCheck -eq "no") { 
+} else {
+	Throw "bad repoCheck value in personal-packages.xml, must be yes or no"
 }
 
 #need this as normal PWSH arrays are slow to add an element, this can add them quickly

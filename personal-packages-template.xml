@@ -23,9 +23,11 @@
 		<writePerPkgs>no</writePerPkgs>
 		<pushPkgs>no</pushPkgs>
 		<pushURL>https://my.repo/feed</pushURL>
+		<!-- todo, apikey option here -->
 		<repoCheck>no</repoCheck>
 		<publicRepoURL>https://chocolatey.org/api/v2/</publicRepoURL>
 		<privateRepoURL>https://my.repo/private-feed/</privateRepoURL>
+		<!-- todo, specify format here -->
 		<privateRepoCreds>no</privateRepoCreds>
 	</options>
 </mypackages>
