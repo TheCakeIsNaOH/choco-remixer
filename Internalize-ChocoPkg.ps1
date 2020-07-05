@@ -51,14 +51,19 @@ if (!(Test-Path $pkgXML)) {
 [XML]$packagesXMLcontent = Get-Content $pkgXML
 [XML]$personalpackagesXMLcontent = Get-Content $personalPkgXML
 
+$options = $personalpackagesXMLcontent.mypackages.options
 #add these to parameters?
-$searchDir = $personalpackagesXMLcontent.mypackages.options.searchDir.tostring()
-$workDir = $personalpackagesXMLcontent.mypackages.options.workDir.tostring()
-$dropPath = $personalpackagesXMLcontent.mypackages.options.DropPath.tostring()
-$useDropPath = $personalpackagesXMLcontent.mypackages.options.useDropPath.tostring()
-$writePerPkgs = $personalpackagesXMLcontent.mypackages.options.writePerPkgs.tostring()
-$pushURL = $personalpackagesXMLcontent.mypackages.options.pushURL.tostring()
-$pushPkgs = $personalpackagesXMLcontent.mypackages.options.pushPkgs.tostring()
+$searchDir        = $options.searchDir.tostring()
+$workDir          = $options.workDir.tostring()
+$dropPath         = $options.DropPath.tostring()
+$useDropPath      = $options.useDropPath.tostring()
+$writePerPkgs     = $options.writePerPkgs.tostring()
+$pushURL          = $options.pushURL.tostring()
+$pushPkgs         = $options.pushPkgs.tostring()
+$repoCheck        = $options.repoCheck.tostring()
+$publicRepoURL    = $options.publicRepoURL.tostring()
+$privateRepoURL   = $options.privateRepoURL.tostring()
+$privateRepoCreds = $options.privateRepoCreds.tostring()
 
 if (!(Test-Path $searchDir)) {
 	throw "$searchDir not found, please specify valid searchDir"
@@ -83,6 +88,24 @@ if ($useDropPath -eq "yes") {
 	if ($null -ne $(Get-ChildItem -Path $dropPath -Filter "*.nupkg")) {
 		Write-Warning "There are still files in the drop path"
 	}
+} elseif ($useDropPath -eq "no") { } else {
+	Throw "bad useDropPath value in personal-packages.xml, must be yes or no"
+}
+
+if ("no","yes" -notcontains $writePerPkgs) {
+	Throw "bad writePerPkgs value in personal-packages.xml, must be yes or no"
+}
+
+if ($pushPkgs -eq "yes") {
+	#validation of url 
+} elseif ($pushPkgs -eq "no") { } else {
+	Throw "bad repoCheck value in personal-packages.xml, must be yes or no"
+}
+
+if ($pushPkgs -eq "yes") {
+	#validation of urls, get creds if needed, etc
+} elseif ($pushPkgs -eq "no") { } else {
+	Throw "bad pushPkgs value in personal-packages.xml, must be yes or no"
 }
 
 #need this as normal PWSH arrays are slow to add an element, this can add them quickly
@@ -225,16 +248,6 @@ Foreach ($obj in $nupkgObjArray) {
 			$tempFuncName = $tempFuncName + ' -obj $obj'
 			Invoke-Expression $tempFuncName
 			$tempFuncName = $null
-				
-			#Write-Output $obj.filename64
-			#Write-InstallScript -nupkgObj $obj
-			#Write-Output "should show up only once"
-			#Write-Output $obj.nuspecID $obj.version
-
-			#OLD
-			#Write-ToolsFiles -nupkg $obj.newPath -toolsDir $obj.toolsDir
-			#Update-ContentTypes -nupkgPath $obj.newPath
-
 
 			Write-UnzippedInstallScript -obj $obj
 
@@ -288,3 +301,7 @@ $nupkgObjArray | ForEach-Object {
 
 # Get-ChildItem -Recurse -Path '..\.nugetv2\F1' -Filter "*.nupkg" | % { Copy-Item $_.fullname . }
 
+#needs log4net 2.0.3, load net40-full dll
+#add-type -Path ".\chocolatey.dll"
+#add-type -Path ".\net40-full\log4net.dll"
+#[chocolatey.StringExtensions]::to_lower("ASDF")

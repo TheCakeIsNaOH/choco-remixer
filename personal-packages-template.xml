@@ -11,6 +11,10 @@
 		<id>my-custom-internal-package-id</id>
 	</personal>
 	
+	<toInternalize>
+		<id prerelease="false/true">package-id-to-check-repo-to-internalize</id>
+	</toInternalize>
+	
 	<options>
 		<searchDir>C:\path\to\get\packages\from</searchDir>
 		<workDir>C:\path\to\modify\packages\in</workDir>
@@ -19,5 +23,9 @@
 		<writePerPkgs>no</writePerPkgs>
 		<pushPkgs>no</pushPkgs>
 		<pushURL>https://my.repo/feed</pushURL>
+		<repoCheck>no</repoCheck>
+		<publicRepoURL>https://chocolatey.org/api/v2/</publicRepoURL>
+		<privateRepoURL>https://my.repo/private-feed/</privateRepoURL>
+		<privateRepoCreds>no</privateRepoCreds>
 	</options>
 </mypackages>

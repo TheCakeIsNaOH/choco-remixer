@@ -46,7 +46,7 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 ## Todo
 
-- move more packages to no custom function, all declared in xml`
+- move more packages to no custom function, all declared in xml
 - implement nexus stuff
 - change fuctions to use all passed things, not script variables
 
