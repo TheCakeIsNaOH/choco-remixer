@@ -97,7 +97,18 @@ if ("no","yes" -notcontains $writePerPkgs) {
 }
 
 if ($pushPkgs -eq "yes") {
-	#validation of url 
+	if ($null -eq $pushURL) {
+		Throw "no pushURL in personal-packages.xml"
+	}
+	try { $page = Invoke-WebRequest -UseBasicParsing -Uri $pushURL -method head } 
+	catch { $page = $_.Exception.Response }
+
+	if ($null -eq $page.StatusCode) {
+		Throw "bad pushURL in personal-packages.xml"
+	} elseif ($page.StatusCode  -eq  200) { } else {
+		Write-Warning "push url exists, but did not return ok. This is expected if it requiest authentication"
+	}
+	
 } elseif ($pushPkgs -eq "no") { } else {
 	Throw "bad repoCheck value in personal-packages.xml, must be yes or no"
 }
