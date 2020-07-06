@@ -1,4 +1,5 @@
-﻿param (
+﻿#Requires -Version 5.0
+param (
 	[string]$pkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
 	[string]$personalPkgXML,
 	[switch]$thoroughList
@@ -15,6 +16,9 @@ Import-Module Microsoft.PowerShell.Utility
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-normal.ps1')
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-special.ps1')
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'OtherFunctions.ps1')
+
+#Install nuget package provider if not already installed
+Get-PackageProvider -Name nuget -Force | Out-Null
 
 #Check for personal-packages.xml in user profile
 if (!($IsWindows) -or ($IsWindows -eq $true)) {
@@ -139,6 +143,8 @@ if ($repocheck -eq "yes") {
 		Throw "privateRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
 	} elseif ($privateRepoCreds -eq "no") { 
 		$privateRepoHeaderCreds = @{ }
+		#todo, fix later things that want creds
+		Throw "not implemented yet, you could remove this line and see how it goes"
 	} elseif ($privateRepoCreds -eq "yes") {
 		#todo, implement me
 		Throw "not implemented yes, later will give option to give creds here"
@@ -147,6 +153,12 @@ if ($repocheck -eq "yes") {
 		$privateRepoHeaderCreds = @{ 
 			Authorization = "Basic $privateRepoCredsBase64"
 		}
+		$credArray = $privateRepoCreds -split ":"
+		$passwd = $credArray[1] | ConvertTo-SecureString -Force -AsPlainText
+		$privateRepoPSCreds = New-Object -TypeName System.Management.Automation.PSCredential -argumentlist $credArray[0],$passwd
+		
+		$credArray = $null
+		$passwd = $null
 	}
 
 	if ($null -eq $privateRepoURL) {
@@ -167,32 +179,47 @@ if ($repocheck -eq "yes") {
 	$toInternalizeCompare = Compare-Object -ReferenceObject $packagesXMLcontent.packages.custom.pkg.id -DifferenceObject $toSearchToInternalize.innertext | Where-Object SideIndicator -eq "=>"
 	
 	$systemTempDir = [System.IO.Path]::GetTempPath()
-	$tempConfigFile = Join-Path $systemTempDir 'deleteme.config'
+	$tempConfigFile = Join-Path $systemTempDir "deleteme-$($(New-Guid)).config"
 	if (Test-Path $tempConfigFile) {
 		Remove-Item $tempConfigFile -Force -ea 0 
 	}
-	
 	Set-Content -Path $tempConfigFile -Value "<configuration>`n</configuration>"
 	
+	$packageSources = get-packagesource -ProviderName nuget
 	
-	$toSearchToInternalize | ForEach-Object {
-		if ($_.prerelease -eq "true") {
-			$privateRepoPkgInfo = Find-Package -Source $privateRepoURL -Name $_.innertext -Headers $privateRepoHeaderCreds -AllowPrereleaseVersions -AllVersions
-			$publicRepoPkgInfo = Find-Package -Source $publicRepoURL -AllowPrereleaseVersions -Name $_.InnerText
-		} else {
-			$privateRepoPkgInfo = Find-Package -Source $privateRepoURL -Name $_.innertext -Headers $privateRepoHeaderCreds
-			$publicRepoPkgInfo = Find-Package -Source $publicRepoURL -Name $_.InnerText -AllVersions
-		}
-		
-		
-		
-		$publicRepoPkgInfo
-		$privateRepoPkgInfo
+	if ($packageSources.Location -notcontains $publicRepoURL) {
+		Register-PackageSource -Name publicRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget | Out-Null
 	}
 	
+	if ($packageSources.Location -notcontains $privateRepoURL) {
+		Register-PackageSource -Name privateRepo -Location $privateRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $privateRepoPSCreds | Out-Null
+	}
 	
-	
+	$toSearchToInternalize | ForEach-Object {
+		Write-Verbose "Comparing repo versions of $($_.InnerText)"
+		if ($_.prerelease -eq "true") {
+			$privateRepoPkgInfo = Find-Package -ConfigFile $tempConfigFile -Source privateRepo -Name $_.InnerText -AllowPrereleaseVersions -Credential $privateRepoPSCreds -AllVersions
+			$publicRepoPkgInfo  = Find-Package -ConfigFile $tempConfigFile -Source publicRepo  -Name $_.InnerText -AllowPrereleaseVersions  
+		} else {
+			$privateRepoPkgInfo = Find-Package -ConfigFile $tempConfigFile -Source privateRepo -Name $_.InnerText -Credential $privateRepoPSCreds -AllVersions
+			$publicRepoPkgInfo  = Find-Package -ConfigFile $tempConfigFile -Source publicRepo  -Name $_.InnerText 
+		}
+		
+		if ($privateRepoPkgInfo.Version -notcontains $publicRepoPkgInfo.Version) {
+			Write-Host "$($_.InnerText) out of date on private repo, found version $($publicRepoPkgInfo.Version)"
+			
+			$saveDir = Join-Path $searchDir $_.innertext
+			if (!(Test-Path $saveDir)) {
+				mkdir $saveDir | Out-Null
+			}
+			
+			Save-Package -ConfigFile $tempConfigFile -Path $saveDir -InputObject $publicRepoPkgInfo -AllowPrereleaseVersions | Out-Null
+			
+		}
+	}
+		
 	Remove-Item $tempConfigFile -Force -ea 0
+	
 } elseif ($repoCheck -eq "no") { 
 } else {
 	Throw "bad repoCheck value in personal-packages.xml, must be yes or no"
