@@ -27,7 +27,8 @@
 		<repoCheck>no</repoCheck>
 		<publicRepoURL>https://chocolatey.org/api/v2/</publicRepoURL>
 		<privateRepoURL>https://my.repo/private-feed/</privateRepoURL>
-		<!-- todo, specify format here -->
+		<!-- specify, yes, or no -->
+		<!-- format user:pass -->
 		<privateRepoCreds>no</privateRepoCreds>
 	</options>
 </mypackages>

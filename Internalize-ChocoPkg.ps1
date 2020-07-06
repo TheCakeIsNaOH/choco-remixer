@@ -117,6 +117,11 @@ if ($pushPkgs -eq "yes") {
 }
 
 if ($repocheck -eq "yes") {
+
+	if ($toInternalizeCompare.inputObject) {
+		Throw "$($toInternalizeCompare.InputObject) not found in packages.xml"; 
+	}
+
 	if ($null -eq $publicRepoURL) {
 		Throw "no publicRepoURL in personal-packages.xml"
 	}
@@ -133,16 +138,22 @@ if ($repocheck -eq "yes") {
 	if ($null -eq $privateRepoCreds) {
 		Throw "privateRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
 	} elseif ($privateRepoCreds -eq "no") { 
+		$privateRepoHeaderCreds = @{ }
 	} elseif ($privateRepoCreds -eq "yes") {
+		#todo, implement me
 		Throw "not implemented yes, later will give option to give creds here"
+	} else {
+		$privateRepoCredsBase64 = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($privateRepoCreds))
+		$privateRepoHeaderCreds = @{ 
+			Authorization = "Basic $privateRepoCredsBase64"
+		}
 	}
 
 	if ($null -eq $privateRepoURL) {
 		Throw "no privateRepoURL in personal-packages.xml"
 	}
 	try { 
-		$page = Invoke-WebRequest -UseBasicParsing -Uri $privateRepoURL -method head  
-		#todo, add if for webrequest with $privateRepoCreds auth here
+		$page = Invoke-WebRequest -UseBasicParsing -Uri $privateRepoURL -method head -Headers $privateRepoHeaderCreds
 	} catch { $page = $_.Exception.Response }
 	
 	if ($null -eq $page.StatusCode) {
@@ -152,8 +163,36 @@ if ($repocheck -eq "yes") {
 		Write-Warning "privateRepoURL exists, but did not return ok. If it reques credentials, please check that they are correct"
 	}
 	
-
+	$toSearchToInternalize = $personalpackagesXMLcontent.mypackages.toInternalize.id
+	$toInternalizeCompare = Compare-Object -ReferenceObject $packagesXMLcontent.packages.custom.pkg.id -DifferenceObject $toSearchToInternalize.innertext | Where-Object SideIndicator -eq "=>"
 	
+	$systemTempDir = [System.IO.Path]::GetTempPath()
+	$tempConfigFile = Join-Path $systemTempDir 'deleteme.config'
+	if (Test-Path $tempConfigFile) {
+		Remove-Item $tempConfigFile -Force -ea 0 
+	}
+	
+	Set-Content -Path $tempConfigFile -Value "<configuration>`n</configuration>"
+	
+	
+	$toSearchToInternalize | ForEach-Object {
+		if ($_.prerelease -eq "true") {
+			$privateRepoPkgInfo = Find-Package -Source $privateRepoURL -Name $_.innertext -Headers $privateRepoHeaderCreds -AllowPrereleaseVersions -AllVersions
+			$publicRepoPkgInfo = Find-Package -Source $publicRepoURL -AllowPrereleaseVersions -Name $_.InnerText
+		} else {
+			$privateRepoPkgInfo = Find-Package -Source $privateRepoURL -Name $_.innertext -Headers $privateRepoHeaderCreds
+			$publicRepoPkgInfo = Find-Package -Source $publicRepoURL -Name $_.InnerText -AllVersions
+		}
+		
+		
+		
+		$publicRepoPkgInfo
+		$privateRepoPkgInfo
+	}
+	
+	
+	
+	Remove-Item $tempConfigFile -Force -ea 0
 } elseif ($repoCheck -eq "no") { 
 } else {
 	Throw "bad repoCheck value in personal-packages.xml, must be yes or no"
@@ -162,6 +201,7 @@ if ($repocheck -eq "yes") {
 #need this as normal PWSH arrays are slow to add an element, this can add them quickly
 [System.Collections.ArrayList]$nupkgObjArray = @()
 
+#todo, make able to do multiple search dirs
 #add switch here to select from other options to get list of nupkgs
 if ($thoroughList) {
 	#Get-ChildItem $searchDir -File -Filter "*adopt*.nupkg" -Recurse
