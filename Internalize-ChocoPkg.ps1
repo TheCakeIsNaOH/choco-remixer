@@ -47,7 +47,7 @@ if (!($PSBoundParameters.ContainsKey('personalPkgXML'))) {
 	throw "personal-packages.xml not found, please specify valid path"
 }
 
-$personalPkgXMLPath = Resolve-Path ".\personal-packages-logic.xml"
+$personalPkgXMLPath = (Resolve-Path $personalPkgXML).path
 
 if (!(Test-Path $pkgXML)) {
 	throw "packages.xml not found, please specify valid path"
@@ -260,10 +260,10 @@ if ($thoroughList) {
 
 #unique needed to workaround a bug if accessing searchDir from a samba share where things show up twice if there are directories with the same name but different case.
 $nupkgArray | select -Unique | ForEach-Object {
-	$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -eq "$nuspecID" }).version
 	$nuspecDetails = Get-NuspecVersion -NupkgPath $_.fullname
 	$nuspecVersion = $nuspecDetails[0]
 	$nuspecID = $nuspecDetails[1]
+	$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -ieq "$nuspecID" }).version
 
 	if ($internalizedVersions -icontains $nuspecVersion) {
 		#package is internalized by user
