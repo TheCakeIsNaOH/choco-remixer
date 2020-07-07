@@ -22,8 +22,7 @@
 		<useDropPath>no</useDropPath>
 		<writePerPkgs>no</writePerPkgs>
 		<pushPkgs>no</pushPkgs>
-		<pushURL>https://my.repo/feed</pushURL>
-		<!-- todo, apikey option here -->
+		<pushURL>https://my.repo/feed/</pushURL>
 		<repoCheck>no</repoCheck>
 		<publicRepoURL>https://chocolatey.org/api/v2/</publicRepoURL>
 		<privateRepoURL>https://my.repo/private-feed/</privateRepoURL>

@@ -116,6 +116,12 @@ if ($pushPkgs -eq "yes") {
 		Write-Warning "pushURL exists, but did not return ok. This is expected if it requires authentication"
 	}
 	
+	$apiKeySources = (& "choco" apikey -r) -split '\|' | Select-String "http"
+	
+	if ($apiKeySources -notcontains $pushURL) {
+		Write-Warning "Did not find a API key for $pushURL"
+	}
+	
 } elseif ($pushPkgs -eq "no") { } else {
 	Throw "bad pushPkgs value in personal-packages.xml, must be yes or no"
 }
@@ -187,22 +193,26 @@ if ($repocheck -eq "yes") {
 	
 	$packageSources = get-packagesource -ProviderName nuget
 	
-	if ($packageSources.Location -notcontains $publicRepoURL) {
-		Register-PackageSource -Name publicRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget | Out-Null
+	if ($packageSources.Name -contains "remixerpublicRepo") {
+		Unregister-PackageSource -Name remixerPublicRepo 
+	}
+	 
+	if ($packageSources.Name -contains "remixerPrivateRepo") {
+		Unregister-PackageSource -Name remixerPrivateRepo 
 	}
 	
-	if ($packageSources.Location -notcontains $privateRepoURL) {
-		Register-PackageSource -Name privateRepo -Location $privateRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $privateRepoPSCreds | Out-Null
-	}
+	Register-PackageSource -Name remixerPublicRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget | Out-Null
+	Register-PackageSource -Name remixerPrivateRepo -Location $privateRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $privateRepoPSCreds | Out-Null
+
 	
 	$toSearchToInternalize | ForEach-Object {
 		Write-Verbose "Comparing repo versions of $($_.InnerText)"
 		if ($_.prerelease -eq "true") {
-			$privateRepoPkgInfo = Find-Package -ConfigFile $tempConfigFile -Source privateRepo -Name $_.InnerText -AllowPrereleaseVersions -Credential $privateRepoPSCreds -AllVersions
-			$publicRepoPkgInfo  = Find-Package -ConfigFile $tempConfigFile -Source publicRepo  -Name $_.InnerText -AllowPrereleaseVersions  
+			$privateRepoPkgInfo = Find-Package -ConfigFile $tempConfigFile -Source remixerPrivateRepo -Name $_.InnerText -AllowPrereleaseVersions -Credential $privateRepoPSCreds -AllVersions
+			$publicRepoPkgInfo  = Find-Package -ConfigFile $tempConfigFile -Source remixerPublicRepo  -Name $_.InnerText -AllowPrereleaseVersions  
 		} else {
-			$privateRepoPkgInfo = Find-Package -ConfigFile $tempConfigFile -Source privateRepo -Name $_.InnerText -Credential $privateRepoPSCreds -AllVersions
-			$publicRepoPkgInfo  = Find-Package -ConfigFile $tempConfigFile -Source publicRepo  -Name $_.InnerText 
+			$privateRepoPkgInfo = Find-Package -ConfigFile $tempConfigFile -Source remixerPrivateRepo -Name $_.InnerText -Credential $privateRepoPSCreds -AllVersions
+			$publicRepoPkgInfo  = Find-Package -ConfigFile $tempConfigFile -Source remixerPublicRepo  -Name $_.InnerText 
 		}
 		
 		if ($privateRepoPkgInfo.Version -notcontains $publicRepoPkgInfo.Version) {
@@ -395,7 +405,7 @@ Foreach ($obj in $nupkgObjArray) {
 				Write-PerPkg -obj $obj
 			}
 			if ($pushPkgs -eq "yes") {
-				$pushArgs = 'push -r -s ' + $pushURL
+				$pushArgs = 'push -f -r -s ' + $pushURL
 				$pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
 			}
 			
