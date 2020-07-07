@@ -78,23 +78,32 @@ Function Write-UnzippedInstallScript ($obj) {
 
 #fixme to work with multiple versions and packages at one time, returning?
 #changeme to work with individual strings
-Function Write-PerPkg ($obj) {
-	$version = $obj.version
-	$nuspecID = $obj.nuspecID.tolower()
+Function Write-PerPkg {
+	param (
+		[parameter(Mandatory=$true)][string]$version,
+		[parameter(Mandatory=$true)][string]$nuspecID,
+		[parameter(Mandatory=$true)][string]$personalPkgXMLPath
+	)
 
-	if ($personalpackagesXMLcontent.mypackages.internalized.pkg.id -notcontains "$nuspecID") {
-		$addID = $personalpackagesXMLcontent.CreateElement("pkg")
+	$nuspecID = $nuspecID.tolower()
+	[XML]$perpkgXMLcontent = Get-Content $personalPkgXMLPath
+	
+
+	if ($perpkgXMLcontent.mypackages.internalized.pkg.id -notcontains "$nuspecID") {
+		Write-Verbose "adding $nuspecID to internalized IDs"
+		$addID = $perpkgXMLcontent.CreateElement("pkg")
 		$addID.SetAttribute("id","$nuspecID")
-		$personalpackagesXMLcontent.mypackages.internalized.AppendChild($addID)  | Out-Null
-		$personalpackagesXMLcontent.save($PersonalPkgXML)
+		$perpkgXMLcontent.mypackages.internalized.AppendChild($addID)  | Out-Null
+		$perpkgXMLcontent.save($PersonalPkgXMLPath)
 		
-		[XML]$personalpackagesXMLcontent = Get-Content $PersonalPkgXML
+		[XML]$perpkgXMLcontent = Get-Content $PersonalPkgXMLPath
 	}
-		
-	$addVersion = $personalpackagesXMLcontent.CreateElement("version")
-	$addVersionText = $addVersion.AppendChild($personalpackagesXMLcontent.CreateTextNode("$version"))
-	$personalpackagesXMLcontent.SelectSingleNode("//pkg[@id=""$nuspecID""]").appendchild($addVersion) | Out-Null
-	$personalpackagesXMLcontent.save($PersonalPkgXML)
+	
+	Write-Verbose "adding $nuspecID $version to list of internalized packages"
+	$addVersion = $perpkgXMLcontent.CreateElement("version")
+	$addVersionText = $addVersion.AppendChild($perpkgXMLcontent.CreateTextNode("$version"))
+	$perpkgXMLcontent.SelectSingleNode("//pkg[@id=""$nuspecID""]").appendchild($addVersion) | Out-Null
+	$perpkgXMLcontent.save($PersonalPkgXMLPath)
 	
 }
 

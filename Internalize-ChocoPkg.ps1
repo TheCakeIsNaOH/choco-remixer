@@ -47,13 +47,17 @@ if (!($PSBoundParameters.ContainsKey('personalPkgXML'))) {
 	throw "personal-packages.xml not found, please specify valid path"
 }
 
+$personalPkgXMLPath = Resolve-Path ".\personal-packages-logic.xml"
+
 if (!(Test-Path $pkgXML)) {
 	throw "packages.xml not found, please specify valid path"
 }
 
+
+
 #changeme?
 [XML]$packagesXMLcontent = Get-Content $pkgXML
-[XML]$personalpackagesXMLcontent = Get-Content $personalPkgXML
+[XML]$personalpackagesXMLcontent = Get-Content $personalPkgXMLPath
 
 $options = $personalpackagesXMLcontent.mypackages.options
 #add these to parameters?
@@ -399,12 +403,15 @@ Foreach ($obj in $nupkgObjArray) {
 	if ($obj.status -eq "internalized") {
 		#Try {
 			if ($useDropPath -eq "yes") {
+				Write-Verbose "coping $($obj.nuspecID) to drop path"
 				Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $dropPath
 			}
 			if ($writePerPkgs -eq "yes") {
-				Write-PerPkg -obj $obj
+				Write-Verbose "writing $($obj.nuspecID) to personal packages as internalized"
+				Write-PerPkg -personalPkgXMLPath $personalPkgXMLPath -Version $obj.version -nuspecID $obj.nuspecID
 			}
 			if ($pushPkgs -eq "yes") {
+				Write-Output "pushing $($obj.nuspecID)"
 				$pushArgs = 'push -f -r -s ' + $pushURL
 				$pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
 			}
@@ -417,6 +424,8 @@ Foreach ($obj in $nupkgObjArray) {
 		#} Catch {
 		#	$obj.status = "failed copy or write"
 		#} 
+	} else {
+		
 	}
 }
 
