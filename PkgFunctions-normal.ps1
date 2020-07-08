@@ -150,11 +150,6 @@ Function mod-slack ($obj) {
 }
 
 
-Function mod-imagemagick ($obj) {
-	mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA
-}
-
-
 Function mod-riot-web ($obj) {
 	mod-installcpkg-both -obj $obj -urltype 4 -argstype 0 -needsTools -x64NameExt -DeEncodeSpace -removeEXE
 }

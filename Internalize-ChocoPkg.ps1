@@ -2,7 +2,9 @@
 param (
 	[string]$pkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
 	[string]$personalPkgXML,
-	[switch]$thoroughList
+	[switch]$thoroughList,
+	[switch]$skipRepoCheck,
+	[switch]$skipRepoMove
 )
 $ErrorActionPreference = 'Stop'
 
@@ -67,12 +69,16 @@ $dropPath         = $options.DropPath.tostring()
 $useDropPath      = $options.useDropPath.tostring()
 $writePerPkgs     = $options.writePerPkgs.tostring()
 $pushURL          = $options.pushURL.tostring()
-#add apikey?
 $pushPkgs         = $options.pushPkgs.tostring()
 $repoCheck        = $options.repoCheck.tostring()
 $publicRepoURL    = $options.publicRepoURL.tostring()
 $privateRepoURL   = $options.privateRepoURL.tostring()
 $privateRepoCreds = $options.privateRepoCreds.tostring()
+$repoMove         = $options.repoMove.tostring()
+$proxyRepoURL     = $options.proxyRepoURL.tostring()
+$proxyRepoCreds   = $options.proxyRepoCreds.tostring()
+$moveToRepoURL    = $options.moveToRepoURL.tostring()
+
 
 if (!(Test-Path $searchDir)) {
 	throw "$searchDir not found, please specify valid searchDir"
@@ -117,24 +123,116 @@ if ($pushPkgs -eq "yes") {
 		Throw "bad pushURL in personal-packages.xml"
 	} elseif ($page.StatusCode  -eq  200) { 
 	} else {
-		Write-Warning "pushURL exists, but did not return ok. This is expected if it requires authentication"
+		Write-Verbose "pushURL exists, but did not return ok. This is expected if it requires authentication"
 	}
 	
-	$apiKeySources = (& "choco" apikey -r) -split '\|' | Select-String "http"
+	#find quicker way, choco is sooooooo slow
+	<# $apiKeySources = (& "choco" apikey -r) -split '\|' | Select-String "http"
 	
 	if ($apiKeySources -notcontains $pushURL) {
-		Write-Warning "Did not find a API key for $pushURL"
-	}
+		Write-Verbose "Did not find a API key for $pushURL"
+	} #>
 	
 } elseif ($pushPkgs -eq "no") { } else {
 	Throw "bad pushPkgs value in personal-packages.xml, must be yes or no"
 }
 
-if ($repocheck -eq "yes") {
 
-	if ($toInternalizeCompare.inputObject) {
-		Throw "$($toInternalizeCompare.InputObject) not found in packages.xml"; 
+
+if (($repomove -eq "yes") -and (!($skipRepoMove))) {
+	
+	
+	if ($null -eq $moveToRepoURL) {
+		Throw "no moveToRepoURL in personal-packages.xml"
 	}
+	try { $page = Invoke-WebRequest -UseBasicParsing -Uri $moveToRepoURL -method head } 
+	catch { $page = $_.Exception.Response }
+
+	if ($null -eq $page.StatusCode) {
+		Throw "bad moveToRepoURL in personal-packages.xml"
+	} elseif ($page.StatusCode  -eq  200) { 
+	} else {
+		Write-Verbose "moveToRepoURL exists, but did not return ok. This is expected if it requires authentication"
+	}
+
+
+	#find quicker way, choco is sooooooo slow
+	<# 	if (!($pushPkgs)) {
+		$apiKeySources = (& "choco" apikey -r) -split '\|' | Select-String "http"
+	}
+	
+	if ($apiKeySources -notcontains $moveToRepoURL) {
+		Write-Warning "Did not find a API key for $moveToRepoURL"
+	} #>
+	
+	
+	if ($null -eq $proxyRepoCreds) {
+		Throw "proxyRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
+	} elseif ($proxyRepoCreds -eq "no") { 
+		$proxyRepoHeaderCreds = @{ }
+		#todo, fix later things that want creds
+		Throw "not implemented yet, you could remove this line and see how it goes"
+	} elseif ($proxyRepoCreds -eq "yes") {
+		#todo, implement me
+		Throw "not implemented yes, later will give option to give creds here"
+	} else {
+		$proxyRepoCredsBase64 = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($proxyRepoCreds))
+		$proxyRepoHeaderCreds = @{ 
+			Authorization = "Basic $proxyRepoCredsBase64"
+		}
+		$credArray = $proxyRepoCreds -split ":"
+		$passwd = $credArray[1] | ConvertTo-SecureString -Force -AsPlainText
+		$proxyRepoPSCreds = New-Object -TypeName System.Management.Automation.PSCredential -argumentlist $credArray[0],$passwd
+		
+		$credArray = $null
+		$passwd = $null
+	}
+
+	if ($null -eq $proxyRepoURL) {
+		Throw "no proxyRepoURL in personal-packages.xml"
+	}
+	try { 
+		$page = Invoke-WebRequest -UseBasicParsing -Uri $proxyRepoURL -method head -Headers $proxyRepoHeaderCreds
+	} catch { $page = $_.Exception.Response }
+	
+	if ($null -eq $page.StatusCode) {
+		Throw "bad proxyRepoURL in personal-packages.xml"
+	} elseif ($page.StatusCode  -eq  200) { 
+	} else {
+		Write-Warning "proxyRepoURL exists, but did not return ok. If it reques credentials, please check that they are correct"
+	}
+	
+	$systemTempDir = [System.IO.Path]::GetTempPath()
+	$tempConfigFile = Join-Path $systemTempDir "deleteme-$($(New-Guid)).config"
+	if (Test-Path $tempConfigFile) {
+		Remove-Item $tempConfigFile -Force -ea 0 
+	}
+	Set-Content -Path $tempConfigFile -Value "<configuration>`n</configuration>"
+	
+	$packageSources = get-packagesource -ProviderName nuget
+	
+	if ($packageSources.Name -contains "remixerProxyRepo") {
+		Unregister-PackageSource -Name remixerProxyRepo
+	}
+	
+	Register-PackageSource -Name remixerProxyRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $proxyRepoPSCreds | Out-Null
+	
+	Find-Package -Source remixerProxyRepo -IncludeDependencies -Credential $proxyRepoPSCreds
+	
+	
+
+	Unregister-PackageSource -Name remixerProxyRepo
+	Remove-Item $tempConfigFile -Force -ea 0
+	
+} elseif ($repoMove -eq "no") { 
+} else {
+	if (!($skipRepoMove)) {
+		Throw "bad repoMove value in personal-packages.xml, must be yes or no"
+	}
+}
+
+
+if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 
 	if ($null -eq $publicRepoURL) {
 		Throw "no publicRepoURL in personal-packages.xml"
@@ -188,6 +286,11 @@ if ($repocheck -eq "yes") {
 	$toSearchToInternalize = $personalpackagesXMLcontent.mypackages.toInternalize.id
 	$toInternalizeCompare = Compare-Object -ReferenceObject $packagesXMLcontent.packages.custom.pkg.id -DifferenceObject $toSearchToInternalize.innertext | Where-Object SideIndicator -eq "=>"
 	
+	
+	if ($toInternalizeCompare.inputObject) {
+		Throw "$($toInternalizeCompare.InputObject) not found in packages.xml"; 
+	}
+	
 	$systemTempDir = [System.IO.Path]::GetTempPath()
 	$tempConfigFile = Join-Path $systemTempDir "deleteme-$($(New-Guid)).config"
 	if (Test-Path $tempConfigFile) {
@@ -234,9 +337,14 @@ if ($repocheck -eq "yes") {
 		
 	Remove-Item $tempConfigFile -Force -ea 0
 	
+	Unregister-PackageSource -Name remixerPublicRepo 
+	Unregister-PackageSource -Name remixerPrivateRepo 
+	
 } elseif ($repoCheck -eq "no") { 
 } else {
-	Throw "bad repoCheck value in personal-packages.xml, must be yes or no"
+	if (!($skipRepoCheck)) {
+		Throw "bad repoCheck value in personal-packages.xml, must be yes or no"
+	}
 }
 
 #need this as normal PWSH arrays are slow to add an element, this can add them quickly

@@ -15,6 +15,8 @@
 		<id prerelease="false/true">package-id-to-check-repo-to-internalize</id>
 	</toInternalize>
 	
+	<!-- todo, tomove -->
+	
 	<options>
 		<searchDir>C:\path\to\get\packages\from</searchDir>
 		<workDir>C:\path\to\modify\packages\in</workDir>
@@ -29,5 +31,10 @@
 		<!-- specify, yes, or no -->
 		<!-- format user:pass -->
 		<privateRepoCreds>no</privateRepoCreds>
+		<repoMove>no</repoMove>
+		<proxyRepoURL>https://my.repo/chocolatey.org-proxy</proxyRepoURL>
+		<moveToRepoURL>https://my.repo/private-feed/</moveToRepoURL>
+		<!-- format user:pass -->
+		<proxyRepoCreds>no</proxyRepoCreds>
 	</options>
 </mypackages>

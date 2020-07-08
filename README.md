@@ -46,12 +46,17 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 ## Todo
 
+
 - move more packages to no custom function, all declared in xml
 - implement nexus stuff
-- change fuctions to use all passed things, not script variables
-
+	- update routing rule from list
+	- move internal packages to repo, download non-internal, display others
+	- quicker find-package
+	
+- better way to check api key
+- change functions to use all passed things, not script variables, and strings and whatnot
 - Checksum downloads
-- Logging, and support verbose
+- Logging, and support verbose well
 - Error checking and handling
 - Turn into proper module
 - Make individual package functions better
@@ -61,6 +66,9 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
   
   - Async/Parallelize file searching, copying, packing, possibly downloading 
   - Drop dependency on `choco`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip after pack.
+	- Move to `chocolatey.lib` instead?
+	- Figure out why does not extract files
+	- Alternate push? `chocolatey.lib`? Nexus API, will reduce compatibility? Dotnet?
   - Ability to bump version of nupkg
   - Extract files individually rather then extracting all and removing excess, difficult because of packages like virtualbox that have files in root dir
-  - Add option to trust names
+  - Add option to trust names of nupkg's in searching
