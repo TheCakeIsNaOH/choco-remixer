@@ -516,7 +516,7 @@ Function mod-krita ($obj) {
 
 
 Function mod-resharper-platform ($obj) {
-	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url ').tostring()
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$Url =').tostring()
 
 	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
 
@@ -525,14 +525,14 @@ Function mod-resharper-platform ($obj) {
 	$obj.installScriptMod = $obj.installScriptMod -replace 'Get-ChocolateyWebFile' , '#Get-ChocolateyWebFile'
 
 	#download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-	$dlwdFile = (Join-Path $(Split-Path $obj.toolsDir) "$filename")
+	$dlwdFile = (Join-Path $(Split-Path $obj.toolsDir) "$filename32")
 	$dlwd = New-Object net.webclient
 	$dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
 	
 	if (Test-Path $dlwdFile) {
 		Write-Output "$dlwdFile appears to be downloaded"
 	} else {
-		$dlwd.DownloadFile($url, $dlwdFile)
+		$dlwd.DownloadFile($url32, $dlwdFile)
 	}
 
 	$dlwd.dispose()
