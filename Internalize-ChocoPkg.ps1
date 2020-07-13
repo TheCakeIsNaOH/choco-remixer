@@ -20,18 +20,31 @@ Import-Module Microsoft.PowerShell.Utility
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'OtherFunctions.ps1')
 
 #Install nuget package provider if not already installed
-Get-PackageProvider -Name nuget -Force | Out-Null
+$null = Get-PackageProvider -Name nuget -Force
 
 #Check for personal-packages.xml in user profile
+#todo, add more options for filenames
 if (!($IsWindows) -or ($IsWindows -eq $true)) {
-	$profileXMLPath = [IO.Path]::Combine($env:APPDATA, "internalizer", "personal-packages.xml" )
+	$profileXMLPath = [IO.Path]::Combine($env:APPDATA, "choco-remixer", "personal-packages.xml" )
 } elseif ($IsLinux -eq $true) {
-	$profileXMLPath = [IO.Path]::Combine( $env:HOME, ".config" , "internalizer", "personal-packages.xml" )
+	$profileXMLPath = [IO.Path]::Combine( $env:HOME, ".config" , "choco-remixer", "personal-packages.xml" )
 } elseif ($IsMacOS -eq $true) {
 	Throw "MacOS not supported"
 } else {
 	Throw "Something went wrong detecting OS"
 }
+
+if ((Get-Command "choco" -ea 0) -eq $null) {
+	Write-Error "Did not find Choco, please make sure it is installed and on path"
+	Throw
+}
+
+if ([Environment]::GetEnvironmentVariable("ChocolateyInstall") -eq $null)  {
+	Write-Error "Did not find ChocolateyInstall environment variable, please make sure it exists"
+	Throw
+}
+
+
 
 #select which personal-packages.xml to use
 if (!($PSBoundParameters.ContainsKey('personalPkgXML'))) {
@@ -54,6 +67,7 @@ $personalPkgXMLPath = (Resolve-Path $personalPkgXML).path
 if (!(Test-Path $pkgXML)) {
 	throw "packages.xml not found, please specify valid path"
 }
+
 
 
 
@@ -126,12 +140,11 @@ if ($pushPkgs -eq "yes") {
 		Write-Verbose "pushURL exists, but did not return ok. This is expected if it requires authentication"
 	}
 	
-	#find quicker way, choco is sooooooo slow
-	<# $apiKeySources = (& "choco" apikey -r) -split '\|' | Select-String "http"
+	$apiKeySources = Get-ChocoApiKeysUrls
 	
 	if ($apiKeySources -notcontains $pushURL) {
 		Write-Verbose "Did not find a API key for $pushURL"
-	} #>
+	}
 	
 } elseif ($pushPkgs -eq "no") { } else {
 	Throw "bad pushPkgs value in personal-packages.xml, must be yes or no"
@@ -155,15 +168,13 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 		Write-Verbose "moveToRepoURL exists, but did not return ok. This is expected if it requires authentication"
 	}
 
-
-	#find quicker way, choco is sooooooo slow
-	<# 	if (!($pushPkgs)) {
-		$apiKeySources = (& "choco" apikey -r) -split '\|' | Select-String "http"
+	if (!($pushPkgs)) {
+		$apiKeySources = Get-ChocoApiKeysUrls
 	}
 	
-	if ($apiKeySources -notcontains $moveToRepoURL) {
+	if ($apiKeySources -inotcontains $moveToRepoURL) {
 		Write-Warning "Did not find a API key for $moveToRepoURL"
-	} #>
+	}
 	
 	
 	if ($null -eq $proxyRepoCreds) {
@@ -199,7 +210,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 		Throw "bad proxyRepoURL in personal-packages.xml"
 	} elseif ($page.StatusCode  -eq  200) { 
 	} else {
-		Write-Warning "proxyRepoURL exists, but did not return ok. If it reques credentials, please check that they are correct"
+		Write-Warning "proxyRepoURL exists, but did not return ok. If it requires credentials, please check that they are correct"
 	}
 	
 	$systemTempDir = [System.IO.Path]::GetTempPath()
@@ -218,6 +229,9 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 	Register-PackageSource -Name remixerProxyRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $proxyRepoPSCreds | Out-Null
 	
 	Find-Package -Source remixerProxyRepo -IncludeDependencies -Credential $proxyRepoPSCreds
+	
+	
+	
 	
 	
 
