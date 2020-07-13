@@ -71,7 +71,7 @@ Function Extract-Nupkg ($obj) {
 Function Write-UnzippedInstallScript ($obj) {
 	(Get-ChildItem $obj.toolsDir -Filter "*chocolateyinstall.ps1").fullname | % { Remove-Item -Force -Recurse -ea 0 -Path $_ } -ea 0
 	$scriptPath = Join-Path $obj.toolsDir 'chocolateyinstall.ps1'
-	Out-File -FilePath $scriptPath -InputObject $obj.installScriptMod -Force | Out-Null
+	$null = Out-File -FilePath $scriptPath -InputObject $obj.installScriptMod -Force
 
 }
 

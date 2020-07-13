@@ -164,6 +164,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 	if ($null -eq $page.StatusCode) {
 		Throw "bad moveToRepoURL in personal-packages.xml"
 	} elseif ($page.StatusCode  -eq  200) { 
+		Write-Verbose "moveToRepoURL valid"
 	} else {
 		Write-Verbose "moveToRepoURL exists, but did not return ok. This is expected if it requires authentication"
 	}
@@ -202,18 +203,28 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 	if ($null -eq $proxyRepoURL) {
 		Throw "no proxyRepoURL in personal-packages.xml"
 	}
+	
 	try { 
 		$page = Invoke-WebRequest -UseBasicParsing -Uri $proxyRepoURL -method head -Headers $proxyRepoHeaderCreds
-	} catch { $page = $_.Exception.Response }
+	} catch { 
+		$page = $_.Exception.Response
+	}
 	
 	if ($null -eq $page.StatusCode) {
 		Throw "bad proxyRepoURL in personal-packages.xml"
-	} elseif ($page.StatusCode  -eq  200) { 
+	} elseif ($page.StatusCode  -eq  200) {
+		Write-Verbose "proxyRepoURL valid"
 	} else {
 		Write-Warning "proxyRepoURL exists, but did not return ok. If it requires credentials, please check that they are correct"
 	}
 	
-	$systemTempDir = [System.IO.Path]::GetTempPath()
+	
+	
+	
+	
+	
+	
+<# 	$systemTempDir = [System.IO.Path]::GetTempPath()
 	$tempConfigFile = Join-Path $systemTempDir "deleteme-$($(New-Guid)).config"
 	if (Test-Path $tempConfigFile) {
 		Remove-Item $tempConfigFile -Force -ea 0 
@@ -226,17 +237,12 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 		Unregister-PackageSource -Name remixerProxyRepo
 	}
 	
-	Register-PackageSource -Name remixerProxyRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $proxyRepoPSCreds | Out-Null
+	$null = Register-PackageSource -Name remixerProxyRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $proxyRepoPSCreds 
 	
 	Find-Package -Source remixerProxyRepo -IncludeDependencies -Credential $proxyRepoPSCreds
-	
-	
-	
-	
-	
 
 	Unregister-PackageSource -Name remixerProxyRepo
-	Remove-Item $tempConfigFile -Force -ea 0
+	Remove-Item $tempConfigFile -Force -ea 0 #>
 	
 } elseif ($repoMove -eq "no") { 
 } else {
@@ -322,8 +328,8 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 		Unregister-PackageSource -Name remixerPrivateRepo 
 	}
 	
-	Register-PackageSource -Name remixerPublicRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget | Out-Null
-	Register-PackageSource -Name remixerPrivateRepo -Location $privateRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $privateRepoPSCreds | Out-Null
+	$null = Register-PackageSource -Name remixerPublicRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget
+	$null = Register-PackageSource -Name remixerPrivateRepo -Location $privateRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $privateRepoPSCreds
 
 	
 	$toSearchToInternalize | ForEach-Object {
@@ -341,10 +347,10 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 			
 			$saveDir = Join-Path $searchDir $_.innertext
 			if (!(Test-Path $saveDir)) {
-				mkdir $saveDir | Out-Null
+				$null = mkdir $saveDir
 			}
 			
-			Save-Package -ConfigFile $tempConfigFile -Path $saveDir -InputObject $publicRepoPkgInfo -AllowPrereleaseVersions | Out-Null
+			$null = Save-Package -ConfigFile $tempConfigFile -Path $saveDir -InputObject $publicRepoPkgInfo -AllowPrereleaseVersions
 			
 		}
 	}
@@ -464,21 +470,21 @@ Foreach ($obj in $nupkgObjArray) {
 	try {
 	
 		if (!(Test-Path $obj.idDir)) {
-			mkdir $obj.idDir | Out-Null
+			$null = mkdir $obj.idDir
 		}
 
 		if (Test-Path $obj.versionDir) {
-			New-Item -Path $obj.versionDir -Name "temp.txt" -ItemType file -ea 0 | Out-Null
+			$null = New-Item -Path $obj.versionDir -Name "temp.txt" -ItemType file -ea 0
 			Remove-Item -ea 0 -Force -Recurse -Path (Get-ChildItem -Path $obj.versionDir -Exclude "tools","*.exe","*.msi","*.msu","*.zip")
 		} else {
-			mkdir $obj.versionDir | Out-Null
+			$null = mkdir $obj.versionDir
 		}
 
 		if (Test-Path $obj.toolsDir) {
-			New-Item -Path $obj.toolsDir -Name "temp.txt" -ItemType file -ea 0 | Out-Null 
+			$null = New-Item -Path $obj.toolsDir -Name "temp.txt" -ItemType file -ea 0
 			Remove-Item -ea 0 -Force -Recurse -Path (Get-ChildItem -Path $obj.toolsDir -Exclude "*.exe","*.msi","*.msu","*.zip")
 		} else {
-			mkdir $obj.toolsDir | Out-Null
+			$null = mkdir $obj.toolsDir
 		}
 
 		#Copy-Item $obj.OrigPath $obj.versionDir 
