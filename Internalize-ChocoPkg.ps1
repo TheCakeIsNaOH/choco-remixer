@@ -153,7 +153,7 @@ if ($pushPkgs -eq "yes") {
 
 
 if (($repomove -eq "yes") -and (!($skipRepoMove))) {
-	
+	$ProgressPreference = 'SilentlyContinue' 
 	
 	if ($null -eq $moveToRepoURL) {
 		Throw "no moveToRepoURL in personal-packages.xml"
@@ -169,11 +169,9 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 		Write-Verbose "moveToRepoURL exists, but did not return ok. This is expected if it requires authentication"
 	}
 
-	if (!($pushPkgs)) {
-		$apiKeySources = Get-ChocoApiKeysUrls
-	}
-	
-	if ($apiKeySources -inotcontains $moveToRepoURL) {
+
+	$apiKeySources = Get-ChocoApiKeysUrls
+	if ($apiKeySources -notcontains $moveToRepoURL) {
 		Write-Warning "Did not find a API key for $moveToRepoURL"
 	}
 	
@@ -219,12 +217,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 	}
 	
 	
-	
-	
-	
-	
-	
-<# 	$systemTempDir = [System.IO.Path]::GetTempPath()
+	 $systemTempDir = [System.IO.Path]::GetTempPath()
 	$tempConfigFile = Join-Path $systemTempDir "deleteme-$($(New-Guid)).config"
 	if (Test-Path $tempConfigFile) {
 		Remove-Item $tempConfigFile -Force -ea 0 
@@ -239,10 +232,126 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 	
 	$null = Register-PackageSource -Name remixerProxyRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $proxyRepoPSCreds 
 	
-	Find-Package -Source remixerProxyRepo -IncludeDependencies -Credential $proxyRepoPSCreds
+	$proxyRepoName = ($proxyRepoURL -split "repository" | select -last 1).trim("/")
+	$proxyRepoBaseURL = $proxyRepoURL -split "repository" | select -first 1
+	$proxyRepoBrowseURL = $proxyRepoBaseURL + "service/rest/repository/browse/" + $proxyRepoName + "/"
+	$proxyRepoApiURL = $proxyRepoBaseURL + "service/rest/v1/"
+	$proxyRepoBrowsePage = Invoke-WebRequest -UseBasicParsing -URI $proxyRepoBrowseURL -Headers $proxyRepoHeaderCreds
+	$proxyRepoIdList = ($proxyRepoBrowsePage.Links.href).trim("/")
+	
+	$pushRepoName = ($pushURL -split "repository" | select -last 1).trim("/")
+	
+	$saveDir = Join-Path $workDir "internal-packages-temp"
+	if (!(Test-Path $saveDir)) {
+		$null = mkdir $saveDir
+	}
+	
+	$proxyRepoIdList | ForEach-Object {
+		$nuspecID = $_
+		if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
+			$versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
+			$versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
+			$versions = ($versionsPage.links | where href -match "\d" | select -expand href).trim("/")
+			#Write-Host $nuspecID $versions
+			$versions | ForEach-Object {
+				#Write-Host $nuspecID $_
+				#$null = Save-Package -ConfigFile $tempConfigFile -Path $saveDir -RequiredVersion $_ -Name $nuspecID -AllowPrereleaseVersions -Source remixerProxyRepo -whatif
+				$apiSearchURL = $proxyRepoApiURL + "search?repository=$proxyRepoName&format=nuget&name=$nuspecID&version=$_"
+				$searchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $proxyRepoHeaderCreds -Uri $apiSearchURL
+
+				
+				if ($null -eq $searchResults.items.id ) {
+					Throw "$nuspecID $_ search result null, not supposed to happen"
+				}
+				if ($searchResults.items.id -is [Array]) {
+					Throw "$nuspecID $_ search returned an array, search URL may have been malformed"
+				}
+			
+				$heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
+				#$heads.Headers."Content-Disposition"
+				$filename =  ($heads.Headers."Content-Disposition" -split "=" | select -Last 1).tostring()
+				$downloadURL = $searchResults.items.assets.downloadURL				
+				
+ 				$dlwdPath = Join-Path $saveDir $filename
+				$dlwd = New-Object net.webclient
+				$dlwd.Headers["Authorization"] = "Basic $proxyRepoCredsBase64"
+				$dlwd.DownloadFile($downloadURL, $dlwdPath)
+				$dlwd.dispose()
+				
+				
+				#fixme, might need multipart/form-data, which is a royal pain
+				#$apiPutURL = $proxyRepoApiURL + "components?repository=$pushRepoName"
+				#Invoke-RestMethod -UseBasicParsing -Headers $proxyRepoHeaderCreds -Method POST -InFile $dlwdPath -Uri $apiPutURL
+				$pushArgs = "push " + $filename + " -f -r -s " + $pushURL
+				$pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
+				
+				if ($pushcode.exitcode -ne "0") {
+					Throw "pushing $nuspecID $_ failed"				
+				} 
+				
+				$apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
+				Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
+				
+				Remove-Item $dlwdPath -ea 0 -Force
+				$pushcode = $null
+			}
+		} elseif ($packagesXMLcontent.packages.notImplemented.id -icontains $nuspecID) {
+			Write-Host "$nuspecID found on the proxy repo and is not implemented, please internalize manually"
+		} elseif ($packagesXMLcontent.packages.custom.pkg.id -icontains $nuspecID) {
+			$versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
+			$versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
+			$versions = ($versionsPage.links | where href -match "\d" | select -expand href).trim("/")
+			#Write-Host $nuspecID $versions
+			$IdSaveDir = Join-Path $searchDir $nuspecID
+			if (!(Test-Path $IdSaveDir)) {
+				$null = mkdir $IdSaveDir
+			}
+			
+			$versions | ForEach-Object {
+				$apiSearchURL = $proxyRepoApiURL + "search?repository=$proxyRepoName&format=nuget&name=$nuspecID&version=$_"
+				$searchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $proxyRepoHeaderCreds -Uri $apiSearchURL
+				
+				
+				if ($null -eq $searchResults.items.id ) {
+					Throw "$nuspecID $_ search result null, not supposed to happen"
+				}
+				if ($searchResults.items.id -is [Array]) {
+					Throw "$nuspecID $_ search returned an array, search URL may have been malformed"
+				}
+			
+				$heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
+				#$heads.Headers."Content-Disposition"
+				$filename =  ($heads.Headers."Content-Disposition" -split "=" | select -Last 1).tostring()
+				$downloadURL = $searchResults.items.assets.downloadURL				
+				
+ 				$dlwdPath = Join-Path $saveDir $filename
+				$dlwd = New-Object net.webclient
+				$dlwd.Headers["Authorization"] = "Basic $proxyRepoCredsBase64"
+				$dlwd.DownloadFile($downloadURL, $dlwdPath)
+				$dlwd.dispose()
+				
+				
+				#$apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
+				#$null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $privateRepoHeaderCreds -URI $apiDeleteURL
+				
+				
+				
+				Write-Host "nuspecID $_ found and downloaded, needs to be manually deleted finishme here"
+				
+			}
+			
+		} else {
+			Write-Host "$_ found on the proxy repo, it is a new ID, may need to be implemented or added to the internal list"
+		}
+		
+	
+
+	}
 
 	Unregister-PackageSource -Name remixerProxyRepo
-	Remove-Item $tempConfigFile -Force -ea 0 #>
+	Remove-Item $tempConfigFile -Force -ea 0
+	
+	$ProgressPreference = 'Continue'
 	
 } elseif ($repoMove -eq "no") { 
 } else {
@@ -250,6 +359,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 		Throw "bad repoMove value in personal-packages.xml, must be yes or no"
 	}
 }
+
 
 
 if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
@@ -391,6 +501,8 @@ $nupkgArray | select -Unique | ForEach-Object {
 	$nuspecDetails = Get-NuspecVersion -NupkgPath $_.fullname
 	$nuspecVersion = $nuspecDetails[0]
 	$nuspecID = $nuspecDetails[1]
+	
+	#todo, make this faster, hash table? linq? other?
 	$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -ieq "$nuspecID" }).version
 
 	if ($internalizedVersions -icontains $nuspecVersion) {

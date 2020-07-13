@@ -705,6 +705,8 @@
 		<id>shmnview</id>
 		<id>maven</id>
 		<id>dotnetfx</id>
+		<id>ddu</id>
+		<id>crystaldiskmark</id>
 		<id></id>
 		<id></id>
 	</notImplemented>
