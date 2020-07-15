@@ -237,7 +237,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 	$proxyRepoBrowseURL = $proxyRepoBaseURL + "service/rest/repository/browse/" + $proxyRepoName + "/"
 	$proxyRepoApiURL = $proxyRepoBaseURL + "service/rest/v1/"
 	$proxyRepoBrowsePage = Invoke-WebRequest -UseBasicParsing -URI $proxyRepoBrowseURL -Headers $proxyRepoHeaderCreds
-	$proxyRepoIdList = ($proxyRepoBrowsePage.Links.href).trim("/")
+	$proxyRepoIdList = $proxyRepoBrowsePage.Links.href
 	
 	$pushRepoName = ($pushURL -split "repository" | select -last 1).trim("/")
 	
@@ -246,8 +246,9 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 		$null = mkdir $saveDir
 	}
 	
+	if ($proxyRepoIdList) {
 	$proxyRepoIdList | ForEach-Object {
-		$nuspecID = $_
+		$nuspecID = $_.trim("/")
 		if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
 			$versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
 			$versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
@@ -290,7 +291,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 				} 
 				
 				$apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
-				Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
+				$null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
 				
 				Remove-Item $dlwdPath -ea 0 -Force
 				$pushcode = $null
@@ -301,17 +302,20 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 			$versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
 			$versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
 			$versions = ($versionsPage.links | where href -match "\d" | select -expand href).trim("/")
-			#Write-Host $nuspecID $versions
+
+
 			$IdSaveDir = Join-Path $searchDir $nuspecID
 			if (!(Test-Path $IdSaveDir)) {
 				$null = mkdir $IdSaveDir
 			}
 			
+			$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -ieq "$nuspecID" }).version
+			
 			$versions | ForEach-Object {
+			
 				$apiSearchURL = $proxyRepoApiURL + "search?repository=$proxyRepoName&format=nuget&name=$nuspecID&version=$_"
 				$searchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $proxyRepoHeaderCreds -Uri $apiSearchURL
-				
-				
+							
 				if ($null -eq $searchResults.items.id ) {
 					Throw "$nuspecID $_ search result null, not supposed to happen"
 				}
@@ -319,38 +323,37 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 					Throw "$nuspecID $_ search returned an array, search URL may have been malformed"
 				}
 			
-				$heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
-				#$heads.Headers."Content-Disposition"
-				$filename =  ($heads.Headers."Content-Disposition" -split "=" | select -Last 1).tostring()
-				$downloadURL = $searchResults.items.assets.downloadURL				
-				
- 				$dlwdPath = Join-Path $saveDir $filename
-				$dlwd = New-Object net.webclient
-				$dlwd.Headers["Authorization"] = "Basic $proxyRepoCredsBase64"
-				$dlwd.DownloadFile($downloadURL, $dlwdPath)
-				$dlwd.dispose()
-				
-				
-				#$apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
-				#$null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $privateRepoHeaderCreds -URI $apiDeleteURL
-				
-				
-				
-				Write-Host "nuspecID $_ found and downloaded, needs to be manually deleted finishme here"
-				
+			
+				if ($internalizedVersions -icontains $_) {
+					Write-Host "$nuspecID $_ already internalized, deleting cached version in proxy repository"
+					$apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
+					$null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
+					#Invoke-RestMethod -UseBasicParsing -Method get -Headers $privateRepoHeaderCreds -URI $apiDeleteURL
+				} else {
+	
+					$heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
+					$filename =  ($heads.Headers."Content-Disposition" -split "=" | select -Last 1).tostring()
+					$downloadURL = $searchResults.items.assets.downloadURL				
+					
+					$dlwdPath = Join-Path $IdSaveDir $filename
+					$dlwd = New-Object net.webclient
+					$dlwd.Headers["Authorization"] = "Basic $proxyRepoCredsBase64"
+					$dlwd.DownloadFile($downloadURL, $dlwdPath)
+					$dlwd.dispose()
+					
+					Write-Host "$nuspecID $_ found and downloaded, needs to be manually deleted finishme here"
+				}
 			}
 			
 		} else {
 			Write-Host "$_ found on the proxy repo, it is a new ID, may need to be implemented or added to the internal list"
-		}
-		
-	
-
+		}		
+	}
 	}
 
 	Unregister-PackageSource -Name remixerProxyRepo
 	Remove-Item $tempConfigFile -Force -ea 0
-	
+	$nuspecID = $null
 	$ProgressPreference = 'Continue'
 	
 } elseif ($repoMove -eq "no") { 
@@ -469,6 +472,7 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 	
 	Unregister-PackageSource -Name remixerPublicRepo 
 	Unregister-PackageSource -Name remixerPrivateRepo 
+	$nuspecID = $null
 	
 } elseif ($repoCheck -eq "no") { 
 } else {

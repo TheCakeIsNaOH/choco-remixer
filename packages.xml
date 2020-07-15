@@ -95,6 +95,7 @@
 		<id>msi.template</id>
 		<id>msys2</id>
 		<id>mumble</id>
+		<id>n3dr</id>
 		<id>nextcloud-client</id>
 		<id>nginx</id>
 		<id>nmap</id>
@@ -661,6 +662,30 @@
 			<functionName>mod-google-drive-file-stream</functionName>
 		</pkg>
 		<pkg>
+			<id>ddu</id>
+			<needsStopAction>yes</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-ddu</functionName>
+		</pkg>
+		<pkg>
+			<id>crystaldiskmark</id>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>no</needsToolsDir>
+			<functionName>mod-crystaldiskmark</functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
+			<id></id>
+			<needsStopAction></needsStopAction>
+			<needsToolsDir></needsToolsDir>
+			<functionName></functionName>
+		</pkg>
+		<pkg>
 			<id></id>
 			<needsStopAction></needsStopAction>
 			<needsToolsDir></needsToolsDir>
@@ -705,9 +730,7 @@
 		<id>shmnview</id>
 		<id>maven</id>
 		<id>dotnetfx</id>
-		<id>ddu</id>
-		<id>crystaldiskmark</id>
-		<id></id>
+		<id>ds4windows</id>
 		<id></id>
 	</notImplemented>
 </packages>

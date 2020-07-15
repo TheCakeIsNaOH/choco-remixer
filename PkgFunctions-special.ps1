@@ -625,3 +625,26 @@ Function mod-imagemagick ($obj) {
 	download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 
 }
+
+
+Function mod-ddu ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url ').tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring().replace("%20", " ")
+	$filePath32 = 'FullFilePath     = (Join-Path $toolsDir "' + $filename32 + '")'
+
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+	$obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
+	$obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n    $filePath32"
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
+
+
+
+
