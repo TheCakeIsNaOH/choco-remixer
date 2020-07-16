@@ -12,7 +12,7 @@
 	</personal>
 	
 	<toInternalize>
-		<id prerelease="false/true">package-id-to-check-repo-to-internalize</id>
+		<id>package-id-to-check-repo-to-internalize</id>
 	</toInternalize>
 	
 	<!-- todo, tomove -->
