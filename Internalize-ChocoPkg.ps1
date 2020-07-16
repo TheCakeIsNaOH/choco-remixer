@@ -403,59 +403,62 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 		Throw "$($toInternalizeCompare.InputObject) not found in packages.xml"; 
 	}
 	
+	$privateRepoName = ($privateRepoURL -split "repository" | select -last 1).trim("/")
+	$privateRepoBaseURL = $privateRepoURL -split "repository" | select -first 1
+	$privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
+	
 	$toSearchToInternalize | ForEach-Object {
-		Write-Verbose "Comparing repo versions of $($_.InnerText)"
+
+		$nuspecID = $_
+		Write-Verbose "Comparing repo versions of $($nuspecID)"
 		#[xml]$var = https://chocolatey.org/api/v2/Packages()?$filter=(tolower(Id)%20eq%20%27googlechrome%27)%20and%20IsLatestVersion #normal
 		#https://chocolatey.org/api/v2/Packages()?$filter=(tolower(Id)%20eq%20%27googlechrome%27)%20and%20IsAbsoluteLatestVersion #pre
 		#$var.feed.entry.properties.Version
 		
-		<# $privatePageURL = "$privateRepoURL" + 'Packages()?$filter=(tolower(Id)%20eq%20%27wget%27)'
+		$privatePageURL = $privateRepoApiURL + 'search?repository=' + $privateRepoName +  '&format=nuget&q=' + $nuspecID
+		$privatePageURLorig = $privatePageURL
 		do {
-			[xml]$privatePage = Invoke-WebRequest -UseBasicParsing -Uri $privatePageURL -Headers $privateRepoHeaderCreds
-			$privateVersions = $privateVersions + $privatePage.feed.entry.properties.Version 
 
-			$privatePage.feed.entry.properties.Version
-			if ($privatePage.feed.link.rel -icontains "next") {
-				$privatePageURL = $privatePage.feed.link.href | Select -Last 1
-			}
+			#FIXME for casing
+			$privatePage = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privatePageURL	
+			[array]$privateVersions = $privateVersions + ( $privatePage.items | Where-Object { $_.name.tolower() -eq $nuspecID } ).version 
 			
-		}  while ($privatePage.feed.link.rel -icontains "next")
+			if ($privatePage.continuationToken) {
+				$privatePageURL = $privatePageURLorig + '&continuationToken=' +  $privatePage.continuationToken
+			}
+		}  while ($privatePage.continuationToken)
+
 		
-		$privateVersions #>
-		
-		$publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $_ + '%27)%20and%20IsLatestVersion'
+		$publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
 		[xml]$publicPage = Invoke-WebRequest -UseBasicParsing -Uri $publicPageURL
-		$publicPage.feed.entry.properties.Version
-		
+		$publicVersion = $publicPage.feed.entry.properties.Version
 		
 		#[xml]$page = https://chocolatey.org/api/v2/Packages()?$filter=(tolower(Id)%20eq%20%27googlechrome%27)
 		#
 		
-		#throw
-		if ($page -eq "asdf") {
-		
-	
-					
-			$page.feed.entry.content.src 
-
+		if ($privateVersions -inotcontains $publicVersion) {
 			
-			$request = [System.Net.WebRequest]::Create($url)
+			Write-Host "$nuspecID out of date on private repo, found version $publicVersion, downloading"
+
+			$request = [System.Net.WebRequest]::Create($publicPage.feed.entry.content.src)
 			$request.AllowAutoRedirect=$false
 			$response=$request.GetResponse()
-			If ($response.StatusCode -eq "Found")
-			{
-				$response.GetResponseHeader("Location")
-			}
+			$dlwdURL = $response.GetResponseHeader("Location")
+			$filename = $dlwdURL.split("/") | select -last 1 
 			
-		}
-		
-		$saveDir = Join-Path $searchDir $_.innertext
+			$saveDir = Join-Path $searchDir $nuspecID
 			if (!(Test-Path $saveDir)) {
 				$null = mkdir $saveDir
+			}
+			
+
+			$dlwdPath = Join-Path $saveDir $filename
+			$dlwd = New-Object net.webclient
+			$dlwd.DownloadFile($dlwdURL, $dlwdPath)
+			$dlwd.dispose()
+
+			
 		}
-		
-		if item
-		Write-Host "$($_.InnerText) out of date on private repo, found version $($publicRepoPkgInfo.Version)"
 	}
 	$nuspecID = $null
 	$ProgressPreference = 'Continue'
@@ -467,7 +470,6 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 	}
 }
 
-		RETURN	
 
 #need this as normal PWSH arrays are slow to add an element, this can add them quickly
 [System.Collections.ArrayList]$nupkgObjArray = @()
