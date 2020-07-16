@@ -19,9 +19,6 @@ Import-Module Microsoft.PowerShell.Utility
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-special.ps1')
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'OtherFunctions.ps1')
 
-#Install nuget package provider if not already installed
-$null = Get-PackageProvider -Name nuget -Force
-
 #Check for personal-packages.xml in user profile
 #todo, add more options for filenames
 if (!($IsWindows) -or ($IsWindows -eq $true)) {
@@ -216,22 +213,6 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 		Write-Warning "proxyRepoURL exists, but did not return ok. If it requires credentials, please check that they are correct"
 	}
 	
-	
-	 $systemTempDir = [System.IO.Path]::GetTempPath()
-	$tempConfigFile = Join-Path $systemTempDir "deleteme-$($(New-Guid)).config"
-	if (Test-Path $tempConfigFile) {
-		Remove-Item $tempConfigFile -Force -ea 0 
-	}
-	Set-Content -Path $tempConfigFile -Value "<configuration>`n</configuration>"
-	
-	$packageSources = get-packagesource -ProviderName nuget
-	
-	if ($packageSources.Name -contains "remixerProxyRepo") {
-		Unregister-PackageSource -Name remixerProxyRepo
-	}
-	
-	$null = Register-PackageSource -Name remixerProxyRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $proxyRepoPSCreds 
-	
 	$proxyRepoName = ($proxyRepoURL -split "repository" | select -last 1).trim("/")
 	$proxyRepoBaseURL = $proxyRepoURL -split "repository" | select -first 1
 	$proxyRepoBrowseURL = $proxyRepoBaseURL + "service/rest/repository/browse/" + $proxyRepoName + "/"
@@ -255,8 +236,6 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 			$versions = ($versionsPage.links | where href -match "\d" | select -expand href).trim("/")
 			#Write-Host $nuspecID $versions
 			$versions | ForEach-Object {
-				#Write-Host $nuspecID $_
-				#$null = Save-Package -ConfigFile $tempConfigFile -Path $saveDir -RequiredVersion $_ -Name $nuspecID -AllowPrereleaseVersions -Source remixerProxyRepo -whatif
 				$apiSearchURL = $proxyRepoApiURL + "search?repository=$proxyRepoName&format=nuget&name=$nuspecID&version=$_"
 				$searchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $proxyRepoHeaderCreds -Uri $apiSearchURL
 
@@ -350,9 +329,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 		}		
 	}
 	}
-
-	Unregister-PackageSource -Name remixerProxyRepo
-	Remove-Item $tempConfigFile -Force -ea 0
+	
 	$nuspecID = $null
 	$ProgressPreference = 'Continue'
 	
@@ -366,6 +343,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 
 
 if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
+	$ProgressPreference = 'SilentlyContinue' 
 
 	if ($null -eq $publicRepoURL) {
 		Throw "no publicRepoURL in personal-packages.xml"
@@ -416,63 +394,71 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 		Write-Warning "privateRepoURL exists, but did not return ok. If it reques credentials, please check that they are correct"
 	}
 	
+
 	$toSearchToInternalize = $personalpackagesXMLcontent.mypackages.toInternalize.id
-	$toInternalizeCompare = Compare-Object -ReferenceObject $packagesXMLcontent.packages.custom.pkg.id -DifferenceObject $toSearchToInternalize.innertext | Where-Object SideIndicator -eq "=>"
+	$toInternalizeCompare = Compare-Object -ReferenceObject $packagesXMLcontent.packages.custom.pkg.id -DifferenceObject $toSearchToInternalize | Where-Object SideIndicator -eq "=>"
 	
 	
 	if ($toInternalizeCompare.inputObject) {
 		Throw "$($toInternalizeCompare.InputObject) not found in packages.xml"; 
 	}
 	
-	$systemTempDir = [System.IO.Path]::GetTempPath()
-	$tempConfigFile = Join-Path $systemTempDir "deleteme-$($(New-Guid)).config"
-	if (Test-Path $tempConfigFile) {
-		Remove-Item $tempConfigFile -Force -ea 0 
-	}
-	Set-Content -Path $tempConfigFile -Value "<configuration>`n</configuration>"
-	
-	$packageSources = get-packagesource -ProviderName nuget
-	
-	if ($packageSources.Name -contains "remixerpublicRepo") {
-		Unregister-PackageSource -Name remixerPublicRepo 
-	}
-	 
-	if ($packageSources.Name -contains "remixerPrivateRepo") {
-		Unregister-PackageSource -Name remixerPrivateRepo 
-	}
-	
-	$null = Register-PackageSource -Name remixerPublicRepo -Location $publicRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget
-	$null = Register-PackageSource -Name remixerPrivateRepo -Location $privateRepoURL -Trusted -Force -ConfigFile $tempConfigFile -ProviderName nuget -Credential $privateRepoPSCreds
-
-	
 	$toSearchToInternalize | ForEach-Object {
 		Write-Verbose "Comparing repo versions of $($_.InnerText)"
-		if ($_.prerelease -eq "true") {
-			$privateRepoPkgInfo = Find-Package -ConfigFile $tempConfigFile -Source remixerPrivateRepo -Name $_.InnerText -AllowPrereleaseVersions -Credential $privateRepoPSCreds -AllVersions
-			$publicRepoPkgInfo  = Find-Package -ConfigFile $tempConfigFile -Source remixerPublicRepo  -Name $_.InnerText -AllowPrereleaseVersions  
-		} else {
-			$privateRepoPkgInfo = Find-Package -ConfigFile $tempConfigFile -Source remixerPrivateRepo -Name $_.InnerText -Credential $privateRepoPSCreds -AllVersions
-			$publicRepoPkgInfo  = Find-Package -ConfigFile $tempConfigFile -Source remixerPublicRepo  -Name $_.InnerText 
-		}
+		#[xml]$var = https://chocolatey.org/api/v2/Packages()?$filter=(tolower(Id)%20eq%20%27googlechrome%27)%20and%20IsLatestVersion #normal
+		#https://chocolatey.org/api/v2/Packages()?$filter=(tolower(Id)%20eq%20%27googlechrome%27)%20and%20IsAbsoluteLatestVersion #pre
+		#$var.feed.entry.properties.Version
 		
-		if ($privateRepoPkgInfo.Version -notcontains $publicRepoPkgInfo.Version) {
-			Write-Host "$($_.InnerText) out of date on private repo, found version $($publicRepoPkgInfo.Version)"
-			
-			$saveDir = Join-Path $searchDir $_.innertext
-			if (!(Test-Path $saveDir)) {
-				$null = mkdir $saveDir
+		<# $privatePageURL = "$privateRepoURL" + 'Packages()?$filter=(tolower(Id)%20eq%20%27wget%27)'
+		do {
+			[xml]$privatePage = Invoke-WebRequest -UseBasicParsing -Uri $privatePageURL -Headers $privateRepoHeaderCreds
+			$privateVersions = $privateVersions + $privatePage.feed.entry.properties.Version 
+
+			$privatePage.feed.entry.properties.Version
+			if ($privatePage.feed.link.rel -icontains "next") {
+				$privatePageURL = $privatePage.feed.link.href | Select -Last 1
 			}
 			
-			$null = Save-Package -ConfigFile $tempConfigFile -Path $saveDir -InputObject $publicRepoPkgInfo -AllowPrereleaseVersions
+		}  while ($privatePage.feed.link.rel -icontains "next")
+		
+		$privateVersions #>
+		
+		$publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $_ + '%27)%20and%20IsLatestVersion'
+		[xml]$publicPage = Invoke-WebRequest -UseBasicParsing -Uri $publicPageURL
+		$publicPage.feed.entry.properties.Version
+		
+		
+		#[xml]$page = https://chocolatey.org/api/v2/Packages()?$filter=(tolower(Id)%20eq%20%27googlechrome%27)
+		#
+		
+		#throw
+		if ($page -eq "asdf") {
+		
+	
+					
+			$page.feed.entry.content.src 
+
+			
+			$request = [System.Net.WebRequest]::Create($url)
+			$request.AllowAutoRedirect=$false
+			$response=$request.GetResponse()
+			If ($response.StatusCode -eq "Found")
+			{
+				$response.GetResponseHeader("Location")
+			}
 			
 		}
-	}
 		
-	Remove-Item $tempConfigFile -Force -ea 0
-	
-	Unregister-PackageSource -Name remixerPublicRepo 
-	Unregister-PackageSource -Name remixerPrivateRepo 
+		$saveDir = Join-Path $searchDir $_.innertext
+			if (!(Test-Path $saveDir)) {
+				$null = mkdir $saveDir
+		}
+		
+		if item
+		Write-Host "$($_.InnerText) out of date on private repo, found version $($publicRepoPkgInfo.Version)"
+	}
 	$nuspecID = $null
+	$ProgressPreference = 'Continue'
 	
 } elseif ($repoCheck -eq "no") { 
 } else {
@@ -480,6 +466,8 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 		Throw "bad repoCheck value in personal-packages.xml, must be yes or no"
 	}
 }
+
+		RETURN	
 
 #need this as normal PWSH arrays are slow to add an element, this can add them quickly
 [System.Collections.ArrayList]$nupkgObjArray = @()

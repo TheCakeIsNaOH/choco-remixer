@@ -22,10 +22,16 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - `choco` installed and on your path
 - Chocolatey `.nupgk` files that do not include all files in the package (i.e. not internal).
 - A nuget repository.
+	- Drop path's are available with proget only
+	- RepoMove and RepoSearch are Nexus only
+
 
 ## Setup 
 
+
 - Copy `personal-packages-template.xml` to `personal-packages.xml` and open it.
+
+### fixme
 - Set `searchDir` to the directory your `.nupkg` files to internalize are.
 - Set `workDir` to the directory where you want the `.nupkg`s to be internalized in.
 - If wanted, change `useDropPath` and/or `pushPkgs` to `yes` and change the `pushURL`/`dropPath` accordingly. These auto copy or push the internalized packages to your repository.
@@ -35,6 +41,8 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 ## Operation 
 
 - Run `Internalize-ChocoPkg.ps1` in PowerShell
+
+### fixme
 - If you have `useDropPath` and `pushPkgs` disabled, push the packages to your local repository, or in the case of Proget, copy to the drop path.
 - If you have `writePerPkgs` disabled, add the package versions to `personal-packages.xml` under the correct IDs. 
 
@@ -48,12 +56,8 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 
 - move more packages to no custom function, all declared in xml
-- implement nexus stuff
-	- update routing rule from list
-	- move internal packages to repo, download non-internal, display others
-	- quicker find-package
+- quicker find-package
 	
-- better way to check api key
 - change functions to use all passed things, not script variables, and strings and whatnot
 - Checksum downloads
 - Logging, and support verbose well
