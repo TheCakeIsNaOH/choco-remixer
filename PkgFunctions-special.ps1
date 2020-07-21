@@ -11,11 +11,11 @@ Function mod-adoptopenjdk8 ($obj) {
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
 
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
+	$filePath32 = 'file     = (Join-Path $toolsDir2 "' + $filename32 + '")'
+	$filePath64 = 'file64	= (Join-Path $toolsDir2 "' + $filename64 + '")'
 
 
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = '$toolsDir2   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
 	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
 
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
@@ -65,11 +65,11 @@ Function mod-adoptopenjdkjre ($obj) {
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
 
-	$filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-	$filePath64 = 'file64	= (Join-Path $toolsDir "' + $filename64 + '")'
+	$filePath32 = 'file     = (Join-Path $toolsDir2 "' + $filename32 + '")'
+	$filePath64 = 'file64	= (Join-Path $toolsDir2 "' + $filename64 + '")'
 
 
-	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = '$toolsDir2   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
 	$obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
@@ -321,7 +321,7 @@ Function mod-geforce-driver ($obj) {
 
 }
 
-
+#deprecated, package internal now
 Function mod-ds4windows ($obj) {
 	throw "broken rn"
 	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url ').tostring()
@@ -353,9 +353,9 @@ Function mod-adobereader ($obj) {
 		Remove-Item $secondDir -ea 0 -force
 	}
 
-	$MUIurlFull    = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$MUIurl ').tostring()
-	$MUImspURLFull = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$MUImspURL ').tostring()
-
+	$MUIurlFull    = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$MUIurl =').tostring()
+	$MUImspURLFull = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$MUImspURL =').tostring()
+	
 	$MUIurl   = ($MUIurlFull    -split "'" | Select-String -Pattern "http").tostring()
 	$MUImspURL = ($MUImspURLFull -split "'" | Select-String -Pattern "http").tostring()
 

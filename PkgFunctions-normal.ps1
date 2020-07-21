@@ -775,7 +775,7 @@ Function mod-dropbox ($obj) {
 
 	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-	$obj.installScriptMod = $obj.installScriptMod -replace "packageArgs        = @{" , "$&`n  $filePath32"
+	$obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32"
 	
 	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }

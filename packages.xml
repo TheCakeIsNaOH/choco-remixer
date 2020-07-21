@@ -11,6 +11,7 @@
 		<id>au</id>
 		<id>audacity-lame</id>
 		<id>audacity</id>
+		<id>autohotkey</id>
 		<id>autohotkey.install</id>
 		<id>autohotkey.portable</id>
 		<id>avidemux</id>
@@ -51,6 +52,7 @@
 		<id>discord</id>
 		<id>docker-kitematic</id>
 		<id>dotnet3.5</id>
+		<id>ds4windows</id>
 		<id>duplicati</id>
 		<id>everything</id>
 		<id>ext2fsd</id>
@@ -140,6 +142,7 @@
 		<id>vcredist-all</id>
 		<id>vcredist2015</id>
 		<id>vcredist2017</id>
+		<id>vcxsrv</id>
 		<id>virtualbox.extensionpack</id>
 		<id>vivaldi</id>
 		<id>vlc</id>
@@ -457,12 +460,12 @@
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-joplin</functionName>
 		</pkg>		
-		<pkg>
+		<!-- Package internal now <pkg>
 			<id>ds4windows</id>
 			<needsStopAction>no</needsStopAction>
 			<needsToolsDir>no</needsToolsDir>
 			<functionName>mod-ds4windows</functionName>
-		</pkg>
+		</pkg> -->
 		<pkg>
 			<id>calibre</id>
 			<needsStopAction></needsStopAction>
