@@ -170,36 +170,35 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <functionName>mod-4k-slideshow</functionName>
+	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <id>4k-video-downloader</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <functionName>mod-4k-video-downloader</functionName>
+	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <id>4k-stogram</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <functionName>mod-4k-stogram</functionName>
+	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <id>4k-video-to-mp3</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <functionName>mod-4k-video-to-mp3</functionName>
+	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <id>4k-youtube-to-mp3</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <functionName>mod-4k-youtube-to-mp3</functionName>
-    </pkg>
-    <pkg>
-      <id>libreoffice-fresh</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <functionName>mod-libreoffice-fresh</functionName>
+	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <id>adb</id>
@@ -278,6 +277,12 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <functionName>mod-krita</functionName>
+    </pkg>
+    <pkg>
+      <id>libreoffice-fresh</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <functionName>mod-libreoffice-fresh</functionName>	  
     </pkg>
     <pkg>
       <id>mono</id>
