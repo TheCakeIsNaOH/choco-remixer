@@ -9,11 +9,11 @@
     <id>angryip</id>
     <id>attributechanger</id>
     <id>au</id>
-    <id>audacity-lame</id>
     <id>audacity</id>
-    <id>autohotkey</id>
+    <id>audacity-lame</id>
     <id>autohotkey.install</id>
     <id>autohotkey.portable</id>
+    <id>autohotkey</id>
     <id>avidemux</id>
     <id>balabolka</id>
     <id>bfg-repo-cleaner</id>
@@ -29,25 +29,25 @@
     <id>cdburnerxp</id>
     <id>checksum</id>
     <id>choco-cleaner</id>
-    <id>choco-nuspec-checker</id>
-    <id>choco-package-list-backup</id>
-    <id>choco-protocol-support</id>
-    <id>chocolatey-core.extension</id>
-    <id>chocolatey-dotnetfx.extension</id>
-    <id>chocolatey-fastanswers.extension</id>
-    <id>chocolatey-misc-helpers.extension</id>
-    <id>chocolatey-visualstudio.extension</id>
-    <id>chocolatey-windowsupdate.extension</id>
     <id>chocolatey.extension</id>
     <id>chocolatey.server</id>
     <id>chocolatey</id>
+    <id>chocolatey-core.extension</id>
+    <id>chocolatey-dotnetfx.extension</id>
+    <id>chocolatey-fastanswers.extension</id>
     <id>chocolateygui</id>
+    <id>chocolatey-misc-helpers.extension</id>
     <id>chocolateypowershell</id>
+    <id>chocolatey-visualstudio.extension</id>
+    <id>chocolatey-windowsupdate.extension</id>
+    <id>choco-nuspec-checker</id>
+    <id>choco-package-list-backup</id>
+    <id>choco-protocol-support</id>
     <id>chromium</id>
     <id>cpu-z</id>
-    <id>crystaldiskinfo</id>
-    <id>crystaldiskinfo.portable</id>
     <id>crystaldiskinfo.install</id>
+    <id>crystaldiskinfo.portable</id>
+    <id>crystaldiskinfo</id>
     <id>curl</id>
     <id>discord</id>
     <id>docker-kitematic</id>
@@ -112,8 +112,8 @@
     <id>nugetpackageexplorer</id>
     <id>obs-studio.install</id>
     <id>obs-studio</id>
-    <id>open-shell</id>
     <id>openlp</id>
+    <id>open-shell</id>
     <id>openssl</id>
     <id>pandoc</id>
     <id>pcsx2.portable</id>
@@ -133,15 +133,15 @@
     <id>rufus</id>
     <id>shotcut</id>
     <id>sudo</id>
-    <id>sumatrapdf</id>
-    <id>sumatrapdf.portable</id>
-    <id>sumatrapdf.install</id>
     <id>sumatrapdf.commandline</id>
+    <id>sumatrapdf.install</id>
+    <id>sumatrapdf.portable</id>
+    <id>sumatrapdf</id>
     <id>tablacus</id>
     <id>totalcommander</id>
-    <id>vcredist-all</id>
     <id>vcredist2015</id>
     <id>vcredist2017</id>
+    <id>vcredist-all</id>
     <id>vcxsrv</id>
     <id>virtualbox.extensionpack</id>
     <id>vivaldi</id>
@@ -704,6 +704,8 @@
 		</pkg> -->
   </custom>
   <notImplemented>
+    <id>dotnetfx</id>
+    <id>maven</id>
     <id>minecraft</id>
     <id>office365proplus</id>
     <id>origin</id>
@@ -711,7 +713,5 @@
     <id>reflect-free</id>
     <id>shexview</id>
     <id>shmnview</id>
-    <id>maven</id>
-    <id>dotnetfx</id>
   </notImplemented>
 </packages>
