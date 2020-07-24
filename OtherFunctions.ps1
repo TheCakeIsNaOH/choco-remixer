@@ -1,4 +1,4 @@
-Function Get-ZippedInstallScript ($nupkgPath) {
+Function Read-ZippedInstallScript ($nupkgPath) {
 	#needed for accessing dotnet zip functions
 	Add-Type -AssemblyName System.IO.Compression.FileSystem
 
@@ -31,7 +31,7 @@ Function Get-ZippedInstallScript ($nupkgPath) {
 }
 
 
-Function Get-NuspecVersion ($nupkgPath) {
+Function Read-NuspecVersion ($nupkgPath) {
 	#needed for accessing dotnet zip functions
 	Add-Type -AssemblyName System.IO.Compression.FileSystem
 

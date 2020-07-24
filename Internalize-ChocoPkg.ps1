@@ -119,9 +119,11 @@ if ($useDropPath -eq "yes") {
 	Throw "bad useDropPath value in personal-packages.xml, must be yes or no"
 }
 
+
 if ("no","yes" -notcontains $writePerPkgs) {
 	Throw "bad writePerPkgs value in personal-packages.xml, must be yes or no"
 }
+
 
 if ($pushPkgs -eq "yes") {
 	if ($null -eq $pushURL) {
@@ -492,7 +494,7 @@ if ($thoroughList) {
 
 #unique needed to workaround a bug if accessing searchDir from a samba share where things show up twice if there are directories with the same name but different case.
 $nupkgArray | select -Unique | ForEach-Object {
-	$nuspecDetails = Get-NuspecVersion -NupkgPath $_.fullname
+	$nuspecDetails = Read-NuspecVersion -NupkgPath $_.fullname
 	$nuspecVersion = $nuspecDetails[0]
 	$nuspecID = $nuspecDetails[1]
 	
@@ -518,7 +520,7 @@ $nupkgArray | select -Unique | ForEach-Object {
 
  	} elseif ($packagesXMLcontent.packages.custom.pkg.id -icontains $nuspecID) {
 
-		 $installScriptDetails = Get-ZippedInstallScript -NupkgPath $_.fullname
+		 $installScriptDetails = Read-ZippedInstallScript -NupkgPath $_.fullname
 		 $status = $installScriptDetails[0]
 		 $installScript = $installScriptDetails[1]
 
