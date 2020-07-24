@@ -14,7 +14,6 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 #needed to use [Microsoft.PowerShell.Commands.PSUserAgent] when running in pwsh
 Import-Module Microsoft.PowerShell.Utility
 
-#default dot source for needed functions
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-normal.ps1')
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-special.ps1')
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'OtherFunctions.ps1')
@@ -408,6 +407,7 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 	$privateRepoName = ($privateRepoURL -split "repository" | select -last 1).trim("/")
 	$privateRepoBaseURL = $privateRepoURL -split "repository" | select -first 1
 	$privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
+	$multiDownload = $false 
 	
 	$toSearchToInternalize | ForEach-Object {
 
@@ -440,6 +440,11 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 		
 		if ($privateVersions -inotcontains $publicVersion) {
 			
+			If ($multiDownload -eq $true) {
+				Write-Host "Waiting five seconds before downloading the next package so as to not get rate limited"
+				Start-Sleep -S 5 
+			}
+			
 			Write-Host "$nuspecID out of date on private repo, found version $publicVersion, downloading"
 
 			$request = [System.Net.WebRequest]::Create($publicPage.feed.entry.content.src)
@@ -459,7 +464,7 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 			$dlwd.DownloadFile($dlwdURL, $dlwdPath)
 			$dlwd.dispose()
 
-			
+			$multiDownload = $true 
 		}
 	}
 	$nuspecID = $null
