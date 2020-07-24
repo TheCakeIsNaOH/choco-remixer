@@ -18,6 +18,7 @@
     <id>balabolka</id>
     <id>bfg-repo-cleaner</id>
     <id>bibletime</id>
+	<id>bitwarden-cli</id>
     <id>blender</id>
     <id>boxstarter.bootstrapper</id>
     <id>boxstarter.chocolatey</id>
@@ -205,7 +206,7 @@
       <id>adb</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+	  <whyNotInternal>licensing</whyNotInternal> <!-- under google SDK license with no redist, but has clause that allows open source licenses to take precedence, unsure if this is totally under open sources licenses, may need to build custom -->
     </pkg>
     <pkg>
       <functionName>mod-adobereader</functionName>
@@ -562,7 +563,7 @@
       <id>shotcut.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+	  <whyNotInternal>size</whyNotInternal><!-- almost too big, not quite yet, but almost -->
     </pkg>
     <pkg>
       <functionName>mod-skype</functionName>
