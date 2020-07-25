@@ -384,6 +384,13 @@
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+		<functionName>mod-goggalaxy</functionName>
+		<id>goggalaxy</id>
+		<needsStopAction>no</needsStopAction>
+		<needsToolsDir>yes</needsToolsDir>
+		<whyNotInternal>licensing</whyNotInternal>
+	</pkg>
+    <pkg>
       <functionName>mod-google-backup-and-sync</functionName>
       <id>google-backup-and-sync</id>
       <needsStopAction>no</needsStopAction>
@@ -684,13 +691,7 @@
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-    <!-- <pkg>
-			<id></id>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
-		</pkg>
-		<pkg>
+	<!-- 	<pkg>
 			<id></id>
 			<needsStopAction></needsStopAction>
 			<needsToolsDir></needsToolsDir>

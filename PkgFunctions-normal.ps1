@@ -820,7 +820,6 @@ Function mod-google-drive-file-stream ($obj) {
 	$exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
 	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 	
-	
 	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -838,3 +837,24 @@ Function mod-crystaldiskmark ($obj) {
 	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
+
+
+Function mod-goggalaxy ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url  ').tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
+	
+	$exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
+
+
+
