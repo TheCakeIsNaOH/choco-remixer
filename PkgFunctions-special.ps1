@@ -628,7 +628,7 @@ Function mod-ddu ($obj) {
 	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url ').tostring()
 	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
 	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring().replace("%20", " ")
-	$filePath32 = 'FullFilePath     = (Join-Path $toolsDir "' + $filename32 + '")'
+	$filePath32 = 'FileFullPath     = (Join-Path $toolsDir "' + $filename32 + '")'
 
 	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
 	$obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
