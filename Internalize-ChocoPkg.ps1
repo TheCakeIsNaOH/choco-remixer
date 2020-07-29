@@ -407,7 +407,6 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 	$privateRepoName = ($privateRepoURL -split "repository" | select -last 1).trim("/")
 	$privateRepoBaseURL = $privateRepoURL -split "repository" | select -first 1
 	$privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
-	$multiDownload = $false 
 	
 	$toSearchToInternalize | ForEach-Object {
 
@@ -430,9 +429,8 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 			}
 		}  while ($privatePage.continuationToken)
 
-		
 		$publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
-		[xml]$publicPage = Invoke-WebRequest -UseBasicParsing -Uri $publicPageURL
+		[xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL 
 		$publicVersion = $publicPage.feed.entry.properties.Version
 		
 		#[xml]$page = https://chocolatey.org/api/v2/Packages()?$filter=(tolower(Id)%20eq%20%27googlechrome%27)
@@ -440,17 +438,10 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 		
 		if ($privateVersions -inotcontains $publicVersion) {
 			
-			If ($multiDownload -eq $true) {
-				Write-Host "Waiting five seconds before downloading the next package so as to not get rate limited"
-				Start-Sleep -S 5 
-			}
-			
 			Write-Host "$nuspecID out of date on private repo, found version $publicVersion, downloading"
 
-			$request = [System.Net.WebRequest]::Create($publicPage.feed.entry.content.src)
-			$request.AllowAutoRedirect=$false
-			$response=$request.GetResponse()
-			$dlwdURL = $response.GetResponseHeader("Location")
+			$redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea 0 
+			$dlwdURL = $redirectpage.Links.href
 			$filename = $dlwdURL.split("/") | select -last 1 
 			
 			$saveDir = Join-Path $searchDir $nuspecID
@@ -464,7 +455,9 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 			$dlwd.DownloadFile($dlwdURL, $dlwdPath)
 			$dlwd.dispose()
 
-			$multiDownload = $true 
+			Write-Host "Waiting three seconds before downloading the next package so as to not get rate limited"
+			Start-Sleep -S 3 
+			
 		}
 	}
 	$nuspecID = $null
