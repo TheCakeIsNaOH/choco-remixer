@@ -7,6 +7,7 @@
     <id>7zip</id>
     <id>android-sdk</id>
     <id>angryip</id>
+	<id>anydesk</id>
     <id>attributechanger</id>
     <id>au</id>
     <id>audacity</id>
@@ -108,6 +109,8 @@
     <id>notepadplusplus.install</id>
     <id>notepadplusplus</id>
     <id>nsis</id>
+	<id>nsis.install</id>
+	<id>nsis.portable</id>
     <id>nssm</id>
     <id>nuget.commandline</id>
     <id>nugetpackageexplorer</id>
@@ -245,7 +248,7 @@
     </pkg>
     <pkg>
       <functionName>mod-anydesk</functionName>
-      <id>anydesk</id>
+      <id>anydesk.portable</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
@@ -503,13 +506,6 @@
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>mod-nsis-install</functionName>
-      <id>nsis.install</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>mod-nvidia-driver</functionName>
       <id>nvidia-display-driver</id>
       <needsStopAction>No</needsStopAction>
@@ -728,6 +724,13 @@
 			<functionName></functionName>
 
 		</pkg>	-->
+    <!--Now internal <pkg>
+      <functionName>mod-nsis-install</functionName>
+      <id>nsis.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+	  <whyNotInternal>maintainer</whyNotInternal>
+    </pkg> -->
     <!-- <pkg>
 			<id>mupdf</id>
 			<needsStopAction>no</needsStopAction>
