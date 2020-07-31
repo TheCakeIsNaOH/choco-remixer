@@ -641,6 +641,20 @@ Function mod-ddu ($obj) {
 }
 
 
+Function mod-eclipse ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url64bit  ').tostring()
+	$url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring().trim("&r=1")
+	$filePath32 = 'FileFullPath64          = (Join-Path $toolsDir "' + $filename32 + '")'
+
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+	$obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
+	$obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
+	
+	$exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.zip | ForEach-Object { Remove-Item $_ -ea 0  }'
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
 
 
 

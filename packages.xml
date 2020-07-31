@@ -56,6 +56,7 @@
     <id>dotnet3.5</id>
     <id>ds4windows</id>
     <id>duplicati</id>
+	<id>element-desktop</id>
     <id>everything</id>
     <id>ext2fsd</id>
     <id>fastcopy.portable</id>
@@ -330,6 +331,13 @@
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
+	<pkg>
+	  <functionName>mod-eclipse</functionName>
+      <id>eclipse</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+	  <whyNotInternal>maintainer</whyNotInternal>
+	</pkg>
     <pkg>
       <functionName>mod-edge</functionName>
       <id>microsoft-edge</id>
