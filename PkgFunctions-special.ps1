@@ -430,7 +430,7 @@ Function mod-thunderbird ($obj) {
 
 Function mod-firefox ($obj) {
 
-	$version = $obj.version
+	$version = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$alreadyInstalled =').tostring().split("'") | Select-String -Pattern '\d\d').tostring()
 
 	$url32 = "https://download.mozilla.org/?product=firefox-" + $version + "-ssl&os=win&lang=en-US"
 	$url64 = "https://download.mozilla.org/?product=firefox-" + $version + "-ssl&os=win64&lang=en-US"

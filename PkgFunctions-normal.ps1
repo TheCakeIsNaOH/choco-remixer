@@ -855,6 +855,28 @@ Function mod-goggalaxy ($obj) {
 }
 
 
+Function mod-slobs ($obj) {
+	$fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url64').tostring()
+	$url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
+	$filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+	$filePath64 = 'file64          = (Join-Path $toolsDir "' + $filename64 + '")'
+
+	$obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath64"
+	
+	$exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
+	$obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+	download-fileSingle -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+}
+
+
+
+
+
+
+
+
 
 
 

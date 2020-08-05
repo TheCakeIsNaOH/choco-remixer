@@ -125,6 +125,7 @@
     <id>picard</id>
     <id>powertoys</id>
     <id>putty.install</id>
+    <id>putty.portable</id>
     <id>putty</id>
     <id>pwsh</id>
     <id>python2</id>
@@ -611,6 +612,13 @@
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
+    <pkg>
+			<id>streamlabs-obs</id>
+			<needsStopAction>no</needsStopAction>
+			<needsToolsDir>yes</needsToolsDir>
+			<functionName>mod-slobs</functionName>
+            <whyNotInternal>size</whyNotInternal>
+	</pkg>
     <pkg>
       <functionName>mod-sysinternals</functionName>
       <id>sysinternals</id>
