@@ -337,7 +337,14 @@
       <id>eclipse</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+	  <whyNotInternal>size</whyNotInternal>
+	</pkg>
+	<pkg>
+	  <functionName>mod-eclipse-java-oxygen</functionName>
+      <id>eclipse-java-oxygen</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+	  <whyNotInternal>size</whyNotInternal>
 	</pkg>
     <pkg>
       <functionName>mod-edge</functionName>
@@ -613,11 +620,11 @@
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-			<id>streamlabs-obs</id>
-			<needsStopAction>no</needsStopAction>
-			<needsToolsDir>yes</needsToolsDir>
-			<functionName>mod-slobs</functionName>
-            <whyNotInternal>size</whyNotInternal>
+        <id>streamlabs-obs</id>
+        <needsStopAction>no</needsStopAction>
+		<needsToolsDir>yes</needsToolsDir>
+		<functionName>mod-slobs</functionName>
+        <whyNotInternal>size</whyNotInternal>
 	</pkg>
     <pkg>
       <functionName>mod-sysinternals</functionName>
