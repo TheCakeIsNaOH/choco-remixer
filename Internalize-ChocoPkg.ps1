@@ -1,10 +1,11 @@
 ﻿#Requires -Version 5.0
 param (
-	[string]$pkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
-	[string]$personalPkgXML,
-	[switch]$thoroughList,
-	[switch]$skipRepoCheck,
-	[switch]$skipRepoMove
+    [string]$pkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
+    [string]$personalPkgXML,
+    [switch]$thoroughList,
+    [switch]$skipRepoCheck,
+    [switch]$skipRepoMove,
+    [switch]$NoSave
 )
 $ErrorActionPreference = 'Stop'
 
@@ -640,8 +641,7 @@ Foreach ($obj in $nupkgObjArray) {
 
 
 Foreach ($obj in $nupkgObjArray) {
-	if ($obj.status -eq "internalized") {
-		#Try {
+	if (($obj.status -eq "internalized") -and (!($NoSave))) {
 			if ($useDropPath -eq "yes") {
 				Write-Verbose "coping $($obj.nuspecID) to drop path"
 				Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $dropPath
@@ -661,9 +661,6 @@ Foreach ($obj in $nupkgObjArray) {
 			} else {
 				$obj.status = "done"
 			}
-		#} Catch {
-		#	$obj.status = "failed copy or write"
-		#} 
 	} else {
 		
 	}
