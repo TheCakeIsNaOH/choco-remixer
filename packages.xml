@@ -172,6 +172,13 @@
   </internal>
   <custom>
     <pkg>
+        <id>1password</id>
+		<needsStopAction>no</needsStopAction>
+        <needsToolsDir>yes</needsToolsDir>
+        <functionName>mod-1password</functionName>
+        <whyNotInternal>licensing</whyNotInternal>
+	</pkg>
+    <pkg>
       <functionName>mod-4k-slideshow</functionName>
       <id>4k-slideshow-maker</id>
       <needsStopAction>no</needsStopAction>
