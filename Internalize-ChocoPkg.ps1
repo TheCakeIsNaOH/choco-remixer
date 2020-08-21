@@ -421,7 +421,13 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 		do {
 
 			#FIXME for casing
-			$privatePage = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privatePageURL	
+            Try {
+                $privatePage = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privatePageURL	
+            } Catch {
+                Write-Host "Broken 406 page $nuspecID"
+                Break
+            }
+            
 			[array]$privateVersions = $privateVersions + ( $privatePage.items | Where-Object { $_.name.tolower() -eq $nuspecID } ).version 
 			
 			if ($privatePage.continuationToken) {
