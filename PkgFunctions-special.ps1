@@ -672,3 +672,20 @@ Function mod-eclipse-java-oxygen ($obj) {
 	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
+
+Function mod-airtame ($obj) {
+	$fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$urlPackage ').tostring()
+	$url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").ToString()
+	$filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+	$filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
+
+	$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+	$obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
+	
+	download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
+
+
+

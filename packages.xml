@@ -54,6 +54,7 @@
     <id>discord</id>
     <id>docker-kitematic</id>
     <id>dotnet3.5</id>
+    <id>dotnet4.7.2</id>
     <id>ds4windows</id>
     <id>duplicati</id>
 	<id>element-desktop</id>
@@ -265,6 +266,13 @@
     <pkg>
       <functionName>mod-anydesk-install</functionName>
       <id>anydesk.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+	  <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>mod-airtame</functionName>
+      <id>airtame</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
