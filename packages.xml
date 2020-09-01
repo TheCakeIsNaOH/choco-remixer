@@ -96,6 +96,7 @@
     <id>linux-reader</id>
     <id>make</id>
     <id>microsoft-message-analyzer</id>
+    <id>minecraft</id>
     <id>moonlight-qt.install</id>
     <id>mp3tag</id>
     <id>msi.template</id>
@@ -511,6 +512,13 @@
     <pkg>
       <functionName>mod-malwarebytes</functionName>
       <id>malwarebytes</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+	  <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>mod-minecraft-launcher</functionName>
+      <id>minecraft-launcher</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
