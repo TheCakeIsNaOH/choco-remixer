@@ -171,39 +171,6 @@ Function mod-nextcloud-client ($obj) {
 }
 
 
-Function mod-hwmonitor ($obj) {
-
-    $version = $obj.version
-
-    $url32 = "http://download.cpuid.com/hwmonitor/hwmonitor_" + $version + ".exe"
-    $filename32 = "hwmonitor_" + $version + ".exe"
-
-    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32"
-
-
-
-    #$dlwdFile32 = (Join-Path $obj.toolsDir "$filename32")
-
-    #$dlwd = New-Object net.webclient
-
-    if (Test-Path $dlwdFile32) {
-        Write-Output $dlwdFile32 ' appears to be downloaded'
-    } else {
-        #$dlwd.DownloadFile($url32, $dlwdFile32)
-        #invoke webrequest needed as with it downloadfile it 429s
-        Invoke-WebRequest -Uri $url32 -OutFile $dlwdFile32
-    }
-
-    #$dlwd.dispose()
-}
-
-
 Function mod-nvidia-driver ($obj) {
     $fullurlwin7  = ($obj.installScriptOrig -split "`n" | Select-String -pattern "packageArgs\['url64'\]      = 'https").tostring()
     $fullurlwin10 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64   ").tostring()
@@ -684,6 +651,54 @@ Function mod-airtame ($obj) {
     
     download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
+
+
+Function mod-spotify ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '  url  ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
+    
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    
+    $obj.installScriptMod = $obj.installScriptMod -replace '\$arguments\[''file''\] *=' , "# $&"
+    $obj.installScriptMod = $obj.installScriptMod -replace '  file *=' , "#$&"
+    $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32"
+    
+    $exeRemoveString =  "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
+    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+    
+    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
+Function mod-rclone-portable ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'FileFullPath          = (Join-Path $toolsDir "' + $filename32 + '")'
+    
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url64bit ').tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    $filePath64 = 'FileFullPath64          = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+    $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
+    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32`n  $filePath64"
+    
+    $exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.zip | ForEach-Object { Remove-Item $_ -ea 0  }'
+    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+    
+    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+}
+
+
+
+
+
+
+
 
 
 

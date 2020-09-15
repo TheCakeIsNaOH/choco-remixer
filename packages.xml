@@ -125,6 +125,7 @@
     <id>pandoc</id>
     <id>pcsx2.portable</id>
     <id>picard</id>
+    <id>pingtracer</id>
     <id>powertoys</id>
     <id>putty.install</id>
     <id>putty.portable</id>
@@ -135,6 +136,7 @@
     <id>qbittorrent</id>
     <id>qtox</id>
     <id>rapidee</id>
+    <id>rclone</id>
     <id>regeditor</id>
     <id>resharper</id>
     <id>ruby</id>
@@ -370,6 +372,13 @@
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>mod-elgato-game-capture</functionName>
+      <id>elgato-game-capture</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>mod-epicgames</functionName>
       <id>epicgameslauncher</id>
       <needsStopAction>no</needsStopAction>
@@ -460,6 +469,13 @@
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
+    <pkg>
+      <functionName>mod-hwmonitor</functionName>
+      <id>hwmonitor</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+	</pkg>
     <pkg>
       <functionName>mod-icecat</functionName>
       <id>icecat</id>
@@ -580,6 +596,13 @@
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>mod-rclone-portable</functionName>
+      <id>rclone.portable</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>mod-resharper-platform</functionName>
       <id>resharper-platform</id>
       <needsStopAction>no</needsStopAction>
@@ -620,6 +643,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>mod-spotify</functionName>
+      <id>spotify</id>
+	  <needsStopAction>yes</needsStopAction>
+	  <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>mod-sqlserver-cmdlineutils</functionName>
@@ -733,37 +763,14 @@
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-	<!-- 	<pkg>
-			<id></id>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
-		</pkg>
-		<pkg>
-			<id></id>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
-		</pkg>
-		<pkg>
-			<id></id>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
-		</pkg>
-		<pkg>
-			<id></id>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
-		</pkg>
-		<pkg>
-			<id></id>
-			<needsStopAction></needsStopAction>
-			<needsToolsDir></needsToolsDir>
-			<functionName></functionName>
-		</pkg> -->
-    <!--<pkg>
+	<!--    <pkg>
+      <functionName></functionName>
+      <id></id>
+      <needsStopAction></needsStopAction>
+      <needsToolsDir></needsToolsDir>
+      <whyNotInternal></whyNotInternal>
+    </pkg> -->
+    <!-- <pkg>
 			<id>maven</id>
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
@@ -815,12 +822,6 @@
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-sqlserver-odbcdriver</functionName>
 		</pkg> -->
-<!--     <pkg>
-      <functionName>mod-nextcloud-client</functionName>
-      <id>nextcloud-client</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-    </pkg> -->
   </custom>
   <notImplemented>
     <id>dotnetfx</id>
