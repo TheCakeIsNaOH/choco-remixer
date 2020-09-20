@@ -278,7 +278,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
                 $pushcode = $null
             }
         } elseif ($packagesXMLcontent.packages.notImplemented.id -icontains $nuspecID) {
-            Write-Host "$nuspecID found on the proxy repo and is not implemented, please internalize manually"
+            Write-Host "$nuspecID found in the proxy repo and is not implemented, please internalize manually"
         } elseif ($packagesXMLcontent.packages.custom.pkg.id -icontains $nuspecID) {
             $versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
             $versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
@@ -327,7 +327,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
             }
             
         } else {
-            Write-Host "$_ found on the proxy repo, it is a new ID, may need to be implemented or added to the internal list"
+            Write-Host "$nuspecID found in the proxy repo, it is a new ID, may need to be implemented or added to the internal list"
         }       
     }
     }
