@@ -302,6 +302,13 @@
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>mod-coretemp</functionName>
+      <id>coretemp</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>mod-cpuz</functionName>
       <id>cpu-z.install</id>
       <needsStopAction>no</needsStopAction>
