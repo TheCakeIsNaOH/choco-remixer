@@ -600,11 +600,17 @@ Function mod-ddu ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
     $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n    $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod -replace "Invoke-WebRequest" , "#Invoke-WebRequest"
+    $obj.installScriptMod = $obj.installScriptMod -replace "Remove-Item" , "#Remove-Item"
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $exeRemoveString =  "`n" + 'Remove-Item "$(Split-Path -parent $MyInvocation.MyCommand.Definition)\*.exe"'
+    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
     download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    
+
 }
 
 
