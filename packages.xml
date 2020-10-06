@@ -764,6 +764,13 @@
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>mod-webex-meetings</functionName>
+      <id>webex-meetings</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>     
+    <pkg>
       <functionName>mod-zoom</functionName>
       <id>zoom</id>
       <needsStopAction>no</needsStopAction>
