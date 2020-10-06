@@ -46,6 +46,7 @@
     <id>choco-package-list-backup</id>
     <id>choco-protocol-support</id>
     <id>chromium</id>
+    <id>clementine</id>
     <id>cpu-z</id>
     <id>crystaldiskinfo.install</id>
     <id>crystaldiskinfo.portable</id>
@@ -58,6 +59,7 @@
     <id>ds4windows</id>
     <id>duplicati</id>
 	<id>element-desktop</id>
+    <id>etcher</id>
     <id>everything</id>
     <id>ext2fsd</id>
     <id>fastcopy.portable</id>
@@ -87,6 +89,7 @@
     <id>jackett</id>
     <id>javaruntime</id>
     <id>jdk8</id>
+    <id>kdenlive</id>
     <id>keepassxc</id>
     <id>kubernetes-cli</id>
     <id>lgs.g700s</id>
@@ -121,6 +124,7 @@
     <id>obs-studio</id>
     <id>openlp</id>
     <id>open-shell</id>
+    <id>openhashtab</id>
     <id>openssl</id>
     <id>pandoc</id>
     <id>pcsx2.portable</id>
@@ -222,7 +226,7 @@
       <id>adb</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal> <!-- under google SDK license with no redist, but has clause that allows open source licenses to take precedence, unsure if this is totally under open sources licenses, may need to build custom -->
+	  <whyNotInternal>licensing</whyNotInternal> <!-- under google SDK licensing with no redist, but has clause that allows open source licensings to take precedence, unsure if this is totally under open sources licensings, may need to build custom -->
     </pkg>
     <pkg>
       <functionName>mod-adobereader</functionName>
@@ -392,13 +396,13 @@
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-    <pkg>
+<!--     <pkg>
       <functionName>mod-etcher</functionName>
       <id>etcher</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
+    </pkg> NOW INTERNAL -->
     <pkg>
       <functionName>mod-firefox</functionName>
       <id>firefox</id>
@@ -504,13 +508,13 @@
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
-    <pkg>
+<!--     <pkg>
       <functionName>mod-kdenlive</functionName>
       <id>kdenlive</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
+    </pkg> NOW INTERNAL-->
     <pkg>
       <functionName>mod-krita</functionName>
       <id>krita</id>
@@ -530,7 +534,7 @@
       <id>lightshot.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>mod-malwarebytes</functionName>
@@ -581,13 +585,13 @@
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
-    <pkg>
+<!--     <pkg>
       <functionName>mod-openhashtab</functionName>
       <id>openhashtab</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
+    </pkg> NOW INTERNAL-->
     <pkg>
       <functionName>mod-openshot</functionName>
       <id>openshot</id>
