@@ -81,6 +81,7 @@
     <id>handbrake</id>
     <id>hashtab</id>
     <id>hxd</id>
+    <id>icecat</id>
     <id>imagemagick</id>
     <id>inkscape</id>
     <id>innoextract</id>
@@ -97,6 +98,7 @@
     <id>libreoffice</id>
     <id>lightshot</id>
     <id>linux-reader</id>
+    <id>looking-glass-host</id>
     <id>make</id>
     <id>microsoft-message-analyzer</id>
     <id>minecraft</id>
@@ -143,6 +145,7 @@
     <id>rclone</id>
     <id>regeditor</id>
     <id>resharper</id>
+    <id>riot-web</id>
     <id>ruby</id>
     <id>rufus</id>
     <id>shotcut</id>
@@ -396,13 +399,6 @@
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-<!--     <pkg>
-      <functionName>mod-etcher</functionName>
-      <id>etcher</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg> NOW INTERNAL -->
     <pkg>
       <functionName>mod-firefox</functionName>
       <id>firefox</id>
@@ -488,13 +484,6 @@
       <whyNotInternal>licensing</whyNotInternal>
 	</pkg>
     <pkg>
-      <functionName>mod-icecat</functionName>
-      <id>icecat</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>mod-imagemagick</functionName>
       <id>imagemagick.app</id>
       <needsStopAction>yes</needsStopAction>
@@ -508,13 +497,6 @@
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
-<!--     <pkg>
-      <functionName>mod-kdenlive</functionName>
-      <id>kdenlive</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg> NOW INTERNAL-->
     <pkg>
       <functionName>mod-krita</functionName>
       <id>krita</id>
@@ -585,13 +567,6 @@
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
-<!--     <pkg>
-      <functionName>mod-openhashtab</functionName>
-      <id>openhashtab</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg> NOW INTERNAL-->
     <pkg>
       <functionName>mod-openshot</functionName>
       <id>openshot</id>
@@ -626,13 +601,6 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>mod-riot-web</functionName>
-      <id>riot-web</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>mod-shotcut-install</functionName>
@@ -839,7 +807,42 @@
 			<needsStopAction>yes</needsStopAction>
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-sqlserver-odbcdriver</functionName>
-		</pkg> -->
+		</pkg>   <pkg>
+      <functionName>mod-etcher</functionName>
+      <id>etcher</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+	  <whyNotInternal>maintainer</whyNotInternal>
+    </pkg> NOW INTERNAL -->
+<!--     <pkg>
+      <functionName>mod-kdenlive</functionName>
+      <id>kdenlive</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+	  <whyNotInternal>maintainer</whyNotInternal>
+    </pkg> NOW INTERNAL-->  
+    <!--     <pkg>
+      <functionName>mod-openhashtab</functionName>
+      <id>openhashtab</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+	  <whyNotInternal>maintainer</whyNotInternal>
+    </pkg> NOW INTERNAL-->
+<!--     <pkg>
+      <functionName>mod-riot-web</functionName>
+      <id>riot-web</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+	  <whyNotInternal>maintainer</whyNotInternal>
+    </pkg> -->    
+<!--     <pkg>
+      <functionName>mod-icecat</functionName>
+      <id>icecat</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+	  <whyNotInternal>maintainer</whyNotInternal>
+    </pkg> -->
+    
   </custom>
   <notImplemented>
     <id>dotnetfx</id>
