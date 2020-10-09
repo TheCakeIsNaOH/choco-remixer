@@ -358,6 +358,13 @@
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>mod-dotnetcore3-desktop-runtime</functionName>
+      <id>dotnetcore3-desktop-runtime</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>mod-dropbox</functionName>
       <id>dropbox</id>
       <needsStopAction>no</needsStopAction>
@@ -504,6 +511,13 @@
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
+    <pkg>
+      <functionName>mod-kodi</functionName>
+      <id>kodi</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>    
     <pkg>
       <functionName>mod-libreoffice-fresh</functionName>
       <id>libreoffice-fresh</id>
