@@ -37,7 +37,7 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - If you have `useDropPath` and `pushPkgs` disabled, the internalized packages are located inside the specified `workDir`.
 - If you have `writePerPkgs` disabled, add the package versions to `personal-packages.xml` under the correct IDs. Otherwise, it will try to internalize them again.
 
-- If there are errors, run with the 
+- If re-running, use the `-skipRepoCheck` switch, so as to not get rate limited by chocolatey.org 
 
 ## Caveats
 
