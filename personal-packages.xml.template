@@ -1,40 +1,59 @@
 <?xml version="1.0"?>
 
 <mypackages>
+    <!-- This will be automatically filled as you internalize more packages assuming that  -->
+    <!-- Add the id and version of any packages that you already have manually internalized and put in your local repo -->
 	<internalized>
 		<pkg id="package-id">
 			<version>0.0.0.0</version>
 		</pkg>
 	</internalized>
 	
+    <!-- Add the package ids of any packages that are not on chocolatey.org and you want to ignore -->
 	<personal>
 		<id>my-custom-internal-package-id</id>
 	</personal>
 	
+    <!-- Add package ids here for repoCheck -->
 	<toInternalize>
 		<id>package-id-to-check-repo-to-internalize</id>
 	</toInternalize>
-	
-	<!-- todo, tomove -->
-	
+		
 	<options>
+        <!-- Local directory where packages are searched for --> 
 		<searchDir>C:\path\to\get\packages\from</searchDir>
+        <!-- Local directory where the internalization actually happens -->
 		<workDir>C:\path\to\modify\packages\in</workDir>
+        
+        <!-- ProGet drop path -->
+        <useDropPath>no</useDropPath>
+        <!-- Directory that is your ProGet drop path -->
 		<dropPath>C:\path\to\droppath</dropPath>
-		<useDropPath>no</useDropPath>
-		<writePerPkgs>no</writePerPkgs>
+		
+        <!-- Yes/No to automatically filling out internalized package versions -->
+		<writePerPkgs>yes</writePerPkgs>
+        
+        <!-- Yes/No automatic pushing internalized packages -->
 		<pushPkgs>no</pushPkgs>
+        <!-- Url to push packages too -->
 		<pushURL>https://my.repo/feed/</pushURL>
+        
+        <!-- Nexus only -->
+        <!-- Check if packages ids listed in toInternalize are out of date in the private repo, and download them to be internalized -->
 		<repoCheck>no</repoCheck>
+        <!-- publicRepoURL should normally not need to be changed -->
 		<publicRepoURL>https://chocolatey.org/api/v2/</publicRepoURL>
+        <!-- URL of your private feed -->
 		<privateRepoURL>https://my.repo/private-feed/</privateRepoURL>
-		<!-- specify, yes, or no -->
-		<!-- format user:pass -->
+		<!-- specify credentials if needed; format user:pass ; Otherwise if no authentication, put in no -->
 		<privateRepoCreds>no</privateRepoCreds>
+        
+        <!-- Nexus only -->
+        <!-- Check the packages on a proxy repository, and either internalize them or push already internal packages to the moveToRepo -->
 		<repoMove>no</repoMove>
 		<proxyRepoURL>https://my.repo/chocolatey.org-proxy</proxyRepoURL>
 		<moveToRepoURL>https://my.repo/private-feed/</moveToRepoURL>
-		<!-- format user:pass -->
+		<!-- specify credentials if needed; format user:pass ; Otherwise if no authentication, put in no -->
 		<proxyRepoCreds>no</proxyRepoCreds>
 	</options>
 </mypackages>

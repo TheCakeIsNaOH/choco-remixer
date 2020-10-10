@@ -1,7 +1,3 @@
-## Notice
-
-Currently undergoing changes to add features and switch the main repository type over to nexus
-
 ## What is this?
 
 This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-recompile-packages) select Chocolatey packages.
@@ -10,53 +6,52 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 - Because relying on software to be available at a specific URL on the internet in perpetuity is not a good idea.
 - Manually downloading and internalizing for each package version is a lot of work.
-- The [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that also has [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages) is-
+- The [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that also has [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages) is:
  
    - Not open source
-   - Too expensive for almost all non-business users because it starts at $640/year
-   - May require an ongoing license to continue to use the packages that where internalized. 
+   - Too expensive for almost all non-business users because it starts at $1,600/year
+   - May require an ongoing license to continue to use the packages that are internalized with the business extension. 
 
 ## Requirements
 
-- PowerShell - tested so far with v5.1 on windows, should be compatible with 6+ and other OSes without too much effort
+- PowerShell v5.1+ - Used so far only on windows, should be compatible with Linux without too much effort
 - `choco` installed and on your path
-- Chocolatey `.nupgk` files that do not include all files in the package (i.e. not internal).
-- A nuget repository.
-	- Drop path's are available with proget only
+- A nuget repository or a folder with `.nupkg`s to internalize. Nexus is the repository that I use and test with.
+	- Drop path's are available with ProGet only
 	- RepoMove and RepoSearch are Nexus only
-
 
 ## Setup 
 
-
-- Copy `personal-packages-template.xml` to `personal-packages.xml` and open it.
-
-### fixme
-- Set `searchDir` to the directory your `.nupkg` files to internalize are.
-- Set `workDir` to the directory where you want the `.nupkg`s to be internalized in.
-- If wanted, change `useDropPath` and/or `pushPkgs` to `yes` and change the `pushURL`/`dropPath` accordingly. These auto copy or push the internalized packages to your repository.
-- If you have any custom packages, their IDs can be added to the personal section
-- `personal-packages.xml` is searched for first in `%appdata%` or `.config` in the internalizer folder, then in the same folder that internalizer runs from. You can also provide a custom path to it. 
+- Clone this repository
+- Chocolatey is required, make sure that it is installed and working properly. 
+- Copy `personal-packages.xml.template` to `personal-packages.xml` and edit it. 
+    - See the file for comments about each of the options.
+    - It is searched for first under `%appdata%`/`.config` in the choco-remixer folder, then it looks in the same folder that choco-remixer runs from. You can also provide a path to it.
+- If you are using the automatic pushing (`pushPkgs`), make sure `choco` has the appropriate `apikey` setup for that URL.
+- It is a good idea to put `personal-packages.xml` in a git repository.
 
 ## Operation 
 
 - Run `Internalize-ChocoPkg.ps1` in PowerShell
 
-### fixme
-- If you have `useDropPath` and `pushPkgs` disabled, push the packages to your local repository, or in the case of Proget, copy to the drop path.
-- If you have `writePerPkgs` disabled, add the package versions to `personal-packages.xml` under the correct IDs. 
+- If you have `useDropPath` and `pushPkgs` disabled, the internalized packages are located inside the specified `workDir`.
+- If you have `writePerPkgs` disabled, add the package versions to `personal-packages.xml` under the correct IDs. Otherwise, it will try to internalize them again.
+
+- If there are errors, run with the 
 
 ## Caveats
 
-- This is alpha software, please do not use in production (yet).
-- Packages are supported by whitelist, and support must be added individually for each package. Only a limited subset of packages that would need internalization are supported at this moment.
-- Error checking and logging are limited
+- I am still actively developing this, I make no promises that it is %100 stable.
+- Packages are supported by whitelist, and support must be added individually for each package. Only a limited subset of packages on chocolatey.org that are not internal are supported at this moment.
+- Error checking is not ideal yet, and there is no logging
 
 ## Todo
 
+- Search in subdir of work dir as well, if readonly search dir or something
+- Input creds during run.
+- output current/old package version during repoCheck
 
 - move more packages to no custom function, all declared in xml
-- quicker find-package
 	
 - change functions to use all passed things, not script variables, and strings and whatnot
 - Checksum downloads
@@ -76,3 +71,5 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
   - Ability to bump version of nupkg
   - Extract files individually rather then extracting all and removing excess, difficult because of packages like virtualbox that have files in root dir
   - Add option to trust names of nupkg's in searching
+  - Git integration for personal-packages.xml
+  - Multiple personal-packages.xml files
