@@ -598,6 +598,13 @@
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>mod-qownnotes</functionName>
+      <id>qownnotes</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>mod-rclone-portable</functionName>
       <id>rclone.portable</id>
       <needsStopAction>no</needsStopAction>
