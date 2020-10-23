@@ -83,6 +83,7 @@
     <id>hxd</id>
     <id>icecat</id>
     <id>imagemagick</id>
+    <id>imagemagick.app</id>
     <id>inkscape</id>
     <id>innoextract</id>
     <id>innosetup</id>
@@ -109,6 +110,7 @@
     <id>msi.template</id>
     <id>msys2</id>
     <id>mumble</id>
+    <id>mupdf</id>
     <id>n3dr</id>
     <id>nextcloud-client</id>
     <id>nginx</id>
@@ -493,13 +495,6 @@
       <whyNotInternal>licensing</whyNotInternal>
 	</pkg>
     <pkg>
-      <functionName>mod-imagemagick</functionName>
-      <id>imagemagick.app</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>mod-joplin</functionName>
       <id>joplin</id>
       <needsStopAction>yes</needsStopAction>
@@ -865,6 +860,14 @@
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg> -->
+<!--     <pkg>
+      <functionName>mod-imagemagick</functionName>
+      <id>imagemagick.app</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+	  <whyNotInternal>maintainer</whyNotInternal>
+    </pkg> -->    
+ 
     
   </custom>
   <notImplemented>
