@@ -1,8 +1,8 @@
 Function mod-adoptopenjdk8 ($obj) {
 #need to deal with added added param that has option of install both 32 and 64, 
-    remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url = ").tostring()
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit = ").tostring()
+    #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url .* = ").tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit .* = ").tostring()
 
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
@@ -26,8 +26,8 @@ Function mod-adoptopenjdk8 ($obj) {
 
 Function mod-adoptopenjdk8jre ($obj) {
 #need to deal with added added param that has option of install both 32 and 64, 
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url = ").tostring()
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit = ").tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url .* = ").tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit .* = ").tostring()
 
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
@@ -53,8 +53,8 @@ Function mod-adoptopenjdk8jre ($obj) {
 Function mod-adoptopenjdkjre ($obj) {
 #need to deal with added added param that has option of install both 32 and 64, 
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url .*= ").tostring()
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64bit .*= ").tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url .*= ").tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit .*= ").tostring()
 
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
