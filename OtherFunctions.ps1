@@ -190,6 +190,8 @@ Function mod-installcpkg-both {
         [switch]$x64NameExt,
         [switch]$DeEncodeSpace,
         [switch]$removeEXE,
+        [switch]$removeMSI,
+        [switch]$removeMSU,
         [int]$checksumType
     )
     
@@ -256,10 +258,14 @@ Function mod-installcpkg-both {
         $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     }
     if ($removeEXE) {
-        $exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0; if (Test-Path $_) { Set-Content "$_.ignore" } }'
-        $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+        $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     }
-
+    if ($removeMSI) {
+        $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
+    }
+    if ($removeMSU) {
+        $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msu'
+    }
 
     Write-Output "Downloading $($obj.NuspecID) files"
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir

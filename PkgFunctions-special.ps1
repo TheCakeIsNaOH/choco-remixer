@@ -126,8 +126,8 @@ Function mod-virtualbox ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "ChecksumType64 *'sha256'" , "$& #>"
     $obj.installScriptMod = $obj.installScriptMod -replace "file_path_ep.*Get-Package.*" , "file_path_ep = $filepathep"
     
-    $exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*vbox-extpack'
 
 
     
@@ -199,7 +199,7 @@ Function mod-nvidia-driver ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "OSVersion\.Version\.Major -ne '10' \) \{" , "$&`n    $filePathwin7"
     $obj.installScriptMod = $obj.installScriptMod -replace "-eq 'true'\) \{" , "$&`n    $filePathDCH"
     
-    $exeRemoveString =  "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
+    $exeRemoveString =  "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
     $dlwdFilewin7 = (Join-Path $obj.toolsDir "$filenamewin7")
@@ -258,7 +258,7 @@ Function mod-geforce-driver ($obj) {
     $dlwdFilewin10 = (Join-Path $obj.toolsDir "$filenamewin10")
     $dlwdFileDCH = (Join-Path $obj.toolsDir "$filenameDCH")
     
-    $exeRemoveString =  "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
+    $exeRemoveString =  "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
     
     Write-Output "Downloading geforce-game-ready-driver files"
@@ -335,7 +335,9 @@ Function mod-adobereader ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace '\$DownloadArgs' , '<# $DownloadArgs'
     $obj.installScriptMod = $obj.installScriptMod -replace '@DownloadArgs' , '$& #>'
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0 }'
+    $obj.installScriptMod = $obj.installScriptMod -replace 'return', '  Remove-Item -Force -EA 0 -Path $toolsDir\*.msp`n  Remove-Item -Force -EA 0 -Path $toolsDir\*.exe`n$&'
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp'
 
     Write-Output $obj.toolsDir
 
@@ -361,7 +363,7 @@ Function mod-thunderbird ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n"
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
     
-    $exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
+    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
 
@@ -468,6 +470,7 @@ Function mod-libreoffice-fresh ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "#>`n`nInstall-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
     $obj.installScriptMod = $obj.installScriptMod -replace "if \(\-not" , "<#if \(\-not"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
@@ -493,7 +496,7 @@ Function mod-hexchat ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "#Install-ChocolateyPackage"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Install-ChocolateyInstallPackage "$packageName" "$installerType" "$silentArgs" "$file" "$file64" -validExitCodes $validExitCodes'
 
-    $exeRemoveString =  "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
+    $exeRemoveString =  "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
@@ -533,6 +536,8 @@ Function mod-tor-browser ($obj) {
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
+    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 
@@ -558,7 +563,7 @@ Function mod-imagemagick ($obj) {
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     
 
-    $exeRemoveString =  "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
+    $exeRemoveString =  "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
@@ -646,7 +651,7 @@ Function mod-spotify ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace '  file *=' , "#$&"
     $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32"
     
-    $exeRemoveString =  "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
+    $exeRemoveString =  "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
     
     download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir

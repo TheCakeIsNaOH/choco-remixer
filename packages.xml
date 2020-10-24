@@ -91,6 +91,7 @@
     <id>jackett</id>
     <id>javaruntime</id>
     <id>jdk8</id>
+    <id>KB2533623</id>
     <id>kdenlive</id>
     <id>keepassxc</id>
     <id>kubernetes-cli</id>
