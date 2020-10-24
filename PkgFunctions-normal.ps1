@@ -92,16 +92,18 @@ Function mod-4k-youtube-to-mp3 ($obj) {
 
 Function mod-vscodium-install ($obj) {
     mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -removeEXE
+    $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp' + "`n" + "     $&"
+    $obj.installScriptMod = $obj.installScriptMod -replace 'return',  $string
 }
 
 
 Function mod-google-backup-and-sync ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 2 -argstype 0 -needsTools
+    mod-installcpkg-both -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveMSI
 }
 
 
 Function mod-googlechrome ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA
+    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
 }
 
 
@@ -126,27 +128,27 @@ Function mod-mono ($obj) {
 
 
 Function mod-shotcut-install ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -needsTools
+    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveExe
 }
 
 
 Function mod-vivaldi-portable ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools
+    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
 }
 
 
 Function mod-vivaldi-install ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools
+    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
 }
 
 
 Function mod-edge ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -needsTools
+    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveMSI
 }
 
 
 Function mod-slack ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -x64NameExt
+    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -x64NameExt -RemoveMSI
 }
 
 
@@ -168,13 +170,13 @@ Function mod-discord-install ($obj) {
 
     $filePath32 = 'file          = (Join-Path $toolsPath "' + $filename32 + '")'
     $filePath64 = 'file64        = (Join-Path $toolsPath "' + $filename64 + '")'
-    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    
 }
 
 
@@ -195,10 +197,7 @@ Function mod-openshot ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
-
-    
-    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
@@ -266,8 +265,7 @@ Function mod-ringcentral-classic ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
-    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
@@ -917,8 +915,7 @@ Function mod-elgato-game-capture ($obj) {
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
     
     download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }

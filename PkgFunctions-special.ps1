@@ -126,8 +126,8 @@ Function mod-virtualbox ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "ChecksumType64 *'sha256'" , "$& #>"
     $obj.installScriptMod = $obj.installScriptMod -replace "file_path_ep.*Get-Package.*" , "file_path_ep = $filepathep"
     
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*vbox-extpack'
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsPath\*.exe'
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsPath\*vbox-extpack'
 
 
     
@@ -335,7 +335,8 @@ Function mod-adobereader ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace '\$DownloadArgs' , '<# $DownloadArgs'
     $obj.installScriptMod = $obj.installScriptMod -replace '@DownloadArgs' , '$& #>'
-    $obj.installScriptMod = $obj.installScriptMod -replace 'return', '  Remove-Item -Force -EA 0 -Path $toolsDir\*.msp`n  Remove-Item -Force -EA 0 -Path $toolsDir\*.exe`n$&'
+    $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp' + "`n" + '         Remove-Item -Force -EA 0 -Path $toolsDir\*.exe' + "`n" + "         $&"
+    $obj.installScriptMod = $obj.installScriptMod -replace 'return',  $string
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp'
 
@@ -389,6 +390,7 @@ Function mod-firefox ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n"
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
@@ -603,9 +605,8 @@ Function mod-eclipse ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
     $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-    
-    $exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.zip | ForEach-Object { Remove-Item $_ -ea 0  }'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
     download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -619,9 +620,8 @@ Function mod-eclipse-java-oxygen ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
     $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-    
-    $exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.zip | ForEach-Object { Remove-Item $_ -ea 0  }'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
+
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
     download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -673,7 +673,7 @@ Function mod-rclone-portable ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32`n  $filePath64"
     
-    $exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.zip | ForEach-Object { Remove-Item $_ -ea 0  }'
+    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
     
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
@@ -696,7 +696,7 @@ Function mod-coretemp ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32`n  $filePath64"
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     
-    $exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.zip | ForEach-Object { Remove-Item $_ -ea 0  }'
+    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
     
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
