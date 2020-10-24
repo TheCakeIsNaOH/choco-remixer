@@ -343,32 +343,6 @@ Function mod-adobereader ($obj) {
 }
 
 
-Function mod-ssms ($obj) {
-    $fullurlfull    = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$fullUrl =').tostring()
-    $fullurlupgrade = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$upgradeUrl =').tostring()
-
-    $urlfull    = ($fullurlfull    -split "'" | Select-String -Pattern "http").tostring()
-    $urlupgrade = ($fullurlupgrade -split "'" | Select-String -Pattern "http").tostring()
-
-    $filenamefull    = ($urlfull    -split "/" | Select-Object -Last 1).tostring()
-    $filenameupgrade = ($urlupgrade -split "/" | Select-Object -Last 1).tostring()
-
-    $filePathfull    = '$packageArgs.file    = (Join-Path $toolsDir "' + $filenamefull + '")'
-    $filePathupgrade = '$packageArgs.file    = (Join-Path $toolsDir "' + $filenameupgrade + '")'
-    $filePathEmpty   = "file          = ''"
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePathEmpty"
-    $obj.installScriptMod = $obj.installScriptMod -replace "ssms180\) {" , "$&`n    $filePathUpgrade"
-    $obj.installScriptMod = $obj.installScriptMod -replace "} else {" , "$&`n    $filePathFull"
-    
-    $exeRemoveString = "`n" + 'Get-ChildItem $toolsDir\*.exe | ForEach-Object { Remove-Item $_ -ea 0  }'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-
-    download-fileBoth -url32 $urlfull -url64 $urlupgrade -filename32 $filenamefull -filename64 $filenameupgrade -toolsDir $obj.toolsDir
-}
-
-
 Function mod-thunderbird ($obj) {
     $version = $obj.version
 

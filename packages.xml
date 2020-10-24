@@ -649,20 +649,6 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>mod-sqlserver-cmdlineutils</functionName>
-      <id>sqlserver-cmdlineutils</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>mod-ssms</functionName>
-      <id>sql-server-management-studio</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>mod-steam</functionName>
       <id>steam</id>
       <needsStopAction>no</needsStopAction>
@@ -820,12 +806,7 @@
 			<needsToolsDir>yes</needsToolsDir>
 			<functionName>mod-zoom-client</functionName>
 		</pkg> -->
-    <!-- borken		<pkg>
-			<id>sqlserver-odbcdriver</id>
-			<needsStopAction>yes</needsStopAction>
-			<needsToolsDir>yes</needsToolsDir>
-			<functionName>mod-sqlserver-odbcdriver</functionName>
-		</pkg>   <pkg>
+    <!--    <pkg>
       <functionName>mod-etcher</functionName>
       <id>etcher</id>
       <needsStopAction>no</needsStopAction>
