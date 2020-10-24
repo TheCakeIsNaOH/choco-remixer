@@ -192,6 +192,7 @@ Function mod-installcpkg-both {
         [switch]$removeEXE,
         [switch]$removeMSI,
         [switch]$removeMSU,
+        [switch]$doubleQuotesUrl,
         [int]$checksumType
     )
     
@@ -212,14 +213,21 @@ Function mod-installcpkg-both {
     } elseif ($urltype -eq 4) {
         $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url ").tostring()
         $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64 ").tostring()
+    } elseif ($urltype -eq 5) {
+        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url32bit ").tostring()
+        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit ").tostring()
     } else {
         Write-Error "could not find url type"
     }
 
 
-    
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+    if ($doubleQuotesUrl){
+        $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
+        $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").tostring()
+    } else {
+        $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+        $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+    }
 
     if ($stripQueryString) {
         $url32 = $url32 -split "\?" | select-object -First 1
