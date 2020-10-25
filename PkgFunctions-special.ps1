@@ -19,6 +19,7 @@ Function mod-adoptopenjdk8 ($obj) {
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir2\*.msi'
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
@@ -44,6 +45,7 @@ Function mod-adoptopenjdk8jre ($obj) {
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir2\*.msi'
 
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
@@ -72,6 +74,7 @@ Function mod-adoptopenjdkjre ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs.url ", "packageArgs.file "
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs.Url64bit ", "packageArgs.file64 "
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
@@ -441,6 +444,10 @@ Function mod-powershell-core ($obj) {
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
+    
+    $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + '    Remove-Item -Force -EA 0 -Path $toolsDir\*.exe' + "`n" + "    $&"
+    $obj.installScriptMod = $obj.installScriptMod -replace ' exit ',  $string
 
     download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
@@ -711,6 +718,34 @@ Function mod-qownnotes ($obj) {
 }
 
 
+
+
+Function mod-resharper-platform ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$Url =').tostring()
+
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+
+    $obj.installScriptMod = $obj.installScriptMod -replace 'Get-ChocolateyWebFile' , '#Get-ChocolateyWebFile'
+    
+    
+
+    #download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    $dlwdFile = (Join-Path $(Split-Path $obj.toolsDir) "$filename32")
+    $dlwd = New-Object net.webclient
+    $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
+    
+    if (Test-Path $dlwdFile) {
+        Write-Output "$dlwdFile appears to be downloaded"
+    } else {
+        $dlwd.DownloadFile($url32, $dlwdFile)
+    }
+
+    $dlwd.dispose()
+    
+    
+}
 
 
 
