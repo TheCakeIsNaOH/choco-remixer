@@ -74,6 +74,7 @@
     <id>ghostscript.app</id>
     <id>git.install</id>
     <id>git</id>
+    <id>github-desktop</id>
     <id>gpu-z</id>
     <id>gsudo</id>
     <id>handbrake.install</id>
@@ -84,7 +85,6 @@
     <id>icecat</id>
     <id>imagemagick</id>
     <id>imagemagick.app</id>
-    <id>inkscape</id>
     <id>innoextract</id>
     <id>innosetup</id>
     <id>iperf2</id>
@@ -133,6 +133,7 @@
     <id>open-shell</id>
     <id>openhashtab</id>
     <id>openssl</id>
+    <id>openssh</id>
     <id>pandoc</id>
     <id>pcsx2.portable</id>
     <id>picard</id>
@@ -174,6 +175,7 @@
     <id>winbtrfs</id>
     <id>wincdemu</id>
     <id>windirstat</id>
+    <id>winfsp</id>
     <id>winmd</id>
     <id>winscp.install</id>
     <id>winscp</id>
@@ -440,13 +442,6 @@
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>mod-github-desktop</functionName>
-      <id>github-desktop</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
 		<functionName>mod-goggalaxy</functionName>
 		<id>goggalaxy</id>
 		<needsStopAction>no</needsStopAction>
@@ -496,6 +491,13 @@
       <whyNotInternal>licensing</whyNotInternal>
 	</pkg>
     <pkg>
+      <functionName>mod-inkscape</functionName>
+      <id>inkscape</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg> 
+    <pkg>
       <functionName>mod-joplin</functionName>
       <id>joplin</id>
       <needsStopAction>yes</needsStopAction>
@@ -536,6 +538,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>mod-makemkv</functionName>
+      <id>makemkv</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>mod-minecraft-launcher</functionName>
@@ -761,94 +770,6 @@
       <needsToolsDir></needsToolsDir>
       <whyNotInternal></whyNotInternal>
     </pkg> -->
-    <!-- <pkg>
-			<id>maven</id>
-			<needsStopAction>yes</needsStopAction>
-			<needsToolsDir>yes</needsToolsDir>
-			<functionName></functionName>
-
-		</pkg>	-->
-    <!--Now internal <pkg>
-      <functionName>mod-nsis-install</functionName>
-      <id>nsis.install</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg> -->
-    <!-- <pkg>
-			<id>mupdf</id>
-			<needsStopAction>no</needsStopAction>
-			<needsToolsDir>yes</needsToolsDir>
-			<functionName></functionName>
-
-		</pkg> -->
-    <!-- Url is problem		<pkg>
-			<id>hwmonitor</id>
-			<needsStopAction>no</needsStopAction>
-			<needsToolsDir>yes</needsToolsDir>
-			<functionName></functionName>
-
-		</pkg>	 -->
-    <!-- pgk doing stuff I don't understand yet		<pkg>
-			<id>origin</id>
-			<needsStopAction>no</needsStopAction>
-			<needsToolsDir>Yes</needsToolsDir>
-			<functionName>mod-origin</functionName>
-		</pkg> -->
-    <!--Now a metapackage pointing to `zoom` <pkg>
-			<id>zoom-client</id>
-			<needsStopAction>no</needsStopAction>
-			<needsToolsDir>yes</needsToolsDir>
-			<functionName>mod-zoom-client</functionName>
-		</pkg> -->
-    <!--Now a metapackage pointing to `zoom` <pkg>
-			<id>zoom-client</id>
-			<needsStopAction>no</needsStopAction>
-			<needsToolsDir>yes</needsToolsDir>
-			<functionName>mod-zoom-client</functionName>
-		</pkg> -->
-    <!--    <pkg>
-      <functionName>mod-etcher</functionName>
-      <id>etcher</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg> NOW INTERNAL -->
-<!--     <pkg>
-      <functionName>mod-kdenlive</functionName>
-      <id>kdenlive</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg> NOW INTERNAL-->  
-    <!--     <pkg>
-      <functionName>mod-openhashtab</functionName>
-      <id>openhashtab</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg> NOW INTERNAL-->
-<!--     <pkg>
-      <functionName>mod-riot-web</functionName>
-      <id>riot-web</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg> -->    
-<!--     <pkg>
-      <functionName>mod-icecat</functionName>
-      <id>icecat</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg> -->
-<!--     <pkg>
-      <functionName>mod-imagemagick</functionName>
-      <id>imagemagick.app</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg> -->    
  
     
   </custom>

@@ -711,6 +711,7 @@ Function mod-qownnotes ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
     $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
     $obj.installScriptMod = $obj.installScriptMod -replace "url64bit" , "#url64bit"
+    $obj.installScriptMod = $obj.installScriptMod -replace " url ", " #url "
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
     
