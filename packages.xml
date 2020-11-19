@@ -7,6 +7,7 @@
     <id>7zip</id>
     <id>android-sdk</id>
     <id>angryip</id>
+    <id>ant</id>
 	<id>anydesk</id>
     <id>attributechanger</id>
     <id>au</id>
@@ -47,6 +48,9 @@
     <id>choco-protocol-support</id>
     <id>chromium</id>
     <id>clementine</id>
+    <id>cmake</id>
+    <id>cmake.portable</id>
+    <id>cmake.install</id>
     <id>cpu-z</id>
     <id>crystaldiskinfo.install</id>
     <id>crystaldiskinfo.portable</id>
@@ -161,6 +165,7 @@
     <id>sumatrapdf.portable</id>
     <id>sumatrapdf</id>
     <id>tablacus</id>
+    <id>tinymediamanager</id>
     <id>totalcommander</id>
     <id>vcredist2015</id>
     <id>vcredist2017</id>
