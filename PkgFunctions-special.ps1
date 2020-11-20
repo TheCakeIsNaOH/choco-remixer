@@ -660,26 +660,6 @@ Function mod-spotify ($obj) {
 }
 
 
-Function mod-rclone-portable ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'FileFullPath          = (Join-Path $toolsDir "' + $filename32 + '")'
-    
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url64bit ').tostring()
-    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
-    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-    $filePath64 = 'FileFullPath64          = (Join-Path $toolsDir "' + $filename64 + '")'
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
-    $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
-    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32`n  $filePath64"
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
-    
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-}
-
-
 Function mod-coretemp ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$url32.*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
