@@ -58,6 +58,8 @@
     <id>curl</id>
     <id>discord</id>
     <id>docker-kitematic</id>
+    <id>dolphin</id>
+    <id>dolphin-dev</id>
     <id>dotnet3.5</id>
     <id>dotnet4.7.2</id>
     <id>ds4windows</id>
@@ -158,6 +160,7 @@
     <id>regeditor</id>
     <id>resharper</id>
     <id>riot-web</id>
+    <id>rpcs3</id>
     <id>ruby</id>
     <id>rufus</id>
     <id>shotcut</id>
