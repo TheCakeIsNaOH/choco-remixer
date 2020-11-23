@@ -153,6 +153,7 @@
     <id>python2</id>
     <id>python3</id>
     <id>qbittorrent</id>
+    <id>qownnotes</id>
     <id>qtox</id>
     <id>rapidee</id>
     <id>rclone</id>
@@ -612,13 +613,13 @@
       <needsToolsDir>No</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
-    <pkg>
+<!--     <pkg>
       <functionName>mod-qownnotes</functionName>
       <id>qownnotes</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
+    </pkg> -->
     <pkg>
       <functionName>mod-resharper-platform</functionName>
       <id>resharper-platform</id>
