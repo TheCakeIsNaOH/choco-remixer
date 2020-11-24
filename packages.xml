@@ -262,21 +262,21 @@
       <id>adoptopenjdk8</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+	  <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
       <functionName>mod-adoptopenjdk8jre</functionName>
       <id>adoptopenjdk8jre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+	  <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
       <functionName>mod-adoptopenjdkjre</functionName>
       <id>adoptopenjdkjre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+	  <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
       <functionName>mod-advanced-installer</functionName>
