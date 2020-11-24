@@ -681,24 +681,6 @@ Function mod-coretemp ($obj) {
 }
 
 
-Function mod-qownnotes ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$url .*=').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'FileFullPath          = (Join-Path $toolsDir "' + $filename32 + '")'
-    
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
-    $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
-    $obj.installScriptMod = $obj.installScriptMod -replace "url64bit" , "#url64bit"
-    $obj.installScriptMod = $obj.installScriptMod -replace " url ", " #url "
-    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
-    
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-}
-
-
 
 
 Function mod-resharper-platform ($obj) {

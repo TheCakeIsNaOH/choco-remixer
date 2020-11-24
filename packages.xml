@@ -55,6 +55,7 @@
     <id>crystaldiskinfo.install</id>
     <id>crystaldiskinfo.portable</id>
     <id>crystaldiskinfo</id>
+    <id>crystaldiskmark</id>
     <id>curl</id>
     <id>discord</id>
     <id>docker-kitematic</id>
@@ -341,13 +342,6 @@
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>mod-crystaldiskmark</functionName>
-      <id>crystaldiskmark</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>mod-cutepdf</functionName>
       <id>cutepdf</id>
       <needsStopAction>No</needsStopAction>
@@ -613,13 +607,6 @@
       <needsToolsDir>No</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
-<!--     <pkg>
-      <functionName>mod-qownnotes</functionName>
-      <id>qownnotes</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
-    </pkg> -->
     <pkg>
       <functionName>mod-resharper-platform</functionName>
       <id>resharper-platform</id>
