@@ -98,6 +98,7 @@
     <id>jackett</id>
     <id>javaruntime</id>
     <id>jdk8</id>
+    <id>joplin</id>
     <id>KB2533623</id>
     <id>kdenlive</id>
     <id>keepassxc</id>
@@ -248,7 +249,7 @@
       <id>adb</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal> <!-- under google SDK licensing with no redist, but has clause that allows open source licensings to take precedence, unsure if this is totally under open sources licensings, may need to build custom -->
+	  <whyNotInternal>licensing</whyNotInternal> <!-- under google SDK licensing with no redist, but has clause that allows open source licensing to take precedence, unsure if this is totally under open sources licensings, may need to build custom -->
     </pkg>
     <pkg>
       <functionName>mod-adobereader</functionName>
@@ -502,13 +503,6 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg> 
-    <pkg>
-      <functionName>mod-joplin</functionName>
-      <id>joplin</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
     <pkg>
       <functionName>mod-krita</functionName>
       <id>krita</id>
