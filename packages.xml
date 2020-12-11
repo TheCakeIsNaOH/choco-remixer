@@ -441,6 +441,13 @@
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>mod-geogebra-classic</functionName>
+      <id>geogebra-classic.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+	  <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>mod-gimp</functionName>
       <id>gimp</id>
       <needsStopAction>no</needsStopAction>
