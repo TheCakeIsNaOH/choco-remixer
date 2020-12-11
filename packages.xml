@@ -90,6 +90,7 @@
     <id>hashtab</id>
     <id>hxd</id>
     <id>icecat</id>
+    <id>iceweasel</id>
     <id>imagemagick</id>
     <id>imagemagick.app</id>
     <id>innoextract</id>
@@ -369,6 +370,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>mod-dotnetcore-desktopruntime</functionName>
+      <id>dotnetcore-desktopruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>mod-dotnetcore3-desktop-runtime</functionName>
