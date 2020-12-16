@@ -646,10 +646,7 @@ Foreach ($obj in $nupkgObjArray) {
                 Write-Verbose "coping $($obj.nuspecID) to drop path"
                 Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $dropPath
             }
-            if ($writePerPkgs -eq "yes") {
-                Write-Verbose "writing $($obj.nuspecID) to personal packages as internalized"
-                Write-PerPkg -personalPkgXMLPath $personalPkgXMLPath -Version $obj.version -nuspecID $obj.nuspecID
-            }
+
             if ($pushPkgs -eq "yes") {
                 Write-Output "pushing $($obj.nuspecID)"
                 $pushArgs = 'push -f -r -s ' + $pushURL
@@ -660,6 +657,11 @@ Foreach ($obj in $nupkgObjArray) {
                 $obj.status = "push failed"
             } else {
                 $obj.status = "done"
+                
+                if ($writePerPkgs -eq "yes") {
+                    Write-Verbose "writing $($obj.nuspecID) to personal packages as internalized"
+                    Write-PerPkg -personalPkgXMLPath $personalPkgXMLPath -Version $obj.version -nuspecID $obj.nuspecID
+                }
             }
     } else {
         
