@@ -128,6 +128,7 @@
     <id>nmap</id>
     <id>nodejs.install</id>
     <id>nodejs</id>
+    <id>nodejs-lts</id>
     <id>nomacs</id>
     <id>notepadplusplus.install</id>
     <id>notepadplusplus</id>
@@ -756,6 +757,13 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>     
+    <pkg>
+      <functionName>mod-yarn</functionName>
+      <id>yarn</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>   
     <pkg>
       <functionName>mod-zoom</functionName>
       <id>zoom</id>
