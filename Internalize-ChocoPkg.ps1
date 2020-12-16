@@ -5,7 +5,8 @@ param (
     [switch]$thoroughList,
     [switch]$skipRepoCheck,
     [switch]$skipRepoMove,
-    [switch]$NoSave
+    [switch]$noSave,
+    [switch]$writeVersion
 )
 $ErrorActionPreference = 'Stop'
 
@@ -89,6 +90,10 @@ $repoMove         = $options.repoMove.tostring()
 $proxyRepoURL     = $options.proxyRepoURL.tostring()
 $proxyRepoCreds   = $options.proxyRepoCreds.tostring()
 $moveToRepoURL    = $options.moveToRepoURL.tostring()
+
+if ($options.writeVersion.tostring() -eq "yes") {
+    $writeVersion = $true
+}
 
 
 if (!(Test-Path $searchDir)) {
@@ -504,7 +509,7 @@ $nupkgArray | select -Unique | ForEach-Object {
     $nuspecID = $nuspecDetails[1]
     
     #todo, make this faster, hash table? linq? other?
-    $internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -ieq "$nuspecID" }).version
+    [array]$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -ieq "$nuspecID" }).version
 
     if ($internalizedVersions -icontains $nuspecVersion) {
         #package is internalized by user
@@ -545,6 +550,16 @@ $nupkgArray | select -Unique | ForEach-Object {
                 Throw "Could not find function for $nuspecID"
             }
             
+            if ($writeVersion) {
+                if($internalizedVersions.count -ge 1) {
+                    $oldVersion = $internalizedVersions | Select -Last 1
+                } else {
+                    $oldVersion = "null"
+                }
+            } else {
+                $oldVersion = "null"
+            }
+            
             $obj = [PSCustomObject]@{
                 nupkgName     = $_.name
                 origPath      = $_.fullname
@@ -560,7 +575,7 @@ $nupkgArray | select -Unique | ForEach-Object {
                 needsStopAction   = $customXml.needsStopAction
                 installScriptOrig = $installScript
                 installScriptMod  = $installScript
-
+                oldVersion        = $oldVersion
             }
 
             $nupkgObjArray.add($obj) | Out-Null
@@ -641,7 +656,7 @@ Foreach ($obj in $nupkgObjArray) {
 
 
 Foreach ($obj in $nupkgObjArray) {
-    if (($obj.status -eq "internalized") -and (!($NoSave))) {
+    if (($obj.status -eq "internalized") -and (!($noSave))) {
             if ($useDropPath -eq "yes") {
                 Write-Verbose "coping $($obj.nuspecID) to drop path"
                 Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $dropPath
@@ -673,6 +688,14 @@ Foreach ($obj in $nupkgObjArray) {
 $nupkgObjArray | ForEach-Object {
     Write-Host $_.nuspecID $_.Version $_.status
 }
+
+if ($writeVersion) {
+    Write-Host "`n`n"
+    $nupkgObjArray | ForEach-Object {
+        Write-Host $_.nuspecID $_.OldVersion 'to' $_.Version
+    }
+}
+
 #Write-Output "completed"
 
 # Get-ChildItem -Recurse -Path '..\.nugetv2\F1' -Filter "*.nupkg" | % { Copy-Item $_.fullname . }

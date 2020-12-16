@@ -55,5 +55,8 @@
 		<moveToRepoURL>https://my.repo/private-feed/</moveToRepoURL>
 		<!-- specify credentials if needed; format user:pass ; Otherwise if no authentication, put in no -->
 		<proxyRepoCreds>no</proxyRepoCreds>
+        
+        <!-- Attempt to write out the the old and the new version of the package | option is yes or no -->
+        <writeVersion>no</writeVersion>
 	</options>
 </mypackages>
