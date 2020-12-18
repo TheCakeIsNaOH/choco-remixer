@@ -595,57 +595,31 @@ $nupkgArray | select -Unique | ForEach-Object {
 #don't need the list anymore, use nupkgObjArray
 $nupkgArray = $null
 
-#Setup the directories for internalizing
-Foreach ($obj in $nupkgObjArray) {
-    try {
-    
-        if (!(Test-Path $obj.idDir)) {
-            $null = mkdir $obj.idDir
-        }
-
-        if (!(Test-Path $obj.versionDir)) {
-            $null = mkdir $obj.versionDir
-        }
-        
-        if (!(Test-Path $obj.toolsDir)) {
-            $null = mkdir $obj.toolsDir
-        }
-        
-        $obj.status = "setup"
-    } catch {
-        $obj.status = "not-setup"
-        Write-Host "failed to setup" $obj.nuspecID $obj.version
-        Remove-Item -ea 0 -Force -Recurse -Path $obj.versionDir
-    }
-    
-}
 
 Foreach ($obj in $nupkgObjArray) {
-    if ($obj.status -eq "setup") {
-        #Try { 
-            Write-Host "Starting " $obj.nuspecID
-            Extract-Nupkg -OrigPath $obj.OrigPath -VersionDir $obj.VersionDir
+    #Try { 
+        Write-Host "Starting " $obj.nuspecID
+        Extract-Nupkg -OrigPath $obj.OrigPath -VersionDir $obj.VersionDir
 
-            #Write-Output $obj.functionName
-            $tempFuncName = $obj.functionName
-            $tempFuncName = $tempFuncName + ' -obj $obj'
-            Invoke-Expression $tempFuncName
-            $tempFuncName = $null
+        #Write-Output $obj.functionName
+        $tempFuncName = $obj.functionName
+        $tempFuncName = $tempFuncName + ' -obj $obj'
+        Invoke-Expression $tempFuncName
+        $tempFuncName = $null
 
-            Write-UnzippedInstallScript -installScriptMod $obj.installScriptMod -toolsDir $obj.toolsDir
+        Write-UnzippedInstallScript -installScriptMod $obj.installScriptMod -toolsDir $obj.toolsDir
 
-            #start choco pack in the correct directory
-            $packcode = Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
-            
-            if ($packcode.exitcode -ne "0") {
-                $obj.status = "pack failed"
-            } else {
-                $obj.status = "internalized"
-            }
-        #} Catch {
-        #   $obj.status = "internalization failed"
-        #}
-    }
+        #start choco pack in the correct directory
+        $packcode = Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
+        
+        if ($packcode.exitcode -ne "0") {
+            $obj.status = "pack failed"
+        } else {
+            $obj.status = "internalized"
+        }
+    #} Catch {
+    #   $obj.status = "internalization failed"
+    #}
 }
 
 
