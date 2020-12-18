@@ -21,7 +21,7 @@ Function mod-adoptopenjdk8 ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir2\*.msi'
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -48,7 +48,7 @@ Function mod-adoptopenjdk8jre ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir2\*.msi'
 
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -76,7 +76,7 @@ Function mod-adoptopenjdkjre ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs.Url64bit ", "packageArgs.file64 "
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -99,7 +99,7 @@ Function mod-sysinternals ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath"
     $obj.installScriptMod = $obj.installScriptMod -replace "Is-NanoServer.*" , "$&`n  $filepathnano"
 
-    download-fileBoth -url32 $url -url64 $urlnano -filename32 $filename -filename64 $filenamenano -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url -url64 $urlnano -filename32 $filename -filename64 $filenamenano -toolsDir $obj.toolsDir
 }
 
 
@@ -134,8 +134,8 @@ Function mod-virtualbox ($obj) {
 
 
     
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-    download-fileSingle -url $urlep -filename $filenameep -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileSingle -url $urlep -filename $filenameep -toolsDir $obj.toolsDir
 }
 
 
@@ -309,7 +309,7 @@ Function mod-ds4windows ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
     $obj.installScriptMod = $obj.installScriptMod -replace "if \(\-not" , "<#if \(\-not"
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 
 }
 
@@ -345,7 +345,7 @@ Function mod-adobereader ($obj) {
 
     Write-Output $obj.toolsDir
 
-    download-fileBoth -url32 $MUIurl -url64 $MUImspURL -filename32 $filenameMUI -filename64 $filenameMSP -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $MUIurl -url64 $MUImspURL -filename32 $filenameMUI -filename64 $filenameMSP -toolsDir $obj.toolsDir
 }
 
 
@@ -372,7 +372,7 @@ Function mod-thunderbird ($obj) {
 
 
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -395,7 +395,7 @@ Function mod-firefox ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -423,7 +423,7 @@ Function mod-vcredist140 ($obj) {
     $dataContent = $dataContent -replace "installData64 = @{" , "$&`n  $filePath64"
 
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
     
     Set-Content -Value $dataContent -Path $dataFile
     
@@ -451,7 +451,7 @@ Function mod-dotnetcore-desktopruntime ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "arguments = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod -replace "arguments64 = @{" , "$&`n  $filePath64"
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
     
 }
 
@@ -474,7 +474,7 @@ Function mod-powershell-core ($obj) {
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + '    Remove-Item -Force -EA 0 -Path $toolsDir\*.exe' + "`n" + "    $&"
     $obj.installScriptMod = $obj.installScriptMod -replace ' exit ',  $string
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -507,7 +507,7 @@ Function mod-libreoffice-fresh ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "if \(\-not" , "<#if \(\-not"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -534,7 +534,7 @@ Function mod-hexchat ($obj) {
     $exeRemoveString =  "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 
 }
 
@@ -552,7 +552,7 @@ Function mod-anydesk-install ($obj) {
     
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyInstallPackage" , "$filePath32`n $&"
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 Function mod-tor-browser ($obj) {
@@ -573,7 +573,7 @@ Function mod-tor-browser ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 
 }
 
@@ -597,7 +597,7 @@ Function mod-imagemagick ($obj) {
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 
 }
 
@@ -618,7 +618,7 @@ Function mod-ddu ($obj) {
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item "$(Split-Path -parent $MyInvocation.MyCommand.Definition)\*.exe"'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
     
 
 }
@@ -635,7 +635,7 @@ Function mod-eclipse ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -650,7 +650,7 @@ Function mod-eclipse-java-oxygen ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -664,7 +664,7 @@ Function mod-airtame ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -681,7 +681,7 @@ Function mod-spotify ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -702,7 +702,7 @@ Function mod-coretemp ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
     
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -719,7 +719,7 @@ Function mod-resharper-platform ($obj) {
     
     
 
-    #download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    #get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
     $dlwdFile = (Join-Path $(Split-Path $obj.toolsDir) "$filename32")
     $dlwd = New-Object net.webclient
     $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
@@ -747,7 +747,7 @@ Function mod-geogebra-classic ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 

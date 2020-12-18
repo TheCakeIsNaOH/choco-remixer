@@ -26,7 +26,7 @@ Function Read-ZippedInstallScript ($nupkgPath) {
 
     }
     $archive.dispose()
-    
+
     return $status, $installScript
 }
 
@@ -45,13 +45,13 @@ Function Read-NuspecVersion ($nupkgPath) {
     $nuspecStream.close()
     $nuspecReader.close()
     $archive.dispose()
-    
+
     return ([XML]$nuspecString).package.metadata.version, ([XML]$nuspecString).package.metadata.id
 }
 
 
 #no need return stuff
-Function Extract-Nupkg {
+Function Expand-Nupkg {
     param (
         [parameter(Mandatory=$true)][string]$OrigPath,
         [parameter(Mandatory=$true)][string]$VersionDir
@@ -59,14 +59,14 @@ Function Extract-Nupkg {
 
     #needed for accessing dotnet zip functions
     Add-Type -AssemblyName System.IO.Compression.FileSystem
-    
+
     $archive = [System.IO.Compression.ZipFile]::Open($OrigPath, 'read')
-    
+
     #Making sure that none of the extra .nupkg files are unpacked
     $filteredArchive = $archive.Entries | `
     Where-Object Name -ne '[Content_Types].xml' | Where-Object Name -ne '.rels' | `
     Where-Object FullName -notlike 'package/*' | Where-Object Fullname -notlike '__MACOSX/*'
-    
+
     $filteredArchive | ForEach-Object {
         $OutputFile = Join-Path $VersionDir $_.fullname
         $null = mkdir $($OutputFile | Split-Path) -ea 0
@@ -81,10 +81,9 @@ Function Write-UnzippedInstallScript {
         [parameter(Mandatory=$true)][string]$toolsDir,
         [parameter(Mandatory=$true)][string]$installScriptMod
     )
-    (Get-ChildItem $toolsDir -Filter "*chocolateyinstall.ps1").fullname | % { Remove-Item -Force -Recurse -ea 0 -Path $_ } -ea 0
+    (Get-ChildItem $toolsDir -Filter "*chocolateyinstall.ps1").fullname | ForEach-Object { Remove-Item -Force -Recurse -ea 0 -Path $_ } -ea 0
     $scriptPath = Join-Path $toolsDir 'chocolateyinstall.ps1'
     $null = Out-File -FilePath $scriptPath -InputObject $installScriptMod -Force
-
 }
 
 
@@ -98,7 +97,6 @@ Function Write-PerPkg {
 
     $nuspecID = $nuspecID.tolower()
     [XML]$perpkgXMLcontent = Get-Content $personalPkgXMLPath
-    
 
     if ($perpkgXMLcontent.mypackages.internalized.pkg.id -notcontains "$nuspecID") {
         Write-Verbose "adding $nuspecID to internalized IDs"
@@ -106,20 +104,19 @@ Function Write-PerPkg {
         $addID.SetAttribute("id","$nuspecID")
         $perpkgXMLcontent.mypackages.internalized.AppendChild($addID)  | Out-Null
         $perpkgXMLcontent.save($PersonalPkgXMLPath)
-        
+
         [XML]$perpkgXMLcontent = Get-Content $PersonalPkgXMLPath
     }
-    
+
     Write-Verbose "adding $nuspecID $version to list of internalized packages"
     $addVersion = $perpkgXMLcontent.CreateElement("version")
     $addVersionText = $addVersion.AppendChild($perpkgXMLcontent.CreateTextNode("$version"))
     $perpkgXMLcontent.SelectSingleNode("//pkg[@id=""$nuspecID""]").appendchild($addVersion) | Out-Null
     $perpkgXMLcontent.save($PersonalPkgXMLPath)
-    
 }
 
 
-Function Get-ChocoApiKeysUrls {
+Function Get-ChocoApiKeysUrlList {
     $configPath = [System.IO.Path]::Combine([Environment]::GetEnvironmentVariable("ChocolateyInstall"), "config" , "chocolatey.config")
     If (Test-Path $configPath) {
         [XML]$configXML = Get-Content $configPath
@@ -127,18 +124,17 @@ Function Get-ChocoApiKeysUrls {
     } else {
         Throw "$configPath is not valid, please check your chocolatey install"
     }
-    
 }
 
 #no need return stuff
 #changeme to work with single
-Function download-fileBoth {
+Function Get-fileBoth {
     param (
-        [parameter(Mandatory=$true)][string]$url32 = $null,
-        [parameter(Mandatory=$true)][string]$url64 = $null,
-        [parameter(Mandatory=$true)][string]$filename32 = $null,
-        [parameter(Mandatory=$true)][string]$filename64 = $null,
-        [parameter(Mandatory=$true)][string]$toolsDir = $null
+        [parameter(Mandatory=$true)][string]$url32,
+        [parameter(Mandatory=$true)][string]$url64,
+        [parameter(Mandatory=$true)][string]$filename32,
+        [parameter(Mandatory=$true)][string]$filename64,
+        [parameter(Mandatory=$true)][string]$toolsDir
     )
 
     $dlwdFile32 = (Join-Path $toolsDir "$filename32")
@@ -146,7 +142,7 @@ Function download-fileBoth {
 
     $dlwd = New-Object net.webclient
     $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
-    
+
     if (Test-Path $dlwdFile32) {
         Write-Output "$dlwdFile32 appears to be downloaded"
     } else {
@@ -160,22 +156,22 @@ Function download-fileBoth {
     }
 
     $dlwd.dispose()
-    # download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    # get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
 
 
 #no need return stuff
-Function download-fileSingle {
+Function Get-fileSingle {
     param (
-        [parameter(Mandatory=$true)][string]$url = $null,
-        [parameter(Mandatory=$true)][string]$filename = $null,
-        [parameter(Mandatory=$true)][string]$toolsDir = $null
+        [parameter(Mandatory=$true)][string]$url,
+        [parameter(Mandatory=$true)][string]$filename,
+        [parameter(Mandatory=$true)][string]$toolsDir
     )
 
     $dlwdFile = (Join-Path $toolsDir "$filename")
     $dlwd = New-Object net.webclient
     $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
-    
+
     if (Test-Path $dlwdFile) {
         Write-Output "$dlwdFile appears to be downloaded"
     } else {
@@ -183,14 +179,14 @@ Function download-fileSingle {
     }
 
     $dlwd.dispose()
-    # download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    # get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
 #no need return stuff
 #changeme to work single
 Function mod-installcpkg-both {
-    param ( 
+    param (
         [parameter(Mandatory=$true)]$obj,
         [parameter(Mandatory=$true)][int]$urltype,
         [parameter(Mandatory=$true)][int]$argstype,
@@ -206,9 +202,9 @@ Function mod-installcpkg-both {
         [switch]$doubleQuotesUrl,
         [int]$checksumType
     )
-    
-    
-    
+
+
+
     if ($urltype -eq 0) {
         $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url ").tostring()
         $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit ").tostring()
@@ -244,10 +240,10 @@ Function mod-installcpkg-both {
         $url32 = $url32 -split "\?" | select-object -First 1
         $url64 = $url64 -split "\?" | select-object -First 1
     }
-    
+
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-    
+
     if ($DeEncodeSpace) {
         $filename32 = $filename32 -replace '%20' , " "
         $filename64 = $filename64 -replace '%20' , " "
@@ -287,7 +283,7 @@ Function mod-installcpkg-both {
     }
 
     Write-Output "Downloading $($obj.NuspecID) files"
-    download-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
     #add checksum here, or in download file?
 
 }

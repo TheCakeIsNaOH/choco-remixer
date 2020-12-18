@@ -140,7 +140,7 @@ Function mod-cpuz ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace " url64bit " , "#url64bit "
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -153,7 +153,7 @@ Function mod-anydesk ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -170,7 +170,7 @@ Function mod-adb ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace '64 \$checksumType' , '$&
       Get-ChocolateyUnzip -FileFullPath $file -Destination $unziplocation -PackageName $packagename'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -185,7 +185,7 @@ Function mod-uplay ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -201,7 +201,7 @@ Function mod-nordvpn ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n   $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -222,7 +222,7 @@ Function mod-bitwarden ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32"
 
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -239,7 +239,7 @@ Function mod-gimp ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -254,7 +254,7 @@ Function mod-krita ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace 'file64        = Get-Item \$toolsDir\\\*\.exe' , $filepath64
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -269,7 +269,7 @@ Function mod-steam ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -284,7 +284,7 @@ Function mod-skype ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -300,7 +300,7 @@ Function mod-cutepdf ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -317,7 +317,7 @@ Function mod-malwarebytes ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -332,7 +332,7 @@ Function mod-calibre ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -345,7 +345,7 @@ Function mod-msiafterburner ($obj) {
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -360,7 +360,7 @@ Function mod-zoom ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 Function mod-advanced-installer ($obj) {
@@ -373,7 +373,7 @@ Function mod-advanced-installer ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -387,7 +387,7 @@ Function mod-epicgames ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -403,7 +403,7 @@ Function mod-geforce-experience ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -419,7 +419,7 @@ Function mod-dropbox ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -434,7 +434,7 @@ Function mod-lightshot ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "$packageArgs = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 Function mod-gotomeeting ($obj) {
@@ -447,7 +447,7 @@ Function mod-gotomeeting ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "$packageArgs = @{" , "$&`n  $filePath32"
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -463,7 +463,7 @@ Function mod-google-drive-file-stream ($obj) {
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -479,7 +479,7 @@ Function mod-goggalaxy ($obj) {
     
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -495,7 +495,7 @@ Function mod-slobs ($obj) {
     
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-    download-fileSingle -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -511,7 +511,7 @@ Function mod-1password ($obj) {
     
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -526,7 +526,7 @@ Function mod-minecraft-launcher ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -541,7 +541,7 @@ Function mod-hwmonitor ($obj) {
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -555,7 +555,7 @@ Function mod-elgato-game-capture ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -572,7 +572,7 @@ Function mod-webex-meetings ($obj) {
     #$obj.installScriptMod = $obj.InstallScriptMod + "`n" + 'Get-Process -Name "ptoneclk" | Stop-Process -ea 0'
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
     
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -587,7 +587,7 @@ Function mod-inkscape ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
     
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -602,7 +602,7 @@ Function mod-makemkv ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -618,7 +618,7 @@ Function mod-yarn ($obj) {
     
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    download-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 

@@ -171,7 +171,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
     }
 
 
-    $apiKeySources = Get-ChocoApiKeysUrls
+    $apiKeySources = Get-ChocoApiKeysUrlList
     if ($apiKeySources -notcontains $moveToRepoURL) {
         Write-Warning "Did not find a API key for $moveToRepoURL"
     }
@@ -559,7 +559,7 @@ $nupkgArray = $null
 
 Foreach ($obj in $nupkgObjArray) {
         Write-Output "Starting $($obj.nuspecID)"
-        Extract-Nupkg -OrigPath $obj.OrigPath -VersionDir $obj.VersionDir
+        Expand-Nupkg -OrigPath $obj.OrigPath -VersionDir $obj.VersionDir
 
         #Write-Output $obj.functionName
         $tempFuncName = $obj.functionName
