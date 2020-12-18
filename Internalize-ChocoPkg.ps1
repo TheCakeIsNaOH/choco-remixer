@@ -642,14 +642,14 @@ Foreach ($obj in $nupkgObjArray) {
 
 
 
-$nupkgObjArray | ForEach-Object {
-    Write-Host $_.nuspecID $_.Version $_.status
+Foreach ($obj in $nupkgObjArray) {
+    Write-Host $obj.nuspecID $obj.Version $obj.status
 }
 
 if ($writeVersion) {
     Write-Host "`n`n"
-    $nupkgObjArray | ForEach-Object {
-        Write-Host $_.nuspecID $_.OldVersion 'to' $_.Version
+    Foreach ($obj in $nupkgObjArray) {
+        Write-Host $obj.nuspecID $obj.OldVersion 'to' $obj.Version
     }
 }
 
