@@ -1,4 +1,4 @@
-Function mod-adoptopenjdk8 ($obj) {
+Function Convert-adoptopenjdk8 ($obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .* = ").tostring()
@@ -25,7 +25,7 @@ Function mod-adoptopenjdk8 ($obj) {
 }
 
 
-Function mod-adoptopenjdk8jre ($obj) {
+Function Convert-adoptopenjdk8jre ($obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .* = ").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit .* = ").tostring()
@@ -52,7 +52,7 @@ Function mod-adoptopenjdk8jre ($obj) {
 }
 
 
-Function mod-adoptopenjdkjre ($obj) {
+Function Convert-adoptopenjdkjre ($obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()
@@ -80,7 +80,7 @@ Function mod-adoptopenjdkjre ($obj) {
 }
 
 
-Function mod-sysinternals ($obj) {
+Function Convert-sysinternals ($obj) {
     $fullurl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $fullurlnano = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'Args.url ').tostring()
 
@@ -103,7 +103,7 @@ Function mod-sysinternals ($obj) {
 }
 
 
-Function mod-virtualbox ($obj) {
+Function Convert-virtualbox ($obj) {
     $obj.toolsDir = $obj.versionDir
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*http").tostring()
@@ -139,7 +139,7 @@ Function mod-virtualbox ($obj) {
 
 
 #moving here as this should be outdated now
-Function mod-nextcloud-client ($obj) {
+Function Convert-nextcloud-client ($obj) {
 
     $version = $obj.version
 
@@ -174,7 +174,7 @@ Function mod-nextcloud-client ($obj) {
 }
 
 
-Function mod-nvidia-driver ($obj) {
+Function Convert-nvidia-driver ($obj) {
     $fullurlwin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['url64'\]      = 'https").tostring()
     $fullurlwin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url64   ").tostring()
     $fullurlDCH = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgsDCHURL      = 'https").tostring()
@@ -233,7 +233,7 @@ Function mod-nvidia-driver ($obj) {
 }
 
 
-Function mod-geforce-driver ($obj) {
+Function Convert-geforce-driver ($obj) {
     $fullurlwin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['url64'\]      = 'https").tostring()
     $fullurlwin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url64   ").tostring()
     $fullurlDCH = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgsDCHURL      = 'https").tostring()
@@ -289,7 +289,7 @@ Function mod-geforce-driver ($obj) {
 }
 
 #deprecated, package internal now
-Function mod-ds4windows ($obj) {
+Function Convert-ds4windows ($obj) {
     throw "broken rn"
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url ').tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
@@ -313,7 +313,7 @@ Function mod-ds4windows ($obj) {
 }
 
 
-Function mod-adobereader ($obj) {
+Function Convert-adobereader ($obj) {
     $secondDir = (Join-Path $obj.toolsDir 'tools')
     If (Test-Path $secondDir) {
         Get-ChildItem -Path $secondDir |  Move-Item -Destination $obj.toolsDir
@@ -348,7 +348,7 @@ Function mod-adobereader ($obj) {
 }
 
 
-Function mod-thunderbird ($obj) {
+Function Convert-thunderbird ($obj) {
     $version = $obj.version
 
     $url32 = "https://download.mozilla.org/?product=thunderbird-" + $version + "-SSL&os=win&lang=en-US"
@@ -375,7 +375,7 @@ Function mod-thunderbird ($obj) {
 }
 
 
-Function mod-firefox ($obj) {
+Function Convert-firefox ($obj) {
 
     $version = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$alreadyInstalled =').tostring().split("'") | Select-String -Pattern '\d\d').tostring()
 
@@ -398,7 +398,7 @@ Function mod-firefox ($obj) {
 }
 
 
-Function mod-vcredist140 ($obj) {
+Function Convert-vcredist140 ($obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = Get-Content $datafile
@@ -427,7 +427,7 @@ Function mod-vcredist140 ($obj) {
 }
 
 
-Function mod-dotnetcore-desktopruntime ($obj) {
+Function Convert-dotnetcore-desktopruntime ($obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -451,7 +451,7 @@ Function mod-dotnetcore-desktopruntime ($obj) {
 }
 
 #Special because orig script uses $version instead of a full URL
-Function mod-powershell-core ($obj) {
+Function Convert-powershell-core ($obj) {
     $version = $obj.version
 
     $url32 = "https://github.com/PowerShell/PowerShell/releases/download/v" + $version + "/PowerShell-" + $version + "-win-x86.msi"
@@ -474,7 +474,7 @@ Function mod-powershell-core ($obj) {
 
 
 #TODO- import functions from real file to get url if package is not latest version
-Function mod-libreoffice-fresh ($obj) {
+Function Convert-libreoffice-fresh ($obj) {
 
     $version = $obj.version
 
@@ -506,7 +506,7 @@ Function mod-libreoffice-fresh ($obj) {
 }
 
 
-Function mod-hexchat ($obj) {
+Function Convert-hexchat ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url ').tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
 
@@ -534,7 +534,7 @@ Function mod-hexchat ($obj) {
 }
 
 
-Function mod-anydesk-install ($obj) {
+Function Convert-anydesk-install ($obj) {
 
     $url32 = "https://download.anydesk.com/AnyDesk.msi"
     $filename32 = "AnyDesk.msi"
@@ -550,7 +550,7 @@ Function mod-anydesk-install ($obj) {
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
-Function mod-tor-browser ($obj) {
+Function Convert-tor-browser ($obj) {
 
     Function Get-PackageParameters { Return "mockup" }
     . $(Join-Path $obj.toolsDir 'helpers.ps1')
@@ -573,7 +573,7 @@ Function mod-tor-browser ($obj) {
 }
 
 
-Function mod-imagemagick ($obj) {
+Function Convert-imagemagick ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' fallbackUrl ').tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' fallbackUrl64 ').tostring()
 
@@ -596,7 +596,7 @@ Function mod-imagemagick ($obj) {
 }
 
 
-Function mod-ddu ($obj) {
+Function Convert-ddu ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring().replace("%20", " ")
@@ -616,7 +616,7 @@ Function mod-ddu ($obj) {
 }
 
 
-Function mod-eclipse ($obj) {
+Function Convert-eclipse ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url64bit  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring().trim("&r=1")
@@ -631,7 +631,7 @@ Function mod-eclipse ($obj) {
 }
 
 
-Function mod-eclipse-java-oxygen ($obj) {
+Function Convert-eclipse-java-oxygen ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -646,7 +646,7 @@ Function mod-eclipse-java-oxygen ($obj) {
 }
 
 
-Function mod-airtame ($obj) {
+Function Convert-airtame ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$urlPackage ').tostring()
     $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -660,7 +660,7 @@ Function mod-airtame ($obj) {
 }
 
 
-Function mod-spotify ($obj) {
+Function Convert-spotify ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -677,7 +677,7 @@ Function mod-spotify ($obj) {
 }
 
 
-Function mod-coretemp ($obj) {
+Function Convert-coretemp ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32.*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -700,7 +700,7 @@ Function mod-coretemp ($obj) {
 
 
 
-Function mod-resharper-platform ($obj) {
+Function Convert-resharper-platform ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$Url =').tostring()
 
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
@@ -724,7 +724,7 @@ Function mod-resharper-platform ($obj) {
 }
 
 
-Function mod-geogebra-classic ($obj) {
+Function Convert-geogebra-classic ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url *=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
