@@ -1,4 +1,9 @@
-﻿Function Convert-4k-slideshow ($obj) {
+﻿[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Name of package is plural', Scope = 'Function', Target = 'Convert-malwarebytes')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Name of package is plural', Scope = 'Function', Target = 'Convert-epicgames')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Name of package is plural', Scope = 'Function', Target = 'Convert-slobs')]
+param()
+
+Function Convert-4k-slideshow ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
