@@ -21,12 +21,11 @@ Import-Module Microsoft.PowerShell.Utility
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-special.ps1')
 . (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'OtherFunctions.ps1')
 
-#Check for personal-packages.xml in user profile
-#todo, add more options for filenames
-if (!($IsWindows) -or ($IsWindows -eq $true)) {
-    $profileXMLPath = [IO.Path]::Combine($env:APPDATA, "choco-remixer", "personal-packages.xml" )
+#Check OS to select user profile location
+if (($null -eq $IsWindows) -or ($IsWindows -eq $true)) {
+    $profileXMLPath = [IO.Path]::Combine($env:APPDATA, "choco-remixer", 'personal-packages.xml')
 } elseif ($IsLinux -eq $true) {
-    $profileXMLPath = [IO.Path]::Combine( $env:HOME, ".config" , "choco-remixer", "personal-packages.xml" )
+    $profileXMLPath = [IO.Path]::Combine($env:HOME, ".config", "choco-remixer", 'personal-packages.xml')
 } elseif ($IsMacOS -eq $true) {
     Throw "MacOS not supported"
 } else {
@@ -42,7 +41,6 @@ if ([Environment]::GetEnvironmentVariable("ChocolateyInstall") -eq $null)  {
     Write-Error "Did not find ChocolateyInstall environment variable, please make sure it exists"
     Throw
 }
-
 
 
 #select which personal-packages.xml to use
@@ -61,7 +59,7 @@ if (!($PSBoundParameters.ContainsKey('personalPkgXML'))) {
     throw "personal-packages.xml not found, please specify valid path"
 }
 
-$personalPkgXMLPath = (Resolve-Path $personalPkgXML).path
+$personalPkgXMLResolved = (Resolve-Path $personalPkgXML).path
 
 if (!(Test-Path $pkgXML)) {
     throw "packages.xml not found, please specify valid path"
@@ -72,7 +70,7 @@ if (!(Test-Path $pkgXML)) {
 
 #TODO: changeme?
 [XML]$packagesXMLcontent = Get-Content $pkgXML
-[XML]$personalpackagesXMLcontent = Get-Content $personalPkgXMLPath
+[XML]$personalpackagesXMLcontent = Get-Content $personalPkgXMLResolved
 
 $options = $personalpackagesXMLcontent.mypackages.options
 #TODO: add these to parameters?
