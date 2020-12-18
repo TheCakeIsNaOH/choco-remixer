@@ -51,7 +51,6 @@ Function Read-NuspecVersion ($nupkgPath) {
 
 
 #no need return stuff
-#changeme to work with individual strings
 Function Extract-Nupkg {
     param (
         [parameter(Mandatory=$true)][string]$OrigPath,
@@ -139,8 +138,8 @@ Function download-fileBoth {
         [parameter(Mandatory=$true)][string]$toolsDir = $null
     )
 
-    $dlwdFile32 = (Join-Path $obj.toolsDir "$filename32")
-    $dlwdFile64 = (Join-Path $obj.toolsDir "$filename64")
+    $dlwdFile32 = (Join-Path $toolsDir "$filename32")
+    $dlwdFile64 = (Join-Path $toolsDir "$filename64")
 
     $dlwd = New-Object net.webclient
     $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
@@ -170,7 +169,7 @@ Function download-fileSingle {
         [parameter(Mandatory=$true)][string]$toolsDir = $null
     )
 
-    $dlwdFile = (Join-Path $obj.toolsDir "$filename")
+    $dlwdFile = (Join-Path $toolsDir "$filename")
     $dlwd = New-Object net.webclient
     $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
     
