@@ -1,4 +1,5 @@
 ﻿#Requires -Version 5.0
+[CmdletBinding()]
 param (
     [string]$pkgXML = (Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
     [string]$personalPkgXML,
@@ -69,12 +70,12 @@ if (!(Test-Path $pkgXML)) {
 
 
 
-#changeme?
+#TODO: changeme?
 [XML]$packagesXMLcontent = Get-Content $pkgXML
 [XML]$personalpackagesXMLcontent = Get-Content $personalPkgXMLPath
 
 $options = $personalpackagesXMLcontent.mypackages.options
-#add these to parameters?
+#TODO: add these to parameters?
 $searchDir        = $options.searchDir.tostring()
 $workDir          = $options.workDir.tostring()
 $dropPath         = $options.DropPath.tostring()
@@ -241,7 +242,6 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
             $versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
             $versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
             $versions = ($versionsPage.links | where href -match "\d" | select -expand href).trim("/")
-            #Write-Host $nuspecID $versions
             $versions | ForEach-Object {
                 $apiSearchURL = $proxyRepoApiURL + "search?repository=$proxyRepoName&format=nuget&name=$nuspecID&version=$_"
                 $searchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $proxyRepoHeaderCreds -Uri $apiSearchURL
@@ -255,7 +255,6 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
                 }
             
                 $heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
-                #$heads.Headers."Content-Disposition"
                 $filename =  ($heads.Headers."Content-Disposition" -split "=" | select -Last 1).tostring()
                 $downloadURL = $searchResults.items.assets.downloadURL              
                 
@@ -266,7 +265,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
                 $dlwd.dispose()
                 
                 
-                #fixme, might need multipart/form-data, which is a royal pain
+                #TODO, might need multipart/form-data, which is a royal pain
                 #$apiPutURL = $proxyRepoApiURL + "components?repository=$pushRepoName"
                 #Invoke-RestMethod -UseBasicParsing -Headers $proxyRepoHeaderCreds -Method POST -InFile $dlwdPath -Uri $apiPutURL
                 $pushArgs = "push " + $filename + " -f -r -s " + $pushURL
@@ -314,7 +313,6 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
                     Write-Host "$nuspecID $_ already internalized, deleting cached version in proxy repository"
                     $apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
                     $null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
-                    #Invoke-RestMethod -UseBasicParsing -Method get -Headers $privateRepoHeaderCreds -URI $apiDeleteURL
                 } else {
     
                     $heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
@@ -583,7 +581,6 @@ $nupkgArray | select -Unique | ForEach-Object {
             $nupkgObjArray.add($obj) | Out-Null
 
             Write-Output "Found $nuspecID $nuspecVersion to internalize"
-            #Write-Output $_.fullname
         }
         
     } else {
