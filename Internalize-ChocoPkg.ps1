@@ -67,13 +67,11 @@ if (!(Test-Path $pkgXML)) {
 
 
 
-
-#TODO: changeme?
 [XML]$packagesXMLcontent = Get-Content $pkgXML
 [XML]$personalpackagesXMLcontent = Get-Content $personalPkgXMLResolved
 
 $options = $personalpackagesXMLcontent.mypackages.options
-#TODO: add these to parameters?
+
 $searchDir        = $options.searchDir.tostring()
 $workDir          = $options.workDir.tostring()
 $dropPath         = $options.DropPath.tostring()
@@ -280,7 +278,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
                 $pushcode = $null
             }
         } elseif ($packagesXMLcontent.packages.notImplemented.id -icontains $nuspecID) {
-            Write-Host "$nuspecID found in the proxy repo and is not implemented, please internalize manually"
+            Write-Output "$nuspecID found in the proxy repo and is not implemented, please internalize manually"
         } elseif ($packagesXMLcontent.packages.custom.pkg.id -icontains $nuspecID) {
             $versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
             $versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
@@ -308,7 +306,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
             
             
                 if ($internalizedVersions -icontains $_) {
-                    Write-Host "$nuspecID $_ already internalized, deleting cached version in proxy repository"
+                    Write-Output "$nuspecID $_ already internalized, deleting cached version in proxy repository"
                     $apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
                     $null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
                 } else {
@@ -323,12 +321,12 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
                     $dlwd.DownloadFile($downloadURL, $dlwdPath)
                     $dlwd.dispose()
                     
-                    Write-Host "$nuspecID $_ found and downloaded, needs to be manually deleted finishme here"
+                    Write-Output "$nuspecID $_ found and downloaded, needs to be manually deleted finishme here"
                 }
             }
             
         } else {
-            Write-Host "$nuspecID found in the proxy repo, it is a new ID, may need to be implemented or added to the internal list"
+            Write-Output "$nuspecID found in the proxy repo, it is a new ID, may need to be implemented or added to the internal list"
         }       
     }
     }
@@ -422,13 +420,8 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
         $privatePageURLorig = $privatePageURL
         do {
 
-            #FIXME for casing
-            Try {
-                $privatePage = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privatePageURL 
-            } Catch {
-                Write-Host "Broken 406 page $nuspecID"
-                Break
-            }
+            #TODO fixme for casing
+            $privatePage = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privatePageURL 
             
             [array]$privateVersions = $privateVersions + ( $privatePage.items | Where-Object { $_.name.tolower() -eq $nuspecID } ).version 
             
@@ -446,7 +439,7 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
         
         if ($privateVersions -inotcontains $publicVersion) {
             
-            Write-Host "$nuspecID out of date on private repo, found version $publicVersion, downloading"
+            Write-Output "$nuspecID out of date on private repo, found version $publicVersion, downloading"
 
             $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea 0 
             $dlwdURL = $redirectpage.Links.href
@@ -463,7 +456,7 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
             $dlwd.DownloadFile($dlwdURL, $dlwdPath)
             $dlwd.dispose()
 
-            Write-Host "Waiting three seconds before downloading the next package so as to not get rate limited"
+            Write-Output "Waiting three seconds before downloading the next package so as to not get rate limited"
             Start-Sleep -S 3 
             
         }
@@ -583,8 +576,7 @@ $nupkgArray = $null
 
 
 Foreach ($obj in $nupkgObjArray) {
-    #Try { 
-        Write-Host "Starting " $obj.nuspecID
+        Write-Output "Starting $($obj.nuspecID)"
         Extract-Nupkg -OrigPath $obj.OrigPath -VersionDir $obj.VersionDir
 
         #Write-Output $obj.functionName
@@ -603,9 +595,6 @@ Foreach ($obj in $nupkgObjArray) {
         } else {
             $obj.status = "internalized"
         }
-    #} Catch {
-    #   $obj.status = "internalization failed"
-    #}
 }
 
 
@@ -641,13 +630,13 @@ Foreach ($obj in $nupkgObjArray) {
 
 
 Foreach ($obj in $nupkgObjArray) {
-    Write-Host $obj.nuspecID $obj.Version $obj.status
+    Write-Output "$($obj.nuspecID) $($obj.Version) $($obj.status)"
 }
 
 if ($writeVersion) {
-    Write-Host "`n`n"
+    Write-Output "`n`n"
     Foreach ($obj in $nupkgObjArray) {
-        Write-Host $obj.nuspecID $obj.OldVersion 'to' $obj.Version
+        Write-Output "$($obj.nuspecID) $($obj.OldVersion) to $($obj.Version)"
     }
 }
 
