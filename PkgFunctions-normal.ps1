@@ -1,128 +1,128 @@
 ﻿Function mod-4k-slideshow ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
 Function mod-4k-video-downloader ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
 Function mod-4k-stogram ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
 Function mod-4k-video-to-mp3 ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
 Function mod-4k-youtube-to-mp3 ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveExe
+    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveExe
 }
 
 
 Function mod-vscodium-install ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -removeEXE
+    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -removeEXE
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp' + "`n" + "     $&"
     $obj.installScriptMod = $obj.installScriptMod -replace 'return', $string
 }
 
 
 Function mod-google-backup-and-sync ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveMSI
 }
 
 
 Function mod-googlechrome ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + "    $&"
     $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
 }
 
 
 Function mod-vagrant ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveMSI
 }
 
 
 Function mod-onlyoffice ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 3 -argstype 0 -needsTools -RemoveExe
+    Edit-InstallChocolateyPackage -obj $obj -urltype 3 -argstype 0 -needsTools -RemoveExe
 }
 
 
 Function mod-dotnetcore-sdk ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveExe
+    Edit-InstallChocolateyPackage -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveExe
 }
 
 
 Function mod-mono ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveMSI
 }
 
 
 Function mod-shotcut-install ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveExe
+    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveExe
 }
 
 
 Function mod-vivaldi-portable ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
+    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
 }
 
 
 Function mod-vivaldi-install ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
+    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
 }
 
 
 Function mod-edge ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveMSI
 }
 
 
 Function mod-slack ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 1 -argstype 0 -x64NameExt -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -x64NameExt -RemoveMSI
 }
 
 
 Function mod-riot-web ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 4 -argstype 0 -needsTools -x64NameExt -DeEncodeSpace -removeEXE
+    Edit-InstallChocolateyPackage -obj $obj -urltype 4 -argstype 0 -needsTools -x64NameExt -DeEncodeSpace -removeEXE
 }
 
 
 Function mod-discord-install ($obj) {
-    mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE -DeEncodeSpace -x64NameExt
+    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE -DeEncodeSpace -x64NameExt
 }
 
 
 Function mod-openshot ($obj) {
-    mod-installcpkg-both -obj $obj -argstype 0 -urltype 0 -needsTools -RemoveEXE
+    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 0 -needsTools -RemoveEXE
 }
 
 
 Function mod-virt-viewer ($obj) {
-    mod-installcpkg-both -obj $obj -argstype 0 -urltype 2 -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 2 -RemoveMSI
 }
 
 
 Function mod-box-drive ($obj) {
-    mod-installcpkg-both -obj $obj -argstype 0 -urltype 3 -needsTools -RemoveMSI
+    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 3 -needsTools -RemoveMSI
 }
 
 
 Function mod-ringcentral-classic ($obj) {
-    mod-installcpkg-both -obj $obj -argstype 0 -urltype 5 -needsTools -RemoveEXE -DeEncodeSpace
+    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 5 -needsTools -RemoveEXE -DeEncodeSpace
 }
 
 
 Function mod-kodi ($obj) {
-    mod-installcpkg-both -obj $obj -argstype 0 -urltype 0 -needsTools -RemoveEXE
+    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 0 -needsTools -RemoveEXE
 }
 
 Function mod-dotnetcore3-desktop-runtime ($obj) {
-    mod-installcpkg-both -obj $obj -argstype 0 -urltype 0 -needsEA -needsTools -RemoveEXE
+    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 0 -needsEA -needsTools -RemoveEXE
 }
 
 # SINGLE --------------------------

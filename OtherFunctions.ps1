@@ -185,7 +185,7 @@ Function Get-fileSingle {
 
 #no need return stuff
 #changeme to work single
-Function mod-installcpkg-both {
+Function Edit-InstallChocolateyPackage {
     param (
         [parameter(Mandatory = $true)]$obj,
         [parameter(Mandatory = $true)][int]$urltype,
