@@ -536,6 +536,8 @@ $nupkgArray | select -Unique | ForEach-Object {
 
         if ($installScriptDetails[0] -eq "noscript") {
             Write-Output "You may want to add $nuspecID $nuspecVersion to the internal list"
+            
+            #Useful if adding support for multiple new packages
             #Write-Output '<id>'$nuspecID'</id>'
 
         } else {
@@ -601,21 +603,14 @@ Foreach ($obj in $nupkgObjArray) {
             $null = mkdir $obj.idDir
         }
 
-        if (Test-Path $obj.versionDir) {
-            $null = New-Item -Path $obj.versionDir -Name "temp.txt" -ItemType file -ea 0
-            Remove-Item -ea 0 -Force -Recurse -Path (Get-ChildItem -Path $obj.versionDir -Exclude "tools","*.exe","*.msi","*.msu","*.zip")
-        } else {
+        if (!(Test-Path $obj.versionDir)) {
             $null = mkdir $obj.versionDir
         }
-
-        if (Test-Path $obj.toolsDir) {
-            $null = New-Item -Path $obj.toolsDir -Name "temp.txt" -ItemType file -ea 0
-            Remove-Item -ea 0 -Force -Recurse -Path (Get-ChildItem -Path $obj.toolsDir -Exclude "*.exe","*.msi","*.msu","*.zip")
-        } else {
+        
+        if (!(Test-Path $obj.toolsDir)) {
             $null = mkdir $obj.toolsDir
         }
-
-        #Copy-Item $obj.OrigPath $obj.versionDir 
+        
         $obj.status = "setup"
     } catch {
         $obj.status = "not-setup"
@@ -629,7 +624,7 @@ Foreach ($obj in $nupkgObjArray) {
     if ($obj.status -eq "setup") {
         #Try { 
             Write-Host "Starting " $obj.nuspecID
-            Extract-Nupkg -obj $obj  
+            Extract-Nupkg -OrigPath $obj.OrigPath -VersionDir $obj.VersionDir
 
             #Write-Output $obj.functionName
             $tempFuncName = $obj.functionName

@@ -52,17 +52,27 @@ Function Read-NuspecVersion ($nupkgPath) {
 
 #no need return stuff
 #changeme to work with individual strings
-Function Extract-Nupkg ($obj) {
+Function Extract-Nupkg {
+    param (
+        [parameter(Mandatory=$true)][string]$OrigPath,
+        [parameter(Mandatory=$true)][string]$VersionDir
+    )
+
     #needed for accessing dotnet zip functions
     Add-Type -AssemblyName System.IO.Compression.FileSystem
-    [System.IO.Compression.ZipFile]::ExtractToDirectory($obj.origPath, $obj.versionDir)
-
-    #force needed due to wacky permissions after extract
-    Remove-Item -Force -Recurse -ea 0 -LiteralPath (Join-Path $obj.versionDir '_rels')
-    Remove-Item -Force -Recurse -ea 0 -LiteralPath (Join-Path $obj.versionDir "package")
-    Remove-Item -Force -Recurse -ea 0 -LiteralPath (Join-Path $obj.versionDir '[Content_Types].xml')
-    Remove-Item -Force -Recurse -ea 0 -LiteralPath (Join-Path $obj.versionDir '__MACOSX')
-
+    
+    $archive = [System.IO.Compression.ZipFile]::Open($OrigPath, 'read')
+    
+    #Making sure that none of the extra .nupkg files are unpacked
+    $filteredArchive = $archive.Entries | `
+    Where-Object Name -ne '[Content_Types].xml' | Where-Object Name -ne '.rels' | `
+    Where-Object FullName -notlike 'package/*' | Where-Object Fullname -notlike '__MACOSX/*'
+    
+    $filteredArchive | ForEach-Object {
+        $OutputFile = Join-Path $VersionDir $_.fullname
+        $null = mkdir $($OutputFile | Split-Path) -ea 0
+        [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, $outputFile, $true)
+    }
 }
 
 
@@ -77,7 +87,6 @@ Function Write-UnzippedInstallScript ($obj) {
 
 
 #fixme to work with multiple versions and packages at one time, returning?
-#changeme to work with individual strings
 Function Write-PerPkg {
     param (
         [parameter(Mandatory=$true)][string]$version,

@@ -68,7 +68,6 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
   - generalize more functionality and make available as functions. 
   - Turn into proper module
   - Ability to bump version of nupkg (fix version)
-  - Extract files individually rather then extracting all and removing excess, difficult because of packages like virtualbox that have files in root dir
   - Add option to trust names of nupkg's in searching, allows for quicker search
   - Git integration for personal-packages.xml
   - Multiple personal-packages.xml files (for now it probably is best to add an alias to your profile for each xml)
