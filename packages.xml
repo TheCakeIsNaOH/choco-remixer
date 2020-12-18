@@ -208,459 +208,459 @@
         <id>1password</id>
 		<needsStopAction>no</needsStopAction>
         <needsToolsDir>yes</needsToolsDir>
-        <functionName>Edit-1password</functionName>
+        <functionName>mod-1password</functionName>
         <whyNotInternal>licensing</whyNotInternal>
 	</pkg>
     <pkg>
-      <functionName>Edit-4k-slideshow</functionName>
+      <functionName>mod-4k-slideshow</functionName>
       <id>4k-slideshow-maker</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-4k-stogram</functionName>
+      <functionName>mod-4k-stogram</functionName>
       <id>4k-stogram</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-4k-video-downloader</functionName>
+      <functionName>mod-4k-video-downloader</functionName>
       <id>4k-video-downloader</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-4k-video-to-mp3</functionName>
+      <functionName>mod-4k-video-to-mp3</functionName>
       <id>4k-video-to-mp3</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-4k-youtube-to-mp3</functionName>
+      <functionName>mod-4k-youtube-to-mp3</functionName>
       <id>4k-youtube-to-mp3</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-adb</functionName>
+      <functionName>mod-adb</functionName>
       <id>adb</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal> <!-- under google SDK licensing with no redist, but has clause that allows open source licensing to take precedence, unsure if this is totally under open sources licensings, may need to build custom -->
     </pkg>
     <pkg>
-      <functionName>Edit-adobereader</functionName>
+      <functionName>mod-adobereader</functionName>
       <id>adobereader</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-adoptopenjdk8</functionName>
+      <functionName>mod-adoptopenjdk8</functionName>
       <id>adoptopenjdk8</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
-      <functionName>Edit-adoptopenjdk8jre</functionName>
+      <functionName>mod-adoptopenjdk8jre</functionName>
       <id>adoptopenjdk8jre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
-      <functionName>Edit-adoptopenjdkjre</functionName>
+      <functionName>mod-adoptopenjdkjre</functionName>
       <id>adoptopenjdkjre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
-      <functionName>Edit-advanced-installer</functionName>
+      <functionName>mod-advanced-installer</functionName>
       <id>advanced-installer</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-anydesk</functionName>
+      <functionName>mod-anydesk</functionName>
       <id>anydesk.portable</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-anydesk-install</functionName>
+      <functionName>mod-anydesk-install</functionName>
       <id>anydesk.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-airtame</functionName>
+      <functionName>mod-airtame</functionName>
       <id>airtame</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-bitwarden</functionName>
+      <functionName>mod-bitwarden</functionName>
       <id>bitwarden</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-box-drive</functionName>
+      <functionName>mod-box-drive</functionName>
       <id>box-drive</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-calibre</functionName>
+      <functionName>mod-calibre</functionName>
       <id>calibre</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-coretemp</functionName>
+      <functionName>mod-coretemp</functionName>
       <id>coretemp</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-cpuz</functionName>
+      <functionName>mod-cpuz</functionName>
       <id>cpu-z.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-cutepdf</functionName>
+      <functionName>mod-cutepdf</functionName>
       <id>cutepdf</id>
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>Yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-ddu</functionName>
+      <functionName>mod-ddu</functionName>
       <id>ddu</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-discord-install</functionName>
+      <functionName>mod-discord-install</functionName>
       <id>discord.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-dotnetcore-sdk</functionName>
+      <functionName>mod-dotnetcore-sdk</functionName>
       <id>dotnetcore-sdk</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-dotnetcore-desktopruntime</functionName>
+      <functionName>mod-dotnetcore-desktopruntime</functionName>
       <id>dotnetcore-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-dotnetcore3-desktop-runtime</functionName>
+      <functionName>mod-dotnetcore3-desktop-runtime</functionName>
       <id>dotnetcore3-desktop-runtime</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-dropbox</functionName>
+      <functionName>mod-dropbox</functionName>
       <id>dropbox</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
 	<pkg>
-	  <functionName>Edit-eclipse</functionName>
+	  <functionName>mod-eclipse</functionName>
       <id>eclipse</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
 	</pkg>
 	<pkg>
-	  <functionName>Edit-eclipse-java-oxygen</functionName>
+	  <functionName>mod-eclipse-java-oxygen</functionName>
       <id>eclipse-java-oxygen</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
 	</pkg>
     <pkg>
-      <functionName>Edit-edge</functionName>
+      <functionName>mod-edge</functionName>
       <id>microsoft-edge</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-elgato-game-capture</functionName>
+      <functionName>mod-elgato-game-capture</functionName>
       <id>elgato-game-capture</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-epicgames</functionName>
+      <functionName>mod-epicgames</functionName>
       <id>epicgameslauncher</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-firefox</functionName>
+      <functionName>mod-firefox</functionName>
       <id>firefox</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-geforce-driver</functionName>
+      <functionName>mod-geforce-driver</functionName>
       <id>geforce-game-ready-driver</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-geforce-experience</functionName>
+      <functionName>mod-geforce-experience</functionName>
       <id>geforce-experience</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-geogebra-classic</functionName>
+      <functionName>mod-geogebra-classic</functionName>
       <id>geogebra-classic.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-gimp</functionName>
+      <functionName>mod-gimp</functionName>
       <id>gimp</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-		<functionName>Edit-goggalaxy</functionName>
+		<functionName>mod-goggalaxy</functionName>
 		<id>goggalaxy</id>
 		<needsStopAction>no</needsStopAction>
 		<needsToolsDir>yes</needsToolsDir>
 		<whyNotInternal>licensing</whyNotInternal>
 	</pkg>
     <pkg>
-      <functionName>Edit-google-backup-and-sync</functionName>
+      <functionName>mod-google-backup-and-sync</functionName>
       <id>google-backup-and-sync</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-googlechrome</functionName>
+      <functionName>mod-googlechrome</functionName>
       <id>googlechrome</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-google-drive-file-stream</functionName>
+      <functionName>mod-google-drive-file-stream</functionName>
       <id>google-drive-file-stream</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-gotomeeting</functionName>
+      <functionName>mod-gotomeeting</functionName>
       <id>gotomeeting</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-hexchat</functionName>
+      <functionName>mod-hexchat</functionName>
       <id>hexchat</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-hwmonitor</functionName>
+      <functionName>mod-hwmonitor</functionName>
       <id>hwmonitor</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
 	</pkg>
     <pkg>
-      <functionName>Edit-inkscape</functionName>
+      <functionName>mod-inkscape</functionName>
       <id>inkscape</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg> 
     <pkg>
-      <functionName>Edit-krita</functionName>
+      <functionName>mod-krita</functionName>
       <id>krita</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-kodi</functionName>
+      <functionName>mod-kodi</functionName>
       <id>kodi</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>    
     <pkg>
-      <functionName>Edit-libreoffice-fresh</functionName>
+      <functionName>mod-libreoffice-fresh</functionName>
       <id>libreoffice-fresh</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-lightshot</functionName>
+      <functionName>mod-lightshot</functionName>
       <id>lightshot.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-malwarebytes</functionName>
+      <functionName>mod-malwarebytes</functionName>
       <id>malwarebytes</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-makemkv</functionName>
+      <functionName>mod-makemkv</functionName>
       <id>makemkv</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-minecraft-launcher</functionName>
+      <functionName>mod-minecraft-launcher</functionName>
       <id>minecraft-launcher</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-mono</functionName>
+      <functionName>mod-mono</functionName>
       <id>mono</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-msiafterburner</functionName>
+      <functionName>mod-msiafterburner</functionName>
       <id>msiafterburner</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-nordvpn</functionName>
+      <functionName>mod-nordvpn</functionName>
       <id>nordvpn</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-nvidia-driver</functionName>
+      <functionName>mod-nvidia-driver</functionName>
       <id>nvidia-display-driver</id>
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>Yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-onlyoffice</functionName>
+      <functionName>mod-onlyoffice</functionName>
       <id>onlyoffice</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-openshot</functionName>
+      <functionName>mod-openshot</functionName>
       <id>openshot</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-powershell-core</functionName>
+      <functionName>mod-powershell-core</functionName>
       <id>powershell-core</id>
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>No</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-resharper-platform</functionName>
+      <functionName>mod-resharper-platform</functionName>
       <id>resharper-platform</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-ringcentral-classic</functionName>
+      <functionName>mod-ringcentral-classic</functionName>
       <id>ringcentral-classic</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-shotcut-install</functionName>
+      <functionName>mod-shotcut-install</functionName>
       <id>shotcut.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal><!-- almost too big, not quite yet, but almost -->
     </pkg>
     <pkg>
-      <functionName>Edit-skype</functionName>
+      <functionName>mod-skype</functionName>
       <id>skype</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-slack</functionName>
+      <functionName>mod-slack</functionName>
       <id>slack</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-spotify</functionName>
+      <functionName>mod-spotify</functionName>
       <id>spotify</id>
 	  <needsStopAction>yes</needsStopAction>
 	  <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-steam</functionName>
+      <functionName>mod-steam</functionName>
       <id>steam</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -670,102 +670,102 @@
         <id>streamlabs-obs</id>
         <needsStopAction>no</needsStopAction>
 		<needsToolsDir>yes</needsToolsDir>
-		<functionName>Edit-slobs</functionName>
+		<functionName>mod-slobs</functionName>
         <whyNotInternal>size</whyNotInternal>
 	</pkg>
     <pkg>
-      <functionName>Edit-sysinternals</functionName>
+      <functionName>mod-sysinternals</functionName>
       <id>sysinternals</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-thunderbird</functionName>
+      <functionName>mod-thunderbird</functionName>
       <id>thunderbird</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-tor-browser</functionName>
+      <functionName>mod-tor-browser</functionName>
       <id>tor-browser</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-uplay</functionName>
+      <functionName>mod-uplay</functionName>
       <id>uplay</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-vagrant</functionName>
+      <functionName>mod-vagrant</functionName>
       <id>vagrant</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-vcredist140</functionName>
+      <functionName>mod-vcredist140</functionName>
       <id>vcredist140</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-virtualbox</functionName>
+      <functionName>mod-virtualbox</functionName>
       <id>virtualbox</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-virt-viewer</functionName>
+      <functionName>mod-virt-viewer</functionName>
       <id>virt-viewer</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-vivaldi-install</functionName>
+      <functionName>mod-vivaldi-install</functionName>
       <id>vivaldi.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-vivaldi-portable</functionName>
+      <functionName>mod-vivaldi-portable</functionName>
       <id>vivaldi.portable</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
 	  <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-vscodium-install</functionName>
+      <functionName>mod-vscodium-install</functionName>
       <id>vscodium.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Edit-webex-meetings</functionName>
+      <functionName>mod-webex-meetings</functionName>
       <id>webex-meetings</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>     
     <pkg>
-      <functionName>Edit-yarn</functionName>
+      <functionName>mod-yarn</functionName>
       <id>yarn</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>   
     <pkg>
-      <functionName>Edit-zoom</functionName>
+      <functionName>mod-zoom</functionName>
       <id>zoom</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
