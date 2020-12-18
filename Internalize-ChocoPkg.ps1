@@ -510,22 +510,13 @@ $nupkgArray | select -Unique | ForEach-Object {
     [array]$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object {$_.id -ieq "$nuspecID" }).version
 
     if ($internalizedVersions -icontains $nuspecVersion) {
-        #package is internalized by user
-        #add something here? verbose logging?
-        
+        Write-Verbose "$nuspecID $nuspecVersion is already internalized"        
     } elseif ($packagesXMLcontent.packages.notImplemented.id -icontains $nuspecID) {
-        Write-Output "$nuspecID $nuspecVersion  not implemented, requires manual internalization" #$nuspecVersion
-        #package is not supported, due to bad choco install script that is hard to internalize
-        #add something here? verbose logging?
-
+        Write-Output "$nuspecID $nuspecVersion  not implemented, requires manual internalization"
     } elseif ($personalpackagesXMLcontent.mypackages.personal.id -icontains $nuspecID) {
-        #package is personal custom package and is internal
-        #add something here? verbose logging?
-
+        Write-Verbose "$nuspecID is a custom package" 
     } elseif ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
-        #package from chocolatey.org is internal by default
-        #add something here? verbose logging?
-
+        Write-Verbose "$nuspecID is already internal coming from chocolatey.org"
     } elseif ($packagesXMLcontent.packages.custom.pkg.id -icontains $nuspecID) {
 
          $installScriptDetails = Read-ZippedInstallScript -NupkgPath $_.fullname
