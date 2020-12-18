@@ -54,7 +54,7 @@ if (!($PSBoundParameters.ContainsKey('personalPkgXML'))) {
     } else {
         Throw "Cannot find personal-packages.xml, please specify path to it"
     }
-    
+
 } elseif (!(Test-Path $personalPkgXML)) {
     throw "personal-packages.xml not found, please specify valid path"
 }
@@ -107,16 +107,16 @@ if ($useDropPath -eq "yes") {
     if (!(Test-Path $dropPath)) {
         throw "Drop path not found, please specify valid path"
     }
-    
+
     for (($i= 0); ($i -le 12) -and ($null -ne $(Get-ChildItem -Path $dropPath -Filter "*.nupkg")) ; $i++ ) {
         Write-Output "Found files in the drop path, waiting 15 seconds for them to clear"
         Start-Sleep -Seconds 15
     }
-    
+
     if ($null -ne $(Get-ChildItem -Path $dropPath -Filter "*.nupkg")) {
         Write-Warning "There are still files in the drop path"
     }
-} elseif ($useDropPath -eq "no") { 
+} elseif ($useDropPath -eq "no") {
 } else {
     Throw "bad useDropPath value in personal-packages.xml, must be yes or no"
 }
@@ -131,22 +131,22 @@ if ($pushPkgs -eq "yes") {
     if ($null -eq $pushURL) {
         Throw "no pushURL in personal-packages.xml"
     }
-    try { $page = Invoke-WebRequest -UseBasicParsing -Uri $pushURL -method head } 
+    try { $page = Invoke-WebRequest -UseBasicParsing -Uri $pushURL -method head }
     catch { $page = $_.Exception.Response }
 
     if ($null -eq $page.StatusCode) {
         Throw "bad pushURL in personal-packages.xml"
-    } elseif ($page.StatusCode  -eq  200) { 
+    } elseif ($page.StatusCode  -eq  200) {
     } else {
         Write-Verbose "pushURL exists, but did not return ok. This is expected if it requires authentication"
     }
-    
+
     $apiKeySources = Get-ChocoApiKeysUrls
-    
+
     if ($apiKeySources -notcontains $pushURL) {
         Write-Verbose "Did not find a API key for $pushURL"
     }
-    
+
 } elseif ($pushPkgs -eq "no") { } else {
     Throw "bad pushPkgs value in personal-packages.xml, must be yes or no"
 }
@@ -155,7 +155,7 @@ if ($pushPkgs -eq "yes") {
 
 if (($repomove -eq "yes") -and (!($skipRepoMove))) {
     $ProgressPreference = 'SilentlyContinue' 
-    
+
     if ($null -eq $moveToRepoURL) {
         Throw "no moveToRepoURL in personal-packages.xml"
     }
@@ -217,14 +217,14 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
         Write-Warning "proxyRepoURL exists, but did not return ok. If it requires credentials, please check that they are correct"
     }
     
-    $proxyRepoName = ($proxyRepoURL -split "repository" | select -last 1).trim("/")
-    $proxyRepoBaseURL = $proxyRepoURL -split "repository" | select -first 1
+    $proxyRepoName = ($proxyRepoURL -split "repository" | Select-Object -last 1).trim("/")
+    $proxyRepoBaseURL = $proxyRepoURL -split "repository" | Select-Object -first 1
     $proxyRepoBrowseURL = $proxyRepoBaseURL + "service/rest/repository/browse/" + $proxyRepoName + "/"
     $proxyRepoApiURL = $proxyRepoBaseURL + "service/rest/v1/"
     $proxyRepoBrowsePage = Invoke-WebRequest -UseBasicParsing -URI $proxyRepoBrowseURL -Headers $proxyRepoHeaderCreds
     $proxyRepoIdList = $proxyRepoBrowsePage.Links.href
     
-    $pushRepoName = ($pushURL -split "repository" | select -last 1).trim("/")
+    $pushRepoName = ($pushURL -split "repository" | Select-Object -last 1).trim("/")
     
     $saveDir = Join-Path $workDir "internal-packages-temp"
     if (!(Test-Path $saveDir)) {
@@ -237,7 +237,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
         if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
             $versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
             $versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
-            $versions = ($versionsPage.links | where href -match "\d" | select -expand href).trim("/")
+            $versions = ($versionsPage.links | Where-Object href -match "\d" | Select-Object -expand href).trim("/")
             $versions | ForEach-Object {
                 $apiSearchURL = $proxyRepoApiURL + "search?repository=$proxyRepoName&format=nuget&name=$nuspecID&version=$_"
                 $searchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $proxyRepoHeaderCreds -Uri $apiSearchURL
@@ -251,7 +251,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
                 }
             
                 $heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
-                $filename =  ($heads.Headers."Content-Disposition" -split "=" | select -Last 1).tostring()
+                $filename =  ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
                 $downloadURL = $searchResults.items.assets.downloadURL              
                 
                 $dlwdPath = Join-Path $saveDir $filename
@@ -282,7 +282,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
         } elseif ($packagesXMLcontent.packages.custom.pkg.id -icontains $nuspecID) {
             $versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
             $versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
-            $versions = ($versionsPage.links | where href -match "\d" | select -expand href).trim("/")
+            $versions = ($versionsPage.links | Where-Object href -match "\d" | Select-Object -expand href).trim("/")
 
 
             $IdSaveDir = Join-Path $searchDir $nuspecID
@@ -312,7 +312,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
                 } else {
     
                     $heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
-                    $filename =  ($heads.Headers."Content-Disposition" -split "=" | select -Last 1).tostring()
+                    $filename =  ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
                     $downloadURL = $searchResults.items.assets.downloadURL              
                     
                     $dlwdPath = Join-Path $IdSaveDir $filename
@@ -404,8 +404,8 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
         Throw "$($toInternalizeCompare.InputObject) not found in packages.xml"; 
     }
     
-    $privateRepoName = ($privateRepoURL -split "repository" | select -last 1).trim("/")
-    $privateRepoBaseURL = $privateRepoURL -split "repository" | select -first 1
+    $privateRepoName = ($privateRepoURL -split "repository" | Select-Object -last 1).trim("/")
+    $privateRepoBaseURL = $privateRepoURL -split "repository" | Select-Object -first 1
     $privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
     
     $toSearchToInternalize | ForEach-Object {
@@ -443,7 +443,7 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 
             $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea 0 
             $dlwdURL = $redirectpage.Links.href
-            $filename = $dlwdURL.split("/") | select -last 1 
+            $filename = $dlwdURL.split("/") | Select-Object -last 1 
             
             $saveDir = Join-Path $searchDir $nuspecID
             if (!(Test-Path $saveDir)) {
@@ -492,7 +492,7 @@ if ($thoroughList) {
 
 
 #unique needed to workaround a bug if accessing searchDir from a samba share where things show up twice if there are directories with the same name but different case.
-$nupkgArray | select -Unique | ForEach-Object {
+$nupkgArray | Select-Object -Unique | ForEach-Object {
     $nuspecDetails = Read-NuspecVersion -NupkgPath $_.fullname
     $nuspecVersion = $nuspecDetails[0]
     $nuspecID = $nuspecDetails[1]
@@ -534,7 +534,7 @@ $nupkgArray | select -Unique | ForEach-Object {
             
             if ($writeVersion) {
                 if($internalizedVersions.count -ge 1) {
-                    $oldVersion = $internalizedVersions | Select -Last 1
+                    $oldVersion = $internalizedVersions | Select-Object -Last 1
                 } else {
                     $oldVersion = "null"
                 }
