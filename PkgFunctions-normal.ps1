@@ -1,133 +1,133 @@
-﻿Function mod-4k-slideshow ($obj) {
+﻿Function Edit-4k-slideshow ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
-Function mod-4k-video-downloader ($obj) {
+Function Edit-4k-video-downloader ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
-Function mod-4k-stogram ($obj) {
+Function Edit-4k-stogram ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
-Function mod-4k-video-to-mp3 ($obj) {
+Function Edit-4k-video-to-mp3 ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
-Function mod-4k-youtube-to-mp3 ($obj) {
+Function Edit-4k-youtube-to-mp3 ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveExe
 }
 
 
-Function mod-vscodium-install ($obj) {
+Function Edit-vscodium-install ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -removeEXE
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp' + "`n" + "     $&"
     $obj.installScriptMod = $obj.installScriptMod -replace 'return', $string
 }
 
 
-Function mod-google-backup-and-sync ($obj) {
+Function Edit-google-backup-and-sync ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveMSI
 }
 
 
-Function mod-googlechrome ($obj) {
+Function Edit-googlechrome ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + "    $&"
     $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
 }
 
 
-Function mod-vagrant ($obj) {
+Function Edit-vagrant ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveMSI
 }
 
 
-Function mod-onlyoffice ($obj) {
+Function Edit-onlyoffice ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 3 -argstype 0 -needsTools -RemoveExe
 }
 
 
-Function mod-dotnetcore-sdk ($obj) {
+Function Edit-dotnetcore-sdk ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveExe
 }
 
 
-Function mod-mono ($obj) {
+Function Edit-mono ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveMSI
 }
 
 
-Function mod-shotcut-install ($obj) {
+Function Edit-shotcut-install ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveExe
 }
 
 
-Function mod-vivaldi-portable ($obj) {
+Function Edit-vivaldi-portable ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
 }
 
 
-Function mod-vivaldi-install ($obj) {
+Function Edit-vivaldi-install ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
 }
 
 
-Function mod-edge ($obj) {
+Function Edit-edge ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveMSI
 }
 
 
-Function mod-slack ($obj) {
+Function Edit-slack ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -x64NameExt -RemoveMSI
 }
 
 
-Function mod-riot-web ($obj) {
+Function Edit-riot-web ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 4 -argstype 0 -needsTools -x64NameExt -DeEncodeSpace -removeEXE
 }
 
 
-Function mod-discord-install ($obj) {
+Function Edit-discord-install ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE -DeEncodeSpace -x64NameExt
 }
 
 
-Function mod-openshot ($obj) {
+Function Edit-openshot ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 0 -needsTools -RemoveEXE
 }
 
 
-Function mod-virt-viewer ($obj) {
+Function Edit-virt-viewer ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 2 -RemoveMSI
 }
 
 
-Function mod-box-drive ($obj) {
+Function Edit-box-drive ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 3 -needsTools -RemoveMSI
 }
 
 
-Function mod-ringcentral-classic ($obj) {
+Function Edit-ringcentral-classic ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 5 -needsTools -RemoveEXE -DeEncodeSpace
 }
 
 
-Function mod-kodi ($obj) {
+Function Edit-kodi ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 0 -needsTools -RemoveEXE
 }
 
-Function mod-dotnetcore3-desktop-runtime ($obj) {
+Function Edit-dotnetcore3-desktop-runtime ($obj) {
     Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 0 -needsEA -needsTools -RemoveEXE
 }
 
 # SINGLE --------------------------
 
-Function mod-cpuz ($obj) {
+Function Edit-cpuz ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -144,7 +144,7 @@ Function mod-cpuz ($obj) {
 }
 
 
-Function mod-anydesk ($obj) {
+Function Edit-anydesk ($obj) {
     $url32 = "https://download.anydesk.com/AnyDesk.exe"
     $filename32 = "AnyDesk.exe"
     $filePath32 = 'file           = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -157,7 +157,7 @@ Function mod-anydesk ($obj) {
 }
 
 
-Function mod-adb ($obj) {
+Function Edit-adb ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -175,7 +175,7 @@ Function mod-adb ($obj) {
 
 
 
-Function mod-uplay ($obj) {
+Function Edit-uplay ($obj) {
     $url32 = "https://ubistatic3-a.akamaihd.net/orbit/launcher_installer/UplayInstaller.exe"
     $filename32 = "UplayInstaller.exe"
     $filePath32 = 'file           = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -189,7 +189,7 @@ Function mod-uplay ($obj) {
 }
 
 
-Function mod-nordvpn ($obj) {
+Function Edit-nordvpn ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -208,7 +208,7 @@ Function mod-nordvpn ($obj) {
 
 
 
-Function mod-bitwarden ($obj) {
+Function Edit-bitwarden ($obj) {
 
     $version = $obj.version
 
@@ -226,7 +226,7 @@ Function mod-bitwarden ($obj) {
 }
 
 
-Function mod-gimp ($obj) {
+Function Edit-gimp ($obj) {
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url").tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
@@ -243,7 +243,7 @@ Function mod-gimp ($obj) {
 }
 
 
-Function mod-krita ($obj) {
+Function Edit-krita ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' Url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -258,7 +258,7 @@ Function mod-krita ($obj) {
 }
 
 
-Function mod-steam ($obj) {
+Function Edit-steam ($obj) {
     $url32 = "http://media.steampowered.com/client/installer/SteamSetup.exe"
     $filename32 = "SteamSetup.exe"
 
@@ -273,7 +273,7 @@ Function mod-steam ($obj) {
 }
 
 
-Function mod-skype ($obj) {
+Function Edit-skype ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -288,7 +288,7 @@ Function mod-skype ($obj) {
 }
 
 
-Function mod-cutepdf ($obj) {
+Function Edit-cutepdf ($obj) {
 
     $url32 = "http://www.cutepdf.com/download/CuteWriter.exe"
     $filename32 = "CuteWriter.exe"
@@ -305,7 +305,7 @@ Function mod-cutepdf ($obj) {
 
 
 
-Function mod-malwarebytes ($obj) {
+Function Edit-malwarebytes ($obj) {
 
     $url32 = "https://downloads.malwarebytes.com/file/mb-windows"
     $filename32 = "MBSetup.exe"
@@ -321,7 +321,7 @@ Function mod-malwarebytes ($obj) {
 }
 
 
-Function mod-calibre ($obj) {
+Function Edit-calibre ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -337,7 +337,7 @@ Function mod-calibre ($obj) {
 
 
 
-Function mod-msiafterburner ($obj) {
+Function Edit-msiafterburner ($obj) {
     $url32 = 'http://download.msi.com/uti_exe/vga/MSIAfterburnerSetup.zip'
     $filename32 = 'afterburner.zip'
 
@@ -349,7 +349,7 @@ Function mod-msiafterburner ($obj) {
 }
 
 
-Function mod-zoom ($obj) {
+Function Edit-zoom ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -363,7 +363,7 @@ Function mod-zoom ($obj) {
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
-Function mod-advanced-installer ($obj) {
+Function Edit-advanced-installer ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -377,7 +377,7 @@ Function mod-advanced-installer ($obj) {
 }
 
 
-Function mod-epicgames ($obj) {
+Function Edit-epicgames ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -391,7 +391,7 @@ Function mod-epicgames ($obj) {
 }
 
 
-Function mod-geforce-experience ($obj) {
+Function Edit-geforce-experience ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -407,7 +407,7 @@ Function mod-geforce-experience ($obj) {
 }
 
 
-Function mod-dropbox ($obj) {
+Function Edit-dropbox ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -423,7 +423,7 @@ Function mod-dropbox ($obj) {
 }
 
 
-Function mod-lightshot ($obj) {
+Function Edit-lightshot ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -437,7 +437,7 @@ Function mod-lightshot ($obj) {
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
-Function mod-gotomeeting ($obj) {
+Function Edit-gotomeeting ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString().Split('?') |  Select-Object -First 1
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -451,7 +451,7 @@ Function mod-gotomeeting ($obj) {
 }
 
 
-Function mod-google-drive-file-stream ($obj) {
+Function Edit-google-drive-file-stream ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -467,7 +467,7 @@ Function mod-google-drive-file-stream ($obj) {
 }
 
 
-Function mod-goggalaxy ($obj) {
+Function Edit-goggalaxy ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -483,7 +483,7 @@ Function mod-goggalaxy ($obj) {
 }
 
 
-Function mod-slobs ($obj) {
+Function Edit-slobs ($obj) {
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64').tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -499,7 +499,7 @@ Function mod-slobs ($obj) {
 }
 
 
-Function mod-1password ($obj) {
+Function Edit-1password ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -515,7 +515,7 @@ Function mod-1password ($obj) {
 }
 
 
-Function mod-minecraft-launcher ($obj) {
+Function Edit-minecraft-launcher ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url     ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -530,7 +530,7 @@ Function mod-minecraft-launcher ($obj) {
 }
 
 
-Function mod-hwmonitor ($obj) {
+Function Edit-hwmonitor ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url.*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -545,7 +545,7 @@ Function mod-hwmonitor ($obj) {
 }
 
 
-Function mod-elgato-game-capture ($obj) {
+Function Edit-elgato-game-capture ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64.*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -559,7 +559,7 @@ Function mod-elgato-game-capture ($obj) {
 }
 
 
-Function mod-webex-meetings ($obj) {
+Function Edit-webex-meetings ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url .*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -576,7 +576,7 @@ Function mod-webex-meetings ($obj) {
 }
 
 
-Function mod-inkscape ($obj) {
+Function Edit-inkscape ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -590,7 +590,7 @@ Function mod-inkscape ($obj) {
 }
 
 
-Function mod-makemkv ($obj) {
+Function Edit-makemkv ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32 .*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -605,7 +605,7 @@ Function mod-makemkv ($obj) {
 }
 
 
-Function mod-yarn ($obj) {
+Function Edit-yarn ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
