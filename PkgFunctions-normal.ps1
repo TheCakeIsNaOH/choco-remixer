@@ -340,11 +340,11 @@ Function mod-calibre ($obj) {
 Function mod-msiafterburner ($obj) {
     $url32 = 'http://download.msi.com/uti_exe/vga/MSIAfterburnerSetup.zip'
     $filename32 = 'afterburner.zip'
-    
+
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#Get-ChocolateyWebFile"
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -418,7 +418,7 @@ Function mod-dropbox ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -433,20 +433,20 @@ Function mod-lightshot ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "$packageArgs = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 Function mod-gotomeeting ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url = ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString().Split('?') |  Select -First 1
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString().Split('?') |  Select-Object -First 1
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "$packageArgs = @{" , "$&`n  $filePath32"
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -462,7 +462,7 @@ Function mod-google-drive-file-stream ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "$packageArgs = @{" , "$&`n  $filePath32"
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -476,7 +476,7 @@ Function mod-goggalaxy ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-    
+
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
@@ -492,7 +492,7 @@ Function mod-slobs ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath64"
-    
+
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
     get-fileSingle -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
@@ -508,7 +508,7 @@ Function mod-1password ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-    
+
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
@@ -525,7 +525,7 @@ Function mod-minecraft-launcher ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -540,7 +540,7 @@ Function mod-hwmonitor ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -554,7 +554,7 @@ Function mod-elgato-game-capture ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -571,7 +571,7 @@ Function mod-webex-meetings ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "url", "#url"
     #$obj.installScriptMod = $obj.InstallScriptMod + "`n" + 'Get-Process -Name "ptoneclk" | Stop-Process -ea 0'
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -585,7 +585,6 @@ Function mod-inkscape ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
-    
 
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
@@ -615,7 +614,7 @@ Function mod-yarn ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
-    
+
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir

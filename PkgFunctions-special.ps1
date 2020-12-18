@@ -1,5 +1,5 @@
 Function mod-adoptopenjdk8 ($obj) {
-#need to deal with added added param that has option of install both 32 and 64, 
+#need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url .* = ").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit .* = ").tostring()
@@ -26,7 +26,7 @@ Function mod-adoptopenjdk8 ($obj) {
 
 
 Function mod-adoptopenjdk8jre ($obj) {
-#need to deal with added added param that has option of install both 32 and 64, 
+#need to deal with added added param that has option of install both 32 and 64,
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url .* = ").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit .* = ").tostring()
 
@@ -53,7 +53,7 @@ Function mod-adoptopenjdk8jre ($obj) {
 
 
 Function mod-adoptopenjdkjre ($obj) {
-#need to deal with added added param that has option of install both 32 and 64, 
+#need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url .*= ").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit .*= ").tostring()
@@ -105,7 +105,7 @@ Function mod-sysinternals ($obj) {
 
 Function mod-virtualbox ($obj) {
     $obj.toolsDir = $obj.versionDir
-    
+
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url .*http").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit ").tostring()
     $fullurlep = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$Url_ep .*http').tostring()
@@ -128,12 +128,11 @@ Function mod-virtualbox ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "<# Get-ChocolateyWebFile"
     $obj.installScriptMod = $obj.installScriptMod -replace "ChecksumType64 *'sha256'" , "$& #>"
     $obj.installScriptMod = $obj.installScriptMod -replace "file_path_ep.*Get-Package.*" , "file_path_ep = $filepathep"
-    
+
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsPath\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsPath\*vbox-extpack'
 
 
-    
     get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
     get-fileSingle -url $urlep -filename $filenameep -toolsDir $obj.toolsDir
 }
@@ -168,7 +167,7 @@ Function mod-nextcloud-client ($obj) {
         #invoke webrequest needed as with it downloadfile it 429s
         Invoke-WebRequest -Uri $url32 -OutFile $dlwdFile32
     }
-    
+
 
 
     #$dlwd.dispose()
@@ -201,7 +200,7 @@ Function mod-nvidia-driver ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n $filePathwin10"
     $obj.installScriptMod = $obj.installScriptMod -replace "OSVersion\.Version\.Major -ne '10' \) \{" , "$&`n    $filePathwin7"
     $obj.installScriptMod = $obj.installScriptMod -replace "-eq 'true'\) \{" , "$&`n    $filePathDCH"
-    
+
     $exeRemoveString =  "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
@@ -250,7 +249,7 @@ Function mod-geforce-driver ($obj) {
     $filePathwin7  = '$packageArgs[''file64'']    =  (Join-Path $toolsDir "' + $filenamewin7 + '")'
     $filePathwin10 = '    file64    = (Join-Path $toolsDir "' + $filenamewin10 + '")'
     $filePathDCH   = '$packageArgs[''file64'']    = (Join-Path $toolsDir "' + $filenameDCH + '")'
-    
+
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n $filePathwin10"
@@ -260,10 +259,10 @@ Function mod-geforce-driver ($obj) {
     $dlwdFilewin7 = (Join-Path $obj.toolsDir "$filenamewin7")
     $dlwdFilewin10 = (Join-Path $obj.toolsDir "$filenamewin10")
     $dlwdFileDCH = (Join-Path $obj.toolsDir "$filenameDCH")
-    
+
     $exeRemoveString =  "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-    
+
     Write-Output "Downloading geforce-game-ready-driver files"
     $dlwd = New-Object net.webclient
 
@@ -323,7 +322,7 @@ Function mod-adobereader ($obj) {
 
     $MUIurlFull    = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$MUIurl =').tostring()
     $MUImspURLFull = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$MUImspURL =').tostring()
-    
+
     $MUIurl   = ($MUIurlFull    -split "'" | Select-String -Pattern "http").tostring()
     $MUImspURL = ($MUImspURLFull -split "'" | Select-String -Pattern "http").tostring()
 
@@ -366,7 +365,7 @@ Function mod-thunderbird ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n"
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
-    
+
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
@@ -403,12 +402,11 @@ Function mod-vcredist140 ($obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = Get-Content $datafile
-    
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    
+
     $fullurl32 = ($dataContent -split "`n" | Select-String -pattern ' Url ').tostring()
     $fullurl64 = ($dataContent -split "`n" | Select-String -pattern ' Url64 ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
@@ -424,9 +422,8 @@ Function mod-vcredist140 ($obj) {
 
 
     get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-    
+
     Set-Content -Value $dataContent -Path $dataFile
-    
 }
 
 
@@ -434,12 +431,11 @@ Function mod-dotnetcore-desktopruntime ($obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
-    
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    
+
     $url32 = $dataContent.Url
     $url64 = $dataContent.Url64
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -452,7 +448,6 @@ Function mod-dotnetcore-desktopruntime ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "arguments64 = @{" , "$&`n  $filePath64"
 
     get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-    
 }
 
 #Special because orig script uses $version instead of a full URL
@@ -470,7 +465,7 @@ Function mod-powershell-core ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
-    
+
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + '    Remove-Item -Force -EA 0 -Path $toolsDir\*.exe' + "`n" + "    $&"
     $obj.installScriptMod = $obj.installScriptMod -replace ' exit ',  $string
 
@@ -548,8 +543,8 @@ Function mod-anydesk-install ($obj) {
 
     $obj.installScriptMod = $obj.installScriptMod -replace " Install-ChocolateyPackage " , " Install-ChocolateyInstallPackage "
     #$obj.installScriptMod = $obj.installScriptMod -replace "(.*)Install-ChocolateyPackage(.*)", "`$1Install-ChocolateyInstallPackage`$2"
-    
-    
+
+
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyInstallPackage" , "$filePath32`n $&"
 
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
@@ -562,7 +557,7 @@ Function mod-tor-browser ($obj) {
     $data = GetDownloadInformation -toolsPath $obj.toolsDir
     $url32 = $data.url32
     $url64 = $data.url64
-    
+
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
 
@@ -598,7 +593,6 @@ Function mod-imagemagick ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-
 }
 
 
@@ -619,8 +613,6 @@ Function mod-ddu ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item "$(Split-Path -parent $MyInvocation.MyCommand.Definition)\*.exe"'
 
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-    
-
 }
 
 
@@ -634,7 +626,7 @@ Function mod-eclipse ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -649,7 +641,7 @@ Function mod-eclipse-java-oxygen ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -663,7 +655,7 @@ Function mod-airtame ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -673,14 +665,14 @@ Function mod-spotify ($obj) {
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
-    
+
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    
+
     $obj.installScriptMod = $obj.installScriptMod -replace '\$arguments\[''file''\] *=' , "# $&"
     $obj.installScriptMod = $obj.installScriptMod -replace '  file *=' , "#$&"
     $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
@@ -690,7 +682,7 @@ Function mod-coretemp ($obj) {
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'FileFullPath          = (Join-Path $toolsDir "' + $filename32 + '")'
-    
+
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$url64.*=').tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -701,7 +693,7 @@ Function mod-coretemp ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32`n  $filePath64"
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
-    
+
     get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
 
@@ -716,14 +708,12 @@ Function mod-resharper-platform ($obj) {
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 
     $obj.installScriptMod = $obj.installScriptMod -replace 'Get-ChocolateyWebFile' , '#Get-ChocolateyWebFile'
-    
-    
 
     #get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
     $dlwdFile = (Join-Path $(Split-Path $obj.toolsDir) "$filename32")
     $dlwd = New-Object net.webclient
     $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
-    
+
     if (Test-Path $dlwdFile) {
         Write-Output "$dlwdFile appears to be downloaded"
     } else {
@@ -731,8 +721,6 @@ Function mod-resharper-platform ($obj) {
     }
 
     $dlwd.dispose()
-    
-    
 }
 
 
@@ -741,12 +729,12 @@ Function mod-geogebra-classic ($obj) {
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-    
+
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
-    
+
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
