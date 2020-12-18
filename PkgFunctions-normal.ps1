@@ -26,7 +26,7 @@ Function mod-4k-youtube-to-mp3 ($obj) {
 Function mod-vscodium-install ($obj) {
     mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -removeEXE
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp' + "`n" + "     $&"
-    $obj.installScriptMod = $obj.installScriptMod -replace 'return',  $string
+    $obj.installScriptMod = $obj.installScriptMod -replace 'return', $string
 }
 
 
@@ -38,7 +38,7 @@ Function mod-google-backup-and-sync ($obj) {
 Function mod-googlechrome ($obj) {
     mod-installcpkg-both -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + "    $&"
-    $obj.installScriptMod = $obj.installScriptMod -replace ' exit ',  $string
+    $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
 }
 
 
@@ -128,7 +128,7 @@ Function mod-dotnetcore3-desktop-runtime ($obj) {
 # SINGLE --------------------------
 
 Function mod-cpuz ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -158,7 +158,7 @@ Function mod-anydesk ($obj) {
 
 
 Function mod-adb ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = '$file       = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -190,8 +190,8 @@ Function mod-uplay ($obj) {
 
 
 Function mod-nordvpn ($obj) {
-    $fullurl32  = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url  ').tostring()
-    $url32      = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url  ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
 
@@ -228,7 +228,7 @@ Function mod-bitwarden ($obj) {
 
 Function mod-gimp ($obj) {
 
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url").tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url").tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
 
@@ -244,7 +244,7 @@ Function mod-gimp ($obj) {
 
 
 Function mod-krita ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' Url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' Url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -274,7 +274,7 @@ Function mod-steam ($obj) {
 
 
 Function mod-skype ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -322,7 +322,7 @@ Function mod-malwarebytes ($obj) {
 
 
 Function mod-calibre ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -350,7 +350,7 @@ Function mod-msiafterburner ($obj) {
 
 
 Function mod-zoom ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -364,7 +364,7 @@ Function mod-zoom ($obj) {
 }
 
 Function mod-advanced-installer ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -378,7 +378,7 @@ Function mod-advanced-installer ($obj) {
 
 
 Function mod-epicgames ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -392,7 +392,7 @@ Function mod-epicgames ($obj) {
 
 
 Function mod-geforce-experience ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -408,7 +408,7 @@ Function mod-geforce-experience ($obj) {
 
 
 Function mod-dropbox ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filename32 = $filename32 -replace '%20' , " "
@@ -424,7 +424,7 @@ Function mod-dropbox ($obj) {
 
 
 Function mod-lightshot ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url = ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -438,7 +438,7 @@ Function mod-lightshot ($obj) {
 }
 
 Function mod-gotomeeting ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url = ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString().Split('?') |  Select-Object -First 1
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -452,7 +452,7 @@ Function mod-gotomeeting ($obj) {
 
 
 Function mod-google-drive-file-stream ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url = ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -468,7 +468,7 @@ Function mod-google-drive-file-stream ($obj) {
 
 
 Function mod-goggalaxy ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url  ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -484,7 +484,7 @@ Function mod-goggalaxy ($obj) {
 
 
 Function mod-slobs ($obj) {
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url64').tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64').tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
     $filePath64 = 'file64          = (Join-Path $toolsDir "' + $filename64 + '")'
@@ -500,7 +500,7 @@ Function mod-slobs ($obj) {
 
 
 Function mod-1password ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url  ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -516,7 +516,7 @@ Function mod-1password ($obj) {
 
 
 Function mod-minecraft-launcher ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url     ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url     ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -531,7 +531,7 @@ Function mod-minecraft-launcher ($obj) {
 
 
 Function mod-hwmonitor ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url.*=').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url.*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -546,7 +546,7 @@ Function mod-hwmonitor ($obj) {
 
 
 Function mod-elgato-game-capture ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$url64.*=').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64.*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -560,7 +560,7 @@ Function mod-elgato-game-capture ($obj) {
 
 
 Function mod-webex-meetings ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url .*=').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url .*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -577,7 +577,7 @@ Function mod-webex-meetings ($obj) {
 
 
 Function mod-inkscape ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -591,7 +591,7 @@ Function mod-inkscape ($obj) {
 
 
 Function mod-makemkv ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '\$url32 .*=').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32 .*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -606,7 +606,7 @@ Function mod-makemkv ($obj) {
 
 
 Function mod-yarn ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern ' url ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'

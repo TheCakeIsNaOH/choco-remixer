@@ -53,8 +53,8 @@ Function Read-NuspecVersion ($nupkgPath) {
 #no need return stuff
 Function Expand-Nupkg {
     param (
-        [parameter(Mandatory=$true)][string]$OrigPath,
-        [parameter(Mandatory=$true)][string]$VersionDir
+        [parameter(Mandatory = $true)][string]$OrigPath,
+        [parameter(Mandatory = $true)][string]$VersionDir
     )
 
     #needed for accessing dotnet zip functions
@@ -64,8 +64,8 @@ Function Expand-Nupkg {
 
     #Making sure that none of the extra .nupkg files are unpacked
     $filteredArchive = $archive.Entries | `
-    Where-Object Name -ne '[Content_Types].xml' | Where-Object Name -ne '.rels' | `
-    Where-Object FullName -notlike 'package/*' | Where-Object Fullname -notlike '__MACOSX/*'
+        Where-Object Name -NE '[Content_Types].xml' | Where-Object Name -NE '.rels' | `
+        Where-Object FullName -NotLike 'package/*' | Where-Object Fullname -NotLike '__MACOSX/*'
 
     $filteredArchive | ForEach-Object {
         $OutputFile = Join-Path $VersionDir $_.fullname
@@ -78,8 +78,8 @@ Function Expand-Nupkg {
 #no need return stuff
 Function Write-UnzippedInstallScript {
     param (
-        [parameter(Mandatory=$true)][string]$toolsDir,
-        [parameter(Mandatory=$true)][string]$installScriptMod
+        [parameter(Mandatory = $true)][string]$toolsDir,
+        [parameter(Mandatory = $true)][string]$installScriptMod
     )
     (Get-ChildItem $toolsDir -Filter "*chocolateyinstall.ps1").fullname | ForEach-Object { Remove-Item -Force -Recurse -ea 0 -Path $_ } -ea 0
     $scriptPath = Join-Path $toolsDir 'chocolateyinstall.ps1'
@@ -90,9 +90,9 @@ Function Write-UnzippedInstallScript {
 #fixme to work with multiple versions and packages at one time, returning?
 Function Write-PerPkg {
     param (
-        [parameter(Mandatory=$true)][string]$version,
-        [parameter(Mandatory=$true)][string]$nuspecID,
-        [parameter(Mandatory=$true)][string]$personalPkgXMLPath
+        [parameter(Mandatory = $true)][string]$version,
+        [parameter(Mandatory = $true)][string]$nuspecID,
+        [parameter(Mandatory = $true)][string]$personalPkgXMLPath
     )
 
     $nuspecID = $nuspecID.tolower()
@@ -101,7 +101,7 @@ Function Write-PerPkg {
     if ($perpkgXMLcontent.mypackages.internalized.pkg.id -notcontains "$nuspecID") {
         Write-Verbose "adding $nuspecID to internalized IDs"
         $addID = $perpkgXMLcontent.CreateElement("pkg")
-        $addID.SetAttribute("id","$nuspecID")
+        $addID.SetAttribute("id", "$nuspecID")
         $perpkgXMLcontent.mypackages.internalized.AppendChild($addID)  | Out-Null
         $perpkgXMLcontent.save($PersonalPkgXMLPath)
 
@@ -130,11 +130,11 @@ Function Get-ChocoApiKeysUrlList {
 #changeme to work with single
 Function Get-fileBoth {
     param (
-        [parameter(Mandatory=$true)][string]$url32,
-        [parameter(Mandatory=$true)][string]$url64,
-        [parameter(Mandatory=$true)][string]$filename32,
-        [parameter(Mandatory=$true)][string]$filename64,
-        [parameter(Mandatory=$true)][string]$toolsDir
+        [parameter(Mandatory = $true)][string]$url32,
+        [parameter(Mandatory = $true)][string]$url64,
+        [parameter(Mandatory = $true)][string]$filename32,
+        [parameter(Mandatory = $true)][string]$filename64,
+        [parameter(Mandatory = $true)][string]$toolsDir
     )
 
     $dlwdFile32 = (Join-Path $toolsDir "$filename32")
@@ -163,9 +163,9 @@ Function Get-fileBoth {
 #no need return stuff
 Function Get-fileSingle {
     param (
-        [parameter(Mandatory=$true)][string]$url,
-        [parameter(Mandatory=$true)][string]$filename,
-        [parameter(Mandatory=$true)][string]$toolsDir
+        [parameter(Mandatory = $true)][string]$url,
+        [parameter(Mandatory = $true)][string]$filename,
+        [parameter(Mandatory = $true)][string]$toolsDir
     )
 
     $dlwdFile = (Join-Path $toolsDir "$filename")
@@ -187,9 +187,9 @@ Function Get-fileSingle {
 #changeme to work single
 Function mod-installcpkg-both {
     param (
-        [parameter(Mandatory=$true)]$obj,
-        [parameter(Mandatory=$true)][int]$urltype,
-        [parameter(Mandatory=$true)][int]$argstype,
+        [parameter(Mandatory = $true)]$obj,
+        [parameter(Mandatory = $true)][int]$urltype,
+        [parameter(Mandatory = $true)][int]$argstype,
         [switch]$needsTools,
         [switch]$needsEA,
         [switch]$stripQueryString,
@@ -206,29 +206,29 @@ Function mod-installcpkg-both {
 
 
     if ($urltype -eq 0) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url ").tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit ").tostring()
+        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
+        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit ").tostring()
     } elseif ($urltype -eq 1) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url32 ').tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
+        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url32 ').tostring()
+        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
     } elseif ($urltype -eq 2) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url ').tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern '^\$Url64 ').tostring()
+        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url ').tostring()
+        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
     } elseif ($urltype -eq 3) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url ").tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64 ").tostring()
+        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
+        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64 ").tostring()
     } elseif ($urltype -eq 4) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url ").tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern "Url64 ").tostring()
+        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url ").tostring()
+        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url64 ").tostring()
     } elseif ($urltype -eq 5) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url32bit ").tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern " Url64bit ").tostring()
+        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url32bit ").tostring()
+        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit ").tostring()
     } else {
         Write-Error "could not find url type"
     }
 
 
-    if ($doubleQuotesUrl){
+    if ($doubleQuotesUrl) {
         $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
         $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").tostring()
     } else {
@@ -237,8 +237,8 @@ Function mod-installcpkg-both {
     }
 
     if ($stripQueryString) {
-        $url32 = $url32 -split "\?" | select-object -First 1
-        $url64 = $url64 -split "\?" | select-object -First 1
+        $url32 = $url32 -split "\?" | Select-Object -First 1
+        $url64 = $url64 -split "\?" | Select-Object -First 1
     }
 
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
