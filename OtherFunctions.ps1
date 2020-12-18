@@ -76,11 +76,14 @@ Function Extract-Nupkg {
 
 
 #no need return stuff
-#changeme to work with individual strings
-Function Write-UnzippedInstallScript ($obj) {
-    (Get-ChildItem $obj.toolsDir -Filter "*chocolateyinstall.ps1").fullname | % { Remove-Item -Force -Recurse -ea 0 -Path $_ } -ea 0
-    $scriptPath = Join-Path $obj.toolsDir 'chocolateyinstall.ps1'
-    $null = Out-File -FilePath $scriptPath -InputObject $obj.installScriptMod -Force
+Function Write-UnzippedInstallScript {
+    param (
+        [parameter(Mandatory=$true)][string]$toolsDir,
+        [parameter(Mandatory=$true)][string]$installScriptMod
+    )
+    (Get-ChildItem $toolsDir -Filter "*chocolateyinstall.ps1").fullname | % { Remove-Item -Force -Recurse -ea 0 -Path $_ } -ea 0
+    $scriptPath = Join-Path $toolsDir 'chocolateyinstall.ps1'
+    $null = Out-File -FilePath $scriptPath -InputObject $installScriptMod -Force
 
 }
 

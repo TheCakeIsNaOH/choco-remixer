@@ -632,7 +632,7 @@ Foreach ($obj in $nupkgObjArray) {
             Invoke-Expression $tempFuncName
             $tempFuncName = $null
 
-            Write-UnzippedInstallScript -obj $obj
+            Write-UnzippedInstallScript -installScriptMod $obj.installScriptMod -toolsDir $obj.toolsDir
 
             #start choco pack in the correct directory
             $packcode = Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
