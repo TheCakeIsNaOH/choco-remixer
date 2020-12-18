@@ -2,11 +2,11 @@
 
 This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-recompile-packages) select Chocolatey packages.
 
-## Why? 
+## Why did I make this? 
 
 - Because relying on software to be available at a specific URL on the internet in perpetuity is not a good idea.
 - Manually downloading and internalizing for each package version is a lot of work.
-- The [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that also has [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages) is:
+- The [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that has similar [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages) is:
  
    - Not open source
    - Too expensive for almost all non-business users because it starts at $1,600/year
@@ -43,33 +43,32 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 - I am still actively developing this, I make no promises that it is %100 stable.
 - Packages are supported by whitelist, and support must be added individually for each package. Only a limited subset of packages on chocolatey.org that are not internal are supported at this moment.
-- Error checking is not ideal yet, and there is no logging
+- Error checking is not ideal yet, and there is no separate logging
 
 ## Todo
 
-- Search in subdir of work dir as well, if readonly search dir or something
 - Input creds during run.
-- output current/old package version during repoCheck
 
-- move more packages to no custom function, all declared in xml
+- Move more packages to no custom function, use generic function
+- Add capability to directly specify from xml
 	
 - change functions to use all passed things, not script variables, and strings and whatnot
 - Checksum downloads
-- Logging, and support verbose well
+- Logging and verbose support
 - Error checking and handling
-- Turn into proper module
-- Make individual package functions better
-	- generalize more functionality and make available as functions. 
-  
-    ### Long term
-  
-  - Async/Parallelize file searching, copying, packing, possibly downloading 
-  - Drop dependency on `choco`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip after pack.
+- Drop dependency on `choco`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip after pack.
 	- Move to `chocolatey.lib` instead?
 	- Figure out why does not extract files
 	- Alternate push? `chocolatey.lib`? Nexus API, will reduce compatibility? Dotnet?
-  - Ability to bump version of nupkg
+
+
+    ### Long term
+  
+  - Async/Parallelize file searching, copying, packing, possibly downloading 
+  - generalize more functionality and make available as functions. 
+  - Turn into proper module
+  - Ability to bump version of nupkg (fix version)
   - Extract files individually rather then extracting all and removing excess, difficult because of packages like virtualbox that have files in root dir
-  - Add option to trust names of nupkg's in searching
+  - Add option to trust names of nupkg's in searching, allows for quicker search
   - Git integration for personal-packages.xml
-  - Multiple personal-packages.xml files
+  - Multiple personal-packages.xml files (for now it probably is best to add an alias to your profile for each xml)
