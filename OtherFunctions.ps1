@@ -110,7 +110,7 @@ Function Write-PerPkg {
 
     Write-Verbose "adding $nuspecID $version to list of internalized packages"
     $addVersion = $perpkgXMLcontent.CreateElement("version")
-    $addVersionText = $addVersion.AppendChild($perpkgXMLcontent.CreateTextNode("$version"))
+    $null = $addVersion.AppendChild($perpkgXMLcontent.CreateTextNode("$version"))
     $perpkgXMLcontent.SelectSingleNode("//pkg[@id=""$nuspecID""]").appendchild($addVersion) | Out-Null
     $perpkgXMLcontent.save($PersonalPkgXMLPath)
 }

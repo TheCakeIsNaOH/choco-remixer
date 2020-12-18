@@ -599,7 +599,7 @@ Foreach ($obj in $nupkgObjArray) {
             $obj.status = "done"
             if ($writePerPkgs -eq "yes") {
                 Write-Verbose "writing $($obj.nuspecID) to personal packages as internalized"
-                Write-PerPkg -personalPkgXMLPath $personalPkgXMLPath -Version $obj.version -nuspecID $obj.nuspecID
+                Write-PerPkg -personalPkgXMLPath $personalPkgXMLResolved -Version $obj.version -nuspecID $obj.nuspecID
             }
         }
     } else {
@@ -623,8 +623,3 @@ if ($writeVersion) {
 #Write-Output "completed"
 
 # Get-ChildItem -Recurse -Path '..\.nugetv2\F1' -Filter "*.nupkg" | % { Copy-Item $_.fullname . }
-
-#needs log4net 2.0.3, load net40-full dll
-#add-type -Path ".\chocolatey.dll"
-#add-type -Path ".\net40-full\log4net.dll"
-#[chocolatey.StringExtensions]::to_lower("ASDF")
