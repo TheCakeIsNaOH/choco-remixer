@@ -128,7 +128,7 @@ Function Get-ChocoApiKeysUrlList {
 
 #no need return stuff
 #changeme to work with single
-Function Get-fileBoth {
+Function Get-FileBoth {
     param (
         [parameter(Mandatory = $true)][string]$url32,
         [parameter(Mandatory = $true)][string]$url64,
@@ -161,7 +161,7 @@ Function Get-fileBoth {
 
 
 #no need return stuff
-Function Get-fileSingle {
+Function Get-FileSingle {
     param (
         [parameter(Mandatory = $true)][string]$url,
         [parameter(Mandatory = $true)][string]$filename,
@@ -184,9 +184,11 @@ Function Get-fileSingle {
 
 
 #no need return stuff
-#changeme to work single
 Function Edit-InstallChocolateyPackage {
     param (
+        [parameter(Mandatory = $true)]
+        [ValidateSet("x64", "x32", "both")]
+        [string]$architecture,
         [parameter(Mandatory = $true)]$obj,
         [parameter(Mandatory = $true)][int]$urltype,
         [parameter(Mandatory = $true)][int]$argstype,
@@ -203,50 +205,101 @@ Function Edit-InstallChocolateyPackage {
         [int]$checksumType
     )
 
-
+    $x64 = $true
+    $x32 = $true
+    if ($architecture -eq "x32") {
+        $x64 = $false
+    }
+    if ($architecture -eq "x64") {
+        $x32 = $false
+    }
 
     if ($urltype -eq 0) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit ").tostring()
+        if ($x32) {
+            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
+        }
+        if ($x64) {
+            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit ").tostring()
+        }
     } elseif ($urltype -eq 1) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url32 ').tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
+        if ($x32) {
+            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url32 ').tostring()
+        }
+        if ($x64) {
+            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
+        }
     } elseif ($urltype -eq 2) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url ').tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
+        if ($x32) {
+            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url ').tostring()
+        }
+        if ($x64) {
+            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
+        }
     } elseif ($urltype -eq 3) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64 ").tostring()
+        if ($x32) {
+            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
+        }
+        if ($x64) {
+            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64 ").tostring()
+        }
     } elseif ($urltype -eq 4) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url ").tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url64 ").tostring()
+        if ($x32) {
+            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url ").tostring()
+        }
+        if ($x64) {
+            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url64 ").tostring()
+        }
     } elseif ($urltype -eq 5) {
-        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url32bit ").tostring()
-        $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit ").tostring()
+        if ($x32) {
+            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url32bit ").tostring()
+        }
+        if ($x64) {
+            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit ").tostring()
+        }
     } else {
         Write-Error "could not find url type"
     }
 
 
     if ($doubleQuotesUrl) {
-        $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
-        $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").tostring()
+        if ($x32) {
+            $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
+        }
+        if ($x64) {
+            $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").tostring()
+        } 
     } else {
-        $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-        $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+        if ($x32) {
+            $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+        }
+        if ($x64) {
+            $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+        }
     }
 
     if ($stripQueryString) {
-        $url32 = $url32 -split "\?" | Select-Object -First 1
-        $url64 = $url64 -split "\?" | Select-Object -First 1
+        if ($x32) {
+            $url32 = $url32 -split "\?" | Select-Object -First 1
+        }
+        if ($x64) {
+            $url64 = $url64 -split "\?" | Select-Object -First 1
+        }
     }
 
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    if ($x32) {
+        $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    }
+    if ($x64) {
+        $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    }
 
     if ($DeEncodeSpace) {
-        $filename32 = $filename32 -replace '%20' , " "
-        $filename64 = $filename64 -replace '%20' , " "
+        if ($x32) {
+            $filename32 = $filename32 -replace '%20' , " "
+        }
+        if ($x64) {
+            $filename64 = $filename64 -replace '%20' , " "
+        } 
     }
 
     if ($x64NameExt) {
@@ -255,9 +308,18 @@ Function Edit-InstallChocolateyPackage {
 
 
     if ($argstype -eq 0) {
-        $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-        $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
-        $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+        if ($architecture -eq "x32") {
+            $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+            $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
+        }
+        if ($architecture -eq "x64") {
+            $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
+            $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+        } else {
+            $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+            $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
+            $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+        }
     } else {
         Write-Error "could not find args type"
     }
@@ -283,7 +345,15 @@ Function Edit-InstallChocolateyPackage {
     }
 
     Write-Output "Downloading $($obj.NuspecID) files"
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    if ($architecture -eq "x32") {
+        Get-FileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    }
+    if ($architecture -eq "x64") {
+        Get-FileSingle -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+    } else {
+        Get-FileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    }
+    
     #add checksum here, or in download file?
 
 }

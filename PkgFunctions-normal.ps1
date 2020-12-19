@@ -4,130 +4,130 @@
 param()
 
 Function Convert-4k-slideshow ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
 Function Convert-4k-video-downloader ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
 Function Convert-4k-stogram ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
 Function Convert-4k-video-to-mp3 ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveMSI
 }
 
 
 Function Convert-4k-youtube-to-mp3 ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveExe
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 1 -argstype 0 -stripQueryString -RemoveExe
 }
 
 
 Function Convert-vscodium-install ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -removeEXE
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -removeEXE
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp' + "`n" + "     $&"
     $obj.installScriptMod = $obj.installScriptMod -replace 'return', $string
 }
 
 
 Function Convert-google-backup-and-sync ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveMSI
 }
 
 
 Function Convert-googlechrome ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + "    $&"
     $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
 }
 
 
 Function Convert-vagrant ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveMSI
 }
 
 
 Function Convert-onlyoffice ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 3 -argstype 0 -needsTools -RemoveExe
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 3 -argstype 0 -needsTools -RemoveExe
 }
 
 
 Function Convert-dotnetcore-sdk ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveExe
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveExe
 }
 
 
 Function Convert-mono ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveMSI
 }
 
 
 Function Convert-shotcut-install ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveExe
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveExe
 }
 
 
 Function Convert-vivaldi-portable ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
 }
 
 
 Function Convert-vivaldi-install ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE
 }
 
 
 Function Convert-edge ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 1 -argstype 0 -needsTools -RemoveMSI
 }
 
 
 Function Convert-slack ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 1 -argstype 0 -x64NameExt -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 1 -argstype 0 -x64NameExt -RemoveMSI
 }
 
 
 Function Convert-riot-web ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 4 -argstype 0 -needsTools -x64NameExt -DeEncodeSpace -removeEXE
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 4 -argstype 0 -needsTools -x64NameExt -DeEncodeSpace -removeEXE
 }
 
 
 Function Convert-discord-install ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE -DeEncodeSpace -x64NameExt
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -needsTools -RemoveEXE -DeEncodeSpace -x64NameExt
 }
 
 
 Function Convert-openshot ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 0 -needsTools -RemoveEXE
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -argstype 0 -urltype 0 -needsTools -RemoveEXE
 }
 
 
 Function Convert-virt-viewer ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 2 -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -argstype 0 -urltype 2 -RemoveMSI
 }
 
 
 Function Convert-box-drive ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 3 -needsTools -RemoveMSI
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -argstype 0 -urltype 3 -needsTools -RemoveMSI
 }
 
 
 Function Convert-ringcentral-classic ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 5 -needsTools -RemoveEXE -DeEncodeSpace
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -argstype 0 -urltype 5 -needsTools -RemoveEXE -DeEncodeSpace
 }
 
 
 Function Convert-kodi ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 0 -needsTools -RemoveEXE
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -argstype 0 -urltype 0 -needsTools -RemoveEXE
 }
 
 Function Convert-dotnetcore3-desktop-runtime ($obj) {
-    Edit-InstallChocolateyPackage -obj $obj -argstype 0 -urltype 0 -needsEA -needsTools -RemoveEXE
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -argstype 0 -urltype 0 -needsEA -needsTools -RemoveEXE
 }
 
 # SINGLE --------------------------
