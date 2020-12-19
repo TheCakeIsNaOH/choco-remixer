@@ -181,8 +181,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
         Throw "proxyRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
     } elseif ($proxyRepoCreds -eq "no") {
         $proxyRepoHeaderCreds = @{ }
-        #todo, fix later things that want creds
-        Throw "not implemented yet, you could remove this line and see how it goes"
+        Write-Warning "Not tested yet, if you see this, let us know how it goes"
     } elseif ($proxyRepoCreds -eq "yes") {
         #todo, implement me
         Throw "not implemented yes, later will give option to give creds here"
@@ -218,9 +217,6 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
     $proxyRepoBrowsePage = Invoke-WebRequest -UseBasicParsing -Uri $proxyRepoBrowseURL -Headers $proxyRepoHeaderCreds
     $proxyRepoIdList = $proxyRepoBrowsePage.Links.href
 
-    #TODO, see proxy repo push
-    #$pushRepoName = ($pushURL -split "repository" | Select-Object -last 1).trim("/")
-
     $saveDir = Join-Path $workDir "internal-packages-temp"
     if (!(Test-Path $saveDir)) {
         $null = mkdir $saveDir
@@ -255,10 +251,6 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
                     $dlwd.DownloadFile($downloadURL, $dlwdPath)
                     $dlwd.dispose()
 
-
-                    #TODO, might need multipart/form-data, which is a royal pain
-                    #$apiPutURL = $proxyRepoApiURL + "components?repository=$pushRepoName"
-                    #Invoke-RestMethod -UseBasicParsing -Headers $proxyRepoHeaderCreds -Method POST -InFile $dlwdPath -Uri $apiPutURL
                     $pushArgs = "push " + $filename + " -f -r -s " + $pushURL
                     $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
 
@@ -356,8 +348,7 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
         Throw "privateRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
     } elseif ($privateRepoCreds -eq "no") {
         $privateRepoHeaderCreds = @{ }
-        #todo, fix later things that want creds
-        Throw "not implemented yet, you could remove this line and see how it goes"
+        Write-Warning "Not tested yet, if you see this, let us know how it goes"
     } elseif ($privateRepoCreds -eq "yes") {
         #todo, implement me
         Throw "not implemented yes, later will give option to give creds here"
@@ -397,9 +388,6 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 
         $nuspecID = $_
         Write-Verbose "Comparing repo versions of $($nuspecID)"
-        #[xml]$var = https://chocolatey.org/api/v2/Packages()?$filter=(tolower(Id)%20eq%20%27googlechrome%27)%20and%20IsLatestVersion #normal
-        #https://chocolatey.org/api/v2/Packages()?$filter=(tolower(Id)%20eq%20%27googlechrome%27)%20and%20IsAbsoluteLatestVersion #pre
-        #$var.feed.entry.properties.Version
 
         $privatePageURL = $privateRepoApiURL + 'search?repository=' + $privateRepoName + '&format=nuget&q=' + $nuspecID
         $privatePageURLorig = $privatePageURL
@@ -418,9 +406,6 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
         $publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
         [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL
         $publicVersion = $publicPage.feed.entry.properties.Version
-
-        #[xml]$page = https://chocolatey.org/api/v2/Packages()?$filter=(tolower(Id)%20eq%20%27googlechrome%27)
-        #
 
         if ($privateVersions -inotcontains $publicVersion) {
 
