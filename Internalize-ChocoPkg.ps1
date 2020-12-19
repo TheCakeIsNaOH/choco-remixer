@@ -141,7 +141,7 @@ if ($pushPkgs -eq "yes") {
         Write-Verbose "pushURL exists, but did not return ok. This is expected if it requires authentication"
     }
 
-    $apiKeySources = Get-ChocoApiKeysUrls
+    $apiKeySources = Get-ChocoApiKeysUrlList
 
     if ($apiKeySources -notcontains $pushURL) {
         Write-Verbose "Did not find a API key for $pushURL"
