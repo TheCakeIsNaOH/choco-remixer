@@ -102,7 +102,7 @@ Function Write-PerPkg {
         Write-Verbose "adding $nuspecID to internalized IDs"
         $addID = $perpkgXMLcontent.CreateElement("pkg")
         $addID.SetAttribute("id", "$nuspecID")
-        $perpkgXMLcontent.mypackages.internalized.AppendChild($addID)  | Out-Null
+        $perpkgXMLcontent.mypackages.internalized.AppendChild($addID) | Out-Null
         $perpkgXMLcontent.save($PersonalPkgXMLPath)
 
         [XML]$perpkgXMLcontent = Get-Content $PersonalPkgXMLPath

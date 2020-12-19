@@ -320,7 +320,7 @@ Function Convert-ds4windows ($obj) {
 Function Convert-adobereader ($obj) {
     $secondDir = (Join-Path $obj.toolsDir 'tools')
     If (Test-Path $secondDir) {
-        Get-ChildItem -Path $secondDir |  Move-Item -Destination $obj.toolsDir
+        Get-ChildItem -Path $secondDir | Move-Item -Destination $obj.toolsDir
         Remove-Item $secondDir -ea 0 -Force
     }
 

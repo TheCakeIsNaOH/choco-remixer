@@ -444,7 +444,7 @@ Function Convert-lightshot ($obj) {
 
 Function Convert-gotomeeting ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString().Split('?') |  Select-Object -First 1
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString().Split('?') | Select-Object -First 1
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
 
