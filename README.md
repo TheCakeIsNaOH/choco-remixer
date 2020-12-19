@@ -54,9 +54,9 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 	
 - change functions to use all passed things, not script variables, and strings and whatnot
 - Checksum downloads
-- Logging and verbose support
-- Error checking and handling
-- Drop dependency on `choco`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip after pack.
+- Better verbose support
+- Better error checking and handling
+- Drop dependency on `choco.exe`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip after pack.
 	- Move to `chocolatey.lib` instead?
 	- Figure out why does not extract files
 	- Alternate push? `chocolatey.lib`? Nexus API, will reduce compatibility? Dotnet?
