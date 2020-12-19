@@ -447,7 +447,6 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 #todo, make able to do multiple search dirs
 #add switch here to select from other options to get list of nupkgs
 if ($thoroughList) {
-    #Get-ChildItem $searchDir -File -Filter "*adopt*.nupkg" -Recurse
     $nupkgArray = Get-ChildItem -File $searchDir -Filter "*.nupkg" -Recurse
 } else {
     #filters based on folder name, therefore less files to open later and therefore faster, but may not be useful in all circumstances.
