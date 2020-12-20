@@ -314,11 +314,24 @@ Function Edit-InstallChocolateyPackage {
         }
         if ($architecture -eq "x64") {
             $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
-            $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+            $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath64"
         } else {
             $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
             $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
             $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+        }
+    } elseif ($argstype -eq 1) {
+        if ($architecture -eq "x32") {
+            $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+            $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath32"
+        }
+        if ($architecture -eq "x64") {
+            $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
+            $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath64"
+        } else {
+            $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+            $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
+            $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath32`n    $filePath64"
         }
     } else {
         Write-Error "could not find args type"
