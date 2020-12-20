@@ -142,42 +142,6 @@ Function Convert-virtualbox ($obj) {
 }
 
 
-#moving here as this should be outdated now
-Function Convert-nextcloud-client ($obj) {
-
-    $version = $obj.version
-
-    $url32 = "https://download.nextcloud.com/desktop/releases/Windows/Nextcloud-" + $version + "-setup.exe"
-    $filename32 = "Nextcloud-" + $version + "-setup.exe"
-
-    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n   $filePath32"
-
-
-
-    #$dlwdFile32 = (Join-Path $obj.toolsDir "$filename32")
-
-    #$dlwd = New-Object net.webclient
-
-    if (Test-Path $dlwdFile32) {
-        Write-Output $dlwdFile32 ' appears to be downloaded'
-    } else {
-        #$dlwd.DownloadFile($url32, $dlwdFile32)
-        #invoke webrequest needed as with it downloadfile it 429s
-        Invoke-WebRequest -Uri $url32 -OutFile $dlwdFile32
-    }
-
-
-
-    #$dlwd.dispose()
-}
-
-
 Function Convert-nvidia-driver ($obj) {
     $fullurlwin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['url64'\]      = 'https").tostring()
     $fullurlwin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url64   ").tostring()
@@ -292,30 +256,6 @@ Function Convert-geforce-driver ($obj) {
 
 }
 
-#deprecated, package internal now
-Function Convert-ds4windows ($obj) {
-    throw "broken rn"
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url ').tostring()
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
-
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-    $filePath32 = 'FileFullPath     = (Join-Path $toolsDir "' + $filename32 + '")'
-    $filePath64 = 'FileFullPath64   = (Join-Path $toolsDir "' + $filename64 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "#>`n`nInstall-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-    $obj.installScriptMod = $obj.installScriptMod -replace "if \(\-not" , "<#if \(\-not"
-
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-
-}
-
 
 Function Convert-adobereader ($obj) {
     $secondDir = (Join-Path $obj.toolsDir 'tools')
@@ -346,8 +286,6 @@ Function Convert-adobereader ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp'
 
-    Write-Output $obj.toolsDir
-
     get-fileBoth -url32 $MUIurl -url64 $MUImspURL -filename32 $filenameMUI -filename64 $filenameMSP -toolsDir $obj.toolsDir
 }
 
@@ -372,8 +310,6 @@ Function Convert-thunderbird ($obj) {
 
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-
-
 
     get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
@@ -539,15 +475,11 @@ Function Convert-hexchat ($obj) {
 
 
 Function Convert-anydesk-install ($obj) {
-
     $url32 = "https://download.anydesk.com/AnyDesk.msi"
     $filename32 = "AnyDesk.msi"
-
     $filePath32 = '$packageArgs["file"]     = (Join-Path $toolsDir "' + $filename32 + '")'
 
     $obj.installScriptMod = $obj.installScriptMod -replace " Install-ChocolateyPackage " , " Install-ChocolateyInstallPackage "
-    #$obj.installScriptMod = $obj.installScriptMod -replace "(.*)Install-ChocolateyPackage(.*)", "`$1Install-ChocolateyInstallPackage`$2"
-
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyInstallPackage" , "$filePath32`n $&"
 
@@ -574,29 +506,6 @@ Function Convert-tor-browser ($obj) {
 
     get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 
-}
-
-
-Function Convert-imagemagick ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' fallbackUrl ').tostring()
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' fallbackUrl64 ').tostring()
-
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-    $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -700,8 +609,6 @@ Function Convert-coretemp ($obj) {
 
     get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
 }
-
-
 
 
 Function Convert-resharper-platform ($obj) {
