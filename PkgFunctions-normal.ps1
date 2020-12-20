@@ -202,177 +202,62 @@ Function Convert-dropbox ($obj) {
 
 
 Function Convert-lightshot ($obj) {
-    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 0 -urltype 2 -RemoveEXE
+    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 0 -urltype 2 -RemoveEXE -needsTools
 }
 
 
 Function Convert-google-drive-file-stream ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "$packageArgs = @{" , "$&`n  $filePath32"
-    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 0 -urltype 2 -RemoveEXE -needsTools
 }
 
 
 Function Convert-goggalaxy ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url  ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-
-    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 1 -urltype 0 -RemoveEXE -needsTools
 }
 
 
 Function Convert-slobs ($obj) {
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64').tostring()
-    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
-    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-    $filePath64 = 'file64          = (Join-Path $toolsDir "' + $filename64 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath64"
-
-    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-    get-fileSingle -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+    Edit-InstallChocolateyPackage -architecture "x64" -obj $obj -argstype 1 -urltype 2 -RemoveEXE -needsTools
 }
 
 
 Function Convert-1password ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url  ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-
-    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 1 -urltype 0 -RemoveEXE -needsTools
 }
 
 
 Function Convert-minecraft-launcher ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url     ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
-
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 1 -urltype 2 -RemoveMSI -needsTools
 }
 
 
 Function Convert-hwmonitor ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url.*=').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 1 -urltype 2 -RemoveEXE
 }
 
 
 Function Convert-elgato-game-capture ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64.*=').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
-
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Edit-InstallChocolateyPackage -architecture "x64" -obj $obj -argstype 1 -urltype 2 -RemoveMSI
 }
 
 
 Function Convert-webex-meetings ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url .*=').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
-    $obj.installScriptMod = $obj.installScriptMod -replace "url", "#url"
-    #$obj.installScriptMod = $obj.InstallScriptMod + "`n" + 'Get-Process -Name "ptoneclk" | Stop-Process -ea 0'
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
-
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 1 -urltype 0 -RemoveMSI -needsTools
 }
 
 
 Function Convert-inkscape ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
-
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 0 -urltype 0 -RemoveMSI -needsTools
 }
 
 
 Function Convert-makemkv ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32 .*=').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 0 -urltype 1 -RemoveEXE -needsTools
 }
 
 
 Function Convert-yarn ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
-
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
-
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 0 -urltype 0 -RemoveMSI -needsTools
 }
 
 
