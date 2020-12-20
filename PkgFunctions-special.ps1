@@ -742,4 +742,94 @@ Function Convert-geogebra-classic ($obj) {
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
+Function Convert-cpuz ($obj) {
+    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 0 -urltype 0 -needsTools -removeEXE
+    $obj.installScriptMod = $obj.installScriptMod -replace " url " , "#url "
+    $obj.installScriptMod = $obj.installScriptMod -replace " url64bit " , "#url64bit "
+}
 
+
+Function Convert-anydesk ($obj) {
+    $url32 = "https://download.anydesk.com/AnyDesk.exe"
+    $filename32 = "AnyDesk.exe"
+    $filePath32 = 'file           = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
+
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
+Function Convert-adb ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = '$file       = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $obj.installScriptMod = $filePath32 + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "#Install-ChocolateyZipPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace '64 \$checksumType' , '$&
+      Get-ChocolateyUnzip -FileFullPath $file -Destination $unziplocation -PackageName $packagename'
+
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
+Function Convert-krita ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' Url ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod -replace 'file64        = Get-Item \$toolsDir\\\*\.exe' , $filepath64
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
+Function Convert-msiafterburner ($obj) {
+    $url32 = 'http://download.msi.com/uti_exe/vga/MSIAfterburnerSetup.zip'
+    $filename32 = 'afterburner.zip'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#Get-ChocolateyWebFile"
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
+
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
+Function Convert-calibre ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'url ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
+
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
+Function Convert-gotomeeting ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString().Split('?') | Select-Object -First 1
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace "$packageArgs = @{" , "$&`n  $filePath32"
+
+    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}

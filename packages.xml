@@ -752,6 +752,13 @@
 	  <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-vscode-install</functionName>
+      <id>vscode.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+	  <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-webex-meetings</functionName>
       <id>webex-meetings</id>
       <needsStopAction>no</needsStopAction>
