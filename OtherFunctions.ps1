@@ -311,8 +311,7 @@ Function Edit-InstallChocolateyPackage {
         if ($architecture -eq "x32") {
             $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
             $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
-        }
-        if ($architecture -eq "x64") {
+        } elseif ($architecture -eq "x64") {
             $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
             $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath64"
         } else {
@@ -324,8 +323,7 @@ Function Edit-InstallChocolateyPackage {
         if ($architecture -eq "x32") {
             $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
             $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath32"
-        }
-        if ($architecture -eq "x64") {
+        } elseif ($architecture -eq "x64") {
             $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
             $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath64"
         } else {
