@@ -740,3 +740,17 @@ Function Convert-gotomeeting ($obj) {
 
     get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
+
+
+Function Convert-googlechrome ($obj) {
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
+    $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + "    $&"
+    $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
+}
+
+
+Function Convert-vscodium-install ($obj) {
+    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -removeEXE
+    $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp' + "`n" + "     $&"
+    $obj.installScriptMod = $obj.installScriptMod -replace 'return', $string
+}

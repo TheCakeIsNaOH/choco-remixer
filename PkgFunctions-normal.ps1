@@ -28,22 +28,8 @@ Function Convert-4k-youtube-to-mp3 ($obj) {
 }
 
 
-Function Convert-vscodium-install ($obj) {
-    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -removeEXE
-    $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp' + "`n" + "     $&"
-    $obj.installScriptMod = $obj.installScriptMod -replace 'return', $string
-}
-
-
 Function Convert-google-backup-and-sync ($obj) {
     Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 2 -argstype 0 -needsTools -RemoveMSI
-}
-
-
-Function Convert-googlechrome ($obj) {
-    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
-    $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + "    $&"
-    $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
 }
 
 

@@ -70,6 +70,7 @@ if (!(Test-Path $pkgXML)) {
 [XML]$packagesXMLcontent = Get-Content $pkgXML
 [XML]$personalpackagesXMLcontent = Get-Content $personalPkgXMLResolved
 
+#Load options into specific variables to clean up stuff lower down
 $options = $personalpackagesXMLcontent.mypackages.options
 
 $searchDir = $options.searchDir.tostring()
