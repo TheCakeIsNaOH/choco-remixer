@@ -360,8 +360,7 @@ Function Edit-InstallChocolateyPackage {
     Write-Output "Downloading $($obj.NuspecID) files"
     if ($architecture -eq "x32") {
         Get-FileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-    }
-    if ($architecture -eq "x64") {
+    } elseif ($architecture -eq "x64") {
         Get-FileSingle -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
     } else {
         Get-FileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
