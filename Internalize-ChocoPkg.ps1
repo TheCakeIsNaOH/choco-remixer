@@ -58,13 +58,13 @@ if (!($PSBoundParameters.ContainsKey('personalPkgXML'))) {
     }
 
 } elseif (!(Test-Path $personalPkgXML)) {
-    throw "personal-packages.xml not found, please specify valid path"
+    Throw "personal-packages.xml not found, please specify valid path"
 }
 
 $personalPkgXMLResolved = (Resolve-Path $personalPkgXML).path
 
 if (!(Test-Path $pkgXML)) {
-    throw "packages.xml not found, please specify valid path"
+    Throw "packages.xml not found, please specify valid path"
 }
 
 
@@ -100,13 +100,13 @@ if (!($proxyRepoCreds)) {
 
 
 if (!(Test-Path $searchDir)) {
-    throw "$searchDir not found, please specify valid searchDir"
+    Throw "$searchDir not found, please specify valid searchDir"
 }
 if (!(Test-Path $workDir)) {
-    throw "$workDir not found, please specify valid workDir"
+    Throw "$workDir not found, please specify valid workDir"
 }
 if ($workDir.ToLower().StartsWith($searchDir.ToLower())) {
-    throw "workDir cannot be a sub directory of the searchDir"
+    Throw "workDir cannot be a sub directory of the searchDir"
 }
 
 

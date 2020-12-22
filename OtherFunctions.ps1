@@ -128,7 +128,7 @@ Function Get-ChocoApiKeysUrlList {
 
 Function Test-DropPath ($dropPath) {
     if (!(Test-Path $dropPath)) {
-        throw "Drop path not found, please specify valid path"
+        Throw "Drop path not found, please specify valid path"
     }
 
     for (($i = 0); ($i -le 12) -and ($null -ne $(Get-ChildItem -Path $dropPath -Filter "*.nupkg")) ; $i++ ) {
