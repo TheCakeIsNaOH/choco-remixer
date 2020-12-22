@@ -91,14 +91,13 @@ $moveToRepoURL = $options.moveToRepoURL.tostring()
 if ($options.writeVersion.tostring() -eq "yes") {
     $writeVersion = $true
 }
-
 if (!($privateRepoCreds)) {
     $privateRepoCreds = $options.privateRepoCreds.tostring()
 }
-
 if (!($proxyRepoCreds)) {
     $proxyRepoCreds = $options.proxyRepoCreds.tostring()
 }
+
 
 if (!(Test-Path $searchDir)) {
     throw "$searchDir not found, please specify valid searchDir"
@@ -109,6 +108,7 @@ if (!(Test-Path $workDir)) {
 if ($workDir.ToLower().StartsWith($searchDir.ToLower())) {
     throw "workDir cannot be a sub directory of the searchDir"
 }
+
 
 if ($useDropPath -eq "yes") {
     Test-DropPath -dropPath $dropPath
@@ -130,7 +130,6 @@ if ($pushPkgs -eq "yes") {
 }
 
 
-
 if (($repomove -eq "yes") -and (!($skipRepoMove))) {
     Invoke-RepoMove -moveToRepoURL $moveToRepoURL -proxyRepoCreds $proxyRepoCreds -proxyRepoURL $proxyRepoURL -personalpackagesXMLcontent $personalpackagesXMLcontent -workDir $workDir -searchDir $searchDir
 } elseif ($repoMove -eq "no") {
@@ -139,7 +138,6 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
         Throw "bad repoMove value in personal-packages.xml, must be yes or no"
     }
 }
-
 
 
 if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
@@ -248,6 +246,7 @@ $nupkgArray | Select-Object -Unique | ForEach-Object {
     }
 }
 
+
 #don't need the list anymore, use nupkgObjArray
 $nupkgArray = $null
 
@@ -273,7 +272,6 @@ Foreach ($obj in $nupkgObjArray) {
         $obj.status = "internalized"
     }
 }
-
 
 
 Foreach ($obj in $nupkgObjArray) {
@@ -303,10 +301,10 @@ Foreach ($obj in $nupkgObjArray) {
 }
 
 
-
 Foreach ($obj in $nupkgObjArray) {
     Write-Output "$($obj.nuspecID) $($obj.Version) $($obj.status)" 
 }
+
 
 if ($writeVersion) {
     Write-Output "`n"
