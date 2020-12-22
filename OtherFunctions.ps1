@@ -87,7 +87,6 @@ Function Write-UnzippedInstallScript {
 }
 
 
-#fixme to work with multiple versions and packages at one time, returning?
 Function Write-PerPkg {
     param (
         [parameter(Mandatory = $true)][string]$version,
@@ -127,7 +126,6 @@ Function Get-ChocoApiKeysUrlList {
 }
 
 #no need return stuff
-#changeme to work with single
 Function Get-FileBoth {
     param (
         [parameter(Mandatory = $true)][string]$url32,
@@ -144,19 +142,19 @@ Function Get-FileBoth {
     $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
 
     if (Test-Path $dlwdFile32) {
-        Write-Output "$dlwdFile32 appears to be downloaded"
+        Write-Information "$dlwdFile32 appears to be downloaded" -InformationAction Continue
     } else {
         $dlwd.DownloadFile($url32, $dlwdFile32)
     }
 
     if (Test-Path $dlwdFile64) {
-        Write-Output "$dlwdFile64 appears to be downloaded"
+        Write-Information "$dlwdFile64 appears to be downloaded" -InformationAction Continue
     } else {
         $dlwd.DownloadFile($url64, $dlwdFile64)
     }
 
     $dlwd.dispose()
-    # get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    # get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $toolsDir
 }
 
 
@@ -173,13 +171,13 @@ Function Get-FileSingle {
     $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
 
     if (Test-Path $dlwdFile) {
-        Write-Output "$dlwdFile appears to be downloaded"
+        Write-Information "$dlwdFile appears to be downloaded" -InformationAction Continue
     } else {
         $dlwd.DownloadFile($url, $dlwdFile)
     }
 
     $dlwd.dispose()
-    # get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    # get-fileSingle -url $url32 -filename $filename32 -toolsDir $toolsDir
 }
 
 
@@ -189,7 +187,9 @@ Function Edit-InstallChocolateyPackage {
         [parameter(Mandatory = $true)]
         [ValidateSet("x64", "x32", "both")]
         [string]$architecture,
-        [parameter(Mandatory = $true)]$obj,
+        [parameter(Mandatory = $true)][string]$nuspecID,
+        [parameter(Mandatory = $true)][string]$installScript,
+        [parameter(Mandatory = $true)][string]$toolsDir,
         [parameter(Mandatory = $true)][int]$urltype,
         [parameter(Mandatory = $true)][int]$argstype,
         [switch]$needsTools,
@@ -214,47 +214,49 @@ Function Edit-InstallChocolateyPackage {
         $x32 = $false
     }
 
+    [string]$installScriptMod = $installScript
+
     if ($urltype -eq 0) {
         if ($x32) {
-            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
+            $fullurl32 = ($installScript -split "`n" | Select-String -Pattern " Url ").tostring()
         }
         if ($x64) {
-            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit ").tostring()
+            $fullurl64 = ($installScript -split "`n" | Select-String -Pattern " Url64bit ").tostring()
         }
     } elseif ($urltype -eq 1) {
         if ($x32) {
-            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url32 ').tostring()
+            $fullurl32 = ($installScript -split "`n" | Select-String -Pattern '^\$Url32 ').tostring()
         }
         if ($x64) {
-            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
+            $fullurl64 = ($installScript -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
         }
     } elseif ($urltype -eq 2) {
         if ($x32) {
-            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url ').tostring()
+            $fullurl32 = ($installScript -split "`n" | Select-String -Pattern '^\$Url ').tostring()
         }
         if ($x64) {
-            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
+            $fullurl64 = ($installScript -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
         }
     } elseif ($urltype -eq 3) {
         if ($x32) {
-            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
+            $fullurl32 = ($installScript -split "`n" | Select-String -Pattern " Url ").tostring()
         }
         if ($x64) {
-            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64 ").tostring()
+            $fullurl64 = ($installScript -split "`n" | Select-String -Pattern " Url64 ").tostring()
         }
     } elseif ($urltype -eq 4) {
         if ($x32) {
-            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url ").tostring()
+            $fullurl32 = ($installScript -split "`n" | Select-String -Pattern "Url ").tostring()
         }
         if ($x64) {
-            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url64 ").tostring()
+            $fullurl64 = ($installScript -split "`n" | Select-String -Pattern "Url64 ").tostring()
         }
     } elseif ($urltype -eq 5) {
         if ($x32) {
-            $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url32bit ").tostring()
+            $fullurl32 = ($installScript -split "`n" | Select-String -Pattern " Url32bit ").tostring()
         }
         if ($x64) {
-            $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit ").tostring()
+            $fullurl64 = ($installScript -split "`n" | Select-String -Pattern " Url64bit ").tostring()
         }
     } else {
         Write-Error "could not find url type"
@@ -310,60 +312,60 @@ Function Edit-InstallChocolateyPackage {
     if ($argstype -eq 0) {
         if ($architecture -eq "x32") {
             $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-            $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
+            $installScriptMod = $installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
         } elseif ($architecture -eq "x64") {
             $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
-            $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath64"
+            $installScriptMod = $installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath64"
         } else {
             $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
             $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
-            $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+            $installScriptMod = $installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
         }
     } elseif ($argstype -eq 1) {
         if ($architecture -eq "x32") {
             $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-            $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath32"
+            $installScriptMod = $installScriptMod -replace " = @{" , "$&`n    $filePath32"
         } elseif ($architecture -eq "x64") {
             $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
-            $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath64"
+            $installScriptMod = $installScriptMod -replace " = @{" , "$&`n    $filePath64"
         } else {
             $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
             $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
-            $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath32`n    $filePath64"
+            $installScriptMod = $installScriptMod -replace " = @{" , "$&`n    $filePath32`n    $filePath64"
         }
     } else {
         Write-Error "could not find args type"
     }
 
 
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $installScriptMod = $installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 
 
     if ($needsTools) {
-        $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+        $installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $installScriptMod
     }
     if ($needsEA) {
-        $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+        $installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $installScriptMod
     }
     if ($removeEXE) {
-        $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+        $installScriptMod = $installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     }
     if ($removeMSI) {
-        $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
+        $installScriptMod = $installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
     }
     if ($removeMSU) {
-        $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msu'
+        $installScriptMod = $installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msu'
     }
 
-    Write-Output "Downloading $($obj.NuspecID) files"
+    Write-Information "Downloading $($NuspecID) files" -InformationAction Continue
     if ($architecture -eq "x32") {
-        Get-FileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+        Get-FileSingle -url $url32 -filename $filename32 -toolsDir $toolsDir
     } elseif ($architecture -eq "x64") {
-        Get-FileSingle -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+        Get-FileSingle -url $url64 -filename $filename64 -toolsDir $toolsDir
     } else {
-        Get-FileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+        Get-FileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $toolsDir
     }
     
     #add checksum here, or in download file?
-
+    Return $installScriptMod
 }

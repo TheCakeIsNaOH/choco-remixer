@@ -650,7 +650,7 @@ Function Convert-geogebra-classic ($obj) {
 }
 
 Function Convert-cpuz ($obj) {
-    Edit-InstallChocolateyPackage -architecture "x32" -obj $obj -argstype 0 -urltype 0 -needsTools -removeEXE
+    $obj.installScriptMod = Edit-InstallChocolateyPackage -architecture "x32" -nuspecID $obj.nuspecID -installScript $obj.installScriptOrig -toolsDir $obj.toolsDir -argstype 0 -urltype 0 -needsTools -removeEXE
     $obj.installScriptMod = $obj.installScriptMod -replace " url " , "#url "
     $obj.installScriptMod = $obj.installScriptMod -replace " url64bit " , "#url64bit "
 }
@@ -743,14 +743,14 @@ Function Convert-gotomeeting ($obj) {
 
 
 Function Convert-googlechrome ($obj) {
-    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
+    $obj.installScriptMod = Edit-InstallChocolateyPackage -architecture "both" -nuspecID $obj.nuspecID -installScript $obj.installScriptOrig -toolsDir $obj.toolsDir -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + "    $&"
     $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
 }
 
 
 Function Convert-vscodium-install ($obj) {
-    Edit-InstallChocolateyPackage -architecture "both" -obj $obj -urltype 0 -argstype 0 -removeEXE
+    $obj.installScriptMod = Edit-InstallChocolateyPackage -architecture "both" -nuspecID $obj.nuspecID -installScript $obj.installScriptOrig -toolsDir $obj.toolsDir -urltype 0 -argstype 0 -removeEXE
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp' + "`n" + "     $&"
     $obj.installScriptMod = $obj.installScriptMod -replace 'return', $string
 }

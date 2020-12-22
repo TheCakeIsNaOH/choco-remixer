@@ -47,8 +47,6 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 ## Todo
 
-- Input creds during run.
-
 - Move more packages to no custom function, use generic function
 - Add capability to directly specify from xml
 	
