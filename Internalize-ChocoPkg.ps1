@@ -3,6 +3,8 @@
 param (
     [string]$pkgXML = (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
     [string]$personalPkgXML,
+    [string]$privateRepoCreds,
+    [string]$proxyRepoCreds,
     [switch]$thoroughList,
     [switch]$skipRepoCheck,
     [switch]$skipRepoMove,
@@ -83,16 +85,21 @@ $pushPkgs = $options.pushPkgs.tostring()
 $repoCheck = $options.repoCheck.tostring()
 $publicRepoURL = $options.publicRepoURL.tostring()
 $privateRepoURL = $options.privateRepoURL.tostring()
-$privateRepoCreds = $options.privateRepoCreds.tostring()
 $repoMove = $options.repoMove.tostring()
 $proxyRepoURL = $options.proxyRepoURL.tostring()
-$proxyRepoCreds = $options.proxyRepoCreds.tostring()
 $moveToRepoURL = $options.moveToRepoURL.tostring()
 
 if ($options.writeVersion.tostring() -eq "yes") {
     $writeVersion = $true
 }
 
+if (!($privateRepoCreds)) {
+    $privateRepoCreds = $options.privateRepoCreds.tostring()
+}
+
+if (!($proxyRepoCreds)) {
+    $proxyRepoCreds = $options.proxyRepoCreds.tostring()
+}
 
 if (!(Test-Path $searchDir)) {
     throw "$searchDir not found, please specify valid searchDir"
@@ -183,9 +190,6 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
     } elseif ($proxyRepoCreds -eq "no") {
         $proxyRepoHeaderCreds = @{ }
         Write-Warning "Not tested yet, if you see this, let us know how it goes"
-    } elseif ($proxyRepoCreds -eq "yes") {
-        #todo, implement me
-        Throw "not implemented yes, later will give option to give creds here"
     } else {
         $proxyRepoCredsBase64 = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($proxyRepoCreds))
         $proxyRepoHeaderCreds = @{
@@ -350,9 +354,6 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
     } elseif ($privateRepoCreds -eq "no") {
         $privateRepoHeaderCreds = @{ }
         Write-Warning "Not tested yet, if you see this, let us know how it goes"
-    } elseif ($privateRepoCreds -eq "yes") {
-        #todo, implement me
-        Throw "not implemented yes, later will give option to give creds here"
     } else {
         $privateRepoCredsBase64 = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($privateRepoCreds))
         $privateRepoHeaderCreds = @{

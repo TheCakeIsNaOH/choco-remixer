@@ -45,7 +45,7 @@
 		<publicRepoURL>https://chocolatey.org/api/v2/</publicRepoURL>
         <!-- URL of your private feed -->
 		<privateRepoURL>https://my.repo/private-feed/</privateRepoURL>
-		<!-- specify credentials if needed; format user:pass ; Otherwise if no authentication, put in no -->
+		<!-- specify credentials if needed; format user:pass ; Otherwise if no authentication, put in no; can also specify in params -->
 		<privateRepoCreds>no</privateRepoCreds>
         
         <!-- Nexus only -->
@@ -53,7 +53,7 @@
 		<repoMove>no</repoMove>
 		<proxyRepoURL>https://my.repo/chocolatey.org-proxy</proxyRepoURL>
 		<moveToRepoURL>https://my.repo/private-feed/</moveToRepoURL>
-		<!-- specify credentials if needed; format user:pass ; Otherwise if no authentication, put in no -->
+		<!-- specify credentials if needed; format user:pass ; Otherwise if no authentication, put in no; can also specify in params -->
 		<proxyRepoCreds>no</proxyRepoCreds>
         
         <!-- Attempt to write out the the old and the new version of the package | option is yes or no -->
