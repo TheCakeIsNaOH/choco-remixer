@@ -296,7 +296,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
                     }
 
                     if ($internalizedVersions -icontains $_) {
-                        Write-Output "$nuspecID $_ already internalized, deleting cached version in proxy repository"
+                        Write-Information "$nuspecID $_ already internalized, deleting cached version in proxy repository" -InformationAction Continue
                         $apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
                         $null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
                     } else {
@@ -311,12 +311,12 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
                         $dlwd.DownloadFile($downloadURL, $dlwdPath)
                         $dlwd.dispose()
 
-                        Write-Output "$nuspecID $_ found and downloaded, needs to be manually deleted finishme here"
+                        Write-Information "$nuspecID $_ found and downloaded, needs to be manually deleted finishme here" -InformationAction Continue
                     }
                 }
 
             } else {
-                Write-Output "$nuspecID found in the proxy repo, it is a new ID, may need to be implemented or added to the internal list"
+                Write-Information "$nuspecID found in the proxy repo, it is a new ID, may need to be implemented or added to the internal list" -InformationAction Continue
             }
         }
     }
@@ -411,7 +411,7 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 
         if ($privateVersions -inotcontains $publicVersion) {
 
-            Write-Output "$nuspecID out of date on private repo, found version $publicVersion, downloading"
+            Write-Information "$nuspecID out of date on private repo, found version $publicVersion, downloading" -InformationAction Continue
 
             $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea 0
             $dlwdURL = $redirectpage.Links.href
@@ -427,7 +427,7 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
             $dlwd.DownloadFile($dlwdURL, $dlwdPath)
             $dlwd.dispose()
 
-            Write-Output "Waiting three seconds before downloading the next package so as to not get rate limited"
+            Write-Information "Waiting three seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
             Start-Sleep -S 3
 
         }
@@ -473,7 +473,7 @@ $nupkgArray | Select-Object -Unique | ForEach-Object {
     if ($internalizedVersions -icontains $nuspecVersion) {
         Write-Verbose "$nuspecID $nuspecVersion is already internalized"
     } elseif ($packagesXMLcontent.packages.notImplemented.id -icontains $nuspecID) {
-        Write-Output "$nuspecID $nuspecVersion  not implemented, requires manual internalization"
+        Write-Warning "$nuspecID $nuspecVersion  not implemented, requires manual internalization"
     } elseif ($personalpackagesXMLcontent.mypackages.personal.id -icontains $nuspecID) {
         Write-Verbose "$nuspecID is a custom package"
     } elseif ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
@@ -485,7 +485,7 @@ $nupkgArray | Select-Object -Unique | ForEach-Object {
         $installScript = $installScriptDetails[1]
 
         if ($installScriptDetails[0] -eq "noscript") {
-            Write-Output "You may want to add $nuspecID $nuspecVersion to the internal list"
+            Write-Warning "You may want to add $nuspecID $nuspecVersion to the internal list; no script found"
 
             #Useful if adding support for multiple new packages
             #Write-Output '<id>'$nuspecID'</id>'
@@ -532,10 +532,10 @@ $nupkgArray | Select-Object -Unique | ForEach-Object {
 
             $nupkgObjArray.add($obj) | Out-Null
 
-            Write-Output "Found $nuspecID $nuspecVersion to internalize"
+            Write-Information "Found $nuspecID $nuspecVersion to internalize" -InformationAction Continue
         }
     } else {
-        Write-Output "$nuspecID $nuspecVersion is new, id unknown"
+        Write-Warning "$nuspecID $nuspecVersion is new, id unknown"
     }
 }
 
@@ -596,16 +596,13 @@ Foreach ($obj in $nupkgObjArray) {
 
 
 Foreach ($obj in $nupkgObjArray) {
-    Write-Output "$($obj.nuspecID) $($obj.Version) $($obj.status)"
+    Write-Output "$($obj.nuspecID) $($obj.Version) $($obj.status)" 
 }
 
 if ($writeVersion) {
-    Write-Output "`n`n"
+    Write-Output "`n"
     Foreach ($obj in $nupkgObjArray) {
         Write-Output "$($obj.nuspecID) $($obj.OldVersion) to $($obj.Version)"
     }
 }
 
-#Write-Output "completed"
-
-# Get-ChildItem -Recurse -Path '..\.nugetv2\F1' -Filter "*.nupkg" | % { Copy-Item $_.fullname . }
