@@ -125,6 +125,45 @@ Function Get-ChocoApiKeysUrlList {
     }
 }
 
+
+Function Test-DropPath ($dropPath) {
+    if (!(Test-Path $dropPath)) {
+        throw "Drop path not found, please specify valid path"
+    }
+
+    for (($i = 0); ($i -le 12) -and ($null -ne $(Get-ChildItem -Path $dropPath -Filter "*.nupkg")) ; $i++ ) {
+        Write-Output "Found files in the drop path, waiting 15 seconds for them to clear"
+        Start-Sleep -Seconds 15
+    }
+
+    if ($null -ne $(Get-ChildItem -Path $dropPath -Filter "*.nupkg")) {
+        Write-Warning "There are still files in the drop path"
+    }
+}
+
+
+Function Test-PushPackages ($pushURL) {
+        if ($null -eq $pushURL) {
+        Throw "no pushURL in personal-packages.xml"
+    }
+    try { $page = Invoke-WebRequest -UseBasicParsing -Uri $pushURL -Method head }
+    catch { $page = $_.Exception.Response }
+
+    if ($null -eq $page.StatusCode) {
+        Throw "bad pushURL in personal-packages.xml"
+    } elseif ($page.StatusCode -eq 200) {
+    } else {
+        Write-Verbose "pushURL exists, but did not return ok. This is expected if it requires authentication"
+    }
+
+    $apiKeySources = Get-ChocoApiKeysUrlList
+
+    if ($apiKeySources -notcontains $pushURL) {
+        Write-Verbose "Did not find a API key for $pushURL"
+    }
+}
+
+
 #no need return stuff
 Function Get-FileBoth {
     param (

@@ -50,7 +50,6 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - Move more packages to no custom function, use generic function
 - Add capability to directly specify from xml
 	
-- change functions to use all passed things, not script variables, and strings and whatnot
 - Checksum downloads
 - Better verbose support
 - Better error checking and handling
