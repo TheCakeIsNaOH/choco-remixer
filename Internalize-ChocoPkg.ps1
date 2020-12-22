@@ -305,107 +305,7 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 
 
 if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
-    $ProgressPreference = 'SilentlyContinue'
-
-    if ($null -eq $publicRepoURL) {
-        Throw "no publicRepoURL in personal-packages.xml"
-    }
-    try { $page = Invoke-WebRequest -UseBasicParsing -Uri $publicRepoURL -Method head }
-    catch { $page = $_.Exception.Response }
-
-    if ($null -eq $page.StatusCode) {
-        Throw "bad publicRepoURL in personal-packages.xml"
-    } elseif ($page.StatusCode -eq 200) {
-    } else {
-        Write-Warning "publicRepoURL exists, but did not return ok. This is expected if it requires authentication"
-    }
-
-    if ($null -eq $privateRepoCreds) {
-        Throw "privateRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
-    } elseif ($privateRepoCreds -eq "no") {
-        $privateRepoHeaderCreds = @{ }
-        Write-Warning "Not tested yet, if you see this, let us know how it goes"
-    } else {
-        $privateRepoCredsBase64 = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($privateRepoCreds))
-        $privateRepoHeaderCreds = @{
-            Authorization = "Basic $privateRepoCredsBase64"
-        }
-    }
-
-    if ($null -eq $privateRepoURL) {
-        Throw "no privateRepoURL in personal-packages.xml"
-    }
-    try {
-        $page = Invoke-WebRequest -UseBasicParsing -Uri $privateRepoURL -Method head -Headers $privateRepoHeaderCreds
-    } catch { $page = $_.Exception.Response }
-
-    if ($null -eq $page.StatusCode) {
-        Throw "bad privateRepoURL in personal-packages.xml"
-    } elseif ($page.StatusCode -eq 200) {
-    } else {
-        Write-Warning "privateRepoURL exists, but did not return ok. If it reques credentials, please check that they are correct"
-    }
-
-    $toSearchToInternalize = $personalpackagesXMLcontent.mypackages.toInternalize.id
-    $toInternalizeCompare = Compare-Object -ReferenceObject $packagesXMLcontent.packages.custom.pkg.id -DifferenceObject $toSearchToInternalize | Where-Object SideIndicator -EQ "=>"
-
-    if ($toInternalizeCompare.inputObject) {
-        Throw "$($toInternalizeCompare.InputObject) not found in packages.xml"
-    }
-
-    $privateRepoName = ($privateRepoURL -split "repository" | Select-Object -Last 1).trim("/")
-    $privateRepoBaseURL = $privateRepoURL -split "repository" | Select-Object -First 1
-    $privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
-
-    $toSearchToInternalize | ForEach-Object {
-
-        $nuspecID = $_
-        Write-Verbose "Comparing repo versions of $($nuspecID)"
-
-        $privatePageURL = $privateRepoApiURL + 'search?repository=' + $privateRepoName + '&format=nuget&q=' + $nuspecID
-        $privatePageURLorig = $privatePageURL
-        do {
-
-            #TODO fixme for casing
-            $privatePage = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privatePageURL
-
-            [array]$privateVersions = $privateVersions + ( $privatePage.items | Where-Object { $_.name.tolower() -eq $nuspecID } ).version
-
-            if ($privatePage.continuationToken) {
-                $privatePageURL = $privatePageURLorig + '&continuationToken=' + $privatePage.continuationToken
-            }
-        }  while ($privatePage.continuationToken)
-
-        $publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
-        [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL
-        $publicVersion = $publicPage.feed.entry.properties.Version
-
-        if ($privateVersions -inotcontains $publicVersion) {
-
-            Write-Information "$nuspecID out of date on private repo, found version $publicVersion, downloading" -InformationAction Continue
-
-            $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea 0
-            $dlwdURL = $redirectpage.Links.href
-            $filename = $dlwdURL.split("/") | Select-Object -Last 1
-
-            $saveDir = Join-Path $searchDir $nuspecID
-            if (!(Test-Path $saveDir)) {
-                $null = mkdir $saveDir
-            }
-
-            $dlwdPath = Join-Path $saveDir $filename
-            $dlwd = New-Object net.webclient
-            $dlwd.DownloadFile($dlwdURL, $dlwdPath)
-            $dlwd.dispose()
-
-            Write-Information "Waiting three seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
-            Start-Sleep -S 3
-
-        }
-    }
-    $nuspecID = $null
-    $ProgressPreference = 'Continue'
-
+    Invoke-RepoCheck -publicRepoURL $publicRepoURL -privateRepoCreds $privateRepoCreds -privateRepoURL $privateRepoURL -personalpackagesXMLcontent $personalpackagesXMLcontent -searchDir $searchDir
 } elseif ($repoCheck -eq "no") {
 } else {
     if (!($skipRepoCheck)) {
@@ -418,7 +318,7 @@ if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
 [System.Collections.ArrayList]$nupkgObjArray = @()
 
 #todo, make able to do multiple search dirs
-#add switch here to select from other options to get list of nupkgs
+#todo, add switch here to select from other options to get list of nupkgs
 if ($thoroughList) {
     $nupkgArray = Get-ChildItem -File $searchDir -Filter "*.nupkg" -Recurse
 } else {
