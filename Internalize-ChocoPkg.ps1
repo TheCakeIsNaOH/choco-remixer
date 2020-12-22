@@ -125,7 +125,8 @@ if ("no", "yes" -notcontains $writePerPkgs) {
 
 if ($pushPkgs -eq "yes") {
     Test-PushPackages -pushURL $pushURL
-} elseif ($pushPkgs -eq "no") { } else {
+} elseif ($pushPkgs -eq "no") { 
+} else {
     Throw "bad pushPkgs value in personal-packages.xml, must be yes or no"
 }
 
@@ -159,7 +160,7 @@ if ($thoroughList) {
     $nupkgArray = Get-ChildItem -File $searchDir -Filter "*.nupkg" -Recurse
 } else {
     #filters based on folder name, therefore less files to open later and therefore faster, but may not be useful in all circumstances.
-    $nupkgArray = (Get-ChildItem -File $searchDir  -Filter "*.nupkg" -Recurse) | Where-Object {
+    $nupkgArray = (Get-ChildItem -File $searchDir -Filter "*.nupkg" -Recurse) | Where-Object {
         ($_.directory.name -notin $packagesXMLcontent.packages.internal.id) `
             -and ($_.directory.Parent.name -notin $packagesXMLcontent.packages.internal.id) `
             -and ($_.directory.name -notin $personalpackagesXMLcontent.mypackages.personal.id) `

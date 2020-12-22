@@ -146,8 +146,11 @@ Function Test-PushPackages ($pushURL) {
     if ($null -eq $pushURL) {
         Throw "no pushURL in personal-packages.xml"
     }
-    try { $page = Invoke-WebRequest -UseBasicParsing -Uri $pushURL -Method head }
-    catch { $page = $_.Exception.Response }
+    try {
+        $page = Invoke-WebRequest -UseBasicParsing -Uri $pushURL -Method head 
+    } catch {
+        $page = $_.Exception.Response 
+    }
 
     if ($null -eq $page.StatusCode) {
         Throw "bad pushURL in personal-packages.xml"
@@ -179,8 +182,11 @@ Function Invoke-RepoMove {
     if ($null -eq $moveToRepoURL) {
         Throw "no moveToRepoURL in personal-packages.xml"
     }
-    try { $page = Invoke-WebRequest -UseBasicParsing -Uri $moveToRepoURL -Method head }
-    catch { $page = $_.Exception.Response }
+    try {
+        $page = Invoke-WebRequest -UseBasicParsing -Uri $moveToRepoURL -Method head 
+    } catch {
+        $page = $_.Exception.Response 
+    }
 
     if ($null -eq $page.StatusCode) {
         Throw "bad moveToRepoURL in personal-packages.xml"
@@ -352,8 +358,11 @@ Function Invoke-RepoCheck {
     if ($null -eq $publicRepoURL) {
         Throw "no publicRepoURL in personal-packages.xml"
     }
-    try { $page = Invoke-WebRequest -UseBasicParsing -Uri $publicRepoURL -Method head }
-    catch { $page = $_.Exception.Response }
+    try {
+        $page = Invoke-WebRequest -UseBasicParsing -Uri $publicRepoURL -Method head 
+    } catch {
+        $page = $_.Exception.Response 
+    }
 
     if ($null -eq $page.StatusCode) {
         Throw "bad publicRepoURL in personal-packages.xml"
@@ -379,7 +388,9 @@ Function Invoke-RepoCheck {
     }
     try {
         $page = Invoke-WebRequest -UseBasicParsing -Uri $privateRepoURL -Method head -Headers $privateRepoHeaderCreds
-    } catch { $page = $_.Exception.Response }
+    } catch {
+        $page = $_.Exception.Response 
+    }
 
     if ($null -eq $page.StatusCode) {
         Throw "bad privateRepoURL in personal-packages.xml"
