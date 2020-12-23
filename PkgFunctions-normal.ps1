@@ -153,6 +153,8 @@ Function Convert-dotnetcore-sdk ($obj) {
         argstype      = 0
         needsTools    = $true
         RemoveExe     = $true
+        checksumArgsType = 2
+        checksumTypeType = 'sha512'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -285,6 +287,8 @@ Function Convert-discord-install ($obj) {
         RemoveEXE     = $true
         DeEncodeSpace = $true
         x64NameExt    = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -326,14 +330,16 @@ Function Convert-virt-viewer ($obj) {
 
 Function Convert-box-drive ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture  = "both"
-        nuspecID      = $obj.nuspecID
-        installScript = $obj.installScriptOrig
-        toolsDir      = $obj.toolsDir
-        argstype      = 0
-        urltype       = 3
-        needsTools    = $true
-        RemoveMSI     = $true
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 3
+        needsTools       = $true
+        RemoveMSI        = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -466,6 +472,8 @@ Function Convert-gimp ($obj) {
         urltype       = 0
         needsTools    = $true
         RemoveEXE     = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -506,14 +514,16 @@ Function Convert-skype ($obj) {
 
 Function Convert-cutepdf ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture  = "x32"
-        nuspecID      = $obj.nuspecID
-        installScript = $obj.installScriptOrig
-        toolsDir      = $obj.toolsDir
-        argstype      = 0
-        urltype       = 0
-        needsTools    = $true
-        RemoveEXE     = $true
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 0
+        needsTools       = $true
+        RemoveEXE        = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha512'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -562,7 +572,7 @@ Function Convert-advanced-installer ($obj) {
         argstype         = 0
         urltype          = 2
         RemoveMSI        = $true
-        checksumArgsType = 1
+        checksumArgsType = 2
         checksumTypeType = 'sha256'
     }
 
@@ -613,6 +623,8 @@ Function Convert-dropbox ($obj) {
         RemoveEXE     = $true
         needsTools    = $true
         DeEncodeSpace = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
