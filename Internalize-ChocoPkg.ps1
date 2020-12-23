@@ -9,7 +9,8 @@ param (
     [switch]$skipRepoCheck,
     [switch]$skipRepoMove,
     [switch]$noSave,
-    [switch]$writeVersion
+    [switch]$writeVersion,
+    [switch]$noPack
 )
 $ErrorActionPreference = 'Stop'
 
@@ -256,21 +257,34 @@ Foreach ($obj in $nupkgObjArray) {
     Write-Output "Starting $($obj.nuspecID)"
     Expand-Nupkg -OrigPath $obj.OrigPath -VersionDir $obj.VersionDir
 
-    #Write-Output $obj.functionName
-    $tempFuncName = $obj.functionName
-    $tempFuncName = $tempFuncName + ' -obj $obj'
-    Invoke-Expression $tempFuncName
-    $tempFuncName = $null
+    Try { 
+        #Write-Output $obj.functionName
+        $tempFuncName = $obj.functionName
+        $tempFuncName = $tempFuncName + ' -obj $obj'
+        Invoke-Expression $tempFuncName
+        $tempFuncName = $null
+    } Catch {
+        Write-Warning "$($obj.nuspecID) $($obj.version) failed downloading or editing"
+        $obj.status = "edit failed"
+        $failed = $true
+    }
 
-    Write-UnzippedInstallScript -installScriptMod $obj.installScriptMod -toolsDir $obj.toolsDir
+    if (!($failed)) {
+        Write-UnzippedInstallScript -installScriptMod $obj.installScriptMod -toolsDir $obj.toolsDir
 
-    #start choco pack in the correct directory
-    $packcode = Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
+        if ($noPack) {
+            $exitcode = 0
+        } else {
+            #start choco pack in the correct directory
+            $packcode = Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
+            $exitcode = $packcode.exitcode
+        }
 
-    if ($packcode.exitcode -ne "0") {
-        $obj.status = "pack failed"
-    } else {
-        $obj.status = "internalized"
+        if ($exitcode -ne "0") {
+            $obj.status = "pack failed"
+        } else {
+            $obj.status = "internalized"
+        }
     }
 }
 
