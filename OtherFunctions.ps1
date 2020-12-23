@@ -471,7 +471,7 @@ Function Get-File {
             $checksumOK = Validate-Checksum -fullFilePath $dlwdFile -checksum $checksum -checksumTypeType $checksumTypeType
         } else {
             Write-Warning "$dlwdFile appears to be downloaded, but no checksum available, so deleting"
-            Remove-Item -Force -path $dlwdFile
+            Remove-Item -Force -Path $dlwdFile
         }
     } else {
         $checksumOk = $true
