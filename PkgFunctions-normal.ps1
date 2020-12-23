@@ -133,14 +133,14 @@ Function Convert-onlyoffice ($obj) {
 
 Function Convert-dotnetcore-sdk ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        urltype = 2
-        argstype = 0
-        needsTools = $true
-        RemoveExe = $true
+        toolsDir      = $obj.toolsDir
+        urltype       = 2
+        argstype      = 0
+        needsTools    = $true
+        RemoveExe     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -149,14 +149,14 @@ Function Convert-dotnetcore-sdk ($obj) {
 
 Function Convert-mono ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        urltype = 0
-        argstype = 0
-        needsTools = $true
-        RemoveMSI = $true
+        toolsDir      = $obj.toolsDir
+        urltype       = 0
+        argstype      = 0
+        needsTools    = $true
+        RemoveMSI     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -165,14 +165,14 @@ Function Convert-mono ($obj) {
 
 Function Convert-shotcut-install ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        urltype = 1
-        argstype = 0
-        needsTools = $true
-        RemoveExe = $true
+        toolsDir      = $obj.toolsDir
+        urltype       = 1
+        argstype      = 0
+        needsTools    = $true
+        RemoveExe     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -181,14 +181,14 @@ Function Convert-shotcut-install ($obj) {
 
 Function Convert-vivaldi-portable ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        urltype = 0
-        argstype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        urltype       = 0
+        argstype      = 0
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -197,14 +197,14 @@ Function Convert-vivaldi-portable ($obj) {
 
 Function Convert-vivaldi-install ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        urltype = 0
-        argstype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        urltype       = 0
+        argstype      = 0
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -213,14 +213,14 @@ Function Convert-vivaldi-install ($obj) {
 
 Function Convert-edge ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        urltype = 1
-        argstype = 0
-        needsTools = $true
-        RemoveMSI = $true
+        toolsDir      = $obj.toolsDir
+        urltype       = 1
+        argstype      = 0
+        needsTools    = $true
+        RemoveMSI     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -229,14 +229,14 @@ Function Convert-edge ($obj) {
 
 Function Convert-slack ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        urltype = 1
-        argstype = 0
-        x64NameExt = $true
-        RemoveMSI = $true
+        toolsDir      = $obj.toolsDir
+        urltype       = 1
+        argstype      = 0
+        x64NameExt    = $true
+        RemoveMSI     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -245,16 +245,16 @@ Function Convert-slack ($obj) {
 
 Function Convert-riot-web ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        urltype = 4
-        argstype = 0
-        needsTools = $true
-        x64NameExt = $true
+        toolsDir      = $obj.toolsDir
+        urltype       = 4
+        argstype      = 0
+        needsTools    = $true
+        x64NameExt    = $true
         DeEncodeSpace = $true
-        removeEXE = $true
+        removeEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -263,16 +263,16 @@ Function Convert-riot-web ($obj) {
 
 Function Convert-discord-install ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        urltype = 0
-        argstype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        urltype       = 0
+        argstype      = 0
+        needsTools    = $true
+        RemoveEXE     = $true
         DeEncodeSpace = $true
-        x64NameExt = $true
+        x64NameExt    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -281,14 +281,14 @@ Function Convert-discord-install ($obj) {
 
 Function Convert-openshot ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -297,13 +297,13 @@ Function Convert-openshot ($obj) {
 
 Function Convert-virt-viewer ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 2
-        RemoveMSI = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 2
+        RemoveMSI     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -312,14 +312,14 @@ Function Convert-virt-viewer ($obj) {
 
 Function Convert-box-drive ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 3
-        needsTools = $true
-        RemoveMSI = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 3
+        needsTools    = $true
+        RemoveMSI     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -328,14 +328,14 @@ Function Convert-box-drive ($obj) {
 
 Function Convert-ringcentral-classic ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 5
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 5
+        needsTools    = $true
+        RemoveEXE     = $true
         DeEncodeSpace = $true
     }
 
@@ -345,14 +345,14 @@ Function Convert-ringcentral-classic ($obj) {
 
 Function Convert-kodi ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -360,15 +360,15 @@ Function Convert-kodi ($obj) {
 
 Function Convert-dotnetcore3-desktop-runtime ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        needsEA = $true
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        needsEA       = $true
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -376,14 +376,14 @@ Function Convert-dotnetcore3-desktop-runtime ($obj) {
 
 Function Convert-vscode-install ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "both"
-        nuspecID = $obj.nuspecID
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -394,14 +394,14 @@ Function Convert-vscode-install ($obj) {
 
 Function Convert-uplay ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -410,14 +410,14 @@ Function Convert-uplay ($obj) {
 
 Function Convert-nordvpn ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 1
-        urltype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 1
+        urltype       = 0
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -426,14 +426,14 @@ Function Convert-nordvpn ($obj) {
 
 Function Convert-bitwarden ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 2
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 2
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -442,14 +442,14 @@ Function Convert-bitwarden ($obj) {
 
 Function Convert-gimp ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -458,14 +458,14 @@ Function Convert-gimp ($obj) {
 
 Function Convert-steam ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -474,14 +474,14 @@ Function Convert-steam ($obj) {
 
 Function Convert-skype ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 4
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 4
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -490,14 +490,14 @@ Function Convert-skype ($obj) {
 
 Function Convert-cutepdf ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -506,14 +506,14 @@ Function Convert-cutepdf ($obj) {
 
 Function Convert-malwarebytes ($obj) { 
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        needsTools = $true
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        needsTools    = $true
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -522,14 +522,14 @@ Function Convert-malwarebytes ($obj) {
 
 Function Convert-zoom ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 2
-        RemoveMSI = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 2
+        RemoveMSI     = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -537,13 +537,13 @@ Function Convert-zoom ($obj) {
 
 Function Convert-advanced-installer ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 2
-        RemoveMSI = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 2
+        RemoveMSI     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -552,13 +552,13 @@ Function Convert-advanced-installer ($obj) {
 
 Function Convert-epicgames ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 2
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 2
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -567,15 +567,15 @@ Function Convert-epicgames ($obj) {
 
 Function Convert-geforce-experience ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        RemoveEXE = $true
-        needsEA = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        RemoveEXE     = $true
+        needsEA       = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -584,14 +584,14 @@ Function Convert-geforce-experience ($obj) {
 
 Function Convert-dropbox ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 1
-        urltype = 0
-        RemoveEXE = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 1
+        urltype       = 0
+        RemoveEXE     = $true
+        needsTools    = $true
         DeEncodeSpace = $true
     }
 
@@ -601,14 +601,14 @@ Function Convert-dropbox ($obj) {
 
 Function Convert-lightshot ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 2
-        RemoveEXE = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 2
+        RemoveEXE     = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -617,14 +617,14 @@ Function Convert-lightshot ($obj) {
 
 Function Convert-google-drive-file-stream ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 2
-        RemoveEXE = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 2
+        RemoveEXE     = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -633,14 +633,14 @@ Function Convert-google-drive-file-stream ($obj) {
 
 Function Convert-goggalaxy ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 1
-        urltype = 0
-        RemoveEXE = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 1
+        urltype       = 0
+        RemoveEXE     = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -649,14 +649,14 @@ Function Convert-goggalaxy ($obj) {
 
 Function Convert-slobs ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x64"
-        nuspecID = $obj.nuspecID
+        architecture  = "x64"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 1
-        urltype = 2
-        RemoveEXE = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 1
+        urltype       = 2
+        RemoveEXE     = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -665,14 +665,14 @@ Function Convert-slobs ($obj) {
 
 Function Convert-1password ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 1
-        urltype = 0
-        RemoveEXE = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 1
+        urltype       = 0
+        RemoveEXE     = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -681,14 +681,14 @@ Function Convert-1password ($obj) {
 
 Function Convert-minecraft-launcher ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 1
-        urltype = 2
-        RemoveMSI = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 1
+        urltype       = 2
+        RemoveMSI     = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -697,13 +697,13 @@ Function Convert-minecraft-launcher ($obj) {
 
 Function Convert-hwmonitor ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 1
-        urltype = 2
-        RemoveEXE = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 1
+        urltype       = 2
+        RemoveEXE     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -712,13 +712,13 @@ Function Convert-hwmonitor ($obj) {
 
 Function Convert-elgato-game-capture ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x64"
-        nuspecID = $obj.nuspecID
+        architecture  = "x64"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 1
-        urltype = 2
-        RemoveMSI = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 1
+        urltype       = 2
+        RemoveMSI     = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -727,14 +727,14 @@ Function Convert-elgato-game-capture ($obj) {
 
 Function Convert-webex-meetings ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 1
-        urltype = 0
-        RemoveMSI = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 1
+        urltype       = 0
+        RemoveMSI     = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -743,14 +743,14 @@ Function Convert-webex-meetings ($obj) {
 
 Function Convert-inkscape ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        RemoveMSI = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        RemoveMSI     = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -759,14 +759,14 @@ Function Convert-inkscape ($obj) {
 
 Function Convert-makemkv ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 1
-        RemoveEXE = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 1
+        RemoveEXE     = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
@@ -775,14 +775,14 @@ Function Convert-makemkv ($obj) {
 
 Function Convert-yarn ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture = "x32"
-        nuspecID = $obj.nuspecID
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
         installScript = $obj.installScriptOrig
-        toolsDir = $obj.toolsDir
-        argstype = 0
-        urltype = 0
-        RemoveMSI = $true
-        needsTools = $true
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        RemoveMSI     = $true
+        needsTools    = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs

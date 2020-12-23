@@ -134,12 +134,12 @@ if ($pushPkgs -eq "yes") {
 
 if (($repomove -eq "yes") -and (!($skipRepoMove))) {
     $invokeRepoMoveArgs = @{
-        moveToRepoURL = $moveToRepoURL
-        proxyRepoCreds = $proxyRepoCreds
-        proxyRepoURL = $proxyRepoURL
+        moveToRepoURL              = $moveToRepoURL
+        proxyRepoCreds             = $proxyRepoCreds
+        proxyRepoURL               = $proxyRepoURL
         personalpackagesXMLcontent = $personalpackagesXMLcontent
-        workDir = $workDir
-        searchDir = $searchDir
+        workDir                    = $workDir
+        searchDir                  = $searchDir
     }
 
     Invoke-RepoMove @invokeRepoMoveArgs
@@ -153,11 +153,11 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 
 if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
     $invokeRepoCheckArgs = @{
-        publicRepoURL = $publicRepoURL
-        privateRepoCreds = $privateRepoCreds
-        privateRepoURL = $privateRepoURL
+        publicRepoURL              = $publicRepoURL
+        privateRepoCreds           = $privateRepoCreds
+        privateRepoURL             = $privateRepoURL
         personalpackagesXMLcontent = $personalpackagesXMLcontent
-        searchDir = $searchDir
+        searchDir                  = $searchDir
     }
 
     Invoke-RepoCheck @invokeRepoCheckArgs
@@ -294,12 +294,12 @@ Foreach ($obj in $nupkgObjArray) {
         } else {
             #start choco pack in the correct directory
             $startProcessArgs = @{
-                FilePath = "choco"
-                ArgumentList = 'pack -r'
+                FilePath         = "choco"
+                ArgumentList     = 'pack -r'
                 WorkingDirectory = $obj.versionDir
-                NoNewWindow = $true
-                Wait = $true
-                PassThru = $true
+                NoNewWindow      = $true
+                Wait             = $true
+                PassThru         = $true
             }
 
             $packcode = Start-Process @startProcessArgs
@@ -326,12 +326,12 @@ Foreach ($obj in $nupkgObjArray) {
             Write-Output "pushing $($obj.nuspecID)"
             $pushArgs = 'push -f -r -s ' + $pushURL
             $startProcessArgs = @{
-                FilePath = "choco"
-                ArgumentList = $pushArgs
+                FilePath         = "choco"
+                ArgumentList     = $pushArgs
                 WorkingDirectory = $obj.versionDir
-                NoNewWindow = $true
-                Wait = $true
-                PassThru = $true
+                NoNewWindow      = $true
+                Wait             = $true
+                PassThru         = $true
             }
 
             $pushcode = Start-Process @startProcessArgs
