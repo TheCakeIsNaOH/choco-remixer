@@ -485,6 +485,13 @@ Function Get-File {
         Write-Information "Downloading $filename" -InformationAction Continue
         $dlwd.DownloadFile($url, $dlwdFile)
         $dlwd.dispose()
+
+        if ($checksum) {
+            $checksumOK = Confirm-Checksum -fullFilePath $dlwdFile -checksum $checksum -checksumTypeType $checksumTypeType
+            if (!($checksumOK)) {
+                Throw "Invalid checksum after download for $url"
+            }
+        }
     }
     # Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir -checksum "asdf" -checksumTypeType "sha256"
 }
