@@ -430,26 +430,60 @@ Function Invoke-RepoCheck {
 }
 
 
+Function Validate-Checksum {
+    param (
+        [parameter(Mandatory = $true)][string]$fullFilePath,
+        [parameter(Mandatory = $true)][string]$checksum,
+        [parameter(Mandatory = $true)]
+        [ValidateSet('md5', 'sha1', 'sha256', 'sha512')]
+        [string]$checksumTypeType
+    )
+    
+    $filehash = (Get-FileHash -Path $fullFilePath -Algorithm $checksumTypeType).hash
+    if ($filehash -ine $checksum) {
+                Remove-Item -Force -EA 0 -Path $fullFilePath
+                Write-Error "Checksum of $fullFilePath invalid, file removed. Wanted $checksum32 got $filehash32"
+                $isOk = $false
+    } else {
+        $isOk = $true
+    }
+    Return $isOk
+}
+
+
 #no need return stuff
 Function Get-File {
     param (
         [parameter(Mandatory = $true)][string]$url,
         [parameter(Mandatory = $true)][string]$filename,
-        [parameter(Mandatory = $true)][string]$toolsDir
+        [parameter(Mandatory = $true)][string]$toolsDir,
+        [string]$checksum,
+        [ValidateSet('md5', 'sha1', 'sha256', 'sha512')]
+        [string]$checksumTypeType
     )
 
     $dlwdFile = (Join-Path $toolsDir "$filename")
-    $dlwd = New-Object net.webclient
-    $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
+    $fileExists = Test-Path $dlwdFile
 
     if (Test-Path $dlwdFile) {
-        Write-Information "$dlwdFile appears to be downloaded" -InformationAction Continue
+        if ($checksum) {
+            Write-Information "$dlwdFile appears to be downloaded, checking checksum" -InformationAction Continue
+            $checksumOK = Validate-Checksum -fullFilePath $dlwdFile -checksum $checksum -checksumTypeType $checksumTypeType
+        } else {
+            Write-Warning "$dlwdFile appears to be downloaded, but no checksum available, so deleting"
+            Remove-Item -Force -path $dlwdFile
+        }
     } else {
-        $dlwd.DownloadFile($url, $dlwdFile)
+        $checksumOk = $true
     }
 
-    $dlwd.dispose()
-    # Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir
+    if ((!($fileExists)) -or (!($checksumOK))) {
+        $dlwd = New-Object net.webclient
+        $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
+        $dlwd.DownloadFile($url, $dlwdFile)
+        $dlwd.dispose()
+    }
+    # Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir -checksum "asdf" -checksumTypeType "sha256"
 }
 
 
@@ -474,7 +508,9 @@ Function Edit-InstallChocolateyPackage {
         [switch]$removeMSI,
         [switch]$removeMSU,
         [switch]$doubleQuotesUrl,
-        [int]$checksumType
+        [ValidateSet('md5', 'sha1', 'sha256', 'sha512')]
+        [string]$checksumTypeType,
+        [int]$checksumArgsType
     )
 
     $x64 = $true
@@ -612,7 +648,6 @@ Function Edit-InstallChocolateyPackage {
 
     $installScriptMod = $installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 
-
     if ($needsTools) {
         $installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $installScriptMod
     }
@@ -630,14 +665,35 @@ Function Edit-InstallChocolateyPackage {
     }
 
     Write-Information "Downloading $($NuspecID) files" -InformationAction Continue
-    if ($x32) {
-        Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir
-    } 
-    if ($x64) {
-        Get-File -url $url64 -filename $filename64 -toolsDir $toolsDir
+    if ($checksumTypeType) {
+        if ($x32) {
+            if ($checksumArgsType -eq 0) {
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern "  Checksum  ").tostring() -split "'" | select -Last 1 -Skip 1 
+            } elseif ($checksumArgsType -eq 1) {
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | select -Last 1 -Skip 1 
+            } else {
+                Throw "Invalid checksumArgsType $checksumArgsType"
+            }
+            Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir -checksum $checksum32 -checksumTypeType $checksumTypeType
+        }
+        if ($x64) {
+            if ($checksumArgsType -eq 0) {
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern "  Checksum64  ").tostring() -split "'" | select -Last 1 -Skip 1 
+            } elseif ($checksumArgsType -eq 1) {
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | select -Last 1 -Skip 1 
+            } else {
+                Throw "Invalid checksumArgsType $checksumArgsType"
+            }
+            Get-File -url $url64 -filename $filename64 -toolsDir $toolsDir -checksum $checksum64 -checksumTypeType $checksumTypeType
+        }
+    } else {
+        if ($x32) {
+            Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir
+        } 
+        if ($x64) {
+            Get-File -url $url64 -filename $filename64 -toolsDir $toolsDir
+        }    
     }
-    }
-    
-    #add checksum here, or in download file?
+
     Return $installScriptMod
 }
