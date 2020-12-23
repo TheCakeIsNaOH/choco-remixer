@@ -430,7 +430,7 @@ Function Invoke-RepoCheck {
 }
 
 
-Function Validate-Checksum {
+Function Confirm-Checksum {
     param (
         [parameter(Mandatory = $true)][string]$fullFilePath,
         [parameter(Mandatory = $true)][string]$checksum,
@@ -468,14 +468,16 @@ Function Get-File {
     if (Test-Path $dlwdFile) {
         if ($checksum) {
             Write-Information "$dlwdFile appears to be downloaded, checking checksum" -InformationAction Continue
-            $checksumOK = Validate-Checksum -fullFilePath $dlwdFile -checksum $checksum -checksumTypeType $checksumTypeType
+            $checksumOK = Confirm-Checksum -fullFilePath $dlwdFile -checksum $checksum -checksumTypeType $checksumTypeType
         } else {
             Write-Warning "$dlwdFile appears to be downloaded, but no checksum available, so deleting"
             Remove-Item -Force -Path $dlwdFile
         }
     } else {
-        $checksumOk = $true
-        Write-Warning "no checksum for $url, please add support to function"
+        $checksumOk = $false
+        if ($checksum) {
+            Write-Warning "no checksum for $url, please add support to function"
+        }
     }
 
     if ((!($fileExists)) -or (!($checksumOK))) {
@@ -669,7 +671,7 @@ Function Edit-InstallChocolateyPackage {
     if ($checksumTypeType) {
         if ($x32) {
             if ($checksumArgsType -eq 0) {
-                $checksum32 = ($installScript -split "`n" | Select-String -Pattern "  Checksum  ").tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 1) {
                 $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 2) {
@@ -681,7 +683,7 @@ Function Edit-InstallChocolateyPackage {
         }
         if ($x64) {
             if ($checksumArgsType -eq 0) {
-                $checksum64 = ($installScript -split "`n" | Select-String -Pattern "  Checksum64  ").tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 1) {
                 $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 2) {
