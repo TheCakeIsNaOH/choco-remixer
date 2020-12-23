@@ -47,11 +47,10 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 ## Todo
 
+- Write docs on how to add packages
 - Move more packages to no custom function, use generic functions
-- Add capability to directly specify from xml
+- Turn into proper module
 - Checksum downloads
-- Better verbose support
-- Better error checking and handling
 - Drop dependency on `choco.exe`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip after pack.
 	- Move to `chocolatey.lib` instead?
 	- Figure out why does not extract files
@@ -61,9 +60,15 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
     ### Long term
   
   - Async/Parallelize file searching, copying, packing, possibly downloading 
-  - generalize more functionality and make available as functions. 
-  - Turn into proper module
   - Ability to bump version of nupkg (fix version)
   - Add option to trust names of nupkg's in searching, allows for quicker search
   - Git integration for personal-packages.xml
   - Multiple personal-packages.xml files (for now it probably is best to add an alias to your profile for each xml)
+  - Add capability to directly specify from xml
+  
+    ### Continuous 
+    
+  - Better verbose/debug and other information output
+  - Better error checking and handling
+  - generalize more functionality and make available as functions. 
+  
