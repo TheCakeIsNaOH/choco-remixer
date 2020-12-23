@@ -48,6 +48,7 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 - Write docs on how to add packages
 - Comment based help
+- Use switch statements in Edit-InstallChocolateyPackage
 - Move more packages to no custom function, use generic functions
 - Turn into proper module
 - Checksum downloads
