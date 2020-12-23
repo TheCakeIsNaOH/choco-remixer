@@ -442,7 +442,7 @@ Function Confirm-Checksum {
     $filehash = (Get-FileHash -Path $fullFilePath -Algorithm $checksumTypeType).hash
     if ($filehash -ine $checksum) {
         Remove-Item -Force -EA 0 -Path $fullFilePath
-        Write-Error "Checksum of $fullFilePath invalid, file removed. Wanted $checksum32 got $filehash32"
+        Write-Warning "Checksum of $fullFilePath invalid, file removed. Wanted $checksum got $filehash"
         $isOk = $false
     } else {
         $isOk = $true
@@ -463,26 +463,26 @@ Function Get-File {
     )
 
     $dlwdFile = (Join-Path $toolsDir "$filename")
-    $fileExists = Test-Path $dlwdFile
-
+    
     if (Test-Path $dlwdFile) {
         if ($checksum) {
             Write-Information "$dlwdFile appears to be downloaded, checking checksum" -InformationAction Continue
-            $checksumOK = Confirm-Checksum -fullFilePath $dlwdFile -checksum $checksum -checksumTypeType $checksumTypeType
+            $oldFileOK = Confirm-Checksum -fullFilePath $dlwdFile -checksum $checksum -checksumTypeType $checksumTypeType
         } else {
             Write-Warning "$dlwdFile appears to be downloaded, but no checksum available, so deleting"
             Remove-Item -Force -Path $dlwdFile
         }
     } else {
-        $checksumOk = $false
-        if ($checksum) {
+        $oldFileOK = $false
+        if (!($checksum)) {
             Write-Warning "no checksum for $url, please add support to function"
         }
     }
 
-    if ((!($fileExists)) -or (!($checksumOK))) {
+    if ($oldFileOK -eq $false) {
         $dlwd = New-Object net.webclient
         $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
+        Write-Information "Downloading $filename" -InformationAction Continue
         $dlwd.DownloadFile($url, $dlwdFile)
         $dlwd.dispose()
     }
