@@ -475,6 +475,7 @@ Function Get-File {
         }
     } else {
         $checksumOk = $true
+        Write-Warning "no checksum for $url, please add support to function"
     }
 
     if ((!($fileExists)) -or (!($checksumOK))) {
@@ -671,6 +672,8 @@ Function Edit-InstallChocolateyPackage {
                 $checksum32 = ($installScript -split "`n" | Select-String -Pattern "  Checksum  ").tostring() -split "'" | select -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 1) {
                 $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | select -Last 1 -Skip 1 
+            } elseif ($checksumArgsType -eq 2) {
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | select -Last 1 -Skip 1 
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
@@ -680,6 +683,8 @@ Function Edit-InstallChocolateyPackage {
             if ($checksumArgsType -eq 0) {
                 $checksum64 = ($installScript -split "`n" | Select-String -Pattern "  Checksum64  ").tostring() -split "'" | select -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 1) {
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | select -Last 1 -Skip 1 
+            } elseif ($checksumArgsType -eq 2) {
                 $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | select -Last 1 -Skip 1 
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"

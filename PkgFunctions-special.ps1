@@ -667,7 +667,18 @@ Function Convert-geogebra-classic ($obj) {
 }
 
 Function Convert-cpuz ($obj) {
-    $obj.installScriptMod = Edit-InstallChocolateyPackage -architecture "x32" -nuspecID $obj.nuspecID -installScript $obj.installScriptOrig -toolsDir $obj.toolsDir -argstype 0 -urltype 0 -needsTools -removeEXE
+    $editInstallChocolateyPackageSplat = @{
+        architecture  = "x32"
+        nuspecID      = $obj.nuspecID
+        installScript = $obj.installScriptOrig
+        toolsDir      = $obj.toolsDir
+        argstype      = 0
+        urltype       = 0
+        needsTools    = $true
+        removeEXE     = $true
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageSplat
     $obj.installScriptMod = $obj.installScriptMod -replace " url " , "#url "
     $obj.installScriptMod = $obj.installScriptMod -replace " url64bit " , "#url64bit "
 }
@@ -760,14 +771,38 @@ Function Convert-gotomeeting ($obj) {
 
 
 Function Convert-googlechrome ($obj) {
-    $obj.installScriptMod = Edit-InstallChocolateyPackage -architecture "both" -nuspecID $obj.nuspecID -installScript $obj.installScriptOrig -toolsDir $obj.toolsDir -urltype 0 -argstype 0 -needsTools -needsEA -RemoveMSI
+    $editInstallChocolateyPackageSplat = @{
+        architecture  = "both"
+        nuspecID      = $obj.nuspecID
+        installScript = $obj.installScriptOrig
+        toolsDir      = $obj.toolsDir
+        urltype       = 0
+        argstype      = 0
+        needsTools    = $true
+        needsEA       = $true
+        RemoveMSI     = $true
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageSplat
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + "    $&"
     $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
 }
 
 
 Function Convert-vscodium-install ($obj) {
-    $obj.installScriptMod = Edit-InstallChocolateyPackage -architecture "both" -nuspecID $obj.nuspecID -installScript $obj.installScriptOrig -toolsDir $obj.toolsDir -urltype 0 -argstype 0 -removeEXE
+    $editInstallChocolateyPackageSplat = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        urltype          = 0
+        argstype         = 0
+        removeEXE        = $true
+        checksumTypeType = 'sha256'
+        checksumArgsType = 0
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageSplat
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp' + "`n" + "     $&"
     $obj.installScriptMod = $obj.installScriptMod -replace 'return', $string
 }

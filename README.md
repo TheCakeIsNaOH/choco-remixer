@@ -51,7 +51,7 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 - Use switch statements in Edit-InstallChocolateyPackage
 - Move more packages to no custom function, use generic functions
 - Turn into proper module
-- Checksum downloads
+- Checksum downloads (finish add support in functions)
 - Drop dependency on `choco.exe`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip after pack.
 	- Move to `chocolatey.lib` instead?
 	- Figure out why does not extract files
