@@ -441,9 +441,9 @@ Function Validate-Checksum {
     
     $filehash = (Get-FileHash -Path $fullFilePath -Algorithm $checksumTypeType).hash
     if ($filehash -ine $checksum) {
-                Remove-Item -Force -EA 0 -Path $fullFilePath
-                Write-Error "Checksum of $fullFilePath invalid, file removed. Wanted $checksum32 got $filehash32"
-                $isOk = $false
+        Remove-Item -Force -EA 0 -Path $fullFilePath
+        Write-Error "Checksum of $fullFilePath invalid, file removed. Wanted $checksum32 got $filehash32"
+        $isOk = $false
     } else {
         $isOk = $true
     }
@@ -669,11 +669,11 @@ Function Edit-InstallChocolateyPackage {
     if ($checksumTypeType) {
         if ($x32) {
             if ($checksumArgsType -eq 0) {
-                $checksum32 = ($installScript -split "`n" | Select-String -Pattern "  Checksum  ").tostring() -split "'" | select -Last 1 -Skip 1 
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern "  Checksum  ").tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 1) {
-                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | select -Last 1 -Skip 1 
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 2) {
-                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | select -Last 1 -Skip 1 
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
@@ -681,11 +681,11 @@ Function Edit-InstallChocolateyPackage {
         }
         if ($x64) {
             if ($checksumArgsType -eq 0) {
-                $checksum64 = ($installScript -split "`n" | Select-String -Pattern "  Checksum64  ").tostring() -split "'" | select -Last 1 -Skip 1 
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern "  Checksum64  ").tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 1) {
-                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | select -Last 1 -Skip 1 
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 2) {
-                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | select -Last 1 -Skip 1 
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }

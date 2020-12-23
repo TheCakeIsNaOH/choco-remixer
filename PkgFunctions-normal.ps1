@@ -555,13 +555,15 @@ Function Convert-zoom ($obj) {
 
 Function Convert-advanced-installer ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture  = "x32"
-        nuspecID      = $obj.nuspecID
-        installScript = $obj.installScriptOrig
-        toolsDir      = $obj.toolsDir
-        argstype      = 0
-        urltype       = 2
-        RemoveMSI     = $true
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 2
+        RemoveMSI        = $true
+        checksumArgsType = 1
+        checksumTypeType = 'sha256'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
