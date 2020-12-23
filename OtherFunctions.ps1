@@ -431,40 +431,7 @@ Function Invoke-RepoCheck {
 
 
 #no need return stuff
-Function Get-FileBoth {
-    param (
-        [parameter(Mandatory = $true)][string]$url32,
-        [parameter(Mandatory = $true)][string]$url64,
-        [parameter(Mandatory = $true)][string]$filename32,
-        [parameter(Mandatory = $true)][string]$filename64,
-        [parameter(Mandatory = $true)][string]$toolsDir
-    )
-
-    $dlwdFile32 = (Join-Path $toolsDir "$filename32")
-    $dlwdFile64 = (Join-Path $toolsDir "$filename64")
-
-    $dlwd = New-Object net.webclient
-    $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
-
-    if (Test-Path $dlwdFile32) {
-        Write-Information "$dlwdFile32 appears to be downloaded" -InformationAction Continue
-    } else {
-        $dlwd.DownloadFile($url32, $dlwdFile32)
-    }
-
-    if (Test-Path $dlwdFile64) {
-        Write-Information "$dlwdFile64 appears to be downloaded" -InformationAction Continue
-    } else {
-        $dlwd.DownloadFile($url64, $dlwdFile64)
-    }
-
-    $dlwd.dispose()
-    # get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $toolsDir
-}
-
-
-#no need return stuff
-Function Get-FileSingle {
+Function Get-File {
     param (
         [parameter(Mandatory = $true)][string]$url,
         [parameter(Mandatory = $true)][string]$filename,
@@ -482,7 +449,7 @@ Function Get-FileSingle {
     }
 
     $dlwd.dispose()
-    # get-fileSingle -url $url32 -filename $filename32 -toolsDir $toolsDir
+    # Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir
 }
 
 
@@ -663,12 +630,12 @@ Function Edit-InstallChocolateyPackage {
     }
 
     Write-Information "Downloading $($NuspecID) files" -InformationAction Continue
-    if ($architecture -eq "x32") {
-        Get-FileSingle -url $url32 -filename $filename32 -toolsDir $toolsDir
-    } elseif ($architecture -eq "x64") {
-        Get-FileSingle -url $url64 -filename $filename64 -toolsDir $toolsDir
-    } else {
-        Get-FileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $toolsDir
+    if ($x32) {
+        Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir
+    } 
+    if ($x64) {
+        Get-File -url $url64 -filename $filename64 -toolsDir $toolsDir
+    }
     }
     
     #add checksum here, or in download file?

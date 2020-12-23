@@ -282,6 +282,8 @@ Foreach ($obj in $nupkgObjArray) {
         $tempFuncName = $null
     } Catch {
         Write-Warning "$($obj.nuspecID) $($obj.version) failed downloading or editing"
+        Write-Warning "Error: $_"
+        
         $obj.status = "edit failed"
         $failed = $true
     }

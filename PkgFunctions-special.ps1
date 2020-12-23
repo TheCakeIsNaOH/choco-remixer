@@ -25,7 +25,8 @@ Function Convert-adoptopenjdk8 ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir2\*.msi'
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -52,7 +53,8 @@ Function Convert-adoptopenjdk8jre ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir2\*.msi'
 
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -80,7 +82,8 @@ Function Convert-adoptopenjdkjre ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs.Url64bit ", "packageArgs.file64 "
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -102,8 +105,9 @@ Function Convert-sysinternals ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath"
     $obj.installScriptMod = $obj.installScriptMod -replace "Is-NanoServer.*" , "$&`n  $filepathnano"
-
-    get-fileBoth -url32 $url -url64 $urlnano -filename32 $filename -filename64 $filenamenano -toolsDir $obj.toolsDir
+    
+    Get-File -url $url -filename $filename -toolsDir $obj.toolsDir
+    Get-File -url $urlnano -filename $filenamenano -toolsDir $obj.toolsDir
 }
 
 
@@ -137,8 +141,9 @@ Function Convert-virtualbox ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsPath\*vbox-extpack'
 
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
-    get-fileSingle -url $urlep -filename $filenameep -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $urlep -filename $filenameep -toolsDir $obj.toolsDir
 }
 
 
@@ -286,7 +291,8 @@ Function Convert-adobereader ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp'
 
-    get-fileBoth -url32 $MUIurl -url64 $MUImspURL -filename32 $filenameMUI -filename64 $filenameMSP -toolsDir $obj.toolsDir
+    Get-File -url $MUIurl -filename $filenameMUI -toolsDir $obj.toolsDir
+    Get-File -url $MUImspURL -filename $filenameMSP -toolsDir $obj.toolsDir
 }
 
 
@@ -311,7 +317,8 @@ Function Convert-thunderbird ($obj) {
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -334,7 +341,8 @@ Function Convert-firefox ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -361,7 +369,8 @@ Function Convert-vcredist140 ($obj) {
     $dataContent = $dataContent -replace "installData64 = @{" , "$&`n  $filePath64"
 
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 
     Set-Content -Value $dataContent -Path $dataFile
 }
@@ -387,7 +396,8 @@ Function Convert-dotnetcore-desktopruntime ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "arguments = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod -replace "arguments64 = @{" , "$&`n  $filePath64"
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
 #Special because orig script uses $version instead of a full URL
@@ -409,7 +419,8 @@ Function Convert-powershell-core ($obj) {
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + '    Remove-Item -Force -EA 0 -Path $toolsDir\*.exe' + "`n" + "    $&"
     $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -442,7 +453,8 @@ Function Convert-libreoffice-fresh ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "if \(\-not" , "<#if \(\-not"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -469,7 +481,8 @@ Function Convert-hexchat ($obj) {
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 
 }
 
@@ -483,7 +496,7 @@ Function Convert-anydesk-install ($obj) {
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyInstallPackage" , "$filePath32`n $&"
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 Function Convert-tor-browser ($obj) {
@@ -506,7 +519,8 @@ Function Convert-tor-browser ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 
 }
 
@@ -527,7 +541,7 @@ Function Convert-ddu ($obj) {
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item "$(Split-Path -parent $MyInvocation.MyCommand.Definition)\*.exe"'
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -542,7 +556,7 @@ Function Convert-eclipse ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -557,7 +571,7 @@ Function Convert-eclipse-java-oxygen ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -571,7 +585,7 @@ Function Convert-airtame ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -588,7 +602,7 @@ Function Convert-spotify ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -609,7 +623,8 @@ Function Convert-coretemp ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
-    get-fileBoth -url32 $url32 -url64 $url64 -filename32 $filename32 -filename64 $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
 
@@ -622,7 +637,7 @@ Function Convert-resharper-platform ($obj) {
 
     $obj.installScriptMod = $obj.installScriptMod -replace 'Get-ChocolateyWebFile' , '#Get-ChocolateyWebFile'
 
-    #get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    #Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
     $dlwdFile = (Join-Path $(Split-Path $obj.toolsDir) "$filename32")
     $dlwd = New-Object net.webclient
     $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
@@ -648,7 +663,7 @@ Function Convert-geogebra-classic ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 Function Convert-cpuz ($obj) {
@@ -667,7 +682,7 @@ Function Convert-anydesk ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -684,7 +699,7 @@ Function Convert-adb ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace '64 \$checksumType' , '$&
       Get-ChocolateyUnzip -FileFullPath $file -Destination $unziplocation -PackageName $packagename'
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -699,7 +714,7 @@ Function Convert-krita ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace 'file64        = Get-Item \$toolsDir\\\*\.exe' , $filepath64
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -711,7 +726,7 @@ Function Convert-msiafterburner ($obj) {
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -726,7 +741,7 @@ Function Convert-calibre ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
@@ -740,7 +755,7 @@ Function Convert-gotomeeting ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "$packageArgs = @{" , "$&`n  $filePath32"
 
-    get-fileSingle -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
 
