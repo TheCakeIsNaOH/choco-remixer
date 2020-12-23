@@ -88,6 +88,7 @@ Function Write-UnzippedInstallScript {
 
 
 Function Write-PerPkg {
+    [CmdletBinding()]
     param (
         [parameter(Mandatory = $true)][string]$version,
         [parameter(Mandatory = $true)][string]$nuspecID,
@@ -127,14 +128,15 @@ Function Get-ChocoApiKeysUrlList {
 
 
 Function Test-URL {
+    [CmdletBinding()]
     param (
         [parameter(Mandatory = $true)][string]$url,
         [parameter(Mandatory = $true)][string]$name,
-        [string]$headers
+        [hashtable]$headers
     )
     try {
         if ($headers) {
-            $page = Invoke-WebRequest -UseBasicParsing -Uri $url -Method head -Headers $proxyRepoHeaderCreds
+            $page = Invoke-WebRequest -UseBasicParsing -Uri $url -Method head -Headers $headers
         } else {
             $page = Invoke-WebRequest -UseBasicParsing -Uri $url -Method head 
         }
@@ -172,7 +174,11 @@ Function Test-DropPath ($dropPath) {
 }
 
 
-Function Test-PushPackages ($pushURL) {
+Function Test-PushPackages {
+    [CmdletBinding()]
+    param (
+        [parameter(Mandatory = $true)][string]$pushURL
+    )
     if ($null -eq $pushURL) {
         Throw "no pushURL in personal-packages.xml"
     }
@@ -187,6 +193,7 @@ Function Test-PushPackages ($pushURL) {
 
 
 Function Invoke-RepoMove {
+    [CmdletBinding()]
     param (
         [parameter(Mandatory = $true)][string]$moveToRepoURL,
         [parameter(Mandatory = $true)][string]$proxyRepoCreds,
@@ -339,6 +346,7 @@ Function Invoke-RepoMove {
 
 
 Function Invoke-RepoCheck {
+    [CmdletBinding()]
     param (
         [parameter(Mandatory = $true)][string]$publicRepoURL,
         [parameter(Mandatory = $true)][string]$privateRepoCreds,
