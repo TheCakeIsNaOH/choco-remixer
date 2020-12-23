@@ -133,7 +133,16 @@ if ($pushPkgs -eq "yes") {
 
 
 if (($repomove -eq "yes") -and (!($skipRepoMove))) {
-    Invoke-RepoMove -moveToRepoURL $moveToRepoURL -proxyRepoCreds $proxyRepoCreds -proxyRepoURL $proxyRepoURL -personalpackagesXMLcontent $personalpackagesXMLcontent -workDir $workDir -searchDir $searchDir
+    $invokeRepoMoveArgs = @{
+        moveToRepoURL = $moveToRepoURL
+        proxyRepoCreds = $proxyRepoCreds
+        proxyRepoURL = $proxyRepoURL
+        personalpackagesXMLcontent = $personalpackagesXMLcontent
+        workDir = $workDir
+        searchDir = $searchDir
+    }
+
+    Invoke-RepoMove @invokeRepoMoveArgs
 } elseif ($repoMove -eq "no") {
 } else {
     if (!($skipRepoMove)) {
@@ -143,7 +152,15 @@ if (($repomove -eq "yes") -and (!($skipRepoMove))) {
 
 
 if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
-    Invoke-RepoCheck -publicRepoURL $publicRepoURL -privateRepoCreds $privateRepoCreds -privateRepoURL $privateRepoURL -personalpackagesXMLcontent $personalpackagesXMLcontent -searchDir $searchDir
+    $invokeRepoCheckArgs = @{
+        publicRepoURL = $publicRepoURL
+        privateRepoCreds = $privateRepoCreds
+        privateRepoURL = $privateRepoURL
+        personalpackagesXMLcontent = $personalpackagesXMLcontent
+        searchDir = $searchDir
+    }
+
+    Invoke-RepoCheck @invokeRepoCheckArgs
 } elseif ($repoCheck -eq "no") {
 } else {
     if (!($skipRepoCheck)) {
@@ -276,7 +293,16 @@ Foreach ($obj in $nupkgObjArray) {
             $exitcode = 0
         } else {
             #start choco pack in the correct directory
-            $packcode = Start-Process -FilePath "choco" -ArgumentList 'pack -r' -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
+            $startProcessArgs = @{
+                FilePath = "choco"
+                ArgumentList = 'pack -r'
+                WorkingDirectory = $obj.versionDir
+                NoNewWindow = $true
+                Wait = $true
+                PassThru = $true
+            }
+
+            $packcode = Start-Process @startProcessArgs
             $exitcode = $packcode.exitcode
         }
 
@@ -299,7 +325,16 @@ Foreach ($obj in $nupkgObjArray) {
         if ($pushPkgs -eq "yes") {
             Write-Output "pushing $($obj.nuspecID)"
             $pushArgs = 'push -f -r -s ' + $pushURL
-            $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $obj.versionDir -NoNewWindow -Wait -PassThru
+            $startProcessArgs = @{
+                FilePath = "choco"
+                ArgumentList = $pushArgs
+                WorkingDirectory = $obj.versionDir
+                NoNewWindow = $true
+                Wait = $true
+                PassThru = $true
+            }
+
+            $pushcode = Start-Process @startProcessArgs
         }
         if (($pushPkgs -eq "yes") -and ($pushcode.exitcode -ne "0")) {
             $obj.status = "push failed"
