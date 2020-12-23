@@ -47,9 +47,8 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 ## Todo
 
-- Move more packages to no custom function, use generic function
+- Move more packages to no custom function, use generic functions
 - Add capability to directly specify from xml
-	
 - Checksum downloads
 - Better verbose support
 - Better error checking and handling

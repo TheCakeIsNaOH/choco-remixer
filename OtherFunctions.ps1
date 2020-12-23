@@ -126,6 +126,36 @@ Function Get-ChocoApiKeysUrlList {
 }
 
 
+Function Test-URL {
+    param (
+        [parameter(Mandatory = $true)][string]$url,
+        [parameter(Mandatory = $true)][string]$name,
+        [string]$headers
+    )
+    try {
+        if ($headers) {
+            $page = Invoke-WebRequest -UseBasicParsing -Uri $url -Method head -Headers $proxyRepoHeaderCreds
+        } else {
+            $page = Invoke-WebRequest -UseBasicParsing -Uri $url -Method head 
+        }
+    } catch {
+        $page = $_.Exception.Response 
+    }
+
+    if ($null -eq $page.StatusCode) {
+        Throw "bad $name in personal-packages.xml"
+    } elseif ($page.StatusCode -eq 200) {
+        Write-Verbose "$name valid"
+    } else {
+        if ($headers) {
+            Write-Warning "$name exists, but did not return ok, check that your credentials are ok"
+        } else {
+            Write-Verbose "$name exists, but did not return ok. This is expected if it requires authentication and credentials are not provided"
+        }
+    }
+}
+
+
 Function Test-DropPath ($dropPath) {
     if (!(Test-Path $dropPath)) {
         Throw "Drop path not found, please specify valid path"
@@ -146,21 +176,10 @@ Function Test-PushPackages ($pushURL) {
     if ($null -eq $pushURL) {
         Throw "no pushURL in personal-packages.xml"
     }
-    try {
-        $page = Invoke-WebRequest -UseBasicParsing -Uri $pushURL -Method head 
-    } catch {
-        $page = $_.Exception.Response 
-    }
-
-    if ($null -eq $page.StatusCode) {
-        Throw "bad pushURL in personal-packages.xml"
-    } elseif ($page.StatusCode -eq 200) {
-    } else {
-        Write-Verbose "pushURL exists, but did not return ok. This is expected if it requires authentication"
-    }
-
+    
+    Test-URL -url $pushURL -name "pushURL"
+    
     $apiKeySources = Get-ChocoApiKeysUrlList
-
     if ($apiKeySources -notcontains $pushURL) {
         Write-Verbose "Did not find a API key for $pushURL"
     }
@@ -182,21 +201,9 @@ Function Invoke-RepoMove {
     if ($null -eq $moveToRepoURL) {
         Throw "no moveToRepoURL in personal-packages.xml"
     }
-    try {
-        $page = Invoke-WebRequest -UseBasicParsing -Uri $moveToRepoURL -Method head 
-    } catch {
-        $page = $_.Exception.Response 
-    }
-
-    if ($null -eq $page.StatusCode) {
-        Throw "bad moveToRepoURL in personal-packages.xml"
-    } elseif ($page.StatusCode -eq 200) {
-        Write-Verbose "moveToRepoURL valid"
-    } else {
-        Write-Verbose "moveToRepoURL exists, but did not return ok. This is expected if it requires authentication"
-    }
-
-
+    
+    Test-URL -url $moveToRepoURL -name "moveToRepoURL"
+    
     $apiKeySources = Get-ChocoApiKeysUrlList
     if ($apiKeySources -notcontains $moveToRepoURL) {
         Write-Warning "Did not find a API key for $moveToRepoURL"
@@ -218,20 +225,7 @@ Function Invoke-RepoMove {
     if ($null -eq $proxyRepoURL) {
         Throw "no proxyRepoURL in personal-packages.xml"
     }
-
-    try {
-        $page = Invoke-WebRequest -UseBasicParsing -Uri $proxyRepoURL -Method head -Headers $proxyRepoHeaderCreds
-    } catch {
-        $page = $_.Exception.Response
-    }
-
-    if ($null -eq $page.StatusCode) {
-        Throw "bad proxyRepoURL in personal-packages.xml"
-    } elseif ($page.StatusCode -eq 200) {
-        Write-Verbose "proxyRepoURL valid"
-    } else {
-        Write-Warning "proxyRepoURL exists, but did not return ok. If it requires credentials, please check that they are correct"
-    }
+    Test-URL -url $proxyRepoURL -name "proxyRepoURL" -headers $proxyRepoHeaderCreds
 
     $proxyRepoName = ($proxyRepoURL -split "repository" | Select-Object -Last 1).trim("/")
     $proxyRepoBaseURL = $proxyRepoURL -split "repository" | Select-Object -First 1
@@ -274,7 +268,7 @@ Function Invoke-RepoMove {
                     $dlwd.DownloadFile($downloadURL, $dlwdPath)
                     $dlwd.dispose()
 
-                    $pushArgs = "push " + $filename + " -f -r -s " + $pushURL
+                    $pushArgs = "push " + $filename + " -f -r -s " + $moveToRepoURL
                     $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
 
                     if ($pushcode.exitcode -ne "0") {
@@ -358,18 +352,7 @@ Function Invoke-RepoCheck {
     if ($null -eq $publicRepoURL) {
         Throw "no publicRepoURL in personal-packages.xml"
     }
-    try {
-        $page = Invoke-WebRequest -UseBasicParsing -Uri $publicRepoURL -Method head 
-    } catch {
-        $page = $_.Exception.Response 
-    }
-
-    if ($null -eq $page.StatusCode) {
-        Throw "bad publicRepoURL in personal-packages.xml"
-    } elseif ($page.StatusCode -eq 200) {
-    } else {
-        Write-Warning "publicRepoURL exists, but did not return ok. This is expected if it requires authentication"
-    }
+    Test-URL -url $publicRepoURL -name "publicRepoURL"
 
     if ($null -eq $privateRepoCreds) {
         Throw "privateRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
@@ -386,18 +369,8 @@ Function Invoke-RepoCheck {
     if ($null -eq $privateRepoURL) {
         Throw "no privateRepoURL in personal-packages.xml"
     }
-    try {
-        $page = Invoke-WebRequest -UseBasicParsing -Uri $privateRepoURL -Method head -Headers $privateRepoHeaderCreds
-    } catch {
-        $page = $_.Exception.Response 
-    }
-
-    if ($null -eq $page.StatusCode) {
-        Throw "bad privateRepoURL in personal-packages.xml"
-    } elseif ($page.StatusCode -eq 200) {
-    } else {
-        Write-Warning "privateRepoURL exists, but did not return ok. If it reques credentials, please check that they are correct"
-    }
+    Test-URL -url $privateRepoURL -name "privateRepoURL" -Headers $privateRepoHeaderCreds
+    
     $toSearchToInternalize = $personalpackagesXMLcontent.mypackages.toInternalize.id
     $toInternalizeCompare = Compare-Object -ReferenceObject $packagesXMLcontent.packages.custom.pkg.id -DifferenceObject $toSearchToInternalize | Where-Object SideIndicator -EQ "=>"
 
