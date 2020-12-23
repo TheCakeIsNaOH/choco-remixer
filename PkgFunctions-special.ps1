@@ -488,7 +488,9 @@ Function Convert-anydesk-install ($obj) {
 
 Function Convert-tor-browser ($obj) {
 
-    Function Get-PackageParameters { Return "mockup" }
+    Function Get-PackageParameters {
+        Return "mockup" 
+    }
     . $(Join-Path $obj.toolsDir 'helpers.ps1')
     $data = GetDownloadInformation -toolsPath $obj.toolsDir
     $url32 = $data.url32
