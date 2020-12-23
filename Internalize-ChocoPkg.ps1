@@ -124,7 +124,7 @@ if ("no", "yes" -notcontains $writePerPkgs) {
 
 
 if ($pushPkgs -eq "yes") {
-    Test-PushPackages -pushURL $pushURL
+    Test-PushPackages -URL $pushURL -Name "pushURL"
 } elseif ($pushPkgs -eq "no") { 
 } else {
     Throw "bad pushPkgs value in personal-packages.xml, must be yes or no"

@@ -177,17 +177,18 @@ Function Test-DropPath ($dropPath) {
 Function Test-PushPackages {
     [CmdletBinding()]
     param (
-        [parameter(Mandatory = $true)][string]$pushURL
+        [parameter(Mandatory = $true)][string]$URL,
+        [parameter(Mandatory = $true)][string]$Name
     )
-    if ($null -eq $pushURL) {
-        Throw "no pushURL in personal-packages.xml"
+    if ($null -eq $URL) {
+        Throw "No $name found"
     }
     
-    Test-URL -url $pushURL -name "pushURL"
+    Test-URL -url $URL -name $name
     
     $apiKeySources = Get-ChocoApiKeysUrlList
-    if ($apiKeySources -notcontains $pushURL) {
-        Write-Verbose "Did not find a API key for $pushURL"
+    if ($apiKeySources -notcontains $URL) {
+        Write-Verbose "Did not find a API key for $name"
     }
 }
 
@@ -204,18 +205,8 @@ Function Invoke-RepoMove {
     )
 
     $ProgressPreference = 'SilentlyContinue'
-
-    if ($null -eq $moveToRepoURL) {
-        Throw "no moveToRepoURL in personal-packages.xml"
-    }
     
-    Test-URL -url $moveToRepoURL -name "moveToRepoURL"
-    
-    $apiKeySources = Get-ChocoApiKeysUrlList
-    if ($apiKeySources -notcontains $moveToRepoURL) {
-        Write-Warning "Did not find a API key for $moveToRepoURL"
-    }
-
+    Test-PushPackages -Url $moveToRepoURL -Name "moveToRepoURL"
 
     if ($null -eq $proxyRepoCreds) {
         Throw "proxyRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
