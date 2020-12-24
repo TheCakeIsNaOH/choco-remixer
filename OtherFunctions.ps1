@@ -471,6 +471,7 @@ Function Get-File {
         } else {
             Write-Warning "$dlwdFile appears to be downloaded, but no checksum available, so deleting"
             Remove-Item -Force -Path $dlwdFile
+            $oldFileOK = $false
         }
     } else {
         $oldFileOK = $false
@@ -685,6 +686,8 @@ Function Edit-InstallChocolateyPackage {
                 $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 3) {
                 $checksum32 = ($installScript -split "`n" | Select-String -Pattern '  checksum32  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+            } elseif ($checksumArgsType -eq 4) {
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern ' checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
@@ -699,6 +702,8 @@ Function Edit-InstallChocolateyPackage {
                 $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } elseif ($checksumArgsType -eq 3) {
                 $checksum64 = ($installScript -split "`n" | Select-String -Pattern '  checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+            } elseif ($checksumArgsType -eq 4) {
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern ' Checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
