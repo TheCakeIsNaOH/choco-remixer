@@ -190,31 +190,13 @@ Function Convert-nvidia-driver ($obj) {
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
-    $dlwdFilewin7 = (Join-Path $obj.toolsDir "$filenamewin7")
-    $dlwdFilewin10 = (Join-Path $obj.toolsDir "$filenamewin10")
-    $dlwdFileDCH = (Join-Path $obj.toolsDir "$filenameDCH")
+    $checksumWin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    $checksumWin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['checksum64'\].*= '").tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    $checksumDCH = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$packageArgsDCHChecksum *=').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
 
-    $dlwd = New-Object net.webclient
-
-    if (Test-Path $dlwdFilewin7) {
-        Write-Output $dlwdFilewin7 ' appears to be downloaded'
-    } else {
-        $dlwd.DownloadFile($urlwin7, $dlwdFilewin7)
-    }
-
-    if (Test-Path $dlwdFilewin10) {
-        Write-Output $dlwdFilewin10 ' appears to be downloaded'
-    } else {
-        $dlwd.DownloadFile($urlwin10, $dlwdFilewin10)
-    }
-
-    if (Test-Path $dlwdFileDCH) {
-        Write-Output $dlwdFileDCH ' appears to be downloaded'
-    } else {
-        $dlwd.DownloadFile($urlDCH, $dlwdFileDCH)
-    }
-
-    $dlwd.dispose()
+    Get-File -url $urlwin7 -filename $filenamewin7 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin7 
+    Get-File -url $urlwin10 -filename $filenamewin10 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin10
+    Get-File -url $urlDCH -filename $filenameDCH -toolsDir $obj.toolsDir-checksumTypeType 'sha256' -checksum $checksumDCH
 
 }
 
@@ -405,6 +387,8 @@ Function Convert-dotnetcore-desktopruntime ($obj) {
 
     $url32 = $dataContent.Url
     $url64 = $dataContent.Url64
+    $checksum32 = $dataContent.checksum
+    $checksum64 = $dataContent.checksum64
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'File    = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -414,8 +398,8 @@ Function Convert-dotnetcore-desktopruntime ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "arguments = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod -replace "arguments64 = @{" , "$&`n  $filePath64"
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
 #Special because orig script uses $version inmod of a full URL
@@ -555,17 +539,18 @@ Function Convert-ddu ($obj) {
 
 
 Function Convert-eclipse ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url64bit  ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring().trim("&r=1")
-    $filePath32 = 'FileFullPath64          = (Join-Path $toolsDir "' + $filename32 + '")'
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url64bit  ').tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring().trim("&r=1")
+    $filePath64 = 'FileFullPath64          = (Join-Path $toolsDir "' + $filename64 + '")'
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
     $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
-    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath64"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
 
@@ -580,7 +565,8 @@ Function Convert-eclipse-java-oxygen ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
@@ -601,6 +587,7 @@ Function Convert-airtame ($obj) {
 
 
 Function Convert-spotify ($obj) {
+    #Throw "broken"
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -613,7 +600,8 @@ Function Convert-spotify ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
 }
 
 
@@ -634,8 +622,11 @@ Function Convert-coretemp ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
 
@@ -665,11 +656,12 @@ Function Convert-geogebra-classic ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 Function Convert-cpuz ($obj) {
-    $editInstallChocolateyPackageSplat = @{
+    $editInstallChocolateyPackageargs = @{
         architecture     = "x32"
         nuspecID         = $obj.nuspecID
         installScript    = $obj.installScriptOrig
@@ -682,7 +674,7 @@ Function Convert-cpuz ($obj) {
         checksumTypeType = 'sha256'
     }
 
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageSplat
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageargs
     $obj.installScriptMod = $obj.installScriptMod -replace " url " , "#url "
     $obj.installScriptMod = $obj.installScriptMod -replace " url64bit " , "#url64bit "
 }
@@ -798,7 +790,7 @@ Function Convert-gotomeeting ($obj) {
 
 
 Function Convert-googlechrome ($obj) {
-    $editInstallChocolateyPackageSplat = @{
+    $editInstallChocolateyPackageargs = @{
         architecture     = "both"
         nuspecID         = $obj.nuspecID
         installScript    = $obj.installScriptOrig
@@ -812,14 +804,14 @@ Function Convert-googlechrome ($obj) {
         checksumTypeType = 'sha256'
     }
 
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageSplat
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageargs
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + "    $&"
     $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
 }
 
 
 Function Convert-vscodium-install ($obj) {
-    $editInstallChocolateyPackageSplat = @{
+    $editInstallChocolateyPackageargs = @{
         architecture     = "both"
         nuspecID         = $obj.nuspecID
         installScript    = $obj.installScriptOrig
@@ -831,7 +823,34 @@ Function Convert-vscodium-install ($obj) {
         checksumArgsType = 0
     }
 
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageSplat
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageargs
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msp' + "`n" + "     $&"
     $obj.installScriptMod = $obj.installScriptMod -replace 'return', $string
+}
+
+
+Function Convert-bitwarden ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 2
+        needsTools       = $true
+        RemoveEXE        = $true
+        checksumArgsType = 2
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+
+    $url = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url *=').tostring() -split "'" | Select-String -Pattern "http").tostring()
+    $releasesPage = Invoke-WebRequest -UseBasicParsing -Uri $url.Trim($($url -split '/' | Select-Object -Last 1)).replace('download', 'tag')
+    $releasesPage.Links | Where-Object href -Like '*.7z' | ForEach-Object {
+        $url7z = 'https://github.com' + $_.href
+        $filename7z = $_.href -split '/' | Select-Object -Last 1
+        Get-File -url $url7z -filename $filename7z -toolsDir $obj.toolsDir
+    }
+
 }
