@@ -114,6 +114,10 @@ Function Convert-sysinternals ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath"
     $obj.installScriptMod = $obj.installScriptMod -replace "Is-NanoServer.*" , "$&`n  $filepathnano"
     
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    $checksumnano = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'packageArgs.checksum *=').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $urlnano -filename $filenamenano -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumnano
 }
 
 
@@ -146,10 +150,13 @@ Function Convert-virtualbox ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsPath\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsPath\*vbox-extpack'
 
-
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
-    Get-File -url $urlep -filename $filenameep -toolsDir $obj.toolsDir
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    $checksumep = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum_ep *=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+    Get-File -url $urlep -filename $filenameep -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumep
 }
 
 
@@ -235,36 +242,17 @@ Function Convert-geforce-driver ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "OSVersion\.Version\.Major -ne '10' \) \{" , "$&`n    $filePathwin7"
     $obj.installScriptMod = $obj.installScriptMod -replace "-eq 'true'\) \{" , "$&`n    $filePathDCH"
 
-    $dlwdFilewin7 = (Join-Path $obj.toolsDir "$filenamewin7")
-    $dlwdFilewin10 = (Join-Path $obj.toolsDir "$filenamewin10")
-    $dlwdFileDCH = (Join-Path $obj.toolsDir "$filenameDCH")
-
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
-    Write-Output "Downloading geforce-game-ready-driver files"
-    $dlwd = New-Object net.webclient
 
-    if (Test-Path $dlwdFilewin7) {
-        Write-Output $dlwdFilewin7 ' appears to be downloaded'
-    } else {
-        $dlwd.DownloadFile($urlwin7, $dlwdFilewin7)
-    }
+    $checksumWin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    $checksumWin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['checksum64'\].*= '").tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    $checksumDCH = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$packageArgsDCHChecksum *=').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
 
-    if (Test-Path $dlwdFilewin10) {
-        Write-Output $dlwdFilewin10 ' appears to be downloaded'
-    } else {
-        $dlwd.DownloadFile($urlwin10, $dlwdFilewin10)
-    }
-
-    if (Test-Path $dlwdFileDCH) {
-        Write-Output $dlwdFileDCH ' appears to be downloaded'
-    } else {
-        $dlwd.DownloadFile($urlDCH, $dlwdFileDCH)
-    }
-
-    $dlwd.dispose()
-
+    Get-File -url $urlwin7 -filename $filenamewin7 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin7 
+    Get-File -url $urlwin10 -filename $filenamewin10 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin10
+    Get-File -url $urlDCH -filename $filenameDCH -toolsDir $obj.toolsDir-checksumTypeType 'sha256' -checksum $checksumDCH
 }
 
 
@@ -307,34 +295,40 @@ Function Convert-adobereader ($obj) {
 
 
 Function Convert-thunderbird ($obj) {
-    $version = $obj.version
+    Function Get-PackageParameters {
+        Return "mockup" 
+    }
+    . $(Join-Path $obj.toolsDir 'helpers.ps1')
 
-    $url32 = "https://download.mozilla.org/?product=thunderbird-" + $version + "-SSL&os=win&lang=en-US"
-    $url64 = "https://download.mozilla.org/?product=thunderbird-" + $version + "-SSL&os=win64&lang=en-US"
+    $locale = 'en-US'
+    $checksums = GetChecksums -language $locale -checksumFile $(Join-Path $obj.toolsDir "LanguageChecksums.csv")
 
-    $filename32 = "Thunderbird-Setup-" + $version + ".exe"
-    $filename64 = "Thunderbird-Setup-x64-" + $version + ".exe"
+
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$packageArgs.Url64 ').tostring()
+
+    $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring() -replace '\$\{locale\}', $locale
+    $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").tostring() -replace '\$\{locale\}', $locale
+
+    $filename32 = "Thunderbird_setup_x32.exe"
+    $filename64 = "Thunderbird_setup_x64.exe"
 
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
     $filePath64 = '$packageArgs.file64  = (Join-Path $toolsDir "' + $filename64 + '")'
-
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n"
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksums.Win32
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksums.Win64
 }
 
 
 Function Convert-firefox ($obj) {
-
-
     Function Get-PackageParameters {
         Return "mockup" 
     }
@@ -390,9 +384,11 @@ Function Convert-vcredist140 ($obj) {
     $dataContent = $dataContent -replace "installData32 = @{" , "$&`n  $filePath32"
     $dataContent = $dataContent -replace "installData64 = @{" , "$&`n  $filePath64"
 
+    $checksum32 = ($dataContent -split "`n" | Select-String -Pattern '  Checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    $checksum64 = ($dataContent -split "`n" | Select-String -Pattern '  Checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 
     Set-Content -Value $dataContent -Path $dataFile
 }
@@ -422,7 +418,7 @@ Function Convert-dotnetcore-desktopruntime ($obj) {
     Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
 }
 
-#Special because orig script uses $version instead of a full URL
+#Special because orig script uses $version inmod of a full URL
 Function Convert-powershell-core ($obj) {
     $version = $obj.version
 
@@ -441,29 +437,25 @@ Function Convert-powershell-core ($obj) {
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + '    Remove-Item -Force -EA 0 -Path $toolsDir\*.exe' + "`n" + "    $&"
     $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
 
 #TODO- import functions from real file to get url if package is not latest version
 Function Convert-libreoffice-fresh ($obj) {
 
-    $version = $obj.version
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url64bit ').tostring()
 
-    # $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'url  ').tostring()
-    # $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -pattern 'url64bit ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
-    # $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    # $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-    # $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    # $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-    $url32 = "https://download.documentfoundation.org/libreoffice/stable/" + $version + "/win/x86/LibreOffice_" + $version + "_Win_x86.msi"
-    $url64 = "https://download.documentfoundation.org/libreoffice/stable/" + $version + "/win/x86_64/LibreOffice_" + $version + "_Win_x64.msi"
-    $filename32 = "LibreOffice_" + $version + "_Win_x86.msi"
-    $filename64 = "LibreOffice_" + $version + "_Win_x64.msi"
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
 
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
     $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
@@ -475,8 +467,11 @@ Function Convert-libreoffice-fresh ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "if \(\-not" , "<#if \(\-not"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
 
@@ -518,6 +513,8 @@ Function Convert-tor-browser ($obj) {
     $data = GetDownloadInformation -toolsPath $obj.toolsDir
     $url32 = $data.url32
     $url64 = $data.url64
+    $checksum32 = $data.checksum
+    $checksum64 = $data.checksum64
 
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -529,8 +526,8 @@ Function Convert-tor-browser ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 
 }
 
@@ -651,18 +648,9 @@ Function Convert-resharper-platform ($obj) {
 
     $obj.installScriptMod = $obj.installScriptMod -replace 'Get-ChocolateyWebFile' , '#Get-ChocolateyWebFile'
 
-    #Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
-    $dlwdFile = (Join-Path $(Split-Path $obj.toolsDir) "$filename32")
-    $dlwd = New-Object net.webclient
-    $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
 
-    if (Test-Path $dlwdFile) {
-        Write-Output "$dlwdFile appears to be downloaded"
-    } else {
-        $dlwd.DownloadFile($url32, $dlwdFile)
-    }
-
-    $dlwd.dispose()
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
@@ -760,19 +748,21 @@ Function Convert-krita ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace 'file64        = Get-Item \$toolsDir\\\*\.exe' , $filepath64
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
 Function Convert-msiafterburner ($obj) {
-    $url32 = 'http://download.msi.com/uti_exe/vga/MSIAfterburnerSetup.zip'
+    $url32 = 'http://download.msi.com/uti_exe/vga/MSIAfterburnerSetup.zip?__token__=' + $(Invoke-RestMethod https://www.msi.com/api/v1/get_token?date=$(Get-Date -Format "yyyyMMdd"))
     $filename32 = 'afterburner.zip'
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#Get-ChocolateyWebFile"
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
@@ -802,21 +792,24 @@ Function Convert-gotomeeting ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "$packageArgs = @{" , "$&`n  $filePath32"
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
 Function Convert-googlechrome ($obj) {
     $editInstallChocolateyPackageSplat = @{
-        architecture  = "both"
-        nuspecID      = $obj.nuspecID
-        installScript = $obj.installScriptOrig
-        toolsDir      = $obj.toolsDir
-        urltype       = 0
-        argstype      = 0
-        needsTools    = $true
-        needsEA       = $true
-        RemoveMSI     = $true
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        urltype          = 0
+        argstype         = 0
+        needsTools       = $true
+        needsEA          = $true
+        RemoveMSI        = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageSplat
