@@ -640,8 +640,10 @@ Function Convert-resharper-platform ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace 'Get-ChocolateyWebFile' , '#Get-ChocolateyWebFile'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+    
+    $downloadDir = Split-Path $obj.toolsDir
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url32 -filename $filename32 -toolsDir $downloadDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
