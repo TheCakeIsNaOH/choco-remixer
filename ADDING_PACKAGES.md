@@ -18,5 +18,9 @@ There can be false positives, as occasionally an internal package will have a UR
 ## Add a non-internal package
 
 1. Get the `id` of the package. Not the name or `title`, but the `id`. The `id` is available in the `.nuspec`, and it is what is used to install/uninstall the package.
+2. From here on out, everything will be referencing the `ChocolateyInstall.ps1` of the package, for brevity called the install script. 
+3. Check if the install script has the error action preference statement, if not note down
+4. Check if the install script has defined the `$tooldDir` variable, if not note down
+5. Check what helper is used to download the file(s). `Install-ChocolateyPackage`, `Install-ChocolateyUnzip`, and `Get-ChocolateyWebfile` are the three most common.
 
 TO FINISH
