@@ -39,6 +39,13 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 - If continuously re-running for development or bug fixing, use the `-skipRepoCheck` switch, so as to not get rate limited by chocolatey.org 
 
+## Adding support for more packages
+
+See [ADDING_PACKAGES.md](https://github.com/TheCakeIsNaOH/choco-remixer/blob/master/ADDING_PACKAGES.md) for more information on how to add support for another package. PRs welcome, see [CONTRIBUTING.md](https://github.com/TheCakeIsNaOH/choco-remixer/blob/master/CONTRIBUTING.md) for more information
+
+Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues/new) to see if someone else is willing to add support.
+
+
 ## Caveats
 
 - I am still actively developing this, I make no promises that it is %100 stable.
