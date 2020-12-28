@@ -130,8 +130,8 @@ if ("no", "yes" -notcontains $writePerPkgs) {
 
 
 if ($pushPkgs -eq "yes") {
-    Test-PushPackages -URL $pushURL -Name "pushURL"
-} elseif ($pushPkgs -eq "no") { 
+    Test-PushPackage -URL $pushURL -Name "pushURL"
+} elseif ($pushPkgs -eq "no") {
 } else {
     Throw "bad pushPkgs value in personal-packages.xml, must be yes or no"
 }
@@ -279,7 +279,7 @@ Foreach ($obj in $nupkgObjArray) {
     Write-Output "Starting $($obj.nuspecID)"
     Expand-Nupkg -OrigPath $obj.OrigPath -VersionDir $obj.VersionDir
     $failed = $false
-    Try { 
+    Try {
         #Write-Output $obj.functionName
         $tempFuncName = $obj.functionName
         $tempFuncName = $tempFuncName + ' -obj $obj'
@@ -288,7 +288,7 @@ Foreach ($obj in $nupkgObjArray) {
     } Catch {
         Write-Warning "$($obj.nuspecID) $($obj.version) failed downloading or editing"
         Write-Warning "Error: $_"
-        
+
         $obj.status = "edit failed"
         $failed = $true
     }
@@ -359,7 +359,7 @@ Foreach ($obj in $nupkgObjArray) {
 
 
 Foreach ($obj in $nupkgObjArray) {
-    Write-Output "$($obj.nuspecID) $($obj.Version) $($obj.status)" 
+    Write-Output "$($obj.nuspecID) $($obj.Version) $($obj.status)"
 }
 
 

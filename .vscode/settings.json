@@ -8,5 +8,6 @@
   "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
   "powershell.codeFormatting.whitespaceBetweenParameters": true,
   "powershell.codeFormatting.ignoreOneLineBlock": false,
-  "powershell.codeFormatting.autoCorrectAliases": true
+  "powershell.codeFormatting.autoCorrectAliases": true,
+  "files.trimTrailingWhitespace": true
 }

@@ -1,3 +1,6 @@
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header', Scope = 'Function')]
+param()
+
 Function Read-ZippedInstallScript ($nupkgPath) {
     #needed for accessing dotnet zip functions
     Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -138,10 +141,10 @@ Function Test-URL {
         if ($headers) {
             $page = Invoke-WebRequest -UseBasicParsing -Uri $url -Method head -Headers $headers
         } else {
-            $page = Invoke-WebRequest -UseBasicParsing -Uri $url -Method head 
+            $page = Invoke-WebRequest -UseBasicParsing -Uri $url -Method head
         }
     } catch {
-        $page = $_.Exception.Response 
+        $page = $_.Exception.Response
     }
 
     if ($null -eq $page.StatusCode) {
@@ -174,7 +177,7 @@ Function Test-DropPath ($dropPath) {
 }
 
 
-Function Test-PushPackages {
+Function Test-PushPackage {
     [CmdletBinding()]
     param (
         [parameter(Mandatory = $true)][string]$URL,
@@ -183,9 +186,9 @@ Function Test-PushPackages {
     if ($null -eq $URL) {
         Throw "No $name found"
     }
-    
+
     Test-URL -url $URL -name $name
-    
+
     $apiKeySources = Get-ChocoApiKeysUrlList
     if ($apiKeySources -notcontains $URL) {
         Write-Verbose "Did not find a API key for $name"
@@ -205,8 +208,8 @@ Function Invoke-RepoMove {
     )
 
     $ProgressPreference = 'SilentlyContinue'
-    
-    Test-PushPackages -Url $moveToRepoURL -Name "moveToRepoURL"
+
+    Test-PushPackage -Url $moveToRepoURL -Name "moveToRepoURL"
 
     if ($null -eq $proxyRepoCreds) {
         Throw "proxyRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
@@ -345,7 +348,7 @@ Function Invoke-RepoCheck {
         [parameter(Mandatory = $true)][xml]$personalpackagesXMLcontent,
         [parameter(Mandatory = $true)][string]$searchDir
     )
-    
+
     $ProgressPreference = 'SilentlyContinue'
 
     if ($null -eq $publicRepoURL) {
@@ -369,7 +372,7 @@ Function Invoke-RepoCheck {
         Throw "no privateRepoURL in personal-packages.xml"
     }
     Test-URL -url $privateRepoURL -name "privateRepoURL" -Headers $privateRepoHeaderCreds
-    
+
     $toSearchToInternalize = $personalpackagesXMLcontent.mypackages.toInternalize.id
     $toInternalizeCompare = Compare-Object -ReferenceObject $packagesXMLcontent.packages.custom.pkg.id -DifferenceObject $toSearchToInternalize | Where-Object SideIndicator -EQ "=>"
 
@@ -438,7 +441,7 @@ Function Confirm-Checksum {
         [ValidateSet('md5', 'sha1', 'sha256', 'sha512')]
         [string]$checksumTypeType
     )
-    
+
     $filehash = (Get-FileHash -Path $fullFilePath -Algorithm $checksumTypeType).hash
     if ($filehash -ine $checksum) {
         Remove-Item -Force -EA 0 -Path $fullFilePath
@@ -463,7 +466,7 @@ Function Get-File {
     )
 
     $dlwdFile = (Join-Path $toolsDir "$filename")
-    
+
     if (Test-Path $dlwdFile) {
         if ($checksum) {
             Write-Information "$dlwdFile appears to be downloaded, checking checksum" -InformationAction Continue
@@ -588,7 +591,7 @@ Function Edit-InstallChocolateyPackage {
         }
         if ($x64) {
             $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").tostring()
-        } 
+        }
     } else {
         if ($x32) {
             $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
@@ -620,7 +623,7 @@ Function Edit-InstallChocolateyPackage {
         }
         if ($x64) {
             $filename64 = $filename64 -replace '%20' , " "
-        } 
+        }
     }
 
     if ($x64NameExt) {
@@ -679,15 +682,15 @@ Function Edit-InstallChocolateyPackage {
     if ($checksumTypeType) {
         if ($x32) {
             if ($checksumArgsType -eq 0) {
-                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } elseif ($checksumArgsType -eq 1) {
-                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } elseif ($checksumArgsType -eq 2) {
-                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } elseif ($checksumArgsType -eq 3) {
-                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '  checksum32  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '  checksum32  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } elseif ($checksumArgsType -eq 4) {
-                $checksum32 = ($installScript -split "`n" | Select-String -Pattern ' checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern ' checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
@@ -695,15 +698,15 @@ Function Edit-InstallChocolateyPackage {
         }
         if ($x64) {
             if ($checksumArgsType -eq 0) {
-                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } elseif ($checksumArgsType -eq 1) {
-                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } elseif ($checksumArgsType -eq 2) {
-                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } elseif ($checksumArgsType -eq 3) {
-                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '  checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '  checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } elseif ($checksumArgsType -eq 4) {
-                $checksum64 = ($installScript -split "`n" | Select-String -Pattern ' Checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1 
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern ' Checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
@@ -712,10 +715,10 @@ Function Edit-InstallChocolateyPackage {
     } else {
         if ($x32) {
             Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir
-        } 
+        }
         if ($x64) {
             Get-File -url $url64 -filename $filename64 -toolsDir $toolsDir
-        }    
+        }
     }
 
     Return $installScriptMod
