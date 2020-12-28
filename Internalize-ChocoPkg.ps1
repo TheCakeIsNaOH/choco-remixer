@@ -1,5 +1,7 @@
 ﻿#Requires -Version 5.0
 [CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = "I don't know another way to do it")]
 param (
     [string]$pkgXML = (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
     [string]$personalPkgXML,
