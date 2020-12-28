@@ -528,7 +528,7 @@ Function Convert-cutepdf ($obj) {
 }
 
 
-Function Convert-malwarebytes ($obj) { 
+Function Convert-malwarebytes ($obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "x32"
         nuspecID         = $obj.nuspecID
@@ -681,7 +681,7 @@ Function Convert-goggalaxy ($obj) {
         argstype         = 1
         urltype          = 0
         RemoveEXE        = $true
-        needsTools       = $true        
+        needsTools       = $true
         checksumArgsType = 0
         checksumTypeType = 'sha256'
     }

@@ -22,8 +22,10 @@ Import-Module Microsoft.PowerShell.Utility
 
 $functionsDir = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Definition) 'functions'
 
-. (Join-Path $functionsDir 'PkgFunctions-normal.ps1')
-. (Join-Path $functionsDir 'PkgFunctions-special.ps1')
+. (Join-Path $functionsDir 'PkgFunctions-standard.ps1')
+. (Join-Path $functionsDir 'PkgFunctions-install.ps1')
+. (Join-Path $functionsDir 'PkgFunctions-webfile.ps1')
+. (Join-Path $functionsDir 'PkgFunctions-zip.ps1')
 . (Join-Path $functionsDir 'OtherFunctions.ps1')
 
 
