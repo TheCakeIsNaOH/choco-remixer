@@ -20,9 +20,12 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 #needed to use [Microsoft.PowerShell.Commands.PSUserAgent] when running in pwsh
 Import-Module Microsoft.PowerShell.Utility
 
-. (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-normal.ps1')
-. (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Definition) 'PkgFunctions-special.ps1')
-. (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Definition) 'OtherFunctions.ps1')
+$functionsDir = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Definition) 'functions'
+
+. (Join-Path $functionsDir 'PkgFunctions-normal.ps1')
+. (Join-Path $functionsDir 'PkgFunctions-special.ps1')
+. (Join-Path $functionsDir 'OtherFunctions.ps1')
+
 
 #Check OS to select user profile location
 if (($null -eq $IsWindows) -or ($IsWindows -eq $true)) {
