@@ -8,11 +8,11 @@
     <id>android-sdk</id>
     <id>angryip</id>
     <id>ant</id>
-	<id>anydesk</id>
+    <id>anydesk</id>
     <id>attributechanger</id>
     <id>au</id>
-    <id>audacity</id>
     <id>audacity-lame</id>
+    <id>audacity</id>
     <id>autohotkey.install</id>
     <id>autohotkey.portable</id>
     <id>autohotkey</id>
@@ -20,7 +20,7 @@
     <id>balabolka</id>
     <id>bfg-repo-cleaner</id>
     <id>bibletime</id>
-	<id>bitwarden-cli</id>
+    <id>bitwarden-cli</id>
     <id>blender</id>
     <id>boxstarter.bootstrapper</id>
     <id>boxstarter.chocolatey</id>
@@ -32,25 +32,25 @@
     <id>cdburnerxp</id>
     <id>checksum</id>
     <id>choco-cleaner</id>
-    <id>chocolatey.extension</id>
-    <id>chocolatey.server</id>
-    <id>chocolatey</id>
-    <id>chocolatey-core.extension</id>
-    <id>chocolatey-dotnetfx.extension</id>
-    <id>chocolatey-fastanswers.extension</id>
-    <id>chocolateygui</id>
-    <id>chocolatey-misc-helpers.extension</id>
-    <id>chocolateypowershell</id>
-    <id>chocolatey-visualstudio.extension</id>
-    <id>chocolatey-windowsupdate.extension</id>
     <id>choco-nuspec-checker</id>
     <id>choco-package-list-backup</id>
     <id>choco-protocol-support</id>
+    <id>chocolatey-core.extension</id>
+    <id>chocolatey-dotnetfx.extension</id>
+    <id>chocolatey-fastanswers.extension</id>
+    <id>chocolatey-misc-helpers.extension</id>
+    <id>chocolatey-visualstudio.extension</id>
+    <id>chocolatey-windowsupdate.extension</id>
+    <id>chocolatey.extension</id>
+    <id>chocolatey.server</id>
+    <id>chocolatey</id>
+    <id>chocolateygui</id>
+    <id>chocolateypowershell</id>
     <id>chromium</id>
     <id>clementine</id>
-    <id>cmake</id>
-    <id>cmake.portable</id>
     <id>cmake.install</id>
+    <id>cmake.portable</id>
+    <id>cmake</id>
     <id>cpu-z</id>
     <id>crystaldiskinfo.install</id>
     <id>crystaldiskinfo.portable</id>
@@ -59,13 +59,13 @@
     <id>curl</id>
     <id>discord</id>
     <id>docker-kitematic</id>
-    <id>dolphin</id>
     <id>dolphin-dev</id>
+    <id>dolphin</id>
     <id>dotnet3.5</id>
     <id>dotnet4.7.2</id>
     <id>ds4windows</id>
     <id>duplicati</id>
-	<id>element-desktop</id>
+    <id>element-desktop</id>
     <id>etcher</id>
     <id>everything</id>
     <id>ext2fsd</id>
@@ -82,8 +82,8 @@
     <id>git.install</id>
     <id>git</id>
     <id>github-desktop</id>
-    <id>gpu-z</id>
     <id>gnupg</id>
+    <id>gpu-z</id>
     <id>gsudo</id>
     <id>handbrake.install</id>
     <id>handbrake.portable</id>
@@ -92,8 +92,8 @@
     <id>hxd</id>
     <id>icecat</id>
     <id>iceweasel</id>
-    <id>imagemagick</id>
     <id>imagemagick.app</id>
+    <id>imagemagick</id>
     <id>innoextract</id>
     <id>innosetup</id>
     <id>iperf2</id>
@@ -101,7 +101,7 @@
     <id>javaruntime</id>
     <id>jdk8</id>
     <id>joplin</id>
-    <id>KB2533623</id>
+    <id>kb2533623</id>
     <id>kdenlive</id>
     <id>keepassxc</id>
     <id>kubernetes-cli</id>
@@ -114,8 +114,8 @@
     <id>make</id>
     <id>maven</id>
     <id>microsoft-message-analyzer</id>
-    <id>miktex</id>
     <id>miktex.install</id>
+    <id>miktex</id>
     <id>minecraft</id>
     <id>moonlight-qt.install</id>
     <id>mp3tag</id>
@@ -127,15 +127,15 @@
     <id>nextcloud-client</id>
     <id>nginx</id>
     <id>nmap</id>
+    <id>nodejs-lts</id>
     <id>nodejs.install</id>
     <id>nodejs</id>
-    <id>nodejs-lts</id>
     <id>nomacs</id>
     <id>notepadplusplus.install</id>
     <id>notepadplusplus</id>
+    <id>nsis.install</id>
+    <id>nsis.portable</id>
     <id>nsis</id>
-	<id>nsis.install</id>
-	<id>nsis.portable</id>
     <id>nssm</id>
     <id>nuget.commandline</id>
     <id>nugetpackageexplorer</id>
@@ -143,8 +143,8 @@
     <id>obs-studio</id>
     <id>open-shell</id>
     <id>openhashtab</id>
-    <id>openssl</id>
     <id>openssh</id>
+    <id>openssl</id>
     <id>pandoc</id>
     <id>pcsx2.portable</id>
     <id>picard</id>
@@ -160,8 +160,8 @@
     <id>qownnotes</id>
     <id>qtox</id>
     <id>rapidee</id>
-    <id>rclone</id>
     <id>rclone.portable</id>
+    <id>rclone</id>
     <id>regeditor</id>
     <id>resharper</id>
     <id>riot-web</id>
@@ -177,9 +177,9 @@
     <id>tablacus</id>
     <id>tinymediamanager</id>
     <id>totalcommander</id>
+    <id>vcredist-all</id>
     <id>vcredist2015</id>
     <id>vcredist2017</id>
-    <id>vcredist-all</id>
     <id>vcxsrv</id>
     <id>virtualbox.extensionpack</id>
     <id>vivaldi</id>
@@ -206,11 +206,11 @@
   <custom>
     <pkg>
         <id>1password</id>
-		<needsStopAction>no</needsStopAction>
+        <needsStopAction>no</needsStopAction>
         <needsToolsDir>yes</needsToolsDir>
         <functionName>Convert-1password</functionName>
         <whyNotInternal>licensing</whyNotInternal>
-	</pkg>
+    </pkg>
     <pkg>
       <functionName>Convert-4k-slideshow</functionName>
       <id>4k-slideshow-maker</id>
@@ -251,84 +251,84 @@
       <id>adb</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal> <!-- under google SDK licensing with no redist, but has clause that allows open source licensing to take precedence, unsure if this is totally under open sources licensings, may need to build custom -->
+      <whyNotInternal>licensing</whyNotInternal> <!-- under google SDK licensing with no redist, but has clause that allows open source licensing to take precedence, unsure if this is totally under open sources licensings, may need to build custom -->
     </pkg>
     <pkg>
       <functionName>Convert-adobereader</functionName>
       <id>adobereader</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-adoptopenjdk8</functionName>
       <id>adoptopenjdk8</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
+      <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
       <functionName>Convert-adoptopenjdk8jre</functionName>
       <id>adoptopenjdk8jre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
+      <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
       <functionName>Convert-adoptopenjdkjre</functionName>
       <id>adoptopenjdkjre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
+      <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
       <functionName>Convert-advanced-installer</functionName>
       <id>advanced-installer</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-anydesk</functionName>
       <id>anydesk.portable</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-anydesk-install</functionName>
       <id>anydesk.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-airtame</functionName>
       <id>airtame</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-bitwarden</functionName>
       <id>bitwarden</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-box-drive</functionName>
       <id>box-drive</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-calibre</functionName>
       <id>calibre</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-coretemp</functionName>
@@ -342,35 +342,35 @@
       <id>cpu-z.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-cutepdf</functionName>
       <id>cutepdf</id>
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>Yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-ddu</functionName>
       <id>ddu</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-discord-install</functionName>
       <id>discord.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-sdk</functionName>
       <id>dotnetcore-sdk</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-desktopruntime</functionName>
@@ -391,28 +391,28 @@
       <id>dropbox</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-	<pkg>
-	  <functionName>Convert-eclipse</functionName>
+    <pkg>
+      <functionName>Convert-eclipse</functionName>
       <id>eclipse</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
-	</pkg>
-	<pkg>
-	  <functionName>Convert-eclipse-java-oxygen</functionName>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-eclipse-java-oxygen</functionName>
       <id>eclipse-java-oxygen</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
-	</pkg>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
     <pkg>
       <functionName>Convert-edge</functionName>
       <id>microsoft-edge</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-elgato-game-capture</functionName>
@@ -426,84 +426,84 @@
       <id>epicgameslauncher</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-firefox</functionName>
       <id>firefox</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-geforce-driver</functionName>
       <id>geforce-game-ready-driver</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-geforce-experience</functionName>
       <id>geforce-experience</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-geogebra-classic</functionName>
       <id>geogebra-classic.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-gimp</functionName>
       <id>gimp</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-		<functionName>Convert-goggalaxy</functionName>
-		<id>goggalaxy</id>
-		<needsStopAction>no</needsStopAction>
-		<needsToolsDir>yes</needsToolsDir>
-		<whyNotInternal>licensing</whyNotInternal>
-	</pkg>
+        <functionName>Convert-goggalaxy</functionName>
+        <id>goggalaxy</id>
+        <needsStopAction>no</needsStopAction>
+        <needsToolsDir>yes</needsToolsDir>
+        <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
     <pkg>
       <functionName>Convert-google-backup-and-sync</functionName>
       <id>google-backup-and-sync</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-googlechrome</functionName>
       <id>googlechrome</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-google-drive-file-stream</functionName>
       <id>google-drive-file-stream</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-gotomeeting</functionName>
       <id>gotomeeting</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-hexchat</functionName>
       <id>hexchat</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-hwmonitor</functionName>
@@ -511,7 +511,7 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
-	</pkg>
+    </pkg>
     <pkg>
       <functionName>Convert-inkscape</functionName>
       <id>inkscape</id>
@@ -524,7 +524,7 @@
       <id>krita</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-kodi</functionName>
@@ -538,21 +538,21 @@
       <id>libreoffice-fresh</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-lightshot</functionName>
       <id>lightshot.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-malwarebytes</functionName>
       <id>malwarebytes</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-makemkv</functionName>
@@ -566,97 +566,97 @@
       <id>minecraft-launcher</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-mono</functionName>
       <id>mono</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-msiafterburner</functionName>
       <id>msiafterburner</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-nordvpn</functionName>
       <id>nordvpn</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-nvidia-driver</functionName>
       <id>nvidia-display-driver</id>
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>Yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-onlyoffice</functionName>
       <id>onlyoffice</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-openshot</functionName>
       <id>openshot</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-powershell-core</functionName>
       <id>powershell-core</id>
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>No</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-resharper-platform</functionName>
       <id>resharper-platform</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-ringcentral-classic</functionName>
       <id>ringcentral-classic</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-shotcut-install</functionName>
       <id>shotcut.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal><!-- almost too big, not quite yet, but almost -->
+      <whyNotInternal>size</whyNotInternal><!-- almost too big, not quite yet, but almost -->
     </pkg>
     <pkg>
       <functionName>Convert-skype</functionName>
       <id>skype</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-slack</functionName>
       <id>slack</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-spotify</functionName>
       <id>spotify</id>
-	  <needsStopAction>yes</needsStopAction>
-	  <needsToolsDir>yes</needsToolsDir>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
@@ -664,98 +664,98 @@
       <id>steam</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
         <id>streamlabs-obs</id>
         <needsStopAction>no</needsStopAction>
-		<needsToolsDir>yes</needsToolsDir>
-		<functionName>Convert-slobs</functionName>
+        <needsToolsDir>yes</needsToolsDir>
+        <functionName>Convert-slobs</functionName>
         <whyNotInternal>size</whyNotInternal>
-	</pkg>
+    </pkg>
     <pkg>
       <functionName>Convert-sysinternals</functionName>
       <id>sysinternals</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-thunderbird</functionName>
       <id>thunderbird</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-tor-browser</functionName>
       <id>tor-browser</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-uplay</functionName>
       <id>uplay</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-vagrant</functionName>
       <id>vagrant</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-vcredist140</functionName>
       <id>vcredist140</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-virtualbox</functionName>
       <id>virtualbox</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>size</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-virt-viewer</functionName>
       <id>virt-viewer</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-vivaldi-install</functionName>
       <id>vivaldi.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-vivaldi-portable</functionName>
       <id>vivaldi.portable</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-vscodium-install</functionName>
       <id>vscodium.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-	  <whyNotInternal>maintainer</whyNotInternal>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-vscode-install</functionName>
       <id>vscode.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-webex-meetings</functionName>
@@ -776,9 +776,9 @@
       <id>zoom</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-	  <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-	<!--    <pkg>
+    <!--    <pkg>
       <functionName></functionName>
       <id></id>
       <needsStopAction></needsStopAction>
