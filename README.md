@@ -6,11 +6,11 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 - Because relying on software to be available at a specific URL on the internet in perpetuity is not a good idea.
 - Manually downloading and internalizing for each package version is a lot of work.
-- The [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that has similar [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages) is:
+- The [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that has similar [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages):
  
-   - Not open source
-   - Too expensive for almost all non-business users because it starts at $1,600/year
-   - May require an ongoing license to continue to use the packages that are internalized with the business extension. 
+   - Is not open source.
+   - Starts at $1,600/year, which puts it out of reach for almost all non-business users.
+   - Requires an ongoing license to continue to use the packages that are internalized with the business extension. 
 
 ## Requirements
 
