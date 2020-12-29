@@ -615,6 +615,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-openoffice</functionName>
+      <id>openoffice</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal><!--- Size of all different ones combined -->
+    </pkg>
+    <pkg>
       <functionName>Convert-openshot</functionName>
       <id>openshot</id>
       <needsStopAction>no</needsStopAction>
