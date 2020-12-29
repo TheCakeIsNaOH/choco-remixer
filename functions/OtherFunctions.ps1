@@ -75,6 +75,7 @@ Function Expand-Nupkg {
         $null = mkdir $($OutputFile | Split-Path) -ea 0
         [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, $outputFile, $true)
     }
+    $archive.dispose()
 }
 
 
