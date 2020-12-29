@@ -71,7 +71,7 @@ Function Expand-Nupkg {
         Where-Object FullName -NotLike 'package/*' | Where-Object Fullname -NotLike '__MACOSX/*'
 
     $filteredArchive | ForEach-Object {
-        $OutputFile = Join-Path $VersionDir $_.fullname
+        $OutputFile = Join-Path $OutputDir $_.fullname
         $null = mkdir $($OutputFile | Split-Path) -ea 0
         [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, $outputFile, $true)
     }
