@@ -604,7 +604,7 @@ Function Convert-openoffice ($obj) {
     $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
 
 
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Install-ChocolateyInstallPackage "$packageName" "$fileType" "$silentArgs" "$file"'
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Install-ChocolateyInstallPackage "$packageName" "$fileType" "$silentArgs" "$file" -validExitCodes $validExitCodes'
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "#$&"
     $obj.installScriptMod = $filePath32  + "`n" + $obj.InstallScriptMod
