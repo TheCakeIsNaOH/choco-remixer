@@ -748,6 +748,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-vcredist2005</functionName>
+      <id>vcredist2005</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-vcredist140</functionName>
       <id>vcredist140</id>
       <needsStopAction>no</needsStopAction>
