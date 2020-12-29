@@ -417,6 +417,25 @@ Function Convert-vscode-install ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
+
+Function Convert-atom-install ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 0
+        RemoveEXE        = $true
+        needsTools       = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+
 # SINGLE --------------------------
 
 
@@ -848,5 +867,4 @@ Function Convert-yarn ($obj) {
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
-
 

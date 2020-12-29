@@ -9,6 +9,7 @@
     <id>angryip</id>
     <id>ant</id>
     <id>anydesk</id>
+    <id>atom</id>
     <id>attributechanger</id>
     <id>au</id>
     <id>audacity-lame</id>
@@ -61,6 +62,7 @@
     <id>docker-kitematic</id>
     <id>dolphin-dev</id>
     <id>dolphin</id>
+    <id>dosbox</id>
     <id>dotnet3.5</id>
     <id>dotnet4.7.2</id>
     <id>ds4windows</id>
@@ -170,6 +172,7 @@
     <id>rufus</id>
     <id>shexview</id>
     <id>shotcut</id>
+    <id>synctrayzor</id>
     <id>sudo</id>
     <id>sumatrapdf.commandline</id>
     <id>sumatrapdf.install</id>
@@ -302,6 +305,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-atom-install</functionName>
+      <id>atom.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-airtame</functionName>
