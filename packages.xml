@@ -638,6 +638,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-openlp</functionName>
+      <id>openlp</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-openoffice</functionName>
       <id>openoffice</id>
       <needsStopAction>yes</needsStopAction>
@@ -918,7 +925,6 @@
     <id>netfx-4.6.2</id>
     <id>obs-ndi</id>
     <id>office365proplus</id>
-    <id>openlp</id>
     <id>orca</id>
     <id>pci-z</id>
     <id>powershell</id>
