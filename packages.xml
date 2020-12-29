@@ -650,6 +650,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-seamonkey</functionName>
+      <id>seamonkey</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-shotcut-install</functionName>
       <id>shotcut.install</id>
       <needsStopAction>no</needsStopAction>
