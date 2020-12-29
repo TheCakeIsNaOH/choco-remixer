@@ -400,6 +400,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-dotnetfx</functionName>
+      <id>dotnetfx</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dropbox</functionName>
       <id>dropbox</id>
       <needsStopAction>no</needsStopAction>
@@ -889,7 +896,6 @@
     <id>dotnet4.5</id>
     <id>dotnet4.6.1</id>
     <id>dotnet4.6</id>
-    <id>dotnetfx</id>
     <id>filespy</id>
     <id>grep</id>
     <id>html-help-workshop</id>
