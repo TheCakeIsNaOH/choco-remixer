@@ -769,6 +769,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-vcredist2012</functionName>
+      <id>vcredist2012</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-vcredist140</functionName>
       <id>vcredist140</id>
       <needsStopAction>no</needsStopAction>
