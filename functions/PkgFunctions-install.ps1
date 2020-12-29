@@ -647,6 +647,46 @@ Function Convert-vcredist2005 ($obj) {
 }
 
 
+Function Convert-vcredist2010 ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'x86').tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'x64').tostring()
+
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+    $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
+    $filePath64 = '$file64   = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    $packagesilentArgs = '$SilentArgs = ''/Q'''
+    $packageFileType = '$filetype = ''exe'''
+    $packageName32 = '$packageName32 = ''vcredist2010'''
+    $packageName64 = '$packageName64 = ''vcredist2010_x64'''
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Type64 sha256", "$&#>`n        Install-ChocolateyInstallPackage -PackageName `"`$packageName64`" -FileType `"`$fileType`" -SilentArgs `"`$silentArgs`" -file64 `"`$file64`""
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "<#$&"
+    $obj.installScriptMod = $obj.installScriptMod -replace '"\$checksumType64"', "$&#>"
+    $obj.installScriptMod = $obj.installScriptMod -replace "Type sha256", "$&#>`n    Install-ChocolateyInstallPackage -PackageName `"`$packageName32`" -FileType `"`$fileType`" -SilentArgs `"`$silentArgs`" -file `"`$file`""
+    
+    $obj.installScriptMod = $packageName64 + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $packageName32 + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $packageFileType + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $packagesilentArgs + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $filePath32  + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $filePath64  + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'checksum ').tostring() -split " " | Select-Object -Last 1 -Skip 1
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'checksum64 ').tostring() -split " " | Select-Object -Last 1 -Skip 1
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}
+
+
 Function Convert-cpuz ($obj) {
     $editInstallChocolateyPackageargs = @{
         architecture     = "x32"
