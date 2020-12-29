@@ -149,6 +149,7 @@
     <id>openssh</id>
     <id>openssl</id>
     <id>pandoc</id>
+    <id>pcsx2</id>
     <id>pcsx2.portable</id>
     <id>picard</id>
     <id>pingtracer</id>
@@ -914,7 +915,6 @@
     <id>openlp</id>
     <id>orca</id>
     <id>pci-z</id>
-    <id>pcsx2</id>
     <id>powershell</id>
     <id>prime95</id>
     <id>qemu-img</id>
