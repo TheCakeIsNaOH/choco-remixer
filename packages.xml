@@ -168,6 +168,7 @@
     <id>rpcs3</id>
     <id>ruby</id>
     <id>rufus</id>
+    <id>shexview</id>
     <id>shotcut</id>
     <id>sudo</id>
     <id>sumatrapdf.commandline</id>
@@ -667,6 +668,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-shmnview</functionName>
+      <id>shmnview</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-steam</functionName>
       <id>steam</id>
       <needsStopAction>no</needsStopAction>
@@ -800,7 +808,5 @@
     <id>office365proplus</id>
     <id>powershell</id>
     <id>reflect-free</id>
-    <id>shexview</id>
-    <id>shmnview</id>
   </notImplemented>
 </packages>

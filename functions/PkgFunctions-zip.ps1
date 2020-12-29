@@ -141,3 +141,29 @@ Function Convert-origin ($obj) {
 
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha512'
 }
+
+
+Function Convert-shmnview ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = '$file       = (Join-Path $toolsDir "' + $filename32 + '")'
+    
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    $filePath64 = '$file64         = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    $obj.installScriptMod = $filePath32 + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $filePath64 + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "<#Install-ChocolateyZipPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace 'checksumType64"' , "$& #>`nGet-ChocolateyUnzip -FileFullPath `$file -FileFullPath64 `$file64 -Destination `$toolsDir -PackageName `$packagename"
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha256'
+}
