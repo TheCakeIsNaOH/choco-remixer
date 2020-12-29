@@ -279,7 +279,7 @@ $nupkgArray = $null
 
 Foreach ($obj in $nupkgObjArray) {
     Write-Output "Starting $($obj.nuspecID)"
-    Expand-Nupkg -OrigPath $obj.OrigPath -VersionDir $obj.VersionDir
+    Expand-Nupkg -OrigPath $obj.OrigPath -OutputDir $obj.VersionDir
     $failed = $false
     Try {
         #Write-Output $obj.functionName

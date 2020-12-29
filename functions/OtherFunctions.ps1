@@ -57,7 +57,7 @@ Function Read-NuspecVersion ($nupkgPath) {
 Function Expand-Nupkg {
     param (
         [parameter(Mandatory = $true)][string]$OrigPath,
-        [parameter(Mandatory = $true)][string]$VersionDir
+        [parameter(Mandatory = $true)][string]$OutputDir
     )
 
     #needed for accessing dotnet zip functions
