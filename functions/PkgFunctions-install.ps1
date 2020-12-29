@@ -111,9 +111,9 @@ Function Convert-airtame ($obj) {
 }
 
 
-#TODO- import functions from real file to get url if package is not latest version
 Function Convert-libreoffice-fresh ($obj) {
-
+    . $(Join-Path $obj.toolsDir 'helpers.ps1')
+    
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url64bit ').tostring()
 
@@ -126,6 +126,12 @@ Function Convert-libreoffice-fresh ($obj) {
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
     $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
 
+    if (-not (IsUrlValid $url32)) {
+        $officeVersion = $obj.installScriptOrig -split "`n" | Select-String -Pattern ' version ').tostring()
+        $exactVersion = GetLibOExactVersion $officeVersion
+        $url32 = $exactVersion.Url32
+        $url64 = $exactVersion.Url64
+    }
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "#>`n`nInstall-ChocolateyInstallPackage"
