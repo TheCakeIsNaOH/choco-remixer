@@ -98,6 +98,7 @@
     <id>imagemagick</id>
     <id>innoextract</id>
     <id>innosetup</id>
+    <id>innounp</id>
     <id>iperf2</id>
     <id>jackett</id>
     <id>javaruntime</id>
@@ -910,14 +911,17 @@
     <id>netfx-4.6.2</id>
     <id>obs-ndi</id>
     <id>office365proplus</id>
+    <id>openlp</id>
     <id>orca</id>
     <id>pci-z</id>
+    <id>pcsx2</id>
     <id>powershell</id>
     <id>prime95</id>
     <id>qemu-img</id>
     <id>qemu</id>
     <id>railroadtycoon</id>
     <id>reflect-free</id>
+    <id>rtx-voice</id>
     <id>ruby2.devkit</id>
     <id>shexview.install</id>
     <id>sql-server-management-studio</id>
