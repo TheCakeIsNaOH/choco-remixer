@@ -781,6 +781,37 @@ Function Convert-kb2919355 ($obj) {
 }
 
 
+Function Convert-kb2919442 ($obj) {
+
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'url +=').tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url64 +=' | Select -First 1).tostring()
+    
+    $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
+    $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").tostring()
+
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+    $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
+    $filePath64 = '$file64   = (Join-Path $toolsDir "' + $filename64 + '")'
+    
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + "Install-ChocolateyInstallPackage -PackageName `"`$packageName`" -FileType 'msu' -SilentArgs `"`$silentArgs`" -file `"`$file`" -file64 `"`$file64`"  -validExitCodes @(0, 3010, 0x80240017)"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msu'
+    $obj.installScriptMod = $obj.installScriptMod -replace "\t+return", "    Remove-Item -Force -EA 0 -Path `$toolsDir\*.msu`n$&"
+    
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "#$&" 
+    $obj.installScriptMod = $filePath32  + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $filePath64  + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum +=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum64 +=' | Select -First 1).tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}
+
+
 Function Convert-cpuz ($obj) {
     $editInstallChocolateyPackageargs = @{
         architecture     = "x32"
