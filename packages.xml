@@ -617,6 +617,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-netfx-4.6.2</functionName>
+      <id>netfx-4.6.2</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-nordvpn</functionName>
       <id>nordvpn</id>
       <needsStopAction>no</needsStopAction>
@@ -922,7 +929,6 @@
     <id>masterpackager</id>
     <id>mitmproxy</id>
     <id>nano</id>
-    <id>netfx-4.6.2</id>
     <id>obs-ndi</id>
     <id>office365proplus</id>
     <id>orca</id>
