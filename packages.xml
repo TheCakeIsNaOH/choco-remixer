@@ -863,9 +863,56 @@
     
   </custom>
   <notImplemented>
+    <id>audacity-ffmpeg</id>
+    <id>becyicongrabber</id>
+    <id>bluescreenview.install</id>
+    <id>chromehistoryview</id>
+    <id>cinebench</id>
+    <id>colortool</id>
+    <id>dotnet4.5.2</id>
+    <id>dotnet4.5</id>
+    <id>dotnet4.6.1</id>
+    <id>dotnet4.6</id>
     <id>dotnetfx</id>
+    <id>filespy</id>
+    <id>grep</id>
+    <id>html-help-workshop</id>
+    <id>imgburn</id>
+    <id>insted</id>
+    <id>io-unlocker</id>
+    <id>iperf3</id>
+    <id>jdk8</id>
+    <id>jre8</id>
+    <id>kb2919355</id>
+    <id>kb2919442</id>
+    <id>kb2999226</id>
+    <id>kb3033929</id>
+    <id>kb3035131</id>
+    <id>kb3063858</id>
+    <id>kb3118401</id>
+    <id>ksign</id>
+    <id>logitechgaming</id>
+    <id>masterpackager</id>
+    <id>mitmproxy</id>
+    <id>nano</id>
+    <id>netfx-4.6.2</id>
+    <id>obs-ndi</id>
     <id>office365proplus</id>
+    <id>orca</id>
+    <id>pci-z</id>
     <id>powershell</id>
+    <id>prime95</id>
+    <id>qemu-img</id>
+    <id>qemu</id>
+    <id>railroadtycoon</id>
     <id>reflect-free</id>
+    <id>ruby2.devkit</id>
+    <id>shexview.install</id>
+    <id>sql-server-management-studio</id>
+    <id>sqlserver-cmdlineutils</id>
+    <id>universal-extractor</id>
+    <id>vidcutter</id>
+    <id>visualbcd</id>
+    <id>xming</id>
   </notImplemented>
 </packages>
