@@ -611,6 +611,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-origin</functionName>
+      <id>origin</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-powershell-core</functionName>
       <id>powershell-core</id>
       <needsStopAction>No</needsStopAction>
@@ -791,7 +798,6 @@
   <notImplemented>
     <id>dotnetfx</id>
     <id>office365proplus</id>
-    <id>origin</id>
     <id>powershell</id>
     <id>reflect-free</id>
     <id>shexview</id>
