@@ -449,6 +449,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-filespy</functionName>
+      <id>filespy</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-firefox</functionName>
       <id>firefox</id>
       <needsStopAction>no</needsStopAction>
@@ -910,7 +917,6 @@
     <id>dotnet4.5</id>
     <id>dotnet4.6.1</id>
     <id>dotnet4.6</id>
-    <id>filespy</id>
     <id>grep</id>
     <id>html-help-workshop</id>
     <id>imgburn</id>

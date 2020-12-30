@@ -167,3 +167,21 @@ Function Convert-shmnview ($obj) {
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
     Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha256'
 }
+
+
+Function Convert-filespy ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url +').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'FileFullPath          = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+    $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
+    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod -replace ' url', '#url'
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+}
+
