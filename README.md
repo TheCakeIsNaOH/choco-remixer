@@ -1,6 +1,6 @@
 ## What is this?
 
-This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-recompile-packages) select Chocolatey packages.
+This automates some tasks involved in maintaining a private Chocolatey repository, primarily [internalizing/recompiling](https://chocolatey.org/docs/how-to-recompile-packages) select Chocolatey packages.
 
 ## Why did I make this? 
 
@@ -41,9 +41,9 @@ This automates [internalizing/recompiling](https://chocolatey.org/docs/how-to-re
 
 ## Adding support for more packages
 
-See [ADDING_PACKAGES.md](https://github.com/TheCakeIsNaOH/choco-remixer/blob/master/ADDING_PACKAGES.md) for more information on how to add support for another package. PRs welcome, see [CONTRIBUTING.md](https://github.com/TheCakeIsNaOH/choco-remixer/blob/master/CONTRIBUTING.md) for more information
+See [ADDING_PACKAGES.md (in progress)](https://github.com/TheCakeIsNaOH/choco-remixer/blob/master/ADDING_PACKAGES.md) for more information on how to add support for another package. PRs welcome, see [CONTRIBUTING.md](https://github.com/TheCakeIsNaOH/choco-remixer/blob/master/CONTRIBUTING.md) for more information
 
-Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues/new) to see if someone else is willing to add support.
+Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues/new) to see if I am willing to add support.
 
 
 ## Caveats
@@ -56,7 +56,6 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 - Write docs on how to add packages
 - Comment based help
 - Use switch statements in Edit-InstallChocolateyPackage
-- Move more packages to no custom function, use generic functions
 - Turn into proper module
 - Drop dependency on `choco.exe`, possibly requires chocolatey to update the nuget.exe version as current version does not extract files added to zip after pack.
 	- Move to `chocolatey.lib` instead?
@@ -71,11 +70,12 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
   - Add option to trust names of nupkg's in searching, allows for quicker search
   - Git integration for personal-packages.xml
   - Multiple personal-packages.xml files (for now it probably is best to add an alias to your profile for each xml)
-  - Add capability to directly specify from xml
+  - Add capability to directly specify package internalization from xml with a separate function
   
     ### Continuous 
     
   - Better verbose/debug and other information output
   - Better error checking and handling
   - generalize more functionality and make available as functions. 
+  - Move more packages to no custom function, use generic functions
   
