@@ -1,6 +1,10 @@
 ## What is this?
 
-This automates some tasks involved in maintaining a private Chocolatey repository, primarily [internalizing/recompiling](https://chocolatey.org/docs/how-to-recompile-packages) select Chocolatey packages.
+This automates some tasks involved in maintaining a private Chocolatey repository.
+
+Primarily, this is for [internalizing/recompiling](https://chocolatey.org/docs/how-to-recompile-packages) select Chocolatey packages.
+
+Secondarily, this can check for packages that need to be internalized in a Nexus nuget repository, and internalize them.
 
 ## Why did I make this? 
 
@@ -53,6 +57,7 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 
 ## Todo
 
+- Add support to update any package, not just non-internal ones.
 - Write docs on how to add packages
 - Comment based help
 - Use switch statements in Edit-InstallChocolateyPackage
