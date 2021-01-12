@@ -76,6 +76,7 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
   - Git integration for personal-packages.xml
   - Multiple personal-packages.xml files (for now it probably is best to add an alias to your profile for each xml)
   - Add capability to directly specify package internalization from xml with a separate function
+  - Pester?
   
     ### Continuous 
     

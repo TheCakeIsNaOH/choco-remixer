@@ -65,21 +65,6 @@ Function Convert-geogebra-classic ($obj) {
 }
 
 
-Function Convert-anydesk ($obj) {
-    $url32 = "https://download.anydesk.com/AnyDesk.exe"
-    $filename32 = "AnyDesk.exe"
-    $filePath32 = 'file           = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
-
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
-}
-
-
 Function Convert-anydesk-install ($obj) {
     $url32 = "https://download.anydesk.com/AnyDesk.msi"
     $filename32 = "AnyDesk.msi"
