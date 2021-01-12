@@ -296,7 +296,7 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-anydesk</functionName>
+      <functionName>Convert-anydesk-portable</functionName>
       <id>anydesk.portable</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>

@@ -66,7 +66,7 @@ Function Convert-geogebra-classic ($obj) {
 
 
 Function Convert-anydesk-install ($obj) {
-    $fullurl32 = ($installScript -split "`n" | Select-String -Pattern '^\$Url32 ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url32 ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
