@@ -1,7 +1,6 @@
 ﻿#Requires -Version 5.0
 [CmdletBinding()]
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header')]
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = "I don't know another way to do it")]
 param (
     [string]$pkgXML = (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Definition) 'packages.xml') ,
     [string]$personalPkgXML,
@@ -283,11 +282,7 @@ Foreach ($obj in $nupkgObjArray) {
     Expand-Nupkg -OrigPath $obj.OrigPath -OutputDir $obj.VersionDir
     $failed = $false
     Try {
-        #Write-Output $obj.functionName
-        $tempFuncName = $obj.functionName
-        $tempFuncName = $tempFuncName + ' -obj $obj'
-        Invoke-Expression $tempFuncName
-        $tempFuncName = $null
+        & $obj.functionName -obj $obj
     } Catch {
         Write-Warning "$($obj.nuspecID) $($obj.version) failed downloading or editing"
         Write-Warning "Error: $_"
