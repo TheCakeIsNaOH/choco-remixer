@@ -36,9 +36,13 @@
     <id>choco-nuspec-checker</id>
     <id>choco-package-list-backup</id>
     <id>choco-protocol-support</id>
+    <id>chocolatey-agent</id>
     <id>chocolatey-core.extension</id>
     <id>chocolatey-dotnetfx.extension</id>
     <id>chocolatey-fastanswers.extension</id>
+    <id>chocolatey-management-service</id>
+    <id>chocolatey-management-web</id>
+    <id>chocolatey-managment-database</id>
     <id>chocolatey-misc-helpers.extension</id>
     <id>chocolatey-visualstudio.extension</id>
     <id>chocolatey-windowsupdate.extension</id>
@@ -759,6 +763,20 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-sql-server-express</functionName>
+      <id>sql-server-express</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-sql-server-management-studio</functionName>
+      <id>sql-server-management-studio</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-steam</functionName>
       <id>steam</id>
       <needsStopAction>no</needsStopAction>
@@ -964,7 +982,6 @@
     <id>rtx-voice</id>
     <id>ruby2.devkit</id>
     <id>shexview.install</id>
-    <id>sql-server-management-studio</id>
     <id>sqlserver-cmdlineutils</id>
     <id>universal-extractor</id>
     <id>vidcutter</id>

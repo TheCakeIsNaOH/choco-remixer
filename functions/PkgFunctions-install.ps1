@@ -297,10 +297,9 @@ Function Convert-dotnetcore-windowshosting ($obj) {
 
 
     $obj.installScriptMod = $obj.installScriptMod -replace "arguments = @{" , "$&`n  $filePath32"
-    $obj.installScriptMod = $obj.installScriptMod -replace "arguments64 = @{" , "$&`n  $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod -replace "arguments = @{" , "$&`n  $filePath64"
 
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
 
@@ -850,6 +849,23 @@ Function Convert-kb2919442 ($obj) {
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum64 +=' | Select-Object -First 1).tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
     Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}
+
+
+Function Convert-sql-server-management-studio ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$fullurl += ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = '$packageArgs.file     = (Join-Path $toolsDir "' + $filename32 + '")'
+
+
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "$filePath32`n    $&"
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$fullChecksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
