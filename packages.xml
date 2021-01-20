@@ -170,6 +170,7 @@
     <id>regeditor</id>
     <id>resharper</id>
     <id>riot-web</id>
+    <id>rocolatey</id>
     <id>rpcs3</id>
     <id>ruby</id>
     <id>rufus</id>
@@ -310,6 +311,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-aspnetcore-runtimepackagestore</functionName>
+      <id>aspnetcore-runtimepackagestore</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-atom-install</functionName>
       <id>atom.install</id>
       <needsStopAction>no</needsStopAction>
@@ -385,6 +393,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-windowshosting</functionName>
+      <id>dotnetcore-windowshosting</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-desktopruntime</functionName>
