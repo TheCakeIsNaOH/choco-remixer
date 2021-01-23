@@ -5,7 +5,6 @@
     <id>7zip.install</id>
     <id>7zip.portable</id>
     <id>7zip</id>
-    <id>android-sdk</id>
     <id>angryip</id>
     <id>ant</id>
     <id>anydesk</id>
@@ -873,6 +872,13 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-virtualbox-additions</functionName>
+      <id>virtualbox-guest-additions-guest.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-virt-viewer</functionName>
