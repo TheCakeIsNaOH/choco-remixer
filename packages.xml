@@ -179,6 +179,7 @@
     <id>rufus</id>
     <id>shexview</id>
     <id>shotcut</id>
+    <id>shutup10</id>
     <id>synctrayzor</id>
     <id>sudo</id>
     <id>sumatrapdf.commandline</id>
@@ -725,6 +726,13 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-setacl</functionName>
+      <id>setacl</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-shotcut-install</functionName>

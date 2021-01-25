@@ -202,3 +202,20 @@ Function Convert-virtualbox-additions ($obj) {
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
+
+Function Convert-setacl ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url\s+=').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring() -replace '%20' , "_"
+    $filePath32 = 'FileFullPath          = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+    $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
+    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod -replace ' url', '#url'
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Checksum\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+}
