@@ -954,3 +954,28 @@ Function Convert-bitwarden ($obj) {
     }
 
 }
+
+
+Function Convert-dellcommandupdate-uwp ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 2
+        RemoveEXE        = $true
+
+        checksumArgsType = 2
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+  
+    #TODO
+    <# $uninstallScriptPath = Join-Path $obj.toolsDir 'chocolateyUninstall.ps1'
+    $uninstallString = "`n" + 'Get-AppxPackage *dellcommandupdate* -AllUsers -ea 0 | Remove-AppxPackage -AllUsers -ea 0'
+    Set-Content -Path $uninstallScriptPath -Value $uninstallString -Encoding utf8BOM #>
+    
+    
+}

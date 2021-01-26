@@ -385,6 +385,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-dellcommandupdate-uwp</functionName>
+      <id>dellcommandupdate-uwp</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-discord-install</functionName>
       <id>discord.install</id>
       <needsStopAction>no</needsStopAction>
