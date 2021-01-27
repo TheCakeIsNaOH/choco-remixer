@@ -338,6 +338,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-audacity-ffmpeg</functionName>
+      <id>audacity-ffmpeg</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-bitwarden</functionName>
       <id>bitwarden</id>
       <needsStopAction>no</needsStopAction>
@@ -1006,7 +1013,6 @@
     
   </custom>
   <notImplemented>
-    <id>audacity-ffmpeg</id>
     <id>becyicongrabber</id>
     <id>bluescreenview.install</id>
     <id>chromehistoryview</id>
