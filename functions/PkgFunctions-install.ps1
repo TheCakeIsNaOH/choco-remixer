@@ -880,6 +880,7 @@ Function Convert-dotnet4.5 ($obj) {
     $obj.installScriptMod = $filePath32 + "`n" + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     
     #No checksum in package
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
@@ -897,6 +898,25 @@ Function Convert-dotnet4.5.2 ($obj) {
     $obj.installScriptMod = $filePath32 + "`n" + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+    
+    #No checksum in package
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
+Function Convert-dotnet4.6 ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$Url\s+=').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
+    $installString = 'Install-ChocolateyInstallPackage -PackageName $packageName -FileType $installerType -SilentArgs $silentArgs -file $file -validExitCodes $validExitCodes'
+    
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "$installString`n    #$&"
+    $obj.installScriptMod = $filePath32 + "`n" + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     
     #No checksum in package
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
