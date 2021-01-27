@@ -1024,8 +1024,8 @@
     <id>insted</id>
     <id>io-unlocker</id>
     <id>iperf3</id>
-    <id>jdk8</id>
-    <id>jre8</id>
+    <id>jdk8</id><!-- please use a non-oracle build of java -->
+    <id>jre8</id><!-- please use a non-oracle build of java -->
     <id>kb2999226</id>
     <id>kb3033929</id>
     <id>kb3035131</id>
@@ -1038,12 +1038,12 @@
     <id>nano</id>
     <id>obs-ndi</id>
     <id>office365proplus</id>
-    <id>orca</id>
+    <id>orca</id><!-- out of date, make an internal package from msi in windows SDK -->
     <id>pci-z</id>
     <id>qemu-img</id>
     <id>qemu</id>
     <id>railroadtycoon</id>
-    <id>reflect-free</id>
+    <id>reflect-free</id><!-- Cannot be internalized, as it downloads the installer with AHK. Make custom package instead -->
     <id>ruby2.devkit</id>
     <id>shexview.install</id>
     <id>sqlserver-cmdlineutils</id>
