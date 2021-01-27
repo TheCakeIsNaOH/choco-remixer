@@ -869,6 +869,23 @@ Function Convert-sql-server-management-studio ($obj) {
 }
 
 
+Function Convert-dotnet4.5 ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = 'dotnetfx45_full_x86_x64.exe'
+    $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
+    $installString = '    Install-ChocolateyInstallPackage -PackageName ''dotnet45'' -FileType ''exe'' -SilentArgs "/Passive /NoRestart /Log $env:temp\net45.log" -file $file -validExitCodes @(0,3010)'
+    
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "$installString`n    #$&"
+    $obj.installScriptMod = $filePath32 + "`n" + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    
+    #No checksum in package
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+}
+
+
 Function Convert-cpuz ($obj) {
     $editInstallChocolateyPackageargs = @{
         architecture     = "x32"
