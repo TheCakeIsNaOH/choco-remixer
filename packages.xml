@@ -158,6 +158,7 @@
     <id>picard</id>
     <id>pingtracer</id>
     <id>powertoys</id>
+    <id>prime95</id>
     <id>putty.install</id>
     <id>putty.portable</id>
     <id>putty</id>
@@ -177,6 +178,7 @@
     <id>rpcs3</id>
     <id>ruby</id>
     <id>rufus</id>
+    <id>sed</id>
     <id>shexview</id>
     <id>shotcut</id>
     <id>shutup10</id>
@@ -728,6 +730,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-rtx-voice</functionName>
+      <id>rtx-voice</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-seamonkey</functionName>
       <id>seamonkey</id>
       <needsStopAction>yes</needsStopAction>
@@ -995,12 +1004,10 @@
     <id>orca</id>
     <id>pci-z</id>
     <id>powershell</id>
-    <id>prime95</id>
     <id>qemu-img</id>
     <id>qemu</id>
     <id>railroadtycoon</id>
     <id>reflect-free</id>
-    <id>rtx-voice</id>
     <id>ruby2.devkit</id>
     <id>shexview.install</id>
     <id>sqlserver-cmdlineutils</id>
