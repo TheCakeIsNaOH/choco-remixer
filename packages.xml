@@ -709,6 +709,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-powershell</functionName>
+      <id>powershell</id>
+      <needsStopAction>Yes</needsStopAction>
+      <needsToolsDir>No</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-powershell-core</functionName>
       <id>powershell-core</id>
       <needsStopAction>No</needsStopAction>
@@ -1003,7 +1010,6 @@
     <id>office365proplus</id>
     <id>orca</id>
     <id>pci-z</id>
-    <id>powershell</id>
     <id>qemu-img</id>
     <id>qemu</id>
     <id>railroadtycoon</id>
