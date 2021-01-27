@@ -625,6 +625,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-kb29992262</functionName>
+      <id>kb2999226</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-krita</functionName>
       <id>krita</id>
       <needsStopAction>yes</needsStopAction>
@@ -1026,7 +1033,6 @@
     <id>iperf3</id>
     <id>jdk8</id><!-- please use a non-oracle build of java -->
     <id>jre8</id><!-- please use a non-oracle build of java -->
-    <id>kb2999226</id>
     <id>kb3033929</id>
     <id>kb3035131</id>
     <id>kb3063858</id>

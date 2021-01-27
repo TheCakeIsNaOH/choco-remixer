@@ -5,7 +5,7 @@ Function Convert-dotnetfx ($obj) {
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'url     = "$(Join-Path $toolsDir ''' + $filename32 + ''')"'
-    
+
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "url", "#url"
@@ -21,7 +21,7 @@ Function Convert-netfx-4.6.2 ($obj) {
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'url     = "$(Join-Path $toolsDir ''' + $filename32 + ''')"'
-    
+
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "url", "#url"
@@ -67,40 +67,40 @@ Function Convert-rtx-voice ($obj) {
 
 
 Function Convert-powershell ($obj) {
-    $urlWin81x86             = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin81x86 '            ).tostring() -split "'" | Select-String -Pattern "http").ToString() 
+    $urlWin81x86 = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin81x86 '            ).tostring() -split "'" | Select-String -Pattern "http").ToString()
     $urlWin2k12R2andWin81x64 = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2k12R2andWin81x64 ').tostring() -split "'" | Select-String -Pattern "http").ToString()
-    $urlWin7x86              = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin7x86 '             ).tostring() -split "'" | Select-String -Pattern "http").ToString()
-    $urlWin2k8R2andWin7x64   = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2k8R2andWin7x64 '  ).tostring() -split "'" | Select-String -Pattern "http").ToString()
-    $urlWin2012              = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2012 '             ).tostring() -split "'" | Select-String -Pattern "http").ToString()
-    
-    $fileNameWin81x86             = ($urlWin81x86             -split "/" | Select-Object -Last 1).tostring()
+    $urlWin7x86 = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin7x86 '             ).tostring() -split "'" | Select-String -Pattern "http").ToString()
+    $urlWin2k8R2andWin7x64 = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2k8R2andWin7x64 '  ).tostring() -split "'" | Select-String -Pattern "http").ToString()
+    $urlWin2012 = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2012 '             ).tostring() -split "'" | Select-String -Pattern "http").ToString()
+
+    $fileNameWin81x86 = ($urlWin81x86 -split "/" | Select-Object -Last 1).tostring()
     $fileNameWin2k12R2andWin81x64 = ($urlWin2k12R2andWin81x64 -split "/" | Select-Object -Last 1).tostring()
-    $fileNameWin7x86              = ($urlWin7x86              -split "/" | Select-Object -Last 1).tostring()
-    $fileNameWin2k8R2andWin7x64   = ($urlWin2k8R2andWin7x64   -split "/" | Select-Object -Last 1).tostring()
-    $fileNameWin2012              = ($urlWin2012              -split "/" | Select-Object -Last 1).tostring()
-    
-    $filePathWin81x86             = '$urlWin81x86             = (Join-Path $toolsDir "' + $fileNameWin81x86 + '")'
+    $fileNameWin7x86 = ($urlWin7x86 -split "/" | Select-Object -Last 1).tostring()
+    $fileNameWin2k8R2andWin7x64 = ($urlWin2k8R2andWin7x64 -split "/" | Select-Object -Last 1).tostring()
+    $fileNameWin2012 = ($urlWin2012 -split "/" | Select-Object -Last 1).tostring()
+
+    $filePathWin81x86 = '$urlWin81x86             = (Join-Path $toolsDir "' + $fileNameWin81x86 + '")'
     $filePathWin2k12R2andWin81x64 = '$urlWin2k12R2andWin81x64 = (Join-Path $toolsDir "' + $fileNameWin2k12R2andWin81x64 + '")'
-    $filePathWin7x86              = '$urlWinWin7x86           = (Join-Path $toolsDir "' + $fileNameWin7x86 + '")'
-    $filePathWin2k8R2andWin7x64   = '$urlWin2k8R2andWin7x64   = (Join-Path $toolsDir "' + $fileNameWin2k8R2andWin7x64 + '")'
-    $filePathWin2012              = '$urlWinWin2012           = (Join-Path $toolsDir "' + $fileNameWin2012 + '")'
-    
+    $filePathWin7x86 = '$urlWinWin7x86           = (Join-Path $toolsDir "' + $fileNameWin7x86 + '")'
+    $filePathWin2k8R2andWin7x64 = '$urlWin2k8R2andWin7x64   = (Join-Path $toolsDir "' + $fileNameWin2k8R2andWin7x64 + '")'
+    $filePathWin2012 = '$urlWinWin2012           = (Join-Path $toolsDir "' + $fileNameWin2012 + '")'
+
     $obj.installScriptMod = $obj.installScriptMod -replace '\$osversionLookup\s+=', "$filePathWin81x86`n$filePathWin2k12R2andWin81x64`n$filePathWin7x86`n$filePathWin2k8R2andWin7x64`n$filePathWin2012`n`n$&"
     $obj.installScriptMod = $obj.installScriptMod -replace "(\s+)(throw)", "`$1Remove-Item -Force -EA 0 -Path `$toolsDir\*.zip`$1Remove-Item -Force -EA 0 -Path `$toolsDir\*.msu`$1`$2"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip' + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msu'
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "$& -UseOriginalLocation"
-    
-    $checksumWin81x86             = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin81x86checksum '             ).tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
+    $checksumWin81x86 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin81x86checksum '             ).tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksumWin2k12R2andWin81x64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2k12R2andWin81x64checksum ' ).tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    $checksumWin7x86              = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin7x86checksum '              ).tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    $checksumWin2k8R2andWin7x64   = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2k8R2andWin7x64checksum '   ).tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    $checksumWin2012              = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2012checksum '              ).tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    
+    $checksumWin7x86 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin7x86checksum '              ).tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksumWin2k8R2andWin7x64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2k8R2andWin7x64checksum '   ).tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksumWin2012 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2012checksum '              ).tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
     Get-File -url $urlWin81x86              -filename $fileNameWin81x86             -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin81x86
     Get-File -url $urlWin2k12R2andWin81x64  -filename $fileNameWin2k12R2andWin81x64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin2k12R2andWin81x64
     Get-File -url $urlWin7x86               -filename $fileNameWin7x86              -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin7x86
-    Get-File -url $urlWin2k8R2andWin7x64    -filename $fileNameWin2k8R2andWin7x64   -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin2k8R2andWin7x64 
+    Get-File -url $urlWin2k8R2andWin7x64    -filename $fileNameWin2k8R2andWin7x64   -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin2k8R2andWin7x64
     Get-File -url $urlWin2012               -filename $fileNameWin2012              -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin2012
 }
 
