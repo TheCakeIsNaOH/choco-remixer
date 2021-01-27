@@ -140,3 +140,144 @@ Function Convert-kb29992262 ($obj) {
 }
 
 
+Function Convert-KB3033929 ($obj) {
+    $installScriptExec = $obj.installScriptOrig -join "`n"
+    $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
+    $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
+    Invoke-Expression $installScriptExec
+
+    $msudata.GetEnumerator() | ForEach-Object {
+        if ($_.value.url) {
+            $url = $_.value.url
+            $checksum = $_.value.checksum
+            $filename = ($url -split "/" | Select-Object -Last 1).tostring()
+            $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
+            Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            
+            $escapedURL = [Regex]::Escape($url)
+            $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
+        }
+        if ($_.value.url64) {
+            $url = $_.value.url64
+            $checksum = $_.value.checksum64
+            $filename = ($url -split "/" | Select-Object -Last 1).tostring()
+            $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
+            Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            
+            $escapedURL = [Regex]::Escape($url)
+            $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
+        }
+    }
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msu'
+}
+
+
+Function Convert-KB3035131 ($obj) {
+    $installScriptExec = $obj.installScriptOrig -join "`n"
+    $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
+    $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
+    Invoke-Expression $installScriptExec
+
+    $msudata.GetEnumerator() | ForEach-Object {
+        if ($_.value.url) {
+            $url = $_.value.url
+            $checksum = $_.value.checksum
+            $filename = ($url -split "/" | Select-Object -Last 1).tostring()
+            $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
+            Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            
+            $escapedURL = [Regex]::Escape($url)
+            $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
+        }
+        if ($_.value.url64) {
+            $url = $_.value.url64
+            $checksum = $_.value.checksum64
+            $filename = ($url -split "/" | Select-Object -Last 1).tostring()
+            $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
+            Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            
+            $escapedURL = [Regex]::Escape($url)
+            $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
+        }
+    }
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msu'
+}
+
+
+Function Convert-KB3063858 ($obj) {
+    $installScriptExec = $obj.installScriptOrig -join "`n"
+    $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
+    $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
+    Invoke-Expression $installScriptExec
+
+    #6.0-client and 6.0-server are the same in this case, with the the same URLs.
+    $msudata.GetEnumerator() | Where-Object { $_.key -notmatch "6.0-client"} | ForEach-Object {
+        if ($_.value.url) {
+            $url = $_.value.url
+            $checksum = $_.value.checksum
+            $filename = ($url -split "/" | Select-Object -Last 1).tostring()
+            $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
+            Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            
+            $escapedURL = [Regex]::Escape($url)
+            $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
+        }
+        if ($_.value.url64) {
+            $url = $_.value.url64
+            $checksum = $_.value.checksum64
+            $filename = ($url -split "/" | Select-Object -Last 1).tostring()
+            $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
+            Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            
+            $escapedURL = [Regex]::Escape($url)
+            $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
+        }
+    }
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msu'
+}
+
+
+Function Convert-KB3118401 ($obj) {
+    $installScriptExec = $obj.installScriptOrig -join "`n"
+    $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
+    $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
+    Invoke-Expression $installScriptExec
+
+    $msudata.GetEnumerator() | ForEach-Object {
+        if ($_.value.url) {
+            $url = $_.value.url
+            $checksum = $_.value.checksum
+            $filename = ($url -split "/" | Select-Object -Last 1).tostring()
+            $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
+            Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            
+            $escapedURL = [Regex]::Escape($url)
+            $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
+        }
+        if ($_.value.url64) {
+            $url = $_.value.url64
+            $checksum = $_.value.checksum64
+            $filename = ($url -split "/" | Select-Object -Last 1).tostring()
+            $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
+            Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            
+            $escapedURL = [Regex]::Escape($url)
+            $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
+        }
+    }
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msu'
+}
+
+

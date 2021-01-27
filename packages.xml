@@ -632,6 +632,34 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-kb3033929</functionName>
+      <id>kb3033929</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-kb3035131</functionName>
+      <id>kb3035131</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-kb3063858</functionName>
+      <id>kb3063858</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-kb3118401</functionName>
+      <id>kb3118401</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-krita</functionName>
       <id>krita</id>
       <needsStopAction>yes</needsStopAction>
@@ -1033,10 +1061,6 @@
     <id>iperf3</id>
     <id>jdk8</id><!-- please use a non-oracle build of java -->
     <id>jre8</id><!-- please use a non-oracle build of java -->
-    <id>kb3033929</id>
-    <id>kb3035131</id>
-    <id>kb3063858</id>
-    <id>kb3118401</id>
     <id>ksign</id>
     <id>logitechgaming</id>
     <id>masterpackager</id>
