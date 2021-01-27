@@ -463,7 +463,9 @@ Function Get-File {
         [parameter(Mandatory = $true)][string]$toolsDir,
         [string]$checksum,
         [ValidateSet('md5', 'sha1', 'sha256', 'sha512')]
-        [string]$checksumTypeType
+        [string]$checksumTypeType,
+        [string]$referer,
+        [string]$acceptMIME
     )
 
     $dlwdFile = (Join-Path $toolsDir "$filename")
@@ -487,6 +489,13 @@ Function Get-File {
     if ($oldFileOK -eq $false) {
         $dlwd = New-Object net.webclient
         $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
+        if ($referer) {
+            $dlwd.Headers.Add('referer', $referer)
+        }
+        if ($acceptMIME) {
+            $dlwd.Headers.Add('accept', $acceptMIME)
+        }
+        
         Write-Information "Downloading $filename" -InformationAction Continue
         $dlwd.DownloadFile($url, $dlwdFile)
         $dlwd.dispose()
