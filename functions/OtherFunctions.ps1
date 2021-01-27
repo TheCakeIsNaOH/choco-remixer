@@ -581,6 +581,13 @@ Function Edit-InstallChocolateyPackage {
         if ($x64) {
             $fullurl64 = ($installScript -split "`n" | Select-String -Pattern " Url64bit ").tostring()
         }
+    } elseif ($urltype -eq 6) {
+        if ($x32) {
+            $fullurl32 = ($installScript -split "`n" | Select-String -Pattern '\$url\s+=').tostring()
+        }
+        if ($x64) {
+            $fullurl64 = ($installScript -split "`n" | Select-String -Pattern '\$url64\s+=').tostring()
+        }
     } else {
         Write-Error "could not find url type"
     }
