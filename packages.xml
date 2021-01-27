@@ -408,6 +408,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-dotnet4.5.2</functionName>
+      <id>dotnet4.5.2</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dotnetcore-sdk</functionName>
       <id>dotnetcore-sdk</id>
       <needsStopAction>no</needsStopAction>
@@ -991,7 +998,6 @@
     <id>chromehistoryview</id>
     <id>cinebench</id>
     <id>colortool</id>
-    <id>dotnet4.5.2</id>
     <id>dotnet4.6.1</id>
     <id>dotnet4.6</id>
     <id>grep</id>
