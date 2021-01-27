@@ -1029,7 +1029,14 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>   
+    </pkg>
+    <pkg>
+      <functionName>Convert-xming</functionName>
+      <id>xming</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>    
     <pkg>
       <functionName>Convert-zoom</functionName>
       <id>zoom</id>
@@ -1080,6 +1087,5 @@
     <id>universal-extractor</id>
     <id>vidcutter</id>
     <id>visualbcd</id>
-    <id>xming</id>
   </notImplemented>
 </packages>
