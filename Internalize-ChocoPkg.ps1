@@ -275,7 +275,7 @@ $nupkgArray | Select-Object -Unique | ForEach-Object {
 
 #don't need the list anymore, use nupkgObjArray
 $nupkgArray = $null
-
+[system.gc]::Collect()
 
 Foreach ($obj in $nupkgObjArray) {
     Write-Output "Starting $($obj.nuspecID)"

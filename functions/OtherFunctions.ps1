@@ -392,7 +392,7 @@ Function Invoke-RepoCheck {
     $privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
 
     $toSearchToInternalize | ForEach-Object {
-
+        [system.gc]::Collect();
         $nuspecID = $_
         Write-Verbose "Comparing repo versions of $($nuspecID)"
 
