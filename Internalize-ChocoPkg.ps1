@@ -298,6 +298,7 @@ Foreach ($obj in $nupkgObjArray) {
 
     if (!($failed)) {
         Write-UnzippedInstallScript -installScriptMod $obj.installScriptMod -toolsDir $obj.toolsDir
+        Add-NuspecFilesElement -nuspecPath ((Get-ChildItem $obj.VersionDir -Filter "*.nuspec").fullname)
 
         if ($noPack) {
             $exitcode = 0

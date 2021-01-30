@@ -203,6 +203,41 @@ Function Test-PushPackage {
 }
 
 
+Function Add-NuspecFilesElement {
+    [CmdletBinding()]
+    param (
+        [parameter(Mandatory = $true)][string]$nuspecPath
+    )
+
+    $nuspecPath = (Resolve-Path $nuspecPath).path
+    [xml]$nuspecXML = Get-Content $nuspecPath
+
+    $packageDir = Split-Path $nuspecPath
+    $filesList = Get-ChildItem $packageDir -Exclude "*.nupkg", "*.nuspec"    
+    
+    if ($null -ne $nuspecXML.package.files) {
+        $nuspecXML.package.RemoveChild($nuspecXML.package.files) | Out-Null
+    }
+    
+    $filesElement = $nuspecXML.CreateElement("files", $nuspecXML.package.xmlns)
+
+    foreach ($file in $filesList) {
+        $fileElement = $nuspecXML.CreateElement("file", $nuspecXML.package.xmlns)
+        $fileElement.SetAttribute("target", "$($file.name)")
+        if ($file.PSIsContainer) {
+            $srcString = "$($file.name){0}**" -f [IO.Path]::DirectorySeparatorChar
+            $fileElement.SetAttribute("src", "$srcString")
+        } else {
+            $fileElement.SetAttribute("src", "$($file.name)")
+        }
+        $filesElement.AppendChild($fileElement) | Out-Null
+    }
+    
+    $nuspecXML.package.AppendChild($filesElement) | Out-Null
+    $nuspecXML.save($nuspecPath)
+}
+
+
 Function Invoke-RepoMove {
     [CmdletBinding()]
     param (
