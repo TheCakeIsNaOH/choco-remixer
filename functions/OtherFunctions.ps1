@@ -72,7 +72,7 @@ Function Expand-Nupkg {
 
     $filteredArchive | ForEach-Object {
         $OutputFile = Join-Path $OutputDir $_.fullname
-        $null = mkdir $($OutputFile | Split-Path) -ea 0
+        $null = New-Item -Type Directory $($OutputFile | Split-Path) -ea 0
         [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, $outputFile, $true)
     }
     $archive.dispose()
@@ -244,7 +244,7 @@ Function Invoke-RepoMove {
 
     $saveDir = Join-Path $workDir "internal-packages-temp"
     if (!(Test-Path $saveDir)) {
-        $null = mkdir $saveDir
+        $null = New-Item -Type Directory $saveDir
     }
 
     if ($proxyRepoIdList) {
@@ -298,7 +298,7 @@ Function Invoke-RepoMove {
 
                 $IdSaveDir = Join-Path $searchDir $nuspecID
                 if (!(Test-Path $IdSaveDir)) {
-                    $null = mkdir $IdSaveDir
+                    $null = New-Item -Type Directory $IdSaveDir
                 }
 
                 $internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object { $_.id -ieq "$nuspecID" }).version
@@ -422,7 +422,7 @@ Function Invoke-RepoCheck {
 
             $saveDir = Join-Path $searchDir $nuspecID
             if (!(Test-Path $saveDir)) {
-                $null = mkdir $saveDir
+                $null = New-Item -Type Directory $saveDir
             }
 
             $dlwdPath = Join-Path $saveDir $filename
