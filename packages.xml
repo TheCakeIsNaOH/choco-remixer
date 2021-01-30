@@ -1060,9 +1060,10 @@
     <id>chromehistoryview</id>
     <id>cinebench</id>
     <id>colortool</id>
+    <id>directx</id><!-- Microsoft download is dead -->
     <id>grep</id>
-    <id>html-help-workshop</id>
-    <id>imgburn</id>
+    <id>html-help-workshop</id><!-- Download URL now dead -->
+    <id>imgburn</id><!-- To be removed from chocolatey -->
     <id>insted</id>
     <id>io-unlocker</id>
     <id>iperf3</id>
