@@ -118,7 +118,7 @@ Function Convert-kb29992262 ($obj) {
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
             Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
-            
+
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
         }
@@ -128,7 +128,7 @@ Function Convert-kb29992262 ($obj) {
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
             Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
-            
+
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
         }
@@ -153,7 +153,7 @@ Function Convert-KB3033929 ($obj) {
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
             Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
-            
+
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
         }
@@ -163,7 +163,7 @@ Function Convert-KB3033929 ($obj) {
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
             Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
-            
+
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
         }
@@ -188,7 +188,7 @@ Function Convert-KB3035131 ($obj) {
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
             Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
-            
+
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
         }
@@ -198,7 +198,7 @@ Function Convert-KB3035131 ($obj) {
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
             Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
-            
+
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
         }
@@ -217,14 +217,14 @@ Function Convert-KB3063858 ($obj) {
     Invoke-Expression $installScriptExec
 
     #6.0-client and 6.0-server are the same in this case, with the the same URLs.
-    $msudata.GetEnumerator() | Where-Object { $_.key -notmatch "6.0-client"} | ForEach-Object {
+    $msudata.GetEnumerator() | Where-Object { $_.key -notmatch "6.0-client" } | ForEach-Object {
         if ($_.value.url) {
             $url = $_.value.url
             $checksum = $_.value.checksum
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
             Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
-            
+
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
         }
@@ -234,7 +234,7 @@ Function Convert-KB3063858 ($obj) {
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
             Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
-            
+
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
         }
@@ -259,7 +259,7 @@ Function Convert-KB3118401 ($obj) {
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
             Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
-            
+
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
         }
@@ -269,7 +269,7 @@ Function Convert-KB3118401 ($obj) {
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
             Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
-            
+
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
         }

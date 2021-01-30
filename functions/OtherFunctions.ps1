@@ -87,7 +87,7 @@ Function Write-UnzippedInstallScript {
     )
     (Get-ChildItem $toolsDir -Filter "*chocolateyinstall.ps1").fullname | ForEach-Object { Remove-Item -Force -Recurse -ea 0 -Path $_ } -ea 0
     $scriptPath = Join-Path $toolsDir 'chocolateyinstall.ps1'
-    
+
     #If using pwsh, explicitly write with BOM
     if ($PSVersionTable.PSVersion.major -ge 6) {
         $null = Out-File -FilePath $scriptPath -InputObject $installScriptMod -Force -Encoding UTF8BOM
@@ -213,12 +213,12 @@ Function Add-NuspecFilesElement {
     [xml]$nuspecXML = Get-Content $nuspecPath
 
     $packageDir = Split-Path $nuspecPath
-    $filesList = Get-ChildItem $packageDir -Exclude "*.nupkg", "*.nuspec"    
-    
+    $filesList = Get-ChildItem $packageDir -Exclude "*.nupkg", "*.nuspec"
+
     if ($null -ne $nuspecXML.package.files) {
         $nuspecXML.package.RemoveChild($nuspecXML.package.files) | Out-Null
     }
-    
+
     $filesElement = $nuspecXML.CreateElement("files", $nuspecXML.package.xmlns)
 
     foreach ($file in $filesList) {
@@ -232,7 +232,7 @@ Function Add-NuspecFilesElement {
         }
         $filesElement.AppendChild($fileElement) | Out-Null
     }
-    
+
     $nuspecXML.package.AppendChild($filesElement) | Out-Null
     $nuspecXML.save($nuspecPath)
 }
@@ -546,7 +546,7 @@ Function Get-File {
         if ($acceptMIME) {
             $dlwd.Headers.Add('accept', $acceptMIME)
         }
-        
+
         Write-Information "Downloading $filename" -InformationAction Continue
         $dlwd.DownloadFile($url, $dlwdFile)
         $dlwd.dispose()
