@@ -419,7 +419,7 @@ Function Invoke-RepoCheck {
             #pwsh considers 3xx response codes as an error if redirection is disallowed
             if ($PSVersionTable.PSVersion.major -ge 6) {
                 try {
-                    Invoke-WebRequest Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea Stop
+                    Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea Stop
                 } catch {
                     $dlwdURL = $_.Exception.Response.headers.location.absoluteuri
                 }
