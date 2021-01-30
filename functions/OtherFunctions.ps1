@@ -421,7 +421,7 @@ Function Invoke-RepoCheck {
                 try {
                     Invoke-WebRequest Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea Stop
                 } catch {
-                    $redirectpage = $_.Exception.Response.headers.location.absoluteuri
+                    $dlwdURL = $_.Exception.Response.headers.location.absoluteuri
                 }
             } else {
                 $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea 0
