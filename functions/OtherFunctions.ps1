@@ -416,8 +416,18 @@ Function Invoke-RepoCheck {
 
             Write-Information "$nuspecID out of date on private repo, found version $publicVersion, downloading" -InformationAction Continue
 
-            $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea 0
-            $dlwdURL = $redirectpage.Links.href
+            #pwsh considers 3xx response codes as an error if redirection is disallowed
+            if ($PSVersionTable.PSVersion.major -ge 6) {
+                try {
+                    Invoke-WebRequest Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea Stop
+                } catch {
+                    $redirectpage = $_.Exception.Response.headers.location.absoluteuri
+                }
+            } else {
+                $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea 0
+                $dlwdURL = $redirectpage.Links.href
+            }
+
             $filename = $dlwdURL.split("/") | Select-Object -Last 1
 
             $saveDir = Join-Path $searchDir $nuspecID
