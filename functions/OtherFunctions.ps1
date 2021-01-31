@@ -213,7 +213,7 @@ Function Add-NuspecFilesElement {
     [xml]$nuspecXML = Get-Content $nuspecPath
 
     $packageDir = Split-Path $nuspecPath
-    $filesList = Get-ChildItem $packageDir -Exclude "*.nupkg", "*.nuspec"
+    $filesList = Get-ChildItem $packageDir -Exclude "*.nupkg", "*.nuspec", "update.ps1"
 
     if ($null -ne $nuspecXML.package.files) {
         $nuspecXML.package.RemoveChild($nuspecXML.package.files) | Out-Null
@@ -223,18 +223,24 @@ Function Add-NuspecFilesElement {
 
     foreach ($file in $filesList) {
         $fileElement = $nuspecXML.CreateElement("file", $nuspecXML.package.xmlns)
-        $fileElement.SetAttribute("target", "$($file.name)")
         if ($file.PSIsContainer) {
             $srcString = "$($file.name){0}**" -f [IO.Path]::DirectorySeparatorChar
             $fileElement.SetAttribute("src", "$srcString")
         } else {
             $fileElement.SetAttribute("src", "$($file.name)")
         }
+        $fileElement.SetAttribute("target", "$($file.name)")
         $filesElement.AppendChild($fileElement) | Out-Null
     }
 
     $nuspecXML.package.AppendChild($filesElement) | Out-Null
-    $nuspecXML.save($nuspecPath)
+    
+    [System.Xml.XmlWriterSettings] $XmlSettings = New-Object System.Xml.XmlWriterSettings
+    $XmlSettings.Indent = $true
+    $XmlSettings.Encoding = New-Object System.Text.UTF8Encoding($false)
+    [System.Xml.XmlWriter] $XmlWriter = [System.Xml.XmlWriter]::Create($nuspecPath, $XmlSettings)
+    $nuspecXML.Save($XmlWriter)
+    $XmlWriter.Dispose() 
 }
 
 
