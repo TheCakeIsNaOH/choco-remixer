@@ -210,7 +210,12 @@ Function Add-NuspecFilesElement {
     )
 
     $nuspecPath = (Resolve-Path $nuspecPath).path
-    [xml]$nuspecXML = Get-Content $nuspecPath
+    
+    if ($PSVersionTable.PSVersion.major -ge 6) {
+        [xml]$nuspecXML = Get-Content $nuspecPath
+    } else {
+        [xml]$nuspecXML = Get-Content $nuspecPath -Encoding UTF8
+    }
 
     $packageDir = Split-Path $nuspecPath
     $filesList = Get-ChildItem $packageDir -Exclude "*.nupkg", "*.nuspec", "update.ps1"
