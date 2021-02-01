@@ -185,13 +185,12 @@ Function Convert-mono ($obj) {
 
 Function Convert-shotcut-install ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
+        architecture     = "x64"
         nuspecID         = $obj.nuspecID
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
         urltype          = 1
         argstype         = 0
-        needsTools       = $true
         RemoveExe        = $true
         checksumArgsType = 1
         checksumTypeType = 'sha256'
