@@ -843,7 +843,7 @@ Function Convert-webex-meetings ($obj) {
         RemoveMSI        = $true
         needsTools       = $true
         checksumArgsType = 0
-        checksumTypeType = "sha256"
+        checksumTypeType = "sha512"
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs

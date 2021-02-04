@@ -16,6 +16,8 @@
     <id>autohotkey.install</id>
     <id>autohotkey.portable</id>
     <id>autohotkey</id>
+    <id>autoit.portable</id>
+    <id>autoit</id>
     <id>avidemux</id>
     <id>balabolka</id>
     <id>bfg-repo-cleaner</id>
@@ -121,6 +123,7 @@
     <id>make</id>
     <id>maven</id>
     <id>microsoft-message-analyzer</id>
+    <id>microsoft-windows-terminal</id>
     <id>miktex.install</id>
     <id>miktex</id>
     <id>minecraft</id>
@@ -152,10 +155,10 @@
     <id>openhashtab</id>
     <id>openssh</id>
     <id>openssl</id>
-    <id>papercut</id>
     <id>pandoc</id>
-    <id>pcsx2</id>
+    <id>papercut</id>
     <id>pcsx2.portable</id>
+    <id>pcsx2</id>
     <id>picard</id>
     <id>pingtracer</id>
     <id>powertoys</id>
@@ -183,12 +186,12 @@
     <id>shexview</id>
     <id>shotcut</id>
     <id>shutup10</id>
-    <id>synctrayzor</id>
     <id>sudo</id>
     <id>sumatrapdf.commandline</id>
     <id>sumatrapdf.install</id>
     <id>sumatrapdf.portable</id>
     <id>sumatrapdf</id>
+    <id>synctrayzor</id>
     <id>tablacus</id>
     <id>tinymediamanager</id>
     <id>totalcommander</id>
