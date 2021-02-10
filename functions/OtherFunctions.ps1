@@ -474,6 +474,10 @@ Function Invoke-RepoCheck {
                 $dlwdURL = $redirectpage.Links.href
             }
 
+            #Ugly, but I'm not sure of a better way to get the hex representation from the base64 represensation of the checksum
+            $checksum = -join ([System.Convert]::FromBase64String($publicPage.feed.entry.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })
+            $checksumType = $publicPage.feed.entry.properties.PackageHashAlgorithm
+
             $filename = $dlwdURL.split("/") | Select-Object -Last 1
 
             $saveDir = Join-Path $searchDir $nuspecID
@@ -481,10 +485,7 @@ Function Invoke-RepoCheck {
                 $null = New-Item -Type Directory $saveDir
             }
 
-            $dlwdPath = Join-Path $saveDir $filename
-            $dlwd = New-Object net.webclient
-            $dlwd.DownloadFile($dlwdURL, $dlwdPath)
-            $dlwd.dispose()
+            Get-File -url $dlwdURL -filename $filename -toolsDir $saveDir -checksumTypeType $checksumType -checksum $checksum
 
             Write-Information "Waiting three seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
             Start-Sleep -S 3
