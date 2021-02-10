@@ -427,36 +427,43 @@ Function Invoke-RepoCheck {
     Test-URL -url $privateRepoURL -name "privateRepoURL" -Headers $privateRepoHeaderCreds
 
     $toSearchToInternalize = $personalpackagesXMLcontent.mypackages.toInternalize.id
-    $toInternalizeCompare = Compare-Object -ReferenceObject $packagesXMLcontent.packages.custom.pkg.id -DifferenceObject $toSearchToInternalize | Where-Object SideIndicator -EQ "=>"
 
-    if ($toInternalizeCompare.inputObject) {
-        Throw "$($toInternalizeCompare.InputObject) not found in packages.xml"
-    }
-
+    Write-Information "Getting information from the Nexus APi, this may take a while." -InformationAction Continue
     $privateRepoName = ($privateRepoURL -split "repository" | Select-Object -Last 1).trim("/")
     $privateRepoBaseURL = $privateRepoURL -split "repository" | Select-Object -First 1
     $privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
+    $privatePageURL = $privateRepoApiURL + 'components?repository=' + $privateRepoName
+    $privatePageURLorig = $privatePageURL
+    do {
+        $privatePage = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privatePageURL
+        [array]$privateInfo += $privatePage.items
+
+        if ($privatePage.continuationToken) {
+            $privatePageURL = $privatePageURLorig + '&continuationToken=' + $privatePage.continuationToken
+        }
+    }  while ($privatePage.continuationToken)
+    Write-Information "Finished" -InformationAction Continue
 
     $toSearchToInternalize | ForEach-Object {
         [system.gc]::Collect();
         $nuspecID = $_
         Write-Verbose "Comparing repo versions of $($nuspecID)"
 
-        $privatePageURL = $privateRepoApiURL + 'search?repository=' + $privateRepoName + '&format=nuget&q=' + $nuspecID
-        $privatePageURLorig = $privatePageURL
-        do {
-            $privatePage = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privatePageURL
-
-            [array]$privateVersions = $privateVersions + ( $privatePage.items | Where-Object { $_.name.tolower() -eq $nuspecID } ).version
-
-            if ($privatePage.continuationToken) {
-                $privatePageURL = $privatePageURLorig + '&continuationToken=' + $privatePage.continuationToken
-            }
-        }  while ($privatePage.continuationToken)
+        $privateVersions = $privateInfo | Where-Object { $_.name -eq $nuspecID } | Select-Object -ExpandProperty version
 
         $publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
         [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL
         $publicVersion = $publicPage.feed.entry.properties.Version
+        
+        if ($null -eq $publicVersion) {
+            $publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsAbsoluteLatestVersion'
+            [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL
+            $publicVersion = $publicPage.feed.entry.properties.Version
+            
+            if ($null -eq $publicVersion) {
+                Write-Error "$nuspecID does not exist or is unlisted on $publicRepoURL"
+            }
+        }
 
         if ($privateVersions -inotcontains $publicVersion) {
 
@@ -474,7 +481,7 @@ Function Invoke-RepoCheck {
                 $dlwdURL = $redirectpage.Links.href
             }
 
-            #Ugly, but I'm not sure of a better way to get the hex representation from the base64 represensation of the checksum
+            #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
             $checksum = -join ([System.Convert]::FromBase64String($publicPage.feed.entry.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })
             $checksumType = $publicPage.feed.entry.properties.PackageHashAlgorithm
 
@@ -487,8 +494,27 @@ Function Invoke-RepoCheck {
 
             Get-File -url $dlwdURL -filename $filename -toolsDir $saveDir -checksumTypeType $checksumType -checksum $checksum
 
-            Write-Information "Waiting three seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
-            Start-Sleep -S 3
+            if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
+                $stopwatch = [system.diagnostics.stopwatch]::StartNew()
+                $dlwdPath = Join-Path $saveDir $filename
+                $pushArgs = "push " + $filename + " -f -r -s " + $privateRepoURL
+                $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
+
+                if ($pushcode.exitcode -ne "0") {
+                    Throw "pushing $nuspecID $_ failed"
+                }
+
+                Remove-Item $dlwdPath -ea 0 -Force
+                $pushcode = $null
+                $stopwatch.stop()
+                if ($stopwatch.ElapsedMilliseconds -le 2800) {
+                    Write-Information "Waiting for $($stopwatch.Elapsed.Seconds) seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
+                    Start-Sleep -Milliseconds (3000 - $stopwatch.ElapsedMilliseconds)
+                }
+            } else {
+                Write-Information "Waiting three seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
+                Start-Sleep -S 3
+            }
 
         }
     }

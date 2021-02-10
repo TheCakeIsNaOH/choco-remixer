@@ -57,7 +57,6 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 
 ## Todo
 
-- Add support to update any package, not just non-internal ones.
 - Write docs on how to add packages
 - Comment based help
 - Use switch statements in Edit-InstallChocolateyPackage
