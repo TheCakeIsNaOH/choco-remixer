@@ -454,12 +454,12 @@ Function Invoke-RepoCheck {
         $publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
         [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL
         $publicVersion = $publicPage.feed.entry.properties.Version
-        
+
         if ($null -eq $publicVersion) {
             $publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsAbsoluteLatestVersion'
             [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL
             $publicVersion = $publicPage.feed.entry.properties.Version
-            
+
             if ($null -eq $publicVersion) {
                 Write-Error "$nuspecID does not exist or is unlisted on $publicRepoURL"
             }

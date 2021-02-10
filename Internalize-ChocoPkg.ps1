@@ -279,12 +279,12 @@ $nupkgArray = $null
 
 Foreach ($obj in $nupkgObjArray) {
     Write-Output "Starting $($obj.nuspecID)"
-    
+
     #Needed for linux, see https://github.com/chocolatey/choco/issues/2076
     Remove-Item -Force -EA 0 -Path (Join-Path $obj.VersionDir '*.nupkg')
-    
+
     Expand-Nupkg -OrigPath $obj.OrigPath -OutputDir $obj.VersionDir
-    
+
     $failed = $false
     Try {
         & $obj.functionName -obj $obj

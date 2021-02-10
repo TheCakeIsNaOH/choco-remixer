@@ -289,7 +289,7 @@ Function Convert-dotnetcore-windowshosting ($obj) {
     $url32 = $dataContent.Url
     $url64 = $dataContent.Url64
     $checksum32 = $dataContent.checksum
-    $checksum64 = $dataContent.checksum64
+    #$checksum64 = $dataContent.checksum64
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'File    = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -875,13 +875,13 @@ Function Convert-dotnet4.5 ($obj) {
     $filename32 = 'dotnetfx45_full_x86_x64.exe'
     $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
     $installString = '    Install-ChocolateyInstallPackage -PackageName ''dotnet45'' -FileType ''exe'' -SilentArgs "/Passive /NoRestart /Log $env:temp\net45.log" -file $file -validExitCodes @(0,3010)'
-    
+
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "$installString`n    #$&"
     $obj.installScriptMod = $filePath32 + "`n" + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    
+
     #No checksum in package
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
@@ -893,13 +893,13 @@ Function Convert-dotnet4.5.2 ($obj) {
     $filename32 = 'dotnetfx45_full_x86_x64.exe'
     $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
     $installString = '    Install-ChocolateyInstallPackage -PackageName ''dotnet45'' -FileType ''exe'' -SilentArgs "/Passive /NoRestart /Log $env:temp\net451.log" -file $file -validExitCodes @(0,3010)'
-    
+
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "$installString`n    #$&"
     $obj.installScriptMod = $filePath32 + "`n" + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    
+
     #No checksum in package
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
@@ -911,13 +911,13 @@ Function Convert-dotnet4.6 ($obj) {
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
     $installString = 'Install-ChocolateyInstallPackage -PackageName $packageName -FileType $installerType -SilentArgs $silentArgs -file $file -validExitCodes $validExitCodes'
-    
+
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "$installString`n    #$&"
     $obj.installScriptMod = $filePath32 + "`n" + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    
+
     #No checksum in package
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
@@ -932,13 +932,13 @@ Function Convert-audacity-ffmpeg ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    
+
     $referer = 'https://lame.buanzo.org/'
     $acceptMIME = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8';
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32 -Referer  $referer -acceptMIME $acceptMIME
-}  
+}
 
 
 Function Convert-xming ($obj) {
@@ -947,14 +947,14 @@ Function Convert-xming ($obj) {
     $filename32 = ($url32 -split "/" | Select-Object -Last 1 -Skip 1).tostring()
     $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
     $installString = 'Install-ChocolateyInstallPackage -PackageName ''Xming'' -FileType ''exe'' -SilentArgs "/sp- /silent /norestart" -file $file'
-    
+
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "$installString`n    #$&"
     $obj.installScriptMod = $obj.installScriptMod -replace "'https", "#$&"
     $obj.installScriptMod = $filePath32 + "`n" + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    
+
     #No checksum in package
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
@@ -1062,11 +1062,11 @@ Function Convert-dellcommandupdate-uwp ($obj) {
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
-  
+
     #TODO
     <# $uninstallScriptPath = Join-Path $obj.toolsDir 'chocolateyUninstall.ps1'
     $uninstallString = "`n" + 'Get-AppxPackage *dellcommandupdate* -AllUsers -ea 0 | Remove-AppxPackage -AllUsers -ea 0'
     Set-Content -Path $uninstallScriptPath -Value $uninstallString -Encoding utf8BOM #>
-    
-    
+
+
 }
