@@ -210,7 +210,7 @@ Function Add-NuspecFilesElement {
     )
 
     $nuspecPath = (Resolve-Path $nuspecPath).path
-    
+
     if ($PSVersionTable.PSVersion.major -ge 6) {
         [xml]$nuspecXML = Get-Content $nuspecPath
     } else {
@@ -239,13 +239,13 @@ Function Add-NuspecFilesElement {
     }
 
     $nuspecXML.package.AppendChild($filesElement) | Out-Null
-    
+
     [System.Xml.XmlWriterSettings] $XmlSettings = New-Object System.Xml.XmlWriterSettings
     $XmlSettings.Indent = $true
     $XmlSettings.Encoding = New-Object System.Text.UTF8Encoding($false)
     [System.Xml.XmlWriter] $XmlWriter = [System.Xml.XmlWriter]::Create($nuspecPath, $XmlSettings)
     $nuspecXML.Save($XmlWriter)
-    $XmlWriter.Dispose() 
+    $XmlWriter.Dispose()
 }
 
 
