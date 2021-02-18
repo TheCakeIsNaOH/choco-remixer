@@ -554,7 +554,8 @@ Function Get-File {
         [ValidateSet('md5', 'sha1', 'sha256', 'sha512')]
         [string]$checksumTypeType,
         [string]$referer,
-        [string]$acceptMIME
+        [string]$acceptMIME,
+        [string]$authorization
     )
 
     $dlwdFile = (Join-Path $toolsDir "$filename")
@@ -583,6 +584,9 @@ Function Get-File {
         }
         if ($acceptMIME) {
             $dlwd.Headers.Add('accept', $acceptMIME)
+        }
+        if ($authorization) {
+            $dlwd.Headers["Authorization"] = $authorization
         }
 
         Write-Information "Downloading $filename" -InformationAction Continue
