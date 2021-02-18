@@ -377,7 +377,7 @@ Function Invoke-RepoMove {
                         $dlwd.DownloadFile($downloadURL, $dlwdPath)
                         $dlwd.dispose()
 
-                        Write-Information "$nuspecID $_ found and downloaded, needs to be manually deleted finishme here" -InformationAction Continue
+                        Write-Information "$nuspecID $_ found and downloaded, will be deleted next run if internalization succeeds" -InformationAction Continue
                     }
                 }
 
