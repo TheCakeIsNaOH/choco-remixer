@@ -8,7 +8,7 @@
             "name": "No checks, no save, no pack",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceRoot}/Internalize-ChocoPkg.ps1",
+            "script": "${workspaceRoot}/choco-remixer/public/Internalize-ChocoPkg.ps1",
             "args": ["-skipRepoCheck -skipRepoMove -personalPkgXML personal-packages-testing.xml -nosave -nopack"],
             "cwd": "${workspaceRoot}"
         },
@@ -16,14 +16,14 @@
             "name": "No checks, no save",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceRoot}/Internalize-ChocoPkg.ps1",
+            "script": "${workspaceRoot}/choco-remixer/public/Internalize-ChocoPkg.ps1",
             "args": ["-skipRepoCheck -skipRepoMove -personalPkgXML personal-packages-testing.xml -nosave"],
             "cwd": "${workspaceRoot}"
         },{
             "name": "No checks",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceRoot}/Internalize-ChocoPkg.ps1",
+            "script": "${workspaceRoot}/choco-remixer/public/Internalize-ChocoPkg.ps1",
             "args": ["-skipRepoCheck -skipRepoMove -personalPkgXML personal-packages-testing.xml"],
             "cwd": "${workspaceRoot}"
         },
@@ -31,7 +31,7 @@
             "name": "no save",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceRoot}/Internalize-ChocoPkg.ps1",
+            "script": "${workspaceRoot}/choco-remixer/public/Internalize-ChocoPkg.ps1",
             "args": ["-personalPkgXML personal-packages-testing.xml -nosave"],
             "cwd": "${workspaceRoot}"
         }
