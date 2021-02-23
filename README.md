@@ -67,19 +67,22 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 ## Immediate TODOs
 
 - Add support for internalizing package icons
-- Comment based help, specifically in Edit-InstallChocolateyPackage
+- Comment based help for all public functions, specifically in Edit-InstallChocolateyPackage
 - Use switch statements in Edit-InstallChocolateyPackage
-- Turn into proper module
+- Create generic validation/config acquiry function, change so repomove/repocheck can be run seperately
+- Module metadata creation, module install, other scripts
+- Switch so invoke-internalizechocopkg can be run with a single chocolatey package
 
 ## Long term TODOs
 
+- Module improvements, chocolatey package, powershell gallery?
 - Async/Parallelize file searching, copying, packing, possibly downloading
 - Ability to bump version of nupkg (fix version)
 - Add option to trust names of nupkg's in searching, allows for quicker search
 - Git integration for personal-packages.xml
 - Multiple personal-packages.xml files (for now it probably is best to add an alias to your profile for each xml)
 - Add capability to directly specify package internalization from xml with a separate function
-- Pester?
+- Pester, other testing?
 - Drop dependency on `choco.exe`.
     - Move to `chocolatey.lib` instead?
 	- Figure out why does not extract files that are added manually?
