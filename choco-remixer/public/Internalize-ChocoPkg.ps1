@@ -27,6 +27,12 @@ Get-ChildItem -Path $privateDir -Filter "*.ps1" | ForEach-Object {
     . $_.fullname
 }
 
+$publicDir = (Split-Path -Parent $MyInvocation.MyCommand.Definition)
+
+Get-ChildItem -Path $publicDir -Filter "*.ps1" | Where-Object { $_.name -ne "Internalize-ChocoPkg.ps1" } | ForEach-Object {
+    . $_.fullname
+}
+
 #Check OS to select user profile location
 if (($null -eq $IsWindows) -or ($IsWindows -eq $true)) {
     $profileXMLPath = [IO.Path]::Combine($env:APPDATA, "choco-remixer", 'personal-packages.xml')
