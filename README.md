@@ -28,7 +28,8 @@ This automates some tasks involved in maintaining a private Chocolatey repositor
 
 ## Operation
 
-- Run `Internalize-ChocoPkg.ps1` in PowerShell
+- Import the `choco-remixer` PowerShell module 
+- Run `Invoke-InternalizeChocoPkg`
 
 - If you have `useDropPath` and `pushPkgs` disabled, the internalized packages are located inside the specified `workDir`.
 - If you have `writePerPkgs` disabled, add the package versions to `personal-packages.xml` under the correct IDs. Otherwise, it will try to internalize them again.

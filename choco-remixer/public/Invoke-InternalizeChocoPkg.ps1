@@ -3,7 +3,7 @@ Function Invoke-InternalizeChocoPkg {
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header')]
     param (
-        [string]$pkgXML = [System.IO.Path]::Combine((Split-Path (Split-Path -Parent $MyInvocation.MyCommand.Definition)), 'metadata', 'packages.xml'),
+        [string]$pkgXML = ([System.IO.Path]::Combine((Split-Path -Parent $PSScriptRoot), 'pkgs', 'packages.xml')),
         [string]$personalPkgXML,
         [string]$privateRepoCreds,
         [string]$proxyRepoCreds,
@@ -15,24 +15,11 @@ Function Invoke-InternalizeChocoPkg {
         [switch]$noPack
     )
     $ErrorActionPreference = 'Stop'
-
     #needed for accessing dotnet zip functions
     Add-Type -AssemblyName System.IO.Compression.FileSystem
 
     #needed to use [Microsoft.PowerShell.Commands.PSUserAgent] when running in pwsh
     Import-Module Microsoft.PowerShell.Utility
-
-    $privateDir = [System.IO.Path]::Combine((Split-Path (Split-Path -Parent $MyInvocation.MyCommand.Definition)), 'private')
-
-    Get-ChildItem -Path $privateDir -Filter "*.ps1" | ForEach-Object {
-        . $_.fullname
-    }
-
-    $publicDir = (Split-Path -Parent $MyInvocation.MyCommand.Definition)
-
-    Get-ChildItem -Path $publicDir -Filter "*.ps1" | Where-Object { $_.name -ne "Internalize-ChocoPkg.ps1" } | ForEach-Object {
-        . $_.fullname
-    }
 
     #Check OS to select user profile location
     if (($null -eq $IsWindows) -or ($IsWindows -eq $true)) {
@@ -55,11 +42,15 @@ Function Invoke-InternalizeChocoPkg {
         Throw
     }
 
+    # Import package specific functions
+    Get-ChildItem -Path (Join-Path (Split-Path -Parent $PSScriptRoot) 'pkgs') -Filter "*.ps1" | ForEach-Object {
+        . $_.fullname
+    }
 
     #select which personal-packages.xml to use
     if (!($PSBoundParameters.ContainsKey('personalPkgXML'))) {
 
-        $gitXMLPath = (Join-Path (Split-Path (Split-Path (Split-Path -Parent $MyInvocation.MyCommand.Definition))) 'personal-packages.xml')
+        $gitXMLPath = (Join-Path (Split-Path (Split-Path -Parent $PSScriptRoot)) 'personal-packages.xml')
         if (Test-Path $profileXMLPath) {
             $personalPkgXML = $profileXMLPath
         } elseif (Test-Path $gitXMLPath) {
