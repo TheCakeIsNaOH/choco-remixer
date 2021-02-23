@@ -16,17 +16,17 @@ This automates some tasks involved in maintaining a private Chocolatey repositor
 	- Drop path's are available with ProGet only
 	- RepoMove and RepoSearch are Nexus only
 
-## Setup 
+## Setup
 
 - Clone this repository
-- Chocolatey is required, make sure that it is installed and working properly. 
-- Copy `personal-packages.xml.template` to `personal-packages.xml` and edit it. 
+- Chocolatey is required, make sure that it is installed and working properly.
+- Copy `personal-packages.xml.template` to `personal-packages.xml` and edit it.
     - See the file for comments about each of the options.
     - It is searched for first under `%appdata%`/`.config` in the choco-remixer folder, then it looks in the same folder that choco-remixer runs from. You can also provide a path to it.
 - If you are using the automatic pushing (`pushPkgs`), make sure `choco` has the appropriate `apikey` setup for that URL.
 - It is a good idea to put `personal-packages.xml` in a git repository.
 
-## Operation 
+## Operation
 
 - Run `Internalize-ChocoPkg.ps1` in PowerShell
 
@@ -52,7 +52,7 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 ## Why not use the Chocolatey official internalizer
 
 - The [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that has [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages):
- 
+
    - Is not open source.
    - Starts at $1,600/year, which puts it out of reach for almost all non-business users.
    - Requires an ongoing license to continue to use the packages that are internalized with the business extension.
@@ -66,14 +66,13 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 ## Immediate TODOs
 
 - Add support for internalizing package icons
-- Write docs on how to add packages
-- Comment based help
+- Comment based help, specifically in Edit-InstallChocolateyPackage
 - Use switch statements in Edit-InstallChocolateyPackage
 - Turn into proper module
 
 ## Long term TODOs
-  
-- Async/Parallelize file searching, copying, packing, possibly downloading 
+
+- Async/Parallelize file searching, copying, packing, possibly downloading
 - Ability to bump version of nupkg (fix version)
 - Add option to trust names of nupkg's in searching, allows for quicker search
 - Git integration for personal-packages.xml
@@ -85,10 +84,9 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 	- Figure out why does not extract files that are added manually?
 	- Alternate push? `chocolatey.lib`? Nexus API, will reduce compatibility? Dotnet?
     - Wait for dotnet core Chocolatey, and keep using it?
-  
+
 ## Continuous TODOs
-    
+
 - Better verbose/debug and other information output
-- generalize more functionality and make available as functions. 
+- generalize more functionality and make available as functions.
 - Move more packages to no custom function, use generic functions
-  
