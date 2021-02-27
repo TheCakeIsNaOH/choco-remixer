@@ -68,7 +68,6 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 
 - Add support for internalizing package icons
 - Comment based help for all public functions, specifically in Edit-InstallChocolateyPackage (platyps?)
-- Use switch statements in Edit-InstallChocolateyPackage
 - Create generic validation/config acquiry function, change so repomove/repocheck can be run separately
 - Module metadata creation, module install, other scripts
 - Switch so invoke-internalizechocopkg can be run with a single chocolatey package
