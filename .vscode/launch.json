@@ -8,31 +8,28 @@
             "name": "No checks, no save, no pack",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceRoot}/choco-remixer/public/Internalize-ChocoPkg.ps1",
-            "args": ["-skipRepoCheck -skipRepoMove -personalPkgXML personal-packages-testing.xml -nosave -nopack"],
-            "cwd": "${workspaceRoot}"
+            "script": "${workspaceRoot}/.vscode-functions/no-checks-no-save-no-pack.ps1",
+            "cwd": "${workspaceRoot}",
+
         },
         {
             "name": "No checks, no save",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceRoot}/choco-remixer/public/Internalize-ChocoPkg.ps1",
-            "args": ["-skipRepoCheck -skipRepoMove -personalPkgXML personal-packages-testing.xml -nosave"],
+            "script": "${workspaceRoot}/.vscode-functions/no-checks-no-save.ps1",
             "cwd": "${workspaceRoot}"
         },{
             "name": "No checks",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceRoot}/choco-remixer/public/Internalize-ChocoPkg.ps1",
-            "args": ["-skipRepoCheck -skipRepoMove -personalPkgXML personal-packages-testing.xml"],
+            "script": "${workspaceRoot}/.vscode-functions/no-checks.ps1",
             "cwd": "${workspaceRoot}"
         },
         {
             "name": "no save",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceRoot}/choco-remixer/public/Internalize-ChocoPkg.ps1",
-            "args": ["-personalPkgXML personal-packages-testing.xml -nosave"],
+            "script": "${workspaceRoot}/.vscode-functions/no-save.ps1",
             "cwd": "${workspaceRoot}"
         }
     ]
