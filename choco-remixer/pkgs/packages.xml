@@ -190,6 +190,7 @@
     <id>shexview</id>
     <id>shotcut</id>
     <id>shutup10</id>
+    <id>steam</id>
     <id>sudo</id>
     <id>sumatrapdf.commandline</id>
     <id>sumatrapdf.install</id>
@@ -885,7 +886,7 @@
     </pkg>
     <pkg>
       <functionName>Convert-steam</functionName>
-      <id>steam</id>
+      <id>steam-client</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
