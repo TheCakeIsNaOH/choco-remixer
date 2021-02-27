@@ -1,13 +1,15 @@
 {
-  "[powershell]": {
-    "files.encoding": "utf8bom",
-    "files.autoGuessEncoding": true
-  },
   "powershell.codeFormatting.useCorrectCasing": true,
   "powershell.codeFormatting.newLineAfterCloseBrace": false,
   "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
   "powershell.codeFormatting.whitespaceBetweenParameters": true,
   "powershell.codeFormatting.ignoreOneLineBlock": false,
   "powershell.codeFormatting.autoCorrectAliases": true,
+  "powershell.scriptAnalysis.settingsPath": ".vscode\\PSScriptAnalyzerSettings.psd1",
+  "powershell.scriptAnalysis.enable": true,
+  "[powershell]": {
+    "files.encoding": "utf8bom",
+    "files.autoGuessEncoding": true
+  },
   "files.trimTrailingWhitespace": true
 }
