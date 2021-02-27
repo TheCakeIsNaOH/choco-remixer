@@ -69,6 +69,7 @@
     <id>dolphin-dev</id>
     <id>dolphin</id>
     <id>dosbox</id>
+    <id>dotpeek</id>
     <id>dotnet3.5</id>
     <id>dotnet4.7.2</id>
     <id>ds4windows</id>
@@ -100,6 +101,7 @@
     <id>hxd</id>
     <id>icecat</id>
     <id>iceweasel</id>
+    <id>ilspy</id>
     <id>imagemagick.app</id>
     <id>imagemagick</id>
     <id>innoextract</id>
