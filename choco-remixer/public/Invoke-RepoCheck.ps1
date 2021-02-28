@@ -5,14 +5,16 @@
         [parameter(Mandatory = $true)][string]$publicRepoURL,
         [parameter(Mandatory = $true)][string]$privateRepoCreds,
         [parameter(Mandatory = $true)][string]$privateRepoURL,
-        [parameter(Mandatory = $true)][xml]$personalpackagesXMLcontent,
-        [parameter(Mandatory = $true)][string]$searchDir
+        [parameter(Mandatory = $true)][string]$searchDir,
+        [parameter(Mandatory = $true)][xml]$packagesXMLContent,
+        [parameter(Mandatory = $true)][string]$repoCheckXML
+
     )
 
     $ProgressPreference = 'SilentlyContinue'
 
     if ($null -eq $publicRepoURL) {
-        Throw "no publicRepoURL in personal-packages.xml"
+        Throw "no publicRepoURL in config xml"
     }
     Test-URL -url $publicRepoURL -name "publicRepoURL"
 
@@ -29,11 +31,17 @@
     }
 
     if ($null -eq $privateRepoURL) {
-        Throw "no privateRepoURL in personal-packages.xml"
+        Throw "no privateRepoURL in config xml"
     }
     Test-URL -url $privateRepoURL -name "privateRepoURL" -Headers $privateRepoHeaderCreds
 
-    $toSearchToInternalize = $personalpackagesXMLcontent.mypackages.toInternalize.id
+    if (!(Test-Path $repoCheckXML)) {
+        Write-Warning "Could not find $repoCheckXML"
+        Throw "Repo check xml not found, please specify valid path"
+    }
+    [xml]$repoCheckXML = Get-Content $repoCheckXML
+
+    $toSearchToInternalize = $repoCheckXML.toInternalize.id
 
     Write-Information "Getting information from the Nexus APi, this may take a while." -InformationAction Continue
     $privateRepoName = ($privateRepoURL -split "repository" | Select-Object -Last 1).trim("/")

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<toInternalize>
+    <!-- Add package ids here for repoCheck -->
+    <id>package-id-to-check-repo-to-internalize</id>
+</toInternalize>

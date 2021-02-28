@@ -3,8 +3,10 @@ Function Invoke-InternalizeChocoPkg {
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header')]
     param (
-        [string]$pkgXML = ([System.IO.Path]::Combine((Split-Path -Parent $PSScriptRoot), 'pkgs', 'packages.xml')),
-        [string]$personalPkgXML,
+        [Parameter(ParameterSetName = 'Individual')][string]$configXML,
+        [Parameter(ParameterSetName = 'Individual')][string]$internalizedXML,
+        [Parameter(ParameterSetName = 'Individual')][string]$repoCheckXML,
+        [Parameter(ParameterSetName = 'Folder')][string]$folderXML,
         [string]$privateRepoCreds,
         [string]$proxyRepoCreds,
         [switch]$thoroughList,
@@ -15,17 +17,17 @@ Function Invoke-InternalizeChocoPkg {
         [switch]$noPack
     )
     $ErrorActionPreference = 'Stop'
-    #needed for accessing dotnet zip functions
-    Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-    #needed to use [Microsoft.PowerShell.Commands.PSUserAgent] when running in pwsh
-    Import-Module Microsoft.PowerShell.Utility
+    # Import package specific functions
+    Get-ChildItem -Path (Join-Path (Split-Path -Parent $PSScriptRoot) 'pkgs') -Filter "*.ps1" | ForEach-Object {
+        . $_.fullname
+    }
 
     #Check OS to select user profile location
     if (($null -eq $IsWindows) -or ($IsWindows -eq $true)) {
-        $profileXMLPath = [IO.Path]::Combine($env:APPDATA, "choco-remixer", 'personal-packages.xml')
+        $profilePath = [IO.Path]::Combine($env:APPDATA, "choco-remixer")
     } elseif ($IsLinux -eq $true) {
-        $profileXMLPath = [IO.Path]::Combine($env:HOME, ".config", "choco-remixer", 'personal-packages.xml')
+        $profilePath = [IO.Path]::Combine($env:HOME, ".config", "choco-remixer")
     } elseif ($IsMacOS -eq $true) {
         Throw "MacOS not supported"
     } else {
@@ -42,39 +44,58 @@ Function Invoke-InternalizeChocoPkg {
         Throw
     }
 
-    # Import package specific functions
-    Get-ChildItem -Path (Join-Path (Split-Path -Parent $PSScriptRoot) 'pkgs') -Filter "*.ps1" | ForEach-Object {
-        . $_.fullname
-    }
-
-    #select which personal-packages.xml to use
-    if (!($PSBoundParameters.ContainsKey('personalPkgXML'))) {
-
-        $gitXMLPath = (Join-Path (Split-Path (Split-Path -Parent $PSScriptRoot)) 'personal-packages.xml')
-        if (Test-Path $profileXMLPath) {
-            $personalPkgXML = $profileXMLPath
-        } elseif (Test-Path $gitXMLPath) {
-            $personalPkgXML = $gitXMLPath
+    #select which xml locations to use
+    if ($PSBoundParameters.ContainsKey('folderXML')) {
+        $folderXML = (Resolve-Path $folderXML).path
+        $configXML = Join-Path $folderXML 'config.xml'
+        $internalizedXML = Join-Path $folderXML 'internalized.xml'
+        $repoCheckXML = Join-Path $folderXML 'repo-check.xml'
+    } else {
+        if ($PSBoundParameters.ContainsKey('configXML')) {
+            $configXML = (Resolve-Path $configXML).path
         } else {
-            Throw "Cannot find personal-packages.xml, please specify path to it"
+            $configXML = Join-Path $profilePath 'config.xml'
         }
 
-    } elseif (!(Test-Path $personalPkgXML)) {
-        Throw "personal-packages.xml not found, please specify valid path"
+        if ($PSBoundParameters.ContainsKey('internalized.xml')) {
+            $internalizedXML = (Resolve-Path $internalizedXML).path
+        } else {
+            $internalizedXML = Join-Path $profilePath 'internalized.xml'
+        }
+
+        if ($PSBoundParameters.ContainsKey('repoCheckXML')) {
+            $repoCheckXML = (Resolve-Path $repoCheckXML).path
+        } else {
+            $repoCheckXML = Join-Path $profilePath 'internalized.xml'
+        }
     }
 
-    $personalPkgXMLResolved = (Resolve-Path $personalPkgXML).path
+    if (!(Test-Path $configXML)) {
+        Write-Warning "Could not find $configXML"
+        Throw "Config xml not found, please specify valid path"
+    }
+    if (!(Test-Path $internalizedXML)) {
+        Write-Warning "Could not find $internalizedXML"
+        Throw "Internalized xml not found, please specify valid path"
+    }
+    if (!(Test-Path $repoCheckXML)) {
+        Write-Warning "Could not find $repoCheckXML"
+        Throw "Repo check xml not found, please specify valid path"
+    }
 
+
+    $pkgXML = ([System.IO.Path]::Combine((Split-Path -Parent $PSScriptRoot), 'pkgs', 'packages.xml'))
     if (!(Test-Path $pkgXML)) {
         Throw "packages.xml not found, please specify valid path"
     }
 
 
-    [XML]$packagesXMLcontent = Get-Content $pkgXML
-    [XML]$personalpackagesXMLcontent = Get-Content $personalPkgXMLResolved
+    [XML]$packagesXMLContent = Get-Content $pkgXML
+    [XML]$configXMLContent = Get-Content $configXML
+    [xml]$internalizedXMLContent = Get-Content $internalizedXML
 
     #Load options into specific variables to clean up stuff lower down
-    $options = $personalpackagesXMLcontent.mypackages.options
+    $options = $configXMLcontent.options
 
     $searchDir = $options.searchDir.tostring()
     $workDir = $options.workDir.tostring()
@@ -89,6 +110,7 @@ Function Invoke-InternalizeChocoPkg {
     $repoMove = $options.repoMove.tostring()
     $proxyRepoURL = $options.proxyRepoURL.tostring()
     $moveToRepoURL = $options.moveToRepoURL.tostring()
+    $personalPackageIds = $options.personal
 
     if ($options.writeVersion.tostring() -eq "yes") {
         $writeVersion = $true
@@ -116,12 +138,12 @@ Function Invoke-InternalizeChocoPkg {
         Test-DropPath -dropPath $dropPath
     } elseif ($useDropPath -eq "no") {
     } else {
-        Throw "bad useDropPath value in personal-packages.xml, must be yes or no"
+        Throw "bad useDropPath value in config xml, must be yes or no"
     }
 
 
     if ("no", "yes" -notcontains $writePerPkgs) {
-        Throw "bad writePerPkgs value in personal-packages.xml, must be yes or no"
+        Throw "bad writePerPkgs value in config xml, must be yes or no"
     }
 
 
@@ -129,43 +151,45 @@ Function Invoke-InternalizeChocoPkg {
         Test-PushPackage -URL $pushURL -Name "pushURL"
     } elseif ($pushPkgs -eq "no") {
     } else {
-        Throw "bad pushPkgs value in personal-packages.xml, must be yes or no"
+        Throw "bad pushPkgs value in config xml, must be yes or no"
     }
 
 
     if (($repomove -eq "yes") -and (!($skipRepoMove))) {
         $invokeRepoMoveArgs = @{
-            moveToRepoURL              = $moveToRepoURL
-            proxyRepoCreds             = $proxyRepoCreds
-            proxyRepoURL               = $proxyRepoURL
-            personalpackagesXMLcontent = $personalpackagesXMLcontent
-            workDir                    = $workDir
-            searchDir                  = $searchDir
+            moveToRepoURL      = $moveToRepoURL
+            proxyRepoCreds     = $proxyRepoCreds
+            proxyRepoURL       = $proxyRepoURL
+            workDir            = $workDir
+            searchDir          = $searchDir
+            internalizedXML    = $internalizedXML
+            packagesXMLContent = $packagesXMLContent
         }
 
         Invoke-RepoMove @invokeRepoMoveArgs
     } elseif ($repoMove -eq "no") {
     } else {
         if (!($skipRepoMove)) {
-            Throw "bad repoMove value in personal-packages.xml, must be yes or no"
+            Throw "bad repoMove value in config xml, must be yes or no"
         }
     }
 
 
     if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
         $invokeRepoCheckArgs = @{
-            publicRepoURL              = $publicRepoURL
-            privateRepoCreds           = $privateRepoCreds
-            privateRepoURL             = $privateRepoURL
-            personalpackagesXMLcontent = $personalpackagesXMLcontent
-            searchDir                  = $searchDir
+            publicRepoURL      = $publicRepoURL
+            privateRepoCreds   = $privateRepoCreds
+            privateRepoURL     = $privateRepoURL
+            searchDir          = $searchDir
+            repoCheckXML       = $repoCheckXML
+            packagesXMLContent = $packagesXMLContent
         }
 
         Invoke-RepoCheck @invokeRepoCheckArgs
     } elseif ($repoCheck -eq "no") {
     } else {
         if (!($skipRepoCheck)) {
-            Throw "bad repoCheck value in personal-packages.xml, must be yes or no"
+            Throw "bad repoCheck value in config xml, must be yes or no"
         }
     }
 
@@ -182,8 +206,8 @@ Function Invoke-InternalizeChocoPkg {
         $nupkgArray = (Get-ChildItem -File $searchDir -Filter "*.nupkg" -Recurse) | Where-Object {
             ($_.directory.name -notin $packagesXMLcontent.packages.internal.id) `
                 -and ($_.directory.Parent.name -notin $packagesXMLcontent.packages.internal.id) `
-                -and ($_.directory.name -notin $personalpackagesXMLcontent.mypackages.personal.id) `
-                -and ($_.directory.Parent.name -notin $personalpackagesXMLcontent.mypackages.personal.id) `
+                -and ($_.directory.name -notin $personalPackageIds.id) `
+                -and ($_.directory.Parent.name -notin $personalPackageIds.id) `
         }
     }
 
@@ -195,13 +219,13 @@ Function Invoke-InternalizeChocoPkg {
         $nuspecID = $nuspecDetails[1]
 
         #todo, make this faster, hash table? linq? other?
-        [array]$internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object { $_.id -ieq "$nuspecID" }).version
+        [array]$internalizedVersions = ($internalizedXMLcontent.internalized.pkg | Where-Object { $_.id -ieq "$nuspecID" }).version
 
         if ($internalizedVersions -icontains $nuspecVersion) {
             Write-Verbose "$nuspecID $nuspecVersion is already internalized"
         } elseif ($packagesXMLcontent.packages.notImplemented.id -icontains $nuspecID) {
             Write-Warning "$nuspecID $nuspecVersion  not implemented, requires manual internalization"
-        } elseif ($personalpackagesXMLcontent.mypackages.personal.id -icontains $nuspecID) {
+        } elseif ($personalPackageIds.id -icontains $nuspecID) {
             Write-Verbose "$nuspecID is a custom package"
         } elseif ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
             Write-Verbose "$nuspecID is already internal coming from chocolatey.org"
@@ -346,8 +370,8 @@ Function Invoke-InternalizeChocoPkg {
             } else {
                 $obj.status = "done"
                 if ($writePerPkgs -eq "yes") {
-                    Write-Verbose "writing $($obj.nuspecID) to personal packages as internalized"
-                    Write-PerPkg -personalPkgXMLPath $personalPkgXMLResolved -Version $obj.version -nuspecID $obj.nuspecID
+                    Write-Verbose "writing $($obj.nuspecID) to internalized xml as internalized"
+                    Write-InternalizedPackage -internalizedXMLPath $internalizedXML -Version $obj.version -nuspecID $obj.nuspecID
                 }
             }
         } else {

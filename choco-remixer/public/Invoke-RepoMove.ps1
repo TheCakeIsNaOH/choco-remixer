@@ -5,9 +5,10 @@
         [parameter(Mandatory = $true)][string]$moveToRepoURL,
         [parameter(Mandatory = $true)][string]$proxyRepoCreds,
         [parameter(Mandatory = $true)][string]$proxyRepoURL,
-        [parameter(Mandatory = $true)][xml]$personalpackagesXMLcontent,
         [parameter(Mandatory = $true)][string]$workDir,
-        [parameter(Mandatory = $true)][string]$searchDir
+        [parameter(Mandatory = $true)][string]$searchDir,
+        [parameter(Mandatory = $true)][string]$internalizedXML,
+        [parameter(Mandatory = $true)][xml]$packagesXMLContent
     )
 
     $ProgressPreference = 'SilentlyContinue'
@@ -27,9 +28,15 @@
     }
 
     if ($null -eq $proxyRepoURL) {
-        Throw "no proxyRepoURL in personal-packages.xml"
+        Throw "no proxyRepoURL in config xml"
     }
     Test-URL -url $proxyRepoURL -name "proxyRepoURL" -headers $proxyRepoHeaderCreds
+
+    if (!(Test-Path $internalizedXML)) {
+        Write-Warning "Could not find $internalizedXML"
+        Throw "Internalized xml not found, please specify valid path"
+    }
+    [xml]$internalizedXMLContent = Get-Content $internalizedXML
 
     $proxyRepoName = ($proxyRepoURL -split "repository" | Select-Object -Last 1).trim("/")
     $proxyRepoBaseURL = $proxyRepoURL -split "repository" | Select-Object -First 1
@@ -97,7 +104,7 @@
                     $null = New-Item -Type Directory $IdSaveDir
                 }
 
-                $internalizedVersions = ($personalpackagesXMLcontent.mypackages.internalized.pkg | Where-Object { $_.id -ieq "$nuspecID" }).version
+                $internalizedVersions = ($internalizedXMLcontent.internalized.pkg | Where-Object { $_.id -ieq "$nuspecID" }).version
 
                 $versions | ForEach-Object {
 

@@ -30,6 +30,8 @@
     }
 
     if ($oldFileOK -eq $false) {
+        #needed to use [Microsoft.PowerShell.Commands.PSUserAgent] when running in pwsh
+        Import-Module Microsoft.PowerShell.Utility
         $dlwd = New-Object net.webclient
         $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
         if ($referer) {

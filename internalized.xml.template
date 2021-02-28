@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<!-- This will be automatically filled as you internalize more packages assuming that  -->
+<!-- Add the id and version of any packages that you already have manually internalized and put in your local repo -->
+<internalized>
+	<pkg id="example-package-id">
+		<version>0.0.0.0</version>
+	</pkg>
+</internalized>
