@@ -2,21 +2,20 @@
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header', Scope = 'Function')]
     param (
-        [parameter(Mandatory = $true)][string]$publicRepoURL,
-        [parameter(Mandatory = $true)][string]$privateRepoCreds,
-        [parameter(Mandatory = $true)][string]$privateRepoURL,
-        [parameter(Mandatory = $true)][string]$searchDir,
-        [parameter(Mandatory = $true)][xml]$packagesXMLContent,
-        [parameter(Mandatory = $true)][string]$repoCheckXML
-
+        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$configXML,
+        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$internalizedXML,
+        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$repoCheckXML,
+        [Parameter(ParameterSetName = 'Folder')][string]$folderXML,
+        [string]$privateRepoCreds
     )
-
+    $saveProgPref = $ProgressPreference
     $ProgressPreference = 'SilentlyContinue'
 
-    if ($null -eq $publicRepoURL) {
-        Throw "no publicRepoURL in config xml"
+    . Get-RemixerConfig -parameterSetName $PSCmdlet.ParameterSetName
+
+    if ($config.repoCheck -eq "no") {
+        Throw "Repocheck disabled in config"
     }
-    Test-URL -url $publicRepoURL -name "publicRepoURL"
 
     if ($null -eq $privateRepoCreds) {
         Throw "privateRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
@@ -30,22 +29,11 @@
         }
     }
 
-    if ($null -eq $privateRepoURL) {
-        Throw "no privateRepoURL in config xml"
-    }
-    Test-URL -url $privateRepoURL -name "privateRepoURL" -Headers $privateRepoHeaderCreds
-
-    if (!(Test-Path $repoCheckXML)) {
-        Write-Warning "Could not find $repoCheckXML"
-        Throw "Repo check xml not found, please specify valid path"
-    }
-    [xml]$repoCheckXML = Get-Content $repoCheckXML
-
-    $toSearchToInternalize = $repoCheckXML.toInternalize.id
+    Test-URL -url $config.privateRepoURL -name "privateRepoURL" -Headers $privateRepoHeaderCreds
 
     Write-Information "Getting information from the Nexus APi, this may take a while." -InformationAction Continue
-    $privateRepoName = ($privateRepoURL -split "repository" | Select-Object -Last 1).trim("/")
-    $privateRepoBaseURL = $privateRepoURL -split "repository" | Select-Object -First 1
+    $privateRepoName = ($config.privateRepoURL -split "repository" | Select-Object -Last 1).trim("/")
+    $privateRepoBaseURL = $config.privateRepoURL -split "repository" | Select-Object -First 1
     $privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
     $privatePageURL = $privateRepoApiURL + 'components?repository=' + $privateRepoName
     $privatePageURLorig = $privatePageURL
@@ -66,17 +54,17 @@
 
         $privateVersions = $privateInfo | Where-Object { $_.name -eq $nuspecID } | Select-Object -ExpandProperty version
 
-        $publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
+        $publicPageURL = $config.publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
         [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL
         $publicVersion = $publicPage.feed.entry.properties.Version
 
         if ($null -eq $publicVersion) {
-            $publicPageURL = $publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsAbsoluteLatestVersion'
+            $publicPageURL = $config.publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsAbsoluteLatestVersion'
             [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL
             $publicVersion = $publicPage.feed.entry.properties.Version
 
             if ($null -eq $publicVersion) {
-                Write-Error "$nuspecID does not exist or is unlisted on $publicRepoURL"
+                Write-Error "$nuspecID does not exist or is unlisted on $config.publicRepoURL"
             }
         }
 
@@ -102,7 +90,7 @@
 
             $filename = $dlwdURL.split("/") | Select-Object -Last 1
 
-            $saveDir = Join-Path $searchDir $nuspecID
+            $saveDir = Join-Path $config.searchDir $nuspecID
             if (!(Test-Path $saveDir)) {
                 $null = New-Item -Type Directory $saveDir
             }
@@ -112,7 +100,7 @@
             if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
                 $stopwatch = [system.diagnostics.stopwatch]::StartNew()
                 $dlwdPath = Join-Path $saveDir $filename
-                $pushArgs = "push " + $filename + " -f -r -s " + $privateRepoURL
+                $pushArgs = "push " + $filename + " -f -r -s " + $config.privateRepoURL
                 $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
 
                 if ($pushcode.exitcode -ne "0") {
@@ -134,5 +122,5 @@
         }
     }
     $nuspecID = $null
-    $ProgressPreference = 'Continue'
+    $ProgressPreference = $saveProgPref
 }

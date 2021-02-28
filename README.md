@@ -20,11 +20,11 @@ This automates some tasks involved in maintaining a private Chocolatey repositor
 
 - Clone this repository
 - Chocolatey is required, make sure that it is installed and working properly.
-- Copy `personal-packages.xml.template` to `personal-packages.xml` and edit it.
-    - See the file for comments about each of the options.
+- Copy `*.xml.template` files to `*.xml` and edit them.
+    - See the files for comments about each of the options.
     - It is searched for first under `%appdata%`/`.config` in the choco-remixer folder, then it looks in the same folder that choco-remixer runs from. You can also provide a path to it.
 - If you are using the automatic pushing (`pushPkgs`), make sure `choco` has the appropriate `apikey` setup for that URL.
-- It is a good idea to put `personal-packages.xml` in a git repository.
+- It is a good idea to put the xml files in a git repository.
 
 ## Operation
 
@@ -32,7 +32,7 @@ This automates some tasks involved in maintaining a private Chocolatey repositor
 - Run `Invoke-InternalizeChocoPkg`
 
 - If you have `useDropPath` and `pushPkgs` disabled, the internalized packages are located inside the specified `workDir`.
-- If you have `writePerPkgs` disabled, add the package versions to `personal-packages.xml` under the correct IDs. Otherwise, it will try to internalize them again.
+- If you have `writePerPkgs` disabled, add the package versions to `internalized.xml` under the correct IDs. Otherwise, it will try to internalize them again.
 
 - If continuously re-running for development or bug fixing, use the `-skipRepoCheck` switch, so as to not get rate limited by chocolatey.org
 
@@ -68,7 +68,6 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 
 - Add support for internalizing package icons
 - Comment based help for all public functions, specifically in Edit-InstallChocolateyPackage (platyps?)
-- Create generic validation/config acquiry function, change so repomove/repocheck can be run separately
 - Module metadata creation, module install, other scripts
 - Switch so invoke-internalizechocopkg can be run with a single chocolatey package
 

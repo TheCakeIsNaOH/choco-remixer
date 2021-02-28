@@ -3,9 +3,9 @@ Function Invoke-InternalizeChocoPkg {
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header')]
     param (
-        [Parameter(ParameterSetName = 'Individual')][string]$configXML,
-        [Parameter(ParameterSetName = 'Individual')][string]$internalizedXML,
-        [Parameter(ParameterSetName = 'Individual')][string]$repoCheckXML,
+        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$configXML,
+        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$internalizedXML,
+        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$repoCheckXML,
         [Parameter(ParameterSetName = 'Folder')][string]$folderXML,
         [string]$privateRepoCreds,
         [string]$proxyRepoCreds,
@@ -23,191 +23,45 @@ Function Invoke-InternalizeChocoPkg {
         . $_.fullname
     }
 
-    #Check OS to select user profile location
-    if (($null -eq $IsWindows) -or ($IsWindows -eq $true)) {
-        $profilePath = [IO.Path]::Combine($env:APPDATA, "choco-remixer")
-    } elseif ($IsLinux -eq $true) {
-        $profilePath = [IO.Path]::Combine($env:HOME, ".config", "choco-remixer")
-    } elseif ($IsMacOS -eq $true) {
-        Throw "MacOS not supported"
-    } else {
-        Throw "Something went wrong detecting OS"
-    }
+    . Get-RemixerConfig -parameterSetName $PSCmdlet.ParameterSetName
 
-    if ($null -eq (Get-Command "choco" -ea 0)) {
-        Write-Error "Did not find Choco, please make sure it is installed and on path"
-        Throw
-    }
-
-    if ($null -eq [Environment]::GetEnvironmentVariable("ChocolateyInstall")) {
-        Write-Error "Did not find ChocolateyInstall environment variable, please make sure it exists"
-        Throw
-    }
-
-    #select which xml locations to use
-    if ($PSBoundParameters.ContainsKey('folderXML')) {
-        $folderXML = (Resolve-Path $folderXML).path
-        $configXML = Join-Path $folderXML 'config.xml'
-        $internalizedXML = Join-Path $folderXML 'internalized.xml'
-        $repoCheckXML = Join-Path $folderXML 'repo-check.xml'
-    } else {
-        if ($PSBoundParameters.ContainsKey('configXML')) {
-            $configXML = (Resolve-Path $configXML).path
-        } else {
-            $configXML = Join-Path $profilePath 'config.xml'
-        }
-
-        if ($PSBoundParameters.ContainsKey('internalized.xml')) {
-            $internalizedXML = (Resolve-Path $internalizedXML).path
-        } else {
-            $internalizedXML = Join-Path $profilePath 'internalized.xml'
-        }
-
-        if ($PSBoundParameters.ContainsKey('repoCheckXML')) {
-            $repoCheckXML = (Resolve-Path $repoCheckXML).path
-        } else {
-            $repoCheckXML = Join-Path $profilePath 'internalized.xml'
-        }
-    }
-
-    if (!(Test-Path $configXML)) {
-        Write-Warning "Could not find $configXML"
-        Throw "Config xml not found, please specify valid path"
-    }
-    if (!(Test-Path $internalizedXML)) {
-        Write-Warning "Could not find $internalizedXML"
-        Throw "Internalized xml not found, please specify valid path"
-    }
-    if (!(Test-Path $repoCheckXML)) {
-        Write-Warning "Could not find $repoCheckXML"
-        Throw "Repo check xml not found, please specify valid path"
-    }
-
-
-    $pkgXML = ([System.IO.Path]::Combine((Split-Path -Parent $PSScriptRoot), 'pkgs', 'packages.xml'))
-    if (!(Test-Path $pkgXML)) {
-        Throw "packages.xml not found, please specify valid path"
-    }
-
-
-    [XML]$packagesXMLContent = Get-Content $pkgXML
-    [XML]$configXMLContent = Get-Content $configXML
-    [xml]$internalizedXMLContent = Get-Content $internalizedXML
-
-    #Load options into specific variables to clean up stuff lower down
-    $options = $configXMLcontent.options
-
-    $searchDir = $options.searchDir.tostring()
-    $workDir = $options.workDir.tostring()
-    $dropPath = $options.DropPath.tostring()
-    $useDropPath = $options.useDropPath.tostring()
-    $writePerPkgs = $options.writePerPkgs.tostring()
-    $pushURL = $options.pushURL.tostring()
-    $pushPkgs = $options.pushPkgs.tostring()
-    $repoCheck = $options.repoCheck.tostring()
-    $publicRepoURL = $options.publicRepoURL.tostring()
-    $privateRepoURL = $options.privateRepoURL.tostring()
-    $repoMove = $options.repoMove.tostring()
-    $proxyRepoURL = $options.proxyRepoURL.tostring()
-    $moveToRepoURL = $options.moveToRepoURL.tostring()
-    $personalPackageIds = $options.personal
-
-    if ($options.writeVersion.tostring() -eq "yes") {
-        $writeVersion = $true
-    }
-    if (!($privateRepoCreds)) {
-        $privateRepoCreds = $options.privateRepoCreds.tostring()
-    }
-    if (!($proxyRepoCreds)) {
-        $proxyRepoCreds = $options.proxyRepoCreds.tostring()
-    }
-
-
-    if (!(Test-Path $searchDir)) {
-        Throw "$searchDir not found, please specify valid searchDir"
-    }
-    if (!(Test-Path $workDir)) {
-        Throw "$workDir not found, please specify valid workDir"
-    }
-    if ($workDir.ToLower().StartsWith($searchDir.ToLower())) {
-        Throw "workDir cannot be a sub directory of the searchDir"
-    }
-
-
-    if ($useDropPath -eq "yes") {
-        Test-DropPath -dropPath $dropPath
-    } elseif ($useDropPath -eq "no") {
-    } else {
-        Throw "bad useDropPath value in config xml, must be yes or no"
-    }
-
-
-    if ("no", "yes" -notcontains $writePerPkgs) {
-        Throw "bad writePerPkgs value in config xml, must be yes or no"
-    }
-
-
-    if ($pushPkgs -eq "yes") {
-        Test-PushPackage -URL $pushURL -Name "pushURL"
-    } elseif ($pushPkgs -eq "no") {
-    } else {
-        Throw "bad pushPkgs value in config xml, must be yes or no"
-    }
-
-
-    if (($repomove -eq "yes") -and (!($skipRepoMove))) {
+    if (($config.repoMove -eq "yes") -and (!($skipRepoMove))) {
         $invokeRepoMoveArgs = @{
-            moveToRepoURL      = $moveToRepoURL
             proxyRepoCreds     = $proxyRepoCreds
-            proxyRepoURL       = $proxyRepoURL
-            workDir            = $workDir
-            searchDir          = $searchDir
+            configXML          = $configXML
             internalizedXML    = $internalizedXML
-            packagesXMLContent = $packagesXMLContent
+            repoCheckXML       = $repoCheckXML
         }
 
         Invoke-RepoMove @invokeRepoMoveArgs
-    } elseif ($repoMove -eq "no") {
-    } else {
-        if (!($skipRepoMove)) {
-            Throw "bad repoMove value in config xml, must be yes or no"
-        }
     }
 
 
-    if (($repocheck -eq "yes") -and (!($skipRepoCheck))) {
+    if (($config.repoCheck -eq "yes") -and (!($skipRepoCheck))) {
         $invokeRepoCheckArgs = @{
-            publicRepoURL      = $publicRepoURL
             privateRepoCreds   = $privateRepoCreds
-            privateRepoURL     = $privateRepoURL
-            searchDir          = $searchDir
+            configXML          = $configXML
+            internalizedXML    = $internalizedXML
             repoCheckXML       = $repoCheckXML
-            packagesXMLContent = $packagesXMLContent
         }
 
         Invoke-RepoCheck @invokeRepoCheckArgs
-    } elseif ($repoCheck -eq "no") {
-    } else {
-        if (!($skipRepoCheck)) {
-            Throw "bad repoCheck value in config xml, must be yes or no"
-        }
     }
 
 
     #need this as normal PWSH arrays are slow to add an element, this can add them quickly
     [System.Collections.ArrayList]$nupkgObjArray = @()
 
-    #todo, make able to do multiple search dirs
     #todo, add switch here to select from other options to get list of nupkgs
     if ($thoroughList) {
-        $nupkgArray = Get-ChildItem -File $searchDir -Filter "*.nupkg" -Recurse
+        $nupkgArray = Get-ChildItem -File $config.searchDir -Filter "*.nupkg" -Recurse
     } else {
         #filters based on folder name, therefore less files to open later and therefore faster, but may not be useful in all circumstances.
-        $nupkgArray = (Get-ChildItem -File $searchDir -Filter "*.nupkg" -Recurse) | Where-Object {
+        $nupkgArray = (Get-ChildItem -File $config.searchDir -Filter "*.nupkg" -Recurse) | Where-Object {
             ($_.directory.name -notin $packagesXMLcontent.packages.internal.id) `
                 -and ($_.directory.Parent.name -notin $packagesXMLcontent.packages.internal.id) `
-                -and ($_.directory.name -notin $personalPackageIds.id) `
-                -and ($_.directory.Parent.name -notin $personalPackageIds.id) `
+                -and ($_.directory.name -notin $config.personal.id) `
+                -and ($_.directory.Parent.name -notin $config.personal.id) `
         }
     }
 
@@ -225,7 +79,7 @@ Function Invoke-InternalizeChocoPkg {
             Write-Verbose "$nuspecID $nuspecVersion is already internalized"
         } elseif ($packagesXMLcontent.packages.notImplemented.id -icontains $nuspecID) {
             Write-Warning "$nuspecID $nuspecVersion  not implemented, requires manual internalization"
-        } elseif ($personalPackageIds.id -icontains $nuspecID) {
+        } elseif ($config.personal.id -icontains $nuspecID) {
             Write-Verbose "$nuspecID is a custom package"
         } elseif ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
             Write-Verbose "$nuspecID is already internal coming from chocolatey.org"
@@ -243,7 +97,7 @@ Function Invoke-InternalizeChocoPkg {
 
             } else {
 
-                $idDir = (Join-Path $workDir $nuspecID)
+                $idDir = (Join-Path $config.workDir $nuspecID)
                 $versionDir = (Join-Path $idDir $nuspecVersion)
                 $newpath = (Join-Path $versionDir $_.name)
                 $customXml = $packagesXMLcontent.packages.custom.pkg | Where-Object id -EQ $nuspecID
@@ -346,14 +200,14 @@ Function Invoke-InternalizeChocoPkg {
 
     Foreach ($obj in $nupkgObjArray) {
         if (($obj.status -eq "internalized") -and (!($noSave))) {
-            if ($useDropPath -eq "yes") {
+            if ($config.useDropPath -eq "yes") {
                 Write-Verbose "coping $($obj.nuspecID) to drop path"
-                Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $dropPath
+                Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $config.dropPath
             }
 
-            if ($pushPkgs -eq "yes") {
+            if ($config.pushPkgs -eq "yes") {
                 Write-Output "pushing $($obj.nuspecID)"
-                $pushArgs = 'push -f -r -s ' + $pushURL
+                $pushArgs = 'push -f -r -s ' + $config.pushURL
                 $startProcessArgs = @{
                     FilePath         = "choco"
                     ArgumentList     = $pushArgs
@@ -365,11 +219,11 @@ Function Invoke-InternalizeChocoPkg {
 
                 $pushcode = Start-Process @startProcessArgs
             }
-            if (($pushPkgs -eq "yes") -and ($pushcode.exitcode -ne "0")) {
+            if (($config.pushPkgs -eq "yes") -and ($pushcode.exitcode -ne "0")) {
                 $obj.status = "push failed"
             } else {
                 $obj.status = "done"
-                if ($writePerPkgs -eq "yes") {
+                if ($config.writePerPkgs -eq "yes") {
                     Write-Verbose "writing $($obj.nuspecID) to internalized xml as internalized"
                     Write-InternalizedPackage -internalizedXMLPath $internalizedXML -Version $obj.version -nuspecID $obj.nuspecID
                 }

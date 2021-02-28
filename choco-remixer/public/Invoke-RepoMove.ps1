@@ -2,18 +2,20 @@
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header', Scope = 'Function')]
     param (
-        [parameter(Mandatory = $true)][string]$moveToRepoURL,
-        [parameter(Mandatory = $true)][string]$proxyRepoCreds,
-        [parameter(Mandatory = $true)][string]$proxyRepoURL,
-        [parameter(Mandatory = $true)][string]$workDir,
-        [parameter(Mandatory = $true)][string]$searchDir,
-        [parameter(Mandatory = $true)][string]$internalizedXML,
-        [parameter(Mandatory = $true)][xml]$packagesXMLContent
+        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$configXML,
+        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$internalizedXML,
+        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$repoCheckXML,
+        [Parameter(ParameterSetName = 'Folder')][string]$folderXML,
+        [string]$proxyRepoCreds
     )
-
+    $saveProgPref = $ProgressPreference
     $ProgressPreference = 'SilentlyContinue'
 
-    Test-PushPackage -Url $moveToRepoURL -Name "moveToRepoURL"
+    . Get-RemixerConfig -parameterSetName $PSCmdlet.ParameterSetName
+
+    if ($config.repoMove -eq "no") {
+        Throw "RepoMove disabled in config"
+    }
 
     if ($null -eq $proxyRepoCreds) {
         Throw "proxyRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
@@ -27,25 +29,16 @@
         }
     }
 
-    if ($null -eq $proxyRepoURL) {
-        Throw "no proxyRepoURL in config xml"
-    }
-    Test-URL -url $proxyRepoURL -name "proxyRepoURL" -headers $proxyRepoHeaderCreds
+    Test-URL -url $config.proxyRepoURL -name "proxyRepoURL" -headers $proxyRepoHeaderCreds
 
-    if (!(Test-Path $internalizedXML)) {
-        Write-Warning "Could not find $internalizedXML"
-        Throw "Internalized xml not found, please specify valid path"
-    }
-    [xml]$internalizedXMLContent = Get-Content $internalizedXML
-
-    $proxyRepoName = ($proxyRepoURL -split "repository" | Select-Object -Last 1).trim("/")
-    $proxyRepoBaseURL = $proxyRepoURL -split "repository" | Select-Object -First 1
+    $proxyRepoName = ($config.proxyRepoURL -split "repository" | Select-Object -Last 1).trim("/")
+    $proxyRepoBaseURL = $config.proxyRepoURL -split "repository" | Select-Object -First 1
     $proxyRepoBrowseURL = $proxyRepoBaseURL + "service/rest/repository/browse/" + $proxyRepoName + "/"
     $proxyRepoApiURL = $proxyRepoBaseURL + "service/rest/v1/"
     $proxyRepoBrowsePage = Invoke-WebRequest -UseBasicParsing -Uri $proxyRepoBrowseURL -Headers $proxyRepoHeaderCreds
     $proxyRepoIdList = $proxyRepoBrowsePage.Links.href
 
-    $saveDir = Join-Path $workDir "internal-packages-temp"
+    $saveDir = Join-Path $config.workDir "internal-packages-temp"
     if (!(Test-Path $saveDir)) {
         $null = New-Item -Type Directory $saveDir
     }
@@ -79,7 +72,7 @@
                     $dlwd.DownloadFile($downloadURL, $dlwdPath)
                     $dlwd.dispose()
 
-                    $pushArgs = "push " + $filename + " -f -r -s " + $moveToRepoURL
+                    $pushArgs = "push " + $filename + " -f -r -s " + $config.moveToRepoURL
                     $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
 
                     if ($pushcode.exitcode -ne "0") {
@@ -99,7 +92,7 @@
                 $versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
                 $versions = ($versionsPage.links | Where-Object href -Match "\d" | Select-Object -expand href).trim("/")
 
-                $IdSaveDir = Join-Path $searchDir $nuspecID
+                $IdSaveDir = Join-Path $config.searchDir $nuspecID
                 if (!(Test-Path $IdSaveDir)) {
                     $null = New-Item -Type Directory $IdSaveDir
                 }
@@ -145,5 +138,5 @@
     }
 
     $nuspecID = $null
-    $ProgressPreference = 'Continue'
+    $ProgressPreference = $saveProgPref
 }
