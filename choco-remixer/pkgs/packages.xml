@@ -696,6 +696,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-lively</functionName>
+      <id>lively</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-malwarebytes</functionName>
       <id>malwarebytes</id>
       <needsStopAction>no</needsStopAction>
