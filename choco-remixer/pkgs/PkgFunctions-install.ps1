@@ -249,6 +249,31 @@ Function Convert-dotnetcore-desktopruntime ($obj) {
     Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
+Function Convert-dotnet-5.0-desktopruntime ($obj) {
+
+    $dataFile = Join-Path $obj.toolsDir 'data.ps1'
+    $dataContent = & $datafile
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+
+    $url32 = $dataContent.Url
+    $url64 = $dataContent.Url64
+    $checksum32 = $dataContent.checksum
+    $checksum64 = $dataContent.checksum64
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'File    = (Join-Path $toolsDir "' + $filename32 + '")'
+    $filePath64 = 'File64   = (Join-Path $toolsDir "' + $filename64 + '")'
+
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "arguments = @{" , "$&`n  $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod -replace "arguments64 = @{" , "$&`n  $filePath64"
+
+    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
+}
 
 Function Convert-aspnetcore-runtimepackagestore ($obj) {
 

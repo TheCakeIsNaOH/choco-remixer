@@ -31,6 +31,7 @@
     <id>boxstarter.winconfig</id>
     <id>boxstarter</id>
     <id>bulk-crap-uninstaller</id>
+    <id>calibre-dedrm</id>
     <id>cdburnerxp</id>
     <id>checksum</id>
     <id>choco-cleaner</id>
@@ -72,6 +73,7 @@
     <id>dotpeek</id>
     <id>dotnet3.5</id>
     <id>dotnet4.7.2</id>
+    <id>dotnet-desktopruntime</id>
     <id>ds4windows</id>
     <id>duplicati</id>
     <id>element-desktop</id>
@@ -444,6 +446,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-dotnet-5.0-desktopruntime</functionName>
+      <id>dotnet-5.0-desktopruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dotnetcore-sdk</functionName>
       <id>dotnetcore-sdk</id>
       <needsStopAction>no</needsStopAction>
@@ -680,7 +689,7 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>    
+    </pkg>
     <pkg>
       <functionName>Convert-libreoffice-fresh</functionName>
       <id>libreoffice-fresh</id>
@@ -1037,7 +1046,7 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
-    </pkg>     
+    </pkg>
     <pkg>
       <functionName>Convert-yarn</functionName>
       <id>yarn</id>
@@ -1051,7 +1060,7 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>    
+    </pkg>
     <pkg>
       <functionName>Convert-zoom</functionName>
       <id>zoom</id>
@@ -1066,8 +1075,8 @@
       <needsToolsDir></needsToolsDir>
       <whyNotInternal></whyNotInternal>
     </pkg> -->
- 
-    
+
+
   </custom>
   <notImplemented>
     <id>becyicongrabber</id>
@@ -1075,9 +1084,9 @@
     <id>chromehistoryview</id>
     <id>cinebench</id>
     <id>colortool</id>
-    <id>directx</id><!-- Microsoft download is dead -->
+    <id>directx</id><!-- Microsoft download is dead --><!-- todo, fix now that it has a wayback link -->
     <id>grep</id>
-    <id>html-help-workshop</id><!-- Download URL now dead -->
+    <id>html-help-workshop</id><!-- Download URL now dead --><!-- todo, fix now that it has a wayback link -->
     <id>imgburn</id><!-- To be removed from chocolatey -->
     <id>insted</id>
     <id>io-unlocker</id>

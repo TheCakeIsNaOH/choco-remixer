@@ -31,7 +31,7 @@
 
     Test-URL -url $config.privateRepoURL -name "privateRepoURL" -Headers $privateRepoHeaderCreds
 
-    Write-Information "Getting information from the Nexus APi, this may take a while." -InformationAction Continue
+    Write-Information "Getting information from the Nexus API, this may take a while." -InformationAction Continue
     $privateRepoName = ($config.privateRepoURL -split "repository" | Select-Object -Last 1).trim("/")
     $privateRepoBaseURL = $config.privateRepoURL -split "repository" | Select-Object -First 1
     $privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"

@@ -66,6 +66,7 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 
 ## Immediate TODOs
 
+- Add license to files
 - Add support for internalizing package icons
 - Comment based help for all public functions, specifically in Edit-InstallChocolateyPackage (platyps?)
 - Module metadata creation, module install, other scripts
