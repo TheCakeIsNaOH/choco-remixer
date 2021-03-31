@@ -474,7 +474,7 @@ Function Convert-openlp ($obj) {
 # SINGLE --------------------------
 
 
-Function Convert-uplay ($obj) {
+Function Convert-ubisoft-connect ($obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "x32"
         nuspecID         = $obj.nuspecID

@@ -109,6 +109,7 @@
     <id>innoextract</id>
     <id>innosetup</id>
     <id>innounp</id>
+    <id>instchoco</id>
     <id>iperf2</id>
     <id>jackett</id>
     <id>javaruntime</id>
@@ -202,6 +203,7 @@
     <id>tablacus</id>
     <id>tinymediamanager</id>
     <id>totalcommander</id>
+    <id>uplay</id>
     <id>vcredist-all</id>
     <id>vcredist2015</id>
     <id>vcredist2017</id>
@@ -627,6 +629,13 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
+        <pkg>
+      <functionName>Convert-itunes</functionName>
+      <id>itunes</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
     <pkg>
       <functionName>Convert-kb2919355</functionName>
       <id>kb2919355</id>
@@ -936,8 +945,8 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-uplay</functionName>
-      <id>uplay</id>
+      <functionName>Convert-ubisoft-connect</functionName>
+      <id>ubisoft-connect</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
