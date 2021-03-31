@@ -330,12 +330,14 @@ Function Convert-dotnetcore-windowshosting ($obj) {
 
 #Special because orig script uses $version inmod of a full URL
 Function Convert-powershell-core ($obj) {
-    $version = $obj.version
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64 ").tostring()
 
-    $url32 = "https://github.com/PowerShell/PowerShell/releases/download/v" + $version + "/PowerShell-" + $version + "-win-x86.msi"
-    $url64 = "https://github.com/PowerShell/PowerShell/releases/download/v" + $version + "/PowerShell-" + $version + "-win-x64.msi"
-    $filename32 = "PowerShell-" + $version + "-win-x86.msi"
-    $filename64 = "PowerShell-" + $version + "-win-x64.msi"
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
 
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
     $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
@@ -537,6 +539,8 @@ Function Convert-virtualbox ($obj) {
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
     Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
     Get-File -url $urlep -filename $filenameep -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumep
+
+    Add-NuspecFilesElement -nuspecPath (Get-ChildItem -path $toolsDir -Filter "*.nuspec")
 }
 
 
