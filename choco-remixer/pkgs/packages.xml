@@ -20,6 +20,7 @@
     <id>autoit</id>
     <id>avidemux</id>
     <id>balabolka</id>
+    <id>balcon</id>
     <id>bfg-repo-cleaner</id>
     <id>bibletime</id>
     <id>bitwarden-cli</id>
@@ -100,6 +101,7 @@
     <id>handbrake.portable</id>
     <id>handbrake</id>
     <id>hashtab</id>
+    <id>hidevolumeosd</id>
     <id>hxd</id>
     <id>icecat</id>
     <id>iceweasel</id>
@@ -231,11 +233,11 @@
   </internal>
   <custom>
     <pkg>
-        <id>1password</id>
-        <needsStopAction>no</needsStopAction>
-        <needsToolsDir>yes</needsToolsDir>
-        <functionName>Convert-1password</functionName>
-        <whyNotInternal>licensing</whyNotInternal>
+      <id>1password</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <functionName>Convert-1password</functionName>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-4k-slideshow</functionName>
@@ -277,7 +279,7 @@
       <id>adb</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal> <!-- under google SDK licensing with no redist, but has clause that allows open source licensing to take precedence, unsure if this is totally under open sources licensings, may need to build custom -->
+      <whyNotInternal>licensing</whyNotInternal>      <!-- under google SDK licensing with no redist, but has clause that allows open source licensing to take precedence, unsure if this is totally under open sources licensings, may need to build custom -->
     </pkg>
     <pkg>
       <functionName>Convert-adobereader</functionName>
@@ -291,21 +293,21 @@
       <id>adoptopenjdk8</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
+      <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
       <functionName>Convert-adoptopenjdk8jre</functionName>
       <id>adoptopenjdk8jre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
+      <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
       <functionName>Convert-adoptopenjdkjre</functionName>
       <id>adoptopenjdkjre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal><!--Not really for this package, but for overall adoptopenjdk packages-->
+      <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
       <functionName>Convert-advanced-installer</functionName>
@@ -574,11 +576,11 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-        <functionName>Convert-goggalaxy</functionName>
-        <id>goggalaxy</id>
-        <needsStopAction>no</needsStopAction>
-        <needsToolsDir>yes</needsToolsDir>
-        <whyNotInternal>licensing</whyNotInternal>
+      <functionName>Convert-goggalaxy</functionName>
+      <id>goggalaxy</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-google-backup-and-sync</functionName>
@@ -629,7 +631,7 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
-        <pkg>
+    <pkg>
       <functionName>Convert-itunes</functionName>
       <id>itunes</id>
       <needsStopAction>no</needsStopAction>
@@ -802,7 +804,7 @@
       <id>openoffice</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal><!--- Size of all different ones combined -->
+      <whyNotInternal>size</whyNotInternal>      <!--- Size of all different ones combined -->
     </pkg>
     <pkg>
       <functionName>Convert-openshot</functionName>
@@ -872,7 +874,7 @@
       <id>shotcut.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal><!-- almost too big, not quite yet, but almost -->
+      <whyNotInternal>size</whyNotInternal>      <!-- almost too big, not quite yet, but almost -->
     </pkg>
     <pkg>
       <functionName>Convert-skype</functionName>
@@ -924,11 +926,11 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-        <id>streamlabs-obs</id>
-        <needsStopAction>no</needsStopAction>
-        <needsToolsDir>yes</needsToolsDir>
-        <functionName>Convert-slobs</functionName>
-        <whyNotInternal>size</whyNotInternal>
+      <id>streamlabs-obs</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <functionName>Convert-slobs</functionName>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-sysinternals</functionName>
@@ -1100,15 +1102,15 @@
     <id>chromehistoryview</id>
     <id>cinebench</id>
     <id>colortool</id>
-    <id>directx</id><!-- Microsoft download is dead --><!-- todo, fix now that it has a wayback link -->
+    <id>directx</id>    <!-- Microsoft download is dead -->    <!-- todo, fix now that it has a wayback link -->
     <id>grep</id>
-    <id>html-help-workshop</id><!-- Download URL now dead --><!-- todo, fix now that it has a wayback link -->
-    <id>imgburn</id><!-- To be removed from chocolatey -->
+    <id>html-help-workshop</id>    <!-- Download URL now dead -->    <!-- todo, fix now that it has a wayback link -->
+    <id>imgburn</id>    <!-- To be removed from chocolatey -->
     <id>insted</id>
     <id>io-unlocker</id>
     <id>iperf3</id>
-    <id>jdk8</id><!-- please use a non-oracle build of java -->
-    <id>jre8</id><!-- please use a non-oracle build of java -->
+    <id>jdk8</id>    <!-- please use a non-oracle build of java -->
+    <id>jre8</id>    <!-- please use a non-oracle build of java -->
     <id>ksign</id>
     <id>logitechgaming</id>
     <id>masterpackager</id>
@@ -1116,12 +1118,12 @@
     <id>nano</id>
     <id>obs-ndi</id>
     <id>office365proplus</id>
-    <id>orca</id><!-- out of date, make an internal package from msi in windows SDK -->
+    <id>orca</id>    <!-- out of date, make an internal package from msi in windows SDK -->
     <id>pci-z</id>
     <id>qemu-img</id>
     <id>qemu</id>
     <id>railroadtycoon</id>
-    <id>reflect-free</id><!-- Cannot be internalized, as it downloads the installer with AHK. Make custom package instead -->
+    <id>reflect-free</id>    <!-- Cannot be internalized, as it downloads the installer with AHK. Make custom package instead -->
     <id>ruby2.devkit</id>
     <id>shexview.install</id>
     <id>sqlserver-cmdlineutils</id>
