@@ -700,6 +700,13 @@
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-laps</functionName>
+      <id>laps</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-libreoffice-fresh</functionName>
       <id>libreoffice-fresh</id>
       <needsStopAction>no</needsStopAction>
