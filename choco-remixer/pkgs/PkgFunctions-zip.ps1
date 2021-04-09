@@ -248,3 +248,57 @@ Function Convert-itunes ($obj) {
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
     Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
+
+Function Convert-rust-ms ($obj) {
+    $int = 0
+    [array]$installScriptSplit =  $obj.installScriptOrig -split "\n"
+
+    while ($installScriptSplit[$int] -notlike "*Updates*") {
+        [string]$installScriptVars += $installScriptSplit[$int] + "`n"
+        $int++
+    }
+    Invoke-Expression $installScriptVars
+
+    $filenamerustcUrl = ($rustcUrl -split "/" | Select-Object -Last 1).tostring()
+    $filerustcUrl = 'FileFullPath   = (Join-Path $toolsDir "' + $filenamerustcUrl + '")'
+
+    $filenamerustcurl64 = ($rustcurl64 -split "/" | Select-Object -Last 1).tostring()
+    $filerustcurl64 = 'FileFullPath64 = (Join-Path $toolsDir "' + $filenamerustcurl64 + '")'
+
+    $filenamecargoUrl = ($cargoUrl -split "/" | Select-Object -Last 1).tostring()
+    $filecargoUrl = 'FileFullPath   = (Join-Path $toolsDir "' + $filenamecargoUrl + '")'
+
+    $filenamecargoUrl64 = ($cargoUrl64 -split "/" | Select-Object -Last 1).tostring()
+    $filecargoUrl64 = 'FileFullPath64 = (Join-Path $toolsDir "' + $filenamecargoUrl64 + '")'
+
+    $filenamestdUrl = ($stdUrl -split "/" | Select-Object -Last 1).tostring()
+    $filestdUrl = 'FileFullPath   = (Join-Path $toolsDir "' + $filenamestdUrl + '")'
+
+    $filenamestdUrl64 = ($stdUrl64 -split "/" | Select-Object -Last 1).tostring()
+    $filestdUrl64 = 'FileFullPath64 = (Join-Path $toolsDir "' + $filenamestdUrl64 + '")'
+
+    $srcUrl = $packageSrcArgs.url
+    $filenamesrcUrl = ($srcUrl -split "/" | Select-Object -Last 1).tostring()
+    $fileSrcUrl = 'FileFullPath   = (Join-Path $toolsDir "' + $filenameSrcUrl + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+    $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination  "
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.tar.gx'
+    $obj.installScriptMod = $obj.installScriptMod -replace ' url64', '#url64'
+    $obj.installScriptMod = $obj.installScriptMod -replace ' url', '#url'
+
+    #$obj.installScriptMod = $obj.installScriptMod -replace 'foreach', "`$packageArgs.remove('FileFullPath') = `$null`n`$packageArgs.remove('FileFullPath64') = `$null`n`n$&"
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filerustcUrl`n    $filerustcUrl64"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageCargoArgs = @{" , "$&`n    $filecargoUrl`n    $filecargoUrl64"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageStdArgs = @{" , "$&`n    $filestdUrl`n    $filestdUrl64"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageSrcArgs = @{" , "$&`n    $fileSrcUrl"
+
+    Get-File -url $rustcUrl -filename $filenamerustcUrl -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageArgs.checksum
+    Get-File -url $rustcUrl64 -filename $filenamerustcUrl64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageArgs.checksum64
+    Get-File -url $cargoUrl -filename $filenamecargoUrl -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageCargoArgs.checksum
+    Get-File -url $cargoUrl64 -filename $filenamecargoUrl64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageCargoArgs.checksum64
+    Get-File -url $stdUrl -filename $filenamestdUrl -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageStdArgs.checksum
+    Get-File -url $stdUrl64 -filename $filenamestdUrl64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageStdArgs.checksum64
+    Get-File -url $srcUrl -filename $filenamesrcUrl -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageSrcArgs.checksum
+}

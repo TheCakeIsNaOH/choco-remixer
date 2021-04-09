@@ -170,6 +170,7 @@
     <id>pingtracer</id>
     <id>powertoys</id>
     <id>prime95</id>
+    <id>psake</id>
     <id>putty.install</id>
     <id>putty.portable</id>
     <id>putty</id>
@@ -854,6 +855,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+        <pkg>
+      <functionName>Convert-rust-ms</functionName>
+      <id>rust-ms</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-seamonkey</functionName>
