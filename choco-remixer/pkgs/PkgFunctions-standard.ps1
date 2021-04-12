@@ -617,16 +617,17 @@ Function Convert-malwarebytes ($obj) {
 
 Function Convert-zoom ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture     = "x32"
+        architecture     = "both"
         nuspecID         = $obj.nuspecID
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
         argstype         = 0
-        urltype          = 2
+        urltype          = 3
         RemoveMSI        = $true
         needsTools       = $true
-        checksumArgsType = 2
+        checksumArgsType = 0
         checksumTypeType = "sha256"
+        x64NameExt       = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
