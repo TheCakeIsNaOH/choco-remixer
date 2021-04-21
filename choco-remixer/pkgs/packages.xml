@@ -467,6 +467,13 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
+        <pkg>
+      <functionName>Convert-dotnet-5.0-sdk-2xx</functionName>
+      <id>dotnet-5.0-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-windowshosting</functionName>
       <id>dotnetcore-windowshosting</id>
