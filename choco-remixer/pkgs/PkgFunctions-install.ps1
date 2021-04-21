@@ -566,7 +566,8 @@ Function Convert-virtualbox ($obj) {
     Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
     Get-File -url $urlep -filename $filenameep -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumep
 
-    Add-NuspecFilesElement -nuspecPath (Get-ChildItem -path $toolsDir -Filter "*.nuspec")
+    $nuspecPath = (Get-ChildItem -path $obj.toolsDir -Filter "*.nuspec").fullname
+    Add-NuspecFilesElement -nuspecPath $nuspecPath
 }
 
 
