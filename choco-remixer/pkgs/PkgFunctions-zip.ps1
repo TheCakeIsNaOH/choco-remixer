@@ -186,23 +186,6 @@ Function Convert-filespy ($obj) {
 }
 
 
-Function Convert-virtualbox-additions ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url\s+=').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'FileFullPath   = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "fileFullPath ", "#fileFullPath"
-    $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile", "#Get-ChocolateyWebFile"
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.iso'
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
-    $obj.installScriptMod = $obj.installScriptMod -replace ' url ', ' #url'
-
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
-}
-
-
 Function Convert-setacl ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url\s+=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()

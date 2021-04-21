@@ -72,6 +72,7 @@
     <id>dolphin</id>
     <id>dosbox</id>
     <id>dotpeek</id>
+    <id>dotnet-5.0-sdk</id>
     <id>dotnet3.5</id>
     <id>dotnet4.7.2</id>
     <id>dotnet-desktopruntime</id>
@@ -211,6 +212,7 @@
     <id>vcredist2015</id>
     <id>vcredist2017</id>
     <id>vcxsrv</id>
+    <id>virtualbox-guest-additions-guest.install</id>
     <id>vivaldi</id>
     <id>vlc</id>
     <id>vscodium</id>
@@ -223,6 +225,7 @@
     <id>winmd</id>
     <id>winscp.install</id>
     <id>winscp</id>
+    <id>winspy</id>
     <id>wireguard</id>
     <id>wireshark</id>
     <id>wixtoolset</id>
@@ -1023,13 +1026,6 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-virtualbox-additions</functionName>
-      <id>virtualbox-guest-additions-guest.install</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-virt-viewer</functionName>
