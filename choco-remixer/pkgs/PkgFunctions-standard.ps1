@@ -622,10 +622,10 @@ Function Convert-zoom ($obj) {
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
         argstype         = 0
-        urltype          = 3
+        urltype          = 2
         RemoveMSI        = $true
         needsTools       = $true
-        checksumArgsType = 0
+        checksumArgsType = 2
         checksumTypeType = "sha256"
         x64NameExt       = $true
     }
