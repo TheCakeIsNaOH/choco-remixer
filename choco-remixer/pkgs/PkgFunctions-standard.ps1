@@ -731,7 +731,7 @@ Function Convert-lively ($obj) {
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
         argstype         = 0
-        urltype          = 2
+        urltype          = 0
         RemoveEXE        = $true
         needsTools       = $true
         checksumArgsType = 0
