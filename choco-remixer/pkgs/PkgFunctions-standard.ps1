@@ -435,25 +435,6 @@ Function Convert-atom-install ($obj) {
 }
 
 
-Function Convert-vcredist2008 ($obj) {
-    $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
-        nuspecID         = $obj.nuspecID
-        installScript    = $obj.installScriptOrig
-        toolsDir         = $obj.toolsDir
-        argstype         = 1
-        urltype          = 0
-        RemoveEXE        = $true
-        needsTools       = $true
-        needsEA          = $true
-        checksumArgsType = 0
-        checksumTypeType = 'sha1'
-    }
-
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
-}
-
-
 Function Convert-openlp ($obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "both"
