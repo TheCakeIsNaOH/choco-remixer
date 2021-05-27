@@ -768,6 +768,13 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
+        <pkg>
+      <functionName>Convert-microsoft-teams</functionName>
+      <id>microsoft-teams</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
     <pkg>
       <functionName>Convert-minecraft-launcher</functionName>
       <id>minecraft-launcher</id>

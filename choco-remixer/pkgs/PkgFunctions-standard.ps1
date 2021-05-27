@@ -467,6 +467,40 @@ Function Convert-laps ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
+
+Function Convert-openscad-install ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 0
+        RemoveEXE        = $true
+        needsTools       = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-microsoft-teams ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 1
+        RemoveEXE        = $true
+        checksumArgsType = 1
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
 # SINGLE --------------------------
 
 
@@ -940,23 +974,6 @@ Function Convert-dotnet4.6.1 ($obj) {
 Function Convert-imgburn ($obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "x32"
-        nuspecID         = $obj.nuspecID
-        installScript    = $obj.installScriptOrig
-        toolsDir         = $obj.toolsDir
-        argstype         = 0
-        urltype          = 0
-        RemoveEXE        = $true
-        needsTools       = $true
-        checksumArgsType = 0
-        checksumTypeType = 'sha256'
-    }
-
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
-}
-
-Function Convert-openscad-install ($obj) {
-    $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
         nuspecID         = $obj.nuspecID
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
