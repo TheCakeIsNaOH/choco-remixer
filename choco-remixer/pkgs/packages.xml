@@ -552,6 +552,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-egnyte-connect</functionName>
+      <id>egnyte-connect</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-filespy</functionName>
       <id>filespy</id>
       <needsStopAction>no</needsStopAction>
@@ -619,6 +626,13 @@
       <id>google-drive-file-stream</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+      <pkg>
+      <functionName>Convert-googleearth</functionName>
+      <id>googleearth</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
@@ -1100,6 +1114,13 @@
     <pkg>
       <functionName>Convert-webex-meetings</functionName>
       <id>webex-meetings</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+        <pkg>
+      <functionName>Convert-webex</functionName>
+      <id>webex</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
