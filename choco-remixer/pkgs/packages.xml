@@ -362,6 +362,13 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
+        <pkg>
+      <functionName>Convert-autocad</functionName>
+      <id>autocad</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
     <pkg>
       <functionName>Convert-bitwarden</functionName>
       <id>bitwarden</id>
