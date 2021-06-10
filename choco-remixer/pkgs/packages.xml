@@ -488,6 +488,13 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
+        <pkg>
+      <functionName>Convert-dotnetcore-31-aspnetruntime</functionName>
+      <id>dotnetcore-3.1-aspnetruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-windowshosting</functionName>
       <id>dotnetcore-windowshosting</id>
@@ -500,14 +507,14 @@
       <id>dotnetcore-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnetcore3-desktop-runtime</functionName>
-      <id>dotnetcore3-desktop-runtime</id>
-      <needsStopAction>yes</needsStopAction>
+      <functionName>Convert-dotnetcore-runtime-install</functionName>
+      <id>dotnetcore-runtime.install</id>
+      <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-dotnetfx</functionName>
