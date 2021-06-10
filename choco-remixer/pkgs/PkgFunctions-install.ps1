@@ -57,7 +57,7 @@ Function Convert-geogebra-classic ($obj) {
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace "\sInstall-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
@@ -1179,7 +1179,7 @@ Function Convert-dellcommandupdate-uwp ($obj) {
         RemoveEXE        = $true
 
         checksumArgsType = 2
-        checksumTypeType = 'md5'
+        checksumTypeType = 'sha256'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
