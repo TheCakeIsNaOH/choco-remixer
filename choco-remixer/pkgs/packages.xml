@@ -76,6 +76,9 @@
     <id>dotnet3.5</id>
     <id>dotnet4.7.2</id>
     <id>dotnet-desktopruntime</id>
+    <id>dotnetcore-runtime</id>
+    <id>dotnetcore3-desktop-runtime</id>
+    <id>dotnetcore-aspnetruntime</id>
     <id>ds4windows</id>
     <id>duplicati</id>
     <id>element-desktop</id>
@@ -167,10 +170,13 @@
     <id>papercut</id>
     <id>pcsx2.portable</id>
     <id>pcsx2</id>
+    <id>pcsx2.install</id>
+    <id>pcsx2-dev</id>
     <id>picard</id>
     <id>pingtracer</id>
     <id>powertoys</id>
     <id>prime95</id>
+    <id>procrastitracker</id>
     <id>psake</id>
     <id>putty.install</id>
     <id>putty.portable</id>
@@ -218,6 +224,7 @@
     <id>vscodium</id>
     <id>waterfox</id>
     <id>wget</id>
+    <id>win-acme</id>
     <id>winbtrfs</id>
     <id>wincdemu</id>
     <id>windirstat</id>
