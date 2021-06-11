@@ -155,7 +155,7 @@ Function Invoke-InternalizeChocoPkg {
         #Needed for linux, see https://github.com/chocolatey/choco/issues/2076
         Remove-Item -Force -EA 0 -Path (Join-Path $obj.VersionDir '*.nupkg')
 
-        Expand-Nupkg -OrigPath $obj.OrigPath -OutputDir $obj.VersionDir
+        Expand-Nupkg -Path $obj.OrigPath -Destination $obj.VersionDir -NoAddFilesElement
 
         $failed = $false
         Try {
