@@ -1,3 +1,46 @@
+<#
+
+.SYNOPSIS
+
+Add the files element to a .nuspec file
+
+.DESCRIPTION
+
+Adds the files element to a .nuspec file.
+Will replace the current element if the .nuspec file already has one.
+By default, will include all files in the folder the .nuspec is in.
+Exclude AU files with the AuExclude parameter.
+Alternatively, specify files to include with the FilesList parameter.
+
+.PARAMETER NuspecPath
+
+Path to .nuspec to add the files element too.
+
+.PARAMETER FilesList
+
+Array of files to include in the files element.
+
+.PARAMETER AuExclude
+
+Do not include AU specific files in the files element.
+
+.EXAMPLE
+
+PS> Add-NuspecFilesElement .\chocolatey.nuspec
+
+.EXAMPLE
+
+PS> Add-NuspecFilesElement -NuspecPath "C:\packageSources\chocolatey\chocolatey.nuspec" -AuExclude
+
+.LINK
+
+Extract-Nupkg
+
+.LINK
+
+https://docs.microsoft.com/en-us/nuget/reference/nuspec
+
+#>
 Function Add-NuspecFilesElement {
     [CmdletBinding()]
     param (

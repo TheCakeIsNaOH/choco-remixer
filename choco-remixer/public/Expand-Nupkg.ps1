@@ -1,5 +1,45 @@
-﻿Function Expand-Nupkg {
+﻿
+<#
+
+.SYNOPSIS
+
+Extract NuGet/Chocolatey .nupkg packages.
+
+.DESCRIPTION
+
+Extract NuGet/Chocolatey .nupkg packages.
+Does not extract the automatically created metadata files.
+Adds back in the files element to .nuspec which is stripped out during the pack process using Add-NuspecFilesElement
+
+.PARAMETER Path
+
+Path to .nupkg file to extract
+
+.PARAMETER Destination
+
+Location for where to extract files.
+If not specified, extracts to the same folder as the .nupkg
+
+.PARAMETER NoAddFilesElement
+
+Do not add the files element back into the .nuspec
+
+.EXAMPLE
+
+PS> Expand-Nupkg .\chocolatey.0.10.15.nupkg
+
+.EXAMPLE
+
+PS> Expand-Nupkg -Path "C:\packages\chocolatey.0.10.15.nupkg" -Destination "C:\packageSources\chocolatey" -NoAddFilesElement
+
+.LINK
+
+Add-NuspecFilesElement
+
+#>
+Function Expand-Nupkg {
     [CmdletBinding()]
+    [Alias("Extract-Nupkg")]
     param (
         [parameter(Mandatory = $true, Position = 0)]
         [ValidateScript( {
