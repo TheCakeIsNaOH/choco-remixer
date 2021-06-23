@@ -28,6 +28,23 @@ Function Convert-autocad ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgsURL\s+= @{" , "$&`n    $filePath32"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
+
+    $nuspecPath = (Get-ChildItem -path $(Split-Path $obj.toolsDir) -Filter "*.nuspec").fullname
+    [xml]$nuspecXml = Get-Content $nuspecPath
+    $depitem = $nuspecXml.package.metadata.dependencies.dependency | Where-Object id -like "vcredist2012"
+    $depitem.removeAttribute('version')
+
+    Try {
+        [System.Xml.XmlWriterSettings] $XmlSettings = New-Object System.Xml.XmlWriterSettings
+        $XmlSettings.Indent = $true
+        # Save without BOM
+        $XmlSettings.Encoding = New-Object System.Text.UTF8Encoding($false)
+        [System.Xml.XmlWriter] $XmlWriter = [System.Xml.XmlWriter]::Create($nuspecPath, $XmlSettings)
+        $nuspecXML.Save($XmlWriter)
+    } Finally {
+        $XmlWriter.Dispose()
+    }
+
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum\s*=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
