@@ -195,6 +195,7 @@
     <id>regeditor</id>
     <id>resharper</id>
     <id>riot-web</id>
+    <id>ripgrep</id>
     <id>rocolatey</id>
     <id>rpcs3</id>
     <id>ruby</id>
@@ -369,7 +370,7 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
-        <pkg>
+    <pkg>
       <functionName>Convert-autocad</functionName>
       <id>autocad</id>
       <needsStopAction>no</needsStopAction>
@@ -404,7 +405,7 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-        <pkg>
+    <pkg>
       <functionName>Convert-cinebench</functionName>
       <id>cinebench</id>
       <needsStopAction>no</needsStopAction>
@@ -495,7 +496,7 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
-        <pkg>
+    <pkg>
       <functionName>Convert-dotnetcore-31-aspnetruntime</functionName>
       <id>dotnetcore-3.1-aspnetruntime</id>
       <needsStopAction>no</needsStopAction>
@@ -580,6 +581,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-egnyte-desktop-app</functionName>
+      <id>egnyte-desktop-app</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-filespy</functionName>
       <id>filespy</id>
       <needsStopAction>no</needsStopAction>
@@ -649,7 +657,7 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-      <pkg>
+    <pkg>
       <functionName>Convert-googleearth</functionName>
       <id>googleearth</id>
       <needsStopAction>no</needsStopAction>
@@ -803,7 +811,7 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-        <pkg>
+    <pkg>
       <functionName>Convert-microsoft-teams</functionName>
       <id>microsoft-teams</id>
       <needsStopAction>no</needsStopAction>
@@ -1139,7 +1147,7 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-        <pkg>
+    <pkg>
       <functionName>Convert-webex</functionName>
       <id>webex</id>
       <needsStopAction>no</needsStopAction>
