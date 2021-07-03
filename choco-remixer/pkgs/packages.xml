@@ -864,6 +864,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-office365business</functionName>
+      <id>office365business</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-onlyoffice</functionName>
       <id>onlyoffice</id>
       <needsStopAction>no</needsStopAction>
