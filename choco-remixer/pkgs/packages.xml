@@ -222,6 +222,8 @@
     <id>vcredist2015</id>
     <id>vcredist2017</id>
     <id>vcxsrv</id>
+    <id>vikunja-desktop</id>
+    <id>vikunja-desktop-unstable</id>
     <id>virtualbox-guest-additions-guest.install</id>
     <id>vivaldi</id>
     <id>vlc</id>
@@ -848,6 +850,13 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-nexus-repository</functionName>
+      <id>nexus-repository</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-nordvpn</functionName>
