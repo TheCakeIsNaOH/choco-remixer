@@ -632,7 +632,6 @@ Function Convert-geforce-driver ($obj) {
 
 
 Function Convert-virtualbox ($obj) {
-    $obj.toolsDir = $obj.versionDir
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*http").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit ").tostring()
@@ -668,8 +667,6 @@ Function Convert-virtualbox ($obj) {
     Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
     Get-File -url $urlep -filename $filenameep -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumep
 
-    $nuspecPath = (Get-ChildItem -path $obj.toolsDir -Filter "*.nuspec").fullname
-    Add-NuspecFilesElement -nuspecPath $nuspecPath
 }
 
 
