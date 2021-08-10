@@ -124,6 +124,7 @@
     <id>kb2533623</id>
     <id>kdenlive</id>
     <id>keepassxc</id>
+    <id>krita</id>
     <id>kubernetes-cli</id>
     <id>lgs.g700s</id>
     <id>libdvdcss-2</id>
@@ -759,13 +760,6 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-krita</functionName>
-      <id>krita</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-kodi</functionName>
