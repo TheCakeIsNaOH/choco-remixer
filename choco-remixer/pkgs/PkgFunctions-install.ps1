@@ -1072,25 +1072,6 @@ Function Convert-dotnet4.6 ($obj) {
     Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
 }
 
-Function Convert-audacity-ffmpeg ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url\s+= ").tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file         = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-
-    $referer = 'https://lame.buanzo.org/'
-    $acceptMIME = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8';
-
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32 -Referer  $referer -acceptMIME $acceptMIME
-}
-
-
 Function Convert-xming ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()

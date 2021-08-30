@@ -56,6 +56,22 @@ Function Convert-4k-stogram ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
+Function Convert-4k-tokkit ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        urltype          = 1
+        argstype         = 0
+        stripQueryString = $true
+        RemoveMSI        = $true
+        checksumArgsType = 1
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
 
 Function Convert-4k-video-to-mp3 ($obj) {
     $editInstallChocolateyPackageArgs = @{

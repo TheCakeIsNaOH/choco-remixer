@@ -12,6 +12,7 @@
     <id>attributechanger</id>
     <id>au</id>
     <id>audacity-lame</id>
+    <id>audacity-ffmpeg</id>
     <id>audacity</id>
     <id>autohotkey.install</id>
     <id>autohotkey.portable</id>
@@ -368,13 +369,6 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-audacity-ffmpeg</functionName>
-      <id>audacity-ffmpeg</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-autocad</functionName>
