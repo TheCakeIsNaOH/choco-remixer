@@ -273,6 +273,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-4k-tokkit</functionName>
+      <id>4k-tokkit</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-4k-video-downloader</functionName>
       <id>4k-video-downloader</id>
       <needsStopAction>no</needsStopAction>

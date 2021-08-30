@@ -1189,7 +1189,7 @@ Function Convert-dellcommandupdate-uwp ($obj) {
         RemoveEXE        = $true
 
         checksumArgsType = 2
-        checksumTypeType = 'sha256'
+        checksumTypeType = 'md5'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
