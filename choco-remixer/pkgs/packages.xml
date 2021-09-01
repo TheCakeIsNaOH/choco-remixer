@@ -938,6 +938,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-reflect-free</functionName>
+      <id>reflect-free</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-ringcentral-classic</functionName>
       <id>ringcentral-classic</id>
       <needsStopAction>no</needsStopAction>
@@ -1224,7 +1231,6 @@
     <id>qemu-img</id>
     <id>qemu</id>
     <id>railroadtycoon</id>
-    <id>reflect-free</id>    <!-- Cannot be internalized, as it downloads the installer with AHK. Make custom package instead -->
     <id>ruby2.devkit</id>
     <id>shexview.install</id>
     <id>sqlserver-cmdlineutils</id>
