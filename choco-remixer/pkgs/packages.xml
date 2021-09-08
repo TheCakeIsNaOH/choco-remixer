@@ -336,6 +336,13 @@
       <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
+      <functionName>Convert-anki</functionName>
+      <id>anki</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-advanced-installer</functionName>
       <id>advanced-installer</id>
       <needsStopAction>no</needsStopAction>
@@ -485,6 +492,13 @@
     <pkg>
       <functionName>Convert-dotnet-5.0-desktopruntime</functionName>
       <id>dotnet-5.0-desktopruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-6.0-desktopruntime</functionName>
+      <id>dotnet-6.0-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -842,6 +856,13 @@
     <pkg>
       <functionName>Convert-netfx-4.6.2</functionName>
       <id>netfx-4.6.2</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-netfx-4.7.2</functionName>
+      <id>netfx-4.7.2</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
