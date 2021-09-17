@@ -108,6 +108,23 @@ Function Convert-4k-youtube-to-mp3 ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
+Function Convert-anydvd ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 1
+        RemoveEXE        = $true
+        checksumArgsType = 1
+        checksumTypeType = 'sha256'
+        needsEA          = $true
+        needsTools       = $true
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
 
 Function Convert-google-backup-and-sync ($obj) {
     $editInstallChocolateyPackageArgs = @{
@@ -549,7 +566,6 @@ Function Convert-reflect-free ($obj) {
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
-
 
 # SINGLE --------------------------
 

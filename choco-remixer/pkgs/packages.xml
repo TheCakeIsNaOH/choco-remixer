@@ -364,6 +364,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-anydvd</functionName>
+      <id>anydvd</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-aspnetcore-runtimepackagestore</functionName>
       <id>aspnetcore-runtimepackagestore</id>
       <needsStopAction>no</needsStopAction>
