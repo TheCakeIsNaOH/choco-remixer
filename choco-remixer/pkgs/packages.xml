@@ -469,6 +469,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-docker-desktop</functionName>
+      <id>docker-desktop</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dotnet4.5</functionName>
       <id>dotnet4.5</id>
       <needsStopAction>yes</needsStopAction>
