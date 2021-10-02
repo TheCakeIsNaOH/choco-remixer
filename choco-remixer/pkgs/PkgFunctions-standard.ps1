@@ -1119,3 +1119,19 @@ Function Convert-docker-desktop ($obj) {
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
+
+Function Convert-tailscale ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 2
+        RemoveEXE        = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}

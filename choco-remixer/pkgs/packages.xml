@@ -210,6 +210,7 @@
     <id>shotcut</id>
     <id>shutup10</id>
     <id>steam</id>
+    <id>stubby</id>
     <id>sudo</id>
     <id>sumatrapdf.commandline</id>
     <id>sumatrapdf.install</id>
@@ -1081,6 +1082,13 @@
       <functionName>Convert-sysinternals</functionName>
       <id>sysinternals</id>
       <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+        <pkg>
+      <functionName>Convert-tailscale</functionName>
+      <id>tailscale</id>
+      <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
