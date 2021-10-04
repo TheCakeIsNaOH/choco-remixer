@@ -248,6 +248,7 @@
     <id>wsl</id>
     <id>wsus-offline-update</id>
     <id>youtube-dl</id>
+    <id>yt-dlp</id>
     <id>zfsin</id>
     <id>zoom-client</id>
   </internal>
