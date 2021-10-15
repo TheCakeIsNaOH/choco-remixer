@@ -227,6 +227,7 @@
     <id>vcxsrv</id>
     <id>vikunja-desktop</id>
     <id>vikunja-desktop-unstable</id>
+    <id>visualstudio-installer</id>
     <id>virtualbox-guest-additions-guest.install</id>
     <id>vivaldi</id>
     <id>vlc</id>
@@ -251,6 +252,7 @@
     <id>yt-dlp</id>
     <id>zfsin</id>
     <id>zoom-client</id>
+    <id>zip.template</id>
   </internal>
   <custom>
     <pkg>
@@ -313,6 +315,13 @@
       <functionName>Convert-adobereader</functionName>
       <id>adobereader</id>
       <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+        <pkg>
+      <functionName>Convert-adobeair</functionName>
+      <id>adobeair</id>
+      <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
@@ -476,6 +485,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
+    </pkg>
+        <pkg>
+      <functionName>Convert-dotnet4.0</functionName>
+      <id>dotnet4.0</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-dotnet4.5</functionName>
@@ -697,6 +713,13 @@
     <pkg>
       <functionName>Convert-googleearth</functionName>
       <id>googleearth</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-googleearthpro</functionName>
+      <id>googleearthpro</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
