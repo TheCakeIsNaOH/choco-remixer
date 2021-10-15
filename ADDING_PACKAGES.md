@@ -71,3 +71,39 @@ These files may or may not need to be removed at the end of the script, it depen
 Case by case basis.
 
 For `Install-WindowsUpdate`, still use `url`/`url64`, which does work with a local file path.
+
+## Edit-InstallChocolateyPackage cheat sheet
+
+## `$urltype`
+- 0: `" Url "`, `" Url64Bit "`
+- 1: `'^\$Url32 '`, `'^\$Url64 '`
+- 2: `'^\$Url '`, `'^\$Url64 '`
+- 3: `" Url "`, `" Url64 "`
+- 4: `"Url "`, `"Url64 "`
+- 5: `" Url32bit "`, `" Url64bit "`
+- 6: `'\$url\s+='`, `'\$url64\s+='`
+
+## `$argsType`
+- 0: for `packageArgs = @{`
+- 1: for ` = @{`
+
+## `$checksumArgsType`
+- 0: `'  Checksum  '`,`'  Checksum64  '`
+- 1: `'^\$checksum32 '`,`'^\$checksum64 '`
+- 2: `'^\$checksum '`,`'^\$checksum64 '`
+- 3: `'  checksum32  '`,`'  checksum64  '`
+- 4: `' checksum '`,`' Checksum64 '`
+
+## Misc other options
+- `$doubleQuotesUrl`, if urls are surrounded by double quotes instead of single
+- `$stripQueryString`, to strip everything after `?` from the url
+- `$DeEncodeSpace`, to switch `%20` to `" "`
+- `$x64NameExt`, to add `_x64` to the 64 bit filename
+  
+  
+  
+  
+  
+  
+  
+  
