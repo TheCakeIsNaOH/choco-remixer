@@ -44,6 +44,7 @@
     <id>chocolatey-core.extension</id>
     <id>chocolatey-dotnetfx.extension</id>
     <id>chocolatey-fastanswers.extension</id>
+    <id>chocolatey-font-helpers.extension</id>
     <id>chocolatey-management-service</id>
     <id>chocolatey-management-web</id>
     <id>chocolatey-managment-database</id>
@@ -201,6 +202,7 @@
     <id>resharper</id>
     <id>riot-web</id>
     <id>ripgrep</id>
+    <id>roboto.font</id>
     <id>rocolatey</id>
     <id>rpcs3</id>
     <id>ruby</id>

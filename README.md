@@ -50,14 +50,14 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 - Allows (most) packages to work on offline/air gapped environments.
 - Makes install a previous version always possible. Some software vendors only have their latest version available to download, in which case old package versions break.
 
-## Why not use the Chocolatey official internalizer
+## Why this is better than the Chocolatey official internalizer
 
-- The [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that has [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages):
+In comparison with the [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that has [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages), choco-remixer:
 
-   - Is not open source.
-   - Starts at $1,600/year, which puts it out of reach for almost all non-business users.
-   - Requires an ongoing license to continue to use the packages that are internalized with the business extension.
-
+- Is free and open source software
+- Is available at no cost, instead of starting at $1,600/year, which is out of reach for almost all non-business users.
+- Does not require and ongoing license to continue to use the internalized packages
+- Validates checksums (if available) of all downloaded binaries and warns if checksums are not available
 
 ## Caveats
 
