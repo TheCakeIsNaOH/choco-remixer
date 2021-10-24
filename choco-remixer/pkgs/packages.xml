@@ -55,6 +55,7 @@
     <id>chocolatey.server</id>
     <id>chocolatey</id>
     <id>chocolateygui</id>
+    <id>chocolateypackageupdater</id>
     <id>chocolateypowershell</id>
     <id>chromium</id>
     <id>clementine</id>
@@ -126,6 +127,7 @@
     <id>kb2533623</id>
     <id>kdenlive</id>
     <id>keepassxc</id>
+    <id>ketarin</id>
     <id>krita</id>
     <id>kubernetes-cli</id>
     <id>lgs.g700s</id>
