@@ -180,24 +180,6 @@ Function Convert-onlyoffice ($obj) {
 }
 
 
-Function Convert-dotnetcore-sdk ($obj) {
-    $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
-        nuspecID         = $obj.nuspecID
-        installScript    = $obj.installScriptOrig
-        toolsDir         = $obj.toolsDir
-        urltype          = 2
-        argstype         = 0
-        needsTools       = $true
-        RemoveExe        = $true
-        checksumArgsType = 2
-        checksumTypeType = 'sha512'
-    }
-
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
-}
-
-
 Function Convert-mono ($obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "both"

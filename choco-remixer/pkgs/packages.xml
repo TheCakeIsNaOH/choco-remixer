@@ -80,6 +80,8 @@
     <id>dotnet4.7.2</id>
     <id>dotnet-desktopruntime</id>
     <id>dotnetcore-runtime</id>
+    <id>dotnetcore-sdk</id>
+    <id>dotnetcore-3.1-sdk</id>
     <id>dotnetcore3-desktop-runtime</id>
     <id>dotnetcore-aspnetruntime</id>
     <id>ds4windows</id>
@@ -540,8 +542,8 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnetcore-sdk</functionName>
-      <id>dotnetcore-sdk</id>
+      <functionName>Convert-dotnetcore-3.1-sdk-4xx</functionName>
+      <id>dotnetcore-3.1-sdk-4xx</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
