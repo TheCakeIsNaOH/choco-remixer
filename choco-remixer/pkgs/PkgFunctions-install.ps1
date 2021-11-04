@@ -275,7 +275,7 @@ Function Convert-vcredist140 ($obj) {
 }
 
 
-Function Convert-dotnetcore-desktopruntime ($obj) {
+Function Convert-dotnetcore-3.1-desktopruntime ($obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
