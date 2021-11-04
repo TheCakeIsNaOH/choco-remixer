@@ -327,7 +327,7 @@ Function Convert-dotnetcore-3.1-sdk-4xx ($obj) {
     Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnetcore-runtime-install ($obj) {
+Function Convert-dotnetcore-3.1-runtime ($obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
