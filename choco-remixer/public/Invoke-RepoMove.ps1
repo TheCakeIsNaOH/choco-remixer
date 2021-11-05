@@ -65,12 +65,9 @@
                     $heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
                     $filename = ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
                     $downloadURL = $searchResults.items.assets.downloadURL
+                    $downloadChecksum = $searchResults.items.assets.checksum.sha512
 
-                    $dlwdPath = Join-Path $saveDir $filename
-                    $dlwd = New-Object net.webclient
-                    $dlwd.Headers["Authorization"] = "Basic $proxyRepoCredsBase64"
-                    $dlwd.DownloadFile($downloadURL, $dlwdPath)
-                    $dlwd.dispose()
+                    Get-File -url $downloadURL -filename $filename -toolsDir $saveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
 
                     $pushArgs = "push " + $filename + " -f -r -s " + $config.moveToRepoURL
                     $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
@@ -120,12 +117,9 @@
                         $heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
                         $filename = ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
                         $downloadURL = $searchResults.items.assets.downloadURL
+                        $downloadChecksum = $searchResults.items.assets.checksum.sha512
 
-                        $dlwdPath = Join-Path $IdSaveDir $filename
-                        $dlwd = New-Object net.webclient
-                        $dlwd.Headers["Authorization"] = "Basic $proxyRepoCredsBase64"
-                        $dlwd.DownloadFile($downloadURL, $dlwdPath)
-                        $dlwd.dispose()
+                        Get-File -url $downloadURL -filename $filename -toolsDir $saveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
 
                         Write-Information "$nuspecID $_ found and downloaded, will be deleted next run if internalization succeeds" -InformationAction Continue
                     }

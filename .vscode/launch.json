@@ -31,6 +31,13 @@
             "request": "launch",
             "script": "${workspaceRoot}/.vscode-functions/no-save.ps1",
             "cwd": "${workspaceRoot}"
+        },
+        {
+            "name": "no save, no repo check",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceRoot}/.vscode-functions/no-save-no-repo-check.ps1",
+            "cwd": "${workspaceRoot}"
         }
     ]
 }
