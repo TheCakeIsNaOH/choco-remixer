@@ -79,7 +79,7 @@
                     $apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
                     $null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
 
-                    Remove-Item $dlwdPath -ea 0 -Force
+                    Remove-Item (Join-Path $saveDir $filename) -ea 0 -Force
                     $pushcode = $null
                 }
             } elseif ($packagesXMLcontent.packages.notImplemented.id -icontains $nuspecID) {
