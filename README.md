@@ -57,7 +57,7 @@ In comparison with the [Chocolatey business license](https://chocolatey.org/pric
 - Is free and open source software
 - Is available at no cost, instead of starting at $1,600/year, which is out of reach for almost all non-business users.
 - Does not require and ongoing license to continue to use the internalized packages
-- Validates checksums (if available) of all downloaded binaries and warns if checksums are not available
+- Validates checksums of all downloaded binaries (`.nupkg`s included), or warns if checksums are not available. 
 
 ## Caveats
 
