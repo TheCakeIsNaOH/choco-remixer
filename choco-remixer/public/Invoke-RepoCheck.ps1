@@ -95,7 +95,7 @@
                 $null = New-Item -Type Directory $saveDir
             }
 
-            Get-File -url $dlwdURL -filename $filename -toolsDir $saveDir -checksumTypeType $checksumType -checksum $checksum
+            Get-File -url $dlwdURL -filename $filename -folder $saveDir -checksumTypeType $checksumType -checksum $checksum
 
             if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
                 $stopwatch = [system.diagnostics.stopwatch]::StartNew()

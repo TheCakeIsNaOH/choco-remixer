@@ -2,7 +2,7 @@
     param (
         [parameter(Mandatory = $true)][string]$url,
         [parameter(Mandatory = $true)][string]$filename,
-        [parameter(Mandatory = $true)][string]$toolsDir,
+        [parameter(Mandatory = $true)][string]$folder,
         [string]$checksum,
         [ValidateSet('md5', 'sha1', 'sha256', 'sha512')]
         [string]$checksumTypeType,
@@ -11,7 +11,7 @@
         [string]$authorization
     )
 
-    $dlwdFile = (Join-Path $toolsDir "$filename")
+    $dlwdFile = (Join-Path "$folder" "$filename")
 
     if (Test-Path $dlwdFile) {
         if ($checksum) {
@@ -55,5 +55,5 @@
             }
         }
     }
-    # Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir -checksum "asdf" -checksumTypeType "sha256"
+    # Get-File -url $url32 -filename $filename32 -folder $toolsDir -checksum "asdf" -checksumTypeType "sha256"
 }

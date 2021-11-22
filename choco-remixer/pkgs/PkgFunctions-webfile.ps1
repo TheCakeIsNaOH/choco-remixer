@@ -33,8 +33,8 @@ Function Convert-adobereader ($obj) {
     $muiChecksum = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$MUIchecksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $mspChecksum = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$MUImspChecksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $MUIurl -filename $filenameMUI -toolsDir $obj.toolsDir -checksum $muiChecksum -checksumTypeType 'sha256'
-    Get-File -url $MUImspURL -filename $filenameMSP -toolsDir $obj.toolsDir -checksum $mspChecksum -checksumTypeType 'sha512'
+    Get-File -url $MUIurl -filename $filenameMUI -folder $obj.toolsDir -checksum $muiChecksum -checksumTypeType 'sha256'
+    Get-File -url $MUImspURL -filename $filenameMSP -folder $obj.toolsDir -checksum $mspChecksum -checksumTypeType 'sha512'
 }
 
 
@@ -53,7 +53,7 @@ Function Convert-spotify ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
 }
 
 
@@ -71,7 +71,7 @@ Function Convert-resharper-platform ($obj) {
 
     $downloadDir = Split-Path $obj.toolsDir
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $downloadDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url32 -filename $filename32 -folder $downloadDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
@@ -85,7 +85,7 @@ Function Convert-msiafterburner ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
@@ -101,6 +101,6 @@ Function Convert-sql-server-express ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
 
     #$checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    #Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    #Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir
 }

@@ -22,8 +22,8 @@ Function Convert-coretemp ($obj) {
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
 
@@ -39,7 +39,7 @@ Function Convert-eclipse ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
 
@@ -55,7 +55,7 @@ Function Convert-eclipse-java-oxygen ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
@@ -77,7 +77,7 @@ Function Convert-ddu ($obj) {
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
@@ -96,7 +96,7 @@ Function Convert-adb ($obj) {
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
 }
 
 Function Convert-cinebench ($obj) {
@@ -114,7 +114,7 @@ Get-ChocolateyUnzip -FileFullPath $file -Destination $installDir -PackageName $p
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$md5hash ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksum $checksum32 -checksumTypeType 'md5'
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'md5'
 }
 
 Function Convert-sysinternals ($obj) {
@@ -138,8 +138,8 @@ Function Convert-sysinternals ($obj) {
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksumnano = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'packageArgs.checksum *=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url -filename $filename -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
-    Get-File -url $urlnano -filename $filenamenano -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumnano
+    Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $urlnano -filename $filenamenano -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumnano
 }
 
 
@@ -156,7 +156,7 @@ Function Convert-origin ($obj) {
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha512'
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha512'
 }
 
 
@@ -181,8 +181,8 @@ Function Convert-shmnview ($obj) {
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha256'
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha256'
 }
 
 
@@ -199,7 +199,7 @@ Function Convert-filespy ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
@@ -219,7 +219,7 @@ Function Convert-dotnet4.0 ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
     #No checksum in package
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir
 }
 
 Function Convert-setacl ($obj) {
@@ -236,7 +236,7 @@ Function Convert-setacl ($obj) {
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Checksum\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 Function Convert-itunes ($obj) {
@@ -264,8 +264,8 @@ Function Convert-itunes ($obj) {
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
-    Get-File -url $url64 -filename $filename64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
 Function Convert-rust-ms ($obj) {
@@ -313,13 +313,13 @@ Function Convert-rust-ms ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageStdArgs = @{" , "$&`n    $filestdUrl`n    $filestdUrl64"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageSrcArgs = @{" , "$&`n    $fileSrcUrl"
 
-    Get-File -url $rustcUrl -filename $filenamerustcUrl -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageArgs.checksum
-    Get-File -url $rustcUrl64 -filename $filenamerustcUrl64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageArgs.checksum64
-    Get-File -url $cargoUrl -filename $filenamecargoUrl -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageCargoArgs.checksum
-    Get-File -url $cargoUrl64 -filename $filenamecargoUrl64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageCargoArgs.checksum64
-    Get-File -url $stdUrl -filename $filenamestdUrl -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageStdArgs.checksum
-    Get-File -url $stdUrl64 -filename $filenamestdUrl64 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageStdArgs.checksum64
-    Get-File -url $srcUrl -filename $filenamesrcUrl -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageSrcArgs.checksum
+    Get-File -url $rustcUrl -filename $filenamerustcUrl -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageArgs.checksum
+    Get-File -url $rustcUrl64 -filename $filenamerustcUrl64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageArgs.checksum64
+    Get-File -url $cargoUrl -filename $filenamecargoUrl -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageCargoArgs.checksum
+    Get-File -url $cargoUrl64 -filename $filenamecargoUrl64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageCargoArgs.checksum64
+    Get-File -url $stdUrl -filename $filenamestdUrl -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageStdArgs.checksum
+    Get-File -url $stdUrl64 -filename $filenamestdUrl64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageStdArgs.checksum64
+    Get-File -url $srcUrl -filename $filenamesrcUrl -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageSrcArgs.checksum
 }
 
 Function Convert-nexus-repository ($obj) {
@@ -335,6 +335,6 @@ Function Convert-nexus-repository ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace ' url64', '#url64'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$Checksum64\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -toolsDir $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 

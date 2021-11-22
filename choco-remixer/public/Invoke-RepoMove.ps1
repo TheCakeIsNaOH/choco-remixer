@@ -67,7 +67,7 @@
                     $downloadURL = $searchResults.items.assets.downloadURL
                     $downloadChecksum = $searchResults.items.assets.checksum.sha512
 
-                    Get-File -url $downloadURL -filename $filename -toolsDir $saveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
+                    Get-File -url $downloadURL -filename $filename -folder $saveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
 
                     $pushArgs = "push " + $filename + " -f -r -s " + $config.moveToRepoURL
                     $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
@@ -119,7 +119,7 @@
                         $downloadURL = $searchResults.items.assets.downloadURL
                         $downloadChecksum = $searchResults.items.assets.checksum.sha512
 
-                        Get-File -url $downloadURL -filename $filename -toolsDir $IdSaveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
+                        Get-File -url $downloadURL -filename $filename -folder $IdSaveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
 
                         Write-Information "$nuspecID $_ found and downloaded, will be deleted next run if internalization succeeds" -InformationAction Continue
                     }

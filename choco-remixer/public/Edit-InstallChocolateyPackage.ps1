@@ -212,7 +212,7 @@ Function Edit-InstallChocolateyPackage {
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
-            Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir -checksum $checksum32 -checksumTypeType $checksumTypeType
+            Get-File -url $url32 -filename $filename32 -folder $toolsDir -checksum $checksum32 -checksumTypeType $checksumTypeType
         }
         if ($x64) {
             if ($checksumArgsType -eq 0) {
@@ -228,14 +228,14 @@ Function Edit-InstallChocolateyPackage {
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
-            Get-File -url $url64 -filename $filename64 -toolsDir $toolsDir -checksum $checksum64 -checksumTypeType $checksumTypeType
+            Get-File -url $url64 -filename $filename64 -folder $toolsDir -checksum $checksum64 -checksumTypeType $checksumTypeType
         }
     } else {
         if ($x32) {
-            Get-File -url $url32 -filename $filename32 -toolsDir $toolsDir
+            Get-File -url $url32 -filename $filename32 -folder $toolsDir
         }
         if ($x64) {
-            Get-File -url $url64 -filename $filename64 -toolsDir $toolsDir
+            Get-File -url $url64 -filename $filename64 -folder $toolsDir
         }
     }
 
