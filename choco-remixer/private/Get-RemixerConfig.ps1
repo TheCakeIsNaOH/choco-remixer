@@ -89,9 +89,13 @@
         Throw "workDir cannot be a sub directory of the searchDir"
     }
 
+    #Make sure paths are full paths
+    $config.searchDir = (Resolve-Path $config.searchDir).Path
+    $config.workDir = (Resolve-Path $config.workDir).Path
 
     if ($config.useDropPath -eq "yes") {
         Test-DropPath -dropPath $config.dropPath
+        $config.dropPath = (Resolve-Path $config.dropPath).Path
     } elseif ($config.useDropPath -eq "no") {
     } else {
         Throw "bad useDropPath value in config xml, must be yes or no"

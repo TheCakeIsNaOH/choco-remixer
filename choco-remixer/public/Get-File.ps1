@@ -11,6 +11,8 @@
         [string]$authorization
     )
 
+    $folder = (Resolve-Path $folder).Path
+
     $dlwdFile = (Join-Path "$folder" "$filename")
 
     if (Test-Path $dlwdFile) {
