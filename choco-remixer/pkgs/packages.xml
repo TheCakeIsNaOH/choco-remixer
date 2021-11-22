@@ -32,8 +32,10 @@
     <id>boxstarter.hyperv</id>
     <id>boxstarter.winconfig</id>
     <id>boxstarter</id>
+    <id>brave</id>
     <id>bulk-crap-uninstaller</id>
     <id>calibre-dedrm</id>
+    <id>codecov</id>
     <id>cdburnerxp</id>
     <id>checksum</id>
     <id>choco-cleaner</id>
@@ -51,6 +53,7 @@
     <id>chocolatey-misc-helpers.extension</id>
     <id>chocolatey-visualstudio.extension</id>
     <id>chocolatey-windowsupdate.extension</id>
+    <id>chocolatey-uninstall.extension</id>
     <id>chocolatey.extension</id>
     <id>chocolatey.server</id>
     <id>chocolatey</id>
@@ -78,12 +81,16 @@
     <id>dotnet-5.0-sdk</id>
     <id>dotnet3.5</id>
     <id>dotnet4.7.2</id>
+    <id>dotnet4.6.2</id>
     <id>dotnet-desktopruntime</id>
+    <id>dotnetcore</id>
     <id>dotnetcore-desktopruntime</id>
     <id>dotnetcore-runtime</id>
     <id>dotnetcore-runtime.install</id>
     <id>dotnetcore-sdk</id>
+    <id>dotnetcore-windowshosting</id>
     <id>dotnetcore-3.1-sdk</id>
+    <id>dotnetcore-3.1-windowshosting</id>
     <id>dotnetcore3-desktop-runtime</id>
     <id>dotnetcore-aspnetruntime</id>
     <id>ds4windows</id>
@@ -126,9 +133,9 @@
     <id>innounp</id>
     <id>instchoco</id>
     <id>iperf2</id>
+    <id>irfanview</id>
     <id>jackett</id>
     <id>javaruntime</id>
-    <id>jdk8</id>
     <id>joplin</id>
     <id>kb2533623</id>
     <id>kdenlive</id>
@@ -179,6 +186,7 @@
     <id>openssh</id>
     <id>openssl</id>
     <id>pandoc</id>
+    <id>paint.net</id>
     <id>papercut</id>
     <id>pcsx2.portable</id>
     <id>pcsx2</id>
@@ -236,6 +244,7 @@
     <id>vcredist2015</id>
     <id>vcredist2017</id>
     <id>vcxsrv</id>
+    <id>vim</id>
     <id>vikunja-desktop</id>
     <id>vikunja-desktop-unstable</id>
     <id>visualstudio-installer</id>
@@ -563,13 +572,6 @@
     <pkg>
       <functionName>Convert-dotnetcore-31-aspnetruntime</functionName>
       <id>dotnetcore-3.1-aspnetruntime</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnetcore-windowshosting</functionName>
-      <id>dotnetcore-windowshosting</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
