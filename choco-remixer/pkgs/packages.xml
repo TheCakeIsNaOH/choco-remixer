@@ -98,12 +98,14 @@
     <id>ffmpeg</id>
     <id>fiddler</id>
     <id>filezilla</id>
+    <id>firefox-quantum-nox</id>
     <id>foobar2000</id>
     <id>gawk</id>
     <id>gh</id>
     <id>ghostscript.app</id>
     <id>git.install</id>
     <id>git</id>
+    <id>gitextensions</id>
     <id>github-desktop</id>
     <id>gnupg</id>
     <id>gpu-z</id>
@@ -142,6 +144,7 @@
     <id>looking-glass-host</id>
     <id>make</id>
     <id>maven</id>
+    <id>meld</id>
     <id>microsoft-message-analyzer</id>
     <id>microsoft-windows-terminal</id>
     <id>miktex.install</id>
