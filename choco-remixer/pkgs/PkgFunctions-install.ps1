@@ -679,7 +679,6 @@ Function Convert-virtualbox ($obj) {
     $filePath64 = 'file64        = (Join-Path $toolsPath "' + $filename64 + '")'
     $filePathep = '(Join-Path $toolsPath "' + $filenameep + '")'
 
-    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "<# Get-ChocolateyWebFile"
