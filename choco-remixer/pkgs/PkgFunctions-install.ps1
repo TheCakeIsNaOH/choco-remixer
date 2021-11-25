@@ -132,9 +132,7 @@ Function Convert-airtame ($obj) {
 
 Function Convert-adobeair ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
-    $brokenurl32 = ($fullurl32 -split '"' | Select-String -Pattern "http").ToString()
-    $pkgversion = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$version ').ToString() -split "'" | Select-String -Pattern "\d\d.\d").tostring()
-    $url32 = $brokenurl32 -replace '\$version',$pkgversion
+    $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").ToString()
 
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
