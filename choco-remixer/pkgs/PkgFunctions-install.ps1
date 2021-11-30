@@ -580,6 +580,39 @@ Function Convert-firefox ($obj) {
     Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksums.Win64
 }
 
+Function Convert-firefoxesr ($obj) {
+    Function Get-PackageParameters {
+        Return "mockup"
+    }
+    . $(Join-Path $obj.toolsDir 'helpers.ps1')
+
+    $locale = 'en-US'
+    $checksums = GetChecksums -language $locale -checksumFile $(Join-Path $obj.toolsDir "LanguageChecksums.csv")
+
+
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$packageArgs.Url64 ').tostring()
+
+    $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring() -replace '\$\{locale\}', $locale
+    $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").tostring() -replace '\$\{locale\}', $locale
+
+    $filename32 = "Firefox_esr_setup_x32.exe"
+    $filename64 = "Firefox_esr_setup_x64.exe"
+
+    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+    $filePath64 = '$packageArgs.file64  = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n"
+    $obj.installScriptMod = $obj.installScriptMod -replace "Get-OSArchitectureWidth 64\)\) {" , "$&`n   $filePath64`n"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+
+
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksums.Win32
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksums.Win64
+}
+
 
 Function Convert-nvidia-driver ($obj) {
     $fullurlwin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['url64'\]      = 'https").tostring()

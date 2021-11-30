@@ -71,6 +71,7 @@
     <id>crystaldiskinfo</id>
     <id>crystaldiskmark</id>
     <id>curl</id>
+    <id>cygwin</id>
     <id>die</id>
     <id>discord</id>
     <id>docker-kitematic</id>
@@ -141,6 +142,7 @@
     <id>kb2533623</id>
     <id>kdenlive</id>
     <id>keepass.install</id>
+    <id>keepass.portable</id>
     <id>keepass</id>
     <id>keepassxc</id>
     <id>ketarin</id>
@@ -169,6 +171,7 @@
     <id>n3dr</id>
     <id>nextcloud-client</id>
     <id>nginx</id>
+    <id>ninja</id>
     <id>nmap</id>
     <id>nodejs-lts</id>
     <id>nodejs.install</id>
@@ -182,11 +185,13 @@
     <id>nssm</id>
     <id>nuget.commandline</id>
     <id>nugetpackageexplorer</id>
+    <id>nxlog</id>
     <id>obs-studio.install</id>
     <id>obs-studio</id>
     <id>open-shell</id>
     <id>openhashtab</id>
     <id>openssh</id>
+    <id>openssl.light</id>
     <id>openssl</id>
     <id>paint.net</id>
     <id>pandoc</id>
@@ -195,12 +200,14 @@
     <id>pcsx2.install</id>
     <id>pcsx2.portable</id>
     <id>pcsx2</id>
+    <id>pdfcreator</id>
+    <id>php</id>
     <id>picard</id>
     <id>pingtracer</id>
     <id>powertoys</id>
     <id>prime95</id>
     <id>procrastitracker</id>
-    <id>prusiaslicer</id>
+    <id>prusaslicer</id>
     <id>psake</id>
     <id>putty.install</id>
     <id>putty.portable</id>
@@ -264,6 +271,7 @@
     <id>winbtrfs</id>
     <id>wincdemu</id>
     <id>windirstat</id>
+    <id>windowsazurepowershell</id>
     <id>winfsp</id>
     <id>winmd</id>
     <id>winscp.install</id>
@@ -683,6 +691,13 @@
     <pkg>
       <functionName>Convert-firefox</functionName>
       <id>firefox</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-firefoxesr</functionName>
+      <id>firefoxesr</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
