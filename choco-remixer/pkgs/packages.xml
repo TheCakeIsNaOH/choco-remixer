@@ -40,6 +40,7 @@
     <id>checksum</id>
     <id>choco-cleaner</id>
     <id>choco-nuspec-checker</id>
+    <id>choco-package-deprecater</id>
     <id>choco-package-list-backup</id>
     <id>choco-protocol-support</id>
     <id>chocolatey-agent</id>
@@ -450,6 +451,34 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-awscli</functionName>
+      <id>awscli</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-azurepowershell</functionName>
+      <id>azurepowershell</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-azure-cli</functionName>
+      <id>azure-cli</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-azure-pipelines-agent</functionName>
+      <id>azure-pipelines-agent</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-bitwarden</functionName>
@@ -1344,8 +1373,10 @@
 
   </custom>
   <notImplemented>
+    <id>adobeshockwaveplayer</id> <!-- Package is broken -->
     <id>becyicongrabber</id>
     <id>bluescreenview.install</id>
+    <id>ccleaner</id> <!-- I don't feel like supporting bundleware -->
     <id>chromehistoryview</id>
     <id>colortool</id>
     <id>directx</id>    <!-- Microsoft download is dead -->    <!-- todo, fix now that it has a wayback link -->
