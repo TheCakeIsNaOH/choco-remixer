@@ -5,6 +5,7 @@
     <id>7zip.install</id>
     <id>7zip.portable</id>
     <id>7zip</id>
+    <id>adobereader-update</id>
     <id>angryip</id>
     <id>ant</id>
     <id>anydesk</id>
@@ -439,6 +440,13 @@
     <pkg>
       <functionName>Convert-autocad</functionName>
       <id>autocad</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-autoruns</functionName>
+      <id>autoruns</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
