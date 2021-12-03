@@ -649,6 +649,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-dotnet-aspnetcoremodule-v2</functionName>
+      <id>dotnet-aspnetcoremodule-v2</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dotnetfx</functionName>
       <id>dotnetfx</id>
       <needsStopAction>yes</needsStopAction>
