@@ -130,6 +130,7 @@ Function Invoke-InternalizeChocoPkg {
                     needsToolsDir     = $customXml.needsToolsDir
                     functionName      = $customXml.functionName
                     needsStopAction   = $customXml.needsStopAction
+                    whyNotInternal    = $customXml.whyNotInternal
                     installScriptOrig = $installScript
                     installScriptMod  = $installScript
                     oldVersion        = $oldVersion
@@ -152,6 +153,15 @@ Function Invoke-InternalizeChocoPkg {
     Foreach ($obj in $nupkgObjArray) {
         Write-Output "Starting $($obj.nuspecID)"
 
+        if ($obj.whyNotInternal -eq "Maintainer") {
+            Write-Output "Last time it was checked, this package did not have embedded binaries due to the"
+            Write-Output "  maintainer's choice in how to build the package. Assuming that the software"
+            Write-Output "  license still allows redistribution, and that the total package size would be"
+            Write-Output "  under the CCR maxmium limit, this package should be able to be switched to an"
+            Write-Output "  internal package on CCR. If you want it to be switched, double check that it"
+            Write-Output "  is eligible, and contact the mantainer with the suggestion."
+        }
+
         #Needed for linux, see https://github.com/chocolatey/choco/issues/2076
         Remove-Item -Force -EA 0 -Path (Join-Path $obj.VersionDir '*.nupkg')
 
@@ -162,7 +172,10 @@ Function Invoke-InternalizeChocoPkg {
             & $obj.functionName -obj $obj
         } Catch {
             Write-Warning "$($obj.nuspecID) $($obj.version) failed downloading or editing"
-            Write-Warning "Error: $_"
+            if ($PSItem.tostring() -eq "You cannot call a method on a null-valued expression.") {
+                Write-Output "This is most likely caused by changes to the format of the install script"
+            }
+            Write-Warning "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
 
             $obj.status = "edit failed"
             $failed = $true
