@@ -28,7 +28,7 @@ This automates some tasks involved in maintaining a private Chocolatey repositor
 
 ## Operation
 
-- Import the `choco-remixer` PowerShell module 
+- Import the `choco-remixer` PowerShell module
 - Run `Invoke-InternalizeChocoPkg`
 
 - If you have `useDropPath` and `pushPkgs` disabled, the internalized packages are located inside the specified `workDir`.
@@ -56,8 +56,9 @@ In comparison with the [Chocolatey business license](https://chocolatey.org/pric
 
 - Is free and open source software
 - Is available at no cost, instead of starting at $1,600/year, which is out of reach for almost all non-business users.
-- Does not require and ongoing license to continue to use the internalized packages
-- Validates checksums of all downloaded binaries (`.nupkg`s included), or warns if checksums are not available. 
+- Does not require a licensed Chocolatey installation to install the internalized packages.
+- Validates checksums of all downloaded binaries (`.nupkg`s included), or warns if checksums are not available.
+- Is available for Linux systems.
 
 ## Caveats
 
@@ -69,7 +70,7 @@ In comparison with the [Chocolatey business license](https://chocolatey.org/pric
 - Add license to files
 - Add support for internalizing package icons
 - Comment based help for all public functions, specifically in Edit-InstallChocolateyPackage (platyps?)
-- Module metadata creation, module install, other scripts
+- Module metadata creation, module install, other helper scripts
 - Switch so invoke-internalizechocopkg can be run with a single chocolatey package
 
 ## Long term TODOs
@@ -82,11 +83,7 @@ In comparison with the [Chocolatey business license](https://chocolatey.org/pric
 - Multiple personal-packages.xml files (for now it probably is best to add an alias to your profile for each xml)
 - Add capability to directly specify package internalization from xml with a separate function
 - Pester, other testing?
-- Drop dependency on `choco.exe`.
-    - Move to `chocolatey.lib` instead?
-	- Figure out why does not extract files that are added manually?
-	- Alternate push? `chocolatey.lib`? Nexus API, will reduce compatibility? Dotnet?
-    - Wait for dotnet core Chocolatey, and keep using it?
+- Drop dependency on `choco.exe`, use `chocolatey.lib` after upgrade to dotnet core
 
 ## Continuous TODOs
 
