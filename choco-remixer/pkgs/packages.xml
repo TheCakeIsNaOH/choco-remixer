@@ -6,6 +6,9 @@
     <id>7zip.portable</id>
     <id>7zip</id>
     <id>adobereader-update</id>
+    <id>adoptopenjdk8</id>
+    <id>adoptopenjdk8jre</id>
+    <id>adoptopenjdkjre</id>
     <id>angryip</id>
     <id>ant</id>
     <id>anydesk</id>
@@ -168,6 +171,9 @@
     <id>minecraft</id>
     <id>moonlight-qt.install</id>
     <id>mp3tag</id>
+    <id>mpv</id>
+    <id>mpv.portable</id>
+    <id>mpv.install</id>
     <id>msi.template</id>
     <id>msys2</id>
     <id>mumble</id>
@@ -364,22 +370,22 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-adoptopenjdk8</functionName>
-      <id>adoptopenjdk8</id>
+      <functionName>Convert-Temurin8</functionName>
+      <id>temurin8</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
-      <functionName>Convert-adoptopenjdk8jre</functionName>
-      <id>adoptopenjdk8jre</id>
+      <functionName>Convert-Temurin8jre</functionName>
+      <id>temurin8jre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
-      <functionName>Convert-adoptopenjdkjre</functionName>
-      <id>adoptopenjdkjre</id>
+      <functionName>Convert-Temurinjre</functionName>
+      <id>temurinjre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->

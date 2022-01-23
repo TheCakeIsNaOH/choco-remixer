@@ -755,11 +755,11 @@ Function Convert-virtualbox ($obj) {
 }
 
 
-Function Convert-adoptopenjdk8 ($obj) {
+Function Convert-Temurin8 ($obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .* = ").tostring()
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit .* = ").tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "\sUrl\s*=\s").tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "\sUrl64bit\s*=\s").tostring()
 
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
@@ -786,7 +786,7 @@ Function Convert-adoptopenjdk8 ($obj) {
 }
 
 
-Function Convert-adoptopenjdk8jre ($obj) {
+Function Convert-Temurin8jre ($obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .* = ").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit .* = ").tostring()
@@ -816,7 +816,7 @@ Function Convert-adoptopenjdk8jre ($obj) {
 }
 
 
-Function Convert-adoptopenjdkjre ($obj) {
+Function Convert-Temurinjre ($obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()
