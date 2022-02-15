@@ -82,6 +82,7 @@ For `Install-WindowsUpdate`, still use `url`/`url64`, which does work with a loc
 - 4: `"Url "`, `"Url64 "`
 - 5: `" Url32bit "`, `" Url64bit "`
 - 6: `'\$url\s+='`, `'\$url64\s+='`
+- 7: `'\s+url\s+='`, `'\s+url64\s+='`
 
 ## `$argsType`
 - 0: for `packageArgs = @{`
@@ -93,17 +94,11 @@ For `Install-WindowsUpdate`, still use `url`/`url64`, which does work with a loc
 - 2: `'^\$checksum '`,`'^\$checksum64 '`
 - 3: `'  checksum32  '`,`'  checksum64  '`
 - 4: `' checksum '`,`' Checksum64 '`
+- 5: `'\schecksum\s+='`,`'\schecksum64\s+='`
+- 6: `'\schecksum\s+='`,`'\schecksum64\s+='` with double quotes url
 
 ## Misc other options
 - `$doubleQuotesUrl`, if urls are surrounded by double quotes instead of single
 - `$stripQueryString`, to strip everything after `?` from the url
 - `$DeEncodeSpace`, to switch `%20` to `" "`
 - `$x64NameExt`, to add `_x64` to the 64 bit filename
-  
-  
-  
-  
-  
-  
-  
-  

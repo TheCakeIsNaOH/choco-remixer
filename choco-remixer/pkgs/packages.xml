@@ -29,7 +29,6 @@
     <id>bfg-repo-cleaner</id>
     <id>bibletime</id>
     <id>bitwarden-cli</id>
-    <id>blender</id>
     <id>boxstarter.bootstrapper</id>
     <id>boxstarter.chocolatey</id>
     <id>boxstarter.common</id>
@@ -196,6 +195,7 @@
     <id>nuget.commandline</id>
     <id>nugetpackageexplorer</id>
     <id>nxlog</id>
+    <id>octave</id>
     <id>obs-studio.install</id>
     <id>obs-studio</id>
     <id>open-shell</id>
@@ -508,6 +508,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-blender</functionName>
+      <id>blender</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-calibre</functionName>
@@ -888,6 +895,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-keybase</functionName>
+      <id>keybase</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-kb2919355</functionName>
       <id>kb2919355</id>
       <needsStopAction>yes</needsStopAction>
@@ -1068,6 +1082,13 @@
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>Yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-octave-install</functionName>
+      <id>octave.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-office365business</functionName>

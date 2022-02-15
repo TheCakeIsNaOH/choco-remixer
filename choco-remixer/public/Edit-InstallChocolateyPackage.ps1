@@ -73,10 +73,10 @@ Function Edit-InstallChocolateyPackage {
         }
         4 {
             if ($x32) {
-                $fullurl32 = ($installScript -split "`n" | Select-String -Pattern "Url ").tostring()
+                $fullurl32 = ($installScript -split "`n" | Select-String -Pattern "Url\s").tostring()
             }
             if ($x64) {
-                $fullurl64 = ($installScript -split "`n" | Select-String -Pattern "Url64 ").tostring()
+                $fullurl64 = ($installScript -split "`n" | Select-String -Pattern "Url64\s").tostring()
             }
             Break
         }
@@ -95,6 +95,15 @@ Function Edit-InstallChocolateyPackage {
             }
             if ($x64) {
                 $fullurl64 = ($installScript -split "`n" | Select-String -Pattern '\$url64\s+=').tostring()
+            }
+            Break
+        }
+        7 {
+            if ($x32) {
+                $fullurl32 = ($installScript -split "`n" | Select-String -Pattern '\s+url\s+=').tostring()
+            }
+            if ($x64) {
+                $fullurl64 = ($installScript -split "`n" | Select-String -Pattern '\s+url64\s+=').tostring()
             }
             Break
         }
@@ -209,6 +218,10 @@ Function Edit-InstallChocolateyPackage {
                 $checksum32 = ($installScript -split "`n" | Select-String -Pattern '  checksum32  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } elseif ($checksumArgsType -eq 4) {
                 $checksum32 = ($installScript -split "`n" | Select-String -Pattern '\schecksum\s').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+            } elseif ($checksumArgsType -eq 5) {
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '\schecksum\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+            } elseif ($checksumArgsType -eq 6) {
+                $checksum32 = ($installScript -split "`n" | Select-String -Pattern '\schecksum\s+=').tostring() -split '"' | Select-Object -Last 1 -Skip 1
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
@@ -225,6 +238,10 @@ Function Edit-InstallChocolateyPackage {
                 $checksum64 = ($installScript -split "`n" | Select-String -Pattern '  checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
             } elseif ($checksumArgsType -eq 4) {
                 $checksum64 = ($installScript -split "`n" | Select-String -Pattern '\sChecksum64\s').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+            } elseif ($checksumArgsType -eq 5) {
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '\sChecksum64\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+            } elseif ($checksumArgsType -eq 5) {
+                $checksum64 = ($installScript -split "`n" | Select-String -Pattern '\sChecksum64\s+=').tostring() -split '"' | Select-Object -Last 1 -Skip 1
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }

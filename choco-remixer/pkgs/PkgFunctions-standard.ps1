@@ -584,6 +584,23 @@ Function Convert-hexchat ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
+Function Convert-octave-install ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 3
+        RemoveEXE        = $true
+        checksumArgsType = 5
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+
 # SINGLE --------------------------
 
 
@@ -1195,6 +1212,42 @@ Function Convert-azure-cli ($obj) {
         argstype         = 0
         urltype          = 0
         RemoveMSI        = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-keybase ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        needsTools       = $true
+        argstype         = 0
+        urltype          = 7
+        RemoveMSI        = $true
+        checksumArgsType = 6
+        checksumTypeType = 'sha256'
+        doubleQuotesUrl  = $true
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-blender ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x64"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 0
+        RemoveMSI        = $true
+        needsEA          = $true
+        needsTools       = $true
         checksumArgsType = 0
         checksumTypeType = 'sha256'
     }
