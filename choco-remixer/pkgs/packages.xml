@@ -349,6 +349,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-7zip-zstd</functionName>
+      <id>7zip-zstd</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-adb</functionName>
       <id>adb</id>
       <needsStopAction>yes</needsStopAction>
@@ -671,6 +678,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-drawio</functionName>
+      <id>drawio</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dropbox</functionName>
       <id>dropbox</id>
       <needsStopAction>no</needsStopAction>
@@ -788,6 +802,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-golang</functionName>
+      <id>golang</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-google-backup-and-sync</functionName>

@@ -183,36 +183,6 @@ Function Convert-libreoffice-fresh ($obj) {
     Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
-
-Function Convert-hexchat ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url ').tostring()
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url64 ').tostring()
-
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring().replace('%20', '-')
-    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring().replace('%20', '-')
-
-    $filePath32 = '$File     = (Join-Path $toolsDir "' + $filename32 + '")'
-    $filePath64 = '$File64  = (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-    $obj.installScriptMod = "$filePath32`n$filePath64`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "#Install-ChocolateyPackage"
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Install-ChocolateyInstallPackage "$packageName" "$installerType" "$silentArgs" "$file" "$file64" -validExitCodes $validExitCodes'
-
-    $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
-
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir
-    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir
-
-}
-
-
 Function Convert-tor-browser ($obj) {
 
     Function Get-PackageParameters {
@@ -866,6 +836,21 @@ Function Convert-seamonkey ($obj) {
     Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
+Function Convert-drawio ($obj) {
+
+    $softwareVersion = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$drawioversion ').tostring() -split "'" | Select-String -Pattern "[\d\.]{4,10}").tostring()
+
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
+    $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
+    $url32 = $url32 -replace '\$drawioversion', "$softwareVersion"
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
+}
 
 Function Convert-openoffice ($obj) {
     Function Get-PackageParameters {

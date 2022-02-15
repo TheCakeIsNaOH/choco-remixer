@@ -446,3 +446,32 @@ Function Convert-azure-pipelines-agent($obj) {
     Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
     Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha256'
 }
+
+Function Convert-7zip-zstd ($obj) {
+
+    $dataFile = Join-Path $obj.toolsDir 'packageArgs.ps1'
+    $dataContent = Invoke-Expression $dataFile
+
+    $url32 = $dataContent['url']
+    $url64 = $dataContent['url64bit']
+    $checksum32 = $dataContent['checksum']
+    $checksum64 = $dataContent['checksum64']
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = '$File    = (Join-Path $toolsDir "' + $filename32 + '")'
+    $filePath64 = '$File64   = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    $extractLocation = '$extractLocation = Join-Path $toolsDir "Codecs"'
+    $archiveLocation = '$archiveLocation = if ((Get-OSArchitectureWidth 64) -and $env:chocolateyForceX86 -ne $true) { $file64 } else { $file }'
+
+    $obj.installScriptMod = $obj.installScriptMod  -replace '\$archiveLocation\s+=' , "#$&"
+    $obj.installScriptMod = $obj.installScriptMod  -replace '\$extractLocation\s+=' , "#$&"
+    $obj.installScriptMod = $extractLocation + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $archiveLocation + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $filePath32 + "`n" + "$filePath64" + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.7z'
+
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}

@@ -549,6 +549,41 @@ Function Convert-reflect-free ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
+
+Function Convert-golang ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 4
+        RemoveMSI        = $true
+        needsEA          = $true
+        needsTools       = $true
+        checksumArgsType = 4
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-hexchat ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 2
+        RemoveEXE        = $true
+        checksumArgsType = 4
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
 # SINGLE --------------------------
 
 
