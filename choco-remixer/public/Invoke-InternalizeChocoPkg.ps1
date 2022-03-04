@@ -23,7 +23,12 @@ Function Invoke-InternalizeChocoPkg {
         . $_.fullname
     }
 
-    . Get-RemixerConfig -parameterSetName $PSCmdlet.ParameterSetName
+    Try {
+        . Get-RemixerConfig -parameterSetName $PSCmdlet.ParameterSetName
+    }
+    Catch {
+        Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
+    }
 
     if (($config.repoMove -eq "yes") -and (!($skipRepoMove))) {
         $invokeRepoMoveArgs = @{
