@@ -22,7 +22,12 @@ This automates some tasks involved in maintaining a private Chocolatey repositor
 - Chocolatey is required, make sure that it is installed and working properly.
 - Copy `*.xml.template` files to `*.xml` and edit them.
     - See the files for comments about each of the options.
-    - It is searched for first under `%appdata%`/`.config` in the choco-remixer folder, then it looks in the same folder that choco-remixer runs from. You can also provide a path to it.
+- The path to each of these files can be specified as such (in order of precedence):
+    1. Manually with the `-configXML`, `-internalizedXML`, and `-repoCheckXML` arguments to the locations of these files.
+    2. Manually with the `-folderXML` argument which specifies the location to a folder with all three files.
+    3. Then if neither of those is specified, the folder that contains the `choco-remixer.psm1` module will be checked.
+    4. Then the parent folder of the module will be checked.
+    5. Finally, the `$env:AppData\choco-remixer` folder will be checked (`$env:HOME/config/choco-remixer` on Linux)
 - If you are using the automatic pushing (`pushPkgs`), make sure `choco` has the appropriate `apikey` setup for that URL.
 - It is a good idea to put the xml files in a git repository.
 

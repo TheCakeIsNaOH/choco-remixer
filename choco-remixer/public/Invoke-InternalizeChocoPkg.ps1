@@ -3,10 +3,10 @@ Function Invoke-InternalizeChocoPkg {
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header')]
     param (
-        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$configXML,
-        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$internalizedXML,
-        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$repoCheckXML,
-        [Parameter(ParameterSetName = 'Folder')][string]$folderXML,
+        [string]$configXML,
+        [string]$internalizedXML,
+        [string]$repoCheckXML,
+        [string]$folderXML,
         [string]$privateRepoCreds,
         [string]$proxyRepoCreds,
         [switch]$thoroughList,
@@ -24,33 +24,40 @@ Function Invoke-InternalizeChocoPkg {
     }
 
     Try {
-        . Get-RemixerConfig -parameterSetName $PSCmdlet.ParameterSetName
-    }
-    Catch {
+        . Get-RemixerConfig
+    } Catch {
         Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
     }
 
     if (($config.repoMove -eq "yes") -and (!($skipRepoMove))) {
         $invokeRepoMoveArgs = @{
-            proxyRepoCreds     = $proxyRepoCreds
-            configXML          = $configXML
-            internalizedXML    = $internalizedXML
-            repoCheckXML       = $repoCheckXML
+            proxyRepoCreds  = $proxyRepoCreds
+            configXML       = $configXML
+            internalizedXML = $internalizedXML
+            repoCheckXML    = $repoCheckXML
         }
 
-        Invoke-RepoMove @invokeRepoMoveArgs
+        Try {
+            Invoke-RepoMove @invokeRepoMoveArgs
+        } Catch {
+            Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
+        }
     }
 
 
     if (($config.repoCheck -eq "yes") -and (!($skipRepoCheck))) {
         $invokeRepoCheckArgs = @{
-            privateRepoCreds   = $privateRepoCreds
-            configXML          = $configXML
-            internalizedXML    = $internalizedXML
-            repoCheckXML       = $repoCheckXML
+            privateRepoCreds = $privateRepoCreds
+            configXML        = $configXML
+            internalizedXML  = $internalizedXML
+            repoCheckXML     = $repoCheckXML
         }
 
-        Invoke-RepoCheck @invokeRepoCheckArgs
+        Try {
+            Invoke-RepoCheck @invokeRepoCheckArgs
+        } Catch {
+            Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
+        }
     }
 
 

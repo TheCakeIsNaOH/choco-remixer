@@ -2,16 +2,20 @@
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header', Scope = 'Function')]
     param (
-        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$configXML,
-        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$internalizedXML,
-        [Parameter(ParameterSetName = 'Individual', Mandatory = $true)][string]$repoCheckXML,
-        [Parameter(ParameterSetName = 'Folder')][string]$folderXML,
+        [string]$configXML,
+        [string]$internalizedXML,
+        [string]$repoCheckXML,
+        [string]$folderXML,
         [string]$privateRepoCreds
     )
     $saveProgPref = $ProgressPreference
     $ProgressPreference = 'SilentlyContinue'
 
-    . Get-RemixerConfig -parameterSetName $PSCmdlet.ParameterSetName
+    Try {
+        . Get-RemixerConfig
+    } Catch {
+        Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
+    }
 
     if ($config.repoCheck -eq "no") {
         Throw "Repocheck disabled in config"
