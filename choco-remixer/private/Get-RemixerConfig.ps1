@@ -1,7 +1,9 @@
 ﻿Function Get-RemixerConfig {
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Justification = 'This is dotsourced')]
-    Param()
+    Param(
+        [Parameter(Mandatory = $true)]$upperFunctionBoundParameters
+    )
     $ErrorActionPreference = 'Stop'
 
     if ($null -eq (Get-Command "choco" -ea 0)) {
@@ -25,63 +27,63 @@
         Throw "Something went wrong detecting OS"
     }
 
-    if ($PSBoundParameters['folderxml']) {
+    if ($upperFunctionBoundParameters['folderxml']) {
         $folderXML = (Resolve-Path $folderXML).path
     }
 
-    if ($PSBoundParameters['configXML']) {
+    if ($upperFunctionBoundParameters['configXML']) {
         $configXML = (Resolve-Path $configXML).path
-    } elseif ($PSBoundParameters['folderxml']) {
+    } elseif ($upperFunctionBoundParameters['folderxml']) {
         $configXML = Join-Path $folderXML 'config.xml'
     } else {
-        Write-Debug "Falling back to checking next to module for config.xml"
+        Write-Verbose "Falling back to checking next to module for config.xml"
         $configXML = Join-Path (Split-Path $PSScriptRoot) 'config.xml'
 
         If (!(Test-Path $configXML)) {
-            Write-Debug "Falling back to checking one level up for config.xml"
+            Write-Verbose "Falling back to checking one level up for config.xml"
             $configXML = Join-Path (Split-Path (Split-Path $PSScriptRoot)) 'config.xml'
         }
 
         If (!(Test-Path $configXML)) {
-            Write-Debug "Falling back to checking in appdata for config.xml"
+            Write-Verbose "Falling back to checking in appdata for config.xml"
             $configXML = Join-Path $profilePath 'config.xml'
         }
     }
 
-    if ($PSBoundParameters['internalizedXML']) {
+    if ($upperFunctionBoundParameters['internalizedXML']) {
         $internalizedXML = (Resolve-Path $internalizedXML).path
-    } elseif ($PSBoundParameters['folderxml']) {
+    } elseif ($upperFunctionBoundParameters['folderxml']) {
         $internalizedXML = Join-Path $folderXML 'internalized.xml'
     } else {
-        Write-Debug "Falling back to checking next to module for internalized.xml"
+        Write-Verbose "Falling back to checking next to module for internalized.xml"
         $internalizedXML = Join-Path (Split-Path $PSScriptRoot) 'internalized.xml'
 
         If (!(Test-Path $internalizedXML)) {
-            Write-Debug "Falling back to checking one level up for internalized.xml"
+            Write-Verbose "Falling back to checking one level up for internalized.xml"
             $internalizedXML = Join-Path (Split-Path (Split-Path $PSScriptRoot)) 'internalized.xml'
         }
 
         If (!(Test-Path $internalizedXML)) {
-            Write-Debug "Falling back to checking in appdata for internalized.xml"
+            Write-Verbose "Falling back to checking in appdata for internalized.xml"
             $internalizedXML = Join-Path $profilePath 'internalized.xml'
         }
     }
 
-    if ($PSBoundParameters['repoCheckXML']) {
+    if ($upperFunctionBoundParameters['repoCheckXML']) {
         $repoCheckXML = (Resolve-Path $repoCheckXML).path
-    } elseif ($PSBoundParameters['folderxml']) {
+    } elseif ($upperFunctionBoundParameters['folderxml']) {
         $repoCheckXML = Join-Path $folderXML 'repo-check.xml'
     } else {
-        Write-Debug "Falling back to checking next to module for repo-check.xml"
+        Write-Verbose "Falling back to checking next to module for repo-check.xml"
         $repoCheckXML = Join-Path (Split-Path $PSScriptRoot) 'repo-check.xml'
 
         If (!(Test-Path $repoCheckXML)) {
-            Write-Debug "Falling back to checking one level up for repo-check.xml"
+            Write-Verbose "Falling back to checking one level up for repo-check.xml"
             $repoCheckXML = Join-Path (Split-Path (Split-Path $PSScriptRoot)) 'repo-check.xml'
         }
 
         If (!(Test-Path $repoCheckXML)) {
-            Write-Debug "Falling back to checking in appdata for repo-check.xml"
+            Write-Verbose "Falling back to checking in appdata for repo-check.xml"
             $repoCheckXML = Join-Path $profilePath 'repo-check.xml'
         }
     }
@@ -89,14 +91,21 @@
     if (!(Test-Path $configXML)) {
         Write-Warning "Could not find $configXML"
         Throw "Config xml not found, please specify valid path"
+    } else {
+        Write-Verbose "Using config XML at $configXML"
     }
     if (!(Test-Path $internalizedXML)) {
         Write-Warning "Could not find $internalizedXML"
         Throw "Internalized xml not found, please specify valid path"
+    } else {
+        Write-Verbose "Using internalized XML at $internalizedXML"
     }
     if (!(Test-Path $repoCheckXML)) {
         Write-Warning "Could not find $repoCheckXML"
         Throw "Repo check xml not found, please specify valid path"
+
+    } else {
+        Write-Verbose "Using repo-check XML at $repocheckXML"
     }
 
     $pkgXML = ([System.IO.Path]::Combine((Split-Path -Parent $PSScriptRoot), 'pkgs', 'packages.xml'))

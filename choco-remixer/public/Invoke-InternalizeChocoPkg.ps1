@@ -24,7 +24,7 @@ Function Invoke-InternalizeChocoPkg {
     }
 
     Try {
-        . Get-RemixerConfig
+        . Get-RemixerConfig -upperFunctionBoundParameters $PSBoundParameters
     } Catch {
         Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
     }
@@ -35,6 +35,7 @@ Function Invoke-InternalizeChocoPkg {
             configXML       = $configXML
             internalizedXML = $internalizedXML
             repoCheckXML    = $repoCheckXML
+            calledInternally = $true
         }
 
         Try {
@@ -51,6 +52,7 @@ Function Invoke-InternalizeChocoPkg {
             configXML        = $configXML
             internalizedXML  = $internalizedXML
             repoCheckXML     = $repoCheckXML
+            calledInternally = $true
         }
 
         Try {
@@ -65,6 +67,7 @@ Function Invoke-InternalizeChocoPkg {
     [System.Collections.ArrayList]$nupkgObjArray = @()
 
     #todo, add switch here to select from other options to get list of nupkgs
+    Write-Verbose "Checking for packages in $($config.searchDir)"
     if ($thoroughList) {
         $nupkgArray = Get-ChildItem -File $config.searchDir -Filter "*.nupkg" -Recurse
     } else {

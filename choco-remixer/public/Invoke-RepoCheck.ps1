@@ -6,13 +6,16 @@
         [string]$internalizedXML,
         [string]$repoCheckXML,
         [string]$folderXML,
-        [string]$privateRepoCreds
+        [string]$privateRepoCreds,
+        [switch]$calledInternally
     )
     $saveProgPref = $ProgressPreference
     $ProgressPreference = 'SilentlyContinue'
 
     Try {
-        . Get-RemixerConfig
+        if (!$calledInternally) {
+            . Get-RemixerConfig -upperFunctionBoundParameters $PSBoundParameters
+        }
     } Catch {
         Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
     }
