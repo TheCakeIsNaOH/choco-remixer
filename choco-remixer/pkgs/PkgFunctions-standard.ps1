@@ -126,23 +126,6 @@ Function Convert-anydvd ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
-Function Convert-google-backup-and-sync ($obj) {
-    $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
-        nuspecID         = $obj.nuspecID
-        installScript    = $obj.installScriptOrig
-        toolsDir         = $obj.toolsDir
-        urltype          = 2
-        argstype         = 0
-        needsTools       = $true
-        RemoveMSI        = $true
-        checksumArgsType = 1
-        checksumTypeType = 'sha256'
-    }
-
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
-}
-
 
 Function Convert-vagrant ($obj) {
     $editInstallChocolateyPackageArgs = @{

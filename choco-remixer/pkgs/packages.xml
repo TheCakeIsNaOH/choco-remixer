@@ -114,6 +114,7 @@
     <id>firefox-quantum-nox</id>
     <id>foobar2000</id>
     <id>gawk</id>
+    <id>google-backup-and-sync</id>
     <id>gh</id>
     <id>ghostscript.app</id>
     <id>git.install</id>
@@ -818,13 +819,6 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-google-backup-and-sync</functionName>
-      <id>google-backup-and-sync</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-googlechrome</functionName>
