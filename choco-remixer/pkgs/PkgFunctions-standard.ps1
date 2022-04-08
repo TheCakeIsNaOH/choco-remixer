@@ -362,7 +362,7 @@ Function Convert-box-drive ($obj) {
 
 Function Convert-ringcentral-classic ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
+        architecture     = "x64"
         nuspecID         = $obj.nuspecID
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
@@ -371,6 +371,7 @@ Function Convert-ringcentral-classic ($obj) {
         needsTools       = $true
         RemoveEXE        = $true
         DeEncodeSpace    = $true
+        stripQueryString = $true
         checksumArgsType = 3
         checksumTypeType = 'sha256'
     }
