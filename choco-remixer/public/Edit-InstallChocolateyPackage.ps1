@@ -138,10 +138,10 @@ Function Edit-InstallChocolateyPackage {
     }
 
     if ($x32) {
-        $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+        $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring() -split "\?" | Select-Object -First 1
     }
     if ($x64) {
-        $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+        $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring() -split "\?" | Select-Object -First 1
     }
 
     if ($DeEncodeSpace) {

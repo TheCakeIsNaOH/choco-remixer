@@ -371,7 +371,6 @@ Function Convert-ringcentral-classic ($obj) {
         needsTools       = $true
         RemoveEXE        = $true
         DeEncodeSpace    = $true
-        stripQueryString = $true
         checksumArgsType = 3
         checksumTypeType = 'sha256'
     }
