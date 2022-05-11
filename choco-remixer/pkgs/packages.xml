@@ -46,6 +46,7 @@
     <id>choco-package-list-backup</id>
     <id>choco-protocol-support</id>
     <id>chocolatey-agent</id>
+    <id>chocolatey-compatibility.extension</id>
     <id>chocolatey-core.extension</id>
     <id>chocolatey-dotnetfx.extension</id>
     <id>chocolatey-fastanswers.extension</id>
@@ -115,6 +116,7 @@
     <id>foobar2000</id>
     <id>gawk</id>
     <id>google-backup-and-sync</id>
+    <id>google-drive-file-stream</id>
     <id>gh</id>
     <id>ghostscript.app</id>
     <id>git.install</id>
@@ -170,6 +172,7 @@
     <id>miktex</id>
     <id>minecraft</id>
     <id>moonlight-qt.install</id>
+    <id>mozillabuild</id>
     <id>mp3tag</id>
     <id>mpv</id>
     <id>mpv.portable</id>
@@ -276,6 +279,8 @@
     <id>visualstudio-installer</id>
     <id>vivaldi</id>
     <id>vlc</id>
+    <id>vlc.install</id>
+    <id>vlc.portable</id>
     <id>vscode</id>
     <id>vscodium</id>
     <id>waterfox</id>
@@ -653,6 +658,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-dotnet-5.0-sdk-4xx</functionName>
+      <id>dotnet-5.0-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dotnetcore-31-aspnetruntime</functionName>
       <id>dotnetcore-3.1-aspnetruntime</id>
       <needsStopAction>no</needsStopAction>
@@ -828,10 +840,10 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-google-drive-file-stream</functionName>
-      <id>google-drive-file-stream</id>
+      <functionName>Convert-googledrive</functionName>
+      <id>googledrive</id>
       <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
+      <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>

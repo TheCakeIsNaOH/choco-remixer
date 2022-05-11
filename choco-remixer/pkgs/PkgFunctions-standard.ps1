@@ -840,7 +840,7 @@ Function Convert-lively ($obj) {
 }
 
 
-Function Convert-google-drive-file-stream ($obj) {
+Function Convert-googledrive ($obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "x32"
         nuspecID         = $obj.nuspecID
@@ -849,8 +849,7 @@ Function Convert-google-drive-file-stream ($obj) {
         argstype         = 0
         urltype          = 2
         RemoveEXE        = $true
-        needsTools       = $true
-        checksumArgsType = 0
+        checksumArgsType = 2
         checksumTypeType = 'sha256'
     }
 
