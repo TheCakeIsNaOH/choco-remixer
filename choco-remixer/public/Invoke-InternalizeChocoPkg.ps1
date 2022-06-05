@@ -156,7 +156,7 @@ Function Invoke-InternalizeChocoPkg {
                 Write-Information "Found $nuspecID $nuspecVersion to internalize" -InformationAction Continue
             }
         } else {
-            Write-Warning "$nuspecID $nuspecVersion is new, id unknown"
+            Write-Warning "$nuspecID $nuspecVersion is a unknown package ID, ignoring. Support has to be added for it, see ADDING_PACKAGES.md"
         }
     }
 

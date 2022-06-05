@@ -1028,7 +1028,7 @@ Function Convert-yarn ($obj) {
         RemoveMSI        = $true
         needsTools       = $true
         checksumArgsType = 4
-        checksumTypeType = 'sha256'
+        checksumTypeType = 'sha512'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
