@@ -1169,6 +1169,23 @@ Function Convert-dotnet4.5 ($obj) {
     Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir
 }
 
+Function Convert-greenshot ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
+    $installString = 'Install-ChocolateyInstallPackage -PackageName ''greenshot'' -FileType ''exe'' -SilentArgs "/VERYSILENT" -file $file'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "$installString`n#$&"
+    $obj.installScriptMod = $filePath32 + "`n" + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+
+    #No checksum in package
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir
+}
+
 
 Function Convert-dotnet4.5.2 ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()

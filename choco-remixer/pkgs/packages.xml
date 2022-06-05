@@ -868,6 +868,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-greenshot</functionName>
+      <id>greenshot</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-gotomeeting</functionName>
       <id>gotomeeting</id>
       <needsStopAction>no</needsStopAction>
@@ -1425,6 +1432,13 @@
       <id>winlogbeat</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-winmerge</functionName>
+      <id>winmerge</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
