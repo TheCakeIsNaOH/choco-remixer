@@ -184,6 +184,7 @@
     <id>mumble</id>
     <id>mupdf</id>
     <id>n3dr</id>
+    <id>nano</id>
     <id>nextcloud-client</id>
     <id>nginx</id>
     <id>ninja</id>
@@ -924,12 +925,27 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-iperf3</functionName>
+      <id>iperf3</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-itunes</functionName>
       <id>itunes</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
+    <pkg>
+      <functionName>Convert-jetbrains-rider</functionName>
+      <id>jetbrains-rider</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+
     <pkg>
       <functionName>Convert-keybase</functionName>
       <id>keybase</id>
@@ -1069,6 +1085,13 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-nano-win</functionName>
+      <id>nano-win</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-netfx-4.6.2</functionName>
@@ -1497,17 +1520,14 @@
     <id>html-help-workshop</id>    <!-- Download URL now dead -->    <!-- todo, fix now that it has a wayback link -->
     <id>insted</id>
     <id>io-unlocker</id>
-    <id>iperf3</id>
     <id>jdk8</id>    <!-- please use a non-oracle build of java -->
     <id>jre8</id>    <!-- please use a non-oracle build of java -->
     <id>ksign</id>
     <id>logitechgaming</id>
     <id>masterpackager</id>
     <id>mitmproxy</id>
-    <id>nano</id>
     <id>obs-ndi</id>
     <id>office365proplus</id>
-    <id>orca</id>    <!-- out of date, make an internal package from msi in windows SDK -->
     <id>pci-z</id>
     <id>qemu-img</id>
     <id>qemu</id>

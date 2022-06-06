@@ -1308,3 +1308,19 @@ Function Convert-citrix-workspace ($obj) {
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
+
+Function Convert-jetbrains-rider ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 2
+        RemoveEXE        = $true
+        checksumArgsType = 2
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
