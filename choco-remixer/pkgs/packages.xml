@@ -1031,6 +1031,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-logitech-options</functionName>
+      <id>logitech-options</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-lively</functionName>
       <id>lively</id>
       <needsStopAction>no</needsStopAction>
@@ -1061,6 +1068,13 @@
     <pkg>
       <functionName>Convert-microsoft-teams</functionName>
       <id>microsoft-teams</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-microsoft-teams-install</functionName>
+      <id>microsoft-teams.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>

@@ -601,6 +601,56 @@ Function Convert-winmerge ($obj) {
 }
 
 
+Function Convert-googleearthpro ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 3
+        RemoveEXE        = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-zoom ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 2
+        RemoveMSI        = $true
+        needsTools       = $true
+        checksumArgsType = 2
+        checksumTypeType = "sha256"
+        x64NameExt       = $true
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-microsoft-teams-install ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 1
+        RemoveMSI        = $true
+        checksumArgsType = 1
+        checksumTypeType = "sha256"
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
 # SINGLE --------------------------
 
 
@@ -731,23 +781,6 @@ Function Convert-malwarebytes ($obj) {
 }
 
 
-Function Convert-zoom ($obj) {
-    $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
-        nuspecID         = $obj.nuspecID
-        installScript    = $obj.installScriptOrig
-        toolsDir         = $obj.toolsDir
-        argstype         = 0
-        urltype          = 2
-        RemoveMSI        = $true
-        needsTools       = $true
-        checksumArgsType = 2
-        checksumTypeType = "sha256"
-        x64NameExt       = $true
-    }
-
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
-}
 
 Function Convert-advanced-installer ($obj) {
     $editInstallChocolateyPackageArgs = @{
@@ -1169,21 +1202,6 @@ Function Convert-tailscale ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
-Function Convert-googleearthpro ($obj) {
-    $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
-        nuspecID         = $obj.nuspecID
-        installScript    = $obj.installScriptOrig
-        toolsDir         = $obj.toolsDir
-        argstype         = 0
-        urltype          = 3
-        RemoveEXE        = $true
-        checksumArgsType = 0
-        checksumTypeType = 'sha256'
-    }
-
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
-}
 
 Function Convert-awscli ($obj) {
     $editInstallChocolateyPackageArgs = @{
@@ -1310,6 +1328,22 @@ Function Convert-citrix-workspace ($obj) {
 }
 
 Function Convert-jetbrains-rider ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 2
+        RemoveEXE        = $true
+        checksumArgsType = 2
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-logitech-options ($obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "x32"
         nuspecID         = $obj.nuspecID
