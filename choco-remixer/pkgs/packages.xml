@@ -546,6 +546,20 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-citrix-workspace-ltsr</functionName>
+      <id>citrix-workspace-ltsr</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-citrix-workspace</functionName>
+      <id>citrix-workspace</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-cpuz</functionName>
       <id>cpu-z.install</id>
       <needsStopAction>no</needsStopAction>

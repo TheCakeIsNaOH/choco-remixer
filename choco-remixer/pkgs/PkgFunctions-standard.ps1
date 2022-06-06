@@ -1260,11 +1260,49 @@ Function Convert-grammarly-for-windows ($obj) {
         nuspecID         = $obj.nuspecID
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
-        argstype         = 0
+        argstype         = 1
         urltype          = 7
         RemoveEXE        = $true
         needsTools       = $true
         checksumArgsType = 5
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-citrix-workspace-ltsr ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 0
+        RemoveEXE        = $true
+        needsTools       = $true
+        needsEA          = $true
+        doubleQuotesUrl  = $true
+        checksumArgsType = 6
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-citrix-workspace ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 0
+        RemoveEXE        = $true
+        needsTools       = $true
+        needsEA          = $true
+        doubleQuotesUrl  = $true
+        checksumArgsType = 6
         checksumTypeType = 'sha256'
     }
 
