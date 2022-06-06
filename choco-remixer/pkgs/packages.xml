@@ -259,6 +259,7 @@
     <id>shutup10</id>
     <id>steam</id>
     <id>stubby</id>
+    <id>sshfs</id>
     <id>sudo</id>
     <id>sumatrapdf.commandline</id>
     <id>sumatrapdf.install</id>
@@ -1371,6 +1372,13 @@
       <id>ubisoft-connect</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-urlrewrite</functionName>
+      <id>urlrewrite</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>

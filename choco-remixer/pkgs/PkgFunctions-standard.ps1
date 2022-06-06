@@ -651,6 +651,23 @@ Function Convert-microsoft-teams-install ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
+Function Convert-urlrewrite ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 2
+        RemoveMSI        = $true
+        checksumArgsType = 0
+        checksumTypeType = "sha1"
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+
 # SINGLE --------------------------
 
 
