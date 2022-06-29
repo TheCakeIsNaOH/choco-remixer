@@ -714,7 +714,7 @@ Function Convert-gimp ($obj) {
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
         argstype         = 0
-        urltype          = 0
+        urltype          = 7
         needsTools       = $true
         RemoveEXE        = $true
         checksumArgsType = 0
@@ -935,7 +935,7 @@ Function Convert-goggalaxy ($obj) {
         RemoveEXE        = $true
         needsTools       = $true
         checksumArgsType = 0
-        checksumTypeType = 'sha256'
+        checksumTypeType = 'md5'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
