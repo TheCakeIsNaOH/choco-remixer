@@ -934,6 +934,13 @@
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-itch</functionName>
+      <id>itch</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-itunes</functionName>
       <id>itunes</id>
       <needsStopAction>no</needsStopAction>
