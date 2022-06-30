@@ -1222,6 +1222,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-playnite</functionName>
+      <id>playnite</id>
+      <needsStopAction>No</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-powershell</functionName>
       <id>powershell</id>
       <needsStopAction>Yes</needsStopAction>
