@@ -83,6 +83,8 @@
     <id>dolphin-dev</id>
     <id>dolphin</id>
     <id>dosbox</id>
+    <id>dotnet</id>
+    <id>dotnet-runtime</id>
     <id>dotnet-5.0-sdk</id>
     <id>dotnet-desktopruntime</id>
     <id>dotnet3.5</id>
@@ -100,6 +102,8 @@
     <id>dotnetcore3-desktop-runtime</id>
     <id>dotnetcore</id>
     <id>dotpeek</id>
+    <id>dotcover</id>
+    <id>dottrace</id>
     <id>ds4windows</id>
     <id>duplicati</id>
     <id>element-desktop</id>
@@ -247,6 +251,7 @@
     <id>rclone</id>
     <id>regeditor</id>
     <id>resharper</id>
+    <id>resharper-ultimate-all</id>
     <id>riot-web</id>
     <id>ripgrep</id>
     <id>roboto.font</id>
@@ -677,6 +682,13 @@
     <pkg>
       <functionName>Convert-dotnet-5.0-sdk-4xx</functionName>
       <id>dotnet-5.0-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-6.0-runtime</functionName>
+      <id>dotnet-6.0-runtime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
