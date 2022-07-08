@@ -1059,6 +1059,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-logitechgaming</functionName>
+      <id>logitechgaming</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-lively</functionName>
       <id>lively</id>
       <needsStopAction>no</needsStopAction>
@@ -1572,7 +1579,6 @@
     <id>jdk8</id>    <!-- please use a non-oracle build of java -->
     <id>jre8</id>    <!-- please use a non-oracle build of java -->
     <id>ksign</id>
-    <id>logitechgaming</id>
     <id>masterpackager</id>
     <id>mitmproxy</id>
     <id>obs-ndi</id>
@@ -1587,5 +1593,11 @@
     <id>universal-extractor</id>
     <id>vidcutter</id>
     <id>visualbcd</id>
+    <id>visualstudio2017-workload-vctools</id>
+    <id>visualstudio2017buildtools</id>
+    <id>visualstudio2019-workload-vctools</id>
+    <id>visualstudio2019buildtools</id>
+    <id>visualstudio2022enterprise</id>
+    <id>windows-sdk-7.1</id>
   </notImplemented>
 </packages>
