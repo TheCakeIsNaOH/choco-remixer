@@ -38,6 +38,14 @@
             "request": "launch",
             "script": "${workspaceRoot}/.vscode-functions/no-save-no-repo-check.ps1",
             "cwd": "${workspaceRoot}"
+        },
+        {
+            "name": "download",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceRoot}/.vscode-functions/download.ps1",
+            "cwd": "${workspaceRoot}"
         }
+
     ]
 }
