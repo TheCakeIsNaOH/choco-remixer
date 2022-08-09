@@ -339,6 +339,33 @@ Function Convert-nexus-repository ($obj) {
     Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
+
+Function Convert-vscode-portable ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32\s+=').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = "vscode_x86.zip"
+    $filePath32 = 'FileFullPath32    = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url64\s+=').tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+    $filename64 = "vscode_x64.zip"
+    $filePath64 = 'FileFullPath64    = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+    $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination  "
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs\s+=\s+@{" , "$&`n    $filePath32 `n    $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod -replace ' url', '#url'
+    $obj.installScriptMod = $obj.installScriptMod -replace ' url64', '#url64'
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$Checksum32\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$Checksum64\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}
+
 Function Convert-winlogbeat ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()

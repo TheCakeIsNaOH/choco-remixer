@@ -21,6 +21,7 @@
     <id>autohotkey.install</id>
     <id>autohotkey.portable</id>
     <id>autohotkey</id>
+    <id>autoit.install</id>
     <id>autoit.portable</id>
     <id>autoit</id>
     <id>avidemux</id>
@@ -91,6 +92,7 @@
     <id>dotnet4.6.2</id>
     <id>dotnet4.7</id>
     <id>dotnet4.7.2</id>
+    <id>dotnet-6.0-sdk</id>
     <id>dotnetcore-3.1-sdk</id>
     <id>dotnetcore-3.1-windowshosting</id>
     <id>dotnetcore-aspnetruntime</id>
@@ -161,6 +163,7 @@
     <id>ketarin</id>
     <id>krita</id>
     <id>kubernetes-cli</id>
+    <id>large-text-file-viewer</id>
     <id>lgs.g700s</id>
     <id>libdvdcss-2</id>
     <id>libreoffice</id>
@@ -231,6 +234,7 @@
     <id>procrastitracker</id>
     <id>prusaslicer</id>
     <id>psake</id>
+    <id>psqlodbc</id>
     <id>putty.install</id>
     <id>putty.portable</id>
     <id>putty</id>
@@ -274,6 +278,7 @@
     <id>synctrayzor</id>
     <id>tablacus</id>
     <id>tinymediamanager</id>
+    <id>tortoisegit</id>
     <id>totalcommander</id>
     <id>uplay</id>
     <id>vcredist-all</id>
@@ -426,6 +431,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-anaconda3</functionName>
+      <id>anaconda3</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-anydesk-portable</functionName>
@@ -661,6 +673,13 @@
     <pkg>
       <functionName>Convert-dotnet-6.0-desktopruntime</functionName>
       <id>dotnet-6.0-desktopruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-6.0-sdk-3xx</functionName>
+      <id>dotnet-6.0-sdk-3xx</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -1045,6 +1064,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-libreoffice-still</functionName>
+      <id>libreoffice-still</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-lightshot</functionName>
       <id>lightshot.install</id>
       <needsStopAction>no</needsStopAction>
@@ -1113,6 +1139,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-miniconda3</functionName>
+      <id>miniconda3</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-mono</functionName>
@@ -1257,6 +1290,13 @@
     <pkg>
       <functionName>Convert-powershell-core</functionName>
       <id>powershell-core</id>
+      <needsStopAction>No</needsStopAction>
+      <needsToolsDir>No</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-pycharm-community</functionName>
+      <id>pycharm-community</id>
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>No</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
@@ -1502,6 +1542,13 @@
     <pkg>
       <functionName>Convert-vscode-install</functionName>
       <id>vscode.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-vscode-portable</functionName>
+      <id>vscode.portable</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>

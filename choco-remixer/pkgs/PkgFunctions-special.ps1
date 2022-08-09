@@ -268,7 +268,8 @@ Function Convert-KB3063858 ($obj) {
     Invoke-Expression $installScriptExec
 
     #6.0-client and 6.0-server are the same in this case, with the the same URLs.
-    $msudata.GetEnumerator() | Where-Object { $_.key -notmatch "6.0-client" } | ForEach-Object {
+#    $msudata.GetEnumerator() | Where-Object { $_.key -notmatch "6.0-client" } | ForEach-Object {
+    $msudata.GetEnumerator() |  ForEach-Object {
         if ($_.value.url) {
             $url = $_.value.url
             $checksum = $_.value.checksum
@@ -294,6 +295,8 @@ Function Convert-KB3063858 ($obj) {
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msu'
+
+    $obj.installScriptMod = Remove-ConsecutiveDuplicateLines $obj.installScriptMod
 }
 
 
