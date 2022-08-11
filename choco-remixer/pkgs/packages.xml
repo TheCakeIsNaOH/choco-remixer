@@ -685,6 +685,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-dotnet-6.0-sdk-4xx</functionName>
+      <id>dotnet-6.0-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dotnetcore-3.1-sdk-4xx</functionName>
       <id>dotnetcore-3.1-sdk-4xx</id>
       <needsStopAction>no</needsStopAction>
