@@ -97,6 +97,58 @@ Function Convert-office365business ($obj) {
 }
 
 
+Function Convert-anaconda3 ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "https").ToString()
+
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url64bit  ').tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "https").ToString()
+
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'file          = (Join-Path $pkgToolsDir "' + $filename32 + '")'
+
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    $filePath64 = 'file64        = (Join-Path $pkgToolsDir "' + $filename64 + '")'
+
+    $obj.installScriptMod = '$pkgToolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32 `n    $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $pkgToolsDir\*.exe'
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}
+Function Convert-miniconda3 ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32 = ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "https").ToString()
+
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url64 = ').tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "https").ToString()
+
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = '    -file (Join-Path $pkgToolsDir "' + $filename32 + '")'
+
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    $filePath64 = '    -file64 (Join-Path $pkgToolsDir "' + $filename64 + '")'
+
+    $obj.installScriptMod = '$pkgToolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace [regex]::Escape("-ValidExitCodes @(0)") , "-ValidExitCodes @(0) ``"
+
+    $obj.installScriptMod = $obj.InstallScriptMod + $filePath32 + "```n"
+    $obj.installScriptMod = $obj.InstallScriptMod + $filePath64 + "`n"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $pkgToolsDir\*.exe'
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum32 = ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum64 = ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}
+
 Function Convert-anydesk-install ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url32 ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
@@ -149,6 +201,41 @@ Function Convert-adobeair ($obj) {
 }
 
 Function Convert-libreoffice-fresh ($obj) {
+    . $(Join-Path $obj.toolsDir 'helpers.ps1')
+
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url64bit ').tostring()
+
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+    $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    if (-not (IsUrlValid $url32)) {
+        $officeVersion = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' version ').tostring()
+        $exactVersion = GetLibOExactVersion $officeVersion
+        $url32 = $exactVersion.Url32
+        $url64 = $exactVersion.Url64
+    }
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "#>`n`nInstall-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod -replace "if \(\-not" , "<#if \(\-not"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}
+
+Function Convert-libreoffice-still ($obj) {
     . $(Join-Path $obj.toolsDir 'helpers.ps1')
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
@@ -450,6 +537,59 @@ Function Convert-dotnet-6.0-runtime ($obj) {
     Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
     Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
+
+Function Convert-dotnet-6.0-sdk-3xx ($obj) {
+
+    $dataFile = Join-Path $obj.toolsDir 'data.ps1'
+    $dataContent = & $datafile
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+
+    $url32 = $dataContent.Url
+    $url64 = $dataContent.Url64
+    $checksum32 = $dataContent.checksum
+    $checksum64 = $dataContent.checksum64
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'File    = (Join-Path $toolsDir "' + $filename32 + '")'
+    $filePath64 = 'File64   = (Join-Path $toolsDir "' + $filename64 + '")'
+
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "arguments = @{" , "$&`n  $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod -replace "arguments64 = @{" , "$&`n  $filePath64"
+
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
+}
+
+Function Convert-dotnet-6.0-sdk-4xx ($obj) {
+
+    $dataFile = Join-Path $obj.toolsDir 'data.ps1'
+    $dataContent = & $datafile
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+
+    $url32 = $dataContent.Url
+    $url64 = $dataContent.Url64
+    $checksum32 = $dataContent.checksum
+    $checksum64 = $dataContent.checksum64
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'File    = (Join-Path $toolsDir "' + $filename32 + '")'
+    $filePath64 = 'File64   = (Join-Path $toolsDir "' + $filename64 + '")'
+
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "arguments = @{" , "$&`n  $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod -replace "arguments64 = @{" , "$&`n  $filePath64"
+
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
+    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
+}
+
 
 
 Function Convert-dotnet-5.0-sdk-2xx ($obj) {
@@ -929,6 +1069,23 @@ Function Convert-openoffice ($obj) {
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
 
     $checksum32 = $checksum
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+}
+
+
+Function Convert-pycharm-community ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url  ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
+
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
     Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
