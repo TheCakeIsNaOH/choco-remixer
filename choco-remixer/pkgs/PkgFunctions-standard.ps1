@@ -1406,3 +1406,19 @@ Function Convert-playnite ($obj) {
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
+
+Function Convert-itch ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 7
+        RemoveEXE        = $true
+        checksumArgsType = 4
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}

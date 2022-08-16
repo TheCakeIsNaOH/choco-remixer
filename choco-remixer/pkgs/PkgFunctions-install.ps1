@@ -1,22 +1,6 @@
 ﻿[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Replaces external function, cant change the name', Scope = 'Function', Target = 'Get-PackageParameters')]
 param()
 
-
-Function Convert-calibre ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'url ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
-
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
-}
-
 Function Convert-autocad ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url\s*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
@@ -843,27 +827,22 @@ Function Convert-nvidia-driver ($obj) {
 
 
 Function Convert-geforce-driver ($obj) {
-    $fullurlwin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['url64'\]      = 'https").tostring()
+    $fullurlwin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['url64'\]\s+= 'https").tostring()
     $fullurlwin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url64   ").tostring()
-    $fullurlDCH = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgsDCHURL      = 'https").tostring()
 
     $urlwin7 = ($fullurlwin7 -split "'" | Select-String -Pattern "http").tostring()
     $urlwin10 = ($fullurlwin10 -split "'" | Select-String -Pattern "http").tostring()
-    $urlDCH = ($fullurlDCH -split "'" | Select-String -Pattern "http").tostring()
 
     $filenamewin7 = ($urlwin7 -split "/" | Select-Object -Last 1).tostring()
     $filenamewin10 = ($urlwin10 -split "/" | Select-Object -Last 1).tostring()
-    $filenameDCH = ($urlDCH -split "/" | Select-Object -Last 1).tostring()
 
     $filePathwin7 = '$packageArgs[''file64'']    =  (Join-Path $toolsDir "' + $filenamewin7 + '")'
     $filePathwin10 = '    file64    = (Join-Path $toolsDir "' + $filenamewin10 + '")'
-    $filePathDCH = '$packageArgs[''file64'']    = (Join-Path $toolsDir "' + $filenameDCH + '")'
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n $filePathwin10"
     $obj.installScriptMod = $obj.installScriptMod -replace "OSVersion\.Version\.Major -ne '10' \) \{" , "$&`n    $filePathwin7"
-    $obj.installScriptMod = $obj.installScriptMod -replace "-eq 'true'\) \{" , "$&`n    $filePathDCH"
 
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
@@ -871,11 +850,9 @@ Function Convert-geforce-driver ($obj) {
 
     $checksumWin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksumWin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['checksum64'\].*= '").tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    $checksumDCH = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$packageArgsDCHChecksum *=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
     Get-File -url $urlwin7 -filename $filenamewin7 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin7
     Get-File -url $urlwin10 -filename $filenamewin10 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin10
-    Get-File -url $urlDCH -filename $filenameDCH -folder $obj.toolsDir-checksumTypeType 'sha256' -checksum $checksumDCH
 }
 
 
@@ -920,60 +897,46 @@ Function Convert-virtualbox ($obj) {
 Function Convert-Temurin8 ($obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "\sUrl\s*=\s").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "\sUrl64bit\s*=\s").tostring()
 
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
 
-    $filePath32 = 'file     = (Join-Path $toolsDir2 "' + $filename32 + '")'
-    $filePath64 = 'file64   = (Join-Path $toolsDir2 "' + $filename64 + '")'
+    $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
 
 
-    $obj.installScriptMod = '$toolsDir2   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath64"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir2\*.msi'
 
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
     Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
 
 Function Convert-Temurin8jre ($obj) {
     #need to deal with added added param that has option of install both 32 and 64,
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .* = ").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit .* = ").tostring()
 
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
 
-    $filePath32 = 'file     = (Join-Path $toolsDir2 "' + $filename32 + '")'
-    $filePath64 = 'file64   = (Join-Path $toolsDir2 "' + $filename64 + '")'
+    $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
 
 
-    $obj.installScriptMod = '$toolsDir2   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath64"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir2\*.msi'
 
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
     Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
@@ -1334,25 +1297,6 @@ Function Convert-sql-server-management-studio ($obj) {
     Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-
-Function Convert-itch ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url\s+').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = "itch-io-installer.exe"
-    $filePath32 = '$file          = (Join-Path $toolsDir "' + $filename32 + '")'
-
-    $installString = 'Install-ChocolateyInstallPackage -PackageName $packageName -FileType $installerType -file $file -validExitCodes $validExitCodes'
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "$installString`n$&"
-    $obj.installScriptMod = $filePath32 + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-
-   #No checksum in package
-   Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir
-}
-
-
 Function Convert-dotnet4.5 ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
@@ -1540,7 +1484,7 @@ Function Convert-dellcommandupdate-uwp ($obj) {
         RemoveEXE        = $true
 
         checksumArgsType = 2
-        checksumTypeType = 'md5'
+        checksumTypeType = 'sha256'
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
