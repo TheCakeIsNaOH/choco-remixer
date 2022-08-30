@@ -200,7 +200,10 @@ Function Convert-libreoffice-fresh ($obj) {
     $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
 
     if (-not (IsUrlValid $url32)) {
+        # line with     version  =  'x.y.z'
         $officeVersion = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' version ').tostring()
+        $officeVersion = ($OfficeVersion -split "=" | Select-Object -Last 1).tostring()
+        $officeVersion = ($officeVersion -replace "'","").Trim()
         $exactVersion = GetLibOExactVersion $officeVersion
         $url32 = $exactVersion.Url32
         $url64 = $exactVersion.Url64
@@ -235,7 +238,10 @@ Function Convert-libreoffice-still ($obj) {
     $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
 
     if (-not (IsUrlValid $url32)) {
+        # line with     version  =  'x.y.z'
         $officeVersion = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' version ').tostring()
+        $officeVersion = ($OfficeVersion -split "=" | Select-Object -Last 1).tostring()
+        $officeVersion = ($officeVersion -replace "'","").Trim()
         $exactVersion = GetLibOExactVersion $officeVersion
         $url32 = $exactVersion.Url32
         $url64 = $exactVersion.Url64
