@@ -146,7 +146,17 @@
     $config.workDir = (Resolve-Path $config.workDir).Path
 
     if ($config.useDropPath -eq "yes") {
-        Test-DropPath -dropPath $config.dropPath
+        if ($config.dropEmpty -eq "yes") {
+        } elseif ($config.dropEmpty -eq "no") {
+        } else {
+            Throw "bad dropEmpty value in config xml, must be yes or no"
+        }
+        if ($config.dropInternal -eq "yes") {
+        } elseif ($config.dropInternal -eq "no") {
+        } else {
+            Throw "bad dropInternal value in config xml, must be yes or no"
+        }
+        Test-DropPath -dropPath $config.dropPath -dropEmpty $config.dropEmpty
         $config.dropPath = (Resolve-Path $config.dropPath).Path
     } elseif ($config.useDropPath -eq "no") {
     } else {
