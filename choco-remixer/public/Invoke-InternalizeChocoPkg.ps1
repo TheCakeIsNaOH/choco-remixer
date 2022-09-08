@@ -98,6 +98,14 @@ Function Invoke-InternalizeChocoPkg {
             Write-Verbose "$nuspecID is a custom package"
         } elseif ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
             Write-Verbose "$nuspecID is already internal coming from chocolatey.org"
+            #quick and dirty, maybe keep already interal packages in list and process (skip and maybe drop) later
+            if ($config.useDropPath -eq "yes" -and $config.dropInternal -eq "yes") {
+                Write-Verbose "coping $.nuspecID) to drop path"
+                if (-not (Test-Path (Join-Path -Path $config.dropPath -ChildPath (Split-Path $_.FullName -Leaf) ))) {
+                    Copy-Item $_.fullname $config.dropPath
+                }
+            }
+
         } elseif ($packagesXMLcontent.packages.custom.pkg.id -icontains $nuspecID) {
 
             $installScriptDetails = Read-ZippedInstallScript -NupkgPath $_.fullname

@@ -10,6 +10,11 @@
 	<useDropPath>no</useDropPath>
 	<!-- Directory that is your ProGet drop path -->
 	<dropPath>C:\path\to\droppath</dropPath>
+	<!-- Yes/No if directory should be empty -->
+	<dropEmpty>no</dropEmpty>
+	<!-- Yes/No if internal packages should be dropped -->
+	<dropInternal>yes</dropInternal>
+
 
 	<!-- Yes/No to automatically filling out internalized package versions -->
 	<writePerPkgs>yes</writePerPkgs>
