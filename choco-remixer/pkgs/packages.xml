@@ -40,6 +40,7 @@
     <id>bulk-crap-uninstaller</id>
     <id>calibre</id>
     <id>calibre-dedrm</id>
+    <id>cake-bakery.portable</id>
     <id>cdburnerxp</id>
     <id>checksum</id>
     <id>choco-cleaner</id>
@@ -86,13 +87,17 @@
     <id>dolphin</id>
     <id>dosbox</id>
     <id>dotnet</id>
+    <id>dotnet-all</id>
     <id>dotnet-runtime</id>
+    <id>dotnet-4.6.2</id>
     <id>dotnet-5.0-sdk</id>
     <id>dotnet-desktopruntime</id>
     <id>dotnet3.5</id>
     <id>dotnet4.6.2</id>
     <id>dotnet4.7</id>
+    <id>dotnet4.7.1</id>
     <id>dotnet4.7.2</id>
+    <id>dotnet5-desktop-runtime</id>
     <id>dotnet-6.0-sdk</id>
     <id>dotnetcore-3.1-sdk</id>
     <id>dotnetcore-3.1-windowshosting</id>
@@ -172,6 +177,7 @@
     <id>linux-reader</id>
     <id>looking-glass-host</id>
     <id>looking-glass-host-bleeding-edge</id>
+    <id>ludusavi</id>
     <id>make</id>
     <id>maven</id>
     <id>meld</id>
@@ -666,6 +672,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-dotnet-5.0-runtime</functionName>
+      <id>dotnet-5.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dotnet-6.0-desktopruntime</functionName>
       <id>dotnet-6.0-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
@@ -713,6 +726,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-6.0-aspnetruntime</functionName>
+      <id>dotnet-6.0-aspnetruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-31-aspnetruntime</functionName>
@@ -1187,6 +1207,13 @@
     <pkg>
       <functionName>Convert-netfx-4.7.1</functionName>
       <id>netfx-4.7.1</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-netfx-4.8</functionName>
+      <id>netfx-4.8</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
