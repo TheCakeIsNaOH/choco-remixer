@@ -175,8 +175,10 @@
     <id>make</id>
     <id>maven</id>
     <id>meld</id>
+    <id>mambaforge</id>
     <id>microsoft-message-analyzer</id>
     <id>microsoft-windows-terminal</id>
+    <id>miniforge3</id>
     <id>miktex.install</id>
     <id>miktex</id>
     <id>minecraft</id>
