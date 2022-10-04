@@ -237,6 +237,7 @@
     <id>picard</id>
     <id>pingtracer</id>
     <id>powertoys</id>
+    <id>playnite</id>
     <id>prime95</id>
     <id>procrastitracker</id>
     <id>prusaslicer</id>
@@ -1301,13 +1302,6 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-playnite</functionName>
-      <id>playnite</id>
-      <needsStopAction>No</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-powershell</functionName>
