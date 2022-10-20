@@ -1443,6 +1443,40 @@ Function Convert-xming ($obj) {
     Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir
 }
 
+Function Convert-conemu ($obj) {
+    $installScriptExec = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$(version|url) = ') -join "`n"
+    Invoke-Expression $installScriptExec
+
+    $filename = ($url -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename + '")'
+    $filePath64 = 'file64        = (Join-Path $toolsDir "' + $filename + '")'
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+    $obj.installScriptMod = $obj.installScriptMod -replace 'Install-ChocolateyPackage' , 'Install-ChocolateyInstallPackage'
+    $obj.installScriptMod = $obj.installScriptMod -replace 'params = @{' , "$&`n  $filePath32`n  $filePath64"
+
+    $checksum = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$sha256 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+}
+
+Function Convert-rstudio ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Install-ChocolateyInstallPackage $packageArgs.packageName $packageArgs.fileType $packageArgs.silentArgs $file'
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "#$&"
+    $obj.installScriptMod = $filePath32 + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+}
 
 Function Convert-cpuz ($obj) {
     $editInstallChocolateyPackageargs = @{
