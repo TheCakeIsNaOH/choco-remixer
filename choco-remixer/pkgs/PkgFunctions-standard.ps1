@@ -683,6 +683,23 @@ Function Convert-logitechgaming ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
+Function Convert-qalculate ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 0
+        RemoveMSI        = $true
+        needsTools       = $true
+        checksumArgsType = 0
+        checksumTypeType = "sha256"
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
 # SINGLE --------------------------
 
 
@@ -1402,6 +1419,106 @@ Function Convert-itch ($obj) {
         RemoveEXE        = $true
         checksumArgsType = 4
         checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-gajim ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x64"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        urltype          = 1
+        argstype         = 0
+        RemoveEXE        = $true
+        checksumArgsType = 3
+        checksumTypeType = 'sha256'
+        needsTools       = $true
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-jabref-install ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x64"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        urltype          = 0
+        argstype         = 1
+        RemoveMSI        = $true
+        checksumArgsType = 3
+        checksumTypeType = 'sha256'
+        needsTools       = $true
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-pdf24 ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        urltype          = 0
+        argstype         = 1
+        RemoveMSI        = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-qgis ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x64"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig -replace '(?<=[$@])InstallArgs', 'packageArgs'
+        toolsDir         = $obj.toolsDir
+        urltype          = 0
+        argstype         = 0
+        RemoveMSI        = $true
+        checksumArgsType = 3
+        checksumTypeType = 'sha256'
+        needsTools       = $true
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-rebootblocker ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        urltype          = 2
+        argstype         = 0
+        RemoveEXE        = $true
+        checksumArgsType = 0
+        checksumTypeType = 'sha256'
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
+Function Convert-setacl-studio ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "x32"
+        nuspecID         = $obj.nuspecID
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        urltype          = 1
+        argstype         = 0
+        RemoveMSI        = $true
+        checksumArgsType = 1
+        checksumTypeType = 'sha256'
+        needsTools       = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
