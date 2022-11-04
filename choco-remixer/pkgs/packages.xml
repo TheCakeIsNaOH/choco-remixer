@@ -9,6 +9,8 @@
     <id>adoptopenjdk8</id>
     <id>adoptopenjdk8jre</id>
     <id>adoptopenjdkjre</id>
+    <id>advanced-renamer.install</id>
+    <id>advanced-renamer</id>
     <id>angryip</id>
     <id>ant</id>
     <id>anydesk</id>
@@ -38,9 +40,9 @@
     <id>boxstarter</id>
     <id>brave</id>
     <id>bulk-crap-uninstaller</id>
-    <id>calibre</id>
-    <id>calibre-dedrm</id>
     <id>cake-bakery.portable</id>
+    <id>calibre-dedrm</id>
+    <id>calibre</id>
     <id>cdburnerxp</id>
     <id>checksum</id>
     <id>choco-cleaner</id>
@@ -48,6 +50,7 @@
     <id>choco-package-deprecater</id>
     <id>choco-package-list-backup</id>
     <id>choco-protocol-support</id>
+    <id>choco-upgrade-all-at</id>
     <id>chocolatey-agent</id>
     <id>chocolatey-compatibility.extension</id>
     <id>chocolatey-core.extension</id>
@@ -68,6 +71,7 @@
     <id>chocolateypackageupdater</id>
     <id>chocolateypowershell</id>
     <id>chromium</id>
+    <id>cleanup-desktop-shortcuts.hook</id>
     <id>clementine</id>
     <id>cmake.install</id>
     <id>cmake.portable</id>
@@ -78,6 +82,7 @@
     <id>crystaldiskinfo.portable</id>
     <id>crystaldiskinfo</id>
     <id>crystaldiskmark</id>
+    <id>cura</id>
     <id>curl</id>
     <id>cygwin</id>
     <id>die</id>
@@ -86,19 +91,20 @@
     <id>dolphin-dev</id>
     <id>dolphin</id>
     <id>dosbox</id>
-    <id>dotnet</id>
-    <id>dotnet-all</id>
-    <id>dotnet-runtime</id>
+    <id>dotcover</id>
     <id>dotnet-4.6.2</id>
     <id>dotnet-5.0-sdk</id>
+    <id>dotnet-6.0-sdk</id>
+    <id>dotnet-all</id>
     <id>dotnet-desktopruntime</id>
+    <id>dotnet-runtime</id>
     <id>dotnet3.5</id>
     <id>dotnet4.6.2</id>
-    <id>dotnet4.7</id>
     <id>dotnet4.7.1</id>
     <id>dotnet4.7.2</id>
+    <id>dotnet4.7</id>
     <id>dotnet5-desktop-runtime</id>
-    <id>dotnet-6.0-sdk</id>
+    <id>dotnet</id>
     <id>dotnetcore-3.1-sdk</id>
     <id>dotnetcore-3.1-windowshosting</id>
     <id>dotnetcore-aspnetruntime</id>
@@ -110,13 +116,12 @@
     <id>dotnetcore3-desktop-runtime</id>
     <id>dotnetcore</id>
     <id>dotpeek</id>
-    <id>dotcover</id>
     <id>dottrace</id>
     <id>ds4windows</id>
     <id>duplicati</id>
     <id>element-desktop</id>
-    <id>etcher</id>
     <id>es</id>
+    <id>etcher</id>
     <id>everything</id>
     <id>ext2fsd</id>
     <id>fastcopy.portable</id>
@@ -128,8 +133,6 @@
     <id>firefox-quantum-nox</id>
     <id>foobar2000</id>
     <id>gawk</id>
-    <id>google-backup-and-sync</id>
-    <id>google-drive-file-stream</id>
     <id>gh</id>
     <id>ghostscript.app</id>
     <id>git.install</id>
@@ -138,6 +141,8 @@
     <id>github-desktop</id>
     <id>gnupg</id>
     <id>gobby</id>
+    <id>google-backup-and-sync</id>
+    <id>google-drive-file-stream</id>
     <id>gpu-z</id>
     <id>grep</id>
     <id>gsudo</id>
@@ -177,8 +182,8 @@
     <id>libreoffice</id>
     <id>lightshot</id>
     <id>linux-reader</id>
-    <id>looking-glass-host</id>
     <id>looking-glass-host-bleeding-edge</id>
+    <id>looking-glass-host</id>
     <id>ludusavi</id>
     <id>make</id>
     <id>maven</id>
@@ -189,15 +194,16 @@
     <id>miktex.install</id>
     <id>miktex</id>
     <id>minecraft</id>
+    <id>mkvtoolnix</id>
     <id>moonlight-qt.install</id>
     <id>mozillabuild</id>
     <id>mp3tag</id>
-    <id>mpv</id>
-    <id>mpv.portable</id>
     <id>mpv.install</id>
+    <id>mpv.portable</id>
+    <id>mpv</id>
     <id>msi.template</id>
-    <id>mssqlserver-compact4.0</id>
     <id>mssqlserver-compact3.5</id>
+    <id>mssqlserver-compact4.0</id>
     <id>msys2</id>
     <id>mumble</id>
     <id>mupdf</id>
@@ -211,6 +217,7 @@
     <id>nodejs.install</id>
     <id>nodejs</id>
     <id>nomacs</id>
+    <id>notepadplusplus.commandline</id>
     <id>notepadplusplus.install</id>
     <id>notepadplusplus</id>
     <id>nsis.install</id>
@@ -220,9 +227,9 @@
     <id>nuget.commandline</id>
     <id>nugetpackageexplorer</id>
     <id>nxlog</id>
-    <id>octave</id>
     <id>obs-studio.install</id>
     <id>obs-studio</id>
+    <id>octave</id>
     <id>oldcalc</id>
     <id>open-shell</id>
     <id>openhashtab</id>
@@ -244,8 +251,8 @@
     <id>php</id>
     <id>picard</id>
     <id>pingtracer</id>
-    <id>powertoys</id>
     <id>playnite</id>
+    <id>powertoys</id>
     <id>prime95</id>
     <id>procrastitracker</id>
     <id>prusaslicer</id>
@@ -264,13 +271,14 @@
     <id>qtox</id>
     <id>quiterss</id>
     <id>r.project</id>
+    <id>r.studio</id>
     <id>r</id>
     <id>rapidee</id>
     <id>rclone.portable</id>
     <id>rclone</id>
     <id>regeditor</id>
-    <id>resharper</id>
     <id>resharper-ultimate-all</id>
+    <id>resharper</id>
     <id>riot-web</id>
     <id>ripgrep</id>
     <id>roboto.font</id>
@@ -282,9 +290,9 @@
     <id>shexview</id>
     <id>shotcut</id>
     <id>shutup10</id>
+    <id>sshfs</id>
     <id>steam</id>
     <id>stubby</id>
-    <id>sshfs</id>
     <id>sudo</id>
     <id>sumatrapdf.commandline</id>
     <id>sumatrapdf.install</id>
@@ -297,6 +305,7 @@
     <id>tortoisegit</id>
     <id>totalcommander</id>
     <id>transifex-client</id>
+    <id>trid</id>
     <id>uplay</id>
     <id>vcredist-all</id>
     <id>vcredist2015</id>
@@ -308,9 +317,9 @@
     <id>virtualbox-guest-additions-guest.install</id>
     <id>visualstudio-installer</id>
     <id>vivaldi</id>
-    <id>vlc</id>
     <id>vlc.install</id>
     <id>vlc.portable</id>
+    <id>vlc</id>
     <id>vscode</id>
     <id>vscodium</id>
     <id>waterfox</id>
@@ -429,8 +438,15 @@
       <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
-      <functionName>Convert-Temurinjre</functionName>
+      <functionName>Convert-Temurinjre-general</functionName>
       <id>temurinjre</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurinjre-general</functionName>
+      <id>temurin17jre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
@@ -618,6 +634,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-cura-new</functionName>
+      <id>cura-new</id>
+      <needsStopAction>Yes</needsStopAction>
+      <needsToolsDir>No</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-ddu</functionName>
       <id>ddu</id>
       <needsStopAction>yes</needsStopAction>
@@ -662,6 +685,13 @@
     <pkg>
       <functionName>Convert-dotnet4.5</functionName>
       <id>dotnet4.5</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet4.5.1</functionName>
+      <id>dotnet4.5.1</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -718,6 +748,41 @@
     <pkg>
       <functionName>Convert-dotnet-6.0-sdk-4xx</functionName>
       <id>dotnet-6.0-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.1-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.2-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-3.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-3.0-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -1144,6 +1209,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-lockhunter</functionName>
+      <id>lockhunter</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-logitech-options</functionName>
       <id>logitech-options</id>
       <needsStopAction>no</needsStopAction>
@@ -1258,6 +1330,13 @@
     <pkg>
       <functionName>Convert-netfx-4.8</functionName>
       <id>netfx-4.8</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-netfx-4.8.1</functionName>
+      <id>netfx-4.8.1</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -1709,6 +1788,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-yubikey-manager</functionName>
+      <id>yubikey-manager</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-xming</functionName>
