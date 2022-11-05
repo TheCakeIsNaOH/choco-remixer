@@ -675,7 +675,14 @@
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
-        <pkg>
+    <pkg>
+      <functionName>Convert-dotnet1.1</functionName>
+      <id>dotnet1.1</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dotnet4.0</functionName>
       <id>dotnet4.0</id>
       <needsStopAction>yes</needsStopAction>
