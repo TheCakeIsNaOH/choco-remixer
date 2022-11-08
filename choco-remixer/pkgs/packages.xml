@@ -95,9 +95,11 @@
     <id>dotnet-4.6.2</id>
     <id>dotnet-5.0-sdk</id>
     <id>dotnet-6.0-sdk</id>
+    <id>dotnet-7.0-sdk</id>
     <id>dotnet-all</id>
     <id>dotnet-desktopruntime</id>
     <id>dotnet-runtime</id>
+    <id>dotnet-sdk</id>
     <id>dotnet3.5</id>
     <id>dotnet4.6.2</id>
     <id>dotnet4.7.1</id>
@@ -188,6 +190,7 @@
     <id>make</id>
     <id>maven</id>
     <id>mc</id>
+    <id>mediainfo</id>
     <id>meld</id>
     <id>microsoft-message-analyzer</id>
     <id>microsoft-windows-terminal</id>
@@ -755,6 +758,27 @@
     <pkg>
       <functionName>Convert-dotnet-6.0-sdk-4xx</functionName>
       <id>dotnet-6.0-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
