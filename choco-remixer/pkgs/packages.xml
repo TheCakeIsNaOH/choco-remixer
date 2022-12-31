@@ -288,6 +288,7 @@
     <id>rocolatey</id>
     <id>rpcs3</id>
     <id>ruby</id>
+    <id>ruby.install</id>
     <id>rufus</id>
     <id>sed</id>
     <id>shexview</id>
@@ -900,6 +901,13 @@
       <id>dropbox</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-ea-app</functionName>
+      <id>ea-app</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
