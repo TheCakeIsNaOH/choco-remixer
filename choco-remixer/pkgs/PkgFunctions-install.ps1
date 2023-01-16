@@ -261,16 +261,11 @@ Function Convert-libreoffice-still ($obj) {
 }
 
 Function Convert-tor-browser ($obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\surl\s').tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\surl64\s').tostring()
 
-    Function Get-PackageParameters {
-        Return "mockup"
-    }
-    . $(Join-Path $obj.toolsDir 'helpers.ps1')
-    $data = GetDownloadInformation -toolsPath $obj.toolsDir
-    $url32 = $data.url32
-    $url64 = $data.url64
-    $checksum32 = $data.checksum
-    $checksum64 = $data.checksum64
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
@@ -281,6 +276,9 @@ Function Convert-tor-browser ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\sChecksum\s').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\sChecksum64\s').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
     Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
     Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
