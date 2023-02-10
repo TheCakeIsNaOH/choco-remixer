@@ -119,6 +119,7 @@
     <id>dotnetcore</id>
     <id>dotpeek</id>
     <id>dottrace</id>
+    <id>dnspyex</id>
     <id>ds4windows</id>
     <id>duplicati</id>
     <id>element-desktop</id>
@@ -267,6 +268,10 @@
     <id>pwsh</id>
     <id>python2</id>
     <id>python3</id>
+    <id>python39</id>
+    <id>python310</id>
+    <id>python311</id>
+    <id>python312</id>
     <id>python</id>
     <id>qbittorrent</id>
     <id>qownnotes</id>
