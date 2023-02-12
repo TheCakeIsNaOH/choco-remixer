@@ -82,27 +82,40 @@ Function Convert-office365business ($obj) {
 
 
 Function Convert-anaconda3 ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "https").ToString()
+    $only64 = $true
+
+    try {
+      $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
+      $url32 = ($fullurl32 -split "'" | Select-String -Pattern "https").ToString()
+      $only64 = $false
+    }
+    catch {}
 
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url64bit  ').tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "https").ToString()
 
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file          = (Join-Path $pkgToolsDir "' + $filename32 + '")'
-
+    if ( ! $only64 ) {
+      $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+      $filePath32 = 'file          = (Join-Path $pkgToolsDir "' + $filename32 + '")'
+    }
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
     $filePath64 = 'file64        = (Join-Path $pkgToolsDir "' + $filename64 + '")'
 
     $obj.installScriptMod = '$pkgToolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32 `n    $filePath64"
+    if ( ! $only64 ) {
+        $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32 `n    $filePath64"
+    }
+    else {
+        $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath64"
+    }
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $pkgToolsDir\*.exe'
 
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    if( ! $only64 ) {
+        $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+        Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    }
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
     Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 Function Convert-miniconda3 ($obj) {
@@ -1710,4 +1723,28 @@ Function Convert-dellcommandupdate ($obj) {
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 
+}
+
+
+
+
+Function Convert-wsl2 ($obj) {
+    #need to deal with added added param that has option of install both 32 and 64,
+    #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
+    $fullurl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()
+
+    $url = ($fullurl -split "'" | Select-String -Pattern "https").tostring()
+    $filename = ($url -split "/" | Select-Object -Last 1).tostring()
+    $filePath = 'file     = (Join-Path $toolsDir "' + $filename + '")'
+
+    $checksum = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath`n"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
+
+
+    Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 }
