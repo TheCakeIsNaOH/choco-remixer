@@ -9,6 +9,8 @@
     <id>adoptopenjdk8</id>
     <id>adoptopenjdk8jre</id>
     <id>adoptopenjdkjre</id>
+    <id>advanced-renamer.install</id>
+    <id>advanced-renamer</id>
     <id>angryip</id>
     <id>ant</id>
     <id>anydesk</id>
@@ -38,9 +40,9 @@
     <id>boxstarter</id>
     <id>brave</id>
     <id>bulk-crap-uninstaller</id>
-    <id>calibre</id>
-    <id>calibre-dedrm</id>
     <id>cake-bakery.portable</id>
+    <id>calibre-dedrm</id>
+    <id>calibre</id>
     <id>cdburnerxp</id>
     <id>checksum</id>
     <id>choco-cleaner</id>
@@ -48,6 +50,7 @@
     <id>choco-package-deprecater</id>
     <id>choco-package-list-backup</id>
     <id>choco-protocol-support</id>
+    <id>choco-upgrade-all-at</id>
     <id>chocolatey-agent</id>
     <id>chocolatey-compatibility.extension</id>
     <id>chocolatey-core.extension</id>
@@ -68,6 +71,7 @@
     <id>chocolateypackageupdater</id>
     <id>chocolateypowershell</id>
     <id>chromium</id>
+    <id>cleanup-desktop-shortcuts.hook</id>
     <id>clementine</id>
     <id>cmake.install</id>
     <id>cmake.portable</id>
@@ -78,6 +82,7 @@
     <id>crystaldiskinfo.portable</id>
     <id>crystaldiskinfo</id>
     <id>crystaldiskmark</id>
+    <id>cura</id>
     <id>curl</id>
     <id>cygwin</id>
     <id>die</id>
@@ -86,19 +91,22 @@
     <id>dolphin-dev</id>
     <id>dolphin</id>
     <id>dosbox</id>
-    <id>dotnet</id>
-    <id>dotnet-all</id>
-    <id>dotnet-runtime</id>
+    <id>dotcover</id>
     <id>dotnet-4.6.2</id>
     <id>dotnet-5.0-sdk</id>
+    <id>dotnet-6.0-sdk</id>
+    <id>dotnet-7.0-sdk</id>
+    <id>dotnet-all</id>
     <id>dotnet-desktopruntime</id>
+    <id>dotnet-runtime</id>
+    <id>dotnet-sdk</id>
     <id>dotnet3.5</id>
     <id>dotnet4.6.2</id>
-    <id>dotnet4.7</id>
     <id>dotnet4.7.1</id>
     <id>dotnet4.7.2</id>
+    <id>dotnet4.7</id>
     <id>dotnet5-desktop-runtime</id>
-    <id>dotnet-6.0-sdk</id>
+    <id>dotnet</id>
     <id>dotnetcore-3.1-sdk</id>
     <id>dotnetcore-3.1-windowshosting</id>
     <id>dotnetcore-aspnetruntime</id>
@@ -110,13 +118,13 @@
     <id>dotnetcore3-desktop-runtime</id>
     <id>dotnetcore</id>
     <id>dotpeek</id>
-    <id>dotcover</id>
     <id>dottrace</id>
+    <id>dnspyex</id>
     <id>ds4windows</id>
     <id>duplicati</id>
     <id>element-desktop</id>
-    <id>etcher</id>
     <id>es</id>
+    <id>etcher</id>
     <id>everything</id>
     <id>ext2fsd</id>
     <id>fastcopy.portable</id>
@@ -128,8 +136,6 @@
     <id>firefox-quantum-nox</id>
     <id>foobar2000</id>
     <id>gawk</id>
-    <id>google-backup-and-sync</id>
-    <id>google-drive-file-stream</id>
     <id>gh</id>
     <id>ghostscript.app</id>
     <id>git.install</id>
@@ -137,6 +143,9 @@
     <id>gitextensions</id>
     <id>github-desktop</id>
     <id>gnupg</id>
+    <id>gobby</id>
+    <id>google-backup-and-sync</id>
+    <id>google-drive-file-stream</id>
     <id>gpu-z</id>
     <id>grep</id>
     <id>gsudo</id>
@@ -170,16 +179,19 @@
     <id>krita</id>
     <id>kubernetes-cli</id>
     <id>large-text-file-viewer</id>
+    <id>less</id>
     <id>lgs.g700s</id>
     <id>libdvdcss-2</id>
     <id>libreoffice</id>
     <id>lightshot</id>
     <id>linux-reader</id>
-    <id>looking-glass-host</id>
     <id>looking-glass-host-bleeding-edge</id>
+    <id>looking-glass-host</id>
     <id>ludusavi</id>
     <id>make</id>
     <id>maven</id>
+    <id>mc</id>
+    <id>mediainfo</id>
     <id>meld</id>
     <id>mambaforge</id>
     <id>microsoft-message-analyzer</id>
@@ -188,15 +200,16 @@
     <id>miktex.install</id>
     <id>miktex</id>
     <id>minecraft</id>
+    <id>mkvtoolnix</id>
     <id>moonlight-qt.install</id>
     <id>mozillabuild</id>
     <id>mp3tag</id>
-    <id>mpv</id>
-    <id>mpv.portable</id>
     <id>mpv.install</id>
+    <id>mpv.portable</id>
+    <id>mpv</id>
     <id>msi.template</id>
-    <id>mssqlserver-compact4.0</id>
     <id>mssqlserver-compact3.5</id>
+    <id>mssqlserver-compact4.0</id>
     <id>msys2</id>
     <id>mumble</id>
     <id>mupdf</id>
@@ -210,6 +223,7 @@
     <id>nodejs.install</id>
     <id>nodejs</id>
     <id>nomacs</id>
+    <id>notepadplusplus.commandline</id>
     <id>notepadplusplus.install</id>
     <id>notepadplusplus</id>
     <id>nsis.install</id>
@@ -219,14 +233,16 @@
     <id>nuget.commandline</id>
     <id>nugetpackageexplorer</id>
     <id>nxlog</id>
-    <id>octave</id>
     <id>obs-studio.install</id>
     <id>obs-studio</id>
+    <id>octave</id>
+    <id>oldcalc</id>
     <id>open-shell</id>
     <id>openhashtab</id>
     <id>openssh</id>
     <id>openssl.light</id>
     <id>openssl</id>
+    <id>openvpn</id>
     <id>paint.net</id>
     <id>pandoc</id>
     <id>papercut</id>
@@ -235,11 +251,14 @@
     <id>pcsx2.portable</id>
     <id>pcsx2</id>
     <id>pdfcreator</id>
+    <id>phonerlite.install</id>
+    <id>phonerlite.portable</id>
+    <id>phonerlite</id>
     <id>php</id>
     <id>picard</id>
     <id>pingtracer</id>
-    <id>powertoys</id>
     <id>playnite</id>
+    <id>powertoys</id>
     <id>prime95</id>
     <id>procrastitracker</id>
     <id>prusaslicer</id>
@@ -251,6 +270,10 @@
     <id>pwsh</id>
     <id>python2</id>
     <id>python3</id>
+    <id>python39</id>
+    <id>python310</id>
+    <id>python311</id>
+    <id>python312</id>
     <id>python</id>
     <id>qbittorrent</id>
     <id>qownnotes</id>
@@ -264,33 +287,36 @@
     <id>rclone.portable</id>
     <id>rclone</id>
     <id>regeditor</id>
-    <id>resharper</id>
     <id>resharper-ultimate-all</id>
+    <id>resharper</id>
     <id>riot-web</id>
     <id>ripgrep</id>
     <id>roboto.font</id>
     <id>rocolatey</id>
     <id>rpcs3</id>
     <id>ruby</id>
+    <id>ruby.install</id>
     <id>rufus</id>
     <id>sed</id>
     <id>shexview</id>
     <id>shotcut</id>
     <id>shutup10</id>
+    <id>sshfs</id>
     <id>steam</id>
     <id>stubby</id>
-    <id>sshfs</id>
     <id>sudo</id>
     <id>sumatrapdf.commandline</id>
     <id>sumatrapdf.install</id>
     <id>sumatrapdf.portable</id>
     <id>sumatrapdf</id>
+    <id>syncthing</id>
     <id>synctrayzor</id>
     <id>tablacus</id>
     <id>tinymediamanager</id>
     <id>tortoisegit</id>
     <id>totalcommander</id>
     <id>transifex-client</id>
+    <id>trid</id>
     <id>uplay</id>
     <id>vcredist-all</id>
     <id>vcredist2015</id>
@@ -302,9 +328,9 @@
     <id>virtualbox-guest-additions-guest.install</id>
     <id>visualstudio-installer</id>
     <id>vivaldi</id>
-    <id>vlc</id>
     <id>vlc.install</id>
     <id>vlc.portable</id>
+    <id>vlc</id>
     <id>vscode</id>
     <id>vscodium</id>
     <id>waterfox</id>
@@ -423,8 +449,15 @@
       <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
-      <functionName>Convert-Temurinjre</functionName>
+      <functionName>Convert-Temurinjre-general</functionName>
       <id>temurinjre</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurinjre-general</functionName>
+      <id>temurin17jre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
@@ -556,6 +589,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-camunda-modeler</functionName>
+      <id>camunda-modeler</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-coretemp</functionName>
       <id>coretemp</id>
       <needsStopAction>yes</needsStopAction>
@@ -584,6 +624,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-conemu</functionName>
+      <id>ConEmu</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-cpuz</functionName>
       <id>cpu-z.install</id>
       <needsStopAction>no</needsStopAction>
@@ -596,6 +643,13 @@
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>Yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-cura-new</functionName>
+      <id>cura-new</id>
+      <needsStopAction>Yes</needsStopAction>
+      <needsToolsDir>No</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-ddu</functionName>
@@ -632,7 +686,14 @@
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
-        <pkg>
+    <pkg>
+      <functionName>Convert-dotnet1.1</functionName>
+      <id>dotnet1.1</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dotnet4.0</functionName>
       <id>dotnet4.0</id>
       <needsStopAction>yes</needsStopAction>
@@ -642,6 +703,13 @@
     <pkg>
       <functionName>Convert-dotnet4.5</functionName>
       <id>dotnet4.5</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet4.5.1</functionName>
+      <id>dotnet4.5.1</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -698,6 +766,62 @@
     <pkg>
       <functionName>Convert-dotnet-6.0-sdk-4xx</functionName>
       <id>dotnet-6.0-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-desktopruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.1-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.2-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-3.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-3.0-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -787,6 +911,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-ea-app</functionName>
+      <id>ea-app</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-eclipse</functionName>
       <id>eclipse</id>
       <needsStopAction>no</needsStopAction>
@@ -862,6 +993,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-gajim</functionName>
+      <id>gajim</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-geforce-driver</functionName>
@@ -1004,11 +1142,25 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-jabref-install</functionName>
+      <id>jabref.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-jetbrains-rider</functionName>
       <id>jetbrains-rider</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-jq</functionName>
+      <id>jq</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
 
     <pkg>
@@ -1100,6 +1252,13 @@
       <id>lightshot.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-lockhunter</functionName>
+      <id>lockhunter</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
@@ -1222,6 +1381,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-netfx-4.8.1</functionName>
+      <id>netfx-4.8.1</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-netfx-4.7.1-devpack</functionName>
       <id>netfx-4.7.1-devpack</id>
       <needsStopAction>yes</needsStopAction>
@@ -1306,6 +1472,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-pdf24</functionName>
+      <id>pdf24</id>
+      <needsStopAction>No</needsStopAction>
+      <needsToolsDir>No</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-powershell</functionName>
       <id>powershell</id>
       <needsStopAction>Yes</needsStopAction>
@@ -1327,6 +1500,27 @@
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-qalculate</functionName>
+      <id>qalculate</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-qgis</functionName>
+      <id>qgis</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-rebootblocker</functionName>
+      <id>rebootblocker</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-resharper-platform</functionName>
       <id>resharper-platform</id>
       <needsStopAction>no</needsStopAction>
@@ -1346,6 +1540,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-rstudio</functionName>
+      <id>R.Studio</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-rtx-voice</functionName>
@@ -1376,6 +1577,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-setacl-studio</functionName>
+      <id>setacl-studio</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-shotcut-install</functionName>
       <id>shotcut.install</id>
       <needsStopAction>no</needsStopAction>
@@ -1395,6 +1603,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-sourcecodepro</functionName>
+      <id>SourceCodePro</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-spotify</functionName>
@@ -1607,11 +1822,25 @@
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-winmtr-redux</functionName>
+      <id>winmtr-redux</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-yarn</functionName>
       <id>yarn</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-yubikey-manager</functionName>
+      <id>yubikey-manager</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-xming</functionName>
