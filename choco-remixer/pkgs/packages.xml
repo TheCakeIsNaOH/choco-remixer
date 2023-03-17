@@ -193,8 +193,10 @@
     <id>mc</id>
     <id>mediainfo</id>
     <id>meld</id>
+    <id>mambaforge</id>
     <id>microsoft-message-analyzer</id>
     <id>microsoft-windows-terminal</id>
+    <id>miniforge3</id>
     <id>miktex.install</id>
     <id>miktex</id>
     <id>minecraft</id>
@@ -1825,6 +1827,20 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-wsl2</functionName>
+      <id>wsl2</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>license</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-wsl-ubuntu-2004</functionName>
+      <id>wsl-ubuntu-2004</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>license</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-yarn</functionName>

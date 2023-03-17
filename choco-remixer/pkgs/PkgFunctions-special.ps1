@@ -367,3 +367,24 @@ Function Convert-KB3118401 ($obj) {
 }
 
 
+Function Convert-wsl-ubuntu-2004 ($obj) {
+    $fullurl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()
+
+    $url = ($fullurl -split "'" | Select-String -Pattern "https").tostring()
+    $filename = "ubuntu2004.appx"
+    $filePath = '(Join-Path $toolsDir "' + $filename + '")'
+
+    $checksum = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
+
+    $obj.installScriptMod = '$toolsDir   = Split-Path -parent $MyInvocation.MyCommand.Definition' + "`n" + $obj.InstallScriptMod
+
+
+    $obj.installScriptMod = $obj.installScriptMod -replace [Regex]::Escape('"$env:TEMP\ubuntu2004.appx"'), $filePath
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile @packageArgs" , ""
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.appx'
+
+    Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+
+}
