@@ -779,6 +779,13 @@
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-7.0-runtime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
