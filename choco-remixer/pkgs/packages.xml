@@ -258,7 +258,6 @@
     <id>picard</id>
     <id>pingtracer</id>
     <id>playnite</id>
-    <id>powertoys</id>
     <id>prime95</id>
     <id>procrastitracker</id>
     <id>prusaslicer</id>
@@ -294,10 +293,13 @@
     <id>roboto.font</id>
     <id>rocolatey</id>
     <id>rpcs3</id>
+    <id>rsync</id>
     <id>ruby</id>
     <id>ruby.install</id>
     <id>rufus</id>
     <id>sed</id>
+    <id>sqlitebrowser</id>
+    <id>sqlitebrowser.install</id>
     <id>shexview</id>
     <id>shotcut</id>
     <id>shutup10</id>
@@ -781,6 +783,13 @@
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-7.0-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-sdk-3xx</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -1482,6 +1491,13 @@
     <pkg>
       <functionName>Convert-pdf24</functionName>
       <id>pdf24</id>
+      <needsStopAction>No</needsStopAction>
+      <needsToolsDir>No</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-powertoys</functionName>
+      <id>powertoys</id>
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>No</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>

@@ -122,9 +122,8 @@ Function Convert-anydesk-portable ($obj) {
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
 
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
+    #$obj.installScriptMod = $obj.installScriptMod -replace "installArgs = @{" , "$&`n  $filePath32"
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyInstallPackage @packageArgs", "$&`n    Remove-Item -Force -EA 0 -Path `$toolsDir\*.exe"
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
