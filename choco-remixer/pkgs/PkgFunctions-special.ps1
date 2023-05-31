@@ -17,7 +17,7 @@ Function Convert-dotnetfx ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' Checksum +').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 Function Convert-netfx-4.6.2 ($obj) {
@@ -33,7 +33,7 @@ Function Convert-netfx-4.6.2 ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' Checksum +').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 Function Convert-netfx-4.7.1-devpack ($obj) {
@@ -49,7 +49,7 @@ Function Convert-netfx-4.7.1-devpack ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' Checksum +').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 Function Convert-netfx-4.7.1 ($obj) {
@@ -65,7 +65,7 @@ Function Convert-netfx-4.7.1 ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' Checksum +').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 Function Convert-netfx-4.7.2 ($obj) {
@@ -81,7 +81,7 @@ Function Convert-netfx-4.7.2 ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' Checksum +').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 Function Convert-netfx-4.8 ($obj) {
@@ -97,7 +97,7 @@ Function Convert-netfx-4.8 ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' Checksum +').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 Function Convert-netfx-4.8.1 ($obj) {
@@ -113,7 +113,7 @@ Function Convert-netfx-4.8.1 ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' Checksum +').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 Function Convert-anydesk-portable ($obj) {
@@ -128,7 +128,7 @@ Function Convert-anydesk-portable ($obj) {
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum32 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
 
@@ -144,7 +144,7 @@ Function Convert-rtx-voice ($obj) {
 
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\schecksum64\s').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
 
@@ -179,11 +179,11 @@ Function Convert-powershell ($obj) {
     $checksumWin2k8R2andWin7x64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2k8R2andWin7x64checksum '   ).tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksumWin2012 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2012checksum '              ).tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-File -url $urlWin81x86              -filename $fileNameWin81x86             -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin81x86
-    Get-File -url $urlWin2k12R2andWin81x64  -filename $fileNameWin2k12R2andWin81x64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin2k12R2andWin81x64
-    Get-File -url $urlWin7x86               -filename $fileNameWin7x86              -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin7x86
-    Get-File -url $urlWin2k8R2andWin7x64    -filename $fileNameWin2k8R2andWin7x64   -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin2k8R2andWin7x64
-    Get-File -url $urlWin2012               -filename $fileNameWin2012              -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin2012
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $urlWin81x86              -filename $fileNameWin81x86             -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin81x86
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $urlWin2k12R2andWin81x64  -filename $fileNameWin2k12R2andWin81x64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin2k12R2andWin81x64
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $urlWin7x86               -filename $fileNameWin7x86              -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin7x86
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $urlWin2k8R2andWin7x64    -filename $fileNameWin2k8R2andWin7x64   -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin2k8R2andWin7x64
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $urlWin2012               -filename $fileNameWin2012              -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin2012
 }
 
 
@@ -199,7 +199,7 @@ Function Convert-kb29992262 ($obj) {
             $checksum = $_.value.checksum
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
-            Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
@@ -209,7 +209,7 @@ Function Convert-kb29992262 ($obj) {
             $checksum = $_.value.checksum64
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
-            Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
@@ -234,7 +234,7 @@ Function Convert-KB3033929 ($obj) {
             $checksum = $_.value.checksum
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
-            Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
@@ -244,7 +244,7 @@ Function Convert-KB3033929 ($obj) {
             $checksum = $_.value.checksum64
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
-            Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
@@ -269,7 +269,7 @@ Function Convert-KB3035131 ($obj) {
             $checksum = $_.value.checksum
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
-            Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
@@ -279,7 +279,7 @@ Function Convert-KB3035131 ($obj) {
             $checksum = $_.value.checksum64
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
-            Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
@@ -306,7 +306,7 @@ Function Convert-KB3063858 ($obj) {
             $checksum = $_.value.checksum
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
-            Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
@@ -316,7 +316,7 @@ Function Convert-KB3063858 ($obj) {
             $checksum = $_.value.checksum64
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
-            Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
@@ -343,7 +343,7 @@ Function Convert-KB3118401 ($obj) {
             $checksum = $_.value.checksum
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url = (Join-Path $toolsDir ''' + $filename + ''')'
-            Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
@@ -353,7 +353,7 @@ Function Convert-KB3118401 ($obj) {
             $checksum = $_.value.checksum64
             $filename = ($url -split "/" | Select-Object -Last 1).tostring()
             $filePath = '    Url64 = (Join-Path $toolsDir ''' + $filename + ''')'
-            Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+            Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 
             $escapedURL = [Regex]::Escape($url)
             $obj.installScriptMod = $obj.installScriptMod -replace ".*$escapedURL.*", "$filePath`n#$&"
@@ -384,6 +384,6 @@ Function Convert-wsl-ubuntu-2004 ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile @packageArgs" , ""
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.appx'
 
-    Get-File -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 
 }

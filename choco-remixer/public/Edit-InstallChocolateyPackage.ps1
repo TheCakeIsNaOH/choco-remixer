@@ -4,6 +4,7 @@ Function Edit-InstallChocolateyPackage {
         [ValidateSet("x64", "x32", "both")]
         [string]$architecture,
         [parameter(Mandatory = $true)][string]$nuspecID,
+        [parameter(Mandatory = $true)][string]$version,
         [parameter(Mandatory = $true)][string]$installScript,
         [parameter(Mandatory = $true)][string]$toolsDir,
         [parameter(Mandatory = $true)][int]$urltype,
@@ -225,7 +226,7 @@ Function Edit-InstallChocolateyPackage {
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
-            Get-File -url $url32 -filename $filename32 -folder $toolsDir -checksum $checksum32 -checksumTypeType $checksumTypeType
+            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url32 -filename $filename32 -folder $toolsDir -checksum $checksum32 -checksumTypeType $checksumTypeType
         }
         if ($x64) {
             if ($checksumArgsType -eq 0) {
@@ -245,14 +246,14 @@ Function Edit-InstallChocolateyPackage {
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
-            Get-File -url $url64 -filename $filename64 -folder $toolsDir -checksum $checksum64 -checksumTypeType $checksumTypeType
+            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url64 -filename $filename64 -folder $toolsDir -checksum $checksum64 -checksumTypeType $checksumTypeType
         }
     } else {
         if ($x32) {
-            Get-File -url $url32 -filename $filename32 -folder $toolsDir
+            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url32 -filename $filename32 -folder $toolsDir
         }
         if ($x64) {
-            Get-File -url $url64 -filename $filename64 -folder $toolsDir
+            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url64 -filename $filename64 -folder $toolsDir
         }
     }
 

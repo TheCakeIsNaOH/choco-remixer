@@ -1,4 +1,4 @@
-﻿Function Get-FileWithDownloadCache {
+﻿Function Get-FileWithCache {
     param (
         [parameter(Mandatory = $true)][string]$url,
         [parameter(Mandatory = $true)][string]$filename,
