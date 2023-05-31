@@ -96,6 +96,7 @@ For `Install-WindowsUpdate`, still use `url`/`url64`, which does work with a loc
 - 4: `' checksum '`,`' Checksum64 '`
 - 5: `'\schecksum\s+='`,`'\schecksum64\s+='`
 - 6: `'\schecksum\s+='`,`'\schecksum64\s+='` with double quotes url
+- 7: `'\$checksum\s+='`,`'\$checksum64\s+='`
 
 ## Misc other options
 - `$doubleQuotesUrl`, if urls are surrounded by double quotes instead of single

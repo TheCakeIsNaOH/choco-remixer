@@ -1018,9 +1018,9 @@ Function Convert-googledrive ($obj) {
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
         argstype         = 0
-        urltype          = 2
+        urltype          = 6
         RemoveEXE        = $true
-        checksumArgsType = 2
+        checksumArgsType = 7
         checksumTypeType = 'sha256'
     }
 
