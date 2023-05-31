@@ -1635,7 +1635,7 @@ Function Convert-googlechrome ($obj) {
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageargs
     $string = 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi' + "`n" + "    $&"
-    $obj.installScriptMod = $obj.installScriptMod -replace ' exit ', $string
+    $obj.installScriptMod = $obj.installScriptMod -replace ' return', $string
 }
 
 

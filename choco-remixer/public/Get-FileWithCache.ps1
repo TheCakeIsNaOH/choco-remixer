@@ -19,7 +19,7 @@
         if ([string]::IsNullOrWhiteSpace($newUrl)) {
             Write-Verbose "No download cache for $url is found"
         } else {
-            Write-Output "Replacing script Url with download cache url $newUrl"
+            Write-Information "Replacing script Url with download cache url $newUrl"  -InformationAction Continue
             $url = $newUrl
         }
     } else {
