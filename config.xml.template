@@ -44,4 +44,7 @@
 
 	<!-- Attempt to write out the the old and the new version of the package | option is yes or no -->
 	<writeVersion>no</writeVersion>
+
+	<!-- Set a locale to use for downloading locale-specific installers (e.g. Firefox). Defaults to en-US if not set -->
+	<locale>en-US</locale>
 </options>

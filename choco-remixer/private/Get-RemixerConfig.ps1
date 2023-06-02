@@ -204,4 +204,10 @@
             Throw "no proxyRepoURL in config xml"
         }
     }
+
+    if ($null -ne $config.locale) {
+        $global:remixerLocale = $config.locale
+    } else {
+        $global:remixerLocale = "en-US"
+    }
 }

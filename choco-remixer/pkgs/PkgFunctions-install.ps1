@@ -803,7 +803,7 @@ Function Convert-thunderbird ($obj) {
     }
     . $(Join-Path $obj.toolsDir 'helpers.ps1')
 
-    $locale = 'en-US'
+    $locale = $global:remixerLocale
     $checksums = GetChecksums -language $locale -checksumFile $(Join-Path $obj.toolsDir "LanguageChecksums.csv")
 
 
@@ -837,7 +837,7 @@ Function Convert-firefox ($obj) {
     }
     . $(Join-Path $obj.toolsDir 'helpers.ps1')
 
-    $locale = 'en-US'
+    $locale = $global:remixerLocale
     $checksums = GetChecksums -language $locale -checksumFile $(Join-Path $obj.toolsDir "LanguageChecksums.csv")
 
 
@@ -870,7 +870,7 @@ Function Convert-firefoxesr ($obj) {
     }
     . $(Join-Path $obj.toolsDir 'helpers.ps1')
 
-    $locale = 'en-US'
+    $locale = $global:remixerLocale
     $checksums = GetChecksums -language $locale -checksumFile $(Join-Path $obj.toolsDir "LanguageChecksums.csv")
 
 
