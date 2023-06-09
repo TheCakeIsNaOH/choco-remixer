@@ -50,6 +50,7 @@
     <id>choco-package-deprecater</id>
     <id>choco-package-list-backup</id>
     <id>choco-protocol-support</id>
+    <id>choco-shim-redirects</id>
     <id>choco-upgrade-all-at</id>
     <id>chocolatey-agent</id>
     <id>chocolatey-compatibility.extension</id>
@@ -61,6 +62,7 @@
     <id>chocolatey-management-web</id>
     <id>chocolatey-managment-database</id>
     <id>chocolatey-misc-helpers.extension</id>
+    <id>chocolatey-shim</id>
     <id>chocolatey-uninstall.extension</id>
     <id>chocolatey-visualstudio.extension</id>
     <id>chocolatey-windowsupdate.extension</id>
@@ -71,22 +73,29 @@
     <id>chocolateypackageupdater</id>
     <id>chocolateypowershell</id>
     <id>chromium</id>
+    <id>cinst-shim</id>
     <id>cleanup-desktop-shortcuts.hook</id>
     <id>clementine</id>
+    <id>clist-shim</id>
     <id>cmake.install</id>
     <id>cmake.portable</id>
     <id>cmake</id>
     <id>codecov</id>
+    <id>cpack-shim</id>
     <id>cpu-z</id>
+    <id>cpush-shim</id>
     <id>crystaldiskinfo.install</id>
     <id>crystaldiskinfo.portable</id>
     <id>crystaldiskinfo</id>
     <id>crystaldiskmark</id>
+    <id>cuninst-shim</id>
+    <id>cup-shim</id>
     <id>cura</id>
     <id>curl</id>
     <id>cygwin</id>
     <id>die</id>
     <id>discord</id>
+    <id>dnspyex</id>
     <id>docker-kitematic</id>
     <id>dolphin-dev</id>
     <id>dolphin</id>
@@ -119,7 +128,6 @@
     <id>dotnetcore</id>
     <id>dotpeek</id>
     <id>dottrace</id>
-    <id>dnspyex</id>
     <id>ds4windows</id>
     <id>duplicati</id>
     <id>element-desktop</id>
@@ -189,17 +197,17 @@
     <id>looking-glass-host</id>
     <id>ludusavi</id>
     <id>make</id>
+    <id>mambaforge</id>
     <id>maven</id>
     <id>mc</id>
     <id>mediainfo</id>
     <id>meld</id>
-    <id>mambaforge</id>
     <id>microsoft-message-analyzer</id>
     <id>microsoft-windows-terminal</id>
-    <id>miniforge3</id>
     <id>miktex.install</id>
     <id>miktex</id>
     <id>minecraft</id>
+    <id>miniforge3</id>
     <id>mkvtoolnix</id>
     <id>moonlight-qt.install</id>
     <id>mozillabuild</id>
@@ -268,11 +276,11 @@
     <id>putty</id>
     <id>pwsh</id>
     <id>python2</id>
-    <id>python3</id>
-    <id>python39</id>
     <id>python310</id>
     <id>python311</id>
     <id>python312</id>
+    <id>python39</id>
+    <id>python3</id>
     <id>python</id>
     <id>qbittorrent</id>
     <id>qownnotes</id>
@@ -294,15 +302,15 @@
     <id>rocolatey</id>
     <id>rpcs3</id>
     <id>rsync</id>
-    <id>ruby</id>
     <id>ruby.install</id>
+    <id>ruby</id>
     <id>rufus</id>
     <id>sed</id>
-    <id>sqlitebrowser</id>
-    <id>sqlitebrowser.install</id>
     <id>shexview</id>
     <id>shotcut</id>
     <id>shutup10</id>
+    <id>sqlitebrowser.install</id>
+    <id>sqlitebrowser</id>
     <id>sshfs</id>
     <id>steam</id>
     <id>stubby</id>
@@ -317,8 +325,8 @@
     <id>tinymediamanager</id>
     <id>tortoisegit</id>
     <id>totalcommander</id>
-    <id>transifex-client</id>
     <id>transifex-cli</id>
+    <id>transifex-client</id>
     <id>trid</id>
     <id>uplay</id>
     <id>vcredist-all</id>
@@ -804,6 +812,13 @@
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-7.0-desktopruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-8.0-runtime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
