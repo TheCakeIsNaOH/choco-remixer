@@ -100,9 +100,9 @@ Function Convert-sql-server-express ($obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
 
-    #$checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    #Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    #Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
 }
 
 Function Convert-azurepowershell ($obj) {

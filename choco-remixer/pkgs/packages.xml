@@ -62,6 +62,7 @@
     <id>chocolatey-management-web</id>
     <id>chocolatey-managment-database</id>
     <id>chocolatey-misc-helpers.extension</id>
+    <id>chocolatey-os-dependency.extension</id>
     <id>chocolatey-shim</id>
     <id>chocolatey-uninstall.extension</id>
     <id>chocolatey-visualstudio.extension</id>
@@ -143,6 +144,7 @@
     <id>filezilla</id>
     <id>firefox-quantum-nox</id>
     <id>foobar2000</id>
+    <id>furmark</id>
     <id>gawk</id>
     <id>gh</id>
     <id>ghostscript.app</id>

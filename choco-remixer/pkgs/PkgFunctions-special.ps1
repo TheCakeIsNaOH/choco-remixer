@@ -120,7 +120,6 @@ Function Convert-anydesk-portable ($obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url32 ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename32 + '")'
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
     #$obj.installScriptMod = $obj.installScriptMod -replace "installArgs = @{" , "$&`n  $filePath32"

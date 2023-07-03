@@ -901,19 +901,15 @@ Function Convert-firefoxesr ($obj) {
 Function Convert-nvidia-driver ($obj) {
     $fullurlwin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['url64'\]      = 'https").tostring()
     $fullurlwin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url64   ").tostring()
-    $fullurlDCH = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgsDCHURL      = 'https").tostring()
 
     $urlwin7 = ($fullurlwin7 -split "'" | Select-String -Pattern "http").tostring()
     $urlwin10 = ($fullurlwin10 -split "'" | Select-String -Pattern "http").tostring()
-    $urlDCH = ($fullurlDCH -split "'" | Select-String -Pattern "http").tostring()
 
     $filenamewin7 = ($urlwin7 -split "/" | Select-Object -Last 1).tostring()
     $filenamewin10 = ($urlwin10 -split "/" | Select-Object -Last 1).tostring()
-    $filenameDCH = ($urlDCH -split "/" | Select-Object -Last 1).tostring()
 
     $filePathwin7 = '$packageArgs[''file'']    =  (Join-Path $toolsDir "' + $filenamewin7 + '")'
     $filePathwin10 = '    file    = (Join-Path $toolsDir "' + $filenamewin10 + '")'
-    $filePathDCH = '$packageArgs[''file'']    = (Join-Path $toolsDir "' + $filenameDCH + '")'
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace '\$packageArgs\[''file''\] = "\$\{' , "#$&"
@@ -923,19 +919,15 @@ Function Convert-nvidia-driver ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n $filePathwin10"
     $obj.installScriptMod = $obj.installScriptMod -replace "OSVersion\.Version\.Major -ne '10' \) \{" , "$&`n    $filePathwin7"
-    $obj.installScriptMod = $obj.installScriptMod -replace "-eq 'true'\) \{" , "$&`n    $filePathDCH"
 
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
     $checksumWin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksumWin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['checksum64'\].*= '").tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    $checksumDCH = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$packageArgsDCHChecksum *=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $urlwin7 -filename $filenamewin7 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin7
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $urlwin10 -filename $filenamewin10 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumWin10
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $urlDCH -filename $filenameDCH -folder $obj.toolsDir-checksumTypeType 'sha256' -checksum $checksumDCH
-
 }
 
 

@@ -1316,6 +1316,7 @@ Function Convert-docker-desktop ($obj) {
         argstype         = 0
         urltype          = 2
         RemoveEXE        = $true
+        DeEncodeSpace    = $true
         checksumArgsType = 2
         checksumTypeType = 'sha256'
     }
