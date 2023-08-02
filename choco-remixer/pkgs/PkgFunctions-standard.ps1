@@ -776,6 +776,24 @@ Function Convert-stellarium ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
+Function Convert-powerbi ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        version          = $obj.version
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 0
+        RemoveEXE        = $true
+        needsTools       = $true
+        checksumArgsType = 0
+        checksumTypeType = "sha256"
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
 # SINGLE --------------------------
 
 

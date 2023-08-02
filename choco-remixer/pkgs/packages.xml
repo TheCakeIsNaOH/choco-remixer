@@ -1513,6 +1513,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-powerbi</functionName>
+      <id>powerbi</id>
+      <needsStopAction>No</needsStopAction>
+      <needsToolsDir>Yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-powertoys</functionName>
       <id>powertoys</id>
       <needsStopAction>No</needsStopAction>

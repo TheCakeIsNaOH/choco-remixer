@@ -88,7 +88,8 @@ Function Expand-Nupkg {
             #Making sure that none of the extra metadata files in the .nupkg are unpacked
             $filteredArchive = $archive.Entries | `
                 Where-Object Name -NE '[Content_Types].xml' | Where-Object Name -NE '.rels' | `
-                Where-Object FullName -NotLike 'package/*' | Where-Object Fullname -NotLike '__MACOSX/*'
+                Where-Object FullName -NotLike 'package/*' | Where-Object Fullname -NotLike '__MACOSX/*' | `
+                Where-Object Fullname -NotLike '_rels*' | Where-Object Name -NE ""
 
             $filteredArchive | ForEach-Object {
                 $OutputFile = Join-Path $Destination $_.fullname
