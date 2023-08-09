@@ -9,18 +9,26 @@ Function Convert-adobereader ($obj) {
 
     $MUIurlFull = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$MUIurl =').tostring()
     $MUImspURLFull = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$MUImspURL =').tostring()
+    $MUIurl64Full = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$MUIurl64 =').tostring()
+    $MUImspURL64Full = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$MUImspURL64 =').tostring()
 
     $MUIurl = ($MUIurlFull -split "'" | Select-String -Pattern "http").tostring()
     $MUImspURL = ($MUImspURLFull -split "'" | Select-String -Pattern "http").tostring()
+    $MUIurl64 = ($MUIurl64Full -split "'" | Select-String -Pattern "http").tostring()
+    $MUImspURL64 = ($MUImspURL64Full -split "'" | Select-String -Pattern "http").tostring()
 
     $filenameMUI = ($MUIurl -split "/" | Select-Object -Last 1).tostring()
     $filenameMSP = ($MUImspURL -split "/" | Select-Object -Last 1).tostring()
+    $filenameMUI64 = ($MUIurl64 -split "/" | Select-Object -Last 1).tostring()
+    $filenameMSP64 = ($MUImspURL64 -split "/" | Select-Object -Last 1).tostring()
 
-    $muiPath = '$MUIexePath = (Join-Path $toolsDir "' + $filenameMUI + '")'
-    $mspPath = '$mspPath    = (Join-Path $toolsDir "' + $filenameMSP + '")'
+    $muiPath = '    $MUIexePath = (Join-Path $toolsDir "' + $filenameMUI + '")'
+    $mspPath = '    $mspPath    = (Join-Path $toolsDir "' + $filenameMSP + '")'
+    $muiPath64 = '    $MUIexePath = (Join-Path $toolsDir "' + $filenameMUI64 + '")'
+    $mspPath64 = '    $mspPath    = (Join-Path $toolsDir "' + $filenameMSP64 + '")'
 
 
-    $obj.installScriptMod = $muiPath + "`n" + $mspPath + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = 'if ((Get-OSArchitectureWidth -compare 32) -or ($env:chocolateyForceX86 -eq $true)) {' + "`n" + $muiPath + "`n" + $mspPath + "`n" + '} else {' + "`n" + $muiPath64 + "`n" + $mspPath64 + "`n}`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace '\$DownloadArgs' , '<# $DownloadArgs'
     $obj.installScriptMod = $obj.installScriptMod -replace '@DownloadArgs' , '$& #>'
@@ -32,9 +40,13 @@ Function Convert-adobereader ($obj) {
 
     $muiChecksum = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$MUIchecksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $mspChecksum = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$MUImspChecksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $muiChecksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$MUIchecksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $mspChecksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$MUImspChecksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $MUIurl -filename $filenameMUI -folder $obj.toolsDir -checksum $muiChecksum -checksumTypeType 'sha256'
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $MUImspURL -filename $filenameMSP -folder $obj.toolsDir -checksum $mspChecksum -checksumTypeType 'sha512'
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $MUImspURL -filename $filenameMSP -folder $obj.toolsDir -checksum $mspChecksum -checksumTypeType 'sha256'
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $MUIurl64 -filename $filenameMUI64 -folder $obj.toolsDir -checksum $muiChecksum64 -checksumTypeType 'sha256'
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $MUImspURL64 -filename $filenameMSP64 -folder $obj.toolsDir -checksum $mspChecksum64 -checksumTypeType 'sha256'
 }
 
 
