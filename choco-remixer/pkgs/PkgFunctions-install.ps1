@@ -1134,9 +1134,12 @@ Function Convert-drawio ($obj) {
     $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
     $url32 = $url32 -replace '\$drawioversion', "$softwareVersion"
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
+    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
 
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+	
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
