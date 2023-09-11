@@ -163,6 +163,7 @@
     <id>handbrake.portable</id>
     <id>handbrake</id>
     <id>hashtab</id>
+    <id>hexchat</id>
     <id>hidevolumeosd</id>
     <id>hxd</id>
     <id>icecat</id>
@@ -1125,13 +1126,6 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-hexchat</functionName>
-      <id>hexchat</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-hwmonitor</functionName>
