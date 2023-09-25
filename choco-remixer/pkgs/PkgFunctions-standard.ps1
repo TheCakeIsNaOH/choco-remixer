@@ -116,18 +116,16 @@ Function Convert-4k-youtube-to-mp3 ($obj) {
 
 Function Convert-anydvd ($obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
+        architecture     = "x32"
         nuspecID         = $obj.nuspecID
         version          = $obj.version
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
         argstype         = 0
-        urltype          = 1
+        urltype          = 0
         RemoveEXE        = $true
-        checksumArgsType = 1
+        checksumArgsType = 0
         checksumTypeType = 'sha256'
-        needsEA          = $true
-        needsTools       = $true
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs

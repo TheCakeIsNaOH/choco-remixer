@@ -324,7 +324,7 @@ Function Convert-rust-ms ($obj) {
 }
 
 Function Convert-nexus-repository ($obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url64\s+=').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\s+url64\s+=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'FileFullPath64    = (Join-Path $toolsDir "' + $filename32 + '")'
@@ -335,7 +335,7 @@ Function Convert-nexus-repository ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs\s+=\s+@{" , "$&`n    $filePath32"
     $obj.installScriptMod = $obj.installScriptMod -replace ' url64', '#url64'
 
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$Checksum64\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\s+Checksum64\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
