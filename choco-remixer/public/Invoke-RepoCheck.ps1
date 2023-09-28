@@ -82,13 +82,20 @@
             #pwsh considers 3xx response codes as an error if redirection is disallowed
             if ($PSVersionTable.PSVersion.major -ge 6) {
                 try {
-                    Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea Stop
+                    $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea Stop
+                    $filename = $redirectpage.Headers.'Content-Disposition' -replace '.*filename=(.*)','$1' | Select-Object -Last 1
+                    $dlwdURL = $publicPage.feed.entry.content.src
                 } catch {
                     $dlwdURL = $_.Exception.Response.headers.location.absoluteuri
+                    $filename = $dlwdURL.split("/") | Select-Object -Last 1
                 }
             } else {
                 $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $publicPage.feed.entry.content.src -MaximumRedirection 0 -ea 0
                 $dlwdURL = $redirectpage.Links.href
+                $filename = $redirectpage.Headers.'Content-Disposition' -replace '.*filename=(.*)','$1'  | Select-Object -Last 1
+                if ([string]::IsNullOrEmpty($filename)){
+                    $filename = $dlwdURL.split("/") | Select-Object -Last 1
+                }
             }
 
             #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
