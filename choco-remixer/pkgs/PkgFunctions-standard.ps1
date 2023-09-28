@@ -792,6 +792,23 @@ Function Convert-powerbi ($obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
+Function Convert-vmware-tools ($obj) {
+    $editInstallChocolateyPackageArgs = @{
+        architecture     = "both"
+        nuspecID         = $obj.nuspecID
+        version          = $obj.version
+        installScript    = $obj.installScriptOrig
+        toolsDir         = $obj.toolsDir
+        argstype         = 0
+        urltype          = 6
+        RemoveEXE        = $true
+        checksumArgsType = 7
+        checksumTypeType = "sha256"
+    }
+
+    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
+}
+
 # SINGLE --------------------------
 
 

@@ -1822,6 +1822,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-vmware-tools</functionName>
+      <id>vmware-tools</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-vscodium-install</functionName>
       <id>vscodium.install</id>
       <needsStopAction>no</needsStopAction>
