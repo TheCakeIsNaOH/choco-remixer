@@ -3,3 +3,4 @@ config.xml
 repo-move.xml
 internalized.xml
 download.xml
+*.nupkg

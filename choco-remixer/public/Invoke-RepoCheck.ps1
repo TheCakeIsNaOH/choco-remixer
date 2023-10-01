@@ -59,7 +59,8 @@
         $nuspecID = $_
         Write-Verbose "Comparing repo versions of $($nuspecID)"
 
-        $privateVersions = $privateInfo | Where-Object { $_.name -eq $nuspecID } | Select-Object -ExpandProperty version
+        # Normalize version, as Chocolatey CLI now normalizes versions on pack
+        $privateVersions = $privateInfo | Where-Object { $_.name -eq $nuspecID } | Select-Object -ExpandProperty version | ForEach-Object { [NuGet.Versioning.NuGetVersion]::Parse($_).ToNormalizedString(); }
 
         $publicPageURL = $config.publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
         [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
@@ -76,6 +77,9 @@
                 Write-Error "$nuspecID does not exist or is unlisted on $config.publicRepoURL"
             }
         }
+
+        # Normalize version, as Chocolatey CLI now normalizes versions on pack
+        $publicVersion = [NuGet.Versioning.NuGetVersion]::Parse($publicVersion).ToNormalizedString();
 
         if ($privateVersions -inotcontains $publicVersion) {
 
