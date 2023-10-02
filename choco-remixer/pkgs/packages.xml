@@ -127,7 +127,6 @@
     <id>atcli</id>
     <id>atkinson-hyperlegible</id>
     <id>atom</id>
-    <id>atom</id>
     <id>atomicparsley</id>
     <id>attributechanger</id>
     <id>au</id>
@@ -421,8 +420,6 @@
     <id>chocolatey</id>
     <id>chocolateydeploymentutils</id>
     <id>chocolateygui</id>
-    <id>chocolateygui</id>
-    <id>chocolateypackageupdater</id>
     <id>chocolateypackageupdater</id>
     <id>chocolateypowershell</id>
     <id>chocopm.install</id>
@@ -562,7 +559,6 @@
     <id>cupboard</id>
     <id>cura-lulzbot-experimental</id>
     <id>cura</id>
-    <id>cura</id>
     <id>curl</id>
     <id>cute-cw</id>
     <id>cutemarked</id>
@@ -572,7 +568,6 @@
     <id>cwcli</id>
     <id>cyberchef</id>
     <id>cyg-get</id>
-    <id>cygwin</id>
     <id>cygwin</id>
     <id>dable</id>
     <id>dankerino</id>
@@ -700,12 +695,10 @@
     <id>dotbrowser</id>
     <id>dotcover-cli</id>
     <id>dotcover</id>
-    <id>dotcover</id>
     <id>dotdotgoose</id>
     <id>dotmemory-console</id>
     <id>dotmemory-unit</id>
     <id>dotmemory</id>
-    <id>dotnet-4.6.2</id>
     <id>dotnet-4.6.2</id>
     <id>dotnet-5.0-sdk</id>
     <id>dotnet-5.0-windowshosting</id>
@@ -724,7 +717,6 @@
     <id>dotnet-version</id>
     <id>dotnet-windowshosting</id>
     <id>dotnet.script</id>
-    <id>dotnet3.5</id>
     <id>dotnet3.5</id>
     <id>dotnet4.6.2</id>
     <id>dotnet4.7.1</id>
@@ -753,9 +745,7 @@
     <id>dotnetpretty</id>
     <id>dotnetversiondetector</id>
     <id>dotpeek</id>
-    <id>dotpeek</id>
     <id>dottrace-memory</id>
-    <id>dottrace</id>
     <id>dottrace</id>
     <id>dotultimate</id>
     <id>doubledriver</id>
@@ -864,7 +854,6 @@
     <id>evernote-chrome</id>
     <id>everything.beta</id>
     <id>everything</id>
-    <id>everything</id>
     <id>eviacam</id>
     <id>exifviewer-chrome</id>
     <id>expandrive</id>
@@ -890,7 +879,6 @@
     <id>far-3</id>
     <id>fastcopy.install</id>
     <id>fastcopy.portable</id>
-    <id>fastcopy</id>
     <id>fastcopy</id>
     <id>fastest-mouse-clicker</id>
     <id>fastfinder</id>
@@ -1032,7 +1020,6 @@
     <id>ggf</id>
     <id>gh-api-cli</id>
     <id>gh</id>
-    <id>ghostscript.app</id>
     <id>ghostscript.app</id>
     <id>ghostscript</id>
     <id>gifski</id>
@@ -1305,7 +1292,6 @@
     <id>inno-download-plugin</id>
     <id>innoextract</id>
     <id>innosetup</id>
-    <id>innosetup</id>
     <id>innounp</id>
     <id>insect</id>
     <id>insomnia-dotnet</id>
@@ -1315,7 +1301,6 @@
     <id>installerific</id>
     <id>installwindowsimage.powershell</id>
     <id>instanteyedropper</id>
-    <id>instchoco</id>
     <id>instchoco</id>
     <id>integration-playbook-logicapps-errorreport</id>
     <id>integrationplaybook-datatransformation-modeller</id>
@@ -1336,7 +1321,6 @@
     <id>ipwhoisflags-chrome</id>
     <id>irfanview-languages</id>
     <id>irfanview-shellextension</id>
-    <id>irfanview</id>
     <id>irfanview</id>
     <id>irfanviewplugins</id>
     <id>ironpython</id>
@@ -1415,7 +1399,6 @@
     <id>kareemsultan.developer.toolkit</id>
     <id>kate</id>
     <id>kawanime</id>
-    <id>kb2533623</id>
     <id>kb2533623</id>
     <id>kb2842230</id>
     <id>kbld</id>
@@ -1509,7 +1492,6 @@
     <id>legendary</id>
     <id>leiningen</id>
     <id>lenovo-s145-touchpad-fix</id>
-    <id>less</id>
     <id>less</id>
     <id>lessmsi</id>
     <id>leveret</id>
@@ -1745,7 +1727,6 @@
     <id>motrix</id>
     <id>mousetrap</id>
     <id>mozillabuild</id>
-    <id>mozillabuild</id>
     <id>mp3directcut</id>
     <id>mp3infpu</id>
     <id>mp3tag</id>
@@ -1902,7 +1883,6 @@
     <id>nsolid-fermium</id>
     <id>nsolid-gallium</id>
     <id>nssm</id>
-    <id>nssm</id>
     <id>nsudo</id>
     <id>nswagstudio</id>
     <id>nteract</id>
@@ -1912,10 +1892,8 @@
     <id>nuclear</id>
     <id>nudelsieb-cli</id>
     <id>nuget.commandline</id>
-    <id>nuget.commandline</id>
     <id>nuget.contextmenu</id>
     <id>nugetpackageexplorer.types</id>
-    <id>nugetpackageexplorer</id>
     <id>nugetpackageexplorer</id>
     <id>nugetupload</id>
     <id>nunit-console-runner</id>
@@ -1960,7 +1938,6 @@
     <id>obs-studio</id>
     <id>obs</id>
     <id>ocenaudio</id>
-    <id>octave</id>
     <id>octave</id>
     <id>octgndevpackage-express</id>
     <id>octofarm</id>
@@ -2014,7 +1991,6 @@
     <id>openshift-cli</id>
     <id>openssh</id>
     <id>openssl-wizard</id>
-    <id>openssl.light</id>
     <id>openssl.light</id>
     <id>openssl</id>
     <id>opensslkey</id>
@@ -2075,7 +2051,6 @@
     <id>pdbgit</id>
     <id>pdf2djvu</id>
     <id>pdfcrack</id>
-    <id>pdfcreator</id>
     <id>pdfcreator</id>
     <id>pdfencrypt</id>
     <id>pdfill</id>
@@ -2300,10 +2275,8 @@
     <id>qutebrowser</id>
     <id>qview</id>
     <id>r.project</id>
-    <id>r.project</id>
     <id>r.studio</id>
     <id>r128gain</id>
-    <id>r</id>
     <id>r</id>
     <id>rack</id>
     <id>radarr</id>
@@ -2312,7 +2285,6 @@
     <id>rambox-os-nightly</id>
     <id>rambox</id>
     <id>ransomfree</id>
-    <id>rapidee</id>
     <id>rapidee</id>
     <id>raven</id>
     <id>rawcopy</id>
@@ -2530,7 +2502,6 @@
     <id>shelltools</id>
     <id>shexview</id>
     <id>shotcut</id>
-    <id>shotcut</id>
     <id>showdate</id>
     <id>shutup10</id>
     <id>sidebar-diagnostics</id>
@@ -2678,7 +2649,6 @@
     <id>sublimetext2.powershellalias</id>
     <id>sublimetext3.app</id>
     <id>subtitleworkshop</id>
-    <id>sudo</id>
     <id>sudo</id>
     <id>sumatrapdf.commandline</id>
     <id>sumatrapdf.install</id>
@@ -2831,10 +2801,8 @@
     <id>torrid</id>
     <id>tortoisegit.latest</id>
     <id>tortoisegit</id>
-    <id>tortoisegit</id>
     <id>tortoisesvn</id>
     <id>totalcmd</id>
-    <id>totalcommander</id>
     <id>totalcommander</id>
     <id>totypescriptd</id>
     <id>toxiproxy-cli</id>
@@ -3013,7 +2981,6 @@
     <id>visualstudiocode</id>
     <id>visualstudioenterprise2015</id>
     <id>vivaldi</id>
-    <id>vivaldi</id>
     <id>vividl</id>
     <id>vkmessenger</id>
     <id>vlc-nightly</id>
@@ -3092,7 +3059,6 @@
     <id>wezterm.portable</id>
     <id>wezterm</id>
     <id>wget</id>
-    <id>wget</id>
     <id>whats-new</id>
     <id>which</id>
     <id>whoistd</id>
@@ -3127,7 +3093,6 @@
     <id>windowsadk.winpe</id>
     <id>windowsadk</id>
     <id>windowsazurelibrariesfornet</id>
-    <id>windowsazurepowershell</id>
     <id>windowsazurepowershell</id>
     <id>windowsazurepowershell_0871</id>
     <id>windowsliveinstaller</id>
