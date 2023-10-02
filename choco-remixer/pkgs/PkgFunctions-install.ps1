@@ -1,7 +1,7 @@
 ﻿[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Replaces external function, cant change the name', Scope = 'Function', Target = 'Get-PackageParameters')]
 param()
 
-Function Convert-autocad ($obj) {
+Function Convert-autocad ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url\s*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -34,7 +34,7 @@ Function Convert-autocad ($obj) {
 }
 
 
-Function Convert-gotomeeting ($obj) {
+Function Convert-gotomeeting ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString().Split('?') | Select-Object -First 1
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -48,7 +48,7 @@ Function Convert-gotomeeting ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-geogebra-classic ($obj) {
+Function Convert-geogebra-classic ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url *=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -63,7 +63,7 @@ Function Convert-geogebra-classic ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-office365business ($obj) {
+Function Convert-office365business ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\surl\s+=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -81,7 +81,7 @@ Function Convert-office365business ($obj) {
 }
 
 
-Function Convert-anaconda3 ($obj) {
+Function Convert-anaconda3 ([PackageInternalizeInfo]$obj) {
     $only64 = $true
 
     try {
@@ -118,7 +118,7 @@ Function Convert-anaconda3 ($obj) {
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
-Function Convert-miniconda3 ($obj) {
+Function Convert-miniconda3 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32 = ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "https").ToString()
 
@@ -146,7 +146,7 @@ Function Convert-miniconda3 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
-Function Convert-anydesk-install ($obj) {
+Function Convert-anydesk-install ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url32 ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -163,7 +163,7 @@ Function Convert-anydesk-install ($obj) {
 }
 
 
-Function Convert-airtame ($obj) {
+Function Convert-airtame ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$urlPackage ').tostring()
     $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -179,7 +179,7 @@ Function Convert-airtame ($obj) {
 }
 
 
-Function Convert-adobeair ($obj) {
+Function Convert-adobeair ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "https").ToString()
 
@@ -197,7 +197,7 @@ Function Convert-adobeair ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-libreoffice-fresh ($obj) {
+Function Convert-libreoffice-fresh ([PackageInternalizeInfo]$obj) {
     . $(Join-Path $obj.toolsDir 'helpers.ps1')
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
@@ -235,7 +235,7 @@ Function Convert-libreoffice-fresh ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
-Function Convert-libreoffice-still ($obj) {
+Function Convert-libreoffice-still ([PackageInternalizeInfo]$obj) {
     . $(Join-Path $obj.toolsDir 'helpers.ps1')
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
@@ -273,7 +273,7 @@ Function Convert-libreoffice-still ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
-Function Convert-tor-browser ($obj) {
+Function Convert-tor-browser ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\surl\s').tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\surl64\s').tostring()
 
@@ -299,7 +299,7 @@ Function Convert-tor-browser ($obj) {
 }
 
 
-Function Convert-vcredist140 ($obj) {
+Function Convert-vcredist140 ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = Get-Content $datafile
@@ -330,7 +330,7 @@ Function Convert-vcredist140 ($obj) {
     Set-Content -Value $dataContent -Path $dataFile
 }
 
-Function Convert-dotnetcore-general-internalizer ($obj) {
+Function Convert-dotnetcore-general-internalizer ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -356,7 +356,7 @@ Function Convert-dotnetcore-general-internalizer ($obj) {
 }
 
 
-Function Convert-dotnetcore-3.1-desktopruntime ($obj) {
+Function Convert-dotnetcore-3.1-desktopruntime ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -382,7 +382,7 @@ Function Convert-dotnetcore-3.1-desktopruntime ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnetcore-3.1-sdk-4xx ($obj) {
+Function Convert-dotnetcore-3.1-sdk-4xx ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -408,7 +408,7 @@ Function Convert-dotnetcore-3.1-sdk-4xx ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnetcore-3.1-runtime ($obj) {
+Function Convert-dotnetcore-3.1-runtime ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -434,7 +434,7 @@ Function Convert-dotnetcore-3.1-runtime ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnet-aspnetcoremodule-v2 ($obj) {
+Function Convert-dotnet-aspnetcoremodule-v2 ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -460,7 +460,7 @@ Function Convert-dotnet-aspnetcoremodule-v2 ($obj) {
 }
 
 
-Function Convert-dotnetcore-31-aspnetruntime ($obj) {
+Function Convert-dotnetcore-31-aspnetruntime ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -486,7 +486,7 @@ Function Convert-dotnetcore-31-aspnetruntime ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnet-5.0-desktopruntime ($obj) {
+Function Convert-dotnet-5.0-desktopruntime ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -512,7 +512,7 @@ Function Convert-dotnet-5.0-desktopruntime ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnet-5.0-runtime ($obj) {
+Function Convert-dotnet-5.0-runtime ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -538,7 +538,7 @@ Function Convert-dotnet-5.0-runtime ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnet-6.0-desktopruntime ($obj) {
+Function Convert-dotnet-6.0-desktopruntime ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -564,7 +564,7 @@ Function Convert-dotnet-6.0-desktopruntime ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnet-6.0-runtime ($obj) {
+Function Convert-dotnet-6.0-runtime ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -590,7 +590,7 @@ Function Convert-dotnet-6.0-runtime ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnet-6.0-aspnetruntime ($obj) {
+Function Convert-dotnet-6.0-aspnetruntime ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -616,7 +616,7 @@ Function Convert-dotnet-6.0-aspnetruntime ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnet-6.0-sdk-3xx ($obj) {
+Function Convert-dotnet-6.0-sdk-3xx ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -642,7 +642,7 @@ Function Convert-dotnet-6.0-sdk-3xx ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnet-6.0-sdk-4xx ($obj) {
+Function Convert-dotnet-6.0-sdk-4xx ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -670,7 +670,7 @@ Function Convert-dotnet-6.0-sdk-4xx ($obj) {
 
 
 
-Function Convert-dotnet-5.0-sdk-2xx ($obj) {
+Function Convert-dotnet-5.0-sdk-2xx ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -696,7 +696,7 @@ Function Convert-dotnet-5.0-sdk-2xx ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-dotnet-5.0-sdk-4xx ($obj) {
+Function Convert-dotnet-5.0-sdk-4xx ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -722,7 +722,7 @@ Function Convert-dotnet-5.0-sdk-4xx ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-aspnetcore-runtimepackagestore ($obj) {
+Function Convert-aspnetcore-runtimepackagestore ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -748,7 +748,7 @@ Function Convert-aspnetcore-runtimepackagestore ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
 
-Function Convert-cura-new ($obj) {
+Function Convert-cura-new ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'data.ps1'
     $dataContent = & $datafile
@@ -769,7 +769,7 @@ Function Convert-cura-new ($obj) {
 
 
 #Special because orig script uses $version inmod of a full URL
-Function Convert-powershell-core ($obj) {
+Function Convert-powershell-core ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64 ").tostring()
 
@@ -797,7 +797,7 @@ Function Convert-powershell-core ($obj) {
 }
 
 
-Function Convert-thunderbird ($obj) {
+Function Convert-thunderbird ([PackageInternalizeInfo]$obj) {
     Function Get-PackageParameters {
         Return "mockup"
     }
@@ -831,7 +831,7 @@ Function Convert-thunderbird ($obj) {
 }
 
 
-Function Convert-firefox ($obj) {
+Function Convert-firefox ([PackageInternalizeInfo]$obj) {
     Function Get-PackageParameters {
         Return "mockup"
     }
@@ -864,7 +864,7 @@ Function Convert-firefox ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksums.Win64
 }
 
-Function Convert-firefoxesr ($obj) {
+Function Convert-firefoxesr ([PackageInternalizeInfo]$obj) {
     Function Get-PackageParameters {
         Return "mockup"
     }
@@ -898,7 +898,7 @@ Function Convert-firefoxesr ($obj) {
 }
 
 
-Function Convert-nvidia-driver ($obj) {
+Function Convert-nvidia-driver ([PackageInternalizeInfo]$obj) {
     $fullurlwin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['url64'\]      = 'https").tostring()
     $fullurlwin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url64   ").tostring()
 
@@ -931,7 +931,7 @@ Function Convert-nvidia-driver ($obj) {
 }
 
 
-Function Convert-geforce-driver ($obj) {
+Function Convert-geforce-driver ([PackageInternalizeInfo]$obj) {
     $fullurlwin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['url64'\]\s+= 'https").tostring()
     $fullurlwin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "Url64   ").tostring()
 
@@ -961,7 +961,7 @@ Function Convert-geforce-driver ($obj) {
 }
 
 
-Function Convert-virtualbox ($obj) {
+Function Convert-virtualbox ([PackageInternalizeInfo]$obj) {
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*http").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit ").tostring()
@@ -999,7 +999,7 @@ Function Convert-virtualbox ($obj) {
 }
 
 
-Function Convert-Temurin8 ($obj) {
+Function Convert-Temurin8 ([PackageInternalizeInfo]$obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "\sUrl64bit\s*=\s").tostring()
@@ -1023,7 +1023,7 @@ Function Convert-Temurin8 ($obj) {
 }
 
 
-Function Convert-Temurin8jre ($obj) {
+Function Convert-Temurin8jre ([PackageInternalizeInfo]$obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit .* = ").tostring()
 
@@ -1046,7 +1046,7 @@ Function Convert-Temurin8jre ($obj) {
 }
 
 
-Function Convert-Temurinjre ($obj) {
+Function Convert-Temurinjre ([PackageInternalizeInfo]$obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()
@@ -1077,7 +1077,7 @@ Function Convert-Temurinjre ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
-Function Convert-Temurinjre-general ($obj) {
+Function Convert-Temurinjre-general ([PackageInternalizeInfo]$obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()
@@ -1108,7 +1108,7 @@ Function Convert-Temurinjre-general ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
-Function Convert-seamonkey ($obj) {
+Function Convert-seamonkey ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -1126,7 +1126,7 @@ Function Convert-seamonkey ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-drawio ($obj) {
+Function Convert-drawio ([PackageInternalizeInfo]$obj) {
 
     $softwareVersion = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$drawioversion ').tostring() -split "'" | Select-String -Pattern "[\d\.]{4,10}").tostring()
 
@@ -1139,13 +1139,12 @@ Function Convert-drawio ($obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32"
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-	
 
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
 }
 
-Function Convert-openoffice ($obj) {
+Function Convert-openoffice ([PackageInternalizeInfo]$obj) {
     Function Get-PackageParameters {
         Return "mockup"
     }
@@ -1174,7 +1173,7 @@ Function Convert-openoffice ($obj) {
 }
 
 
-Function Convert-pycharm-community ($obj) {
+Function Convert-pycharm-community ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
 
@@ -1191,7 +1190,7 @@ Function Convert-pycharm-community ($obj) {
 }
 
 
-Function Convert-vcredist2005 ($obj) {
+Function Convert-vcredist2005 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64 ").tostring()
 
@@ -1219,7 +1218,7 @@ Function Convert-vcredist2005 ($obj) {
 }
 
 
-Function Convert-vcredist2008 ($obj) {
+Function Convert-vcredist2008 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64 ").tostring()
 
@@ -1246,7 +1245,7 @@ Function Convert-vcredist2008 ($obj) {
 
 }
 
-Function Convert-vcredist2010 ($obj) {
+Function Convert-vcredist2010 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64 ").tostring()
 
@@ -1274,7 +1273,7 @@ Function Convert-vcredist2010 ($obj) {
 }
 
 
-Function Convert-vcredist2012 ($obj) {
+Function Convert-vcredist2012 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$32BitUrl').tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$64BitUrl').tostring()
 
@@ -1306,7 +1305,7 @@ Function Convert-vcredist2012 ($obj) {
 }
 
 
-Function Convert-vcredist2013 ($obj) {
+Function Convert-vcredist2013 ([PackageInternalizeInfo]$obj) {
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
@@ -1336,7 +1335,7 @@ Function Convert-vcredist2013 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
-Function Convert-anki ($obj) {
+Function Convert-anki ([PackageInternalizeInfo]$obj) {
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
@@ -1357,7 +1356,7 @@ Function Convert-anki ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-kb2919355 ($obj) {
+Function Convert-kb2919355 ([PackageInternalizeInfo]$obj) {
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'url +=').tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url64 +=' | Select-Object -First 1).tostring()
@@ -1388,7 +1387,7 @@ Function Convert-kb2919355 ($obj) {
 }
 
 
-Function Convert-kb2919442 ($obj) {
+Function Convert-kb2919442 ([PackageInternalizeInfo]$obj) {
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'url +=').tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url64 +=' | Select-Object -First 1).tostring()
@@ -1419,7 +1418,7 @@ Function Convert-kb2919442 ($obj) {
 }
 
 
-Function Convert-sql-server-management-studio ($obj) {
+Function Convert-sql-server-management-studio ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$fullurl += ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -1435,7 +1434,7 @@ Function Convert-sql-server-management-studio ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-dotnet4.5 ($obj) {
+Function Convert-dotnet4.5 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = 'dotnetfx45_full_x86_x64.exe'
@@ -1452,7 +1451,7 @@ Function Convert-dotnet4.5 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
 }
 
-Function Convert-greenshot ($obj) {
+Function Convert-greenshot ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -1470,7 +1469,7 @@ Function Convert-greenshot ($obj) {
 }
 
 
-Function Convert-dotnet4.5.1 ($obj) {
+Function Convert-dotnet4.5.1 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = 'NDP451-KB2859818-Web.exe'
@@ -1488,7 +1487,7 @@ Function Convert-dotnet4.5.1 ($obj) {
 }
 
 
-Function Convert-dotnet4.5.2 ($obj) {
+Function Convert-dotnet4.5.2 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = 'dotnetfx45_full_x86_x64.exe'
@@ -1506,7 +1505,7 @@ Function Convert-dotnet4.5.2 ($obj) {
 }
 
 
-Function Convert-dotnet4.6 ($obj) {
+Function Convert-dotnet4.6 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$Url\s+=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -1523,7 +1522,7 @@ Function Convert-dotnet4.6 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
 }
 
-Function Convert-xming ($obj) {
+Function Convert-xming ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1 -Skip 1).tostring()
@@ -1541,7 +1540,7 @@ Function Convert-xming ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
 }
 
-Function Convert-conemu ($obj) {
+Function Convert-conemu ([PackageInternalizeInfo]$obj) {
     $installScriptExec = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$(version|url) = ') -join "`n"
     Invoke-Expression $installScriptExec
 
@@ -1559,7 +1558,7 @@ Function Convert-conemu ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 }
 
-Function Convert-rstudio ($obj) {
+Function Convert-rstudio ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -1576,7 +1575,7 @@ Function Convert-rstudio ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-dotnet1.1 ($obj) {
+Function Convert-dotnet1.1 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -1591,7 +1590,7 @@ Function Convert-dotnet1.1 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
 }
 
-Function Convert-cpuz ($obj) {
+Function Convert-cpuz ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageargs = @{
         architecture     = "x32"
         nuspecID         = $obj.nuspecID
@@ -1612,7 +1611,7 @@ Function Convert-cpuz ($obj) {
 }
 
 
-Function Convert-googlechrome ($obj) {
+Function Convert-googlechrome ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageargs = @{
         architecture     = "both"
         nuspecID         = $obj.nuspecID
@@ -1634,7 +1633,7 @@ Function Convert-googlechrome ($obj) {
 }
 
 
-Function Convert-vscodium-install ($obj) {
+Function Convert-vscodium-install ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageargs = @{
         architecture     = "both"
         nuspecID         = $obj.nuspecID
@@ -1654,7 +1653,7 @@ Function Convert-vscodium-install ($obj) {
 }
 
 
-Function Convert-bitwarden ($obj) {
+Function Convert-bitwarden ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "x32"
         nuspecID         = $obj.nuspecID
@@ -1682,7 +1681,7 @@ Function Convert-bitwarden ($obj) {
 }
 
 
-Function Convert-dellcommandupdate-uwp ($obj) {
+Function Convert-dellcommandupdate-uwp ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "x32"
         nuspecID         = $obj.nuspecID
@@ -1707,7 +1706,7 @@ Function Convert-dellcommandupdate-uwp ($obj) {
 
 }
 
-Function Convert-dellcommandupdate ($obj) {
+Function Convert-dellcommandupdate ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "x32"
         nuspecID         = $obj.nuspecID
@@ -1729,7 +1728,7 @@ Function Convert-dellcommandupdate ($obj) {
 
 
 
-Function Convert-wsl2 ($obj) {
+Function Convert-wsl2 ([PackageInternalizeInfo]$obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
     $fullurl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()

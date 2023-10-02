@@ -1,6 +1,6 @@
 ﻿
 
-Function Convert-adobereader ($obj) {
+Function Convert-adobereader ([PackageInternalizeInfo]$obj) {
     $secondDir = (Join-Path $obj.toolsDir 'tools')
     If (Test-Path $secondDir) {
         Get-ChildItem -Path $secondDir | Move-Item -Destination $obj.toolsDir
@@ -51,7 +51,7 @@ Function Convert-adobereader ($obj) {
 
 
 
-Function Convert-spotify ($obj) {
+Function Convert-spotify ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -70,7 +70,7 @@ Function Convert-spotify ($obj) {
 
 
 
-Function Convert-resharper-platform ($obj) {
+Function Convert-resharper-platform ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$Url =').tostring()
 
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
@@ -88,7 +88,7 @@ Function Convert-resharper-platform ($obj) {
 
 
 
-Function Convert-msiafterburner ($obj) {
+Function Convert-msiafterburner ([PackageInternalizeInfo]$obj) {
     $url32 = 'http://download.msi.com/uti_exe/vga/MSIAfterburnerSetup.zip?__token__=' + $(Invoke-RestMethod https://www.msi.com/api/v1/get_token?date=$(Get-Date -Format "yyyyMMdd"))
     $filename32 = 'afterburner.zip'
 
@@ -101,7 +101,7 @@ Function Convert-msiafterburner ($obj) {
 }
 
 
-Function Convert-sql-server-express ($obj) {
+Function Convert-sql-server-express ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$Url64\s+=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -117,7 +117,7 @@ Function Convert-sql-server-express ($obj) {
     #Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
 }
 
-Function Convert-azurepowershell ($obj) {
+Function Convert-azurepowershell ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -134,7 +134,7 @@ Function Convert-azurepowershell ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-jq ($obj) {
+Function Convert-jq ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()

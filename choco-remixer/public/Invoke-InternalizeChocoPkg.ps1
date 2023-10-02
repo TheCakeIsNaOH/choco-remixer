@@ -31,10 +31,10 @@ Function Invoke-InternalizeChocoPkg {
 
     if (($config.repoMove -eq "yes") -and (!($skipRepoMove))) {
         $invokeRepoMoveArgs = @{
-            proxyRepoCreds  = $proxyRepoCreds
-            configXML       = $configXML
-            internalizedXML = $internalizedXML
-            repoCheckXML    = $repoCheckXML
+            proxyRepoCreds   = $proxyRepoCreds
+            configXML        = $configXML
+            internalizedXML  = $internalizedXML
+            repoCheckXML     = $repoCheckXML
             calledInternally = $true
         }
 
@@ -106,7 +106,7 @@ Function Invoke-InternalizeChocoPkg {
                 }
             }
 
-        } elseif ($packagesXMLcontent.packages.custom.pkg.id -icontains $nuspecID) {
+        } elseif ($packagesXMLcontent.packages.implemented.pkg.id -icontains $nuspecID) {
 
             $installScriptDetails = Read-ZippedInstallScript -NupkgPath $_.fullname
             $status = $installScriptDetails[0]
@@ -123,7 +123,7 @@ Function Invoke-InternalizeChocoPkg {
                 $idDir = (Join-Path $config.workDir $nuspecID)
                 $versionDir = (Join-Path $idDir $nuspecVersion)
                 $newpath = (Join-Path $versionDir $_.name)
-                $customXml = $packagesXMLcontent.packages.custom.pkg | Where-Object id -EQ $nuspecID
+                $customXml = $packagesXMLcontent.packages.implemented.pkg | Where-Object id -EQ $nuspecID
                 $toolsDir = (Join-Path $versionDir "tools")
 
                 if (($null -eq $customXml.functionName) -or ($customXml.functionName -eq "")) {
@@ -140,24 +140,23 @@ Function Invoke-InternalizeChocoPkg {
                     $oldVersion = "null"
                 }
 
-                $obj = [PSCustomObject]@{
-                    nupkgName         = $_.name
-                    origPath          = $_.fullname
-                    version           = $nuspecVersion
-                    nuspecID          = $nuspecID
-                    status            = $status
-                    idDir             = $idDir
-                    versionDir        = $versionDir
-                    toolsDir          = $toolsDir
-                    newPath           = $newpath
-                    needsToolsDir     = $customXml.needsToolsDir
-                    functionName      = $customXml.functionName
-                    needsStopAction   = $customXml.needsStopAction
-                    whyNotInternal    = $customXml.whyNotInternal
-                    installScriptOrig = $installScript
-                    installScriptMod  = $installScript
-                    oldVersion        = $oldVersion
-                }
+                $obj = [PackageInternalizeInfo]::New(
+                    $_.name,
+                    $_.fullname,
+                    $nuspecVersion,
+                    $nuspecID,
+                    $status,
+                    $idDir,
+                    $versionDir,
+                    $toolsDir,
+                    $newpath,
+                    $customXml.needsToolsDir,
+                    $customXml.functionName,
+                    $customXml.needsStopAction,
+                    $customXml.whyNotInternal,
+                    $installScript,
+                    $installScript,
+                    $oldVersion)
 
                 $nupkgObjArray.add($obj) | Out-Null
 

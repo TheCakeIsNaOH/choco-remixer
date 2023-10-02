@@ -3240,7 +3240,7 @@
     <id>zoxide</id>
     <id>zpaq</id>
   </internal>
-  <custom>
+  <implemented>
     <pkg>
       <id>1password</id>
       <needsStopAction>no</needsStopAction>
@@ -4812,7 +4812,7 @@
     </pkg> -->
 
 
-  </custom>
+  </implemented>
   <notImplemented>
     <id>010editor.install</id>
     <id>010editor.portable</id>

@@ -2,7 +2,7 @@
 param()
 
 
-Function Convert-coretemp ($obj) {
+Function Convert-coretemp ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32.*=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -27,7 +27,7 @@ Function Convert-coretemp ($obj) {
 }
 
 
-Function Convert-eclipse ($obj) {
+Function Convert-eclipse ([PackageInternalizeInfo]$obj) {
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url64bit  ').tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring().trim("&r=1")
@@ -43,7 +43,7 @@ Function Convert-eclipse ($obj) {
 }
 
 
-Function Convert-eclipse-java-oxygen ($obj) {
+Function Convert-eclipse-java-oxygen ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url  ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -59,7 +59,7 @@ Function Convert-eclipse-java-oxygen ($obj) {
 }
 
 
-Function Convert-ddu ($obj) {
+Function Convert-ddu ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring().replace("%20", " ")
@@ -81,7 +81,7 @@ Function Convert-ddu ($obj) {
 }
 
 
-Function Convert-adb ($obj) {
+Function Convert-adb ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -99,7 +99,7 @@ Function Convert-adb ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
 }
 
-Function Convert-cinebench ($obj) {
+Function Convert-cinebench ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -117,7 +117,7 @@ Get-ChocolateyUnzip -FileFullPath $file -Destination $installDir -PackageName $p
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'md5'
 }
 
-Function Convert-sysinternals ($obj) {
+Function Convert-sysinternals ([PackageInternalizeInfo]$obj) {
     $fullurl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $fullurlnano = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'Args.url ').tostring()
 
@@ -143,7 +143,7 @@ Function Convert-sysinternals ($obj) {
 }
 
 
-Function Convert-origin ($obj) {
+Function Convert-origin ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -161,7 +161,7 @@ Function Convert-origin ($obj) {
 }
 
 
-Function Convert-shmnview ($obj) {
+Function Convert-shmnview ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -187,7 +187,7 @@ Function Convert-shmnview ($obj) {
 }
 
 
-Function Convert-filespy ($obj) {
+Function Convert-filespy ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url +').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -204,7 +204,7 @@ Function Convert-filespy ($obj) {
 }
 
 
-Function Convert-dotnet4.0 ($obj) {
+Function Convert-dotnet4.0 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -223,7 +223,7 @@ Function Convert-dotnet4.0 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
 }
 
-Function Convert-setacl ($obj) {
+Function Convert-setacl ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url\s+=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring() -replace '%20' , "_"
@@ -240,7 +240,7 @@ Function Convert-setacl ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-itunes ($obj) {
+Function Convert-itunes ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -269,7 +269,7 @@ Function Convert-itunes ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
-Function Convert-rust-ms ($obj) {
+Function Convert-rust-ms ([PackageInternalizeInfo]$obj) {
     $int = 0
     [array]$installScriptSplit =  $obj.installScriptOrig -split "\n"
 
@@ -323,7 +323,7 @@ Function Convert-rust-ms ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $srcUrl -filename $filenamesrcUrl -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $packageSrcArgs.checksum
 }
 
-Function Convert-nexus-repository ($obj) {
+Function Convert-nexus-repository ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\s+url64\s+=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -340,7 +340,7 @@ Function Convert-nexus-repository ($obj) {
 }
 
 
-Function Convert-vscode-portable ($obj) {
+Function Convert-vscode-portable ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32\s+=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = "vscode_x86.zip"
@@ -366,7 +366,7 @@ Function Convert-vscode-portable ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
-Function Convert-winlogbeat ($obj) {
+Function Convert-winlogbeat ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -389,7 +389,7 @@ Function Convert-winlogbeat ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha512'
 }
 
-Function Convert-metricbeat ($obj) {
+Function Convert-metricbeat ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -412,7 +412,7 @@ Function Convert-metricbeat ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha512'
 }
 
-Function Convert-filebeat ($obj) {
+Function Convert-filebeat ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -435,7 +435,7 @@ Function Convert-filebeat ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha512'
 }
 
-Function Convert-autoruns ($obj) {
+Function Convert-autoruns ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -450,7 +450,7 @@ Function Convert-autoruns ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
 }
 
-Function Convert-nano-win ($obj) {
+Function Convert-nano-win ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -466,7 +466,7 @@ Function Convert-nano-win ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
 }
 
-Function Convert-iperf3 ($obj) {
+Function Convert-iperf3 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'http').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -484,7 +484,7 @@ Function Convert-iperf3 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
 }
 
-Function Convert-azure-pipelines-agent($obj) {
+Function Convert-azure-pipelines-agent([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -508,7 +508,7 @@ Function Convert-azure-pipelines-agent($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha256'
 }
 
-Function Convert-7zip-zstd ($obj) {
+Function Convert-7zip-zstd ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'packageArgs.ps1'
     $dataContent = Invoke-Expression $dataFile
@@ -537,7 +537,7 @@ Function Convert-7zip-zstd ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
-Function Convert-camunda-modeler ($obj) {
+Function Convert-camunda-modeler ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32 ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -561,7 +561,7 @@ Function Convert-camunda-modeler ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha256'
 }
 
-Function Convert-sourcecodepro ($obj) {
+Function Convert-sourcecodepro ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$fontUrl\s+=').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -579,7 +579,7 @@ Function Convert-sourcecodepro ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-winmtr-redux ($obj) {
+Function Convert-winmtr-redux ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()

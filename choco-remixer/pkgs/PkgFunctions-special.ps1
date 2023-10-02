@@ -4,7 +4,7 @@
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = 'Couldnt figure out an alternative', Scope = 'Function', Target = 'Convert-KB3063858')]
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = 'Couldnt figure out an alternative', Scope = 'Function', Target = 'Convert-KB3118401')]
 param()
-Function Convert-dotnetfx ($obj) {
+Function Convert-dotnetfx ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url +').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -20,7 +20,7 @@ Function Convert-dotnetfx ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-netfx-4.6.2 ($obj) {
+Function Convert-netfx-4.6.2 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url +').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -36,7 +36,7 @@ Function Convert-netfx-4.6.2 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-netfx-4.7.1-devpack ($obj) {
+Function Convert-netfx-4.7.1-devpack ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url +').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -52,7 +52,7 @@ Function Convert-netfx-4.7.1-devpack ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-netfx-4.7.1 ($obj) {
+Function Convert-netfx-4.7.1 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url +').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -68,7 +68,7 @@ Function Convert-netfx-4.7.1 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-netfx-4.7.2 ($obj) {
+Function Convert-netfx-4.7.2 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url +').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -84,7 +84,7 @@ Function Convert-netfx-4.7.2 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-netfx-4.8 ($obj) {
+Function Convert-netfx-4.8 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url +').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -100,7 +100,7 @@ Function Convert-netfx-4.8 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-netfx-4.8.1 ($obj) {
+Function Convert-netfx-4.8.1 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url +').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -116,7 +116,7 @@ Function Convert-netfx-4.8.1 ($obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
-Function Convert-anydesk-portable ($obj) {
+Function Convert-anydesk-portable ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$Url32 ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
@@ -131,7 +131,7 @@ Function Convert-anydesk-portable ($obj) {
 }
 
 
-Function Convert-rtx-voice ($obj) {
+Function Convert-rtx-voice ([PackageInternalizeInfo]$obj) {
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\sUrl64\s*').tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
     $filename64 = 'rtxvoice.zip'
@@ -147,7 +147,7 @@ Function Convert-rtx-voice ($obj) {
 }
 
 
-Function Convert-powershell ($obj) {
+Function Convert-powershell ([PackageInternalizeInfo]$obj) {
     $urlWin81x86 = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin81x86 '            ).tostring() -split "'" | Select-String -Pattern "http").ToString()
     $urlWin2k12R2andWin81x64 = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin2k12R2andWin81x64 ').tostring() -split "'" | Select-String -Pattern "http").ToString()
     $urlWin7x86 = (($obj.installScriptOrig -split "`n" | Select-String -Pattern '\[string\]\$urlWin7x86 '             ).tostring() -split "'" | Select-String -Pattern "http").ToString()
@@ -186,7 +186,7 @@ Function Convert-powershell ($obj) {
 }
 
 
-Function Convert-kb29992262 ($obj) {
+Function Convert-kb29992262 ([PackageInternalizeInfo]$obj) {
     $installScriptExec = $obj.installScriptOrig -join "`n"
     $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
     $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
@@ -221,7 +221,7 @@ Function Convert-kb29992262 ($obj) {
 }
 
 
-Function Convert-KB3033929 ($obj) {
+Function Convert-KB3033929 ([PackageInternalizeInfo]$obj) {
     $installScriptExec = $obj.installScriptOrig -join "`n"
     $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
     $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
@@ -256,7 +256,7 @@ Function Convert-KB3033929 ($obj) {
 }
 
 
-Function Convert-KB3035131 ($obj) {
+Function Convert-KB3035131 ([PackageInternalizeInfo]$obj) {
     $installScriptExec = $obj.installScriptOrig -join "`n"
     $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
     $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
@@ -291,7 +291,7 @@ Function Convert-KB3035131 ($obj) {
 }
 
 
-Function Convert-KB3063858 ($obj) {
+Function Convert-KB3063858 ([PackageInternalizeInfo]$obj) {
     $installScriptExec = $obj.installScriptOrig -join "`n"
     $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
     $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
@@ -330,7 +330,7 @@ Function Convert-KB3063858 ($obj) {
 }
 
 
-Function Convert-KB3118401 ($obj) {
+Function Convert-KB3118401 ([PackageInternalizeInfo]$obj) {
     $installScriptExec = $obj.installScriptOrig -join "`n"
     $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
     $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
@@ -365,7 +365,7 @@ Function Convert-KB3118401 ($obj) {
 }
 
 
-Function Convert-wsl-ubuntu-2004 ($obj) {
+Function Convert-wsl-ubuntu-2004 ([PackageInternalizeInfo]$obj) {
     $fullurl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()
 
     $url = ($fullurl -split "'" | Select-String -Pattern "https").tostring()
