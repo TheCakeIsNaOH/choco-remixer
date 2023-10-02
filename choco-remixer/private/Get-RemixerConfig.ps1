@@ -88,6 +88,25 @@
         }
     }
 
+    if ($upperFunctionBoundParameters['downloadXML']) {
+        $downloadXML = (Resolve-Path $downloadXML).path
+    } elseif ($upperFunctionBoundParameters['folderxml']) {
+        $downloadXML = Join-Path $folderXML 'download.xml'
+    } else {
+        Write-Verbose "Falling back to checking next to module for download.xml"
+        $downloadXML = Join-Path (Split-Path $PSScriptRoot) 'download.xml'
+
+        If (!(Test-Path $downloadXML)) {
+            Write-Verbose "Falling back to checking one level up for download.xml"
+            $downloadXML = Join-Path (Split-Path (Split-Path $PSScriptRoot)) 'download.xml'
+        }
+
+        If (!(Test-Path $downloadXML)) {
+            Write-Verbose "Falling back to checking in appdata for download.xml"
+            $downloadXML = Join-Path $profilePath 'download.xml'
+        }
+    }
+
     if (!(Test-Path $configXML)) {
         Write-Warning "Could not find $configXML"
         Throw "Config xml not found, please specify valid path"
@@ -107,6 +126,12 @@
     } else {
         Write-Verbose "Using repo-check XML at $repocheckXML"
     }
+    if (!(Test-Path $downloadXML)) {
+        Write-Warning "Could not find $downloadXML"
+        Throw "Download xml not found, please specify valid path"
+    } else {
+        Write-Verbose "Using download XML at $downloadXML"
+    }
 
     $pkgXML = ([System.IO.Path]::Combine((Split-Path -Parent $PSScriptRoot), 'pkgs', 'packages.xml'))
     if (!(Test-Path $pkgXML)) {
@@ -116,6 +141,7 @@
     [XML]$packagesXMLContent = Get-Content $pkgXML
     [XML]$configXMLContent = Get-Content $configXML
     [xml]$internalizedXMLContent = Get-Content $internalizedXML
+    [XML]$downloadXMLcontent = Get-Content $downloadXML
 
     #Load options into specific variable to clean up stuff lower down
     $config = $configXMLcontent.options

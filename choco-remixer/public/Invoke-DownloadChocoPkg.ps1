@@ -1,5 +1,4 @@
 ﻿#Requires -Version 5.0
-#Requires -Modules @{ ModuleName="PowershellGet"; ModuleVersion="3.0.0" }
 
 Function Invoke-DownloadChocoPkg {
     [CmdletBinding()]
@@ -23,58 +22,58 @@ Function Invoke-DownloadChocoPkg {
         Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
     }
 
-    if ($PSBoundParameters['downloadXML']) {
-        $downloadXML = (Resolve-Path $downloadXML).path
-    } elseif ($upperFunctionBoundParameters['folderxml']) {
-        $downloadXML = Join-Path $folderXML 'download.xml'
-    } else {
-        Write-Verbose "Falling back to checking next to module for download.xml"
-        $downloadXML = Join-Path (Split-Path $PSScriptRoot) 'download.xml'
-
-        If (!(Test-Path $downloadXML)) {
-            Write-Verbose "Falling back to checking one level up for download.xml"
-            $downloadXML = Join-Path (Split-Path (Split-Path $PSScriptRoot)) 'download.xml'
-        }
-
-        If (!(Test-Path $downloadXML)) {
-            Write-Verbose "Falling back to checking in appdata for download.xml"
-            $downloadXML = Join-Path $profilePath 'download.xml'
-        }
-    }
-
-    $parameters = @{
-        Name    = "ChocolateyCommunityPackageRepository"
-        Uri     = "https://community.chocolatey.org/api/v2"
-        Trusted = $true
-    }
-    Unregister-PSResourceRepository -Name PSGallery -ErrorAction SilentlyContinue
-    Get-PSResourceRepository | Where-Object { $_.Uri -eq $parameters.Uri } | Unregister-PSResourceRepository -ErrorAction SilentlyContinue
-    Register-PSResourceRepository @parameters -ErrorAction SilentlyContinue
-    # Make sure that PSGallery is registered
-    Register-PSResourceRepository -PSGallery -ErrorAction SilentlyContinue
-
-    [XML]$downloadXMLcontent = Get-Content $downloadXML
+    $ccrAPI = "https://community.chocolatey.org/api/v2/"
 
     $downloadXMLcontent.SelectNodes("//pkg") | ForEach-Object {
-        If (-not ([string]::IsNullOrEmpty($_.version))) {
-            $pkg = Find-PSResource -Name $_.id -Version $_.version -Repository ChocolateyCommunityPackageRepository
-            $version = (New-Object -TypeName NuGet.Versioning.NuGetVersion -ArgumentList $pkg.Version)
-            $normalizedVersion = $version.ToNormalizedString()
-            $nupkgFileName = "$($pkg.Name).$normalizedVersion.nupkg"
-            if (($Force) -or (-not (Test-Path -LiteralPath (Join-Path $config.SearchDir $nupkgFileName )))) {
-                Write-Verbose "Downloading package $($_.id) version $($_.version) to $($config.searchDir)"
-                $pkg | Save-PSResource -Path $config.SearchDir -AsNupkg -ErrorAction SilentlyContinue -Quiet
+        $id = $_.id
+        if (([string]::IsNullOrEmpty($_.version))) {
+            $publicPageURL = $ccrAPI + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $id + '%27)%20and%20IsLatestVersion'
+            [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
+            $publicEntry = $publicPage.feed.entry | Select-Object -first 1
+            $version = $publicEntry.properties.Version
+
+            if ($null -eq $version) {
+                $publicPageURL = $ccrAPI + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $id + '%27)%20and%20IsAbsoluteLatestVersion'
+                [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
+                $publicEntry = $publicPage.feed.entry | Select-Object -first 1
+                $version = $publicEntry.properties.Version
+
+                if ($null -eq $version) {
+                    Write-Error "$id does not exist or is unlisted on $ccrAPI"
+                }
+            }
+            Write-Verbose "Found $version of $id available"
+        } else {
+            $version = $_.version
+            $publicPageURL = $ccrAPI + "Packages(Id='" + $id + "',Version='" + $version + "')"
+            Write-Warning $publicPageUrl
+            [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
+            $publicEntry = $publicPage.entry | Select-Object -first 1
+        }
+
+        Write-Verbose "Downloading package $id version $version to $($config.searchDir)"
+
+        $normalizedVersion = [NuGet.Versioning.NuGetVersion]::Parse($version).ToNormalizedString()
+        $nupkgFileName = "$id.$normalizedVersion.nupkg"
+
+        $srcUrl = $publicEntry.content.src | Select-Object -First 1
+        #pwsh considers 3xx response codes as an error if redirection is disallowed
+        if ($PSVersionTable.PSVersion.major -ge 6) {
+            try {
+                Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea Stop
+            } catch {
+                $dlwdURL = $_.Exception.Response.headers.location.absoluteuri
             }
         } else {
-            $pkg = Find-PSResource -Name $_.id -Repository ChocolateyCommunityPackageRepository
-            $version = New-Object -TypeName NuGet.Versioning.NuGetVersion -ArgumentList $pkg.Version
-            $normalizedVersion = $version.ToNormalizedString()
-            $nupkgFileName = "$($pkg.Name).$normalizedVersion.nupkg"
-            if (($Force) -or (-not (Test-Path -LiteralPath (Join-Path $config.SearchDir $nupkgFileName )))) {
-                Write-Verbose "Downloading newest package $($_.id) to $($config.searchDir)"
-                $pkg | Save-PSResource -Path $config.SearchDir -AsNupkg -ErrorAction SilentlyContinue -Quiet
-            }
+            $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea 0
+            $dlwdURL = $redirectpage.Links.href
         }
+
+        #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
+        $checksum = -join ([System.Convert]::FromBase64String($publicEntry.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })
+        $checksumType = $publicEntry.properties.PackageHashAlgorithm
+
+        Get-File -url $dlwdURL -filename $nupkgFileName  -folder $config.SearchDir -checksumTypeType $checksumType -checksum $checksum
     }
     return
 }
