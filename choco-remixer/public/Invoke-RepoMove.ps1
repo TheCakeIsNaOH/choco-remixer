@@ -90,7 +90,7 @@
                     $pushcode = $null
                 }
             } elseif ($packagesXMLcontent.packages.notImplemented.id -icontains $nuspecID) {
-                Write-Output "$nuspecID found in the proxy repo and is not implemented, please internalize manually"
+                Write-Information "$nuspecID found in the proxy repo and is not implemented. Support has to be added for it, see ADDING_PACKAGES.md" -InformationAction Continue
             } elseif ($packagesXMLcontent.packages.custom.pkg.id -icontains $nuspecID) {
                 $versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
                 $versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
