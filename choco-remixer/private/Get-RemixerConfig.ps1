@@ -126,12 +126,6 @@
     } else {
         Write-Verbose "Using repo-check XML at $repocheckXML"
     }
-    if (!(Test-Path $downloadXML)) {
-        Write-Warning "Could not find $downloadXML"
-        Throw "Download xml not found, please specify valid path"
-    } else {
-        Write-Verbose "Using download XML at $downloadXML"
-    }
 
     $pkgXML = ([System.IO.Path]::Combine((Split-Path -Parent $PSScriptRoot), 'pkgs', 'packages.xml'))
     if (!(Test-Path $pkgXML)) {
@@ -141,7 +135,11 @@
     [XML]$packagesXMLContent = Get-Content $pkgXML
     [XML]$configXMLContent = Get-Content $configXML
     [xml]$internalizedXMLContent = Get-Content $internalizedXML
-    [XML]$downloadXMLcontent = Get-Content $downloadXML
+    if (!(Test-Path $downloadXML)) {
+        Write-Warning "Could not find $downloadXML"
+    } else {
+        [XML]$downloadXMLcontent = Get-Content $downloadXML
+    }
 
     #Load options into specific variable to clean up stuff lower down
     $config = $configXMLcontent.options
