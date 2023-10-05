@@ -416,25 +416,6 @@ Function Convert-dotnetcore3-desktop-runtime ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
-Function Convert-vscode-install ([PackageInternalizeInfo]$obj) {
-    $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
-        nuspecID         = $obj.nuspecID
-        version          = $obj.version
-        installScript    = $obj.installScriptOrig
-        toolsDir         = $obj.toolsDir
-        argstype         = 0
-        urltype          = 0
-        needsTools       = $true
-        RemoveEXE        = $true
-        checksumArgsType = 0
-        checksumTypeType = 'sha256'
-    }
-
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
-}
-
-
 Function Convert-atom-install ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "both"
