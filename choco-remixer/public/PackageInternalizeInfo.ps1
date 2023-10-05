@@ -18,7 +18,20 @@
         $this.installScriptOrig = $installScriptOrig
         $this.installScriptMod = $installScriptMod
         $this.oldVersion = $oldVersion
+        $this.architecture = $customXml.architecture
+        $this.urlType = $customXml.urlType
+        $this.argsType = $customXml.argsType
+        $this.stripQueryString = $customXml.stripQueryString
+        $this.x64NameExt = $customXml.x64NameExt -eq "yes"
+        $this.DeEncodeSpace = $customXml.DeEncodeSpace -eq "yes"
+        $this.removeEXE = $customXml.removeEXE -eq "yes"
+        $this.removeMSI = $customXml.removeMSI -eq "yes"
+        $this.removeMSU = $customXml.removeMSU -eq "yes"
+        $this.doubleQuotesUrl = $customXml.doubleQuotesUrl -eq "yes"
+        $this.checksumTypeType = $customXml.checksumTypeType
+        $this.checksumArgsType = $customXml.checksumArgsType
     }
+
     [String] $nupkgName
     [String] $origPath
     [String] $version
@@ -35,4 +48,17 @@
     [String] $installScriptOrig
     [String] $installScriptMod
     [String] $oldVersion
+    [String] $architecture
+    [int] $urlType
+    [int] $argsType
+    [bool] $stripQueryString
+    [bool] $x64NameExt
+    [bool] $DeEncodeSpace
+    [bool] $removeEXE
+    [bool] $removeMSI
+    [bool] $removeMSU
+    [bool] $doubleQuotesUrl
+    [string] $checksumTypeType
+    [int] $checksumArgsType
+
 }

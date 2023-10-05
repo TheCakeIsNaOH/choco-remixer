@@ -3249,11 +3249,18 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-4k-slideshow</functionName>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
       <id>4k-slideshow-maker</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+      <architecture>both</architecture>
+      <urlType>1</urlType>
+      <argsType>0</argsType>
+      <stripQueryString>yes</stripQueryString>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>1</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
     </pkg>
     <pkg>
       <functionName>Convert-4k-stogram</functionName>

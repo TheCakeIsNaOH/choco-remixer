@@ -12,16 +12,16 @@ Function Edit-InstallChocolateyPackage {
         [switch]$needsTools,
         [switch]$needsEA,
         [switch]$stripQueryString,
-        [switch]$checksum,
         [switch]$x64NameExt,
         [switch]$DeEncodeSpace,
         [switch]$removeEXE,
         [switch]$removeMSI,
         [switch]$removeMSU,
         [switch]$doubleQuotesUrl,
+        [parameter(Mandatory = $true)]
         [ValidateSet('md5', 'sha1', 'sha256', 'sha512')]
         [string]$checksumTypeType,
-        [int]$checksumArgsType
+        [parameter(Mandatory = $true)][int]$checksumArgsType
     )
 
     $x64 = $true

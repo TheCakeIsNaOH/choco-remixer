@@ -3,25 +3,6 @@
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Name of package is plural', Scope = 'Function', Target = 'Convert-slobs')]
 param()
 
-Function Convert-4k-slideshow ([PackageInternalizeInfo]$obj) {
-    $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
-        nuspecID         = $obj.nuspecID
-        version          = $obj.version
-        installScript    = $obj.installScriptOrig
-        toolsDir         = $obj.toolsDir
-        urltype          = 1
-        argstype         = 0
-        stripQueryString = $true
-        RemoveMSI        = $true
-        checksumArgsType = 1
-        checksumTypeType = 'sha256'
-    }
-
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
-}
-
-
 Function Convert-4k-video-downloader ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "both"
