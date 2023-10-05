@@ -89,20 +89,25 @@
             #pwsh considers 3xx response codes as an error if redirection is disallowed
             if ($PSVersionTable.PSVersion.major -ge 6) {
                 try {
-                    Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea Stop
+                    $null = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea Stop
+                    $dlwdUrl = $srcUrl
                 } catch {
                     $dlwdURL = $_.Exception.Response.headers.location.absoluteuri
                 }
             } else {
-                $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea 0
-                $dlwdURL = $redirectpage.Links.href
+                $redirectPage = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea 0
+                if ([string]::IsNullOrWhiteSpace($redirectPage.Links.href)) {
+                    $dlwdUrl = $srcUrl
+                } else {
+                    $dlwdURL = $redirectpage.Links.href
+                }
             }
 
             #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
             $checksum = -join ([System.Convert]::FromBase64String($publicEntry.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })
             $checksumType = $publicEntry.properties.PackageHashAlgorithm
 
-            $filename = $dlwdURL.split("/") | Select-Object -Last 1
+            $filename = $nuspecID + "." + $publicVersion + ".nupkg"
 
             $saveDir = Join-Path $config.searchDir $nuspecID
             if (!(Test-Path $saveDir)) {
