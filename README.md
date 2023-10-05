@@ -2,7 +2,7 @@
 
 This automates some tasks involved in maintaining a private Chocolatey repository, specifically focusing on repositories hosted on Nexus.
 
-- Checking for packages that out of date in a Nexus nuget repository, and updating them.
+- Checking for packages that out of date in a Nexus NuGet repository, and updating them.
 
 - Moving packages from a Nexus proxy repository to a hosted Nexus repository.
 
@@ -60,38 +60,34 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 In comparison with the [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that has [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages), choco-remixer:
 
 - Is free and open source software
-- Is available at no cost, instead of starting at $1,600/year, which is out of reach for almost all non-business users.
-- Does not require a licensed Chocolatey installation to install the internalized packages.
-- Validates checksums of all downloaded binaries (`.nupkg`s included), or warns if checksums are not available.
+- Is available at no cost, instead of starting at $650/year, which is out of reach for almost all non-business users.
+- Does not require a licensed Chocolatey installation to install the internalized packages. Packages internalized with the licensed internalizer stop working if you license lapses.
+- Validates checksums of downloaded binaries (`.nupkg`s included) and warns if checksums are not available in the package.
 - Is available for Linux systems.
 
 ## Caveats
 
-- I am still actively developing this, I make no promises that it is %100 stable.
+- This is not at a stable release. Things may break, feel free to open an issue if I broke something.
+- Packages can change on the Community Repository, again, open an issue if a package is broken.
 - Packages are supported by whitelist, and support must be added individually for each package.
 
-## Immediate TODOs
+## Specific TODOs
 
-- Add license to files
 - Add support for internalizing package icons
-- Comment based help for all public functions, specifically in Edit-InstallChocolateyPackage (platyps?)
+- Comment based help for all public functions, specifically in `Edit-InstallChocolateyPackage` (platyps?)
 - Module metadata creation, module install, other helper scripts
-- Switch so invoke-internalizechocopkg can be run with a single chocolatey package
-
-## Long term TODOs
-
-- Module improvements, chocolatey package, powershell gallery?
-- Async/Parallelize file searching, copying, packing, possibly downloading
-- Ability to bump version of nupkg (fix version)
-- Add option to trust names of nupkg's in searching, allows for quicker search
-- Git integration for personal-packages.xml
-- Multiple personal-packages.xml files (for now it probably is best to add an alias to your profile for each xml)
-- Add capability to directly specify package internalization from xml with a separate function
-- Pester, other testing?
-- Drop dependency on `choco.exe`, use `chocolatey.lib` after upgrade to dotnet core
+- Add a helper where a single Chocolatey package can be passed in as a path and internalized
+- Complete the components for module, and publish the module (PowerShell gallery?)
+- Add Pester tests
 
 ## Continuous TODOs
 
-- Better verbose/debug and other information output
-- generalize more functionality and make available as functions.
-- Move more packages to no custom function, use generic functions
+- Better verbose/debug and other information output.
+- Generalize and factor out repeated code into functions.
+- Continue adding support for more packages
+
+## Potential things to add
+- Git integration for personal-packages.xml
+- Multiple personal-packages.xml files (for now it probably is best to add an alias to your profile for each xml)
+- Async/Parallelize file searching, copying, packing, possibly downloading
+- Ability to bump version of nupkg (aka fix version)
