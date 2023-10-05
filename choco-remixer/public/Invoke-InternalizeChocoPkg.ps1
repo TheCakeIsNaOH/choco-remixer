@@ -150,10 +150,7 @@ Function Invoke-InternalizeChocoPkg {
                     $versionDir,
                     $toolsDir,
                     $newpath,
-                    $customXml.needsToolsDir,
-                    $customXml.functionName,
-                    $customXml.needsStopAction,
-                    $customXml.whyNotInternal,
+                    $customXml,
                     $installScript,
                     $installScript,
                     $oldVersion)

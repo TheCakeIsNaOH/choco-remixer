@@ -1,8 +1,7 @@
 ﻿class PackageInternalizeInfo {
     PackageInternalizeInfo($nupkgName, $origPath, $version, $nuspecID, $status,
-        $idDir, $versionDir, $toolsDir, $newPath, $needsToolsDir, $functionName,
-        $needsStopAction, $whyNotInternal, $installScriptOrig, $installScriptMod,
-        $oldVersion) {
+        $idDir, $versionDir, $toolsDir, $newPath, $customXml, $installScriptOrig,
+        $installScriptMod, $oldVersion) {
         $this.nupkgName = $nupkgName
         $this.origPath = $origPath
         $this.version = $version
@@ -12,11 +11,12 @@
         $this.versionDir = $versionDir
         $this.toolsDir = $toolsDir
         $this.newPath = $newPath
-        $this.needsToolsDir = $needsToolsDir
-        $this.functionName = $functionName
-        $this.needsStopAction = $needsStopAction
-        $this.whyNotInternal = $whyNotInternal
-        $this.installScriptOrig = $installScriptMod
+        $this.needsToolsDir = $customXml.needsToolsDir -eq "yes"
+        $this.functionName = $customXml.functionName
+        $this.needsStopAction = $customXml.needsStopAction -eq "yes"
+        $this.whyNotInternal = $customXml.whyNotInternal
+        $this.installScriptOrig = $installScriptOrig
+        $this.installScriptMod = $installScriptMod
         $this.oldVersion = $oldVersion
     }
     [String] $nupkgName
@@ -28,9 +28,9 @@
     [String] $versionDir
     [String] $toolsDir
     [String] $newPath
-    [String] $needsToolsDir
+    [bool] $needsToolsDir
     [String] $functionName
-    [String] $needsStopAction
+    [bool] $needsStopAction
     [String] $whyNotInternal
     [String] $installScriptOrig
     [String] $installScriptMod
