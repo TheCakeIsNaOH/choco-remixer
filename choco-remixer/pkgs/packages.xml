@@ -3249,11 +3249,10 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
       <id>4k-slideshow-maker</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
       <architecture>both</architecture>
       <urlType>1</urlType>
       <argsType>0</argsType>
@@ -3261,6 +3260,7 @@
       <removeMSI>yes</removeMSI>
       <checksumArgsType>1</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-4k-stogram</functionName>
@@ -4598,6 +4598,19 @@
       <id>tailscale</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>teracopy</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeExe>yes</removeExe>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
@@ -10150,7 +10163,6 @@
     <id>tencentdocs</id>
     <id>tencentmeeting</id>
     <id>tencentqq</id>
-    <id>teracopy</id>
     <id>terapad</id>
     <id>teraterm</id>
     <id>terminals.app</id>
