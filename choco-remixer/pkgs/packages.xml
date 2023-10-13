@@ -2075,6 +2075,7 @@
     <id>pet</id>
     <id>petabridge-cmd</id>
     <id>pgmetrics</id>
+    <id>phantomjs</id>
     <id>philea</id>
     <id>phonerlite.install</id>
     <id>phonerlite.portable</id>
@@ -8722,7 +8723,6 @@
     <id>phalanger-4.0-tools</id>
     <id>phalcon</id>
     <id>phantombot</id>
-    <id>phantomjs</id>
     <id>phatgit</id>
     <id>phorest</id>
     <id>photofiltre-studio-x</id>
