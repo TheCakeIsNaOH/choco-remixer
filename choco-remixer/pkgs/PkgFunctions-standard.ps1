@@ -1575,7 +1575,7 @@ Function Convert-jabref-install ([PackageInternalizeInfo]$obj) {
 
 Function Convert-pdf24 ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture     = "x32"
+        architecture     = "both"
         nuspecID         = $obj.nuspecID
         version          = $obj.version
         installScript    = $obj.installScriptOrig
