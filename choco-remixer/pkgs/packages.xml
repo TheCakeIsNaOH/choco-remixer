@@ -4175,6 +4175,19 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <id>logioptionsplus</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>2</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>2</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-logitech-options</functionName>
       <id>logitech-options</id>
       <needsStopAction>no</needsStopAction>
@@ -4326,6 +4339,19 @@
       <id>nvidia-display-driver</id>
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>Yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>obsidian</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
@@ -4562,6 +4588,13 @@
     <pkg>
       <functionName>Convert-sql-server-management-studio</functionName>
       <id>sql-server-management-studio</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>startallback</id>
+      <functionName>Convert-startallback</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -7697,7 +7730,6 @@
     <id>logicoolgaming5</id>
     <id>logicoolgaming</id>
     <id>loginator</id>
-    <id>logioptionsplus</id>
     <id>logisim-evolution</id>
     <id>logitech-camera-settings</id>
     <id>logitech-media-server</id>
@@ -8410,7 +8442,6 @@
     <id>obs-move-transition</id>
     <id>obs-ndi</id>
     <id>obs-virtualcam</id>
-    <id>obsidian</id>
     <id>ocaml-ocpwin64</id>
     <id>ocaml</id>
     <id>occt</id>
@@ -9906,7 +9937,6 @@
     <id>start10</id>
     <id>start11</id>
     <id>start8</id>
-    <id>startallback</id>
     <id>startbluescreen</id>
     <id>starter</id>
     <id>startisback</id>
