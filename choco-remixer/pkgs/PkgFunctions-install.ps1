@@ -1680,7 +1680,7 @@ Function Convert-googlechrome ([PackageInternalizeInfo]$obj) {
 
 Function Convert-vscodium-install ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageargs = @{
-        architecture     = "both"
+        architecture     = "x64"
         nuspecID         = $obj.nuspecID
         version          = $obj.version
         installScript    = $obj.installScriptOrig
