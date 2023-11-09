@@ -7,7 +7,8 @@
         [string]$repoCheckXML,
         [string]$folderXML,
         [string]$privateRepoCreds,
-        [switch]$calledInternally
+        [switch]$calledInternally,
+        [PSCustomObject]$repoUpdateCheckResults
     )
     $saveProgPref = $ProgressPreference
     $ProgressPreference = 'SilentlyContinue'
@@ -36,56 +37,20 @@
         }
     }
 
-    Test-URL -url $config.privateRepoURL -name "privateRepoURL" -Headers $privateRepoHeaderCreds
-
-    Write-Information "Getting information from the Nexus API, this may take a while." -InformationAction Continue
-    $privateRepoName = ($config.privateRepoURL -split "repository" | Select-Object -Last 1).trim("/")
-    $privateRepoBaseURL = $config.privateRepoURL -split "repository" | Select-Object -First 1
-    $privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
-    $privatePageURL = $privateRepoApiURL + 'components?repository=' + $privateRepoName
-    $privatePageURLorig = $privatePageURL
-    do {
-        $privatePage = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privatePageURL
-        [array]$privateInfo += $privatePage.items
-
-        if ($privatePage.continuationToken) {
-            $privatePageURL = $privatePageURLorig + '&continuationToken=' + $privatePage.continuationToken
-        }
-    }  while ($privatePage.continuationToken)
-    Write-Information "Finished" -InformationAction Continue
-
-    $toSearchToInternalize | ForEach-Object {
+$repoUpdateCheckResults | ForEach-Object {
         [system.gc]::Collect();
-        $nuspecID = $_
+        $nuspecID = $_.name
         Write-Verbose "Comparing repo versions of $($nuspecID)"
-
-        # Normalize version, as Chocolatey CLI now normalizes versions on pack
-        $privateVersions = $privateInfo | Where-Object { $_.name -eq $nuspecID } | Select-Object -ExpandProperty version | ForEach-Object { [NuGet.Versioning.NuGetVersion]::Parse($_).ToNormalizedString(); }
-
-        $publicPageURL = $config.publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
-        [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
-        $publicEntry = $publicPage.feed.entry | Select-Object -first 1
-        $publicVersion = $publicEntry.properties.Version
-
-        if ($null -eq $publicVersion) {
-            $publicPageURL = $config.publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsAbsoluteLatestVersion'
-            [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL
-            $publicEntry = $publicPage.feed.entry | Select-Object -first 1
-            $publicVersion = $publicEntry.properties.Version
-
-            if ($null -eq $publicVersion) {
-                Write-Error "$nuspecID does not exist or is unlisted on $config.publicRepoURL"
-            }
-        }
-
-        # Normalize version, as Chocolatey CLI now normalizes versions on pack
-        $publicVersion = [NuGet.Versioning.NuGetVersion]::Parse($publicVersion).ToNormalizedString();
+        $privateVersions =  $_.privateVersions
+        $publicVersion =  $_.publicVersion
+        $srcUrl = $_.srcUrl
+        $checksum = $_.checksum
+        $checksumType = $_.checksumType
 
         if ($privateVersions -inotcontains $publicVersion) {
 
             Write-Information "$nuspecID out of date on private repo, found version $publicVersion, downloading" -InformationAction Continue
 
-            $srcUrl = $publicEntry.content.src | Select-Object -First 1
             #pwsh considers 3xx response codes as an error if redirection is disallowed
             if ($PSVersionTable.PSVersion.major -ge 6) {
                 try {
@@ -103,9 +68,6 @@
                 }
             }
 
-            #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
-            $checksum = -join ([System.Convert]::FromBase64String($publicEntry.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })
-            $checksumType = $publicEntry.properties.PackageHashAlgorithm
 
             $filename = $nuspecID + "." + $publicVersion + ".nupkg"
 
@@ -139,7 +101,7 @@
             }
 
         }
-    }
+}
     $nuspecID = $null
     $ProgressPreference = $saveProgPref
 }

@@ -12,6 +12,7 @@ Function Edit-InstallChocolateyPackage {
         [switch]$needsTools,
         [switch]$needsEA,
         [switch]$stripQueryString,
+        [switch]$checksum,
         [switch]$x64NameExt,
         [switch]$DeEncodeSpace,
         [switch]$removeEXE,
