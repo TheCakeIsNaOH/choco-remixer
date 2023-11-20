@@ -25,10 +25,14 @@
     }
 
     if ($null -eq $privateRepoCreds) {
-        Throw "privateRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
+        Throw "privateRepoCreds cannot be empty, please change to an explicit no, base64:<encodedString>, or give the creds"
     } elseif ($privateRepoCreds -eq "no") {
         $privateRepoHeaderCreds = @{ }
         Write-Warning "Not tested yet, if you see this, let us know how it goes"
+    } elseif ($privateRepoCreds -ilike "base64:*") {
+        $privateRepoHeaderCreds = @{
+            Authorization = "Basic $($privateRepoCreds.Replace('base64:',''))"
+        }
     } else {
         $privateRepoCredsBase64 = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($privateRepoCreds))
         $privateRepoHeaderCreds = @{
