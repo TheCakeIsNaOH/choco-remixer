@@ -27,6 +27,8 @@
 	<!-- Nexus only -->
 	<!-- Check if packages ids listed in toInternalize are out of date in the private repo, and download them to be internalized -->
 	<repoCheck>no</repoCheck>
+	<!-- specify if the Repack should be skipped  -->
+	<skipRepack>no</skipRepack>
 	<!-- publicRepoURL should normally not need to be changed -->
 	<publicRepoURL>https://community.chocolatey.org/api/v2/</publicRepoURL>
 	<!-- URL of your private feed -->

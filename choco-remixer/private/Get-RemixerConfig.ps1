@@ -221,6 +221,12 @@
         $toSearchToInternalize = ([xml](Get-Content $repoCheckXML)).toInternalize.id
     }
 
+    if ($null -eq $config.skipRepack) {
+        #Fallback as this variable was not there from beginning
+    } elseif ("yes", "no" -notcontains $config.skipRepack) {
+        Throw "bad skipRepack value in config xml, must be yes or no"
+    }
+
     if ($config.repoMove -eq "yes") {
         Test-PushPackage -Url $config.moveToRepoURL -Name "moveToRepoURL"
 
