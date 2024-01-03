@@ -3692,6 +3692,13 @@
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-8.0-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-7.0-runtime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -3707,6 +3714,13 @@
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-8.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-8.0-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -6164,8 +6178,6 @@
     <id>dotnet-6.0-sdk-2xx</id>
     <id>dotnet-7.0-aspnetruntime</id>
     <id>dotnet-8.0-aspnetruntime</id>
-    <id>dotnet-8.0-desktopruntime</id>
-    <id>dotnet-8.0-sdk-1xx</id>
     <id>dotnet-aspnetcoremodule-v1</id>
     <id>dotnet-verification-tool</id>
     <id>dotnet4.6-targetpack</id>

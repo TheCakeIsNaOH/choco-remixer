@@ -16,7 +16,7 @@
     if ($null -ne (Get-Command Get-ChocolateyDownloadCacheUrls -EA 0)) {
         $downloadCacheUrls = Get-ChocolateyDownloadCacheUrls -PackageID $PackageID -PackageVersion $PackageVersion
         $newUrl = $downloadCacheUrls.$url
-        if ([string]::IsNullOrWhiteSpace($newUrl)) {
+        if ([string]::IsNullOrWhiteSpace($newUrl) -or ($PackageID -eq "keybase")) {
             Write-Verbose "No download cache for $url is found"
         } else {
             Write-Information "Replacing script Url with download cache url $newUrl"  -InformationAction Continue

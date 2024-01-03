@@ -1611,7 +1611,7 @@ Function Convert-dotnet1.1 ([PackageInternalizeInfo]$obj) {
 }
 
 Function Convert-startallback ([PackageInternalizeInfo]$obj) {
-    $scriptVersionFull = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' version ').tostring()
+    $scriptVersionFull = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'Version ').tostring()
     $scriptVersion = ($scriptVersionFull -split '"' | Select-String -Pattern "\d").ToString()
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url = ($fullurl32 -split '"' | Select-String -Pattern "http").ToString()
