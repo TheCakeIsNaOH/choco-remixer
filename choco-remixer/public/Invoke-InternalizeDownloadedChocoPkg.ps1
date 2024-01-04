@@ -24,10 +24,14 @@ Function Invoke-InternalizeDownloadedChocoPkg {
         . $_.fullname
     }
 
-    Try {
-        . Get-RemixerConfig -upperFunctionBoundParameters $PSBoundParameters
-    } Catch {
-        Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
+    if ($null -eq $config) {
+        Try {
+            . Get-RemixerConfig -upperFunctionBoundParameters $PSBoundParameters
+        } Catch {
+            Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
+        }
+    } else {
+        Write-Verbose "Config already aquired"
     }
 
     $nuspecDetails = Read-NuspecVersion -NupkgPath $nupkgFile
@@ -111,6 +115,10 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     }
 
     [system.gc]::Collect()
+
+    if ($null -eq $obj) {
+        return
+    }
 
     Write-Information "Starting $($obj.nuspecID)" -InformationAction Continue
 
