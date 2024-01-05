@@ -89,6 +89,11 @@ Function Invoke-InternalizeChocoPkg {
                 } else {
                     $parameters.Add("nupkgFile",  $_.fullname)
                 }
+                if ($parameters['internalizedXML']) {
+                    $parameters.internalizedXML = $internalizedXML
+                } else {
+                    $parameters.Add("internalizedXML",  $internalizedXML)
+                }
                 $string = Invoke-InternalizeDownloadedChocoPkg @parameters
                 $null = $nupkgInfoArray.Add($string)
             } Catch {

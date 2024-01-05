@@ -3362,6 +3362,20 @@
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <id>androidstudio</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>2</urlType>
+      <argsType>0</argsType>
+      <stripQueryString>no</stripQueryString>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>2</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-advanced-installer</functionName>
       <id>advanced-installer</id>
       <needsStopAction>no</needsStopAction>
@@ -5105,7 +5119,6 @@
     <id>android-messages-desktop</id>
     <id>android-ndk</id>
     <id>android-sdk</id>
-    <id>androidstudio</id>
     <id>angry-birds-star-wars</id>
     <id>ankhsvn</id>
     <id>annie</id>
