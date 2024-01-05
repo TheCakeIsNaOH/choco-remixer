@@ -15,7 +15,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
         [switch]$noSave,
         [switch]$writeVersion,
         [switch]$noPack,
-        [string]$nupkgFile
+        [parameter(Mandatory = $true)][string]$nupkgFile
     )
     $ErrorActionPreference = 'Stop'
 
