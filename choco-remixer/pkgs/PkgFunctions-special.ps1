@@ -19,7 +19,20 @@ Function Convert-dotnetfx ([PackageInternalizeInfo]$obj) {
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' Checksum +').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
+Function Convert-filebeat-oss ([PackageInternalizeInfo]$obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'url\s+=').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'url     = "$(Join-Path $toolsDir ''' + $filename32 + ''')"'
 
+    $obj.installScriptMod = $obj.installScriptMod -replace "url\s+=", "#url ="
+    $obj.installScriptMod = $obj.installScriptMod -replace "url64bit\s+=", "#url64bit ="
+    $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'checksum\s+=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'SHA256' -checksum $checksum32
+}
 Function Convert-netfx-4.6.2 ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url +').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
