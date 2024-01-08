@@ -364,6 +364,19 @@ Function Convert-KB3118401 ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msu'
 }
 
+Function Convert-wazuh-agent ([PackageInternalizeInfo]$obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'urlPackage =').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'url     = "$(Join-Path $toolsDir ''' + $filename32 + ''')"'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "    url", "    #url"
+    $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksumPackage ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'SHA512' -checksum $checksum32
+}
 
 Function Convert-wsl-ubuntu-2004 ([PackageInternalizeInfo]$obj) {
     $fullurl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()
