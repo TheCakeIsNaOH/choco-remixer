@@ -4875,6 +4875,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-wazuh-agent</functionName>
+      <id>wazuh-agent</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-webex-meetings</functionName>
       <id>webex-meetings</id>
       <needsStopAction>no</needsStopAction>
@@ -11193,7 +11200,6 @@
     <id>wavpack7z</id>
     <id>wavpack</id>
     <id>wayback</id>
-    <id>wazuh-agent</id>
     <id>wcat</id>
     <id>wd-backup</id>
     <id>wd-dashboard</id>
