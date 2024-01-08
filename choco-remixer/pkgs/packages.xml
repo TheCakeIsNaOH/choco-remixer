@@ -3995,6 +3995,15 @@
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <id>filebeat-oss</id>
+      <functionName>Convert-filebeat-oss</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <checksumTypeType>SHA512</checksumTypeType>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-firefox</functionName>
       <id>firefox</id>
       <needsStopAction>no</needsStopAction>
@@ -6618,7 +6627,6 @@
     <id>file-splitter</id>
     <id>filealyzer</id>
     <id>fileassassin</id>
-    <id>filebeat-oss</id>
     <id>filebeat.install</id>
     <id>filebot</id>
     <id>filedrop</id>
