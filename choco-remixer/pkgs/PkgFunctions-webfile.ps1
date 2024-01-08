@@ -159,3 +159,22 @@ Function Convert-jq ([PackageInternalizeInfo]$obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum32
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha512' -checksum $checksum64
 }
+
+Function Convert-microsoft-vclibs-140-00 ([PackageInternalizeInfo]$obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\sUrl\s+=' | Select-Object -First 1).tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\sUrl\s+=' | Select-Object -Last  1).tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+
+    $obj.installScriptMod = $obj.installScriptMod -replace 'Get-ChocolateyWebFile' , '#Get-ChocolateyWebFile'
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\schecksum\s+=' | Select-Object -First 1).tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\schecksum\s+=' | Select-Object -Last  1).tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}

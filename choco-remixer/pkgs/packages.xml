@@ -1678,6 +1678,7 @@
     <id>microsoft-message-analyzer</id>
     <id>microsoft-powershellforgithub-psmodule</id>
     <id>microsoft-ui-xaml</id>
+    <id>microsoft-ui-xaml-2-7</id>
     <id>microsoft-vsteam-psmodule</id>
     <id>microsoft-windows-terminal</id>
     <id>microsoft.aspnet.mvc</id>
@@ -4342,6 +4343,13 @@
     <pkg>
       <functionName>Convert-microsoft-teams-install</functionName>
       <id>microsoft-teams.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-microsoft-vclibs-140-00</functionName>
+      <id>microsoft-vclibs-140-00</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -8055,8 +8063,6 @@
     <id>microsoft-r-open</id>
     <id>microsoft-sql-server-migration-assistant-for-access</id>
     <id>microsoft-teams-new-bootstrapper</id>
-    <id>microsoft-ui-xaml-2-7</id>
-    <id>microsoft-vclibs-140-00</id>
     <id>microsoft-vclibs</id>
     <id>microsoft-visual-cpp-build-tools</id>
     <id>microsoftazurestorageexplorer</id>
