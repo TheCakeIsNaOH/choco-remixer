@@ -2023,6 +2023,7 @@
     <id>openshark</id>
     <id>openshift-cli</id>
     <id>openssh</id>
+    <id>openssh.install</id>
     <id>openssl-wizard</id>
     <id>openssl.light</id>
     <id>openssl</id>
@@ -4522,6 +4523,19 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <id>partition-assistant-standard</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>4</urlType>
+      <argsType>0</argsType>
+      <removeExe>yes</removeExe>
+      <checksumArgsType>4</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-pdf24</functionName>
       <id>pdf24</id>
       <needsStopAction>No</needsStopAction>
@@ -4910,6 +4924,13 @@
       <id>webex</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>webpi</id>
+      <functionName>Convert-webpi</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
@@ -8802,7 +8823,6 @@
     <id>parse.cloudcode</id>
     <id>parsec-cloud</id>
     <id>parsec</id>
-    <id>partition-assistant-standard</id>
     <id>partition-manager</id>
     <id>partitionexpert</id>
     <id>partitionwizard</id>
@@ -11238,7 +11258,6 @@
     <id>webmcam</id>
     <id>webos-dev-manager</id>
     <id>webpacktaskrunner</id>
-    <id>webpi</id>
     <id>webpicmd</id>
     <id>webproxy</id>
     <id>webrecorderplayer</id>
