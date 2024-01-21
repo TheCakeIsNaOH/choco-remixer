@@ -400,6 +400,7 @@
     <id>chocolatey-agent</id>
     <id>chocolatey-appstore-chrome</id>
     <id>chocolatey-azuredatastudio.extension</id>
+    <id>chocolatey-community-validation.extension</id>
     <id>chocolatey-compatibility.extension</id>
     <id>chocolatey-core.extension</id>
     <id>chocolatey-dotnetfx.extension</id>
@@ -1003,6 +1004,7 @@
     <id>fxgqlc</id>
     <id>fxsound</id>
     <id>fzf</id>
+    <id>g-helper</id>
     <id>galaxian</id>
     <id>gallery-dl</id>
     <id>gambit</id>
@@ -1479,6 +1481,7 @@
     <id>klog</id>
     <id>kmttg</id>
     <id>knime</id>
+    <id>knope</id>
     <id>koffee</id>
     <id>konversation</id>
     <id>koodo-reader</id>
@@ -1677,8 +1680,8 @@
     <id>microsoft-build-tools</id>
     <id>microsoft-message-analyzer</id>
     <id>microsoft-powershellforgithub-psmodule</id>
-    <id>microsoft-ui-xaml</id>
     <id>microsoft-ui-xaml-2-7</id>
+    <id>microsoft-ui-xaml</id>
     <id>microsoft-vsteam-psmodule</id>
     <id>microsoft-windows-terminal</id>
     <id>microsoft.aspnet.mvc</id>
@@ -2022,8 +2025,8 @@
     <id>opensans</id>
     <id>openshark</id>
     <id>openshift-cli</id>
-    <id>openssh</id>
     <id>openssh.install</id>
+    <id>openssh</id>
     <id>openssl-wizard</id>
     <id>openssl.light</id>
     <id>openssl</id>
@@ -2645,6 +2648,7 @@
     <id>spring-boot-cli</id>
     <id>sql-operations-studio</id>
     <id>sqlbulksync</id>
+    <id>sqlcequery</id>
     <id>sqlean-shell</id>
     <id>sqlean</id>
     <id>sqlgrep</id>
@@ -3132,6 +3136,24 @@
     <id>whoistd</id>
     <id>wifi-manager</id>
     <id>wifidiagnosticsview</id>
+    <id>win-acme-store-keyvault</id>
+    <id>win-acme-store-userstore</id>
+    <id>win-acme-validation-dns-azure</id>
+    <id>win-acme-validation-dns-cloudflare</id>
+    <id>win-acme-validation-dns-digitalocean</id>
+    <id>win-acme-validation-dns-dnsmadeeasy</id>
+    <id>win-acme-validation-dns-domeneshop</id>
+    <id>win-acme-validation-dns-dreamhost</id>
+    <id>win-acme-validation-dns-godaddy</id>
+    <id>win-acme-validation-dns-googledns</id>
+    <id>win-acme-validation-dns-infomaniak</id>
+    <id>win-acme-validation-dns-linode</id>
+    <id>win-acme-validation-dns-luadns</id>
+    <id>win-acme-validation-dns-ns1</id>
+    <id>win-acme-validation-dns-rfc2136</id>
+    <id>win-acme-validation-dns-route53</id>
+    <id>win-acme-validation-dns-simply</id>
+    <id>win-acme-validation-dns-transip</id>
     <id>win-acme</id>
     <id>win-caffeinate</id>
     <id>win-no-annoy</id>
@@ -5297,6 +5319,7 @@
     <id>armagetronad</id>
     <id>armory</id>
     <id>arq</id>
+    <id>arrowdl</id>
     <id>arsclip</id>
     <id>artifactory-pro</id>
     <id>artifactory</id>
@@ -5349,6 +5372,7 @@
     <id>auditbeat.install</id>
     <id>auditbeat</id>
     <id>austin</id>
+    <id>autenticacaogovpt</id>
     <id>authpass</id>
     <id>authy-desktop</id>
     <id>autobootdisk</id>
@@ -7035,6 +7059,7 @@
     <id>gopass-jsonapi</id>
     <id>gopass</id>
     <id>gopro-quik</id>
+    <id>goreleaser-testing</id>
     <id>goreleaser</id>
     <id>goserver</id>
     <id>gosuslugi-plugin</id>
@@ -7125,6 +7150,7 @@
     <id>habitat</id>
     <id>hackfont-windows</id>
     <id>hackfont</id>
+    <id>hackolade-studio</id>
     <id>hackolade</id>
     <id>hadoop</id>
     <id>hadouken</id>
@@ -7915,6 +7941,7 @@
     <id>love.install</id>
     <id>love.portable</id>
     <id>lrtimelapse</id>
+    <id>lrzsz</id>
     <id>lsagent</id>
     <id>lsasecretsdump</id>
     <id>lsnes</id>
@@ -8083,6 +8110,7 @@
     <id>microsoft-openjdk</id>
     <id>microsoft-r-open</id>
     <id>microsoft-sql-server-migration-assistant-for-access</id>
+    <id>microsoft-teams-msix</id>
     <id>microsoft-teams-new-bootstrapper</id>
     <id>microsoft-vclibs</id>
     <id>microsoft-visual-cpp-build-tools</id>
@@ -9690,6 +9718,7 @@
     <id>selenium-ie-driver</id>
     <id>selenium-opera-driver</id>
     <id>selenium</id>
+    <id>self-hosted-integration-runtime</id>
     <id>selfssl7</id>
     <id>semanticmerge</id>
     <id>semanticreleasenotes-parser</id>
@@ -9847,6 +9876,7 @@
     <id>smart-console-utility</id>
     <id>smart-control-center</id>
     <id>smart7z</id>
+    <id>smartcontextmenu</id>
     <id>smartftp</id>
     <id>smartgit-with-jre</id>
     <id>smartgit</id>
@@ -10286,6 +10316,7 @@
     <id>tagsrep</id>
     <id>taiga</id>
     <id>tailblazer</id>
+    <id>tailed</id>
     <id>talosctl</id>
     <id>tangible-t4-vs2013</id>
     <id>tangible-t4-vs2017</id>
@@ -11456,6 +11487,8 @@
     <id>wirelessnetview.install</id>
     <id>wirelessnetview.portable</id>
     <id>wiremockui</id>
+    <id>wiresockvpnclient</id>
+    <id>wiresockvpngateway</id>
     <id>wisemo</id>
     <id>wit</id>
     <id>wix35</id>
