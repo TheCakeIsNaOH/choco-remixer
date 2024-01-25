@@ -232,6 +232,7 @@
     <id>bind-toolsonly</id>
     <id>bing</id>
     <id>bingdesktop</id>
+    <id>bitbucket-cli</id>
     <id>bitcoin-unlimited</id>
     <id>bitcoin</id>
     <id>bitcoinxt</id>
@@ -3268,6 +3269,7 @@
     <id>xenserver-backup</id>
     <id>xh</id>
     <id>ximple</id>
+    <id>xlslim</id>
     <id>xmedia-recode</id>
     <id>xml-notepad</id>
     <id>xmlformatter</id>
@@ -5349,6 +5351,7 @@
     <id>asterie</id>
     <id>astrogrep</id>
     <id>astromenace</id>
+    <id>asyncapi</id>
     <id>atcmd</id>
     <id>athens</id>
     <id>atheros-bluetooth-driver</id>
@@ -7054,6 +7057,8 @@
     <id>googlechrome.canary</id>
     <id>googlechrome.dev</id>
     <id>googlechromebeta</id>
+    <id>googlechromecanary</id>
+    <id>googlechromedev</id>
     <id>googlejapaneseinput</id>
     <id>googlephotos</id>
     <id>gopass-jsonapi</id>
@@ -7827,6 +7832,8 @@
     <id>liberica17jdklite</id>
     <id>liberica17jre</id>
     <id>liberica17jrefull</id>
+    <id>liberica21jdk</id>
+    <id>liberica21jrefull</id>
     <id>liberica8jdk</id>
     <id>liberica8jre</id>
     <id>libericajdk</id>
@@ -8046,6 +8053,7 @@
     <id>mcr-r2020b</id>
     <id>mcr-r2021b</id>
     <id>mcr-r2022b</id>
+    <id>mcr-r2023b</id>
     <id>mcs</id>
     <id>mcserv</id>
     <id>md5sums</id>
@@ -8456,6 +8464,7 @@
     <id>net-reactor-slayer</id>
     <id>netbalancer</id>
     <id>netbeans-jee</id>
+    <id>netbird</id>
     <id>netbscanner</id>
     <id>netcfpowertoys</id>
     <id>netcfsvcutil</id>
@@ -9271,6 +9280,7 @@
     <id>qodana</id>
     <id>qpmx</id>
     <id>qr-code-studio</id>
+    <id>qr-codereader</id>
     <id>qrcp</id>
     <id>qsync</id>
     <id>qt-creator-x64</id>
@@ -10466,6 +10476,7 @@
     <id>therenamer</id>
     <id>thinupdate</id>
     <id>thor.generator</id>
+    <id>thorium</id>
     <id>thoughtworks.go.server</id>
     <id>thumbico</id>
     <id>thumbnail-database-viewer</id>
@@ -11247,6 +11258,8 @@
     <id>wakeuponstandby</id>
     <id>wallcat</id>
     <id>wamp-server</id>
+    <id>wander</id>
+    <id>warp-diag-checker</id>
     <id>warp</id>
     <id>warzone2100</id>
     <id>was-liberty-java-ee7-full-platform</id>
@@ -11295,6 +11308,7 @@
     <id>websitesniffer</id>
     <id>webstorm</id>
     <id>webswing</id>
+    <id>webtoon-dl</id>
     <id>webtorrent-desktop</id>
     <id>webvideocap.install</id>
     <id>webvideocap.portable</id>

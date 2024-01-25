@@ -952,6 +952,21 @@ Function Convert-geforce-driver ([PackageInternalizeInfo]$obj) {
     $exeRemoveString = "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod + $exeRemoveString
 
+    $nuspecPath = (Get-ChildItem -path $(Split-Path $obj.toolsDir) -Filter "*.nuspec").fullname
+    [xml]$nuspecXml = Get-Content $nuspecPath
+    $nuspecXml.package.metadata.copyright = "Nvidia"
+
+    Try {
+        [System.Xml.XmlWriterSettings] $XmlSettings = New-Object System.Xml.XmlWriterSettings
+        $XmlSettings.Indent = $true
+        # Save without BOM
+        $XmlSettings.Encoding = New-Object System.Text.UTF8Encoding($false)
+        [System.Xml.XmlWriter] $XmlWriter = [System.Xml.XmlWriter]::Create($nuspecPath, $XmlSettings)
+        $nuspecXML.Save($XmlWriter)
+    } Finally {
+        $XmlWriter.Dispose()
+    }
+
 
     $checksumWin10 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksumWin7 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "packageArgs\['checksum64'\].*= '").tostring() -split "'" | Select-Object -Last 1 -Skip 1
