@@ -4,6 +4,11 @@
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = 'Couldnt figure out an alternative', Scope = 'Function', Target = 'Convert-KB3063858')]
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = 'Couldnt figure out an alternative', Scope = 'Function', Target = 'Convert-KB3118401')]
 param()
+
+Function Test-PkgFunctionsDefined() {
+    Write-Warning "Ignore This"
+}
+
 Function Convert-dotnetfx ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url +').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()

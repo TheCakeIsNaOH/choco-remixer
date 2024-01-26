@@ -101,7 +101,7 @@
                     $null = New-Item -Type Directory $IdSaveDir
                 }
 
-                $internalizedVersions = ($internalizedXMLcontent.internalized.pkg | Where-Object { $_.id -ieq "$nuspecID" }).version
+                $internalizedVersions = $internalizedXMLContent.internalized.SelectSingleNode("//pkg[@id=""$($nuspecID.ToLower())""]").version
 
                 $versions | ForEach-Object {
 

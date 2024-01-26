@@ -20,8 +20,10 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     $ErrorActionPreference = 'Stop'
 
     # Import package specific functions
-    Get-ChildItem -Path (Join-Path (Split-Path -Parent $PSScriptRoot) 'pkgs') -Filter "*.ps1" | ForEach-Object {
-        . $_.fullname
+    if (!(Test-Path -Path Function:\Test-PkgFunctionsDefined)) {
+        Get-ChildItem -Path (Join-Path (Split-Path -Parent $PSScriptRoot) 'pkgs') -Filter "*.ps1" | ForEach-Object {
+            . $_.fullname
+        }
     }
 
     if ($null -eq $config) {
@@ -31,7 +33,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
             Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
         }
     } else {
-        Write-Verbose "Config already aquired"
+        Write-Verbose "Config already acquired"
     }
 
     $nuspecDetails = Read-NuspecVersion -NupkgPath $nupkgFile
@@ -39,7 +41,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     $nuspecID = $nuspecDetails[1]
 
     #todo, make this faster, hash table? linq? other?
-    [array]$internalizedVersions = ($internalizedXMLcontent.internalized.pkg | Where-Object { $_.id -ieq "$nuspecID" }).version
+    [array]$internalizedVersions = $internalizedXMLContent.internalized.SelectSingleNode("//pkg[@id=""$($nuspecID.ToLower())""]").version
 
     if ($internalizedVersions -icontains $nuspecVersion) {
         Write-Verbose "$nuspecID $nuspecVersion is already internalized"
@@ -113,8 +115,6 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     } else {
         Write-Warning "$nuspecID $nuspecVersion is a unknown package ID, ignoring. Support has to be added for it, see ADDING_PACKAGES.md"
     }
-
-    [system.gc]::Collect()
 
     if ($null -eq $obj) {
         return

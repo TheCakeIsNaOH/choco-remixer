@@ -12,8 +12,10 @@ Function Invoke-DownloadChocoPkg {
     $ErrorActionPreference = 'Stop'
 
     # Import package specific functions
-    Get-ChildItem -Path (Join-Path (Split-Path -Parent $PSScriptRoot) 'pkgs') -Filter "*.ps1" | ForEach-Object {
-        . $_.fullname
+    if (!(Test-Path -Path Function:\Test-PkgFunctionsDefined)) {
+        Get-ChildItem -Path (Join-Path (Split-Path -Parent $PSScriptRoot) 'pkgs') -Filter "*.ps1" | ForEach-Object {
+            . $_.fullname
+        }
     }
 
     Try {

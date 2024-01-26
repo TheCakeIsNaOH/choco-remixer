@@ -60,6 +60,13 @@ Function Invoke-InternalizeChocoPkg {
     }
 
     if (($null -eq $config.skipRepack) -or ($config.skipRepack -eq "no")) {
+        # Import package specific functions
+        if (!(Test-Path -Path Function:\Test-PkgFunctionsDefined)) {
+            Get-ChildItem -Path (Join-Path (Split-Path -Parent $PSScriptRoot) 'pkgs') -Filter "*.ps1" | ForEach-Object {
+                . $_.fullname
+            }
+        }
+
         #todo, add switch here to select from other options to get list of nupkgs
         Write-Verbose "Checking for packages in $($config.searchDir)"
         if ($thoroughList) {
