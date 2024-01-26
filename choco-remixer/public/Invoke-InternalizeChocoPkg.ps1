@@ -59,8 +59,6 @@ Function Invoke-InternalizeChocoPkg {
         }
     }
 
-
-
     if (($null -eq $config.skipRepack) -or ($config.skipRepack -eq "no")) {
         #todo, add switch here to select from other options to get list of nupkgs
         Write-Verbose "Checking for packages in $($config.searchDir)"
@@ -68,26 +66,30 @@ Function Invoke-InternalizeChocoPkg {
             $nupkgArray = Get-ChildItem -File $config.searchDir -Filter "*.nupkg" -Recurse
         } else {
             #filters based on folder name, therefore less files to open later and therefore faster, but may not be useful in all circumstances.
-            $nupkgArray = (Get-ChildItem -File $config.searchDir -Filter "*.nupkg" -Recurse) | Where-Object {
-                ($_.directory.name -notin $packagesXMLcontent.packages.internal.id) `
-                    -and ($_.directory.Parent.name -notin $packagesXMLcontent.packages.internal.id) `
-                    -and ($_.directory.name -notin $config.personal.id) `
-                    -and ($_.directory.Parent.name -notin $config.personal.id) `
+            [System.Collections.ArrayList]$nupkgArray = @()
+            [System.Collections.Generic.HashSet[String]]$internalIds = @($packagesXMLcontent.packages.internal.id)
+            [System.Collections.Generic.HashSet[String]]$personalIds = @($config.personal.id)
+            foreach ($file in (Get-ChildItem -File $config.searchDir -Filter "*.nupkg" -Recurse)) {
+                if ((!$internalIds.Contains($file.directory.name)) -and (!$internalIds.Contains($file.directory.Parent.name)) `
+                    -and (!$personalIds.Contains($file.directory.name)) -and (!$personalIds.Contains($file.directory.Parent.name))) {
+                    $null = $nupkgArray.Add($file)
+                }
             }
         }
-    }
 
-    if (($null -eq $config.skipRepack) -or ($config.skipRepack -eq "no")) {
+        Write-Verbose "Repacking $($nupkgArray.Count) Packages"
         [System.Collections.ArrayList]$nupkgInfoArray = @()
+        $nupkgArrayDedup = $nupkgArray | Sort-Object -Unique
+        Write-Verbose "Deduplicated packages"
 
         #unique needed to workaround a bug if accessing searchDir from a samba share where things show up twice if there are directories with the same name but different case.
-        $nupkgArray | Select-Object -Unique | ForEach-Object {
+        foreach ($package in $nupkgArrayDedup) {
             $parameters = $PSBoundParameters
             Try {
                 if ($parameters['nupkgFile']) {
-                    $parameters.nupkgFile = $_.fullname
+                    $parameters.nupkgFile = $package.fullname
                 } else {
-                    $parameters.Add("nupkgFile",  $_.fullname)
+                    $parameters.Add("nupkgFile",  $package.fullname)
                 }
                 if ($parameters['internalizedXML']) {
                     $parameters.internalizedXML = $internalizedXML
