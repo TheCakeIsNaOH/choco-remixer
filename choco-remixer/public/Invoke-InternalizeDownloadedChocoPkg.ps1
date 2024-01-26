@@ -41,7 +41,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     $nuspecID = $nuspecDetails[1]
 
     #todo, make this faster, hash table? linq? other?
-    [array]$internalizedVersions = $internalizedXMLContent.internalized.SelectSingleNode("//pkg[@id=""$($nuspecID.ToLower())""]").version
+    [array]$internalizedVersions = $internalizedXMLcontent.SelectSingleNode("//pkg[@id=""$($nuspecID.ToLower())""]").version
 
     if ($internalizedVersions -icontains $nuspecVersion) {
         Write-Verbose "$nuspecID $nuspecVersion is already internalized"

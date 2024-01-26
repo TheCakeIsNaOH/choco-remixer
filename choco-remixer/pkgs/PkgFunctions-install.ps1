@@ -2,35 +2,18 @@
 param()
 
 Function Convert-autocad ([PackageInternalizeInfo]$obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url\s*=').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+    $fullurl1 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url1\s*=.*English').tostring()
+    $url1 = ($fullurl1 -split "'" | Select-String -Pattern "http").tostring()
+    $filename1 = ($url1 -split "/" | Select-Object -Last 1).tostring()
+    $filePath1 = 'file     = (Join-Path $toolsDir "' + $filename1 + '")'
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgsURL\s+= @{" , "$&`n    $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgsURL\s+= @{" , "$&`n    $filePath1"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+    $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
 
-
-    $nuspecPath = (Get-ChildItem -path $(Split-Path $obj.toolsDir) -Filter "*.nuspec").fullname
-    [xml]$nuspecXml = Get-Content $nuspecPath
-    $depitem = $nuspecXml.package.metadata.dependencies.dependency | Where-Object id -like "vcredist2012"
-    $depitem.removeAttribute('version')
-
-    Try {
-        [System.Xml.XmlWriterSettings] $XmlSettings = New-Object System.Xml.XmlWriterSettings
-        $XmlSettings.Indent = $true
-        # Save without BOM
-        $XmlSettings.Encoding = New-Object System.Text.UTF8Encoding($false)
-        [System.Xml.XmlWriter] $XmlWriter = [System.Xml.XmlWriter]::Create($nuspecPath, $XmlSettings)
-        $nuspecXML.Save($XmlWriter)
-    } Finally {
-        $XmlWriter.Dispose()
-    }
-
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum\s*=').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    $checksum1 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum1\s*=.*English').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url1 -filename $filename1 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum1
 }
 
 
@@ -1371,24 +1354,33 @@ Function Convert-vscode-install ([PackageInternalizeInfo]$obj) {
 }
 
 Function Convert-anki ([PackageInternalizeInfo]$obj) {
+    $scriptVersionFull = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'Version ').tostring()
+    $scriptVersion = ($scriptVersionFull -split "'" | Select-String -Pattern "\d").ToString()
 
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
+    $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
+    $url32 = $url32 -replace '\$version',$scriptVersion
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
+    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+
+    $fullUrlqt5 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '''url''').tostring()
+    $urlQt5 =  ($fullUrlqt5 -split '"' | Select-String -Pattern "http").tostring()
+    $urlQt5 = $urlQt5 -replace '\$version',$scriptVersion
+    $filenameQt5 = ($urlQt5 -split "/" | Select-Object -Last 1).tostring()
+    $filePathQt5 = '$packageArgs[''file''] = (Join-Path $toolsDir "' + $filenameQt5 + '")'
 
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    #$obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage", "<#$&"
-    #$obj.installScriptMod = $obj.installScriptMod -replace "checksumType 'sha256'", "$&#>`nInstall-ChocolateyInstallPackage -PackageName `"`$packageName`" -FileType `"`$installerType`" -SilentArgs `"`" -file `"`$file`""
 
-    $obj.installScriptMod = $obj.installScriptMod -replace '-Url \$url', "-File `$file"
-
-    $obj.installScriptMod = $filePath32 + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod -replace "'Qt5'\]\) \{" , "$&`n  $filePathQt5"
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
 
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksumQt6  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+
+    $checksumQt5 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksumQt5  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $urlQt5 -filename $filenameQt5 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksumQt5
 }
 
 Function Convert-kb2919355 ([PackageInternalizeInfo]$obj) {
@@ -1483,7 +1475,7 @@ Function Convert-dotnet4.5 ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     #No checksum in package
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType "md5"
 }
 
 Function Convert-greenshot ([PackageInternalizeInfo]$obj) {
@@ -1500,7 +1492,7 @@ Function Convert-greenshot ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     #No checksum in package
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType "md5"
 }
 
 
@@ -1518,7 +1510,7 @@ Function Convert-dotnet4.5.1 ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     #No checksum in package
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType "md5"
 }
 
 
@@ -1536,7 +1528,7 @@ Function Convert-dotnet4.5.2 ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     #No checksum in package
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType "md5"
 }
 
 
@@ -1554,7 +1546,7 @@ Function Convert-dotnet4.6 ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     #No checksum in package
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType "md5"
 }
 
 Function Convert-xming ([PackageInternalizeInfo]$obj) {
@@ -1572,7 +1564,7 @@ Function Convert-xming ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
 
     #No checksum in package
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType "md5"
 }
 
 Function Convert-conemu ([PackageInternalizeInfo]$obj) {
