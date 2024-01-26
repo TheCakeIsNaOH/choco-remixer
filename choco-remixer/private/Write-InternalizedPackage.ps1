@@ -13,7 +13,7 @@
         Write-Verbose "adding $nuspecID to internalized IDs"
         $addID = $internalizedXMLcontent.CreateElement("pkg")
         $addID.SetAttribute("id", "$nuspecID")
-        $internalizedXMLcontent.internalized.AppendChild($addID) | Out-Null
+        $internalizedXMLcontent.SelectSingleNode('//internalized').AppendChild($addID) | Out-Null
         $internalizedXMLcontent.save($internalizedXMLPath)
 
         [XML]$internalizedXMLcontent = Get-Content $internalizedXMLPath

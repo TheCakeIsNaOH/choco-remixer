@@ -33,7 +33,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
             Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
         }
     } else {
-        Write-Verbose "Config already acquired"
+        Write-Debug "Config already acquired"
     }
 
     $nuspecDetails = Read-NuspecVersion -NupkgPath $nupkgFile
