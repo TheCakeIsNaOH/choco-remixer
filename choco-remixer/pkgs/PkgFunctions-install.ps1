@@ -1044,34 +1044,27 @@ Function Convert-Temurin8jre ([PackageInternalizeInfo]$obj) {
 }
 
 
-Function Convert-Temurinjre ([PackageInternalizeInfo]$obj) {
+Function Convert-Temurinjre-64only ([PackageInternalizeInfo]$obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit .*= ").tostring()
 
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
 
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
 
-    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
     $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
 
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = '$ErrorActionPreference = ''Stop''' + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32`n  $filePath64"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs.url ", "packageArgs.file "
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath64"
     $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs.Url64bit ", "packageArgs.file64 "
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
 
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 

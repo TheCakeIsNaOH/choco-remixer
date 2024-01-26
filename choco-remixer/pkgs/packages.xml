@@ -3433,7 +3433,7 @@
       <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
-      <functionName>Convert-Temurinjre-general</functionName>
+      <functionName>Convert-Temurinjre-64only</functionName>
       <id>temurinjre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
