@@ -1687,6 +1687,7 @@
     <id>microsoft-windows-terminal</id>
     <id>microsoft.aspnet.mvc</id>
     <id>midimt</id>
+    <id>mightygrep-demo</id>
     <id>mightytext-chrome</id>
     <id>miktex.install</id>
     <id>miktex</id>
@@ -2034,6 +2035,7 @@
     <id>opensslkey</id>
     <id>openstego</id>
     <id>opentofu.portable</id>
+    <id>opentosca-vintner</id>
     <id>openvpn-community</id>
     <id>openvpn</id>
     <id>openwebstart</id>
@@ -2710,6 +2712,8 @@
     <id>sublimetext3.app</id>
     <id>subtitleworkshop</id>
     <id>sudo</id>
+    <id>sui.portable</id>
+    <id>sui</id>
     <id>sumatrapdf.commandline</id>
     <id>sumatrapdf.install</id>
     <id>sumatrapdf.portable</id>
@@ -3008,6 +3012,7 @@
     <id>veeam-service-provider-console-ssp-agent-service</id>
     <id>vendir</id>
     <id>vera</id>
+    <id>veracode-cli</id>
     <id>vet</id>
     <id>veusz</id>
     <id>veyon</id>
@@ -5964,6 +5969,7 @@
     <id>corvusskk</id>
     <id>cosafe</id>
     <id>cosign</id>
+    <id>cosmic-comics</id>
     <id>cosmosdbexplorer</id>
     <id>couchbase-server-community</id>
     <id>couchdb</id>
@@ -6308,6 +6314,7 @@
     <id>dogtail.vs2012.2</id>
     <id>dogtail.vs2012.3</id>
     <id>dokandiscutils</id>
+    <id>dokany2</id>
     <id>dolt</id>
     <id>domainhostingview</id>
     <id>domo</id>
@@ -6647,6 +6654,7 @@
     <id>fanalab</id>
     <id>fanatec-driver-beta</id>
     <id>fanatec-driver</id>
+    <id>fanficfare</id>
     <id>far-2</id>
     <id>far</id>
     <id>fastglacier</id>
@@ -7833,6 +7841,9 @@
     <id>liberica17jre</id>
     <id>liberica17jrefull</id>
     <id>liberica21jdk</id>
+    <id>liberica21jdkfull</id>
+    <id>liberica21jdklite</id>
+    <id>liberica21jre</id>
     <id>liberica21jrefull</id>
     <id>liberica8jdk</id>
     <id>liberica8jre</id>
@@ -8063,6 +8074,7 @@
     <id>mdprojecttimer</id>
     <id>mdt</id>
     <id>meatplay</id>
+    <id>mechpack2</id>
     <id>medford.portable</id>
     <id>media-preview</id>
     <id>mediacoder</id>

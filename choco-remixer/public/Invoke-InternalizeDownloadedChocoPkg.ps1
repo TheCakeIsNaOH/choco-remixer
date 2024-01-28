@@ -152,7 +152,9 @@ Function Invoke-InternalizeDownloadedChocoPkg {
 
     if (!($failed)) {
         Write-UnzippedInstallScript -installScriptMod $obj.installScriptMod -toolsDir $obj.toolsDir
-        Add-NuspecFilesElement -nuspecPath ((Get-ChildItem $obj.VersionDir -Filter "*.nuspec").fullname)
+        $nuspecPath = (Get-ChildItem $obj.VersionDir -Filter "*.nuspec").fullname
+        Add-NuspecFilesElement -nuspecPath $nuspecPath
+        Format-NuspecForValidation -nuspecPath $nuspecPath
 
         if ($noPack) {
             $exitcode = 0
