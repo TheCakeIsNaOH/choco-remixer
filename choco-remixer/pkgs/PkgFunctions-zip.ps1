@@ -269,7 +269,7 @@ Function Convert-itunes ([PackageInternalizeInfo]$obj) {
 
 Function Convert-rust-ms ([PackageInternalizeInfo]$obj) {
     $int = 0
-    [array]$installScriptSplit =  $obj.installScriptOrig -split "\n"
+    [array]$installScriptSplit = $obj.installScriptOrig -split "\n"
 
     while ($installScriptSplit[$int] -notlike "*Updates*") {
         [string]$installScriptVars += $installScriptSplit[$int] + "`n"
@@ -523,8 +523,8 @@ Function Convert-7zip-zstd ([PackageInternalizeInfo]$obj) {
     $extractLocation = '$extractLocation = Join-Path $toolsDir "Codecs"'
     $archiveLocation = '$archiveLocation = if ((Get-OSArchitectureWidth 64) -and $env:chocolateyForceX86 -ne $true) { $file64 } else { $file }'
 
-    $obj.installScriptMod = $obj.installScriptMod  -replace '\$archiveLocation\s+=' , "#$&"
-    $obj.installScriptMod = $obj.installScriptMod  -replace '\$extractLocation\s+=' , "#$&"
+    $obj.installScriptMod = $obj.installScriptMod -replace '\$archiveLocation\s+=' , "#$&"
+    $obj.installScriptMod = $obj.installScriptMod -replace '\$extractLocation\s+=' , "#$&"
     $obj.installScriptMod = $extractLocation + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $archiveLocation + "`n" + $obj.InstallScriptMod
     $obj.installScriptMod = $filePath32 + "`n" + "$filePath64" + "`n" + $obj.InstallScriptMod

@@ -13,10 +13,10 @@ Function Convert-autocad ([PackageInternalizeInfo]$obj) {
     }
 
     $installScriptExec = $obj.installScriptOrig -join "`n"
-    $installScriptExec = $installScriptExec -replace "Invoke-UninstallOld","#$&"
-    $installScriptExec = $installScriptExec -replace "Get-ChocolateyWebFile","#$&"
-    $installScriptExec = $installScriptExec -replace "Install-ChocolateyInstallPackage","#$&"
-    $installScriptExec = $installScriptExec -replace '\. \$tools',"#$&"
+    $installScriptExec = $installScriptExec -replace "Invoke-UninstallOld", "#$&"
+    $installScriptExec = $installScriptExec -replace "Get-ChocolateyWebFile", "#$&"
+    $installScriptExec = $installScriptExec -replace "Install-ChocolateyInstallPackage", "#$&"
+    $installScriptExec = $installScriptExec -replace '\. \$tools', "#$&"
     Invoke-Expression $installScriptExec
 
     $filename1 = ($url1 -split "/" | Select-Object -Last 1).tostring()
@@ -85,18 +85,18 @@ Function Convert-anaconda3 ([PackageInternalizeInfo]$obj) {
     $only64 = $true
 
     try {
-      $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
-      $url32 = ($fullurl32 -split "'" | Select-String -Pattern "https").ToString()
-      $only64 = $false
+        $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url  ').tostring()
+        $url32 = ($fullurl32 -split "'" | Select-String -Pattern "https").ToString()
+        $only64 = $false
+    } catch {
     }
-    catch {}
 
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url64bit  ').tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "https").ToString()
 
     if ( ! $only64 ) {
-      $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-      $filePath32 = 'file          = (Join-Path $pkgToolsDir "' + $filename32 + '")'
+        $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+        $filePath32 = 'file          = (Join-Path $pkgToolsDir "' + $filename32 + '")'
     }
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
     $filePath64 = 'file64        = (Join-Path $pkgToolsDir "' + $filename64 + '")'
@@ -105,13 +105,12 @@ Function Convert-anaconda3 ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     if ( ! $only64 ) {
         $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n  $filePath32 `n    $filePath64"
-    }
-    else {
+    } else {
         $obj.installScriptMod = $obj.installScriptMod -replace " = @{" , "$&`n    $filePath64"
     }
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $pkgToolsDir\*.exe'
 
-    if( ! $only64 ) {
+    if ( ! $only64 ) {
         $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
         Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
     }
@@ -216,7 +215,7 @@ Function Convert-libreoffice-fresh ([PackageInternalizeInfo]$obj) {
         # line with     version  =  'x.y.z'
         $officeVersion = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' version ').tostring()
         $officeVersion = ($OfficeVersion -split "=" | Select-Object -Last 1).tostring()
-        $officeVersion = ($officeVersion -replace "'","").Trim()
+        $officeVersion = ($officeVersion -replace "'", "").Trim()
         $exactVersion = GetLibOExactVersion $officeVersion
         $url32 = $exactVersion.Url32
         $url64 = $exactVersion.Url64
@@ -254,7 +253,7 @@ Function Convert-libreoffice-still ([PackageInternalizeInfo]$obj) {
         # line with     version  =  'x.y.z'
         $officeVersion = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' version ').tostring()
         $officeVersion = ($OfficeVersion -split "=" | Select-Object -Last 1).tostring()
-        $officeVersion = ($officeVersion -replace "'","").Trim()
+        $officeVersion = ($officeVersion -replace "'", "").Trim()
         $exactVersion = GetLibOExactVersion $officeVersion
         $url32 = $exactVersion.Url32
         $url64 = $exactVersion.Url64
@@ -1376,13 +1375,13 @@ Function Convert-anki ([PackageInternalizeInfo]$obj) {
 
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
-    $url32 = $url32 -replace '\$version',$scriptVersion
+    $url32 = $url32 -replace '\$version', $scriptVersion
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
 
     $fullUrlqt5 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '''url''').tostring()
-    $urlQt5 =  ($fullUrlqt5 -split '"' | Select-String -Pattern "http").tostring()
-    $urlQt5 = $urlQt5 -replace '\$version',$scriptVersion
+    $urlQt5 = ($fullUrlqt5 -split '"' | Select-String -Pattern "http").tostring()
+    $urlQt5 = $urlQt5 -replace '\$version', $scriptVersion
     $filenameQt5 = ($urlQt5 -split "/" | Select-Object -Last 1).tostring()
     $filePathQt5 = '$packageArgs[''file''] = (Join-Path $toolsDir "' + $filenameQt5 + '")'
 
@@ -1639,7 +1638,7 @@ Function Convert-startallback ([PackageInternalizeInfo]$obj) {
     $scriptVersion = ($scriptVersionFull -split '"' | Select-String -Pattern "\d").ToString()
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
     $url = ($fullurl32 -split '"' | Select-String -Pattern "http").ToString()
-    $url = $url -replace '\$\{version\}',$scriptVersion
+    $url = $url -replace '\$\{version\}', $scriptVersion
 
     $filename = ($url -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename + '")'

@@ -241,6 +241,6 @@
         $global:remixerLocale = "en-US"
     }
 
-    $versioningDLLPath = [IO.Path]::Combine((Split-Path $PSScriptRoot),"private","Chocolatey.NuGet.Versioning.3.4.2","lib","netstandard2.0","Chocolatey.NuGet.Versioning.dll")
+    $versioningDLLPath = [IO.Path]::Combine((Split-Path $PSScriptRoot), "private", "Chocolatey.NuGet.Versioning.3.4.2", "lib", "netstandard2.0", "Chocolatey.NuGet.Versioning.dll")
     Add-Type -Path $versioningDLLPath
 }

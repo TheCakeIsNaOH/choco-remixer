@@ -1,6 +1,6 @@
 ## Contributing
 
-To setup a development environment, first check that you have dependencies of PowerShell 5+ and choco installed. 
+To setup a development environment, first check that you have dependencies of PowerShell 5+ and choco installed.
 Then copy the personal packages template to a file called `personal-packages-testing.xml` so as to be able to use the `.vscode/launch.json` settings.
 Adjust the options in `personal-packages-testing.xml` as needed for what you are testing.
 

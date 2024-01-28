@@ -68,13 +68,13 @@
 
         $publicPageURL = $config.publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
         [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
-        $publicEntry = $publicPage.feed.entry | Select-Object -first 1
+        $publicEntry = $publicPage.feed.entry | Select-Object -First 1
         $publicVersion = $publicEntry.properties.Version
 
         if ($null -eq $publicVersion) {
             $publicPageURL = $config.publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsAbsoluteLatestVersion'
             [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL
-            $publicEntry = $publicPage.feed.entry | Select-Object -first 1
+            $publicEntry = $publicPage.feed.entry | Select-Object -First 1
             $publicVersion = $publicEntry.properties.Version
 
             if ($null -eq $publicVersion) {

@@ -78,7 +78,7 @@ Function Invoke-InternalizeChocoPkg {
             [System.Collections.Generic.HashSet[String]]$personalIds = @($config.personal.id)
             foreach ($file in (Get-ChildItem -File $config.searchDir -Filter "*.nupkg" -Recurse)) {
                 if ((!$internalIds.Contains($file.directory.name)) -and (!$internalIds.Contains($file.directory.Parent.name)) `
-                    -and (!$personalIds.Contains($file.directory.name)) -and (!$personalIds.Contains($file.directory.Parent.name))) {
+                        -and (!$personalIds.Contains($file.directory.name)) -and (!$personalIds.Contains($file.directory.Parent.name))) {
                     $null = $nupkgArray.Add($file)
                 }
             }
@@ -96,17 +96,17 @@ Function Invoke-InternalizeChocoPkg {
                 if ($parameters['nupkgFile']) {
                     $parameters.nupkgFile = $package.fullname
                 } else {
-                    $parameters.Add("nupkgFile",  $package.fullname)
+                    $parameters.Add("nupkgFile", $package.fullname)
                 }
                 if ($parameters['internalizedXML']) {
                     $parameters.internalizedXML = $internalizedXML
                 } else {
-                    $parameters.Add("internalizedXML",  $internalizedXML)
+                    $parameters.Add("internalizedXML", $internalizedXML)
                 }
                 $string = Invoke-InternalizeDownloadedChocoPkg @parameters
                 $null = $nupkgInfoArray.Add($string)
             } Catch {
-            Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
+                Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
             }
         }
 

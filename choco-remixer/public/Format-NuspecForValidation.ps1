@@ -3,14 +3,14 @@ Function Format-NuspecForValidation {
     param (
         [parameter(Mandatory = $true, Position = 0)]
         [ValidateScript( {
-            if (!(Test-Path -Path $_ -PathType Leaf) ) {
-                throw "The NuspecPath parameter must be a file. Folder paths are not allowed."
-            }
-            if ($_ -notmatch "(\.nuspec)") {
-                throw "The file specified in the NuspecPath parameter must be .nuspec"
-            }
-            return $true
-         } )]
+                if (!(Test-Path -Path $_ -PathType Leaf) ) {
+                    throw "The NuspecPath parameter must be a file. Folder paths are not allowed."
+                }
+                if ($_ -notmatch "(\.nuspec)") {
+                    throw "The file specified in the NuspecPath parameter must be .nuspec"
+                }
+                return $true
+            } )]
         [string]$NuspecPath
     )
 
@@ -31,14 +31,14 @@ Function Format-NuspecForValidation {
     foreach ($line in ($nuspecXML.package.metadata.description -split "`n")) {
         if ($line -match '^(#+)([^\s#].*)$') {
             Write-Warning "$NuspecPath had invalid markdown headings, spacing out"
-            $updatedLine = $line -replace "#","# "
-            $nuspecXML.package.metadata.description = $nuspecXML.package.metadata.description -replace $line,$updatedLine
+            $updatedLine = $line -replace "#", "# "
+            $nuspecXML.package.metadata.description = $nuspecXML.package.metadata.description -replace $line, $updatedLine
         }
     }
 
     if ($nuspecXML.package.metadata.description -match '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}') {
         Write-Warning "$NuspecPath had an email in the description, mangling"
-        $nuspecXML.package.metadata.description = $nuspecXML.package.metadata.description -replace "@","[at]"
+        $nuspecXML.package.metadata.description = $nuspecXML.package.metadata.description -replace "@", "[at]"
     }
 
     Try {

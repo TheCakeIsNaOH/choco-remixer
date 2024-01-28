@@ -99,7 +99,7 @@ Function Expand-Nupkg {
             }
 
             if (!$NoAddFilesElement) {
-                $toplevelFiles = $filteredArchive.fullname | ForEach-Object { $_ -split "[/\\]" | Select-Object -first 1 } | Select-Object -Unique
+                $toplevelFiles = $filteredArchive.fullname | ForEach-Object { $_ -split "[/\\]" | Select-Object -First 1 } | Select-Object -Unique
                 $nuspecPath = Join-Path $Destination ($toplevelFiles | Where-Object { $_ -like "*.nuspec" })
                 [array]$filesElementList = Get-Item ($toplevelFiles | Where-Object { $_ -notlike "*.nuspec" } | ForEach-Object { Join-Path $Destination $_ })
                 Add-NuspecFilesElement -NuspecPath $nuspecPath -FilesList $filesElementList

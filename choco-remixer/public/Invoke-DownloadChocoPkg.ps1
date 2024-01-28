@@ -31,13 +31,13 @@ Function Invoke-DownloadChocoPkg {
         if (([string]::IsNullOrEmpty($_.version))) {
             $publicPageURL = $ccrAPI + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $id + '%27)%20and%20IsLatestVersion'
             [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
-            $publicEntry = $publicPage.feed.entry | Select-Object -first 1
+            $publicEntry = $publicPage.feed.entry | Select-Object -First 1
             $version = $publicEntry.properties.Version
 
             if ($null -eq $version) {
                 $publicPageURL = $ccrAPI + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $id + '%27)%20and%20IsAbsoluteLatestVersion'
                 [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
-                $publicEntry = $publicPage.feed.entry | Select-Object -first 1
+                $publicEntry = $publicPage.feed.entry | Select-Object -First 1
                 $version = $publicEntry.properties.Version
 
                 if ($null -eq $version) {
@@ -50,7 +50,7 @@ Function Invoke-DownloadChocoPkg {
             $publicPageURL = $ccrAPI + "Packages(Id='" + $id + "',Version='" + $version + "')"
             Write-Warning $publicPageUrl
             [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
-            $publicEntry = $publicPage.entry | Select-Object -first 1
+            $publicEntry = $publicPage.entry | Select-Object -First 1
         }
 
         Write-Verbose "Downloading package $id version $version to $($config.searchDir)"
@@ -75,7 +75,7 @@ Function Invoke-DownloadChocoPkg {
         $checksum = -join ([System.Convert]::FromBase64String($publicEntry.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })
         $checksumType = $publicEntry.properties.PackageHashAlgorithm
 
-        Get-File -url $dlwdURL -filename $nupkgFileName  -folder $config.SearchDir -checksumTypeType $checksumType -checksum $checksum
+        Get-File -url $dlwdURL -filename $nupkgFileName -folder $config.SearchDir -checksumTypeType $checksumType -checksum $checksum
     }
     return
 }

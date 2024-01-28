@@ -46,14 +46,14 @@ Function Add-NuspecFilesElement {
     param (
         [parameter(Mandatory = $true, Position = 0)]
         [ValidateScript( {
-            if (!(Test-Path -Path $_ -PathType Leaf) ) {
-                throw "The NuspecPath parameter must be a file. Folder paths are not allowed."
-            }
-            if ($_ -notmatch "(\.nuspec)") {
-                throw "The file specified in the NuspecPath parameter must be .nuspec"
-            }
-            return $true
-         } )]
+                if (!(Test-Path -Path $_ -PathType Leaf) ) {
+                    throw "The NuspecPath parameter must be a file. Folder paths are not allowed."
+                }
+                if ($_ -notmatch "(\.nuspec)") {
+                    throw "The file specified in the NuspecPath parameter must be .nuspec"
+                }
+                return $true
+            } )]
         [string]$NuspecPath,
         [System.IO.FileSystemInfo[]]$FilesList,
         [switch]$AuExclude
