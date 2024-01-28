@@ -9193,6 +9193,7 @@
     <id>proxifier</id>
     <id>proxyswitcher</id>
     <id>proxytrace</id>
+    <id>prstats-cli</id>
     <id>prtgdesktop</id>
     <id>ps-remote-play</id>
     <id>ps3mediaserver</id>

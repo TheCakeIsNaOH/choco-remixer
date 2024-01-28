@@ -2,18 +2,35 @@
 param()
 
 Function Convert-autocad ([PackageInternalizeInfo]$obj) {
-    $fullurl1 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url1\s*=.*English').tostring()
-    $url1 = ($fullurl1 -split "'" | Select-String -Pattern "http").tostring()
-    $filename1 = ($url1 -split "/" | Select-Object -Last 1).tostring()
-    $filePath1 = 'file     = (Join-Path $toolsDir "' + $filename1 + '")'
+    Function Install-ChocolateyInstallPackage {
+        Write-Information "mockup"
+    }
+    Function Get-PackageParameters {
+        Write-Information "mockup"
+    }
+    Function Get-ChocolateyWebFile {
+        Write-Information "mockup"
+    }
 
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgsURL\s+= @{" , "$&`n    $filePath1"
+    $installScriptExec = $obj.installScriptOrig -join "`n"
+    $installScriptExec = $installScriptExec -replace "Invoke-UninstallOld","#$&"
+    $installScriptExec = $installScriptExec -replace "Get-ChocolateyWebFile","#$&"
+    $installScriptExec = $installScriptExec -replace "Install-ChocolateyInstallPackage","#$&"
+    $installScriptExec = $installScriptExec -replace '\. \$tools',"#$&"
+    Invoke-Expression $installScriptExec
+
+    $filename1 = ($url1 -split "/" | Select-Object -Last 1).tostring()
+    $filePath1 = '$part1     = (Join-Path $toolsDir "' + $filename1 + '")'
+    $filename2 = ($url2 -split "/" | Select-Object -Last 1).tostring()
+    $filePath2 = '$part2     = (Join-Path $toolsDir "' + $filename2 + '")'
+
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
     $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
+    $obj.installScriptMod = $obj.installScriptMod -replace '\$part1 =' , "$filePath1`n#$&"
+    $obj.installScriptMod = $obj.installScriptMod -replace '\$part2 =' , "$filePath2`n#$&"
 
-    $checksum1 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum1\s*=.*English').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url1 -filename $filename1 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum1
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url2 -filename $filename2 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum2
 }
 
 
@@ -1147,6 +1164,29 @@ Function Convert-openoffice ([PackageInternalizeInfo]$obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
 
+Function Convert-tailscale ([PackageInternalizeInfo]$obj) {
+    Function Install-ChocolateyPackage {
+        Write-Information "mockup"
+    }
+    . $(Join-Path $obj.toolsDir 'ChocolateyInstall.ps1')
+
+    $url32 = $packageArgs.Url
+    $url64 = $packageArgs.Url64Bit
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+    $filePath32 = 'file     = (Join-Path $toolsDir "' + $filename32 + '")'
+    $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath32`n    $filePath64"
+
+    $checksum32 = $PackageArgs.Checksum
+    $checksum64 = $PackageArgs.Checksum64
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}
 
 Function Convert-pycharm-community ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url  ').tostring()

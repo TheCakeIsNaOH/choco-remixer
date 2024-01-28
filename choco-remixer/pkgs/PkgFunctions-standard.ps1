@@ -1337,24 +1337,6 @@ Function Convert-docker-desktop ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
 }
 
-Function Convert-tailscale ([PackageInternalizeInfo]$obj) {
-    $editInstallChocolateyPackageArgs = @{
-        architecture     = "x32"
-        nuspecID         = $obj.nuspecID
-        version          = $obj.version
-        installScript    = $obj.installScriptOrig
-        toolsDir         = $obj.toolsDir
-        argstype         = 0
-        urltype          = 2
-        RemoveEXE        = $true
-        checksumArgsType = 0
-        checksumTypeType = 'sha256'
-    }
-
-    $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs
-}
-
-
 Function Convert-awscli ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageArgs = @{
         architecture     = "x64"
