@@ -4,14 +4,20 @@
 
     $archive = [System.IO.Compression.ZipFile]::OpenRead($nupkgPath)
 
-    $nuspecStream = ($archive.Entries | Where-Object { $_.FullName -like "*.nuspec" }).open()
+    foreach ($entry in $archive.Entries) {
+        if ($entry.Fullname -Like "*.nuspec") {
+            $nuspecStream = $entry.Open()
+            break
+        }
+    }
+
     $nuspecReader = New-Object Io.streamreader($nuspecStream)
-    $nuspecString = $nuspecReader.ReadToEnd()
+    [xml]$nuspecXML = $nuspecReader.ReadToEnd()
 
     #cleanup opened variables
     $nuspecStream.close()
     $nuspecReader.close()
     $archive.dispose()
 
-    return ([XML]$nuspecString).package.metadata.version, ([XML]$nuspecString).package.metadata.id
+    return $nuspecXML.package.metadata.version, $nuspecXML.package.metadata.id
 }

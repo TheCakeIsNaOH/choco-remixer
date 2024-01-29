@@ -133,6 +133,11 @@
     }
 
     [XML]$packagesXMLContent = Get-Content $pkgXML
+    $notImplementedIdsTableLower = @{}
+    ForEach ($id in $packagesXMLContent.packages.notImplemented.id){
+        $notImplementedIdsTableLower.Add($id.ToLower(),"1")
+    }
+
     [XML]$configXMLContent = Get-Content $configXML
     [xml]$internalizedXMLContent = Get-Content $internalizedXML
     if (!(Test-Path $downloadXML)) {
