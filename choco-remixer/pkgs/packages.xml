@@ -3495,7 +3495,7 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-aspnetcore-runtimepackagestore</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>aspnetcore-runtimepackagestore</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -3670,64 +3670,106 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-5.0-desktopruntime</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-5.0-aspnetruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-5.0-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-5.0-runtime</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-5.0-runtime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-5.0-sdk-2xx</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-5.0-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-5.0-sdk-2xx</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-5.0-sdk-4xx</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-5.0-sdk-3xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-5.0-sdk-4xx</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-6.0-aspnetruntime</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-6.0-aspnetruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-6.0-desktopruntime</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-6.0-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-6.0-runtime</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-6.0-runtime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-6.0-sdk-3xx</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-6.0-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-6.0-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-6.0-sdk-3xx</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-6.0-sdk-4xx</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-6.0-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-aspnetruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -3776,6 +3818,13 @@
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-8.0-aspnetruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-8.0-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -3796,7 +3845,14 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-aspnetcoremodule-v2</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-aspnetcoremodule-v1</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-aspnetcoremodule-v2</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -3860,6 +3916,41 @@
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.0-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.0-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.0-sdk-3xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.0-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.1-aspnetruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnetcore-2.1-runtime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -3867,7 +3958,91 @@
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.1-sdk-3xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.1-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.1-sdk-5xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.1-sdk-6xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.1-sdk-7xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.1-sdk-8xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.2-aspnetruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnetcore-2.2-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.2-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.2-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.2-sdk-3xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-2.2-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-3.0-aspnetruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -3887,29 +4062,64 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnetcore-31-aspnetruntime</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-3.0-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnetcore-3.1-aspnetruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnetcore-3.1-desktopruntime</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnetcore-3.1-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnetcore-3.1-runtime</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnetcore-3.1-runtime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnetcore-3.1-sdk-4xx</functionName>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-3.1-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-3.1-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-3.1-sdk-3xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnetcore-3.1-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-runtime.portable</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -6344,41 +6554,11 @@
     <id>dotlocal</id>
     <id>dotmemory-console.portable</id>
     <id>dotmemory-unit.portable</id>
-    <id>dotnet-5.0-aspnetruntime</id>
-    <id>dotnet-5.0-sdk-1xx</id>
-    <id>dotnet-5.0-sdk-3xx</id>
-    <id>dotnet-6.0-sdk-1xx</id>
-    <id>dotnet-6.0-sdk-2xx</id>
-    <id>dotnet-7.0-aspnetruntime</id>
-    <id>dotnet-8.0-aspnetruntime</id>
-    <id>dotnet-aspnetcoremodule-v1</id>
     <id>dotnet-verification-tool</id>
     <id>dotnet4.6-targetpack</id>
     <id>dotnet4.6.1-devpack</id>
     <id>dotnet4.6.2-deu</id>
     <id>dotnet4.7.2-deu</id>
-    <id>dotnetcore-2.0-sdk-1xx</id>
-    <id>dotnetcore-2.0-sdk-2xx</id>
-    <id>dotnetcore-2.0-sdk-3xx</id>
-    <id>dotnetcore-2.0-sdk-4xx</id>
-    <id>dotnetcore-2.1-aspnetruntime</id>
-    <id>dotnetcore-2.1-sdk-3xx</id>
-    <id>dotnetcore-2.1-sdk-4xx</id>
-    <id>dotnetcore-2.1-sdk-5xx</id>
-    <id>dotnetcore-2.1-sdk-6xx</id>
-    <id>dotnetcore-2.1-sdk-7xx</id>
-    <id>dotnetcore-2.1-sdk-8xx</id>
-    <id>dotnetcore-2.2-aspnetruntime</id>
-    <id>dotnetcore-2.2-sdk-1xx</id>
-    <id>dotnetcore-2.2-sdk-2xx</id>
-    <id>dotnetcore-2.2-sdk-3xx</id>
-    <id>dotnetcore-2.2-sdk-4xx</id>
-    <id>dotnetcore-3.0-aspnetruntime</id>
-    <id>dotnetcore-3.0-sdk-1xx</id>
-    <id>dotnetcore-3.1-sdk-1xx</id>
-    <id>dotnetcore-3.1-sdk-2xx</id>
-    <id>dotnetcore-3.1-sdk-3xx</id>
-    <id>dotnetcore-runtime.portable</id>
     <id>dotnetcore-vs</id>
     <id>dotnetcoresdk</id>
     <id>dotnetdash</id>
