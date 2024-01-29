@@ -603,55 +603,7 @@ Function Convert-virtualbox ([PackageInternalizeInfo]$obj) {
 
 }
 
-
-Function Convert-Temurin8 ([PackageInternalizeInfo]$obj) {
-    #need to deal with added added param that has option of install both 32 and 64,
-    #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "\sUrl64bit\s*=\s").tostring()
-
-    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-    $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath64"
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir2\*.msi'
-
-    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
-}
-
-
-Function Convert-Temurin8jre ([PackageInternalizeInfo]$obj) {
-    #need to deal with added added param that has option of install both 32 and 64,
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit .* = ").tostring()
-
-    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
-
-    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-
-    $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
-
-
-    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
-
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath64"
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir2\*.msi'
-
-    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
-}
-
-
-Function Convert-Temurinjre-64only ([PackageInternalizeInfo]$obj) {
+Function Convert-Temurin-64only ([PackageInternalizeInfo]$obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64bit .*= ").tostring()
@@ -675,7 +627,7 @@ Function Convert-Temurinjre-64only ([PackageInternalizeInfo]$obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
-Function Convert-Temurinjre-general ([PackageInternalizeInfo]$obj) {
+Function Convert-Temurin-general ([PackageInternalizeInfo]$obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()

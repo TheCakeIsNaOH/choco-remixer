@@ -4980,15 +4980,105 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-Temurinjre-general</functionName>
+      <functionName>Convert-Temurin-64only</functionName>
+      <id>temurin</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-general</functionName>
+      <id>temurin11</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-general</functionName>
+      <id>temurin11jre</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-64only</functionName>
+      <id>temurin16</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-general</functionName>
+      <id>temurin17</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-general</functionName>
       <id>temurin17jre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
-      <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
-      <functionName>Convert-Temurin8</functionName>
+      <functionName>Convert-Temurin-general</functionName>
+      <id>temurin18</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-general</functionName>
+      <id>temurin18jre</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-general</functionName>
+      <id>temurin19</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-general</functionName>
+      <id>temurin19jre</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-64only</functionName>
+      <id>temurin20</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-64only</functionName>
+      <id>temurin20jre</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-64only</functionName>
+      <id>temurin21</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-64only</functionName>
+      <id>temurin21jre</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin-64only</functionName>
       <id>temurin8</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -4996,7 +5086,7 @@
       <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
-      <functionName>Convert-Temurin8jre</functionName>
+      <functionName>Convert-Temurin-64only</functionName>
       <id>temurin8jre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -5004,7 +5094,7 @@
       <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
-      <functionName>Convert-Temurinjre-64only</functionName>
+      <functionName>Convert-Temurin-64only</functionName>
       <id>temurinjre</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -10596,19 +10686,6 @@
     <id>tempfilecleaner.app</id>
     <id>template</id>
     <id>temple.portable</id>
-    <id>temurin11</id>
-    <id>temurin11jre</id>
-    <id>temurin16</id>
-    <id>temurin17</id>
-    <id>temurin18</id>
-    <id>temurin18jre</id>
-    <id>temurin19</id>
-    <id>temurin19jre</id>
-    <id>temurin20</id>
-    <id>temurin20jre</id>
-    <id>temurin21</id>
-    <id>temurin21jre</id>
-    <id>temurin</id>
     <id>tencentdocs</id>
     <id>tencentmeeting</id>
     <id>tencentqq</id>
