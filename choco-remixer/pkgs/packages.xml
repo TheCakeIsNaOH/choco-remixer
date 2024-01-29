@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <packages>
   <internal>
     <id>010editor</id>
@@ -3339,6 +3339,13 @@
     <id>zpaq</id>
   </internal>
   <implemented>
+    <!--    <pkg>
+      <functionName></functionName>
+      <id></id>
+      <needsStopAction></needsStopAction>
+      <needsToolsDir></needsToolsDir>
+      <whyNotInternal></whyNotInternal>
+    </pkg> -->
     <pkg>
       <id>1password</id>
       <needsStopAction>no</needsStopAction>
@@ -3407,7 +3414,15 @@
       <id>adb</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>      <!-- under google SDK licensing with no redist, but has clause that allows open source licensing to take precedence, unsure if this is totally under open sources licensings, may need to build custom -->
+      <whyNotInternal>licensing</whyNotInternal>
+      <!-- under google SDK licensing with no redist, but has clause that allows open source licensing to take precedence, unsure if this is totally under open sources licensings, may need to build custom -->
+    </pkg>
+    <pkg>
+      <functionName>Convert-adobeair</functionName>
+      <id>adobeair</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-adobereader</functionName>
@@ -3416,47 +3431,26 @@
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-        <pkg>
-      <functionName>Convert-adobeair</functionName>
-      <id>adobeair</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
+    <pkg>
+      <functionName>Convert-advanced-installer</functionName>
+      <id>advanced-installer</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-Temurin8</functionName>
-      <id>temurin8</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
+      <functionName>Convert-airtame</functionName>
+      <id>airtame</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-Temurin8jre</functionName>
-      <id>temurin8jre</id>
-      <needsStopAction>yes</needsStopAction>
+      <functionName>Convert-anaconda3</functionName>
+      <id>anaconda3</id>
+      <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
-    </pkg>
-    <pkg>
-      <functionName>Convert-Temurinjre-64only</functionName>
-      <id>temurinjre</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
-    </pkg>
-    <pkg>
-      <functionName>Convert-Temurinjre-general</functionName>
-      <id>temurin17jre</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>      <!--Not really for this package, but for overall adoptopenjdk packages-->
-    </pkg>
-    <pkg>
-      <functionName>Convert-anki</functionName>
-      <id>anki</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <id>androidstudio</id>
@@ -3473,29 +3467,22 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-advanced-installer</functionName>
-      <id>advanced-installer</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-anaconda3</functionName>
-      <id>anaconda3</id>
-      <needsStopAction>no</needsStopAction>
+      <functionName>Convert-anki</functionName>
+      <id>anki</id>
+      <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-anydesk-portable</functionName>
-      <id>anydesk.portable</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-anydesk-install</functionName>
       <id>anydesk.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-anydesk-portable</functionName>
+      <id>anydesk.portable</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -3522,13 +3509,6 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-airtame</functionName>
-      <id>airtame</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>Convert-autocad</functionName>
       <id>autocad</id>
       <needsStopAction>no</needsStopAction>
@@ -3550,13 +3530,6 @@
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-azurepowershell</functionName>
-      <id>azurepowershell</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>Convert-azure-cli</functionName>
       <id>azure-cli</id>
       <needsStopAction>no</needsStopAction>
@@ -3571,18 +3544,18 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-bitwarden</functionName>
-      <id>bitwarden</id>
+      <functionName>Convert-azurepowershell</functionName>
+      <id>azurepowershell</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-box-drive</functionName>
-      <id>box-drive</id>
+      <functionName>Convert-bitwarden</functionName>
+      <id>bitwarden</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-blender</functionName>
@@ -3592,18 +3565,18 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-box-drive</functionName>
+      <id>box-drive</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-camunda-modeler</functionName>
       <id>camunda-modeler</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-coretemp</functionName>
-      <id>coretemp</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-cinebench</functionName>
@@ -3613,15 +3586,15 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-citrix-workspace-ltsr</functionName>
-      <id>citrix-workspace-ltsr</id>
+      <functionName>Convert-citrix-workspace</functionName>
+      <id>citrix-workspace</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-citrix-workspace</functionName>
-      <id>citrix-workspace</id>
+      <functionName>Convert-citrix-workspace-ltsr</functionName>
+      <id>citrix-workspace-ltsr</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -3634,17 +3607,17 @@
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-cpuz</functionName>
-      <id>cpu-z.install</id>
-      <needsStopAction>no</needsStopAction>
+      <functionName>Convert-coretemp</functionName>
+      <id>coretemp</id>
+      <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-cutepdf</functionName>
-      <id>cutepdf</id>
-      <needsStopAction>No</needsStopAction>
-      <needsToolsDir>Yes</needsToolsDir>
+      <functionName>Convert-cpuz</functionName>
+      <id>cpu-z.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
@@ -3655,13 +3628,20 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-cutepdf</functionName>
+      <id>cutepdf</id>
+      <needsStopAction>No</needsStopAction>
+      <needsToolsDir>Yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-ddu</functionName>
       <id>ddu</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-      <pkg>
+    <pkg>
       <functionName>Convert-dellcommandupdate</functionName>
       <id>dellcommandupdate</id>
       <needsStopAction>no</needsStopAction>
@@ -3688,6 +3668,139 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-5.0-desktopruntime</functionName>
+      <id>dotnet-5.0-desktopruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-5.0-runtime</functionName>
+      <id>dotnet-5.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-5.0-sdk-2xx</functionName>
+      <id>dotnet-5.0-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-5.0-sdk-4xx</functionName>
+      <id>dotnet-5.0-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-6.0-aspnetruntime</functionName>
+      <id>dotnet-6.0-aspnetruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-6.0-desktopruntime</functionName>
+      <id>dotnet-6.0-desktopruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-6.0-runtime</functionName>
+      <id>dotnet-6.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-6.0-sdk-3xx</functionName>
+      <id>dotnet-6.0-sdk-3xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-6.0-sdk-4xx</functionName>
+      <id>dotnet-6.0-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-desktopruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-sdk-3xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-7.0-sdk-4xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-8.0-desktopruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-8.0-runtime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-8.0-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnet-aspnetcoremodule-v2</functionName>
+      <id>dotnet-aspnetcoremodule-v2</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-dotnet1.1</functionName>
@@ -3739,104 +3852,6 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-5.0-desktopruntime</functionName>
-      <id>dotnet-5.0-desktopruntime</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnet-5.0-runtime</functionName>
-      <id>dotnet-5.0-runtime</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnet-6.0-desktopruntime</functionName>
-      <id>dotnet-6.0-desktopruntime</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnet-6.0-sdk-3xx</functionName>
-      <id>dotnet-6.0-sdk-3xx</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnet-6.0-sdk-4xx</functionName>
-      <id>dotnet-6.0-sdk-4xx</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnetcore-general-internalizer</functionName>
-      <id>dotnet-7.0-sdk-1xx</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnetcore-general-internalizer</functionName>
-      <id>dotnet-7.0-sdk-2xx</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnetcore-general-internalizer</functionName>
-      <id>dotnet-7.0-sdk-3xx</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnetcore-general-internalizer</functionName>
-      <id>dotnet-7.0-sdk-4xx</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnetcore-general-internalizer</functionName>
-      <id>dotnet-8.0-sdk-1xx</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnetcore-general-internalizer</functionName>
-      <id>dotnet-7.0-runtime</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnetcore-general-internalizer</functionName>
-      <id>dotnet-7.0-desktopruntime</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnetcore-general-internalizer</functionName>
-      <id>dotnet-8.0-runtime</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnetcore-general-internalizer</functionName>
-      <id>dotnet-8.0-desktopruntime</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnetcore-2.0-runtime</id>
       <needsStopAction>no</needsStopAction>
@@ -3859,52 +3874,17 @@
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
-      <id>dotnetcore-3.0-runtime</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnetcore-3.0-desktopruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnetcore-3.1-sdk-4xx</functionName>
-      <id>dotnetcore-3.1-sdk-4xx</id>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnetcore-3.0-runtime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnet-5.0-sdk-2xx</functionName>
-      <id>dotnet-5.0-sdk-2xx</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnet-5.0-sdk-4xx</functionName>
-      <id>dotnet-5.0-sdk-4xx</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnet-6.0-runtime</functionName>
-      <id>dotnet-6.0-runtime</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-dotnet-6.0-aspnetruntime</functionName>
-      <id>dotnet-6.0-aspnetruntime</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-31-aspnetruntime</functionName>
@@ -3928,11 +3908,11 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-dotnet-aspnetcoremodule-v2</functionName>
-      <id>dotnet-aspnetcoremodule-v2</id>
+      <functionName>Convert-dotnetcore-3.1-sdk-4xx</functionName>
+      <id>dotnetcore-3.1-sdk-4xx</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-dotnetfx</functionName>
@@ -3977,8 +3957,15 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-edge</functionName>
-      <id>microsoft-edge</id>
+      <functionName>Convert-egnyte-connect</functionName>
+      <id>egnyte-connect</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-egnyte-desktop-app</functionName>
+      <id>egnyte-desktop-app</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -3998,27 +3985,6 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-egnyte-connect</functionName>
-      <id>egnyte-connect</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-egnyte-desktop-app</functionName>
-      <id>egnyte-desktop-app</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-filespy</functionName>
-      <id>filespy</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>Convert-filebeat</functionName>
       <id>filebeat</id>
       <needsStopAction>no</needsStopAction>
@@ -4032,6 +3998,13 @@
       <needsToolsDir>yes</needsToolsDir>
       <architecture>both</architecture>
       <checksumTypeType>SHA512</checksumTypeType>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-filespy</functionName>
+      <id>filespy</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
@@ -4056,16 +4029,16 @@
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-geforce-driver</functionName>
-      <id>geforce-game-ready-driver</id>
-      <needsStopAction>no</needsStopAction>
+      <functionName>Convert-geforce-experience</functionName>
+      <id>geforce-experience</id>
+      <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-geforce-experience</functionName>
-      <id>geforce-experience</id>
-      <needsStopAction>yes</needsStopAction>
+      <functionName>Convert-geforce-driver</functionName>
+      <id>geforce-game-ready-driver</id>
+      <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
@@ -4126,6 +4099,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-gotomeeting</functionName>
+      <id>gotomeeting</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-grammarly-for-windows</functionName>
       <id>grammarly-for-windows</id>
       <needsStopAction>no</needsStopAction>
@@ -4136,13 +4116,6 @@
       <functionName>Convert-greenshot</functionName>
       <id>greenshot</id>
       <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-gotomeeting</functionName>
-      <id>gotomeeting</id>
-      <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
@@ -4209,14 +4182,6 @@
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
-
-    <pkg>
-      <functionName>Convert-keybase</functionName>
-      <id>keybase</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
     <pkg>
       <functionName>Convert-kb2919355</functionName>
       <id>kb2919355</id>
@@ -4267,6 +4232,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-keybase</functionName>
+      <id>keybase</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-kodi</functionName>
       <id>kodi</id>
       <needsStopAction>no</needsStopAction>
@@ -4300,6 +4272,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-lively</functionName>
+      <id>lively</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-lockhunter</functionName>
@@ -4336,22 +4315,15 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-lively</functionName>
-      <id>lively</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-malwarebytes</functionName>
-      <id>malwarebytes</id>
+      <functionName>Convert-makemkv</functionName>
+      <id>makemkv</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-makemkv</functionName>
-      <id>makemkv</id>
+      <functionName>Convert-malwarebytes</functionName>
+      <id>malwarebytes</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -4362,6 +4334,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-edge</functionName>
+      <id>microsoft-edge</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-microsoft-teams</functionName>
@@ -4427,15 +4406,22 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-netfx-4.7.2</functionName>
-      <id>netfx-4.7.2</id>
+      <functionName>Convert-netfx-4.7.1</functionName>
+      <id>netfx-4.7.1</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-netfx-4.7.1</functionName>
-      <id>netfx-4.7.1</id>
+      <functionName>Convert-netfx-4.7.1-devpack</functionName>
+      <id>netfx-4.7.1-devpack</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-netfx-4.7.2</functionName>
+      <id>netfx-4.7.2</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -4450,13 +4436,6 @@
     <pkg>
       <functionName>Convert-netfx-4.8.1</functionName>
       <id>netfx-4.8.1</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-netfx-4.7.1-devpack</functionName>
-      <id>netfx-4.7.1-devpack</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -4517,13 +4496,6 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-openscad-install</functionName>
-      <id>openscad.install</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>Convert-openlp</functionName>
       <id>openlp</id>
       <needsStopAction>no</needsStopAction>
@@ -4535,7 +4507,15 @@
       <id>openoffice</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>      <!--- Size of all different ones combined -->
+      <whyNotInternal>size</whyNotInternal>
+      <!--- Size of all different ones combined -->
+    </pkg>
+    <pkg>
+      <functionName>Convert-openscad-install</functionName>
+      <id>openscad.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-openshot</functionName>
@@ -4579,13 +4559,6 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-powertoys</functionName>
-      <id>powertoys</id>
-      <needsStopAction>No</needsStopAction>
-      <needsToolsDir>No</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>Convert-powershell</functionName>
       <id>powershell</id>
       <needsStopAction>Yes</needsStopAction>
@@ -4598,6 +4571,13 @@
       <needsStopAction>No</needsStopAction>
       <needsToolsDir>No</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-powertoys</functionName>
+      <id>powertoys</id>
+      <needsStopAction>No</needsStopAction>
+      <needsToolsDir>No</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-pycharm-community</functionName>
@@ -4621,15 +4601,15 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-rebootblocker</functionName>
-      <id>rebootblocker</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
+      <functionName>Convert-rstudio</functionName>
+      <id>R.Studio</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-resharper-platform</functionName>
-      <id>resharper-platform</id>
+      <functionName>Convert-rebootblocker</functionName>
+      <id>rebootblocker</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -4642,18 +4622,18 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-resharper-platform</functionName>
+      <id>resharper-platform</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-ringcentral-classic</functionName>
       <id>ringcentral-classic</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-rstudio</functionName>
-      <id>R.Studio</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-rtx-voice</functionName>
@@ -4691,11 +4671,19 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-shmnview</functionName>
+      <id>shmnview</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-shotcut-install</functionName>
       <id>shotcut.install</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>size</whyNotInternal>      <!-- almost too big, not quite yet, but almost -->
+      <whyNotInternal>size</whyNotInternal>
+      <!-- almost too big, not quite yet, but almost -->
     </pkg>
     <pkg>
       <functionName>Convert-skype</functionName>
@@ -4721,13 +4709,6 @@
     <pkg>
       <functionName>Convert-spotify</functionName>
       <id>spotify</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-shmnview</functionName>
-      <id>shmnview</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -4781,12 +4762,44 @@
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-        <pkg>
+    <pkg>
       <functionName>Convert-tailscale</functionName>
       <id>tailscale</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurinjre-general</functionName>
+      <id>temurin17jre</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+      <!--Not really for this package, but for overall adoptopenjdk packages-->
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin8</functionName>
+      <id>temurin8</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+      <!--Not really for this package, but for overall adoptopenjdk packages-->
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurin8jre</functionName>
+      <id>temurin8jre</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+      <!--Not really for this package, but for overall adoptopenjdk packages-->
+    </pkg>
+    <pkg>
+      <functionName>Convert-Temurinjre-64only</functionName>
+      <id>temurinjre</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+      <!--Not really for this package, but for overall adoptopenjdk packages-->
     </pkg>
     <pkg>
       <id>teracopy</id>
@@ -4837,6 +4850,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-vcredist140</functionName>
+      <id>vcredist140</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-vcredist2005</functionName>
       <id>vcredist2005</id>
       <needsStopAction>yes</needsStopAction>
@@ -4872,11 +4892,11 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-vcredist140</functionName>
-      <id>vcredist140</id>
+      <functionName>Convert-virt-viewer</functionName>
+      <id>virt-viewer</id>
       <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>licensing</whyNotInternal>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-virtualbox</functionName>
@@ -4884,13 +4904,6 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
-    </pkg>
-    <pkg>
-      <functionName>Convert-virt-viewer</functionName>
-      <id>virt-viewer</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-vivaldi-install</functionName>
@@ -4914,13 +4927,6 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-vscodium-install</functionName>
-      <id>vscodium.install</id>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>Convert-vscode-install</functionName>
       <id>vscode.install</id>
       <needsStopAction>no</needsStopAction>
@@ -4935,6 +4941,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-vscodium-install</functionName>
+      <id>vscodium.install</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-wazuh-agent</functionName>
       <id>wazuh-agent</id>
       <needsStopAction>no</needsStopAction>
@@ -4942,15 +4955,15 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-webex-meetings</functionName>
-      <id>webex-meetings</id>
+      <functionName>Convert-webex</functionName>
+      <id>webex</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-webex</functionName>
-      <id>webex</id>
+      <functionName>Convert-webex-meetings</functionName>
+      <id>webex-meetings</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -4984,6 +4997,13 @@
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-wsl-ubuntu-2004</functionName>
+      <id>wsl-ubuntu-2004</id>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>license</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-wsl2</functionName>
       <id>wsl2</id>
       <needsStopAction>no</needsStopAction>
@@ -4991,11 +5011,11 @@
       <whyNotInternal>license</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-wsl-ubuntu-2004</functionName>
-      <id>wsl-ubuntu-2004</id>
+      <functionName>Convert-xming</functionName>
+      <id>xming</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>license</whyNotInternal>
+      <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-yarn</functionName>
@@ -5012,28 +5032,12 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <functionName>Convert-xming</functionName>
-      <id>xming</id>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <whyNotInternal>maintainer</whyNotInternal>
-    </pkg>
-    <pkg>
       <functionName>Convert-zoom</functionName>
       <id>zoom</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
-    <!--    <pkg>
-      <functionName></functionName>
-      <id></id>
-      <needsStopAction></needsStopAction>
-      <needsToolsDir></needsToolsDir>
-      <whyNotInternal></whyNotInternal>
-    </pkg> -->
-
-
   </implemented>
   <notImplemented>
     <id>010editor.install</id>
