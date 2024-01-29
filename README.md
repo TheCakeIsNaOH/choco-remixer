@@ -86,6 +86,8 @@ In comparison with the [Chocolatey business license](https://chocolatey.org/pric
 - Generalize and factor out repeated code into functions.
 - Continue adding support for more packages
 
+![Progress](https://progress-bar.dev/265/?scale=6961&width=400&suffix=/6961)
+
 ## Potential things to add
 - Git integration for personal-packages.xml
 - Multiple personal-packages.xml files (for now it probably is best to add an alias to your profile for each xml)
