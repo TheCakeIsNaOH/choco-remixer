@@ -561,7 +561,7 @@ Function Convert-hexchat ([PackageInternalizeInfo]$obj) {
 
 Function Convert-octave-install ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageArgs = @{
-        architecture     = "both"
+        architecture     = "x64"
         nuspecID         = $obj.nuspecID
         version          = $obj.version
         installScript    = $obj.installScriptOrig

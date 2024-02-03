@@ -1171,6 +1171,8 @@
     <id>graphingcalculator</id>
     <id>graphite-powershell</id>
     <id>graphviz</id>
+    <id>gravitdesigner.install</id>
+    <id>gravitdesigner</id>
     <id>green-tunnel-gui</id>
     <id>grep</id>
     <id>grocery-checklist-shell</id>
@@ -8163,6 +8165,7 @@
     <id>ks.net</id>
     <id>ks</id>
     <id>ksign</id>
+    <id>kslite</id>
     <id>ksnip.install</id>
     <id>ksnip.portable</id>
     <id>ksonnet</id>
