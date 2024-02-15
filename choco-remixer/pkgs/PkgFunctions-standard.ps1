@@ -1274,9 +1274,9 @@ Function Convert-googleearth ([PackageInternalizeInfo]$obj) {
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
         argstype         = 0
-        urltype          = 6
+        urltype          = 0
         RemoveEXE        = $true
-        checksumArgsType = 2
+        checksumArgsType = 0
         checksumTypeType = 'sha256'
     }
 
@@ -1493,9 +1493,9 @@ Function Convert-logitech-options ([PackageInternalizeInfo]$obj) {
         installScript    = $obj.installScriptOrig
         toolsDir         = $obj.toolsDir
         argstype         = 0
-        urltype          = 2
+        urltype          = 0
         RemoveEXE        = $true
-        checksumArgsType = 2
+        checksumArgsType = 0
         checksumTypeType = 'sha256'
     }
 

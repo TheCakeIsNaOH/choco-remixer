@@ -592,3 +592,19 @@ Function Convert-winmtr-redux ([PackageInternalizeInfo]$obj) {
 
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
 }
+
+Function Convert-fbx2gltf ([PackageInternalizeInfo]$obj) {
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url64bit ').tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    $filePath64 = 'FileFullPath   = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+    $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
+    $obj.installScriptMod = $obj.installScriptMod -replace "= @{" , "$&`n  $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
+
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}

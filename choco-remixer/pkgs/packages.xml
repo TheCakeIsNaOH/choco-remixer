@@ -1708,6 +1708,7 @@
     <id>milkman-sio</id>
     <id>milkman-sync-git</id>
     <id>milkman-test</id>
+    <id>milkman-ws</id>
     <id>miller</id>
     <id>millipede</id>
     <id>milton.install</id>
@@ -4023,6 +4024,20 @@
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-8.0-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-9.0-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-aspnetcoremodule-v1</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -4367,6 +4382,13 @@
     <pkg>
       <functionName>Convert-epicgames</functionName>
       <id>epicgameslauncher</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-fbx2gltf</functionName>
+      <id>fbx2gltf</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
@@ -9121,6 +9143,7 @@
     <id>ogdesigneagle</id>
     <id>oh-my-posh</id>
     <id>ohmgraphite-exporter</id>
+    <id>okta-aws-cli</id>
     <id>okta.core.automation</id>
     <id>okta</id>
     <id>olex2</id>
