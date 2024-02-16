@@ -3352,6 +3352,32 @@
       <whyNotInternal></whyNotInternal>
     </pkg> -->
     <pkg>
+      <id>010editor.install</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>1</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>1</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>1c-barcode-scanner</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>1password</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -3363,6 +3389,58 @@
       <checksumArgsType>0</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>1password4</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>360ts</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>360tse</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>3dslicer</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <id>4k-slideshow-maker</id>
@@ -3449,11 +3527,116 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <id>7tt</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-7zip-zstd</functionName>
       <id>7zip-zstd</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>absolute-uninstaller</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>access2016runtime</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <stripQueryString>yes</stripQueryString>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>acestream</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>acronis-drive-monitor</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>acronis-vdi</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>acrylic-dns-proxy</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>action</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-adb</functionName>
@@ -3464,11 +3647,50 @@
       <!-- under google SDK licensing with no redist, but has clause that allows open source licensing to take precedence, unsure if this is totally under open sources licensings, may need to build custom -->
     </pkg>
     <pkg>
+      <id>adobe-connect</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>adobe-dnc</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-adobeair</functionName>
       <id>adobeair</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>adobedigitaleditions</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <functionName>Convert-adobereader</functionName>
@@ -6099,25 +6321,19 @@
     </pkg>
   </implemented>
   <notImplemented>
-    <id>010editor.install</id>
     <id>010editor.portable</id>
     <id>0ad</id>
     <id>0patch</id>
     <id>1c-barcode-printing</id>
-    <id>1c-barcode-scanner</id>
     <id>1c-its</id>
     <id>1cfresh-client</id>
     <id>1clipboard</id>
     <id>1password-cli</id>
-    <id>1password4</id>
     <id>2fast</id>
     <id>2gis</id>
-    <id>360ts</id>
-    <id>360tse</id>
     <id>3cx</id>
     <id>3dduke-shareware</id>
     <id>3dmark</id>
-    <id>3dslicer</id>
     <id>3dsmax</id>
     <id>3proxy</id>
     <id>3rvx</id>
@@ -6125,7 +6341,6 @@
     <id>64gram</id>
     <id>7-taskbar-tweaker</id>
     <id>7kaa</id>
-    <id>7tt</id>
     <id>8gadgetpack</id>
     <id>8x8work</id>
     <id>9kw-client</id>
@@ -6135,28 +6350,21 @@
     <id>abastart</id>
     <id>abc-update</id>
     <id>abilityoffice</id>
-    <id>absolute-uninstaller</id>
     <id>acardaoutboundagent</id>
     <id>acardaoutboundsolo</id>
     <id>accents</id>
     <id>access-data-registry-viewer</id>
     <id>access-to-mysql</id>
-    <id>access2016runtime</id>
     <id>accesschk</id>
     <id>accessdirector</id>
     <id>accessenum</id>
     <id>accesspv</id>
     <id>acddokannet</id>
-    <id>acestream</id>
     <id>achievement-watcher</id>
     <id>acm</id>
     <id>acme-sh</id>
     <id>acr</id>
-    <id>acronis-drive-monitor</id>
-    <id>acronis-vdi</id>
-    <id>acrylic-dns-proxy</id>
     <id>acs-engine</id>
-    <id>action</id>
     <id>activate-linux</id>
     <id>active-directory-photos</id>
     <id>activeexit</id>
@@ -6192,9 +6400,6 @@
     <id>admobilize-malos-vision</id>
     <id>admobilize-vision-service</id>
     <id>admprovider</id>
-    <id>adobe-connect</id>
-    <id>adobe-dnc</id>
-    <id>adobedigitaleditions</id>
     <id>adobeshockwaveplayer</id>
     <id>adom-classic</id>
     <id>adom-tiles</id>
