@@ -85,7 +85,7 @@ Function Invoke-InternalizeChocoPkg {
         }
 
         Write-Verbose "Repacking $($nupkgArray.Count) Packages"
-        [System.Collections.ArrayList]$nupkgInfoArray = @()
+        [System.Collections.ArrayList]$nupkgResultArray = @()
         $nupkgArrayDedup = $nupkgArray | Sort-Object -Unique
         Write-Verbose "Deduplicated packages"
 
@@ -103,8 +103,10 @@ Function Invoke-InternalizeChocoPkg {
                 } else {
                     $parameters.Add("internalizedXML", $internalizedXML)
                 }
-                $string = Invoke-InternalizeDownloadedChocoPkg @parameters
-                $null = $nupkgInfoArray.Add($string)
+                $pkgResult = Invoke-InternalizeDownloadedChocoPkg @parameters
+                if (![System.String]::IsNullOrWhiteSpace($pkgResult.id)) {
+                    $null = $nupkgResultArray.Add($pkgResult)
+                }
             } Catch {
                 Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
             }
@@ -112,8 +114,8 @@ Function Invoke-InternalizeChocoPkg {
 
         if ($writeVersion) {
             Write-Output "`n"
-            Foreach ($string in $nupkgInfoArray) {
-                Write-Output $string
+            Foreach ($result in $nupkgResultArray) {
+                Write-Output "$($result.ID) $($result.OldVersion) to $($result.Version)"
             }
         }
     }
