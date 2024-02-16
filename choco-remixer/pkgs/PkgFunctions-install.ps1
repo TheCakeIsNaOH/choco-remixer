@@ -1265,6 +1265,21 @@ Function Convert-startallback ([PackageInternalizeInfo]$obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
 }
 
+Function Convert-malwarebytes ([PackageInternalizeInfo]$obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
+    $url = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
+    $filename = "mb-windows.exe"
+    $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename + '")'
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+    $obj.installScriptMod = $obj.installScriptMod -replace 'Install-ChocolateyPackage' , 'Install-ChocolateyInstallPackage'
+    $obj.installScriptMod = $obj.installScriptMod -replace 'packageArgs = @{' , "$&`n  $filePath32"
+
+    $checksum = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\schecksum\s').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url -filename $filename -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum
+}
+
 Function Convert-cpuz ([PackageInternalizeInfo]$obj) {
     $editInstallChocolateyPackageargs = @{
         architecture     = "x32"

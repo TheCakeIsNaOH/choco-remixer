@@ -5033,15 +5033,9 @@
     </pkg>
     <pkg>
       <id>malwarebytes</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>yes</needsStopAction>
+      <functionName>Convert-malwarebytes</functionName>
+      <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>0</urlType>
-      <argsType>0</argsType>
-      <removeEXE>yes</removeEXE>
-      <checksumArgsType>0</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
