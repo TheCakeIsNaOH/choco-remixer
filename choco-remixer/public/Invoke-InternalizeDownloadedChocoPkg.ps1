@@ -217,5 +217,5 @@ Function Invoke-InternalizeDownloadedChocoPkg {
 
     Write-Information "$($obj.nuspecID) $($obj.Version) $($obj.status)" -InformationAction Continue
 
-    return [PackageInternalizeResult]::New($obj.nuspecID,$obj.Version,$obj.oldVersion,$obj.status)
+    return [PackageInternalizeResult]::New($obj)
 }
