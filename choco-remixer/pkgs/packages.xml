@@ -725,6 +725,8 @@
     <id>dotnet-7.0-windowshosting</id>
     <id>dotnet-8.0-sdk</id>
     <id>dotnet-8.0-windowshosting</id>
+    <id>dotnet-9.0-sdk</id>
+    <id>dotnet-9.0-windowshosting</id>
     <id>dotnet-all</id>
     <id>dotnet-aspnetruntime</id>
     <id>dotnet-desktopruntime</id>
@@ -4143,6 +4145,27 @@
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-8.0-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-9.0-aspnetruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-9.0-desktopruntime</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-9.0-runtime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
