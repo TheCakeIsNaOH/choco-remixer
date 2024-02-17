@@ -32,7 +32,7 @@ Function Format-NuspecForValidation {
         if ($line -match '^(#+)([^\s#].*)$') {
             Write-Warning "$NuspecPath had invalid markdown headings, spacing out"
             $updatedLine = $line -replace "#", "# "
-            $nuspecXML.package.metadata.description = $nuspecXML.package.metadata.description -replace $line, $updatedLine
+            $nuspecXML.package.metadata.description = $nuspecXML.package.metadata.description -replace [Regex]::Escape($line), $updatedLine
         }
     }
 
