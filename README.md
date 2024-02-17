@@ -86,7 +86,7 @@ In comparison with the [Chocolatey business license](https://chocolatey.org/pric
 - Generalize and factor out repeated code into functions.
 - Continue adding support for more packages
 
-![Progress](https://progress-bar.dev/265/?scale=6961&width=400&suffix=/6961)
+![Progress](https://progress-bar.dev/398/?scale=6969&width=400&suffix=/6969)
 
 ## Potential things to add
 - Git integration for personal-packages.xml
