@@ -111,11 +111,12 @@ This function edits the install script and downloads the installer(s) for standa
 - 3: `'  checksum32  '`,`'  checksum64  '`
 - 4: `' checksum '`,`' Checksum64 '`
 - 5: `'\schecksum\s+='`,`'\schecksum64\s+='`
-- 6: `'\schecksum\s+='`,`'\schecksum64\s+='` with double quotes url
+- 6: `'\schecksum\s+='`,`'\schecksum64\s+='` with double quotes url (legacy, use `$doubleQuotesChecksum` instead)
 - 7: `'\$checksum\s+='`,`'\$checksum64\s+='`
 
 ## Misc other options
 - `$doubleQuotesUrl`, if urls are surrounded by double quotes instead of single
+- `$doubleQuotesChecksum`, if checksums are surrounded by double quotes instead of single
 - `$stripQueryString`, to strip everything after `?` from the url
 - `$DeEncodeSpace`, to switch `%20` to `" "`
 - `$x64NameExt`, to add `_x64` to the 64 bit filename

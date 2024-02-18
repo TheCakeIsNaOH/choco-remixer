@@ -10232,6 +10232,7 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <doubleQuotesChecksum>yes</doubleQuotesChecksum>
       <checksumArgsType>1</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
@@ -10246,6 +10247,7 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <doubleQuotesChecksum>yes</doubleQuotesChecksum>
       <checksumArgsType>7</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
@@ -11439,6 +11441,7 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <doubleQuotesChecksum>yes</doubleQuotesChecksum>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
@@ -11908,6 +11911,7 @@
       <stripQueryString>yes</stripQueryString>
       <removeMSI>yes</removeMSI>
       <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <doubleQuotesChecksum>yes</doubleQuotesChecksum>
       <checksumArgsType>7</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
@@ -13022,6 +13026,7 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <doubleQuotesChecksum>yes</doubleQuotesChecksum>
       <checksumArgsType>7</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
