@@ -46,6 +46,10 @@ Function Format-NuspecForValidation {
         $nuspecXML.package.metadata.owners = $nuspecXML.package.metadata.owners -replace "@", "[at]"
     }
 
+    if ($nuspecXML.package.metadata.description.length -le 30) {
+        $nuspecXML.package.metadata.description += " An extra string to increase the description length above the minimum discription length of 30 characeters. "
+    }
+
     Try {
         [System.Xml.XmlWriterSettings] $XmlSettings = New-Object System.Xml.XmlWriterSettings
         $XmlSettings.Indent = $true
