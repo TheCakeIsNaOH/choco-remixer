@@ -5437,6 +5437,19 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>betaflight-configurator</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>bethesdanet</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -7423,6 +7436,19 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>dataspell</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>datastar</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -7449,6 +7475,71 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>dbforge-sql-decrypt</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dbforge-sql-devops</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dbforge-sql-fus</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dbkoda</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dcforoffice</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>ddev</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -7462,11 +7553,37 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>dds-thumbnail-viewer</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-ddu</functionName>
       <id>ddu</id>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>debugdiagnostic</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <id>debugdiagnostictool</id>
@@ -7495,6 +7612,19 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>deeparmor</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>deepl</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -7508,6 +7638,19 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>deepvocal-hitsuboku-kumi-chn</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>defiwallet</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -7515,6 +7658,20 @@
       <architecture>x64</architecture>
       <urlType>6</urlType>
       <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>defraggler</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <stripQueryString>yes</stripQueryString>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
@@ -7574,6 +7731,111 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>desktop-tech</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>devdocs-app</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>digimizer</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dipiscan</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>directorymonitor</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>directoryopus</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>md5</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>directx-sdk</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>discord-canary</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>discord.install</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -7587,6 +7849,71 @@
       <checksumArgsType>0</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>discoverj</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>diskdefragtouch</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>diskgenius</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dissenter-browser</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>md5</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dmd</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <id>docker-desktop</id>
@@ -7612,6 +7939,32 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dokany2</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dolt</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -7922,6 +8275,34 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <id>dotnet4.6.2-deu</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dotnet4.7.2-deu</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnetcore-2.0-runtime</id>
       <needsStopAction>no</needsStopAction>
@@ -8159,6 +8540,32 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <id>dotnetinstaller</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>doublecadxt</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>1</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>downzemall</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8172,11 +8579,50 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>doxie</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dozzzaqueux</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-drawio</functionName>
       <id>drawio</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>drawpile</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <id>driverbooster</id>
@@ -8205,6 +8651,19 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>drmemory.install</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>drobo-dashboard</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8214,6 +8673,19 @@
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
       <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>droidcamclient</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -8232,6 +8704,71 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <id>dub</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dumo</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>duo-auth-proxy</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>duo-authentication</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dupeguru</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>dvddecrypter</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>yes</needsStopAction>
@@ -8242,6 +8779,20 @@
       <removeEXE>yes</removeEXE>
       <checksumArgsType>7</checksumArgsType>
       <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dvdflick</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <DeEncodeSpace>yes</DeEncodeSpace>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
@@ -8271,6 +8822,32 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>dynare</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>dynatraceclient</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>ea-app</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8293,6 +8870,71 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>1</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>ealite</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>easy7zip</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>easycrypt</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>easyeda</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>easyuefi</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -8363,11 +9005,50 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <id>eid-estonia</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>electron-cash.install</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>electron-mail</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x64</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>elements</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
       <urlType>7</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
@@ -8387,6 +9068,110 @@
       <checksumArgsType>1</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>elm-platform</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>elsie</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>elsterformular</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>ember-media-manager</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>emsisoft-emergency-kit</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>englishizecmd</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>md5</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>enigmavirtualbox</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>enpass.install</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <id>envelope-printer</id>
@@ -8416,6 +9201,71 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <id>epidata</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>epos-connect</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>ericards</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>eset-antivirus</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>esp-idf-tools</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>espanso</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8438,6 +9288,19 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>eventghost</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -8468,6 +9331,45 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>evga-precision-xoc</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>evoluentmousemanager</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>exacqvision</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>md5</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>exchange-edb-viewer</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>yes</needsStopAction>
@@ -8477,6 +9379,19 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>executor</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -8494,7 +9409,46 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>explorergenie</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>expresslrs-configurator</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>expressvpn</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>expressvpn-beta</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -8520,6 +9474,19 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>f.lux.install</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>faceit</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8529,6 +9496,45 @@
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
       <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>far</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>fastimageresizer</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>favbinedit</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -8566,6 +9572,71 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>feeddemon</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>ferdi</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>0</urlType>
+      <argsType>1</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>ferdium</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>1</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>ffftp.install</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>file-converter</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>7</urlType>
+      <argsType>1</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-filebeat</functionName>
       <id>filebeat</id>
       <needsStopAction>no</needsStopAction>
@@ -8582,11 +9653,90 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <id>filebeat.install</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>fileoptimizer</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>fileshredder</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>1</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <functionName>Convert-filespy</functionName>
       <id>filespy</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>filius</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>film-info-organizer</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <DeEncodeSpace>yes</DeEncodeSpace>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>findinfiles</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <id>firefly</id>
@@ -8616,6 +9766,32 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <id>firestorm-opensim</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>firestorm-secondlife</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>flashbackexpress</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8625,6 +9801,162 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>flashdevelop</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>flashplayerplugin</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>flashplayerppapi</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>folder_size</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>foldersizes</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>fontbase</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>fossamail</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>7</urlType>
+      <argsType>1</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>fox-xca</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>foxitreader</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>1</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>fpsmonitor</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>fr.dwightstudio.jarmemu</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>franz</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -8655,12 +9987,90 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>free-virtual-keyboard</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>freeciv</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>freedownloadmanager</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>freefemplusplus</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x64</architecture>
       <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>freemake-audio-converter</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>freemake-video-converter</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>freenet</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
@@ -8681,6 +10091,84 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>freeter</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>freetube</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>frozenfruits</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>frozenfruits2</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>fscapture</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha1</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>fspy</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>fsviewer</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8690,6 +10178,19 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>1</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>fusioninventory-agent.install</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>0</urlType>
+      <argsType>1</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -8720,6 +10221,19 @@
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
     <pkg>
+      <id>gam</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>game-collector</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8729,6 +10243,19 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>gamecaster</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -8746,6 +10273,72 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>ganttproject</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>garmin-express</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>gather</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>gcloudsdk</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>gdlauncher</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>geany-plugins</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8755,6 +10348,45 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>geekbench2</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>geekbench3</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>geekbench4</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -8812,6 +10444,19 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <id>geosetter.install</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha1</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>getdataback-simple</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8821,6 +10466,97 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>getdiz</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>geth</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>md5</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>getiplayer</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>ggu-software</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>ggu-software-international</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>gigantticloud</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>gimagereader</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -8838,6 +10574,45 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <id>git-credential-manager-for-windows</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>git-fork</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>gitg</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>gitsh</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8852,6 +10627,33 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>glasswire</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>glimpse</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>glogg</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8862,6 +10664,19 @@
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>md5</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>glyphr-studio-desktop</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
@@ -8954,6 +10769,32 @@
       <checksumArgsType>4</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>goldendict-ng</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>gom-player</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <id>google-hangouts-chat</id>
@@ -15983,7 +17824,6 @@
     <id>bennett.portable</id>
     <id>bepo</id>
     <id>berrybrew</id>
-    <id>betaflight-configurator</id>
     <id>betterbird</id>
     <id>beyondcompare2</id>
     <id>beyondcompare4</id>
@@ -16426,7 +18266,6 @@
     <id>datamash</id>
     <id>datapixels</id>
     <id>dataram-ramdisk</id>
-    <id>dataspell</id>
     <id>datastax.community</id>
     <id>datomic-free</id>
     <id>daxstudio</id>
@@ -16450,13 +18289,10 @@
     <id>dbforge-sql-cb</id>
     <id>dbforge-sql-cmpl</id>
     <id>dbforge-sql-dc</id>
-    <id>dbforge-sql-decrypt</id>
-    <id>dbforge-sql-devops</id>
     <id>dbforge-sql-dg</id>
     <id>dbforge-sql-doc</id>
     <id>dbforge-sql-dp</id>
     <id>dbforge-sql-ep</id>
-    <id>dbforge-sql-fus</id>
     <id>dbforge-sql-im</id>
     <id>dbforge-sql-mon</id>
     <id>dbforge-sql-qb</id>
@@ -16468,28 +18304,21 @@
     <id>dbforge-sql-ut</id>
     <id>dbgl</id>
     <id>dbgview</id>
-    <id>dbkoda</id>
     <id>dbmigration</id>
-    <id>dcforoffice</id>
     <id>dcm</id>
     <id>dcmtk</id>
     <id>dcmtktls</id>
     <id>dcode</id>
     <id>dcplusplus.portable</id>
-    <id>dds-thumbnail-viewer</id>
     <id>de4dot</id>
-    <id>debugdiagnostic</id>
-    <id>deeparmor</id>
     <id>deepgit</id>
     <id>deepview</id>
-    <id>deepvocal-hitsuboku-kumi-chn</id>
     <id>deepvocal</id>
     <id>deezer</id>
     <id>defaultprogramseditor</id>
     <id>defender-injector</id>
     <id>deflopt</id>
     <id>defprof</id>
-    <id>defraggler</id>
     <id>deimos-driver</id>
     <id>dejavufonts</id>
     <id>deletefiles</id>
@@ -16513,7 +18342,6 @@
     <id>deskscapes</id>
     <id>deskspace</id>
     <id>desktop-audio-streamer</id>
-    <id>desktop-tech</id>
     <id>desktopconnector</id>
     <id>desktopicontoggle</id>
     <id>desktops</id>
@@ -16530,7 +18358,6 @@
     <id>devbox-vcredist2010</id>
     <id>devbox-wget</id>
     <id>devd</id>
-    <id>devdocs-app</id>
     <id>deviceioview</id>
     <id>devmanview</id>
     <id>devtoys</id>
@@ -16547,32 +18374,23 @@
     <id>diffutils</id>
     <id>digikam</id>
     <id>digime</id>
-    <id>digimizer</id>
     <id>digital</id>
     <id>digsby</id>
     <id>dingtalk</id>
     <id>dink-smallwood</id>
     <id>dip</id>
-    <id>dipiscan</id>
-    <id>directorymonitor</id>
-    <id>directoryopus</id>
-    <id>directx-sdk</id>
     <id>directx</id>
     <id>direvents</id>
     <id>dirsyncpro</id>
     <id>disable-windows10-upgrade</id>
     <id>disableuac</id>
     <id>disablewintracking</id>
-    <id>discord-canary</id>
     <id>discord-history-tracker</id>
     <id>discordchatexporter</id>
-    <id>discoverj</id>
     <id>disk2vhd</id>
     <id>diskcountersview</id>
-    <id>diskdefragtouch</id>
     <id>diskdump</id>
     <id>diskext</id>
-    <id>diskgenius</id>
     <id>diskled</id>
     <id>diskmarkstream</id>
     <id>diskmon</id>
@@ -16584,11 +18402,9 @@
     <id>displayfusion.portable</id>
     <id>displaylink</id>
     <id>disposablefixer</id>
-    <id>dissenter-browser</id>
     <id>dive</id>
     <id>divvy</id>
     <id>dllexp</id>
-    <id>dmd</id>
     <id>dmg2img</id>
     <id>dnsdataview</id>
     <id>dnspy-netfx</id>
@@ -16624,8 +18440,6 @@
     <id>dogtail.vs2012.2</id>
     <id>dogtail.vs2012.3</id>
     <id>dokandiscutils</id>
-    <id>dokany2</id>
-    <id>dolt</id>
     <id>domainhostingview</id>
     <id>domo</id>
     <id>donyacalendar-cli</id>
@@ -16651,12 +18465,9 @@
     <id>dotnet-verification-tool</id>
     <id>dotnet4.6-targetpack</id>
     <id>dotnet4.6.1-devpack</id>
-    <id>dotnet4.6.2-deu</id>
-    <id>dotnet4.7.2-deu</id>
     <id>dotnetcore-vs</id>
     <id>dotnetcoresdk</id>
     <id>dotnetdash</id>
-    <id>dotnetinstaller</id>
     <id>dotnetreactor</id>
     <id>dotnetresourcesextract</id>
     <id>dotnetsdk1.1</id>
@@ -16664,21 +18475,17 @@
     <id>dotnetsmoketest4</id>
     <id>dotnetversionmanager</id>
     <id>dotpeek.portable</id>
-    <id>doublecadxt</id>
     <id>doublecmd</id>
     <id>downloadapp</id>
     <id>downtester.install</id>
     <id>downtester.portable</id>
-    <id>doxie</id>
     <id>doxybook2</id>
     <id>doxygen.install</id>
     <id>doxygen.portable</id>
-    <id>dozzzaqueux</id>
     <id>draftsight</id>
     <id>draglock</id>
     <id>dragondisk</id>
     <id>drasyl</id>
-    <id>drawpile</id>
     <id>dreampie</id>
     <id>driveletterview</id>
     <id>driver-officegate</id>
@@ -16687,10 +18494,8 @@
     <id>driverview</id>
     <id>drivesnapshot</id>
     <id>drkspider</id>
-    <id>drmemory.install</id>
     <id>drmemory.portable</id>
     <id>droidcam-obs-plugin</id>
-    <id>droidcamclient</id>
     <id>droidfonts</id>
     <id>droidsansmono</id>
     <id>dropboxifier</id>
@@ -16706,18 +18511,13 @@
     <id>dtksneak</id>
     <id>du</id>
     <id>dualism</id>
-    <id>dub</id>
     <id>duck</id>
     <id>duckietv</id>
     <id>duf</id>
     <id>dumeter</id>
-    <id>dumo</id>
     <id>dumpedid</id>
-    <id>duo-auth-proxy</id>
-    <id>duo-authentication</id>
     <id>dupeguru-me</id>
     <id>dupeguru-pe</id>
-    <id>dupeguru</id>
     <id>dupemerge</id>
     <id>duplicacy</id>
     <id>duplicatecleaner</id>
@@ -16727,30 +18527,22 @@
     <id>durandal-extensions-vs2013</id>
     <id>dvassist</id>
     <id>dvc</id>
-    <id>dvdflick</id>
     <id>dvdstyler</id>
     <id>dwarf-fortress</id>
     <id>dwgtrueview</id>
     <id>dws.portable</id>
     <id>dxwnd</id>
     <id>dynamorio.drmemory</id>
-    <id>dynare</id>
     <id>dynatraceagent</id>
-    <id>dynatraceclient</id>
     <id>e-haushaltsbuch</id>
     <id>e-sword</id>
     <id>eagle</id>
-    <id>ealite</id>
     <id>earth-alerts</id>
     <id>eask-cli</id>
-    <id>easy7zip</id>
     <id>easyconnect</id>
-    <id>easycrypt</id>
-    <id>easyeda</id>
     <id>easylogusb</id>
     <id>easytag</id>
     <id>easytune6</id>
-    <id>easyuefi</id>
     <id>ec2clitools</id>
     <id>echotool</id>
     <id>eclipse-classic-juno</id>
@@ -16774,42 +18566,34 @@
     <id>efx-ct</id>
     <id>efx-view</id>
     <id>eget</id>
-    <id>eid-estonia</id>
     <id>ekeyfinder</id>
     <id>ekiga</id>
     <id>eksctl</id>
     <id>ekz</id>
     <id>elastic</id>
     <id>elasticsearch</id>
-    <id>electron-cash.install</id>
     <id>electron-cash.portable</id>
     <id>electron</id>
     <id>electrum-dash</id>
     <id>electrum-mona.install</id>
     <id>electrum.install</id>
     <id>electrum.portable</id>
-    <id>elements</id>
     <id>elevate.native</id>
     <id>elevenclock</id>
     <id>elinks</id>
     <id>elixir</id>
     <id>elkjop-cloud</id>
     <id>elm-new</id>
-    <id>elm-platform</id>
-    <id>elsie</id>
-    <id>elsterformular</id>
     <id>elympics-cli</id>
     <id>em-client</id>
     <id>em-n-en</id>
     <id>embarcaderodevcpp</id>
-    <id>ember-media-manager</id>
     <id>embestide</id>
     <id>emeditor</id>
     <id>emet</id>
     <id>empv</id>
     <id>emscripten</id>
     <id>emsisoft-anti-malware</id>
-    <id>emsisoft-emergency-kit</id>
     <id>emulationstation.install</id>
     <id>emulationstation.portable</id>
     <id>emule</id>
@@ -16817,21 +18601,15 @@
     <id>encryptr</id>
     <id>endless-sky</id>
     <id>energia</id>
-    <id>englishizecmd</id>
-    <id>enigmavirtualbox</id>
-    <id>enpass.install</id>
     <id>entityframeworkpowertools-vs2013</id>
     <id>envycoder</id>
     <id>epanet</id>
-    <id>epidata</id>
-    <id>epos-connect</id>
     <id>epsdevtools.web</id>
     <id>epson-perfection-v33-scanner</id>
     <id>equality</id>
     <id>equalizerapo</id>
     <id>equick</id>
     <id>equilibrium</id>
-    <id>ericards</id>
     <id>erlang16</id>
     <id>erlang</id>
     <id>erpxe</id>
@@ -16839,19 +18617,16 @@
     <id>errorcatcher</id>
     <id>esafe</id>
     <id>esedatabaseview</id>
-    <id>eset-antivirus</id>
     <id>eset-endpoint-antivirus</id>
     <id>eset-internet-security</id>
     <id>eset-nod32-antivirus</id>
     <id>esgen</id>
-    <id>esp-idf-tools</id>
     <id>essence</id>
     <id>ethanbrown.chromecanarydevextensions</id>
     <id>ethanbrown.chromedevextensions</id>
     <id>ethanbrown.devtools.web</id>
     <id>ethanbrown.sublimetext2.webpackages</id>
     <id>ethminer</id>
-    <id>eventghost</id>
     <id>eventlogsourcesview</id>
     <id>eventstore-oss</id>
     <id>eventstore</id>
@@ -16864,12 +18639,9 @@
     <id>evga-eleet</id>
     <id>evga-flow-control</id>
     <id>evga-precision-x1</id>
-    <id>evga-precision-xoc</id>
     <id>evimsync</id>
     <id>evince</id>
-    <id>evoluentmousemanager</id>
     <id>ewseditor</id>
-    <id>exacqvision</id>
     <id>exactaudiocopy</id>
     <id>excel.viewer</id>
     <id>excelconverter</id>
@@ -16877,7 +18649,6 @@
     <id>exceptionless</id>
     <id>execs</id>
     <id>executedprogramslist</id>
-    <id>executor</id>
     <id>exeinfo</id>
     <id>exercism-io-cli</id>
     <id>exfat7z</id>
@@ -16885,13 +18656,10 @@
     <id>exifdataview</id>
     <id>exiftool</id>
     <id>exiftoolgui</id>
-    <id>explorergenie</id>
     <id>explorersuite</id>
     <id>expressionblend3</id>
     <id>expressionblend4</id>
-    <id>expresslrs-configurator</id>
     <id>expresso</id>
-    <id>expressvpn-beta</id>
     <id>expurgate</id>
     <id>extensibilitytools</id>
     <id>extractnow</id>
@@ -16900,7 +18668,6 @@
     <id>ezssh</id>
     <id>f-secureav</id>
     <id>f-secureis</id>
-    <id>f.lux.install</id>
     <id>f.lux.portable</id>
     <id>f1viewer</id>
     <id>f2</id>
@@ -16912,40 +18679,31 @@
     <id>fanatec-driver</id>
     <id>fanficfare</id>
     <id>far-2</id>
-    <id>far</id>
     <id>fastglacier</id>
-    <id>fastimageresizer</id>
     <id>fastresolver.install</id>
     <id>fastresolver.portable</id>
-    <id>favbinedit</id>
     <id>faviconizer</id>
     <id>faview</id>
     <id>fawkes</id>
     <id>fbexport</id>
     <id>fbp-vst-plugins</id>
     <id>fbvlc</id>
-    <id>feeddemon</id>
     <id>femm</id>
     <id>fenix-web-server-beta</id>
     <id>fenix-web-server</id>
-    <id>ferdi</id>
-    <id>ferdium</id>
     <id>feroxbuster</id>
     <id>ffdshow</id>
     <id>ffe</id>
-    <id>ffftp.install</id>
     <id>ffftp.portable</id>
     <id>ffmpeg-shared</id>
     <id>ffsj</id>
     <id>fheroes2enh</id>
     <id>figlet-go</id>
     <id>figma</id>
-    <id>file-converter</id>
     <id>file-hash-generator</id>
     <id>file-splitter</id>
     <id>filealyzer</id>
     <id>fileassassin</id>
-    <id>filebeat.install</id>
     <id>filebot</id>
     <id>filedrop</id>
     <id>fileformatconverters</id>
@@ -16953,16 +18711,12 @@
     <id>filelist</id>
     <id>filen-sync</id>
     <id>filenesting</id>
-    <id>fileoptimizer</id>
     <id>fileseek.portable</id>
     <id>fileseek</id>
-    <id>fileshredder</id>
     <id>filetool</id>
     <id>filetypeeditor</id>
     <id>filetypesman</id>
     <id>filezilla.commandline</id>
-    <id>filius</id>
-    <id>film-info-organizer</id>
     <id>final-fantasy-xiv</id>
     <id>finalbuilder</id>
     <id>find-and-run-robot.install</id>
@@ -16970,7 +18724,6 @@
     <id>findaes</id>
     <id>findandreplace</id>
     <id>finddupe</id>
-    <id>findinfiles</id>
     <id>findlinks</id>
     <id>findthatfont</id>
     <id>findutils</id>
@@ -16988,8 +18741,6 @@
     <id>firefox-nightly</id>
     <id>firefoxdownloadsview</id>
     <id>firessh</id>
-    <id>firestorm-opensim</id>
-    <id>firestorm-secondlife</id>
     <id>firmwaretablesview</id>
     <id>firowallet</id>
     <id>fitbit.connect</id>
@@ -17003,10 +18754,7 @@
     <id>flashboot</id>
     <id>flashbuilder.install</id>
     <id>flashcookiesview</id>
-    <id>flashdevelop</id>
     <id>flashplayeractivex</id>
-    <id>flashplayerplugin</id>
-    <id>flashplayerppapi</id>
     <id>flashpoint-core</id>
     <id>flashpoint-infinity</id>
     <id>flattenpackages</id>
@@ -17032,10 +18780,8 @@
     <id>focuswriter</id>
     <id>fogg</id>
     <id>folder-marker</id>
-    <id>folder_size</id>
     <id>folderchangesview</id>
     <id>foldermenu3</id>
-    <id>foldersizes</id>
     <id>foldertimeupdate</id>
     <id>foldit</id>
     <id>followmee</id>
@@ -17045,7 +18791,6 @@
     <id>font-hackgen-nerd</id>
     <id>font-hackgen</id>
     <id>font-nerd-dejavusansmono</id>
-    <id>fontbase</id>
     <id>fonts-poppins</id>
     <id>fonts-ricty-diminished</id>
     <id>force-cli</id>
@@ -17054,37 +18799,25 @@
     <id>formatfactory</id>
     <id>forseti.portable</id>
     <id>forticlientvpn</id>
-    <id>fossamail</id>
     <id>fossil</id>
-    <id>fox-xca</id>
     <id>foxe.install</id>
     <id>foxe.portable</id>
-    <id>foxitreader</id>
     <id>foxtelgo</id>
-    <id>fpsmonitor</id>
     <id>fpt</id>
-    <id>fr.dwightstudio.jarmemu</id>
-    <id>franz</id>
     <id>fraps</id>
     <id>frc-radioconfigurationutility</id>
     <id>freac.portable</id>
     <id>free-hex-editor-neo</id>
-    <id>free-virtual-keyboard</id>
     <id>free42</id>
     <id>freearc.install</id>
     <id>freearc.portable</id>
     <id>freecad.portable</id>
     <id>freecad</id>
-    <id>freeciv</id>
     <id>freecommander-xe.install</id>
     <id>freecommander-xe.portable</id>
     <id>freecommander</id>
     <id>freedoom</id>
-    <id>freedownloadmanager</id>
-    <id>freemake-audio-converter</id>
-    <id>freemake-video-converter</id>
     <id>freemind</id>
-    <id>freenet</id>
     <id>freeoffice</id>
     <id>freeorion</id>
     <id>freepascal</id>
@@ -17092,8 +18825,6 @@
     <id>freerdp</id>
     <id>freesnap</id>
     <id>freesshd</id>
-    <id>freeter</id>
-    <id>freetube</id>
     <id>freevd</id>
     <id>frescobaldi</id>
     <id>freshbing</id>
@@ -17107,13 +18838,9 @@
     <id>frozenbytes.baseline.dev.tools</id>
     <id>frozenbytes.baseline.dev</id>
     <id>frozenbytes.vs2012.extensions</id>
-    <id>frozenfruits2</id>
-    <id>frozenfruits</id>
-    <id>fscapture</id>
     <id>fslogix-java</id>
     <id>fslogix-rule</id>
     <id>fslogix</id>
-    <id>fspy</id>
     <id>fsresizer.install</id>
     <id>fsum</id>
     <id>fsumfrontend</id>
@@ -17126,7 +18853,6 @@
     <id>fuelscm.portable</id>
     <id>fulleventlogview</id>
     <id>fuse-nfs</id>
-    <id>fusioninventory-agent.install</id>
     <id>fusioninventory-agent.portable</id>
     <id>fv.install</id>
     <id>fv</id>
@@ -17137,22 +18863,17 @@
     <id>gae.sdk</id>
     <id>gallio</id>
     <id>galliobundle</id>
-    <id>gam</id>
     <id>game-key-revealer.portable</id>
     <id>gamebooster</id>
-    <id>gamecaster</id>
     <id>gamedownloader.install</id>
     <id>gamedownloader.portable</id>
     <id>gamevox</id>
     <id>gamingapp</id>
     <id>ganache</id>
-    <id>ganttproject</id>
     <id>gardenctl-v2</id>
     <id>gardenlogin</id>
     <id>garena</id>
     <id>garmin-basecamp</id>
-    <id>garmin-express</id>
-    <id>gather</id>
     <id>gatling</id>
     <id>gauge</id>
     <id>gax2012</id>
@@ -17163,35 +18884,24 @@
     <id>gc-menu</id>
     <id>gcc-arm-embedded</id>
     <id>gcc-arm</id>
-    <id>gcloudsdk</id>
     <id>gcm</id>
     <id>gcstar</id>
     <id>gdevelop</id>
-    <id>gdlauncher</id>
     <id>gdrive</id>
     <id>geany-nogtk</id>
     <id>geany</id>
     <id>gedit</id>
-    <id>geekbench2</id>
-    <id>geekbench3</id>
-    <id>geekbench4</id>
     <id>geekuninstaller</id>
     <id>genymotion</id>
     <id>geogebra</id>
-    <id>geosetter.install</id>
     <id>geosetter.portable</id>
-    <id>getdiz</id>
-    <id>geth</id>
     <id>getignore</id>
-    <id>getiplayer</id>
     <id>getopt</id>
     <id>getter1</id>
     <id>getuserinfo</id>
     <id>geupd4</id>
     <id>geupd</id>
     <id>gfwlive</id>
-    <id>ggu-software-international</id>
-    <id>ggu-software</id>
     <id>ghb0t</id>
     <id>ghc</id>
     <id>ghidra</id>
@@ -17205,15 +18915,11 @@
     <id>gibo</id>
     <id>gifcam</id>
     <id>gifsicle</id>
-    <id>gigantticloud</id>
-    <id>gimagereader</id>
     <id>gimp-data-extras</id>
     <id>gingerwriter</id>
     <id>git-annex</id>
     <id>git-cola</id>
-    <id>git-credential-manager-for-windows</id>
     <id>git-flow-hooks</id>
-    <id>git-fork</id>
     <id>git-interactive-rebase-tool</id>
     <id>git-status-cache-posh-client</id>
     <id>git-tf</id>
@@ -17226,7 +18932,6 @@
     <id>gitdiffmargin</id>
     <id>gitea</id>
     <id>giteye</id>
-    <id>gitg</id>
     <id>github-desktop-beta</id>
     <id>githubsearch</id>
     <id>gitkraken</id>
@@ -17241,10 +18946,8 @@
     <id>glaryutilities-pro</id>
     <id>glassfish-javaee</id>
     <id>glassfish</id>
-    <id>glasswire</id>
     <id>gleam</id>
     <id>glfw3</id>
-    <id>glimpse</id>
     <id>glmixer</id>
     <id>global</id>
     <id>globalping</id>
@@ -17252,7 +18955,6 @@
     <id>glpi-agent</id>
     <id>glyph-launcher</id>
     <id>glyphexporter</id>
-    <id>glyphr-studio-desktop</id>
     <id>gmac.teamcity</id>
     <id>gmail-growl</id>
     <id>gmailnotifier</id>
@@ -17278,12 +18980,10 @@
     <id>gogs</id>
     <id>golangci-lint</id>
     <id>goldendict-en-ru-en.install</id>
-    <id>goldendict-ng</id>
     <id>goldendict.install</id>
     <id>goldendict.portable</id>
     <id>golo</id>
     <id>gols</id>
-    <id>gom-player</id>
     <id>gomodrun</id>
     <id>goodbyedpi</id>
     <id>goodsync</id>

@@ -41,6 +41,11 @@ Function Format-NuspecForValidation {
         $nuspecXML.package.metadata.description = $nuspecXML.package.metadata.description -replace "@", "[at]"
     }
 
+    if ($nuspecXML.package.metadata.owners -match '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}') {
+        Write-Warning "$NuspecPath had an email in the owners, mangling"
+        $nuspecXML.package.metadata.owners = $nuspecXML.package.metadata.owners -replace "@", "[at]"
+    }
+
     Try {
         [System.Xml.XmlWriterSettings] $XmlSettings = New-Object System.Xml.XmlWriterSettings
         $XmlSettings.Indent = $true
