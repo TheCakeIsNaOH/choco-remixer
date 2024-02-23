@@ -15358,6 +15358,21 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>multicommander</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>9</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <doubleQuotesChecksum>no</doubleQuotesChecksum>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha1</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>multimarkdown</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -28283,7 +28298,6 @@
     <id>multibit</id>
     <id>multibrowse</id>
     <id>multiclip</id>
-    <id>multicommander</id>
     <id>multihasher</id>
     <id>multilingualapptoolkit</id>
     <id>multiplicity</id>
