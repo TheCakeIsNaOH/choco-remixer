@@ -100,7 +100,7 @@ This function edits the install script and downloads the installer(s) for standa
 - 6: `'\$url\s+='`, `'\$url64\s+='`
 - 7: `'\s+url\s+='`, `'\s+url64\s+='`
 - 8: `'\s+url32\s+='`, `'\s+url64\s+='`
-- 8: `'\s+url\s+='`, `'\s+url64bit\s+='`
+- 9: `'\s+url\s+='`, `'\s+url64bit\s+='`
 
 ## `$argsType` sets how to parse the argument splatted for `Install-ChocolateyPackage`
 - 0: for `packageArgs = @{`

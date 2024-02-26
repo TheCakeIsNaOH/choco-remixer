@@ -16384,6 +16384,19 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>oh-my-posh</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>9</urlType>
+      <argsType>1</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>onlykeyapp</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -28598,7 +28611,6 @@
     <id>officetabfree</id>
     <id>ofview.install</id>
     <id>ofview.portable</id>
-    <id>oh-my-posh</id>
     <id>ohmgraphite-exporter</id>
     <id>okta-aws-cli</id>
     <id>okta.core.automation</id>
