@@ -207,7 +207,7 @@ Function Edit-InstallChocolateyPackage {
     }
 
 
-    $installScriptMod = $installScriptMod -replace "^Install-ChocolateyPackage\s|\sInstall-ChocolateyPackage\s" , " Install-ChocolateyInstallPackage "
+    $installScriptMod = $installScriptMod -replace "^Install-ChocolateyPackage\s|\sInstall-ChocolateyPackage\s" , "`nInstall-ChocolateyInstallPackage "
 
     if ($needsTools) {
         $installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $installScriptMod
