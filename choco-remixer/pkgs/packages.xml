@@ -2036,7 +2036,6 @@
     <id>openssh</id>
     <id>openssl-wizard</id>
     <id>openssl.light</id>
-    <id>openssl</id>
     <id>opensslkey</id>
     <id>openstego</id>
     <id>opentofu.portable</id>
@@ -16677,6 +16676,21 @@
       <checksumArgsType>0</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>openssl</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>8</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <doubleQuotesUrl>no</doubleQuotesUrl>
+      <doubleQuotesChecksum>no</doubleQuotesChecksum>
+      <checksumArgsType>3</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <id>openstego.install</id>
