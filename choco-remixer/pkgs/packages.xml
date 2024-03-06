@@ -1555,6 +1555,7 @@
     <id>linqpad5</id>
     <id>linqpad6</id>
     <id>linqpad7</id>
+    <id>linqpad8</id>
     <id>linqpad</id>
     <id>linux-reader</id>
     <id>little-system-cleaner</id>
@@ -2857,6 +2858,7 @@
     <id>tineye-chrome</id>
     <id>tinn-r</id>
     <id>tinycad</id>
+    <id>tinymediamanager.install</id>
     <id>tinymediamanager</id>
     <id>tipp10</id>
     <id>tivo-desktop</id>
@@ -2940,6 +2942,7 @@
     <id>umbrello</id>
     <id>umlet</id>
     <id>umple</id>
+    <id>unciv</id>
     <id>uncrustify</id>
     <id>undark</id>
     <id>undercover10</id>
@@ -26762,6 +26765,7 @@
     <id>dingtalk</id>
     <id>dink-smallwood</id>
     <id>dip</id>
+    <id>directfolders</id>
     <id>directx</id>
     <id>direvents</id>
     <id>dirsyncpro</id>
@@ -27146,6 +27150,7 @@
     <id>flightgear</id>
     <id>flink</id>
     <id>flipflip</id>
+    <id>floorp</id>
     <id>floss</id>
     <id>flow-launcher</id>
     <id>flowdock</id>
@@ -27993,6 +27998,8 @@
     <id>linqpad6.portable</id>
     <id>linqpad7.install</id>
     <id>linqpad7.portable</id>
+    <id>linqpad8.install</id>
+    <id>linqpad8.portable</id>
     <id>liquibase</id>
     <id>listary</id>
     <id>listdlls</id>
@@ -28014,6 +28021,7 @@
     <id>loadem</id>
     <id>locale-emulator</id>
     <id>localrelay</id>
+    <id>localxpose</id>
     <id>locate32</id>
     <id>log2console</id>
     <id>logi-tune</id>
@@ -29634,6 +29642,7 @@
     <id>speccy</id>
     <id>specflow</id>
     <id>specialfoldersview</id>
+    <id>speed-dreams</id>
     <id>speedtest-by-ookla</id>
     <id>speedtest</id>
     <id>speedyfox</id>
@@ -29934,6 +29943,7 @@
     <id>telerikcontrolpanel</id>
     <id>telnet</id>
     <id>tempfilecleaner.app</id>
+    <id>template-cli</id>
     <id>template</id>
     <id>temple.portable</id>
     <id>tencentdocs</id>
@@ -31013,6 +31023,7 @@
     <id>zoiper</id>
     <id>zola</id>
     <id>zona</id>
+    <id>zoom-vdi-client</id>
     <id>zoom-vdi-universal-plugin</id>
     <id>zoomit</id>
     <id>zsnes</id>
