@@ -18564,8 +18564,8 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>7</urlType>
+      <architecture>x64</architecture>
+      <urlType>9</urlType>
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
       <checksumArgsType>5</checksumArgsType>
