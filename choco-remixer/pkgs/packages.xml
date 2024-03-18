@@ -400,6 +400,7 @@
     <id>chocolatestore</id>
     <id>chocolatey-agent</id>
     <id>chocolatey-appstore-chrome</id>
+    <id>chocolatey-au</id>
     <id>chocolatey-azuredatastudio.extension</id>
     <id>chocolatey-community-validation.extension</id>
     <id>chocolatey-compatibility.extension</id>
@@ -1736,6 +1737,7 @@
     <id>mm-choco.extension</id>
     <id>mmbot</id>
     <id>mmdb.websitebeaterupper</id>
+    <id>mmsstv</id>
     <id>mnemosyne</id>
     <id>mo2</id>
     <id>mobswitcher</id>
@@ -1997,6 +1999,7 @@
     <id>ojdkbuild17</id>
     <id>ojdkbuild8</id>
     <id>ojdkbuild</id>
+    <id>okta.powershell</id>
     <id>okular</id>
     <id>oldcalc</id>
     <id>omnidb-app</id>
@@ -2353,6 +2356,7 @@
     <id>reactos-apps</id>
     <id>reactos-notepad</id>
     <id>reactos-paint</id>
+    <id>readarr</id>
     <id>rebus.snoop</id>
     <id>recuva.portable</id>
     <id>redis-64</id>
@@ -3151,6 +3155,7 @@
     <id>wifidiagnosticsview</id>
     <id>win-acme-store-keyvault</id>
     <id>win-acme-store-userstore</id>
+    <id>win-acme-validation-dns-aliyun</id>
     <id>win-acme-validation-dns-azure</id>
     <id>win-acme-validation-dns-cloudflare</id>
     <id>win-acme-validation-dns-digitalocean</id>
@@ -3166,7 +3171,9 @@
     <id>win-acme-validation-dns-rfc2136</id>
     <id>win-acme-validation-dns-route53</id>
     <id>win-acme-validation-dns-simply</id>
+    <id>win-acme-validation-dns-tencent</id>
     <id>win-acme-validation-dns-transip</id>
+    <id>win-acme-validation-http-rest</id>
     <id>win-acme</id>
     <id>win-caffeinate</id>
     <id>win-no-annoy</id>
@@ -7890,6 +7897,7 @@
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+      <replaceFilenames>yes</replaceFilenames>
     </pkg>
     <pkg>
       <id>dissenter-browser</id>
@@ -9630,7 +9638,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x32</architecture>
       <urlType>7</urlType>
       <argsType>1</argsType>
       <removeMSI>yes</removeMSI>
@@ -25790,9 +25798,7 @@
       <architecture>x32</architecture>
       <urlType>7</urlType>
       <argsType>0</argsType>
-      <removeMSI>yes</removeMSI>
-      <doubleQuotesUrl>yes</doubleQuotesUrl>
-      <doubleQuotesChecksum>yes</doubleQuotesChecksum>
+      <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
@@ -28174,6 +28180,7 @@
     <id>microsoft-band-sync</id>
     <id>microsoft-build-tools-2013</id>
     <id>microsoft-office-deployment</id>
+    <id>microsoft-openjdk-21</id>
     <id>microsoft-openjdk11</id>
     <id>microsoft-openjdk17</id>
     <id>microsoft-openjdk</id>
@@ -28260,6 +28267,7 @@
     <id>mooncoin</id>
     <id>moose.portable</id>
     <id>moq.prig</id>
+    <id>morse-runner</id>
     <id>morserabbit</id>
     <id>morsetest</id>
     <id>motrix.portable</id>

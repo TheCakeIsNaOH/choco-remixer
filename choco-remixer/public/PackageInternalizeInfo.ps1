@@ -28,6 +28,7 @@
         $this.removeMSI = $customXml.removeMSI -eq "yes"
         $this.removeMSU = $customXml.removeMSU -eq "yes"
         $this.doubleQuotesUrl = $customXml.doubleQuotesUrl -eq "yes"
+        $this.replaceFilenames = $customXml.replaceFilenames -eq "yes"
         $this.doubleQuotesChecksum = $customXml.doubleQuotesChecksum -eq "yes"
         $this.checksumTypeType = $customXml.checksumTypeType
         $this.checksumArgsType = $customXml.checksumArgsType
@@ -60,6 +61,7 @@
     [bool] $removeMSU
     [bool] $doubleQuotesUrl
     [bool] $doubleQuotesChecksum
+    [bool] $replaceFilenames
     [string] $checksumTypeType
     [int] $checksumArgsType
 

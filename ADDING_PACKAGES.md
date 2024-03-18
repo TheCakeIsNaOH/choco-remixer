@@ -125,3 +125,4 @@ This function edits the install script and downloads the installer(s) for standa
 - `$removeEXE`, to add a line to the end of the script that removes all `.exe` files from the tools directory
 - `$removeMSI`, to add a line to the end of the script that removes all `.msi` files from the tools directory
 - `$removeMSU`, to add a line to the end of the script that removes all `.msi` files from the tools directory
+- `$replaceFilenames`, to use filenames in the format `<id>-<version>-<architecture>.<extension>` instead of filenames parsed from the download urls

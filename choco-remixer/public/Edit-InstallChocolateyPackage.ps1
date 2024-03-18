@@ -19,6 +19,7 @@ Function Edit-InstallChocolateyPackage {
         [switch]$removeMSU,
         [switch]$doubleQuotesUrl,
         [switch]$doubleQuotesChecksum,
+        [switch]$replaceFilenames,
         [parameter(Mandatory = $true)]
         [ValidateSet('md5', 'sha1', 'sha256', 'sha512')]
         [string]$checksumTypeType,
@@ -175,6 +176,25 @@ Function Edit-InstallChocolateyPackage {
 
     if ($x64NameExt) {
         $filename64 = $filename64.Insert(($filename64.Length - 4), "_x64")
+    }
+
+    if ($replaceFilenames) {
+        if ($removeEXE) {
+            $fileType = 'exe'
+        } elseif ($removeMSI) {
+            $fileType = 'msi'
+        } elseif ($removeMSU) {
+            $fileType = 'msu'
+        } else {
+            Write-Error "No remove file type specified, this is required when replaceFilenames is specified"
+        }
+
+        if ($x32) {
+            $filename32 = "$nuspecID-$version-x32.$fileType"
+        }
+        if ($x64) {
+            $filename64 = "$nuspecID-$version-x64.$fileType"
+        }
     }
 
 
