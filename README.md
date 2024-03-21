@@ -10,11 +10,11 @@ This automates some tasks involved in maintaining a private Chocolatey repositor
 
 ## Requirements
 
-- PowerShell v5.1+ - Primarily used so far on Windows, should work fine with Linux, but I have not thoroughly tested it yet.
+- PowerShell v5.1+ (Windows and Linux)
 - `choco` installed and on your path
-- A nuget repository or a folder with `.nupkg`s to internalize. Nexus is the repository that I use and test with.
+- A nuget repository or a folder with `.nupkg`s to internalize. Sonatype Nexus is the most widely tested repository.
 	- Drop path's are available with ProGet only
-	- RepoMove and RepoSearch are Nexus only
+	- RepoMove and RepoSearch are Sonatype Nexus only
 
 ## Setup
 
@@ -45,7 +45,7 @@ This automates some tasks involved in maintaining a private Chocolatey repositor
 
 See [ADDING_PACKAGES.md (in progress)](https://github.com/TheCakeIsNaOH/choco-remixer/blob/master/ADDING_PACKAGES.md) for more information on how to add support for another package. PRs welcome, see [CONTRIBUTING.md](https://github.com/TheCakeIsNaOH/choco-remixer/blob/master/CONTRIBUTING.md) for more information
 
-Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues/new) to see if I am willing to add support.
+Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues/new) to see if there is someone willing to add support.
 
 
 ## Why have internalization functionality?
@@ -55,41 +55,43 @@ Otherwise, open an [issue](https://github.com/TheCakeIsNaOH/choco-remixer/issues
 - Allows (most) packages to work on offline/air gapped environments.
 - Makes install a previous version always possible. Some software vendors only have their latest version available to download, in which case old package versions break.
 
-## Why this is better than the Chocolatey official internalizer
+## Comparison to the Chocolatey For Business Internalization Functionality
 
 In comparison with the [Chocolatey business license](https://chocolatey.org/pricing#faq-pricing) that has [automated internalization functionality](https://chocolatey.org/docs/features-automatically-recompile-packages), choco-remixer:
 
 - Is free and open source software
-- Is available at no cost, instead of starting at $650/year, which is out of reach for almost all non-business users.
+- Is available at no cost.
 - Does not require a licensed Chocolatey installation to install the internalized packages. Packages internalized with the licensed internalizer stop working if you license lapses.
 - Validates checksums of downloaded binaries (`.nupkg`s included) and warns if checksums are not available in the package.
 - Is available for Linux systems.
 
+However, choco-remixer:
+
+- Does not have any SLA or on-call support.
+- Requires each package to be supported explicitly
+- Is in general more brittle (internalization is more likely to fail loudly if a package changes)
+- Requires more set-up and configuration
+- Is not stable software (yet)
+
 ## Caveats
 
 - This is not at a stable release. Things may break, feel free to open an issue if I broke something.
-- Packages can change on the Community Repository, again, open an issue if a package is broken.
-- Packages are supported by whitelist, and support must be added individually for each package.
+- Packages can change on the Community Repository, please open an issue if a package is broken.
+- Support must be added individually for each package.
+- Linux support is not as throughly tested, open an issue if there are any incompatibilities.
 
 ## Specific TODOs
 
 - Add support for internalizing package icons
 - Comment based help for all public functions, specifically in `Edit-InstallChocolateyPackage` (platyps?)
 - Module metadata creation, module install, other helper scripts
-- Add a helper where a single Chocolatey package can be passed in as a path and internalized
-- Complete the components for module, and publish the module (PowerShell gallery?)
+- Complete the components for module, and publish the module (PowerShell gallery)
 - Add Pester tests
+- Add generic functions for archive, portable download and vscode extension packages.
 
 ## Continuous TODOs
 
-- Better verbose/debug and other information output.
 - Generalize and factor out repeated code into functions.
 - Continue adding support for more packages
 
 ![Progress](https://progress-bar.dev/1817/?scale=6969&width=400&suffix=/6969)
-
-## Potential things to add
-- Git integration for personal-packages.xml
-- Multiple personal-packages.xml files (for now it probably is best to add an alias to your profile for each xml)
-- Async/Parallelize file searching, copying, packing, possibly downloading
-- Ability to bump version of nupkg (aka fix version)
