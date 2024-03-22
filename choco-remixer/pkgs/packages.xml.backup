@@ -4913,20 +4913,6 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
-      <id>atlassian-companion</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>7</urlType>
-      <argsType>0</argsType>
-      <DeEncodeSpace>yes</DeEncodeSpace>
-      <removeMSI>yes</removeMSI>
-      <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
       <id>atom.install</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -5394,19 +5380,6 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <architecture>x32</architecture>
-      <urlType>6</urlType>
-      <argsType>0</argsType>
-      <removeEXE>yes</removeEXE>
-      <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
-      <id>bareos-client</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <architecture>x64</architecture>
       <urlType>6</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
@@ -7822,19 +7795,6 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <doubleQuotesUrl>yes</doubleQuotesUrl>
-      <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
-      <id>directfolders</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>7</urlType>
-      <argsType>0</argsType>
-      <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
@@ -25922,6 +25882,46 @@
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x32</architecture>
       <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>atlassian-companion</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <DeEncodeSpace>yes</DeEncodeSpace>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>bareos-client</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>directfolders</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
