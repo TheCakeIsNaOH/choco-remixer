@@ -232,6 +232,7 @@
     <id>bind-toolsonly</id>
     <id>bing</id>
     <id>bingdesktop</id>
+    <id>bird</id>
     <id>bitbucket-cli</id>
     <id>bitcoin-unlimited</id>
     <id>bitcoin</id>
@@ -1611,6 +1612,7 @@
     <id>lynxtoolkit</id>
     <id>lyx</id>
     <id>lzip</id>
+    <id>m2-repo-cleaner</id>
     <id>mac-precision-touchpad</id>
     <id>macaroni</id>
     <id>magic-wormhole</id>
@@ -2374,6 +2376,7 @@
     <id>rember</id>
     <id>remix-desktop</id>
     <id>remoteapp</id>
+    <id>remotelydesktopclient</id>
     <id>remy</id>
     <id>rename-cli</id>
     <id>renamer</id>
@@ -2427,7 +2430,9 @@
     <id>rojo</id>
     <id>romp</id>
     <id>ronscsveditor</id>
+    <id>ronsdataedit</id>
     <id>ronsdatagear</id>
+    <id>ronsdatastream</id>
     <id>ronshtmlcleaner</id>
     <id>ronsrenamer</id>
     <id>ronsweblynx</id>
@@ -2503,6 +2508,7 @@
     <id>sdcard-formatter</id>
     <id>sdir</id>
     <id>seafile-client</id>
+    <id>sealed-secrets</id>
     <id>search-by-image-chrome</id>
     <id>search-sql-server-database</id>
     <id>searchwithmybrowser</id>
@@ -2590,6 +2596,7 @@
     <id>simplewavsplitter-avalonia</id>
     <id>simplewavsplitter-wpf</id>
     <id>simulide</id>
+    <id>sioyek</id>
     <id>siril</id>
     <id>siv</id>
     <id>siw.portable</id>
@@ -2680,6 +2687,7 @@
     <id>srwareiron</id>
     <id>ssh-chat</id>
     <id>ssh-copy-id</id>
+    <id>ssh-manager</id>
     <id>sshfs</id>
     <id>sshrunas</id>
     <id>sshs</id>
@@ -26111,6 +26119,7 @@
     <id>argo-workflows</id>
     <id>argouml</id>
     <id>aria2</id>
+    <id>ark-vcs</id>
     <id>arkana</id>
     <id>armagetronad</id>
     <id>armory</id>
@@ -26191,6 +26200,7 @@
     <id>azshell</id>
     <id>aztfexport</id>
     <id>aztfy</id>
+    <id>azure-arc</id>
     <id>azure-cosmosdb-emulator</id>
     <id>azure-documentdb-emulator</id>
     <id>azure-functions-core-tools-2</id>
@@ -26217,6 +26227,7 @@
     <id>banana-buchhaltung</id>
     <id>bandizip</id>
     <id>banks.portable</id>
+    <id>banksiagui</id>
     <id>barryschiffer-netscaler-script</id>
     <id>base64</id>
     <id>basilisk.portable</id>
@@ -26477,6 +26488,7 @@
     <id>cica</id>
     <id>cimer</id>
     <id>circleci-cli</id>
+    <id>citrix-enterprise-browser</id>
     <id>citrix-sharefile-outlook</id>
     <id>citrix-sharefile-sync</id>
     <id>citrix-xenserver-sdk</id>
@@ -26666,6 +26678,7 @@
     <id>cursor-commander</id>
     <id>customexplorertoolbar</id>
     <id>cutter</id>
+    <id>cxcli</id>
     <id>cyberduck.install</id>
     <id>cyberduck</id>
     <id>cyberfox</id>
@@ -27018,6 +27031,7 @@
     <id>elevenclock</id>
     <id>elinks</id>
     <id>elixir</id>
+    <id>elk-native</id>
     <id>elkjop-cloud</id>
     <id>elm-new</id>
     <id>elympics-cli</id>
@@ -27037,6 +27051,7 @@
     <id>encryptr</id>
     <id>endless-sky</id>
     <id>energia</id>
+    <id>ente-auth</id>
     <id>entityframeworkpowertools-vs2013</id>
     <id>envycoder</id>
     <id>epanet</id>
@@ -27118,6 +27133,7 @@
     <id>fastglacier</id>
     <id>fastresolver.install</id>
     <id>fastresolver.portable</id>
+    <id>faust</id>
     <id>faviconizer</id>
     <id>faview</id>
     <id>fawkes</id>
@@ -27138,6 +27154,7 @@
     <id>figma</id>
     <id>file-hash-generator</id>
     <id>file-splitter</id>
+    <id>fileactivitywatch</id>
     <id>filealyzer</id>
     <id>fileassassin</id>
     <id>filebot</id>
@@ -27517,6 +27534,7 @@
     <id>havdetectiontool</id>
     <id>haxm</id>
     <id>hazelcast</id>
+    <id>hbcd</id>
     <id>hcloud.portable</id>
     <id>hddguardian.install</id>
     <id>hddguardian.portable</id>
@@ -27986,11 +28004,13 @@
     <id>latin-modern-fonts</id>
     <id>launch4j</id>
     <id>launchbox</id>
+    <id>launcher</id>
     <id>layer0</id>
     <id>lazarus</id>
     <id>lazpaint</id>
     <id>lazydocker</id>
     <id>lazygit</id>
+    <id>lc0-cuda</id>
     <id>lcov</id>
     <id>ldapadmin</id>
     <id>ldc</id>
@@ -28190,6 +28210,7 @@
     <id>mdprojecttimer</id>
     <id>mdt</id>
     <id>meatplay</id>
+    <id>mechpack1</id>
     <id>mechpack2</id>
     <id>medford.portable</id>
     <id>media-preview</id>
@@ -28715,6 +28736,8 @@
     <id>openbve</id>
     <id>openchrom</id>
     <id>opencodecs</id>
+    <id>opencomic.portable</id>
+    <id>opencomic</id>
     <id>opencommandline</id>
     <id>openconnect</id>
     <id>opencover.install</id>
@@ -28884,6 +28907,7 @@
     <id>performance-monitor</id>
     <id>perfview</id>
     <id>perfwatsonmonitor</id>
+    <id>perimeter81</id>
     <id>persianbingcalendar</id>
     <id>pesecurity</id>
     <id>pesieve</id>
@@ -29055,7 +29079,9 @@
     <id>prometheus-windows-exporter.install</id>
     <id>prometheus</id>
     <id>pronterface</id>
+    <id>protonmail</id>
     <id>prototyper</id>
+    <id>proxyman</id>
     <id>proxyswitcher</id>
     <id>proxytrace</id>
     <id>ps-remote-play</id>
@@ -29096,6 +29122,7 @@
     <id>purescript</id>
     <id>puretext</id>
     <id>purple-facebook</id>
+    <id>purview-ir</id>
     <id>pushbullet</id>
     <id>pushcsv</id>
     <id>pushmonitoff</id>
@@ -29120,6 +29147,7 @@
     <id>python.pypy</id>
     <id>python3-virtualenv</id>
     <id>pythonnet</id>
+    <id>pythonrest</id>
     <id>pytivo-lucasnz</id>
     <id>pytivo-wmcbrine</id>
     <id>pywin32</id>
@@ -29779,6 +29807,8 @@
     <id>sqlpsx</id>
     <id>sqlsentryplanexplorer</id>
     <id>sqlserver-cmdlineutils</id>
+    <id>sqlserver-odbcdriver-17</id>
+    <id>sqlserver-odbcdriver-18</id>
     <id>sqlserver-odbcdriver</id>
     <id>sqlserver2008r2express-engine</id>
     <id>sqlserver2008r2express-managementstudio</id>
@@ -30062,6 +30092,7 @@
     <id>tidytabs.portable</id>
     <id>tigervnc-viewer</id>
     <id>tiled</id>
+    <id>tileiconifier</id>
     <id>tilemaker</id>
     <id>tilt</id>
     <id>tim</id>
@@ -30221,6 +30252,7 @@
     <id>uniws</id>
     <id>unknownhorizons</id>
     <id>unrar</id>
+    <id>unused-deps</id>
     <id>unxutils</id>
     <id>unzip</id>
     <id>upackx</id>
@@ -30238,6 +30270,7 @@
     <id>usbip</id>
     <id>usblogon</id>
     <id>usblogview</id>
+    <id>usbpid-win</id>
     <id>userassistview</id>
     <id>userprofilesview</id>
     <id>ut-client</id>
@@ -30282,6 +30315,8 @@
     <id>verizonmessageplus</id>
     <id>veryseriousbutton</id>
     <id>vh7-cli</id>
+    <id>vial-kb.install</id>
+    <id>vial-kb.portable</id>
     <id>vibrancegui</id>
     <id>victoria</id>
     <id>vidcutter</id>
@@ -30913,6 +30948,7 @@
     <id>worimager</id>
     <id>workcad</id>
     <id>workflow_cmd</id>
+    <id>workspace</id>
     <id>wot</id>
     <id>wow-stat</id>
     <id>wowup-cf</id>
@@ -31067,6 +31103,7 @@
     <id>zig</id>
     <id>zim</id>
     <id>zimbra-desktop</id>
+    <id>zimbradesktop</id>
     <id>zip</id>
     <id>zipinst</id>
     <id>znotes</id>
