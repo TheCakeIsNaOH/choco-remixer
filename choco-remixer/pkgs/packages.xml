@@ -83,6 +83,7 @@
     <id>annatar</id>
     <id>ansiblevaultcmd</id>
     <id>ansifilter</id>
+    <id>ant-commander-personal</id>
     <id>ant-commander-pro</id>
     <id>ant-renamer</id>
     <id>ant</id>
@@ -446,6 +447,7 @@
     <id>chrometana-chrome</id>
     <id>chromium</id>
     <id>chrono-chrome</id>
+    <id>chrysalis</id>
     <id>chucknorris</id>
     <id>cinst-shim</id>
     <id>clamav</id>
@@ -3036,6 +3038,7 @@
     <id>veusz</id>
     <id>veyon</id>
     <id>vhdattach</id>
+    <id>vial-kb</id>
     <id>victormononf</id>
     <id>vidcoder</id>
     <id>video-ad-block-for-twitch-chrome</id>
@@ -26068,6 +26071,7 @@
     <id>amule.portable</id>
     <id>amulet</id>
     <id>analyzer2go</id>
+    <id>anchor</id>
     <id>android-ndk</id>
     <id>android-sdk</id>
     <id>ankhsvn</id>
@@ -26178,6 +26182,7 @@
     <id>autover</id>
     <id>auxil-excel-add-in</id>
     <id>avastbrowsercleanup</id>
+    <id>avctl</id>
     <id>avd-nativeapp</id>
     <id>avgantivirusbusiness</id>
     <id>avgantivirusfree</id>
@@ -26447,6 +26452,7 @@
     <id>cfsec</id>
     <id>cgithubinst</id>
     <id>chainlp</id>
+    <id>chainner</id>
     <id>chainsaw</id>
     <id>chandler</id>
     <id>change-dns-servers</id>
@@ -26482,6 +26488,7 @@
     <id>chromehistoryview</id>
     <id>chromepass</id>
     <id>chromium-stable</id>
+    <id>chrysalis.install</id>
     <id>chrysalis.portable</id>
     <id>chutzpah</id>
     <id>ci-cd-assets-vscode</id>
@@ -26856,6 +26863,7 @@
     <id>dllexp</id>
     <id>dmg2img</id>
     <id>dnsdataview</id>
+    <id>dnslookupview</id>
     <id>dnspy-netfx</id>
     <id>dnspy</id>
     <id>dnsquerysniffer</id>
@@ -27231,6 +27239,7 @@
     <id>flyway.commandline</id>
     <id>fmedesktop</id>
     <id>fmedia</id>
+    <id>focusrite-control</id>
     <id>focuswriter</id>
     <id>fogg</id>
     <id>folder-marker</id>
@@ -27372,6 +27381,7 @@
     <id>gimp-data-extras</id>
     <id>gingerwriter</id>
     <id>git-annex</id>
+    <id>git-branchless</id>
     <id>git-cola</id>
     <id>git-flow-hooks</id>
     <id>git-interactive-rebase-tool</id>
@@ -27998,6 +28008,7 @@
     <id>lanmessenger</id>
     <id>lansweeper</id>
     <id>lanxchange</id>
+    <id>laravel-herd</id>
     <id>lastactivityview</id>
     <id>lastools</id>
     <id>latexml</id>
@@ -28304,6 +28315,7 @@
     <id>moderncsv</id>
     <id>modgallery</id>
     <id>modsecurity</id>
+    <id>mokapi</id>
     <id>moldflowc</id>
     <id>moldy</id>
     <id>monaco</id>
@@ -28982,6 +28994,7 @@
     <id>popcorn-time</id>
     <id>popcorntime</id>
     <id>portable-library-tools-2</id>
+    <id>portal</id>
     <id>portexpert</id>
     <id>portfolio</id>
     <id>portmon</id>
@@ -29561,6 +29574,7 @@
     <id>shellrunas</id>
     <id>shellsend</id>
     <id>shellz</id>
+    <id>sheltasks-cli</id>
     <id>sherwood.portable</id>
     <id>shexview.install</id>
     <id>shexview.portable</id>
@@ -30029,6 +30043,7 @@
     <id>temple.portable</id>
     <id>tencentdocs</id>
     <id>tencentqq</id>
+    <id>tenv</id>
     <id>terapad</id>
     <id>terminals.app</id>
     <id>termscp</id>
@@ -30046,6 +30061,7 @@
     <id>teslamap</id>
     <id>test-pipeline</id>
     <id>testdriven.net</id>
+    <id>testmyapp</id>
     <id>tetris-java</id>
     <id>texniccenter</id>
     <id>text-to-mp3-converter</id>
@@ -30191,6 +30207,8 @@
     <id>twister-webkit</id>
     <id>twitch-bandwidth-tester</id>
     <id>twitch</id>
+    <id>twitchdownloader-cli</id>
+    <id>twitchdownloader-gui</id>
     <id>twsnmp</id>
     <id>typemockisolator.net</id>
     <id>typescript.vs2013</id>
@@ -30970,6 +30988,7 @@
     <id>wsl-ubuntu-1804</id>
     <id>wsl-ubuntu-2204</id>
     <id>wsl2-distro-manager</id>
+    <id>wsl2host</id>
     <id>wszst</id>
     <id>wtime</id>
     <id>wtw</id>
