@@ -471,6 +471,7 @@
     <id>cloneapp</id>
     <id>cloudformation-guard</id>
     <id>cloudquery</id>
+    <id>cmag</id>
     <id>cmail</id>
     <id>cmake.install</id>
     <id>cmake.portable</id>
@@ -561,6 +562,7 @@
     <id>crystaldiskinfo.install</id>
     <id>crystaldiskinfo.portable</id>
     <id>crystaldiskinfo</id>
+    <id>crystaldiskmark.install</id>
     <id>crystaldiskmark.portable</id>
     <id>crystaldiskmark</id>
     <id>csound</id>
@@ -1229,6 +1231,7 @@
     <id>helio-workstation</id>
     <id>hemtt</id>
     <id>hercules</id>
+    <id>herd</id>
     <id>heroku-cli</id>
     <id>heroku-toolbelt</id>
     <id>hexchat</id>
@@ -1536,6 +1539,7 @@
     <id>lf</id>
     <id>lgs.g700s</id>
     <id>libdvdcss-2</id>
+    <id>libgit2</id>
     <id>libre-baskerville.font</id>
     <id>libre-hardware-monitor</id>
     <id>librebarcode.font</id>
@@ -1544,6 +1548,7 @@
     <id>librehardwaremonitor</id>
     <id>libreoffice-oldstable</id>
     <id>libreoffice</id>
+    <id>librepcb</id>
     <id>libressl</id>
     <id>libskycoinnet</id>
     <id>licecap</id>
@@ -2514,6 +2519,7 @@
     <id>search-by-image-chrome</id>
     <id>search-sql-server-database</id>
     <id>searchwithmybrowser</id>
+    <id>secondfactor</id>
     <id>secondstrategy.baseline.utilities</id>
     <id>secret-maryo-chronicles</id>
     <id>section-9-regular-font</id>
@@ -2628,6 +2634,7 @@
     <id>snoop</id>
     <id>snort</id>
     <id>soft-cleaner</id>
+    <id>softcleaner</id>
     <id>softhsm.install</id>
     <id>softhsm.portable</id>
     <id>softhsm</id>
@@ -2817,11 +2824,15 @@
     <id>tesseract</id>
     <id>test-oracleconnect.powershell</id>
     <id>testcentric-experimental-gui</id>
+    <id>testcentric-extension-net20-pluggable-agent</id>
+    <id>testcentric-extension-net40-pluggable-agent</id>
     <id>testcentric-extension-net462-pluggable-agent</id>
     <id>testcentric-extension-net50-pluggable-agent</id>
     <id>testcentric-extension-net60-pluggable-agent</id>
     <id>testcentric-extension-net70-pluggable-agent</id>
     <id>testcentric-extension-net80-pluggable-agent</id>
+    <id>testcentric-extension-netcore21-pluggable-agent</id>
+    <id>testcentric-extension-netcore31-pluggable-agent</id>
     <id>testcentric-gui</id>
     <id>testdisk-photorec</id>
     <id>testdisk</id>
@@ -25974,6 +25985,7 @@
     <id>accessdirector</id>
     <id>accessenum</id>
     <id>accesspv</id>
+    <id>acli</id>
     <id>acm</id>
     <id>acme-sh</id>
     <id>acr</id>
@@ -26328,6 +26340,7 @@
     <id>bluetoothlogview</id>
     <id>bluetoothview</id>
     <id>blur-ie</id>
+    <id>bmake</id>
     <id>bmfont</id>
     <id>bombardier</id>
     <id>bonjour</id>
@@ -26359,6 +26372,7 @@
     <id>brightauthor</id>
     <id>brightauthorconnected</id>
     <id>brogue</id>
+    <id>browser-tamer</id>
     <id>browserbeat</id>
     <id>browsermanager</id>
     <id>browsersync</id>
@@ -26394,6 +26408,7 @@
     <id>bulkrenameutility</id>
     <id>bulletspassview.install</id>
     <id>bulletspassview.portable</id>
+    <id>bun</id>
     <id>bundlerminifier</id>
     <id>bunqdesktop</id>
     <id>burp-suite-free-edition</id>
@@ -27533,6 +27548,7 @@
     <id>handle</id>
     <id>hardware-identify.portable</id>
     <id>hardwipe</id>
+    <id>harmony-sase</id>
     <id>haroopad</id>
     <id>hashdeep</id>
     <id>hasher</id>
@@ -27857,6 +27873,7 @@
     <id>karen</id>
     <id>katmouse</id>
     <id>kav</id>
+    <id>kaytu</id>
     <id>kb2454826</id>
     <id>kb2519277</id>
     <id>kb2533552</id>
@@ -27962,6 +27979,7 @@
     <id>kobito</id>
     <id>kodos</id>
     <id>kog</id>
+    <id>komorebi</id>
     <id>kontur-plugin</id>
     <id>kopano-ads-nightly</id>
     <id>kopano-deskapp-nightly</id>
@@ -28049,6 +28067,8 @@
     <id>librecrypt</id>
     <id>libreelec-usb-sd-creator</id>
     <id>libreoffice-help</id>
+    <id>librepcb.install</id>
+    <id>librepcb.portable</id>
     <id>librespeed-cli</id>
     <id>libsndfile</id>
     <id>libusbdotnet</id>
@@ -28316,6 +28336,7 @@
     <id>modgallery</id>
     <id>modsecurity</id>
     <id>mokapi</id>
+    <id>mokka</id>
     <id>moldflowc</id>
     <id>moldy</id>
     <id>monaco</id>
@@ -29093,6 +29114,7 @@
     <id>prometheus</id>
     <id>pronterface</id>
     <id>protonmail</id>
+    <id>protonpass</id>
     <id>prototyper</id>
     <id>proxyman</id>
     <id>proxyswitcher</id>
@@ -29427,6 +29449,7 @@
     <id>rust</id>
     <id>rustdesk.install</id>
     <id>rustdesk.portable</id>
+    <id>rustrover</id>
     <id>rustup.install</id>
     <id>rutoken-drivers-removal-tool</id>
     <id>rutoken-drivers</id>
@@ -29605,6 +29628,8 @@
     <id>simpleprogramdebugger</id>
     <id>simpleradiorecorder</id>
     <id>simplesystemtweaker</id>
+    <id>simplex.commandline</id>
+    <id>simplex</id>
     <id>simply-weather</id>
     <id>simutrans-pak128</id>
     <id>simutrans-pak64</id>
@@ -29874,6 +29899,7 @@
     <id>stduviewer</id>
     <id>steam-cleaner</id>
     <id>steamcmd</id>
+    <id>steamlink</id>
     <id>stellar</id>
     <id>stern</id>
     <id>stexbar</id>
@@ -30618,6 +30644,7 @@
     <id>voxengo-warmifier</id>
     <id>voxengo-water-chorus</id>
     <id>vpb-banking</id>
+    <id>vpilot</id>
     <id>vs2010.shellintegratedredist</id>
     <id>vs2010sdk</id>
     <id>vs2012.4</id>
@@ -30803,6 +30830,7 @@
     <id>whatsapp</id>
     <id>whitebox.portable</id>
     <id>whiteboxtools-open-core</id>
+    <id>whkd</id>
     <id>whois</id>
     <id>whoiscl</id>
     <id>whoisconnectedsniffer</id>
