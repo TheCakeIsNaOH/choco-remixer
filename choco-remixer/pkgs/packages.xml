@@ -1570,6 +1570,7 @@
     <id>little-system-cleaner</id>
     <id>livesplit</id>
     <id>livestreamer-twitch-gui</id>
+    <id>lldb-mi</id>
     <id>lmms</id>
     <id>loc</id>
     <id>localadminwmi</id>
@@ -2120,6 +2121,7 @@
     <id>pdfshaperpro</id>
     <id>pdftk-java</id>
     <id>pdftkbuilder</id>
+    <id>pdftoolkit</id>
     <id>pdfxchangeviewer</id>
     <id>pdq-deploy</id>
     <id>pdq-inventory</id>
@@ -8258,6 +8260,13 @@
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-8.0-sdk-3xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-9.0-aspnetruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -13276,7 +13285,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x32</architecture>
       <urlType>6</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
@@ -20696,7 +20705,7 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>both</architecture>
-      <urlType>6</urlType>
+      <urlType>4</urlType>
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
       <checksumArgsType>5</checksumArgsType>
@@ -26408,6 +26417,7 @@
     <id>bulkrenameutility</id>
     <id>bulletspassview.install</id>
     <id>bulletspassview.portable</id>
+    <id>bun-baseline</id>
     <id>bun</id>
     <id>bundlerminifier</id>
     <id>bunqdesktop</id>
@@ -26698,6 +26708,7 @@
     <id>cupscale</id>
     <id>curse-voice</id>
     <id>cursor-commander</id>
+    <id>cursoride</id>
     <id>customexplorertoolbar</id>
     <id>cutter</id>
     <id>cxcli</id>
@@ -27486,6 +27497,7 @@
     <id>gping</id>
     <id>gpower</id>
     <id>gps-sdr-sim</id>
+    <id>gpt4all</id>
     <id>gptgen</id>
     <id>gpxeditor</id>
     <id>graalvm-java11</id>
@@ -27665,6 +27677,7 @@
     <id>iconsext.install</id>
     <id>iconsext.portable</id>
     <id>icsharp</id>
+    <id>idprt-sp320-label-printer-driver</id>
     <id>idris</id>
     <id>idrive</id>
     <id>ie10</id>
@@ -27787,6 +27800,7 @@
     <id>ironruby</id>
     <id>isapirewrite</id>
     <id>iscommandlineapp</id>
+    <id>islc</id>
     <id>iso7z</id>
     <id>isoplex</id>
     <id>isowriter</id>
@@ -28006,6 +28020,7 @@
     <id>kubernetes-helmfile</id>
     <id>kubernetes-kops</id>
     <id>kubernetes-node</id>
+    <id>kubetui</id>
     <id>kubeval</id>
     <id>kustomize</id>
     <id>kvrt</id>
@@ -29686,6 +29701,7 @@
     <id>snagit-2020</id>
     <id>snake-java</id>
     <id>snaketail.portable</id>
+    <id>snapform-viewer</id>
     <id>snaplr</id>
     <id>snappy-driver-installer</id>
     <id>snarl</id>
@@ -29943,6 +29959,7 @@
     <id>sumologic</id>
     <id>sundance</id>
     <id>sundial</id>
+    <id>sunset-berlin</id>
     <id>sunset-screen.portable</id>
     <id>supd2</id>
     <id>super-mario-bros-java</id>
