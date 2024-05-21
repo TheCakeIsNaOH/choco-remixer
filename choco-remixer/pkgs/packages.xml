@@ -53,6 +53,7 @@
     <id>ai-web-originalip</id>
     <id>aida64extreme</id>
     <id>airship</id>
+    <id>airshipper</id>
     <id>airstream-futuropolis-regular-font</id>
     <id>ajour-opengl</id>
     <id>aksctl</id>
@@ -62,6 +63,7 @@
     <id>alanstevens.utils.vm</id>
     <id>alanstevens.utils</id>
     <id>alcohol52-free</id>
+    <id>aleapp-gui</id>
     <id>aleapp</id>
     <id>allbrowsers</id>
     <id>alldup</id>
@@ -437,6 +439,7 @@
     <id>chocopm.install</id>
     <id>chocoshortcuts</id>
     <id>chocoupdater</id>
+    <id>chocoversionselect</id>
     <id>choosenim</id>
     <id>chrlauncher.portable</id>
     <id>chromas</id>
@@ -853,10 +856,12 @@
     <id>empoche</id>
     <id>emulationstation</id>
     <id>emulsion</id>
+    <id>en-croissant</id>
     <id>encfs4win</id>
     <id>encfsmp</id>
     <id>encryption-software</id>
     <id>enki</id>
+    <id>epg123</id>
     <id>epr</id>
     <id>epsviewer</id>
     <id>epub-checker</id>
@@ -880,6 +885,7 @@
     <id>everything.beta</id>
     <id>everything</id>
     <id>eviacam</id>
+    <id>evtxecmd</id>
     <id>exifviewer-chrome</id>
     <id>expandrive</id>
     <id>explorer-expand-to-current-folder</id>
@@ -893,6 +899,7 @@
     <id>extraterm.install</id>
     <id>extraterm.portable</id>
     <id>extraterm</id>
+    <id>ezviewer</id>
     <id>f.lux</id>
     <id>faas-cli</id>
     <id>fab</id>
@@ -1381,6 +1388,7 @@
     <id>javaruntime</id>
     <id>jayhankins.conemuconfig</id>
     <id>jcpicker</id>
+    <id>jenkins-set-prefix.hook</id>
     <id>jenkins</id>
     <id>jenkinsondesktop</id>
     <id>jfrog-cli-v2-jf</id>
@@ -1694,6 +1702,7 @@
     <id>mfcmapi</id>
     <id>mft2csv</id>
     <id>mftecmd</id>
+    <id>mftexplorer</id>
     <id>microsoft-build-tools</id>
     <id>microsoft-message-analyzer</id>
     <id>microsoft-powershellforgithub-psmodule</id>
@@ -2004,6 +2013,7 @@
     <id>office-to-pdf</id>
     <id>office-tool</id>
     <id>officecustomuieditor</id>
+    <id>ofgb</id>
     <id>ofview</id>
     <id>ojdkbuild11</id>
     <id>ojdkbuild17</id>
@@ -2336,6 +2346,7 @@
     <id>quickstart.defaultinstall</id>
     <id>quikpak</id>
     <id>quiterss</id>
+    <id>quodlibet.install</id>
     <id>quodlibet</id>
     <id>quollwriter</id>
     <id>qutebrowser.install</id>
@@ -2369,6 +2380,8 @@
     <id>reactos-paint</id>
     <id>readarr</id>
     <id>rebus.snoop</id>
+    <id>recentfilecacheparser</id>
+    <id>recmd</id>
     <id>recuva.portable</id>
     <id>redis-64</id>
     <id>redis</id>
@@ -2426,6 +2439,7 @@
     <id>ripple</id>
     <id>rivet</id>
     <id>rke</id>
+    <id>rla</id>
     <id>rm-glob</id>
     <id>rmstale</id>
     <id>rnp</id>
@@ -2543,6 +2557,7 @@
     <id>selenium-all-drivers</id>
     <id>selenium-chrome-driver</id>
     <id>selenium-gecko-driver</id>
+    <id>selenium.powershell</id>
     <id>seleniumgridinabox.node</id>
     <id>seleniumhub</id>
     <id>sendkeys.extension</id>
@@ -2681,6 +2696,7 @@
     <id>sqlcequery</id>
     <id>sqlean-shell</id>
     <id>sqlean</id>
+    <id>sqlecmd</id>
     <id>sqlgrep</id>
     <id>sqlite-shell-x64</id>
     <id>sqlite.analyzer</id>
@@ -2695,6 +2711,7 @@
     <id>sqlitestudio</id>
     <id>sqlstudio</id>
     <id>squashfs</id>
+    <id>srumecmd</id>
     <id>srwareiron</id>
     <id>ssh-chat</id>
     <id>ssh-copy-id</id>
@@ -2746,6 +2763,7 @@
     <id>sumatrapdf.install</id>
     <id>sumatrapdf.portable</id>
     <id>sumatrapdf</id>
+    <id>sumecmd</id>
     <id>summerfun</id>
     <id>sunset-screen</id>
     <id>sunshine</id>
@@ -3183,11 +3201,13 @@
     <id>win-acme-validation-dns-azure</id>
     <id>win-acme-validation-dns-cloudflare</id>
     <id>win-acme-validation-dns-digitalocean</id>
+    <id>win-acme-validation-dns-dnsexit</id>
     <id>win-acme-validation-dns-dnsmadeeasy</id>
     <id>win-acme-validation-dns-domeneshop</id>
     <id>win-acme-validation-dns-dreamhost</id>
     <id>win-acme-validation-dns-godaddy</id>
     <id>win-acme-validation-dns-googledns</id>
+    <id>win-acme-validation-dns-hetzner</id>
     <id>win-acme-validation-dns-infomaniak</id>
     <id>win-acme-validation-dns-linode</id>
     <id>win-acme-validation-dns-luadns</id>
@@ -18750,19 +18770,6 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
-      <id>quodlibet.install</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>6</urlType>
-      <argsType>0</argsType>
-      <removeEXE>yes</removeEXE>
-      <checksumArgsType>7</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
       <id>qview.install</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -24528,11 +24535,11 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
-      <urlType>1</urlType>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
-      <checksumArgsType>1</checksumArgsType>
+      <checksumArgsType>7</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -27611,6 +27618,7 @@
     <id>hikvision-sadp</id>
     <id>hitmanpro</id>
     <id>hledger</id>
+    <id>hmark</id>
     <id>hmne</id>
     <id>hobocopy</id>
     <id>hollowshunter</id>
@@ -28244,6 +28252,7 @@
     <id>mcr-r2015b</id>
     <id>mcr-r2016b</id>
     <id>mcr-r2019a</id>
+    <id>mcr-r2020a</id>
     <id>mcr-r2020b</id>
     <id>mcr-r2021b</id>
     <id>mcr-r2022b</id>
@@ -29505,6 +29514,7 @@
     <id>sauerbraten</id>
     <id>saxonhe</id>
     <id>sbcl</id>
+    <id>sbecmd</id>
     <id>sbom-tool-cli</id>
     <id>sbt</id>
     <id>sc3plugins</id>
@@ -29706,6 +29716,7 @@
     <id>snappy-driver-installer</id>
     <id>snarl</id>
     <id>snes9x</id>
+    <id>snet-cli</id>
     <id>sniffpass.install</id>
     <id>sniffpass.portable</id>
     <id>snipaste-beta</id>
@@ -31115,6 +31126,7 @@
     <id>yakyak</id>
     <id>yale.portable</id>
     <id>yammer-notifier</id>
+    <id>yandex-browser</id>
     <id>yandexdisk</id>
     <id>yanknote</id>
     <id>yasm</id>

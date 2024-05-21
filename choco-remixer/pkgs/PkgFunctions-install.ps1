@@ -11,6 +11,9 @@ Function Convert-autocad ([PackageInternalizeInfo]$obj) {
     Function Get-ChocolateyWebFile {
         Write-Information "mockup"
     }
+    Function Invoke-UninstallAutoCAD {
+        Write-Information "mockup"
+    }
 
     $installScriptExec = $obj.installScriptOrig -join "`n"
     $installScriptExec = $installScriptExec -replace "Invoke-UninstallOld", "#$&"
@@ -761,6 +764,7 @@ Function Convert-openoffice ([PackageInternalizeInfo]$obj) {
     $request.AllowAutoRedirect = $false
     $response = $request.GetResponse()
     $url32 = $response.GetResponseHeader("Location")
+    $url32 = $url32 -split "\?" | Select-Object -First 1
     $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = '$file     = (Join-Path $toolsDir "' + $filename32 + '")'
 
