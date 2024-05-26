@@ -1222,6 +1222,7 @@
     <id>hardentools</id>
     <id>hardware-freak</id>
     <id>hash-r</id>
+    <id>hashcat</id>
     <id>hashcheck</id>
     <id>hasher-erz</id>
     <id>hashmyfiles</id>
@@ -25987,6 +25988,86 @@
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
+    <pkg>
+      <id>7-taskbar-tweaker</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>aquasnap</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>asana</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <replaceFilenames>yes</replaceFilenames>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>azure-arc</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>balsamiqwireframes</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>9</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>chainner</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>9</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <replaceFilenames>yes</replaceFilenames>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
   </implemented>
   <notImplemented>
     <id>010editor.portable</id>
@@ -26006,7 +26087,6 @@
     <id>3proxy</id>
     <id>3rvx</id>
     <id>4t-tray-minimizer</id>
-    <id>7-taskbar-tweaker</id>
     <id>7kaa</id>
     <id>9kw-client</id>
     <id>aacgain</id>
@@ -26163,7 +26243,6 @@
     <id>appvprovider</id>
     <id>apricot</id>
     <id>aqt</id>
-    <id>aquasnap</id>
     <id>archi</id>
     <id>archiver</id>
     <id>arduinoidegalileo</id>
@@ -26183,7 +26262,6 @@
     <id>aruba-networks-virtual-intranet-access-client</id>
     <id>arxiv-collector</id>
     <id>as-ssd</id>
-    <id>asana</id>
     <id>asar7z</id>
     <id>asciidocfx.portable</id>
     <id>asciidoctorj</id>
@@ -26254,7 +26332,6 @@
     <id>azshell</id>
     <id>aztfexport</id>
     <id>aztfy</id>
-    <id>azure-arc</id>
     <id>azure-cosmosdb-emulator</id>
     <id>azure-documentdb-emulator</id>
     <id>azure-functions-core-tools-2</id>
@@ -26277,7 +26354,6 @@
     <id>bacula</id>
     <id>baidupcs-go</id>
     <id>balsamiqmockups.install</id>
-    <id>balsamiqwireframes</id>
     <id>banana-buchhaltung</id>
     <id>bandizip</id>
     <id>banks.portable</id>
@@ -26504,7 +26580,6 @@
     <id>cfsec</id>
     <id>cgithubinst</id>
     <id>chainlp</id>
-    <id>chainner</id>
     <id>chainsaw</id>
     <id>chandler</id>
     <id>change-dns-servers</id>
@@ -28549,6 +28624,7 @@
     <id>neochat.install</id>
     <id>neocronce</id>
     <id>neovim</id>
+    <id>nerd-fonts-0xproto</id>
     <id>nerd-fonts-3270</id>
     <id>nerd-fonts-agave</id>
     <id>nerd-fonts-anonymouspro</id>
@@ -28557,9 +28633,12 @@
     <id>nerd-fonts-bigblueterminal</id>
     <id>nerd-fonts-bitstreamverasansmono</id>
     <id>nerd-fonts-cascadiacode</id>
+    <id>nerd-fonts-cascadiamono</id>
     <id>nerd-fonts-codenewroman</id>
     <id>nerd-fonts-comicshannsmono</id>
+    <id>nerd-fonts-commitmono</id>
     <id>nerd-fonts-cousine</id>
+    <id>nerd-fonts-d2coding</id>
     <id>nerd-fonts-daddytimemono</id>
     <id>nerd-fonts-dejavusansmono</id>
     <id>nerd-fonts-delugiabook</id>
@@ -28568,9 +28647,11 @@
     <id>nerd-fonts-delugiamono-powerline</id>
     <id>nerd-fonts-delugiapowerline</id>
     <id>nerd-fonts-droidsansmono</id>
+    <id>nerd-fonts-envycoder</id>
     <id>nerd-fonts-fantasquesansmono</id>
     <id>nerd-fonts-firacode</id>
     <id>nerd-fonts-firamono</id>
+    <id>nerd-fonts-geistmono</id>
     <id>nerd-fonts-go-mono</id>
     <id>nerd-fonts-gohu</id>
     <id>nerd-fonts-hack</id>
@@ -28582,13 +28663,17 @@
     <id>nerd-fonts-inconsolata</id>
     <id>nerd-fonts-inconsolatago</id>
     <id>nerd-fonts-inconsolatalgc</id>
+    <id>nerd-fonts-intelonemono</id>
     <id>nerd-fonts-iosevka</id>
     <id>nerd-fonts-iosevkaterm</id>
+    <id>nerd-fonts-iosevkatermslab</id>
     <id>nerd-fonts-jetbrainsmono</id>
     <id>nerd-fonts-lekton</id>
     <id>nerd-fonts-liberationmono</id>
     <id>nerd-fonts-lilex</id>
+    <id>nerd-fonts-martianmono</id>
     <id>nerd-fonts-meslo</id>
+    <id>nerd-fonts-monaspace</id>
     <id>nerd-fonts-monofur</id>
     <id>nerd-fonts-monoid</id>
     <id>nerd-fonts-mononoki</id>
@@ -28599,6 +28684,7 @@
     <id>nerd-fonts-overpass</id>
     <id>nerd-fonts-profont</id>
     <id>nerd-fonts-proggyclean</id>
+    <id>nerd-fonts-recursive</id>
     <id>nerd-fonts-robotomono</id>
     <id>nerd-fonts-sharetechmono</id>
     <id>nerd-fonts-sourcecodepro</id>
@@ -28607,7 +28693,9 @@
     <id>nerd-fonts-tinos</id>
     <id>nerd-fonts-ubuntu</id>
     <id>nerd-fonts-ubuntumono</id>
+    <id>nerd-fonts-ubuntusans</id>
     <id>nerd-fonts-victormono</id>
+    <id>nerd-fonts-zedmono</id>
     <id>nero-aac</id>
     <id>nessus-agent</id>
     <id>nestopia</id>
@@ -28961,6 +29049,9 @@
     <id>pdfarranger</id>
     <id>pdfcombine</id>
     <id>pdfconverter</id>
+    <id>pdfcreator-professional</id>
+    <id>pdfcreator-server</id>
+    <id>pdfcreator-terminal-server</id>
     <id>pdfedit</id>
     <id>pdffactorypro-workstation</id>
     <id>pdfsplitter</id>
@@ -30184,13 +30275,13 @@
     <id>tiled</id>
     <id>tileiconifier</id>
     <id>tilemaker</id>
-    <id>timetravel</id>
-    <id>timetravelcli</id>
+    <id>tilt</id>
     <id>tim</id>
     <id>time4popcorn</id>
     <id>timeit</id>
     <id>timestamp</id>
-    <id>timet
+    <id>timetravel</id>
+    <id>timetravelcli</id>
     <id>tinc</id>
     <id>tiny-brightness</id>
     <id>tiny-pxe-server</id>
