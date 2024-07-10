@@ -105,6 +105,7 @@
     <id>appveyor-evu</id>
     <id>appveyor-server</id>
     <id>appveyorbyoc.powershell</id>
+    <id>aptos</id>
     <id>arcanist</id>
     <id>archive</id>
     <id>archivo-narrow.font</id>
@@ -290,6 +291,7 @@
     <id>btsync</id>
     <id>buck</id>
     <id>buckets</id>
+    <id>buddy-tunnel</id>
     <id>build-bot</id>
     <id>build-them-all</id>
     <id>buildpacks</id>
@@ -1455,6 +1457,7 @@
     <id>kdenlive</id>
     <id>kdevelop.portable</id>
     <id>kdevelop</id>
+    <id>kdiff3</id>
     <id>keep-chrome</id>
     <id>keepass-classic-langfiles</id>
     <id>keepass-classic</id>
@@ -2088,6 +2091,7 @@
     <id>owncloud-client</id>
     <id>p4merge</id>
     <id>pack</id>
+    <id>package-debug.extension</id>
     <id>pacman-revenge</id>
     <id>pacman</id>
     <id>paint.net.portable</id>
@@ -2951,6 +2955,7 @@
     <id>truecrypt-langfiles</id>
     <id>truglobalprotect</id>
     <id>ttl</id>
+    <id>tuff-cards</id>
     <id>tunnelier.install</id>
     <id>tunnelier</id>
     <id>turnoffxboxcontroller</id>
@@ -3070,11 +3075,15 @@
     <id>vet</id>
     <id>veusz</id>
     <id>veyon</id>
+    <id>vfox.install</id>
+    <id>vfox.portable</id>
+    <id>vfox</id>
     <id>vhdattach</id>
     <id>vial-kb</id>
     <id>victormononf</id>
     <id>vidcoder</id>
     <id>video-ad-block-for-twitch-chrome</id>
+    <id>video-compare</id>
     <id>videocacheview</id>
     <id>videoder</id>
     <id>vidmerger</id>
@@ -12981,19 +12990,6 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
-      <id>kdiff3</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
-      <urlType>7</urlType>
-      <argsType>1</argsType>
-      <removeEXE>yes</removeEXE>
-      <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
       <id>keboola-cli</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -13031,6 +13027,7 @@
       <doubleQuotesUrl>yes</doubleQuotesUrl>
       <checksumArgsType>6</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
+      <replaceFilenames>yes</replaceFilenames>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
@@ -16381,7 +16378,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>0</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
@@ -20641,7 +20638,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>1</urlType>
       <argsType>0</argsType>
       <x64NameExt>yes</x64NameExt>
@@ -26169,6 +26166,7 @@
     <id>algokit</id>
     <id>algolia</id>
     <id>aliengame</id>
+    <id>alire</id>
     <id>aliyun-cli</id>
     <id>all-to-mp3</id>
     <id>allow-block-remove-firewall</id>
@@ -26381,6 +26379,7 @@
     <id>battoexeconverter</id>
     <id>bazel</id>
     <id>bazelisk</id>
+    <id>bbdown</id>
     <id>bbwin</id>
     <id>bdfilehash</id>
     <id>bear.portable</id>
@@ -26614,6 +26613,7 @@
     <id>chutzpah</id>
     <id>ci-cd-assets-vscode</id>
     <id>cica</id>
+    <id>cilium-cli</id>
     <id>cimer</id>
     <id>circleci-cli</id>
     <id>citrix-enterprise-browser</id>
@@ -26708,6 +26708,7 @@
     <id>commitmonitor.install</id>
     <id>commitmonitor.portable</id>
     <id>comodo-cocc</id>
+    <id>compare41</id>
     <id>compareit</id>
     <id>compassion</id>
     <id>compdf-console</id>
@@ -27117,6 +27118,7 @@
     <id>e-sword</id>
     <id>eagle</id>
     <id>earth-alerts</id>
+    <id>easi-gen</id>
     <id>eask-cli</id>
     <id>easyconnect</id>
     <id>easylogusb</id>
@@ -27253,6 +27255,7 @@
     <id>f1viewer</id>
     <id>f2</id>
     <id>factor</id>
+    <id>faforever</id>
     <id>fah</id>
     <id>fakenet</id>
     <id>fanalab</id>
@@ -27260,6 +27263,7 @@
     <id>fanatec-driver</id>
     <id>fanficfare</id>
     <id>far-2</id>
+    <id>fastfetch</id>
     <id>fastglacier</id>
     <id>fastresolver.install</id>
     <id>fastresolver.portable</id>
@@ -27350,6 +27354,7 @@
     <id>floss</id>
     <id>flow-launcher</id>
     <id>flowdock</id>
+    <id>fluent-reader</id>
     <id>fluentautomation.repl</id>
     <id>fluffyapp</id>
     <id>fluffychat</id>
@@ -27429,6 +27434,7 @@
     <id>fsresizer.install</id>
     <id>fsum</id>
     <id>fsumfrontend</id>
+    <id>ftb</id>
     <id>ftdi-drivers</id>
     <id>ftester</id>
     <id>ftpdmin</id>
@@ -27681,6 +27687,7 @@
     <id>hdtune</id>
     <id>headlamp</id>
     <id>headset</id>
+    <id>healthcheck</id>
     <id>heapmemview</id>
     <id>heartbeat-oss</id>
     <id>hearthstone-deck-tracker-arena-helper</id>
@@ -27749,6 +27756,7 @@
     <id>https-everywhere-chrome</id>
     <id>httpstress</id>
     <id>httpsysmanager</id>
+    <id>httptoolkit</id>
     <id>httrack.app</id>
     <id>httrack.tool</id>
     <id>hub</id>
@@ -27916,6 +27924,7 @@
     <id>jameica</id>
     <id>jamovi.portable</id>
     <id>jarfix</id>
+    <id>jarmemu</id>
     <id>java7u13x64</id>
     <id>java7u13x86</id>
     <id>javadecompiler-gui</id>
@@ -28340,9 +28349,13 @@
     <id>mcr-r2015a</id>
     <id>mcr-r2015b</id>
     <id>mcr-r2016b</id>
+    <id>mcr-r2017b</id>
+    <id>mcr-r2018a</id>
     <id>mcr-r2019a</id>
+    <id>mcr-r2019b</id>
     <id>mcr-r2020a</id>
     <id>mcr-r2020b</id>
+    <id>mcr-r2021a</id>
     <id>mcr-r2021b</id>
     <id>mcr-r2022b</id>
     <id>mcr-r2023b</id>
@@ -28767,6 +28780,7 @@
     <id>nimbletext</id>
     <id>ninefs</id>
     <id>nirext</id>
+    <id>nitrokey-app2</id>
     <id>nitroreader.install</id>
     <id>nk2edit.install</id>
     <id>nk2edit.portable</id>
@@ -28827,6 +28841,7 @@
     <id>nyagos</id>
     <id>nyanfi</id>
     <id>nytdl</id>
+    <id>nzbgetcom</id>
     <id>nzxt-cam</id>
     <id>oatmeal</id>
     <id>obs-move-transition</id>
@@ -29048,6 +29063,7 @@
     <id>pdfcreator-terminal-server</id>
     <id>pdfedit</id>
     <id>pdffactorypro-workstation</id>
+    <id>pdfgear</id>
     <id>pdfsplitter</id>
     <id>pdftk</id>
     <id>pdfxchangeeditor</id>
@@ -29095,6 +29111,7 @@
     <id>pia</id>
     <id>pibakery</id>
     <id>picassio</id>
+    <id>picguard</id>
     <id>picoscope</id>
     <id>pidgin</id>
     <id>pik</id>
@@ -29286,6 +29303,7 @@
     <id>purescript</id>
     <id>puretext</id>
     <id>purple-facebook</id>
+    <id>purview-information-protection-client</id>
     <id>purview-ir</id>
     <id>pushbullet</id>
     <id>pushcsv</id>
@@ -29366,6 +29384,7 @@
     <id>quarkus</id>
     <id>queryexplus</id>
     <id>queueexplorer-professional</id>
+    <id>quick-share</id>
     <id>quickcpu</id>
     <id>quickroute</id>
     <id>quicksetdns</id>
@@ -29390,6 +29409,7 @@
     <id>raidcall</id>
     <id>railroadtycoon</id>
     <id>railwayopsim</id>
+    <id>ralibretro</id>
     <id>rammap</id>
     <id>ramme</id>
     <id>rancher-cli</id>
@@ -29472,6 +29492,7 @@
     <id>registrychangesview</id>
     <id>registryfiles-validator-commandline</id>
     <id>registryfiles-validator</id>
+    <id>regit</id>
     <id>regjump</id>
     <id>regripper</id>
     <id>regscanner.portable</id>
@@ -29604,6 +29625,7 @@
     <id>sam</id>
     <id>sameboy</id>
     <id>sampler</id>
+    <id>samsung-dex</id>
     <id>samsung-magician</id>
     <id>samsung-usb-driver</id>
     <id>sandcastle</id>
@@ -29754,6 +29776,7 @@
     <id>silverlight5sdk</id>
     <id>sim</id>
     <id>simnetsa-adobereader-fr</id>
+    <id>simplecli</id>
     <id>simplednscrypt</id>
     <id>simpleprogramdebugger</id>
     <id>simpleradiorecorder</id>
@@ -30006,12 +30029,14 @@
     <id>ssip.portable</id>
     <id>ssis-multiple-hash</id>
     <id>ssis-vs2019</id>
+    <id>ssis-vs2022</id>
     <id>sslyze</id>
     <id>ssms-tools-pack</id>
     <id>ssrs-2019</id>
     <id>stack</id>
     <id>stakecubecoinwallet-bootstrap</id>
     <id>stakecubecoinwallet</id>
+    <id>standalone-ssis-devops-tools</id>
     <id>standalone-windows-stig</id>
     <id>stardock-fences</id>
     <id>stardock-multiplicity</id>
@@ -30044,6 +30069,7 @@
     <id>stracent</id>
     <id>streambaby</id>
     <id>streaming-video-downloader</id>
+    <id>streamloader</id>
     <id>streams</id>
     <id>streamwriter</id>
     <id>stress.portable</id>
@@ -30353,6 +30379,7 @@
     <id>ttuodbc2000</id>
     <id>tuifeed</id>
     <id>tukui</id>
+    <id>tumblthree</id>
     <id>tuneuputilities</id>
     <id>tunsafe</id>
     <id>turbo</id>
@@ -30712,6 +30739,7 @@
     <id>vkquake</id>
     <id>vlmc</id>
     <id>vlna</id>
+    <id>vmagent</id>
     <id>vmmap</id>
     <id>vmrc</id>
     <id>vnc-connect</id>
@@ -31207,6 +31235,7 @@
     <id>xonotic</id>
     <id>xournal</id>
     <id>xournalplusplus</id>
+    <id>xpipe-ptb</id>
     <id>xplotter</id>
     <id>xpsdesiredstateconfiguration</id>
     <id>xqilla</id>
