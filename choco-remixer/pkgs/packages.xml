@@ -5,6 +5,7 @@
     <id>0install.install</id>
     <id>0install.portable</id>
     <id>0install</id>
+    <id>1password-chrome</id>
     <id>1remote</id>
     <id>7zip.commandline</id>
     <id>7zip.install</id>
@@ -135,6 +136,7 @@
     <id>atkinson-hyperlegible</id>
     <id>atom</id>
     <id>atomicparsley</id>
+    <id>att-rc</id>
     <id>attributechanger</id>
     <id>au</id>
     <id>audacity-ffmpeg</id>
@@ -591,6 +593,7 @@
     <id>cyberchef</id>
     <id>cyg-get</id>
     <id>cygwin</id>
+    <id>d2</id>
     <id>dable</id>
     <id>dankerino</id>
     <id>darktable</id>
@@ -995,6 +998,7 @@
     <id>freecommander-xe</id>
     <id>freeencoderpack</id>
     <id>freefilesync</id>
+    <id>freeocr</id>
     <id>freerdp.portable</id>
     <id>freevideoeditor</id>
     <id>frhed</id>
@@ -1659,6 +1663,7 @@
     <id>markdown-edit</id>
     <id>markdownmonster.portable</id>
     <id>markdownwin</id>
+    <id>markdowser</id>
     <id>marktext</id>
     <id>marv</id>
     <id>massigra</id>
@@ -1868,6 +1873,7 @@
     <id>neftest.consolerunner</id>
     <id>negativescreen</id>
     <id>neko</id>
+    <id>nekoray</id>
     <id>neochat.portable</id>
     <id>neochat</id>
     <id>neovide.install</id>
@@ -1928,6 +1934,7 @@
     <id>noteexplorer</id>
     <id>notepad3.install</id>
     <id>notepad3</id>
+    <id>notepad4</id>
     <id>notepadplusplus-npppluginmanager</id>
     <id>notepadplusplus-plugin.template</id>
     <id>notepadplusplus.commandline</id>
@@ -2105,6 +2112,7 @@
     <id>papagayo-ng</id>
     <id>papercut</id>
     <id>paraffin</id>
+    <id>parallel-launcher.install</id>
     <id>parq</id>
     <id>partitionmasterfree</id>
     <id>pass-winmenu</id>
@@ -2232,6 +2240,7 @@
     <id>powerdelivery</id>
     <id>powerdimmer</id>
     <id>powergist</id>
+    <id>powersession-legacy</id>
     <id>powershellbuild.powershell</id>
     <id>powershellhere-elevated</id>
     <id>powershellhere</id>
@@ -2829,6 +2838,7 @@
     <id>tdarr-updater</id>
     <id>tdesktop</id>
     <id>tdict</id>
+    <id>tealdeer</id>
     <id>teamcity-openjdk8</id>
     <id>teamcity-preinstalledjre</id>
     <id>teamcityaddin</id>
@@ -3016,6 +3026,7 @@
     <id>unreleasedgithubhistory.portable</id>
     <id>up2date</id>
     <id>upack</id>
+    <id>updatedep</id>
     <id>uplay</id>
     <id>upx</id>
     <id>usbdeview</id>
@@ -16511,6 +16522,19 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>onedrive</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>onlykeyapp</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -26196,6 +26220,7 @@
     <id>android-ndk</id>
     <id>android-sdk</id>
     <id>ankhsvn</id>
+    <id>anmaniesmp</id>
     <id>annie</id>
     <id>anonymouspro</id>
     <id>anote</id>
@@ -26283,6 +26308,7 @@
     <id>audio-router</id>
     <id>audiobookconverter</id>
     <id>audioconverter</id>
+    <id>audiorelay</id>
     <id>audioswitcher</id>
     <id>auditbeat</id>
     <id>autenticacaogovpt</id>
@@ -26298,6 +26324,8 @@
     <id>automiseruntime</id>
     <id>autorest</id>
     <id>autorunner</id>
+    <id>autoscreenshot.portable</id>
+    <id>autoscreenshot</id>
     <id>autover</id>
     <id>auxil-excel-add-in</id>
     <id>avastbrowsercleanup</id>
@@ -26678,10 +26706,12 @@
     <id>cnspec</id>
     <id>cntlm</id>
     <id>coapp</id>
+    <id>cocogitto</id>
     <id>codac</id>
     <id>codeauditor</id>
     <id>codegpt</id>
     <id>codemaid</id>
+    <id>codeproject-ai</id>
     <id>codeql</id>
     <id>coderush-vs2015</id>
     <id>codeslice</id>
@@ -26762,11 +26792,13 @@
     <id>crashplan</id>
     <id>crashplanpro</id>
     <id>crawl</id>
+    <id>creality-print</id>
     <id>crealogix-paymaker-office</id>
     <id>create-synchronicity.install</id>
     <id>create-synchronicity.portable</id>
     <id>createstructure</id>
     <id>croc</id>
+    <id>cromite</id>
     <id>cropper</id>
     <id>crossftp</id>
     <id>crowdin-cli</id>
@@ -26890,6 +26922,7 @@
     <id>dcode</id>
     <id>dcplusplus.portable</id>
     <id>de4dot</id>
+    <id>deansbury.portable</id>
     <id>deepgit</id>
     <id>deepview</id>
     <id>deepvocal</id>
@@ -27120,6 +27153,7 @@
     <id>earth-alerts</id>
     <id>easi-gen</id>
     <id>eask-cli</id>
+    <id>easy-auto-clicker</id>
     <id>easyconnect</id>
     <id>easylogusb</id>
     <id>easytag</id>
@@ -27255,6 +27289,7 @@
     <id>f1viewer</id>
     <id>f2</id>
     <id>factor</id>
+    <id>fafarunner</id>
     <id>faforever</id>
     <id>fah</id>
     <id>fakenet</id>
@@ -27264,6 +27299,8 @@
     <id>fanficfare</id>
     <id>far-2</id>
     <id>fastfetch</id>
+    <id>fastflix.portable</id>
+    <id>fastflix</id>
     <id>fastglacier</id>
     <id>fastresolver.install</id>
     <id>fastresolver.portable</id>
@@ -27532,6 +27569,7 @@
     <id>gitpad</id>
     <id>gitsign</id>
     <id>gittfs</id>
+    <id>gittyup</id>
     <id>gitui</id>
     <id>gkcli</id>
     <id>glab.portable</id>
@@ -27727,6 +27765,8 @@
     <id>hot-chocolatey</id>
     <id>hotpotato</id>
     <id>hotswap</id>
+    <id>houdoku.portable</id>
+    <id>houdoku</id>
     <id>housecall.portable</id>
     <id>houselinc</id>
     <id>howard.install</id>
@@ -28073,6 +28113,7 @@
     <id>keyboard-layout-creator</id>
     <id>keyhac</id>
     <id>keyhub-cli</id>
+    <id>keymapper</id>
     <id>keypirinha</id>
     <id>keypose</id>
     <id>keytweak</id>
@@ -28099,6 +28140,7 @@
     <id>kobito</id>
     <id>kodos</id>
     <id>kog</id>
+    <id>kollama</id>
     <id>komorebi</id>
     <id>kontur-plugin</id>
     <id>kopano-ads-nightly</id>
@@ -28200,6 +28242,7 @@
     <id>lightworks</id>
     <id>lili.install</id>
     <id>lili.portable</id>
+    <id>lime3ds</id>
     <id>limechat</id>
     <id>limitless</id>
     <id>line6monkey</id>
@@ -28279,6 +28322,7 @@
     <id>lunar-ips</id>
     <id>luxcorerender</id>
     <id>lxrunoffline</id>
+    <id>lychee</id>
     <id>lyncbasic2013</id>
     <id>lyncbasic2013x86</id>
     <id>lyricsfinder</id>
@@ -28891,7 +28935,6 @@
     <id>omnirig</id>
     <id>onchrome</id>
     <id>onedarkpro-vscode</id>
-    <id>onedrive</id>
     <id>onefetch</id>
     <id>onenote-taggingkit-addin.install</id>
     <id>onenote</id>
@@ -28997,6 +29040,7 @@
     <id>packetbeat</id>
     <id>packetstream</id>
     <id>padgen</id>
+    <id>padloc-tauri</id>
     <id>padmanager</id>
     <id>painttoolsai</id>
     <id>pal</id>
@@ -29529,6 +29573,7 @@
     <id>resophnotes</id>
     <id>resourcehacker.portable</id>
     <id>restart-to-uefi</id>
+    <id>restic-browser</id>
     <id>retroarch</id>
     <id>revalee.service</id>
     <id>revosleep</id>
@@ -29645,6 +29690,7 @@
     <id>sbom-tool-cli</id>
     <id>sbt</id>
     <id>sc3plugins</id>
+    <id>scala-test</id>
     <id>scala.install</id>
     <id>scala.portable</id>
     <id>scalaide</id>
@@ -29882,6 +29928,7 @@
     <id>songr</id>
     <id>sonicpi</id>
     <id>sonobuoy</id>
+    <id>sonobus</id>
     <id>sonos-controller</id>
     <id>sony-imaging-edge-webcam</id>
     <id>sonyvegaspro</id>
@@ -29932,6 +29979,7 @@
     <id>split</id>
     <id>splunk-server</id>
     <id>splunkforwarder</id>
+    <id>spright</id>
     <id>springtoolsuite</id>
     <id>sprut-sms-client</id>
     <id>sprut-universal-sprutconfig</id>
@@ -30033,6 +30081,7 @@
     <id>sslyze</id>
     <id>ssms-tools-pack</id>
     <id>ssrs-2019</id>
+    <id>ssrs-2022</id>
     <id>stack</id>
     <id>stakecubecoinwallet-bootstrap</id>
     <id>stakecubecoinwallet</id>
@@ -30083,6 +30132,7 @@
     <id>studio3t</id>
     <id>stunnel-msspi</id>
     <id>stunnel.beta</id>
+    <id>stuntrally</id>
     <id>stylecop-vsix</id>
     <id>sublimetext2.packagecontrol</id>
     <id>sublimetext2</id>
@@ -30299,6 +30349,7 @@
     <id>tim</id>
     <id>time4popcorn</id>
     <id>timeit</id>
+    <id>timemem</id>
     <id>timestamp</id>
     <id>timetravel</id>
     <id>timetravelcli</id>
@@ -30331,6 +30382,7 @@
     <id>tonelib-zoom</id>
     <id>toolkit</id>
     <id>topbeat</id>
+    <id>topgrade</id>
     <id>tor</id>
     <id>torchat</id>
     <id>tortoisehg</id>
@@ -30363,6 +30415,7 @@
     <id>trilium-notes</id>
     <id>trim</id>
     <id>trion.portable</id>
+    <id>trippy</id>
     <id>trivy</id>
     <id>trojan-qt5-client</id>
     <id>trojita</id>
@@ -30920,6 +30973,7 @@
     <id>vt-cli</id>
     <id>vtex.toolbelt</id>
     <id>vulkan-sdk</id>
+    <id>vulnapi</id>
     <id>vultr-cli.portable</id>
     <id>vut</id>
     <id>vvvv-addonpack.x64</id>
@@ -31265,6 +31319,7 @@
     <id>yandexdisk</id>
     <id>yanknote</id>
     <id>yasm</id>
+    <id>yazi</id>
     <id>yed-nojre</id>
     <id>yed</id>
     <id>yinxiangbiji</id>

@@ -47,8 +47,15 @@
         }
 
         Write-Information "Downloading $filename" -InformationAction Continue
-        $dlwd.DownloadFile($url, $dlwdFile)
-        $dlwd.dispose()
+        try {
+            $dlwd.DownloadFile($url, $dlwdFile)
+        } catch {
+            Write-Warning "Url Failed to download: $url"
+            throw $_
+        } finally {
+            $dlwd.dispose()
+        }
+
 
         if ($checksum) {
             $checksumOK = Confirm-Checksum -fullFilePath $dlwdFile -checksum $checksum -checksumTypeType $checksumTypeType
