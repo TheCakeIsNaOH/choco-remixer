@@ -69,80 +69,144 @@
         $publicPageURL = $config.publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
         [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
         $publicEntry = $publicPage.feed.entry | Select-Object -First 1
-        $publicVersion = $publicEntry.properties.Version
+        $publicVersionrelease = $publicEntry.properties.Version
 
-        if ($null -eq $publicVersion) {
-            $publicPageURL = $config.publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsAbsoluteLatestVersion'
-            [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURL
-            $publicEntry = $publicPage.feed.entry | Select-Object -First 1
-            $publicVersion = $publicEntry.properties.Version
-
-            if ($null -eq $publicVersion) {
-                Write-Error "$nuspecID does not exist or is unlisted on $config.publicRepoURL"
-            }
-        }
+        $publicPageURLpre = $config.publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsAbsoluteLatestVersion'
+        [xml]$publicPagepre = Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURLpre
+        $publicEntrypre = $publicPagepre.feed.entry | Select-Object -First 1
+        $publicVersionpre = $publicEntrypre.properties.Version
 
         # Normalize version, as Chocolatey CLI now normalizes versions on pack
-        $publicVersion = [NuGet.Versioning.NuGetVersion]::Parse($publicVersion).ToNormalizedString();
+        if ($null -ne $publicVersionrelease) {
+            $publicVersionrelease = [NuGet.Versioning.NuGetVersion]::Parse($publicVersionrelease).ToNormalizedString();
+            if ($privateVersions -inotcontains $publicVersionrelease) {
 
-        if ($privateVersions -inotcontains $publicVersion) {
+                Write-Information "$nuspecID out of date on private repo, found version $publicVersionrelease, downloading" -InformationAction Continue
 
-            Write-Information "$nuspecID out of date on private repo, found version $publicVersion, downloading" -InformationAction Continue
-
-            $srcUrl = $publicEntry.content.src | Select-Object -First 1
-            #pwsh considers 3xx response codes as an error if redirection is disallowed
-            if ($PSVersionTable.PSVersion.major -ge 6) {
-                try {
-                    $null = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea Stop
-                    $dlwdUrl = $srcUrl
-                } catch {
-                    $dlwdURL = $_.Exception.Response.headers.location.absoluteuri
-                }
-            } else {
-                $redirectPage = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea 0
-                if ([string]::IsNullOrWhiteSpace($redirectPage.Links.href)) {
-                    $dlwdUrl = $srcUrl
+                $srcUrl = $publicEntry.content.src | Select-Object -First 1
+                #pwsh considers 3xx response codes as an error if redirection is disallowed
+                if ($PSVersionTable.PSVersion.major -ge 6) {
+                    try {
+                        $null = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea Stop
+                        $dlwdUrl = $srcUrl
+                    } catch {
+                        $dlwdURL = $_.Exception.Response.headers.location.absoluteuri
+                    }
                 } else {
-                    $dlwdURL = $redirectpage.Links.href
-                }
-            }
-
-            #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
-            $checksum = -join ([System.Convert]::FromBase64String($publicEntry.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })
-            $checksumType = $publicEntry.properties.PackageHashAlgorithm
-
-            $filename = $nuspecID + "." + $publicVersion + ".nupkg"
-
-            $saveDir = Join-Path $config.searchDir $nuspecID
-            if (!(Test-Path $saveDir)) {
-                $null = New-Item -Type Directory $saveDir
-            }
-
-            Get-File -url $dlwdURL -filename $filename -folder $saveDir -checksumTypeType $checksumType -checksum $checksum
-
-            if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
-                $stopwatch = [system.diagnostics.stopwatch]::StartNew()
-                $dlwdPath = Join-Path $saveDir $filename
-                $pushArgs = "push " + $filename + " -f -r -s " + $config.privateRepoURL
-                $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
-
-                if ($pushcode.exitcode -ne "0") {
-                    Throw "pushing $nuspecID $_ failed"
+                    $redirectPage = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea 0
+                    if ([string]::IsNullOrWhiteSpace($redirectPage.Links.href)) {
+                        $dlwdUrl = $srcUrl
+                    } else {
+                        $dlwdURL = $redirectpage.Links.href
+                    }
                 }
 
-                Remove-Item $dlwdPath -ea 0 -Force
-                $pushcode = $null
-                $stopwatch.stop()
-                if ($stopwatch.ElapsedMilliseconds -le 2800) {
-                    Write-Information "Waiting for $($stopwatch.Elapsed.Seconds) seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
-                    Start-Sleep -Milliseconds (3000 - $stopwatch.ElapsedMilliseconds)
-                }
-            } else {
-                Write-Information "Waiting three seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
-                Start-Sleep -S 3
-            }
+                #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
+                $checksum = -join ([System.Convert]::FromBase64String($publicEntry.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })
+                $checksumType = $publicEntry.properties.PackageHashAlgorithm
 
+                $filename = $nuspecID + "." + $publicVersionrelease + ".nupkg"
+
+                $saveDir = Join-Path $config.searchDir $nuspecID
+                if (!(Test-Path $saveDir)) {
+                    $null = New-Item -Type Directory $saveDir
+                }
+
+                Get-File -url $dlwdURL -filename $filename -folder $saveDir -checksumTypeType $checksumType -checksum $checksum
+
+                if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
+                    $stopwatch = [system.diagnostics.stopwatch]::StartNew()
+                    $dlwdPath = Join-Path $saveDir $filename
+                    $pushArgs = "push " + $filename + " -f -r -s " + $config.privateRepoURL
+                    $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
+
+                    if ($pushcode.exitcode -ne "0") {
+                        Throw "pushing $nuspecID $_ failed"
+                    }
+
+                    Remove-Item $dlwdPath -ea 0 -Force
+                    $pushcode = $null
+                    $stopwatch.stop()
+                    if ($stopwatch.ElapsedMilliseconds -le 2800) {
+                        Write-Information "Waiting for $($stopwatch.Elapsed.Seconds) seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
+                        Start-Sleep -Milliseconds (3000 - $stopwatch.ElapsedMilliseconds)
+                    }
+                } else {
+                    Write-Information "Waiting three seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
+                    Start-Sleep -S 3
+                }
+
+            }
         }
+        if ($null -ne $publicVersionpre) {
+            $publicVersionpre = [NuGet.Versioning.NuGetVersion]::Parse($publicVersionpre).ToNormalizedString();
+            if ($privateVersions -inotcontains $publicVersionpre) {
+
+                Write-Information "$nuspecID out of date on private repo, found version $publicVersionpre, downloading" -InformationAction Continue
+
+                $srcUrl = $publicEntrypre.content.src | Select-Object -First 1
+                #pwsh considers 3xx response codes as an error if redirection is disallowed
+                if ($PSVersionTable.PSVersion.major -ge 6) {
+                    try {
+                        $null = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea Stop
+                        $dlwdUrl = $srcUrl
+                    } catch {
+                        $dlwdURL = $_.Exception.Response.headers.location.absoluteuri
+                    }
+                } else {
+                    $redirectPage = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea 0
+                    if ([string]::IsNullOrWhiteSpace($redirectPage.Links.href)) {
+                        $dlwdUrl = $srcUrl
+                    } else {
+                        $dlwdURL = $redirectpage.Links.href
+                    }
+                }
+
+                #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
+                $checksum = -join ([System.Convert]::FromBase64String($publicEntrypre.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })
+                $checksumType = $publicEntrypre.properties.PackageHashAlgorithm
+
+                $filename = $nuspecID + "." + $publicVersionpre + ".nupkg"
+
+                $saveDir = Join-Path $config.searchDir $nuspecID
+                if (!(Test-Path $saveDir)) {
+                    $null = New-Item -Type Directory $saveDir
+                }
+
+                Get-File -url $dlwdURL -filename $filename -folder $saveDir -checksumTypeType $checksumType -checksum $checksum
+
+                if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
+                    $stopwatch = [system.diagnostics.stopwatch]::StartNew()
+                    $dlwdPath = Join-Path $saveDir $filename
+                    $pushArgs = "push " + $filename + " -f -r -s " + $config.privateRepoURL
+                    $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
+
+                    if ($pushcode.exitcode -ne "0") {
+                        Throw "pushing $nuspecID $_ failed"
+                    }
+
+                    Remove-Item $dlwdPath -ea 0 -Force
+                    $pushcode = $null
+                    $stopwatch.stop()
+                    if ($stopwatch.ElapsedMilliseconds -le 2800) {
+                        Write-Information "Waiting for $($stopwatch.Elapsed.Seconds) seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
+                        Start-Sleep -Milliseconds (3000 - $stopwatch.ElapsedMilliseconds)
+                    }
+                } else {
+                    Write-Information "Waiting three seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
+                    Start-Sleep -S 3
+                }
+
+            }
+        }
+        if (($null -eq $publicVersionrelease) -and ($null -eq $publicVersionpre)) {
+            Write-Error "$nuspecID does not exist or is unlisted on $config.publicRepoURL"
+        }
+
+
+
+
+
     }
     $nuspecID = $null
     $ProgressPreference = $saveProgPref

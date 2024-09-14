@@ -69,8 +69,9 @@
                         Throw "$nuspecID $_ search returned an array, search URL may have been malformed"
                     }
 
-                    $heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
-                    $filename = ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
+                    #$heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
+                    #$filename = ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
+                    $filename = $nuspecID + "." + $_ + ".nupkg"
                     $downloadURL = $searchResults.items.assets.downloadURL
                     $downloadChecksum = $searchResults.items.assets.checksum.sha512
 
@@ -120,9 +121,15 @@
                         $apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
                         $null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
                     } else {
+                        #try {
+                        #    $heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
+                        #} catch {
+                        #    Write-Warning "Failed to get $($searchResults.items.assets.downloadURL)"
+                        #    throw $_
+                        #}
 
-                        $heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
-                        $filename = ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
+                        #$filename = ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
+                        $filename = $nuspecID + "." + $_ + ".nupkg"
                         $downloadURL = $searchResults.items.assets.downloadURL
                         $downloadChecksum = $searchResults.items.assets.checksum.sha512
 
