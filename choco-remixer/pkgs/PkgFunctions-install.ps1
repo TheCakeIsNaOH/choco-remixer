@@ -1449,13 +1449,13 @@ Function Convert-dellcommandupdate ([PackageInternalizeInfo]$obj) {
 Function Convert-wsl2 ([PackageInternalizeInfo]$obj) {
     #need to deal with added added param that has option of install both 32 and 64,
     #remove-item -ea 0 -Path (get-childitem $obj.toolsDir -Filter "*hoco*stall.ps1")
-    $fullurl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url .*= ").tostring()
+    $fullurl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url64 .*= ").tostring()
 
     $url = ($fullurl -split "'" | Select-String -Pattern "https").tostring()
     $filename = ($url -split "/" | Select-Object -Last 1).tostring()
-    $filePath = 'file     = (Join-Path $toolsDir "' + $filename + '")'
+    $filePath = 'file64     = (Join-Path $toolsDir "' + $filename + '")'
 
-    $checksum = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    $checksum = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  Checksum64  ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
 
     $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod

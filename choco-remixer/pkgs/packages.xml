@@ -318,7 +318,6 @@
     <id>cake-bakery.portable</id>
     <id>cake.portable</id>
     <id>calibre-dedrm</id>
-    <id>calibre</id>
     <id>camlviewer</id>
     <id>camotics</id>
     <id>cantact</id>
@@ -6160,6 +6159,19 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>calibre</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>8</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>Size</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>camstudio</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -8310,6 +8322,13 @@
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-8.0-sdk-3xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-8.0-sdk-4xx</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -12584,6 +12603,7 @@
       <checksumArgsType>4</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>licensing</whyNotInternal>
+      <replaceFilenames>yes</replaceFilenames>
     </pkg>
     <pkg>
       <functionName>Convert-itunes</functionName>
@@ -19977,6 +19997,13 @@
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>scap-compliance-checker</id>
+      <functionName>Convert-scap-compliance-checker</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>License</whyNotInternal>
     </pkg>
     <pkg>
       <id>scarm</id>
@@ -29697,7 +29724,6 @@
     <id>scanner</id>
     <id>scansnapmanager</id>
     <id>scantailor</id>
-    <id>scap-compliance-checker</id>
     <id>scavenger</id>
     <id>sccache</id>
     <id>sccmclictr</id>

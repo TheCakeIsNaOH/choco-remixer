@@ -597,7 +597,7 @@ Function Convert-fbx2gltf ([PackageInternalizeInfo]$obj) {
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url64bit ').tostring()
     $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
-    $filePath64 = 'FileFullPath   = (Join-Path $toolsDir "' + $filename64 + '")'
+    $filePath64 = 'FileFullPath64   = (Join-Path $toolsDir "' + $filename64 + '")'
 
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
     $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
@@ -605,6 +605,27 @@ Function Convert-fbx2gltf ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
 
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}
+
+Function Convert-scap-compliance-checker ([PackageInternalizeInfo]$obj) {
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
+    $SccVersionFull =  ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$SccVersion ').tostring()
+    $sscVersion = ($SccVersionFull -split "'" | Select-String -Pattern '\d').ToString()
+    $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").ToString()
+    $url64 = $url64 -replace '\$\(\$SccVersion\)',$sscVersion
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    $filePath64 = 'FileFullPath   = (Join-Path $toolsDir "' + $filename64 + '")'
+
+
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.InstallScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+    $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination"
+    $obj.installScriptMod = $obj.installScriptMod -replace "UnzipArgs = @{" , "$&`n  $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.zip'
+
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$SccZipCheckSum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
