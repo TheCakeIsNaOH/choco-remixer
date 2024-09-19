@@ -13,6 +13,7 @@
     <id>7zip</id>
     <id>8x8virtualoffice</id>
     <id>a0toolkit</id>
+    <id>abalect</id>
     <id>ace</id>
     <id>ack</id>
     <id>acmesharp-posh-all</id>
@@ -26,6 +27,7 @@
     <id>activator</id>
     <id>activepresenter</id>
     <id>actysystemstylerule</id>
+    <id>acunetix-free</id>
     <id>ad-acl-scanner</id>
     <id>adblockplusfirefox</id>
     <id>admincenter</id>
@@ -850,6 +852,7 @@
     <id>ellp</id>
     <id>elmer-mpi</id>
     <id>elmer</id>
+    <id>elvish</id>
     <id>emacs-full</id>
     <id>emacs.install</id>
     <id>emacs.portable</id>
@@ -967,6 +970,7 @@
     <id>fldigi</id>
     <id>flicflac</id>
     <id>flip</id>
+    <id>flips</id>
     <id>flohsm</id>
     <id>flrig</id>
     <id>fluent-terminal</id>
@@ -1246,6 +1250,7 @@
     <id>hemtt</id>
     <id>hercules</id>
     <id>herd</id>
+    <id>heroic-games-launcher</id>
     <id>heroku-cli</id>
     <id>heroku-toolbelt</id>
     <id>hexchat</id>
@@ -1758,6 +1763,7 @@
     <id>minishift</id>
     <id>mirth-administrator-launcher</id>
     <id>mirth</id>
+    <id>mise</id>
     <id>misslecommand</id>
     <id>mixxx</id>
     <id>mkcert</id>
@@ -2112,6 +2118,7 @@
     <id>papercut</id>
     <id>paraffin</id>
     <id>parallel-launcher.install</id>
+    <id>parallel-launcher</id>
     <id>parq</id>
     <id>partitionmasterfree</id>
     <id>pass-winmenu</id>
@@ -2185,6 +2192,7 @@
     <id>pictus</id>
     <id>pidginotrplugin</id>
     <id>pingtracer</id>
+    <id>pinpoint</id>
     <id>pinta</id>
     <id>pinwin</id>
     <id>pipes-rs</id>
@@ -2204,6 +2212,7 @@
     <id>plexamp</id>
     <id>plexpy</id>
     <id>plutolang</id>
+    <id>png-to-ico.install</id>
     <id>pnggauntlet.install</id>
     <id>pnggauntlet</id>
     <id>pngoptimizer.commandline</id>
@@ -2240,6 +2249,7 @@
     <id>powerdimmer</id>
     <id>powergist</id>
     <id>powersession-legacy</id>
+    <id>powersession</id>
     <id>powershellbuild.powershell</id>
     <id>powershellhere-elevated</id>
     <id>powershellhere</id>
@@ -2651,6 +2661,7 @@
     <id>sliksvn</id>
     <id>slnlauncher</id>
     <id>slooh-explorer</id>
+    <id>smarter</id>
     <id>smartrename</id>
     <id>smplayer2</id>
     <id>smplayer</id>
@@ -3401,6 +3412,7 @@
     <id>zabbix-agent2</id>
     <id>zabbix-agent</id>
     <id>zeal</id>
+    <id>zelda3-launcher</id>
     <id>zephyr-gnuarmemb</id>
     <id>zerobrane-studio</id>
     <id>zerotier-one</id>
@@ -3801,19 +3813,6 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>0</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
-      <id>acunetix-free</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>6</urlType>
-      <argsType>0</argsType>
-      <removeEXE>yes</removeEXE>
-      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -6411,6 +6410,9 @@
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+      <hasVersionUrl>yes</hasVersionUrl>
+      <versionUrlType>0</versionUrlType>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
     </pkg>
     <pkg>
       <id>chef-workstation</id>
@@ -6629,6 +6631,9 @@
       <checksumArgsType>7</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+      <hasVersionUrl>yes</hasVersionUrl>
+      <versionUrlType>0</versionUrlType>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
     </pkg>
     <pkg>
       <id>clion-ide</id>
@@ -14820,6 +14825,9 @@
       <checksumArgsType>7</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+      <hasVersionUrl>yes</hasVersionUrl>
+      <versionUrlType>0</versionUrlType>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
     </pkg>
     <pkg>
       <functionName>Convert-metricbeat</functionName>
@@ -18987,12 +18995,12 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x32</architecture>
       <urlType>6</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
-      <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
+      <checksumArgsType>2</checksumArgsType>
+      <checksumTypeType>sha512</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
@@ -20592,6 +20600,9 @@
       <checksumArgsType>7</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+      <hasVersionUrl>yes</hasVersionUrl>
+      <versionUrlType>0</versionUrlType>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
     </pkg>
     <pkg>
       <id>sinon</id>
@@ -20876,7 +20887,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>6</urlType>
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
@@ -26102,7 +26113,7 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x64</architecture>
-      <urlType>9</urlType>
+      <urlType>3</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <replaceFilenames>yes</replaceFilenames>
@@ -26133,6 +26144,8 @@
     <id>9kw-client</id>
     <id>aacgain</id>
     <id>aaclr</id>
+    <id>ab-download-manager.portable</id>
+    <id>ab-download-manager</id>
     <id>abaclient</id>
     <id>abastart</id>
     <id>abc-update</id>
@@ -26257,6 +26270,7 @@
     <id>antlrworks2</id>
     <id>anvide-seal-folder</id>
     <id>any2ico.portable</id>
+    <id>anyquery</id>
     <id>anytoiso</id>
     <id>anytype</id>
     <id>anyvideoconverter</id>
@@ -26304,6 +26318,7 @@
     <id>artifactory</id>
     <id>artmoney.install</id>
     <id>aruba-networks-virtual-intranet-access-client</id>
+    <id>arvan</id>
     <id>arxiv-collector</id>
     <id>as-ssd</id>
     <id>asar7z</id>
@@ -26405,6 +26420,7 @@
     <id>bandizip</id>
     <id>banks.portable</id>
     <id>banksiagui</id>
+    <id>barklarm</id>
     <id>barryschiffer-netscaler-script</id>
     <id>base64</id>
     <id>basilisk.portable</id>
@@ -27338,6 +27354,7 @@
     <id>fbexport</id>
     <id>fbp-vst-plugins</id>
     <id>fbvlc</id>
+    <id>fdk</id>
     <id>femm</id>
     <id>fenix-web-server-beta</id>
     <id>fenix-web-server</id>
@@ -27642,6 +27659,7 @@
     <id>golo</id>
     <id>gols</id>
     <id>gomodrun</id>
+    <id>good-commit</id>
     <id>goodbyedpi</id>
     <id>google-chrome-for-enterprise</id>
     <id>google-pinyin</id>
@@ -27764,6 +27782,8 @@
     <id>helmsman</id>
     <id>help-workshop</id>
     <id>heroesofnewerth</id>
+    <id>heroic-games-launcher.install</id>
+    <id>heroic-games-launcher.portable</id>
     <id>hex2dec</id>
     <id>hexedit</id>
     <id>hexter.octopus.tentacle</id>
@@ -27844,6 +27864,7 @@
     <id>icaros</id>
     <id>icc-profile-inspector</id>
     <id>icecast</id>
+    <id>icedrive</id>
     <id>icloud</id>
     <id>iconizer</id>
     <id>iconsext.install</id>
@@ -28833,6 +28854,7 @@
     <id>nextdns-cli</id>
     <id>nextdns</id>
     <id>nextiva</id>
+    <id>nexttrace</id>
     <id>nexus-oss</id>
     <id>nexusfile.install</id>
     <id>nexusfile.portable</id>
@@ -28956,6 +28978,7 @@
     <id>okta</id>
     <id>olex2</id>
     <id>olive</id>
+    <id>ollama</id>
     <id>ollydbg</id>
     <id>omega-data-logger</id>
     <id>omegat</id>
@@ -28963,6 +28986,7 @@
     <id>onchrome</id>
     <id>onedarkpro-vscode</id>
     <id>onefetch</id>
+    <id>onenote-classnotebook</id>
     <id>onenote-taggingkit-addin.install</id>
     <id>onenote</id>
     <id>onescript-cli</id>
@@ -28988,6 +29012,7 @@
     <id>opencover.portable</id>
     <id>opencv</id>
     <id>openfire</id>
+    <id>openflexure-connect</id>
     <id>openflexure-ev</id>
     <id>openhardwaremonitor</id>
     <id>openide</id>
@@ -29008,6 +29033,7 @@
     <id>openocd</id>
     <id>openproj</id>
     <id>openproject</id>
+    <id>openrails</id>
     <id>openrct2</id>
     <id>openrefine</id>
     <id>opensavefilesview</id>
@@ -29071,6 +29097,7 @@
     <id>padmanager</id>
     <id>painttoolsai</id>
     <id>pal</id>
+    <id>palos.portable</id>
     <id>pan</id>
     <id>pandabank.install</id>
     <id>pandabank.portable</id>
@@ -29319,6 +29346,7 @@
     <id>proficad.install</id>
     <id>proficad.portable</id>
     <id>profwiz</id>
+    <id>proggy</id>
     <id>program-install-and-uninstall-troubleshooter</id>
     <id>project.2010.sdk</id>
     <id>project64</id>
@@ -30001,6 +30029,11 @@
     <id>spiceworksnetmon</id>
     <id>spideroak</id>
     <id>spideroakgroups</id>
+    <id>splashtop-personal</id>
+    <id>splashtop-sos</id>
+    <id>splashtop-streamer-deployment-msi</id>
+    <id>splashtop-streamer-deployment</id>
+    <id>splashtop-streamer</id>
     <id>spleeter-msvc-exe</id>
     <id>split</id>
     <id>splunk-server</id>
@@ -30127,6 +30160,7 @@
     <id>startmenureviver</id>
     <id>static-web-server</id>
     <id>statistical</id>
+    <id>stax</id>
     <id>staxrip</id>
     <id>stduviewer</id>
     <id>steam-cleaner</id>
@@ -30201,6 +30235,7 @@
     <id>swig</id>
     <id>swish</id>
     <id>swissfileknife</id>
+    <id>switchbar</id>
     <id>switcheroo.install</id>
     <id>switcheroo.portable</id>
     <id>swmm</id>
@@ -30448,6 +30483,7 @@
     <id>truecrypt</id>
     <id>truepng</id>
     <id>trufflehog</id>
+    <id>truvami-decoder</id>
     <id>trzsz</id>
     <id>tsprint</id>
     <id>tsqlflex</id>
@@ -30564,6 +30600,7 @@
     <id>util-linux-ng-getopt</id>
     <id>util-linux-ng-libintl3</id>
     <id>utorrent</id>
+    <id>uv</id>
     <id>uws</id>
     <id>v2ray</id>
     <id>v2rayn</id>
@@ -31331,6 +31368,7 @@
     <id>xunit.visualstudio</id>
     <id>xunit.vs2012</id>
     <id>xvst</id>
+    <id>xyplorer.portable</id>
     <id>xyplorer</id>
     <id>xyplorerfree</id>
     <id>xysubfilter</id>
@@ -31406,6 +31444,7 @@
     <id>zoom-vdi-client</id>
     <id>zoom-vdi-universal-plugin</id>
     <id>zoomit</id>
+    <id>zscaler-terraformer</id>
     <id>zsnes</id>
     <id>zstandard</id>
     <id>zulu11</id>

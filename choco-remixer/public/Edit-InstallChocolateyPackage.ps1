@@ -23,7 +23,9 @@ Function Edit-InstallChocolateyPackage {
         [parameter(Mandatory = $true)]
         [ValidateSet('md5', 'sha1', 'sha256', 'sha512')]
         [string]$checksumTypeType,
-        [parameter(Mandatory = $true)][int]$checksumArgsType
+        [parameter(Mandatory = $true)][int]$checksumArgsType,
+        [switch]$hasVersionUrl,
+        [int]$versionUrlType
     )
 
     $x64 = $true
@@ -146,6 +148,25 @@ Function Edit-InstallChocolateyPackage {
         }
         if ($x64) {
             $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+        }
+    }
+
+    if ($hasVersionUrl) {
+        switch ($versionUrlType) {
+            0 {
+                $scriptVersionVarFull = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$Version\s+=').tostring()
+                $scriptVersionVar = ($scriptVersionVarFull -split "'" | Select-String -Pattern '\d').ToString()
+                if ($x32) {
+                    $url32 = $url32 -replace '\$\{Version\}',$scriptVersionVar
+                }
+                if ($x64) {
+                    $url64 = $url64 -replace '\$\{Version\}',$scriptVersionVar
+                }
+                Break
+            }
+            Default {
+                Write-Error "could not find url type"
+            }
         }
     }
 

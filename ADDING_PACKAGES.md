@@ -126,3 +126,7 @@ This function edits the install script and downloads the installer(s) for standa
 - `$removeMSI`, to add a line to the end of the script that removes all `.msi` files from the tools directory
 - `$removeMSU`, to add a line to the end of the script that removes all `.msi` files from the tools directory
 - `$replaceFilenames`, to use filenames in the format `<id>-<version>-<architecture>.<extension>` instead of filenames parsed from the download urls
+- `$hasVersionUrl`, to use a seperate version variable in the package url
+
+## `$versionUrlType` sets what type of version variable to use
+- 0: `$version`, replacing `${version}`

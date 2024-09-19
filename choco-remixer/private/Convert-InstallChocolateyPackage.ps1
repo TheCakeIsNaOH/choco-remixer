@@ -20,6 +20,8 @@
         checksumTypeType = $obj.checksumTypeType
         checksumArgsType = $obj.checksumArgsType
         doubleQuotesChecksum = $obj.doubleQuotesChecksum
+        hasVersionUrl    = $obj.hasVersionUrl
+        versionUrlType   = $obj.versionUrlType
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs

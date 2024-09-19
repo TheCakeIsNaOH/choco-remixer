@@ -32,6 +32,8 @@
         $this.doubleQuotesChecksum = $customXml.doubleQuotesChecksum -eq "yes"
         $this.checksumTypeType = $customXml.checksumTypeType
         $this.checksumArgsType = $customXml.checksumArgsType
+        $this.hasVersionUrl = $customXml.hasVersionUrl -eq "yes"
+        $this.versionUrlType = $customXml.versionUrlType
     }
 
     [String] $nupkgName
@@ -64,5 +66,6 @@
     [bool] $replaceFilenames
     [string] $checksumTypeType
     [int] $checksumArgsType
-
+    [bool] $hasVersionUrl
+    [int] $versionUrlType
 }
