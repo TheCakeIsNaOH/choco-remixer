@@ -164,8 +164,30 @@ Function Edit-InstallChocolateyPackage {
                 }
                 Break
             }
+            1 {
+                $scriptVersionVarFull = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$PackageVersion\s+=').tostring()
+                $scriptVersionVar = ($scriptVersionVarFull -split '"' | Select-String -Pattern '\d').ToString()
+                if ($x32) {
+                    $url32 = $url32 -replace '\$\(\$PackageVersion\)',$scriptVersionVar
+                }
+                if ($x64) {
+                    $url64 = $url64 -replace '\$\(\$PackageVersion\)',$scriptVersionVar
+                }
+                Break
+            }
+            2 {
+                $scriptVersionVarFull = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$Version\s+=').tostring()
+                $scriptVersionVar = ($scriptVersionVarFull -split '"' | Select-String -Pattern '\d').ToString()
+                if ($x32) {
+                    $url32 = $url32 -replace '\$\{Version\}',$scriptVersionVar
+                }
+                if ($x64) {
+                    $url64 = $url64 -replace '\$\{Version\}',$scriptVersionVar
+                }
+                Break
+            }
             Default {
-                Write-Error "could not find url type"
+                Write-Error "could not find version URL type"
             }
         }
     }

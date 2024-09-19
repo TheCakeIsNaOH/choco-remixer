@@ -3173,6 +3173,7 @@
     <id>voxengo-crtiv-chorus</id>
     <id>voxengo-crtiv-reverb-2</id>
     <id>vp8-vfw</id>
+    <id>vpnarea</id>
     <id>vr-photo-converter</id>
     <id>vs2013classicmenucasing</id>
     <id>vs2015.1</id>
@@ -13565,11 +13566,11 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x64</architecture>
-      <urlType>6</urlType>
+      <urlType>0</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
+      <checksumTypeType>sha512</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
@@ -14008,13 +14009,14 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>7</urlType>
+      <architecture>both</architecture>
+      <urlType>6</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
-      <checksumArgsType>5</checksumArgsType>
+      <checksumArgsType>7</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
     </pkg>
     <pkg>
       <id>lightshot.install</id>
@@ -16648,6 +16650,9 @@
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha512</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+      <hasVersionUrl>yes</hasVersionUrl>
+      <versionUrlType>1</versionUrlType>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
     </pkg>
     <pkg>
       <id>opencppcoverage</id>
@@ -18645,13 +18650,16 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-      <architecture>x64</architecture>
+      <architecture>x32</architecture>
       <urlType>6</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
-      <checksumArgsType>5</checksumArgsType>
+      <checksumArgsType>7</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+      <hasVersionUrl>yes</hasVersionUrl>
+      <versionUrlType>2</versionUrlType>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
     </pkg>
     <pkg>
       <id>qgis</id>
@@ -19059,8 +19067,6 @@
       <urlType>7</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
-      <doubleQuotesUrl>yes</doubleQuotesUrl>
-      <doubleQuotesChecksum>yes</doubleQuotesChecksum>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
@@ -20570,7 +20576,7 @@
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
       <hasVersionUrl>yes</hasVersionUrl>
-      <versionUrlType>0</versionUrlType>
+      <versionUrlType>2</versionUrlType>
       <doubleQuotesUrl>yes</doubleQuotesUrl>
     </pkg>
     <pkg>
@@ -20787,12 +20793,11 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>0</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <doubleQuotesUrl>yes</doubleQuotesUrl>
-      <doubleQuotesChecksum>yes</doubleQuotesChecksum>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
@@ -24403,19 +24408,6 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
-      <id>vpnarea</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>7</urlType>
-      <argsType>0</argsType>
-      <removeEXE>yes</removeEXE>
-      <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
       <id>vs2012.5</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>yes</needsStopAction>
@@ -24797,12 +24789,13 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x32</architecture>
-      <urlType>6</urlType>
+      <urlType>1</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
-      <checksumArgsType>5</checksumArgsType>
+      <checksumArgsType>1</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+      <replaceFilenames>yes</replaceFilenames>
     </pkg>
     <pkg>
       <id>whale</id>
@@ -25819,7 +25812,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>0</urlType>
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>

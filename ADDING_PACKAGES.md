@@ -130,3 +130,5 @@ This function edits the install script and downloads the installer(s) for standa
 
 ## `$versionUrlType` sets what type of version variable to use
 - 0: `$version`, replacing `${version}`
+- 1: `$PackageVersion` with "", replacing `$($PackageVersion)`
+- 0: `$version` with "", replacing `${version}`
