@@ -1876,6 +1876,7 @@
     <id>ncollector-studio-lite</id>
     <id>ncrunch.vs2013</id>
     <id>neatmouse</id>
+    <id>nearby-share</id>
     <id>neftest.consolerunner</id>
     <id>negativescreen</id>
     <id>neko</id>
@@ -2010,6 +2011,7 @@
     <id>nvml-exporter</id>
     <id>nxlog</id>
     <id>nyrna</id>
+    <id>nzbget</id>
     <id>oak9cli</id>
     <id>ober.portable</id>
     <id>ober</id>
@@ -2707,6 +2709,7 @@
     <id>spicetify-marketplace</id>
     <id>spin</id>
     <id>spineomatic</id>
+    <id>splashtop-client-personal</id>
     <id>splayer</id>
     <id>splint.install</id>
     <id>splint.portable</id>
@@ -15765,7 +15768,7 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
-      <id>nearby-share</id>
+      <id>quick-share</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -16329,7 +16332,7 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
-      <id>nzbget</id>
+      <id>nzbgetcom</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -21104,7 +21107,7 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
-      <id>splashtop-client-personal</id>
+      <id>splashtop-personal</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -28897,7 +28900,6 @@
     <id>nyagos</id>
     <id>nyanfi</id>
     <id>nytdl</id>
-    <id>nzbgetcom</id>
     <id>nzxt-cam</id>
     <id>oatmeal</id>
     <id>obs-move-transition</id>
@@ -29446,7 +29448,6 @@
     <id>quarkus</id>
     <id>queryexplus</id>
     <id>queueexplorer-professional</id>
-    <id>quick-share</id>
     <id>quickcpu</id>
     <id>quickroute</id>
     <id>quicksetdns</id>
@@ -29992,7 +29993,6 @@
     <id>spiceworksnetmon</id>
     <id>spideroak</id>
     <id>spideroakgroups</id>
-    <id>splashtop-personal</id>
     <id>splashtop-sos</id>
     <id>splashtop-streamer-deployment-msi</id>
     <id>splashtop-streamer-deployment</id>
