@@ -7,6 +7,7 @@
     <id>0install</id>
     <id>1password-chrome</id>
     <id>1remote</id>
+    <id>7fivefive-lens-workstation-agent</id>
     <id>7zip.commandline</id>
     <id>7zip.install</id>
     <id>7zip.portable</id>
@@ -219,6 +220,7 @@
     <id>bca-spdx</id>
     <id>bcc-msbuildlog</id>
     <id>bcc-submission</id>
+    <id>bdy</id>
     <id>beacon</id>
     <id>beebeep</id>
     <id>beeftext</id>
@@ -311,6 +313,7 @@
     <id>burneremails-chrome</id>
     <id>burnttoast-psmodule</id>
     <id>busybox</id>
+    <id>buttercup.install</id>
     <id>buttercup.portable</id>
     <id>bytemark</id>
     <id>bzip2</id>
@@ -659,6 +662,7 @@
     <id>dictaphone</id>
     <id>die</id>
     <id>dilay</id>
+    <id>dind-cli</id>
     <id>directory-crop</id>
     <id>dirsize</id>
     <id>disable-hiberboot</id>
@@ -712,8 +716,8 @@
     <id>dogtail.dotnet3.5sp1</id>
     <id>dokan-library</id>
     <id>dokany-redistributable</id>
-    <id>dokany</id>
     <id>dokany2</id>
+    <id>dokany</id>
     <id>dolphin-dev</id>
     <id>dolphin</id>
     <id>donkeykong</id>
@@ -896,6 +900,7 @@
     <id>evtxecmd</id>
     <id>exifviewer-chrome</id>
     <id>expandrive</id>
+    <id>explain</id>
     <id>explorer-expand-to-current-folder</id>
     <id>explorer-show-all-folders</id>
     <id>explorer-winconfig</id>
@@ -1325,6 +1330,7 @@
     <id>imagemagick.app</id>
     <id>imagemagick.tool</id>
     <id>imagemagick</id>
+    <id>imagine-full</id>
     <id>imagine</id>
     <id>imdisk-toolkit</id>
     <id>imdisk</id>
@@ -1344,6 +1350,7 @@
     <id>innoextract</id>
     <id>innosetup</id>
     <id>innounp</id>
+    <id>input-leap</id>
     <id>insect</id>
     <id>insomnia-dotnet</id>
     <id>insomnia</id>
@@ -1704,6 +1711,7 @@
     <id>memurai-developer.portable</id>
     <id>memurai-developer</id>
     <id>mendeley-reference-manager</id>
+    <id>mercury</id>
     <id>meshlab</id>
     <id>metadataplusplus</id>
     <id>metafox</id>
@@ -1875,8 +1883,8 @@
     <id>navi</id>
     <id>ncollector-studio-lite</id>
     <id>ncrunch.vs2013</id>
-    <id>neatmouse</id>
     <id>nearby-share</id>
+    <id>neatmouse</id>
     <id>neftest.consolerunner</id>
     <id>negativescreen</id>
     <id>neko</id>
@@ -1902,6 +1910,7 @@
     <id>netscan32</id>
     <id>netscan64</id>
     <id>netscan</id>
+    <id>neutroncli</id>
     <id>newrelic-cli</id>
     <id>newrelic-dotnet</id>
     <id>news-feed-eradicator-for-facebook-chrome</id>
@@ -2216,6 +2225,7 @@
     <id>plexpy</id>
     <id>plutolang</id>
     <id>png-to-ico.install</id>
+    <id>png-to-ico</id>
     <id>pnggauntlet.install</id>
     <id>pnggauntlet</id>
     <id>pngoptimizer.commandline</id>
@@ -2994,6 +3004,7 @@
     <id>tv-browser</id>
     <id>tweetduck.install</id>
     <id>tweetduck</id>
+    <id>twine</id>
     <id>twingate-connector</id>
     <id>twingate</id>
     <id>twinkle-tray</id>
@@ -3001,6 +3012,7 @@
     <id>typegen</id>
     <id>typescript</id>
     <id>typst</id>
+    <id>uattool</id>
     <id>ublockorigin-chrome</id>
     <id>ubuntu.font</id>
     <id>uefs</id>
@@ -3469,7 +3481,7 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
-      <id>1password</id>
+      <id>1password7</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -18897,8 +18909,8 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>6</urlType>
+      <architecture>x64</architecture>
+      <urlType>0</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
@@ -22080,6 +22092,19 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>tableau-public</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>0</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>0</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>tableau-server</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -24585,7 +24610,7 @@
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
       <checksumArgsType>7</checksumArgsType>
-      <checksumTypeType>sha512</checksumTypeType>
+      <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
@@ -26096,6 +26121,8 @@
     <id>1cfresh-client</id>
     <id>1clipboard</id>
     <id>1password-cli</id>
+    <id>1password8</id>
+    <id>1password</id>
     <id>2fast</id>
     <id>2gis</id>
     <id>3cx</id>
@@ -26354,6 +26381,7 @@
     <id>axel</id>
     <id>axhelper</id>
     <id>axis2-war</id>
+    <id>axonopsworkbench</id>
     <id>azcopy10</id>
     <id>azpazeta</id>
     <id>azshell</id>
@@ -26389,6 +26417,7 @@
     <id>barryschiffer-netscaler-script</id>
     <id>base64</id>
     <id>basilisk.portable</id>
+    <id>bassboom</id>
     <id>bat</id>
     <id>batch-docs</id>
     <id>batch-encoding-converter</id>
@@ -26447,6 +26476,7 @@
     <id>biorhythms-calculator</id>
     <id>bioviadraw-ae</id>
     <id>birdtray</id>
+    <id>bisbee.portable</id>
     <id>bit-git</id>
     <id>bitcoin-unlimited.install</id>
     <id>bitcoin-unlimited.portable</id>
@@ -26509,6 +26539,7 @@
     <id>br.adobereaderfr</id>
     <id>brackets.theseus</id>
     <id>brainsimulator</id>
+    <id>breaktimer</id>
     <id>brewtarget</id>
     <id>brightauthor</id>
     <id>brightauthorconnected</id>
@@ -26982,6 +27013,7 @@
     <id>deviceioview</id>
     <id>devmanview</id>
     <id>devtoys</id>
+    <id>devzero-cli</id>
     <id>dex2jar</id>
     <id>dexpot</id>
     <id>dfu-util</id>
@@ -27079,6 +27111,8 @@
     <id>doomsday</id>
     <id>doomseeker</id>
     <id>dopdf</id>
+    <id>dorion.portable</id>
+    <id>dorion</id>
     <id>doro.install</id>
     <id>dotdocs</id>
     <id>dotlocal</id>
@@ -27104,6 +27138,7 @@
     <id>doxybook2</id>
     <id>doxygen.install</id>
     <id>doxygen.portable</id>
+    <id>dra</id>
     <id>draftsight</id>
     <id>draglock</id>
     <id>dragondisk</id>
@@ -27492,6 +27527,7 @@
     <id>fulleventlogview</id>
     <id>fuse-nfs</id>
     <id>fusioninventory-agent.portable</id>
+    <id>fuze-desktop</id>
     <id>fv.install</id>
     <id>fv</id>
     <id>fvm</id>
@@ -27514,6 +27550,7 @@
     <id>garmin-basecamp</id>
     <id>gatling</id>
     <id>gauge</id>
+    <id>gauntlet</id>
     <id>gax2012</id>
     <id>gb.mongodb</id>
     <id>gbstudio.install</id>
@@ -27540,6 +27577,7 @@
     <id>geupd4</id>
     <id>geupd</id>
     <id>gfwlive</id>
+    <id>ggu-software-codemeter</id>
     <id>ghb0t</id>
     <id>ghc</id>
     <id>ghidra</id>
@@ -27586,6 +27624,7 @@
     <id>glaryutilities-pro</id>
     <id>glassfish-javaee</id>
     <id>glassfish</id>
+    <id>glazewm</id>
     <id>gleam</id>
     <id>glfw3</id>
     <id>glmixer</id>
@@ -27617,6 +27656,7 @@
     <id>gociagent</id>
     <id>godot-dev</id>
     <id>godot-mono-dev</id>
+    <id>godu</id>
     <id>gogs</id>
     <id>golangci-lint</id>
     <id>goldendict-en-ru-en.install</id>
@@ -27776,6 +27816,7 @@
     <id>hostinfo</id>
     <id>hosts.editor</id>
     <id>hot-chocolatey</id>
+    <id>hotcorners</id>
     <id>hotpotato</id>
     <id>hotswap</id>
     <id>houdoku.portable</id>
@@ -27874,6 +27915,7 @@
     <id>imageslicer</id>
     <id>imagesprites</id>
     <id>imageusb</id>
+    <id>imagine-full.portable</id>
     <id>imagine.portable</id>
     <id>imazing</id>
     <id>imhex</id>
@@ -27917,6 +27959,8 @@
     <id>intel-redist-cpp</id>
     <id>intel-rst-driver</id>
     <id>intel-xtu</id>
+    <id>intellifile.portable</id>
+    <id>intellifile</id>
     <id>intellijidea-community</id>
     <id>intellijidea-ultimate</id>
     <id>intellitype</id>
@@ -28009,6 +28053,7 @@
     <id>jmc</id>
     <id>jmeter</id>
     <id>jmodelica</id>
+    <id>jnv</id>
     <id>join.me</id>
     <id>jom</id>
     <id>joytokey</id>
@@ -28145,6 +28190,7 @@
     <id>kis</id>
     <id>kkbox</id>
     <id>kkrieger</id>
+    <id>kl</id>
     <id>kmdf</id>
     <id>kmupd4</id>
     <id>kmupd</id>
@@ -28164,6 +28210,7 @@
     <id>kpcli</id>
     <id>kptransfer</id>
     <id>krew</id>
+    <id>krokiet</id>
     <id>krypton-cli</id>
     <id>kryptor</id>
     <id>ks.net</id>
@@ -28196,6 +28243,7 @@
     <id>lammercontextmenu</id>
     <id>lan-messenger.portable</id>
     <id>lan-messenger</id>
+    <id>lan-mouse</id>
     <id>lan-speed-test.portable</id>
     <id>lanbench</id>
     <id>languagetool-code-comments</id>
@@ -28263,6 +28311,7 @@
     <id>line</id>
     <id>linkerd2</id>
     <id>linkshellextension</id>
+    <id>linkus-desktop-client</id>
     <id>linotte</id>
     <id>linqpad2.install</id>
     <id>linqpad4.anycpu.portable</id>
@@ -28295,6 +28344,7 @@
     <id>livereloadwebserver</id>
     <id>livestreamer</id>
     <id>llftool</id>
+    <id>llvm.portable</id>
     <id>ln</id>
     <id>loadem</id>
     <id>locale-emulator</id>
@@ -28334,6 +28384,7 @@
     <id>luckybackup</id>
     <id>luke.portable</id>
     <id>lunar-ips</id>
+    <id>lutgen-rs</id>
     <id>luxcorerender</id>
     <id>lxrunoffline</id>
     <id>lychee</id>
@@ -28345,6 +28396,11 @@
     <id>mach-composer</id>
     <id>made-2016</id>
     <id>made2010</id>
+    <id>madronalabs-aalto</id>
+    <id>madronalabs-aaltoverb</id>
+    <id>madronalabs-kaivo</id>
+    <id>madronalabs-sumu</id>
+    <id>madronalabs-virta</id>
     <id>madvr</id>
     <id>mages</id>
     <id>magic-wormhole.portable</id>
@@ -28496,6 +28552,7 @@
     <id>miro</id>
     <id>mirth-administrator-launcher.install</id>
     <id>mirth-administrator-launcher.portable</id>
+    <id>miru</id>
     <id>missionplanner</id>
     <id>mitelconnect</id>
     <id>mitmproxy</id>
@@ -28519,6 +28576,8 @@
     <id>moderncsv</id>
     <id>modgallery</id>
     <id>modsecurity</id>
+    <id>modworm-rain</id>
+    <id>modworm-soil</id>
     <id>mokapi</id>
     <id>mokka</id>
     <id>moldflowc</id>
@@ -28653,6 +28712,8 @@
     <id>mysql</id>
     <id>myuninst</id>
     <id>mzcv</id>
+    <id>naiveproxy</id>
+    <id>nam-juce</id>
     <id>namecoin</id>
     <id>namemytvseries.portable</id>
     <id>nanazip.portable</id>
@@ -28890,6 +28951,7 @@
     <id>numpy</id>
     <id>nunit.parallel</id>
     <id>nuxmv</id>
+    <id>nvenc</id>
     <id>nvidia-geforce-now</id>
     <id>nvika</id>
     <id>nvm.install</id>
@@ -28909,10 +28971,12 @@
     <id>ocaml</id>
     <id>occt</id>
     <id>ocenaudio.portable</id>
+    <id>ocm-cli</id>
     <id>ocpwin</id>
     <id>octant</id>
     <id>octave.portable</id>
     <id>octo-cli</id>
+    <id>octopusdeploy.tentacle.selfcontained</id>
     <id>octopusdeploy.tentacle</id>
     <id>octopusdeploy</id>
     <id>oda-file-converter</id>
@@ -29011,6 +29075,7 @@
     <id>openvpn-connect</id>
     <id>openwithview</id>
     <id>openxcom</id>
+    <id>openxr-explorer</id>
     <id>opera-neon</id>
     <id>operacacheview</id>
     <id>operapassview</id>
@@ -29161,6 +29226,7 @@
     <id>phalcon</id>
     <id>phantombot</id>
     <id>phatgit</id>
+    <id>photo-demon</id>
     <id>photofiltre-studio-x</id>
     <id>photofiltre7-en</id>
     <id>photofiltre7</id>
@@ -29251,6 +29317,7 @@
     <id>postgresql14</id>
     <id>postgresql15</id>
     <id>postgresql16</id>
+    <id>postgresql17</id>
     <id>postgresql9</id>
     <id>postman-cli</id>
     <id>postman</id>
@@ -29409,6 +29476,7 @@
     <id>qpmx</id>
     <id>qr-code-studio</id>
     <id>qrcp</id>
+    <id>qsvenc</id>
     <id>qt-creator-x64</id>
     <id>qt-creator-x86</id>
     <id>qt-sdk-android-x86</id>
@@ -29543,6 +29611,7 @@
     <id>regcool.portable</id>
     <id>regdelnull</id>
     <id>regdllview</id>
+    <id>regedix</id>
     <id>regexcoach</id>
     <id>regexpeditor</id>
     <id>regexpixie</id>
@@ -29993,6 +30062,7 @@
     <id>spiceworksnetmon</id>
     <id>spideroak</id>
     <id>spideroakgroups</id>
+    <id>splashtop-business</id>
     <id>splashtop-sos</id>
     <id>splashtop-streamer-deployment-msi</id>
     <id>splashtop-streamer-deployment</id>
@@ -30182,6 +30252,7 @@
     <id>superdelete</id>
     <id>superdirt</id>
     <id>superfamiconv</id>
+    <id>superfile</id>
     <id>supermarioflashback</id>
     <id>superorca</id>
     <id>supportassist</id>
@@ -30224,7 +30295,6 @@
     <id>systemninja.portable</id>
     <id>systraymeter</id>
     <id>t-rex</id>
-    <id>tableau-public</id>
     <id>tableplus</id>
     <id>tabletextcompare</id>
     <id>tabspace</id>
@@ -30304,6 +30374,7 @@
     <id>tencentqq</id>
     <id>tenv</id>
     <id>terapad</id>
+    <id>terasology</id>
     <id>terminals.app</id>
     <id>termscp</id>
     <id>terracreds</id>
@@ -30430,6 +30501,7 @@
     <id>transwiz-new</id>
     <id>travis</id>
     <id>traystatus.portable</id>
+    <id>treblle</id>
     <id>tree-sitter</id>
     <id>treesheets</id>
     <id>treesize</id>
@@ -30578,6 +30650,7 @@
     <id>vbindiff</id>
     <id>vboxheadlesstray</id>
     <id>vcbuildtools</id>
+    <id>vceenc</id>
     <id>vcexpress2010</id>
     <id>vclip</id>
     <id>veeam-agent</id>
@@ -31226,6 +31299,7 @@
     <id>wmicc</id>
     <id>wmiexplorer</id>
     <id>wmisecurity</id>
+    <id>wmocr</id>
     <id>wms</id>
     <id>wnetwatcher.install</id>
     <id>wnetwatcher.portable</id>
@@ -31347,6 +31421,7 @@
     <id>yanknote</id>
     <id>yasm</id>
     <id>yazi</id>
+    <id>yealink-usb-connect</id>
     <id>yed-nojre</id>
     <id>yed</id>
     <id>yinxiangbiji</id>
@@ -31369,6 +31444,8 @@
     <id>zandronum</id>
     <id>zbar</id>
     <id>zeal.portable</id>
+    <id>zebar</id>
+    <id>zen-browser</id>
     <id>zentimings</id>
     <id>zephyr-crosstool-aarch64</id>
     <id>zephyr-crosstool-arc</id>
