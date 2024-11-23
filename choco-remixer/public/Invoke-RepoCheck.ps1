@@ -140,7 +140,8 @@
         }
         if ($null -ne $publicVersionpre) {
             $publicVersionpre = [NuGet.Versioning.NuGetVersion]::Parse($publicVersionpre).ToNormalizedString();
-            if ($privateVersions -inotcontains $publicVersionpre) {
+
+            if (($privateVersions -inotcontains $publicVersionpre) -and ($publicVersionpre -ne $publicVersionrelease)) {
 
                 Write-Information "$nuspecID out of date on private repo, found version $publicVersionpre, downloading" -InformationAction Continue
 

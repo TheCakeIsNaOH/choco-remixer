@@ -12349,6 +12349,7 @@
       <removeEXE>yes</removeEXE>
       <checksumArgsType>7</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
+      <replaceFilenames>yes</replaceFilenames>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
