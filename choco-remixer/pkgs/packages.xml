@@ -2770,7 +2770,7 @@
     <id>stayawake.powershell</id>
     <id>stc</id>
     <id>stdump</id>
-    <id>steam</id>
+    <id>steam-client</id>
     <id>steamachievementmanager</id>
     <id>steamlibrarymanager.portable</id>
     <id>steascree.install</id>
@@ -21478,15 +21478,15 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
-      <id>steam-client</id>
+      <id>steam</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x32</architecture>
-      <urlType>0</urlType>
+      <urlType>7</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
-      <checksumArgsType>2</checksumArgsType>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
