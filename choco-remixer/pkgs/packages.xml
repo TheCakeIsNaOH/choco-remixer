@@ -106,6 +106,7 @@
     <id>appcompat-cacheparser</id>
     <id>appease.client.powershell</id>
     <id>appharborcli.install</id>
+    <id>applet-runner-pro</id>
     <id>appveyor-evu</id>
     <id>appveyor-server</id>
     <id>appveyorbyoc.powershell</id>
@@ -639,6 +640,7 @@
     <id>dependency-server2016</id>
     <id>dependency-server2019</id>
     <id>dependency-windows10</id>
+    <id>deskflow</id>
     <id>desktop-notifications-for-android-chrome</id>
     <id>desktop-restore</id>
     <id>desktopicons-winconfig</id>
@@ -692,6 +694,7 @@
     <id>ditto</id>
     <id>djv</id>
     <id>djvu-libre</id>
+    <id>dlss-updater</id>
     <id>dmde</id>
     <id>dmxcontrol2</id>
     <id>dngrep</id>
@@ -1512,6 +1515,7 @@
     <id>kickassconsole</id>
     <id>kickassvim</id>
     <id>kid3</id>
+    <id>kidc</id>
     <id>kino-leaseprovider-service</id>
     <id>kino-rendezvous-service</id>
     <id>kino.leaseprovider</id>
@@ -1539,6 +1543,7 @@
     <id>kui</id>
     <id>kyma-cli</id>
     <id>labplot</id>
+    <id>lals</id>
     <id>lamexp</id>
     <id>lan-speed-test-lite</id>
     <id>lan-speed-test-registered</id>
@@ -2109,6 +2114,7 @@
     <id>osquery</id>
     <id>osv-scanner</id>
     <id>oswald.font</id>
+    <id>othello</id>
     <id>otterbrowser</id>
     <id>ouiguichocolatey</id>
     <id>owinhost</id>
@@ -2335,6 +2341,7 @@
     <id>pydev</id>
     <id>pyenv-win</id>
     <id>pyhoca-gui</id>
+    <id>pysolfc</id>
     <id>python-x86_32</id>
     <id>python.x86</id>
     <id>python2-x86_32</id>
@@ -2816,6 +2823,7 @@
     <id>superslicer</id>
     <id>surreal</id>
     <id>svg-explorer-extension</id>
+    <id>swagger-codegen</id>
     <id>sweet-home-3d</id>
     <id>swift-im</id>
     <id>switch</id>
@@ -3188,6 +3196,7 @@
     <id>voxengo-crtiv-chorus</id>
     <id>voxengo-crtiv-reverb-2</id>
     <id>vp8-vfw</id>
+    <id>vpinball</id>
     <id>vpnarea</id>
     <id>vr-photo-converter</id>
     <id>vs2013classicmenucasing</id>
@@ -26784,6 +26793,7 @@
     <id>compdf-console</id>
     <id>compdf</id>
     <id>compton.portable</id>
+    <id>computesphere</id>
     <id>conadvpass</id>
     <id>concert.env</id>
     <id>concerteenv</id>
@@ -26837,6 +26847,7 @@
     <id>create-synchronicity.install</id>
     <id>create-synchronicity.portable</id>
     <id>createstructure</id>
+    <id>crip</id>
     <id>croc</id>
     <id>cromite</id>
     <id>cropper</id>
@@ -26901,6 +26912,7 @@
     <id>darksoulsmapviewer</id>
     <id>dart-sass-embedded</id>
     <id>dart-sdk</id>
+    <id>dartfish2024</id>
     <id>dartium</id>
     <id>dasel</id>
     <id>dashcore</id>
@@ -27189,6 +27201,7 @@
     <id>dwarf-fortress</id>
     <id>dwgtrueview</id>
     <id>dws.portable</id>
+    <id>dxlog</id>
     <id>dxwnd</id>
     <id>dynamorio.drmemory</id>
     <id>dynatraceagent</id>
@@ -27240,6 +27253,8 @@
     <id>electrum.portable</id>
     <id>elevate.native</id>
     <id>elevenclock</id>
+    <id>elgato-camerahub</id>
+    <id>elgato-controlcenter</id>
     <id>elinks</id>
     <id>elixir</id>
     <id>elk-native</id>
@@ -27451,6 +27466,7 @@
     <id>fmedia</id>
     <id>focusrite-control</id>
     <id>focuswriter</id>
+    <id>fogapi</id>
     <id>fogg</id>
     <id>folder-marker</id>
     <id>folderchangesview</id>
@@ -27604,6 +27620,7 @@
     <id>git-town</id>
     <id>gitb</id>
     <id>gitblit</id>
+    <id>gitbutler</id>
     <id>gitconvex</id>
     <id>gitdiffmargin.vs2012</id>
     <id>gitdiffmargin.vs2013</id>
@@ -28481,6 +28498,7 @@
     <id>mdprojecttimer-pro</id>
     <id>mdprojecttimer</id>
     <id>mdt</id>
+    <id>measure-killer</id>
     <id>meatplay</id>
     <id>mechpack1</id>
     <id>mechpack2</id>
@@ -28646,6 +28664,7 @@
     <id>msdeploy3</id>
     <id>msdeploy</id>
     <id>msfilterpack2-redist-x64</id>
+    <id>msgraph-cli</id>
     <id>msigna</id>
     <id>msinttypes</id>
     <id>msmtp.portable</id>
@@ -29126,6 +29145,7 @@
     <id>padgen</id>
     <id>padloc-tauri</id>
     <id>padmanager</id>
+    <id>painttoolsai2.portable</id>
     <id>painttoolsai</id>
     <id>pal</id>
     <id>palos.portable</id>
@@ -29344,6 +29364,7 @@
     <id>powershellplus</id>
     <id>ppdgr2</id>
     <id>ppee</id>
+    <id>prattl</id>
     <id>precode.wlw</id>
     <id>prefix</id>
     <id>premake.portable</id>
@@ -30033,6 +30054,7 @@
     <id>source-han-serif-cn</id>
     <id>source-han-serif-sc</id>
     <id>sourcecodepro</id>
+    <id>sourcegit</id>
     <id>sourceinsight</id>
     <id>sourcetrail</id>
     <id>sourcetree</id>
@@ -30059,6 +30081,7 @@
     <id>spencer.portable</id>
     <id>sph</id>
     <id>sphinx</id>
+    <id>spicedb</id>
     <id>spiceworks-agent-shell</id>
     <id>spiceworksnetmon</id>
     <id>spideroak</id>
@@ -30072,6 +30095,7 @@
     <id>split</id>
     <id>splunk-server</id>
     <id>splunkforwarder</id>
+    <id>spn</id>
     <id>spright</id>
     <id>springtoolsuite</id>
     <id>sprut-sms-client</id>
@@ -30238,6 +30262,7 @@
     <id>subtitleedit</id>
     <id>subtitleworkshop.install</id>
     <id>subtitleworkshop.portable</id>
+    <id>sucrose</id>
     <id>sugarsync</id>
     <id>suggestedextensions</id>
     <id>sumerics</id>
@@ -31099,6 +31124,7 @@
     <id>wassapp</id>
     <id>watchexec</id>
     <id>watlow-composer</id>
+    <id>wave</id>
     <id>wavesurfer</id>
     <id>wavosaur</id>
     <id>wavpack7z</id>
@@ -31197,6 +31223,7 @@
     <id>windows-adk-deploy</id>
     <id>windows-adk-winpe</id>
     <id>windows-adk</id>
+    <id>windows-app-sdk</id>
     <id>windows-iso-downloader</id>
     <id>windows-optimize-debloat</id>
     <id>windows-optimize-harden-debloat</id>
@@ -31273,6 +31300,7 @@
     <id>winspector</id>
     <id>winsys</id>
     <id>wintpic</id>
+    <id>winupdatesview</id>
     <id>winvdig</id>
     <id>winvice-nightly</id>
     <id>winvice</id>
@@ -31296,6 +31324,7 @@
     <id>wiznote</id>
     <id>wiznotelite</id>
     <id>wiztools-rest-client-ui</id>
+    <id>wk-radar</id>
     <id>wlan-optimizer</id>
     <id>wmicc</id>
     <id>wmiexplorer</id>
