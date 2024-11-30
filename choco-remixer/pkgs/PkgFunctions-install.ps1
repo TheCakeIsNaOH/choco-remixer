@@ -784,7 +784,8 @@ Function Convert-tailscale ([PackageInternalizeInfo]$obj) {
     Function Install-ChocolateyPackage {
         Write-Information "mockup"
     }
-    . $(Join-Path $obj.toolsDir 'ChocolateyInstall.ps1')
+
+    . $((Get-ChildItem $obj.toolsDir | Where-Object Name -ieq "ChocolateyInstall.ps1").Fullname)
 
     $url32 = $packageArgs.Url
     $url64 = $packageArgs.Url64Bit

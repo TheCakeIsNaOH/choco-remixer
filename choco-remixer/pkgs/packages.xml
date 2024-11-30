@@ -3239,6 +3239,7 @@
     <id>weather-chrome</id>
     <id>web-platform-disable-prompt</id>
     <id>webbrowserpassview</id>
+    <id>webcamoid</id>
     <id>webex-teams</id>
     <id>webp</id>
     <id>webpicommandline</id>
@@ -24703,19 +24704,6 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <architecture>x32</architecture>
-      <urlType>7</urlType>
-      <argsType>0</argsType>
-      <removeEXE>yes</removeEXE>
-      <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
-      <id>webcamoid</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>yes</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
       <urlType>7</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
