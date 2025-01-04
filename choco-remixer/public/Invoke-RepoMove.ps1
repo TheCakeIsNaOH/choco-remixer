@@ -56,7 +56,13 @@
             if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
                 $versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
                 $versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
-                $versions = ($versionsPage.links | Where-Object href -Match "\d" | Select-Object -expand href).trim("/")
+                $versionsUntrimmed = ($versionsPage.links | Where-Object href -Match "\d" | Select-Object -expand href)
+                if ($versionsUntrimmed) {
+                    $versions = $versionsUntrimmed.trim("/")
+                } else {
+                    $versions = @()
+                }
+
                 $versions | ForEach-Object {
                     $apiSearchURL = $proxyRepoApiURL + "search?repository=$proxyRepoName&format=nuget&name=$nuspecID&version=$_"
                     $searchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $proxyRepoHeaderCreds -Uri $apiSearchURL

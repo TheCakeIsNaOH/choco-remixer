@@ -896,6 +896,7 @@
     <id>ethanbrown.sublimetext2.gitpackages</id>
     <id>ethanbrown.sublimetext2.utilpackages</id>
     <id>eventstore-servicehost</id>
+    <id>eventstoredb-ee</id>
     <id>evernote-chrome</id>
     <id>everything.beta</id>
     <id>everything</id>
@@ -949,6 +950,7 @@
     <id>ffmpeg</id>
     <id>ffsclient</id>
     <id>fiddler</id>
+    <id>file-renamer.portable</id>
     <id>file</id>
     <id>filelight</id>
     <id>filemenutools</id>
@@ -2351,6 +2353,7 @@
     <id>python311</id>
     <id>python312</id>
     <id>python313</id>
+    <id>python314</id>
     <id>python35</id>
     <id>python36</id>
     <id>python37</id>
@@ -2986,9 +2989,12 @@
     <id>transmission-qt</id>
     <id>trayit</id>
     <id>traystatus</id>
+    <id>traytoolbar</id>
     <id>tree-data-explorer</id>
     <id>tree</id>
     <id>treecell</id>
+    <id>treesheets.install</id>
+    <id>treesheets.portable</id>
     <id>trelby</id>
     <id>trello-chrome</id>
     <id>trid</id>
@@ -3256,6 +3262,7 @@
     <id>wifidiagnosticsview</id>
     <id>win-acme-store-keyvault</id>
     <id>win-acme-store-userstore</id>
+    <id>win-acme-trimmed</id>
     <id>win-acme-validation-dns-aliyun</id>
     <id>win-acme-validation-dns-azure</id>
     <id>win-acme-validation-dns-cloudflare</id>
@@ -3439,6 +3446,7 @@
     <id>zabbix-agent2</id>
     <id>zabbix-agent</id>
     <id>zeal</id>
+    <id>zelda-classic</id>
     <id>zelda3-launcher</id>
     <id>zephyr-gnuarmemb</id>
     <id>zerobrane-studio</id>
@@ -9352,7 +9360,7 @@
       <id>epicgameslauncher</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
+      <needsToolsDir>yes</needsToolsDir>
       <architecture>x32</architecture>
       <urlType>7</urlType>
       <argsType>0</argsType>
@@ -26293,6 +26301,7 @@
     <id>aqt</id>
     <id>archi</id>
     <id>archiver</id>
+    <id>arduino.portable</id>
     <id>arduinoidegalileo</id>
     <id>arecabackup</id>
     <id>ares</id>
@@ -26306,6 +26315,7 @@
     <id>arsclip</id>
     <id>artifactory-pro</id>
     <id>artifactory</id>
+    <id>artify</id>
     <id>artmoney.install</id>
     <id>aruba-networks-virtual-intranet-access-client</id>
     <id>arvan</id>
@@ -26449,6 +26459,7 @@
     <id>becyicongrabber</id>
     <id>bedford.portable</id>
     <id>beeftext.portable</id>
+    <id>beeper-app</id>
     <id>beersmith</id>
     <id>beets</id>
     <id>belarcadvisor</id>
@@ -26458,6 +26469,7 @@
     <id>bepo</id>
     <id>berrybrew</id>
     <id>betterbird</id>
+    <id>bex</id>
     <id>beyondcompare2</id>
     <id>beyondcompare4</id>
     <id>beyondcompare</id>
@@ -26654,6 +26666,7 @@
     <id>chezmoi</id>
     <id>chgkey</id>
     <id>chia-network</id>
+    <id>chiaki-ng</id>
     <id>chimera</id>
     <id>chindeoremote</id>
     <id>chirpyvsi</id>
@@ -26692,6 +26705,7 @@
     <id>clamsentinel</id>
     <id>clamwin</id>
     <id>clash</id>
+    <id>claude</id>
     <id>clcl.portable</id>
     <id>cleanafterme</id>
     <id>cleanmgr-plus</id>
@@ -27292,6 +27306,7 @@
     <id>ethanbrown.devtools.web</id>
     <id>ethanbrown.sublimetext2.webpackages</id>
     <id>ethminer</id>
+    <id>eve-online-new</id>
     <id>eventlogsourcesview</id>
     <id>eventstore-oss</id>
     <id>eventstore</id>
@@ -27604,6 +27619,7 @@
     <id>git-flow-hooks</id>
     <id>git-interactive-rebase-tool</id>
     <id>git-status-cache-posh-client</id>
+    <id>git-sumi</id>
     <id>git-tf</id>
     <id>git-town</id>
     <id>gitb</id>
@@ -27621,6 +27637,7 @@
     <id>gitleaks</id>
     <id>gitob</id>
     <id>gitpad</id>
+    <id>gits</id>
     <id>gitsign</id>
     <id>gittfs</id>
     <id>gittyup</id>
@@ -27702,6 +27719,7 @@
     <id>graalvm-java21</id>
     <id>graalvm</id>
     <id>gradle</id>
+    <id>grafana-alloy</id>
     <id>grails</id>
     <id>gramblr</id>
     <id>gramps</id>
@@ -27744,6 +27762,7 @@
     <id>gulp-cli</id>
     <id>gulpsnippetpack</id>
     <id>gurtle</id>
+    <id>gyroflow</id>
     <id>gzdoom</id>
     <id>h-opc-cli</id>
     <id>h2testw</id>
@@ -27802,6 +27821,7 @@
     <id>hexter.octopus</id>
     <id>hexter.teamcity</id>
     <id>hexter.webserver</id>
+    <id>heynote</id>
     <id>hhkbcng</id>
     <id>hibernation-recon</id>
     <id>hidemaru-editor</id>
@@ -27819,6 +27839,7 @@
     <id>home-assistant-taskbar-menu</id>
     <id>homeassistant</id>
     <id>homedale.portable</id>
+    <id>horizon-modding-tool</id>
     <id>hostinfo</id>
     <id>hosts.editor</id>
     <id>hot-chocolatey</id>
@@ -28168,6 +28189,7 @@
     <id>keepass-plugin-webautotype</id>
     <id>keepass-plugin-winkee</id>
     <id>keepass-rpc</id>
+    <id>keeper-cli</id>
     <id>keeper</id>
     <id>keesbaggerman-nutanix-script</id>
     <id>kega-fusion</id>
@@ -28176,6 +28198,7 @@
     <id>kernel-simulator-coreclr</id>
     <id>keyboard-layout-clear</id>
     <id>keyboard-layout-creator</id>
+    <id>keyboard-layout-ru-si</id>
     <id>keyhac</id>
     <id>keyhub-cli</id>
     <id>keymapper</id>
@@ -28468,6 +28491,7 @@
     <id>mcr-r2014b</id>
     <id>mcr-r2015a</id>
     <id>mcr-r2015b</id>
+    <id>mcr-r2016a</id>
     <id>mcr-r2016b</id>
     <id>mcr-r2017b</id>
     <id>mcr-r2018a</id>
@@ -28500,6 +28524,7 @@
     <id>megatools</id>
     <id>megui</id>
     <id>memoq-translator-pro</id>
+    <id>memorix</id>
     <id>mental-omega</id>
     <id>mery</id>
     <id>meshcommander</id>
@@ -28614,6 +28639,7 @@
     <id>mooncoin</id>
     <id>moose.portable</id>
     <id>moq.prig</id>
+    <id>morgen</id>
     <id>morse-runner</id>
     <id>morserabbit</id>
     <id>morsetest</id>
@@ -28960,6 +28986,7 @@
     <id>nunit.parallel</id>
     <id>nuxmv</id>
     <id>nvenc</id>
+    <id>nvidia-app</id>
     <id>nvidia-geforce-now</id>
     <id>nvika</id>
     <id>nvm.install</id>
@@ -29403,6 +29430,8 @@
     <id>protonmail</id>
     <id>protonpass</id>
     <id>prototyper</id>
+    <id>proxy-checker.portable</id>
+    <id>proxy-checker</id>
     <id>proxyman</id>
     <id>proxyswitcher</id>
     <id>proxytrace</id>
@@ -29436,6 +29465,7 @@
     <id>ptime</id>
     <id>ptimer</id>
     <id>publicdns</id>
+    <id>pull-watch</id>
     <id>pulse</id>
     <id>pulseway-dashboard</id>
     <id>pulseway</id>
@@ -29482,6 +29512,8 @@
     <id>qgis-ltr</id>
     <id>qip2012</id>
     <id>qlcplus</id>
+    <id>qlikview</id>
+    <id>qob-cli</id>
     <id>qodana</id>
     <id>qpmx</id>
     <id>qr-code-studio</id>
@@ -29795,6 +29827,7 @@
     <id>scanner</id>
     <id>scansnapmanager</id>
     <id>scantailor</id>
+    <id>scapple.install</id>
     <id>scavenger</id>
     <id>sccache</id>
     <id>sccmclictr</id>
@@ -30170,6 +30203,7 @@
     <id>sqlserverlocaldb</id>
     <id>sqlyog</id>
     <id>sqsmover</id>
+    <id>squirreldisk</id>
     <id>srb2</id>
     <id>srcclr</id>
     <id>sre</id>
@@ -30532,6 +30566,7 @@
     <id>truecrypt</id>
     <id>truepng</id>
     <id>trufflehog</id>
+    <id>trusted-signing-client-tools</id>
     <id>truvami-decoder</id>
     <id>trzsz</id>
     <id>tsprint</id>
@@ -30557,6 +30592,7 @@
     <id>twemoji</id>
     <id>twisted</id>
     <id>twister-webkit</id>
+    <id>twistpad</id>
     <id>twitch-bandwidth-tester</id>
     <id>twitch</id>
     <id>twitchdownloader-cli</id>
@@ -30567,6 +30603,7 @@
     <id>typescript.vs</id>
     <id>uadevelopers.utils</id>
     <id>uas-plex</id>
+    <id>ubiquiti-wifiman-desktop</id>
     <id>ubooquity</id>
     <id>ubuntuhere</id>
     <id>uc</id>
@@ -30666,6 +30703,7 @@
     <id>vcbuildtools</id>
     <id>vceenc</id>
     <id>vcexpress2010</id>
+    <id>vcf-cli</id>
     <id>vclip</id>
     <id>veeam-agent</id>
     <id>veeam-backup-and-replication-extract</id>
@@ -31207,6 +31245,7 @@
     <id>windowdetective</id>
     <id>windowgrid</id>
     <id>windowinspector.portable</id>
+    <id>windows-11-media-creation-tool</id>
     <id>windows-adk-all</id>
     <id>windows-adk-deploy</id>
     <id>windows-adk-winpe</id>
@@ -31260,6 +31299,7 @@
     <id>winginx</id>
     <id>winhotkey</id>
     <id>winhttpcertcfg</id>
+    <id>winidea</id>
     <id>winimage</id>
     <id>winja.install</id>
     <id>winja.portable</id>
