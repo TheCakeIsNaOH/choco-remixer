@@ -900,6 +900,7 @@
     <id>evernote-chrome</id>
     <id>everything.beta</id>
     <id>everything</id>
+    <id>eve-online</id>
     <id>eviacam</id>
     <id>evtxecmd</id>
     <id>exifviewer-chrome</id>
@@ -4197,12 +4198,12 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>0</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
+      <checksumTypeType>md5</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
@@ -9449,19 +9450,6 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
-      <id>eve-online</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>6</urlType>
-      <argsType>0</argsType>
-      <removeEXE>yes</removeEXE>
-      <checksumArgsType>7</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
       <id>eventghost</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -10678,7 +10666,7 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x32</architecture>
-      <urlType>6</urlType>
+      <urlType>2</urlType>
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
       <checksumArgsType>5</checksumArgsType>
@@ -10691,7 +10679,7 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x32</architecture>
-      <urlType>6</urlType>
+      <urlType>2</urlType>
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
       <checksumArgsType>5</checksumArgsType>
