@@ -56,6 +56,12 @@ Function Format-NuspecForValidation {
     if ($nuspecXML.package.metadata.iconurl -like "https://raw.githubusercontent.com*") {
         $nuspecXML.package.metadata.iconurl = "https://example.com/"
     }
+    if ($nuspecXML.package.metadata.iconurl -like "https://rawgit.com*") {
+        $nuspecXML.package.metadata.iconurl = "https://example.com/"
+    }
+    if ($nuspecXML.package.metadata.iconurl -like "http://cdn.rawgit.com*") {
+        $nuspecXML.package.metadata.iconurl = "https://example.com/"
+    }
 
     Try {
         [System.Xml.XmlWriterSettings] $XmlSettings = New-Object System.Xml.XmlWriterSettings

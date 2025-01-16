@@ -18338,7 +18338,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>x32</architecture>
+      <architecture>x64</architecture>
       <urlType>1</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
@@ -23400,7 +23400,7 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
+      <checksumTypeType>md5</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
