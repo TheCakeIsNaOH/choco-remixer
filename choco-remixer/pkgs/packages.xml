@@ -239,6 +239,7 @@
     <id>bibletime</id>
     <id>bicep</id>
     <id>biggit</id>
+    <id>bililite-uwp-x64</id>
     <id>bills-jammin-jukebox</id>
     <id>bind-toolsonly</id>
     <id>bing</id>
@@ -26895,6 +26896,8 @@
     <id>d4t-addons-keysncorpses</id>
     <id>dagger-cue</id>
     <id>dagger</id>
+    <id>dapr.install</id>
+    <id>dapr.portable</id>
     <id>dapr</id>
     <id>dar</id>
     <id>darkoberon</id>
@@ -26915,6 +26918,7 @@
     <id>datacleaner</id>
     <id>datacrow</id>
     <id>datadog-agent</id>
+    <id>datadog-fips-agent</id>
     <id>datahealthcheck</id>
     <id>datahelix</id>
     <id>datamash</id>
@@ -27848,6 +27852,7 @@
     <id>hp-universal-print-driver-pcl</id>
     <id>hp-universal-print-driver-ps</id>
     <id>hpglviewer</id>
+    <id>hpimageassistant</id>
     <id>hppark</id>
     <id>hpsupportassistant</id>
     <id>hsm-usb-serial-driver</id>
@@ -28205,6 +28210,7 @@
     <id>kingdraw</id>
     <id>kingsoft-office-free</id>
     <id>kis</id>
+    <id>kitify</id>
     <id>kkbox</id>
     <id>kkrieger</id>
     <id>kl</id>
@@ -28439,6 +28445,7 @@
     <id>makehuman</id>
     <id>malcat</id>
     <id>malimo</id>
+    <id>managarr</id>
     <id>manictime.install</id>
     <id>manictime.portable</id>
     <id>manifest-tool</id>
@@ -30940,6 +30947,7 @@
     <id>vnote.portable</id>
     <id>vogen</id>
     <id>voicecommands</id>
+    <id>voiceflow</id>
     <id>volatility3</id>
     <id>volley</id>
     <id>volume2.install</id>
@@ -31287,6 +31295,7 @@
     <id>winginx</id>
     <id>winhotkey</id>
     <id>winhttpcertcfg</id>
+    <id>winidea.portable</id>
     <id>winidea</id>
     <id>winimage</id>
     <id>winja.install</id>
