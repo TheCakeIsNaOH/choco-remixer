@@ -8091,7 +8091,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-      <architecture>x32</architecture>
+      <architecture>x64</architecture>
       <urlType>2</urlType>
       <argsType>0</argsType>
       <DeEncodeSpace>yes</DeEncodeSpace>
