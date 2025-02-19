@@ -239,7 +239,9 @@
     <id>bibletime</id>
     <id>bicep</id>
     <id>biggit</id>
+    <id>bililite-uwp-arm64</id>
     <id>bililite-uwp-x64</id>
+    <id>bililite-uwp-x86</id>
     <id>bills-jammin-jukebox</id>
     <id>bind-toolsonly</id>
     <id>bing</id>
@@ -896,12 +898,12 @@
     <id>ethanbrown.sublimetext2.editorpackages</id>
     <id>ethanbrown.sublimetext2.gitpackages</id>
     <id>ethanbrown.sublimetext2.utilpackages</id>
+    <id>eve-online</id>
     <id>eventstore-servicehost</id>
     <id>eventstoredb-ee</id>
     <id>evernote-chrome</id>
     <id>everything.beta</id>
     <id>everything</id>
-    <id>eve-online</id>
     <id>eviacam</id>
     <id>evtxecmd</id>
     <id>exifviewer-chrome</id>
@@ -1083,6 +1085,7 @@
     <id>git-absorb</id>
     <id>git-credential-winstore</id>
     <id>git-disable-gcm</id>
+    <id>git-filter-repo</id>
     <id>git-flow-dependencies</id>
     <id>git-helper</id>
     <id>git-istage</id>
@@ -1266,6 +1269,7 @@
     <id>heroic-games-launcher</id>
     <id>heroku-cli</id>
     <id>heroku-toolbelt</id>
+    <id>heta-compiler</id>
     <id>hexchat</id>
     <id>hexyl</id>
     <id>hfs</id>
@@ -8373,6 +8377,13 @@
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-9.0-sdk-1xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-9.0-sdk-2xx</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -26811,6 +26822,7 @@
     <id>coreinfo</id>
     <id>corvusskk</id>
     <id>cosign</id>
+    <id>cosmosdb.odbc</id>
     <id>cosmosdbexplorer</id>
     <id>couchbase-server-community</id>
     <id>couchdb</id>
@@ -29113,6 +29125,7 @@
     <id>opsview-agent-x32</id>
     <id>opswatsecurityscore</id>
     <id>opus-tools</id>
+    <id>opv</id>
     <id>oracle-sql-developer</id>
     <id>orca</id>
     <id>orcaslicer</id>
@@ -29254,6 +29267,7 @@
     <id>pgcli</id>
     <id>pgina</id>
     <id>pginafork</id>
+    <id>pgutil</id>
     <id>phalcon</id>
     <id>phantombot</id>
     <id>phatgit</id>
@@ -30287,6 +30301,7 @@
     <id>sumologic</id>
     <id>sundance</id>
     <id>sundial</id>
+    <id>sunsama</id>
     <id>sunset-berlin</id>
     <id>sunset-screen.portable</id>
     <id>supd2</id>
