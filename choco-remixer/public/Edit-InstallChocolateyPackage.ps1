@@ -137,17 +137,17 @@ Function Edit-InstallChocolateyPackage {
 
     if ($doubleQuotesUrl) {
         if ($x32) {
-            $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring()
+            $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http" | Select-Object -First 1).tostring()
         }
         if ($x64) {
-            $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").tostring()
+            $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http" | Select-Object -First 1).tostring()
         }
     } else {
         if ($x32) {
-            $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+            $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http" | Select-Object -First 1).tostring()
         }
         if ($x64) {
-            $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+            $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http" | Select-Object -First 1).tostring()
         }
     }
 
