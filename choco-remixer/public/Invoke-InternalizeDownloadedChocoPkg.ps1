@@ -46,7 +46,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     if ($internalizedVersions -icontains $nuspecVersion) {
         Write-Verbose "$nuspecID $nuspecVersion is already internalized"
     } elseif ($notImplementedIdsTableLower.ContainsKey($nuspecID.ToLower())) {
-        #Write-Warning "$nuspecID $nuspecVersion not implemented. Support has to be added for it, see ADDING_PACKAGES.md"
+        Write-Warning "$nuspecID $nuspecVersion not implemented. Support has to be added for it, see ADDING_PACKAGES.md"
     } elseif ($config.personal.id -icontains $nuspecID) {
         Write-Verbose "$nuspecID is a custom package"
     } elseif ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
