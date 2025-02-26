@@ -27,6 +27,7 @@ Function Invoke-DownloadChocoPkg {
     $ccrAPI = "https://community.chocolatey.org/api/v2/"
 
     $downloadXMLcontent.SelectNodes("//pkg") | ForEach-Object {
+        $stopwatch = [system.diagnostics.stopwatch]::StartNew()
         $id = $_.id
         if (([string]::IsNullOrEmpty($_.version))) {
             $publicPageURL = $ccrAPI + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $id + '%27)%20and%20IsLatestVersion'
@@ -76,6 +77,11 @@ Function Invoke-DownloadChocoPkg {
         $checksumType = $publicEntry.properties.PackageHashAlgorithm
 
         Get-File -url $dlwdURL -filename $nupkgFileName -folder $config.SearchDir -checksumTypeType $checksumType -checksum $checksum
+        $stopwatch.stop()
+        if ($stopwatch.ElapsedMilliseconds -lt 3000) {
+            Write-Information "Waiting for $($stopwatch.Elapsed.Seconds) seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
+            Start-Sleep -Milliseconds (3000 - $stopwatch.ElapsedMilliseconds)
+        }
     }
     return
 }
