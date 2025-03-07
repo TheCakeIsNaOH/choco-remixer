@@ -697,6 +697,7 @@
     <id>ditto</id>
     <id>djv</id>
     <id>djvu-libre</id>
+    <id>dlss-swapper</id>
     <id>dlss-updater</id>
     <id>dmde</id>
     <id>dmxcontrol2</id>
@@ -742,6 +743,8 @@
     <id>dotmemory-console</id>
     <id>dotmemory-unit</id>
     <id>dotmemory</id>
+    <id>dotnet-10.0-sdk</id>
+    <id>dotnet-10.0-windowshosting</id>
     <id>dotnet-4.6.2</id>
     <id>dotnet-5.0-sdk</id>
     <id>dotnet-5.0-windowshosting</id>
@@ -753,8 +756,6 @@
     <id>dotnet-8.0-windowshosting</id>
     <id>dotnet-9.0-sdk</id>
     <id>dotnet-9.0-windowshosting</id>
-    <id>dotnet-10.0-sdk</id>
-    <id>dotnet-10.0-windowshosting</id>
     <id>dotnet-all</id>
     <id>dotnet-aspnetruntime</id>
     <id>dotnet-desktopruntime</id>
@@ -1120,6 +1121,7 @@
     <id>githubreleasemanager.portable</id>
     <id>githubreleasenotes</id>
     <id>giti</id>
+    <id>gitinfo.portable</id>
     <id>gitlab-runner</id>
     <id>gitlink</id>
     <id>gitreleasemanager.portable</id>
@@ -2095,6 +2097,8 @@
     <id>openorienteering-mapper.portable</id>
     <id>openorienteering-mapper</id>
     <id>openpuff</id>
+    <id>openrgb.install</id>
+    <id>openrgb.portable</id>
     <id>openrgb</id>
     <id>openrocket</id>
     <id>opensans</id>
@@ -2115,6 +2119,8 @@
     <id>opera.next</id>
     <id>optipng</id>
     <id>orangec</id>
+    <id>orcaslicer.install</id>
+    <id>organizeit</id>
     <id>orientdb</id>
     <id>orvibos20cli</id>
     <id>osfmount</id>
@@ -2307,6 +2313,7 @@
     <id>protoc</id>
     <id>prowlarr</id>
     <id>proxallium</id>
+    <id>prusaslicer.install</id>
     <id>prusaslicer</id>
     <id>psake</id>
     <id>pscodehealth</id>
@@ -2796,6 +2803,7 @@
     <id>steascree</id>
     <id>steghide</id>
     <id>stickies</id>
+    <id>strange-eons</id>
     <id>stratos</id>
     <id>strawberrymusicplayer</id>
     <id>stretchly</id>
@@ -3091,6 +3099,7 @@
     <id>vacuum-im</id>
     <id>valgrindparsetools</id>
     <id>varpanel</id>
+    <id>vassal</id>
     <id>vbackup</id>
     <id>vboxguestadditions.install</id>
     <id>vcredist-all</id>
@@ -27385,6 +27394,44 @@
     <id>f.lux.portable</id>
     <id>f1viewer</id>
     <id>f2</id>
+    <id>fabfilter-micro-x64</id>
+    <id>fabfilter-micro-x86</id>
+    <id>fabfilter-one-x64</id>
+    <id>fabfilter-one-x86</id>
+    <id>fabfilter-proc2-x64</id>
+    <id>fabfilter-proc2-x86</id>
+    <id>fabfilter-prods-x64</id>
+    <id>fabfilter-prods-x86</id>
+    <id>fabfilter-prog-x64</id>
+    <id>fabfilter-prol-x64</id>
+    <id>fabfilter-promb-x86</id>
+    <id>fabfilter-proq2-x64</id>
+    <id>fabfilter-proq2-x86</id>
+    <id>fabfilter-proq3-x64</id>
+    <id>fabfilter-proq3-x86</id>
+    <id>fabfilter-proq4-x64</id>
+    <id>fabfilter-proq4-x86</id>
+    <id>fabfilter-pror-x64</id>
+    <id>fabfilter-pror-x86</id>
+    <id>fabfilter-pror2-x64</id>
+    <id>fabfilter-pror2-x86</id>
+    <id>fabfilter-saturn-x86</id>
+    <id>fabfilter-saturn2-x64</id>
+    <id>fabfilter-saturn2-x86</id>
+    <id>fabfilter-simplon-x64</id>
+    <id>fabfilter-simplon-x86</id>
+    <id>fabfilter-timeless2-x64</id>
+    <id>fabfilter-timeless2-x86</id>
+    <id>fabfilter-timeless3-x64</id>
+    <id>fabfilter-timeless3-x86</id>
+    <id>fabfilter-twin2-x64</id>
+    <id>fabfilter-twin2-x86</id>
+    <id>fabfilter-twin3-x64</id>
+    <id>fabfilter-twin3-x86</id>
+    <id>fabfilter-volcano2-x64</id>
+    <id>fabfilter-volcano2-x86</id>
+    <id>fabfilter-volcano3-x64</id>
+    <id>fabfilter-volcano3-x86</id>
     <id>factor</id>
     <id>fafarunner</id>
     <id>faforever</id>
@@ -27508,6 +27555,7 @@
     <id>folder-marker</id>
     <id>folderchangesview</id>
     <id>foldermenu3</id>
+    <id>foldersync-desktop</id>
     <id>foldertimeupdate</id>
     <id>foldit</id>
     <id>followmee</id>
@@ -29084,6 +29132,7 @@
     <id>omega-data-logger</id>
     <id>omegat</id>
     <id>omnirig</id>
+    <id>omnissa-horizon-client</id>
     <id>onchrome</id>
     <id>onedarkpro-vscode</id>
     <id>onefetch</id>
@@ -30036,6 +30085,7 @@
     <id>smartgit</id>
     <id>smartmontools</id>
     <id>smartpss</id>
+    <id>smartpsslite</id>
     <id>smartsystemmenu</id>
     <id>smartty3</id>
     <id>smartty</id>
@@ -30511,6 +30561,7 @@
     <id>thebrain.portable</id>
     <id>thedesk.portable</id>
     <id>themekit</id>
+    <id>therion</id>
     <id>thor.generator</id>
     <id>thorium</id>
     <id>thoughtworks.go.server</id>
