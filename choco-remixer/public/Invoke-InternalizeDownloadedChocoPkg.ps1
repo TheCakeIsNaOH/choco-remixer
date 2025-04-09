@@ -135,6 +135,10 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     Remove-Item -Force -EA 0 -Path (Join-Path $obj.VersionDir '*.nupkg')
 
     Expand-Nupkg -Path $obj.OrigPath -Destination $obj.VersionDir -NoAddFilesElement
+    $foundToolsDir = (Get-Childitem -Path $obj.VersionDir -Filter "tools")
+    if ($null -ne $foundToolsDir) {
+        $obj.toolsDir = $foundToolsDir.FullName
+    }
 
     $failed = $false
     Try {
