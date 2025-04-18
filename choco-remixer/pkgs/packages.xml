@@ -299,6 +299,7 @@
     <id>bstrings</id>
     <id>btprox</id>
     <id>btsync</id>
+    <id>bubbles</id>
     <id>buck</id>
     <id>buckets</id>
     <id>buddy-tunnel</id>
@@ -687,6 +688,7 @@
     <id>dispcalgui.install</id>
     <id>dispcalgui.portable</id>
     <id>dispcalgui</id>
+    <id>dispensense-cli.martin.test</id>
     <id>displaycal.portable</id>
     <id>displaycal</id>
     <id>displayfusion</id>
@@ -1286,6 +1288,7 @@
     <id>hindsight</id>
     <id>hiphop</id>
     <id>hl7inspector</id>
+    <id>hnefatafl-copenhagen</id>
     <id>homebank</id>
     <id>homepages-winconfig</id>
     <id>honeybee.devops.packaging</id>
@@ -1556,6 +1559,7 @@
     <id>kubernetes-kompose</id>
     <id>kubescape</id>
     <id>kui</id>
+    <id>kurrentdb</id>
     <id>kyma-cli</id>
     <id>labplot</id>
     <id>lals</id>
@@ -2679,6 +2683,29 @@
     <id>silk</id>
     <id>silverlightsdk</id>
     <id>simh</id>
+    <id>simple-acme-store-keyvault</id>
+    <id>simple-acme-validation-dns-aliyun</id>
+    <id>simple-acme-validation-dns-azure</id>
+    <id>simple-acme-validation-dns-cloudflare</id>
+    <id>simple-acme-validation-dns-digitalocean</id>
+    <id>simple-acme-validation-dns-dnsexit</id>
+    <id>simple-acme-validation-dns-dnsmadeeasy</id>
+    <id>simple-acme-validation-dns-domeneshop</id>
+    <id>simple-acme-validation-dns-dreamhost</id>
+    <id>simple-acme-validation-dns-godaddy</id>
+    <id>simple-acme-validation-dns-googledns</id>
+    <id>simple-acme-validation-dns-hetzner</id>
+    <id>simple-acme-validation-dns-huaweicloud</id>
+    <id>simple-acme-validation-dns-infomaniak</id>
+    <id>simple-acme-validation-dns-linode</id>
+    <id>simple-acme-validation-dns-luadns</id>
+    <id>simple-acme-validation-dns-ns1</id>
+    <id>simple-acme-validation-dns-rfc2136</id>
+    <id>simple-acme-validation-dns-route53</id>
+    <id>simple-acme-validation-dns-simply</id>
+    <id>simple-acme-validation-dns-tencent</id>
+    <id>simple-acme-validation-dns-transip</id>
+    <id>simple-acme-validation-http-rest</id>
     <id>simple-acme</id>
     <id>simple-software-restriction-policy</id>
     <id>simple-sticky-notes</id>
@@ -3478,6 +3505,7 @@
     <id>zfsin</id>
     <id>zint</id>
     <id>zip.template</id>
+    <id>zirv</id>
     <id>zkanji.install</id>
     <id>zkanji.portable</id>
     <id>zkanji</id>
@@ -6504,7 +6532,7 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x64</architecture>
-      <urlType>6</urlType>
+      <urlType>5</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
@@ -21584,7 +21612,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>0</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
@@ -26396,6 +26424,7 @@
     <id>audio-router</id>
     <id>audiobookconverter</id>
     <id>audioconverter</id>
+    <id>audioling</id>
     <id>audiorelay</id>
     <id>audioswitcher</id>
     <id>auditbeat</id>
@@ -26426,6 +26455,7 @@
     <id>avgpctuneup</id>
     <id>avirafreeantivirus</id>
     <id>aviraiss</id>
+    <id>avsnap</id>
     <id>awatch</id>
     <id>awboxcontroller</id>
     <id>awesomebump</id>
@@ -26507,6 +26537,7 @@
     <id>bear.portable</id>
     <id>becyicongrabber</id>
     <id>bedford.portable</id>
+    <id>bedrock-launcher</id>
     <id>beeftext.portable</id>
     <id>beeper-app</id>
     <id>beersmith</id>
@@ -27099,6 +27130,7 @@
     <id>digime</id>
     <id>digital</id>
     <id>digsby</id>
+    <id>diki</id>
     <id>dingtalk</id>
     <id>dink-smallwood</id>
     <id>dip</id>
@@ -27120,6 +27152,7 @@
     <id>disksmartview</id>
     <id>diskspd</id>
     <id>diskview</id>
+    <id>dispensense-cli.devops-5</id>
     <id>dispensense-cli</id>
     <id>display-changer</id>
     <id>displayfusion.portable</id>
@@ -27478,6 +27511,7 @@
     <id>fbp-vst-plugins</id>
     <id>fbvlc</id>
     <id>fdk</id>
+    <id>feishin</id>
     <id>femm</id>
     <id>fenix-web-server-beta</id>
     <id>fenix-web-server</id>
@@ -27614,6 +27648,7 @@
     <id>freecommander-xe.portable</id>
     <id>freecommander</id>
     <id>freedoom</id>
+    <id>freelens</id>
     <id>freemind</id>
     <id>freeoffice</id>
     <id>freeorion</id>
@@ -27691,6 +27726,7 @@
     <id>geany-nogtk</id>
     <id>geany</id>
     <id>gedit</id>
+    <id>geekbench-ai</id>
     <id>geekuninstaller</id>
     <id>genymotion</id>
     <id>geogebra</id>
@@ -28313,6 +28349,7 @@
     <id>keyboard-layout-ru-si</id>
     <id>keyhac</id>
     <id>keyhub-cli</id>
+    <id>keymapp</id>
     <id>keymapper</id>
     <id>keypirinha</id>
     <id>keypose</id>
@@ -28422,6 +28459,7 @@
     <id>lftp</id>
     <id>lg-ultragear-control-center</id>
     <id>lgbridge</id>
+    <id>lgpo</id>
     <id>lha</id>
     <id>lhaca</id>
     <id>lhaplus</id>
@@ -28709,6 +28747,7 @@
     <id>mkdocs-material</id>
     <id>mkdocs</id>
     <id>mkey</id>
+    <id>mkshim</id>
     <id>mkv-muxing-batch-gui</id>
     <id>mkvtoolnix.portable</id>
     <id>mls-software-openssh</id>
@@ -29029,6 +29068,7 @@
     <id>newrelicserver</id>
     <id>newrelicwindowsserveragent</id>
     <id>newsbin</id>
+    <id>nextcloud-talk</id>
     <id>nextdns-cli</id>
     <id>nextdns</id>
     <id>nextiva</id>
@@ -29830,6 +29870,8 @@
     <id>restic-browser</id>
     <id>retroarch</id>
     <id>revalee.service</id>
+    <id>revit</id>
+    <id>revitlt</id>
     <id>revosleep</id>
     <id>revouninstallerpro</id>
     <id>revrobotics-hardwareclient</id>
@@ -30062,6 +30104,7 @@
     <id>shortcutexporter</id>
     <id>shotcut.portable</id>
     <id>shotty</id>
+    <id>shuku</id>
     <id>sickbeard</id>
     <id>sidemash</id>
     <id>sif</id>
@@ -31258,6 +31301,7 @@
     <id>vsvim</id>
     <id>vt-cli</id>
     <id>vtex.toolbelt</id>
+    <id>vtm</id>
     <id>vulkan-sdk</id>
     <id>vulnapi</id>
     <id>vultr-cli.portable</id>
