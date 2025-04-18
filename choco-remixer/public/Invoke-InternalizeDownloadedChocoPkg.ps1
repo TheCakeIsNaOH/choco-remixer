@@ -141,6 +141,14 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     }
 
     $failed = $false
+    if( ! (Test-Path $obj.toolsDir)){
+        Write-Information "$($obj.toolsDir) does not exists, trying to use the Uppercase Version" -InformationAction Continue
+        $newToolsDir = (Join-Path $obj.versionDir "Tools")
+        if(Test-Path $newToolsDir){
+            $obj.toolsDir = $newToolsDir
+            Write-Information "Uppercase Version $($obj.toolsDir) found" -InformationAction Continue
+        }
+    }
     Try {
         & $obj.functionName -obj $obj
     } Catch {
