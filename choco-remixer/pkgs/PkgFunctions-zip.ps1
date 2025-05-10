@@ -652,3 +652,20 @@ Function Convert-gcloudsdk ([PackageInternalizeInfo]$obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256'
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha256'
 }
+
+Function Convert-autocad ([PackageInternalizeInfo]$obj) {
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
+    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+    $filePath32 = 'file       = (Join-Path $toolsDir "' + $filename32 + '")'
+
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgsUnzip = @{" , "$&`n  $filePath32"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.7z'
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+    $obj.installScriptMod = $obj.installScriptMod -replace "UnzipLocation" , "Destination  "
+
+    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+}

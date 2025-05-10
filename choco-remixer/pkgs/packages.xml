@@ -839,6 +839,7 @@
     <id>earthview-chrome</id>
     <id>eartrumpet</id>
     <id>easy-database-creator</id>
+    <id>eat</id>
     <id>eazfuscator.net</id>
     <id>ebay-chrome</id>
     <id>echoargs</id>
@@ -1080,6 +1081,7 @@
     <id>geteventstore</id>
     <id>gevent</id>
     <id>ggf</id>
+    <id>ggshield</id>
     <id>gh-api-cli</id>
     <id>gh</id>
     <id>ghostscript.app</id>
@@ -1296,6 +1298,7 @@
     <id>honeyview.install</id>
     <id>honeyview.portable</id>
     <id>honeyview</id>
+    <id>hoptodesk</id>
     <id>horcrust</id>
     <id>hosts</id>
     <id>hostsman</id>
@@ -1515,6 +1518,7 @@
     <id>keepass</id>
     <id>keepassx-langfiles</id>
     <id>keepassx</id>
+    <id>keepassxc-run</id>
     <id>keepassxc</id>
     <id>keeweb</id>
     <id>kekiri.tools</id>
@@ -2684,6 +2688,7 @@
     <id>silverlightsdk</id>
     <id>simh</id>
     <id>simple-acme-store-keyvault</id>
+    <id>simple-acme-store-userstore</id>
     <id>simple-acme-validation-dns-aliyun</id>
     <id>simple-acme-validation-dns-azure</id>
     <id>simple-acme-validation-dns-cloudflare</id>
@@ -2979,6 +2984,7 @@
     <id>thegiant.fonts</id>
     <id>thegiant.freshinstall</id>
     <id>thegiant.tools</id>
+    <id>theholybible</id>
     <id>thematrix</id>
     <id>thonny</id>
     <id>threema-desktop</id>
@@ -27333,6 +27339,7 @@
     <id>eclipse-standard-luna</id>
     <id>ecs-cli</id>
     <id>edecoder</id>
+    <id>edgescapenavigator</id>
     <id>edison</id>
     <id>editorconfig.vs</id>
     <id>edrawings-viewer-2019</id>
@@ -27439,6 +27446,7 @@
     <id>exiftool</id>
     <id>exiftoolgui</id>
     <id>explorersuite</id>
+    <id>explorertabutility</id>
     <id>expressionblend3</id>
     <id>expressionblend4</id>
     <id>expresso</id>
@@ -28111,6 +28119,7 @@
     <id>inedohub</id>
     <id>infekt</id>
     <id>influx-capacitor</id>
+    <id>inform7</id>
     <id>informado</id>
     <id>infracost</id>
     <id>infrarecorder</id>
@@ -28393,6 +28402,7 @@
     <id>kog</id>
     <id>kollama</id>
     <id>komorebi</id>
+    <id>kontroll</id>
     <id>kontur-plugin</id>
     <id>kopano-ads-nightly</id>
     <id>kopano-deskapp-nightly</id>
@@ -28530,6 +28540,7 @@
     <id>litemanager-viewer</id>
     <id>littlenavmap</id>
     <id>littleregistrycleaner</id>
+    <id>live2d-cubism</id>
     <id>livecode</id>
     <id>livecontactsview</id>
     <id>livekd</id>
@@ -29162,6 +29173,7 @@
     <id>nvm.portable</id>
     <id>nvs</id>
     <id>nvu</id>
+    <id>nx</id>
     <id>nxt</id>
     <id>nyagos</id>
     <id>nyanfi</id>
@@ -29284,6 +29296,7 @@
     <id>opera-neon</id>
     <id>operacacheview</id>
     <id>operapassview</id>
+    <id>opkssh</id>
     <id>opos-cco</id>
     <id>opsview-agent-x32</id>
     <id>opswatsecurityscore</id>
@@ -29588,6 +29601,7 @@
     <id>proficad.install</id>
     <id>proficad.portable</id>
     <id>profwiz</id>
+    <id>proget</id>
     <id>proggy</id>
     <id>program-install-and-uninstall-troubleshooter</id>
     <id>project.2010.sdk</id>
@@ -29725,6 +29739,7 @@
     <id>qttabbar</id>
     <id>qualcoder</id>
     <id>quamotion</id>
+    <id>quantum</id>
     <id>quantumdreams</id>
     <id>quantumgis</id>
     <id>quantumshooter</id>
@@ -30692,6 +30707,7 @@
     <id>tinytex</id>
     <id>tinywall</id>
     <id>titanium-studio</id>
+    <id>titlecase</id>
     <id>tivotogo-plex</id>
     <id>tixati.portable</id>
     <id>tixati</id>
@@ -31201,6 +31217,7 @@
     <id>voxengo-water-chorus</id>
     <id>vpb-banking</id>
     <id>vpilot</id>
+    <id>vroid-studio</id>
     <id>vs2010.shellintegratedredist</id>
     <id>vs2010sdk</id>
     <id>vs2012.4</id>
@@ -31479,6 +31496,7 @@
     <id>windowsxappremover</id>
     <id>windowtextextractor</id>
     <id>windscribe</id>
+    <id>windsurf</id>
     <id>windterm.portable</id>
     <id>windv</id>
     <id>winedt</id>

@@ -1,42 +1,6 @@
 ﻿[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Replaces external function, cant change the name', Scope = 'Function', Target = 'Get-PackageParameters')]
 param()
 
-Function Convert-autocad ([PackageInternalizeInfo]$obj) {
-    Function Install-ChocolateyInstallPackage {
-        Write-Information "mockup"
-    }
-    Function Get-PackageParameters {
-        Write-Information "mockup"
-    }
-    Function Get-ChocolateyWebFile {
-        Write-Information "mockup"
-    }
-    Function Invoke-UninstallAutoCAD {
-        Write-Information "mockup"
-    }
-
-    $installScriptExec = $obj.installScriptOrig -join "`n"
-    $installScriptExec = $installScriptExec -replace "Invoke-UninstallOld", "#$&"
-    $installScriptExec = $installScriptExec -replace "Get-ChocolateyWebFile", "#$&"
-    $installScriptExec = $installScriptExec -replace "Install-ChocolateyInstallPackage", "#$&"
-    $installScriptExec = $installScriptExec -replace '\. \$tools', "#$&"
-    Invoke-Expression $installScriptExec
-
-    $filename1 = ($url1 -split "/" | Select-Object -Last 1).tostring()
-    $filePath1 = '$part1     = (Join-Path $toolsDir "' + $filename1 + '")'
-    $filename2 = ($url2 -split "/" | Select-Object -Last 1).tostring()
-    $filePath2 = '$part2     = (Join-Path $toolsDir "' + $filename2 + '")'
-
-    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
-    $obj.installScriptMod = $obj.installScriptMod -replace "Get-ChocolateyWebFile" , "#$&"
-    $obj.installScriptMod = $obj.installScriptMod -replace '\$part1 =' , "$filePath1`n#$&"
-    $obj.installScriptMod = $obj.installScriptMod -replace '\$part2 =' , "$filePath2`n#$&"
-
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url1 -filename $filename1 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum1
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url2 -filename $filename2 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum2
-}
-
-
 Function Convert-gotomeeting ([PackageInternalizeInfo]$obj) {
     $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
     $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString().Split('?') | Select-Object -First 1
