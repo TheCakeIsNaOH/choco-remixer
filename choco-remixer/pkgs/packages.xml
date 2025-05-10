@@ -15078,6 +15078,18 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>mingw</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>9</urlType>
+      <argsType>0</argsType>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>minecraft-launcher</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -28738,7 +28750,6 @@
     <id>min.portable</id>
     <id>minecraft-education</id>
     <id>mingw-get</id>
-    <id>mingw</id>
     <id>minibin</id>
     <id>miniconda</id>
     <id>minio-client</id>
