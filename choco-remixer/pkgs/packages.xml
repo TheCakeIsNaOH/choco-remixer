@@ -259,6 +259,7 @@
     <id>biztalkmigrator-biztalk</id>
     <id>biztalkmigrator-cli</id>
     <id>biztalkmigrator</id>
+    <id>blaiztools</id>
     <id>bleachbit.install</id>
     <id>bleachbit.portable</id>
     <id>bleachbit</id>
@@ -476,6 +477,7 @@
     <id>claws-mail</id>
     <id>cleanup-desktop-shortcuts.hook</id>
     <id>clementine</id>
+    <id>clic</id>
     <id>clipboardfusion</id>
     <id>clipgrab</id>
     <id>clipto-pro.install</id>
@@ -799,6 +801,7 @@
     <id>dottrace</id>
     <id>dotultimate</id>
     <id>doubledriver</id>
+    <id>dougi</id>
     <id>doulossil</id>
     <id>download-info.extension</id>
     <id>downtester</id>
@@ -2370,6 +2373,7 @@
     <id>pydev</id>
     <id>pyenv-win</id>
     <id>pyhoca-gui</id>
+    <id>pymanager</id>
     <id>pysolfc</id>
     <id>python-x86_32</id>
     <id>python.x86</id>
@@ -8434,6 +8438,20 @@
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-9.0-sdk-2xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-9.0-sdk-3xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-9.0-sdk-4xx</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>size</whyNotInternal>
@@ -16429,6 +16447,19 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>nvidia-app</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>2</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>2</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -26351,6 +26382,7 @@
     <id>amiri</id>
     <id>amongus-extraroles</id>
     <id>amp-winoff.portable</id>
+    <id>ampcast</id>
     <id>ampfontviewer</id>
     <id>amt</id>
     <id>amule.install</id>
@@ -27187,6 +27219,7 @@
     <id>display-changer</id>
     <id>displayfusion.portable</id>
     <id>displaylink</id>
+    <id>displaynote</id>
     <id>disposablefixer</id>
     <id>dive</id>
     <id>divvy</id>
@@ -27402,6 +27435,7 @@
     <id>ente-auth</id>
     <id>ente-photos</id>
     <id>entityframeworkpowertools-vs2013</id>
+    <id>envi</id>
     <id>envycoder</id>
     <id>epanet</id>
     <id>epsdevtools.web</id>
@@ -27433,6 +27467,7 @@
     <id>eventstore</id>
     <id>eveonline</id>
     <id>evernote2onenote</id>
+    <id>everything-development</id>
     <id>everything.beta.install</id>
     <id>everything.beta.portable</id>
     <id>everything.portable</id>
@@ -28561,6 +28596,7 @@
     <id>llftool</id>
     <id>llvm.portable</id>
     <id>lm-studio</id>
+    <id>lmstudio</id>
     <id>ln</id>
     <id>loadem</id>
     <id>locale-emulator</id>
@@ -29177,7 +29213,6 @@
     <id>nunit.parallel</id>
     <id>nuxmv</id>
     <id>nvenc</id>
-    <id>nvidia-app</id>
     <id>nvidia-geforce-now</id>
     <id>nvika</id>
     <id>nvm.install</id>
@@ -29207,6 +29242,7 @@
     <id>octopusdeploy.tentacle</id>
     <id>octopusdeploy</id>
     <id>oda-file-converter</id>
+    <id>odin</id>
     <id>odrive.install</id>
     <id>odrive</id>
     <id>offcat</id>
@@ -29978,6 +30014,7 @@
     <id>rust</id>
     <id>rustdesk.install</id>
     <id>rustdesk.portable</id>
+    <id>rustic</id>
     <id>rustrover</id>
     <id>rustup.install</id>
     <id>rutoken-drivers-removal-tool</id>
@@ -31707,6 +31744,7 @@
     <id>yed-nojre</id>
     <id>yed</id>
     <id>yinxiangbiji</id>
+    <id>yixee</id>
     <id>ynote</id>
     <id>yo</id>
     <id>yogadns</id>
