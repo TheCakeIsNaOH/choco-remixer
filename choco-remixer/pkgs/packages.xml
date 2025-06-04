@@ -351,6 +351,7 @@
     <id>cascadiamonopl-italic</id>
     <id>cascadiamonopl</id>
     <id>casperjs</id>
+    <id>caupain</id>
     <id>cc65-compiler</id>
     <id>ccenhancer.install</id>
     <id>ccenhancer.portable</id>
@@ -2587,6 +2588,7 @@
     <id>scc</id>
     <id>scenebuilder9</id>
     <id>scheduled-shutdown</id>
+    <id>schematongs-netfx481</id>
     <id>scicoslab</id>
     <id>scidavis</id>
     <id>scite4autohotkey</id>
@@ -2881,6 +2883,8 @@
     <id>superputty.portable</id>
     <id>superputty</id>
     <id>superslicer</id>
+    <id>surge-xt.install</id>
+    <id>surge-xt</id>
     <id>surreal</id>
     <id>svg-explorer-extension</id>
     <id>swagger-codegen</id>
@@ -3698,7 +3702,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>1</urlType>
       <argsType>0</argsType>
       <stripQueryString>yes</stripQueryString>
@@ -18052,7 +18056,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x32</architecture>
       <urlType>0</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
@@ -22812,6 +22816,13 @@
       <whyNotInternal>size</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-thunderbird</functionName>
+      <id>thunderbirdesr</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>thymiosuite</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -26378,6 +26389,7 @@
     <id>amazon-appstream</id>
     <id>amazon-ecr-credential-helper</id>
     <id>amd-ryzen-chipset</id>
+    <id>amethyst</id>
     <id>amiduos</id>
     <id>amiri</id>
     <id>amongus-extraroles</id>
@@ -26693,6 +26705,8 @@
     <id>brainsimulator</id>
     <id>breaktimer</id>
     <id>brewtarget</id>
+    <id>brickd</id>
+    <id>brickv</id>
     <id>brightauthor</id>
     <id>brightauthorconnected</id>
     <id>brogue</id>
@@ -27477,6 +27491,7 @@
     <id>evga-precision-x1</id>
     <id>evimsync</id>
     <id>evince</id>
+    <id>evkey</id>
     <id>ewseditor</id>
     <id>exactaudiocopy</id>
     <id>excel.viewer</id>
@@ -27570,6 +27585,7 @@
     <id>fastglacier</id>
     <id>fastresolver.install</id>
     <id>fastresolver.portable</id>
+    <id>faststone-image-viewer</id>
     <id>faust</id>
     <id>faviconizer</id>
     <id>faview</id>
@@ -27659,6 +27675,7 @@
     <id>floss</id>
     <id>flow-launcher</id>
     <id>flowdock</id>
+    <id>fluent-bit</id>
     <id>fluent-reader</id>
     <id>fluentautomation.repl</id>
     <id>fluffyapp</id>
@@ -28477,6 +28494,7 @@
     <id>kubernetes-helmfile</id>
     <id>kubernetes-kops</id>
     <id>kubernetes-node</id>
+    <id>kubetail</id>
     <id>kubetui</id>
     <id>kubeval</id>
     <id>kustomize</id>
@@ -29001,6 +29019,7 @@
     <id>ncrunch-vs2017</id>
     <id>ncrunch-vs2019</id>
     <id>ncrunch-vs2022</id>
+    <id>ndi-runtime</id>
     <id>ndm</id>
     <id>neat</id>
     <id>neck-diagrams</id>
@@ -29509,6 +29528,7 @@
     <id>pia</id>
     <id>pibakery</id>
     <id>picassio</id>
+    <id>picguard-pro</id>
     <id>picguard</id>
     <id>picoscope</id>
     <id>pidgin</id>
@@ -30362,6 +30382,7 @@
     <id>splunk-server</id>
     <id>splunkforwarder</id>
     <id>spn</id>
+    <id>spotless-cli</id>
     <id>spright</id>
     <id>springtoolsuite</id>
     <id>sprut-sms-client</id>
@@ -30553,6 +30574,7 @@
     <id>superorca</id>
     <id>supportassist</id>
     <id>supraball</id>
+    <id>surge-xt.portable</id>
     <id>suricata</id>
     <id>suwatchapp</id>
     <id>svcadmin</id>
@@ -31508,6 +31530,7 @@
     <id>windows-adk-deploy</id>
     <id>windows-adk-winpe</id>
     <id>windows-adk</id>
+    <id>windows-app-runtime16</id>
     <id>windows-app-sdk</id>
     <id>windows-iso-downloader</id>
     <id>windows-optimize-debloat</id>
@@ -31544,6 +31567,7 @@
     <id>windowsxappremover</id>
     <id>windowtextextractor</id>
     <id>windscribe</id>
+    <id>windsor</id>
     <id>windsurf</id>
     <id>windterm.portable</id>
     <id>windv</id>
@@ -31738,6 +31762,7 @@
     <id>yandex-browser</id>
     <id>yandexdisk</id>
     <id>yanknote</id>
+    <id>yasb</id>
     <id>yasm</id>
     <id>yazi</id>
     <id>yealink-usb-connect</id>
