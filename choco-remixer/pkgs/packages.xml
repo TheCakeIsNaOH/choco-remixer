@@ -111,6 +111,7 @@
     <id>appveyor-server</id>
     <id>appveyorbyoc.powershell</id>
     <id>aptos</id>
+    <id>aqua</id>
     <id>arcanist</id>
     <id>archive</id>
     <id>archivo-narrow.font</id>
@@ -246,6 +247,7 @@
     <id>bind-toolsonly</id>
     <id>bing</id>
     <id>bingdesktop</id>
+    <id>biomejs-cli</id>
     <id>bird</id>
     <id>bitbucket-cli</id>
     <id>bitcoin-unlimited</id>
@@ -312,6 +314,7 @@
     <id>bulletspassview</id>
     <id>bumpy.portable</id>
     <id>bunnyhop</id>
+    <id>bunyan-logviewer</id>
     <id>burgertime</id>
     <id>burnawarefree</id>
     <id>burnawarepremium</id>
@@ -719,6 +722,7 @@
     <id>docfetcher</id>
     <id>docker-cli</id>
     <id>docker-compose</id>
+    <id>docker-credential-wincred</id>
     <id>docker-for-windows</id>
     <id>docker-kitematic</id>
     <id>docker-watch-forwarder</id>
@@ -851,6 +855,7 @@
     <id>eddie.install</id>
     <id>eddie.portable</id>
     <id>eddie</id>
+    <id>edit</id>
     <id>editor-services-command-suite</id>
     <id>editorconfig.core</id>
     <id>editthiscookie-chrome</id>
@@ -2588,6 +2593,9 @@
     <id>scc</id>
     <id>scenebuilder9</id>
     <id>scheduled-shutdown</id>
+    <id>schemaquench-dotnetcore9</id>
+    <id>schemaquench-netfx481</id>
+    <id>schematongs-dotnetcore9</id>
     <id>schematongs-netfx481</id>
     <id>scicoslab</id>
     <id>scidavis</id>
@@ -3660,7 +3668,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>1</urlType>
       <argsType>0</argsType>
       <stripQueryString>yes</stripQueryString>
@@ -26544,6 +26552,7 @@
     <id>azahar.portable</id>
     <id>azahar</id>
     <id>azcopy10</id>
+    <id>azdocli</id>
     <id>azpazeta</id>
     <id>azshell</id>
     <id>aztfexport</id>
@@ -26795,6 +26804,7 @@
     <id>ccleaner.portable</id>
     <id>cctray</id>
     <id>cdinfo.portable</id>
+    <id>cedra</id>
     <id>ceed</id>
     <id>celestia</id>
     <id>cevio</id>
@@ -26960,6 +26970,7 @@
     <id>confd</id>
     <id>confide</id>
     <id>confuser</id>
+    <id>connectra</id>
     <id>connectwise-manage-client</id>
     <id>connexion</id>
     <id>conroe.install</id>
@@ -27228,6 +27239,7 @@
     <id>disksmartview</id>
     <id>diskspd</id>
     <id>diskview</id>
+    <id>dismgui</id>
     <id>dispensense-cli.devops-5</id>
     <id>dispensense-cli</id>
     <id>display-changer</id>
@@ -27235,6 +27247,7 @@
     <id>displaylink</id>
     <id>displaynote</id>
     <id>disposablefixer</id>
+    <id>distroav</id>
     <id>dive</id>
     <id>divvy</id>
     <id>dllexp</id>
@@ -27290,11 +27303,13 @@
     <id>doom4-death-foretold</id>
     <id>doomsday</id>
     <id>doomseeker</id>
+    <id>dopamine3</id>
     <id>dopdf</id>
     <id>dorion.portable</id>
     <id>dorion</id>
     <id>doro.install</id>
     <id>dotdocs</id>
+    <id>dotdraw</id>
     <id>dotlocal</id>
     <id>dotmemory-console.portable</id>
     <id>dotmemory-unit.portable</id>
@@ -27344,6 +27359,7 @@
     <id>dsc.networking</id>
     <id>dsc.powershellcommunity</id>
     <id>dsc.webadministration</id>
+    <id>dsc</id>
     <id>dspeech</id>
     <id>dtksneak</id>
     <id>du</id>
@@ -27469,6 +27485,7 @@
     <id>eset-internet-security</id>
     <id>eset-nod32-antivirus</id>
     <id>esgen</id>
+    <id>espeak-ng</id>
     <id>essence</id>
     <id>ethanbrown.chromecanarydevextensions</id>
     <id>ethanbrown.chromedevextensions</id>
@@ -27517,6 +27534,7 @@
     <id>extractnow</id>
     <id>eyeframeconverter</id>
     <id>eyesrelax</id>
+    <id>eza</id>
     <id>ezssh</id>
     <id>f-secureav</id>
     <id>f-secureis</id>
@@ -27692,6 +27710,7 @@
     <id>focuswriter</id>
     <id>fogapi</id>
     <id>fogg</id>
+    <id>foks</id>
     <id>folder-marker</id>
     <id>folderchangesview</id>
     <id>foldermenu3</id>
@@ -27782,6 +27801,7 @@
     <id>gallio</id>
     <id>galliobundle</id>
     <id>game-key-revealer.portable</id>
+    <id>game-launcher</id>
     <id>gamebooster</id>
     <id>gamedownloader.install</id>
     <id>gamedownloader.portable</id>
@@ -27822,7 +27842,11 @@
     <id>geupd4</id>
     <id>geupd</id>
     <id>gfwlive</id>
+    <id>ggu-connect</id>
+    <id>ggu-footing</id>
+    <id>ggu-seep</id>
     <id>ggu-software-codemeter</id>
+    <id>ggu-stability</id>
     <id>ghb0t</id>
     <id>ghc</id>
     <id>ghidra</id>
@@ -28014,6 +28038,7 @@
     <id>hasklig</id>
     <id>havdetectiontool</id>
     <id>haxm</id>
+    <id>hayman.portable</id>
     <id>hazelcast</id>
     <id>hbcd</id>
     <id>hcloud.portable</id>
@@ -28024,6 +28049,7 @@
     <id>hdhomerun-view</id>
     <id>hdhomerunviewer-plex</id>
     <id>hdparm</id>
+    <id>hdr-tray</id>
     <id>hdsentinel</id>
     <id>hdtune</id>
     <id>headlamp</id>
@@ -28116,6 +28142,8 @@
     <id>hunspell.portable</id>
     <id>hurl</id>
     <id>hv-ms735-config</id>
+    <id>hwmonitor.install</id>
+    <id>hwmonitor.portable</id>
     <id>hybrid</id>
     <id>hydrairc</id>
     <id>i2pd</id>
@@ -28466,6 +28494,7 @@
     <id>kog</id>
     <id>kollama</id>
     <id>komorebi</id>
+    <id>koncierge</id>
     <id>kontroll</id>
     <id>kontur-plugin</id>
     <id>kopano-ads-nightly</id>
@@ -28847,6 +28876,7 @@
     <id>mobizen</id>
     <id>moboplay</id>
     <id>mod</id>
+    <id>moddy-desktop</id>
     <id>modelio</id>
     <id>modern7z</id>
     <id>moderncsv</id>
@@ -30068,6 +30098,7 @@
     <id>sandisk-dashboard</id>
     <id>sanerpersonal</id>
     <id>sanetwain</id>
+    <id>sap-btptf</id>
     <id>sapiclient</id>
     <id>sardu</id>
     <id>sass</id>
@@ -30609,6 +30640,7 @@
     <id>sysmon</id>
     <id>syspin</id>
     <id>system-monitor</id>
+    <id>systeminformer</id>
     <id>systemninja.install</id>
     <id>systemninja.portable</id>
     <id>systraymeter</id>
@@ -30798,6 +30830,7 @@
     <id>tonelib-gfx</id>
     <id>tonelib-zoom</id>
     <id>toolkit</id>
+    <id>toolora</id>
     <id>topbeat</id>
     <id>topgrade</id>
     <id>tor</id>
@@ -31227,6 +31260,7 @@
     <id>vogen</id>
     <id>voicecommands</id>
     <id>voiceflow</id>
+    <id>voicemeet</id>
     <id>volatility3</id>
     <id>volley</id>
     <id>volume2.install</id>
@@ -31791,6 +31825,7 @@
     <id>zeal.portable</id>
     <id>zebar</id>
     <id>zen-browser</id>
+    <id>zenarmor</id>
     <id>zentimings</id>
     <id>zephyr-crosstool-aarch64</id>
     <id>zephyr-crosstool-arc</id>
