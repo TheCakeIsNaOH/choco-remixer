@@ -587,6 +587,8 @@
     <id>crystaldiskmark.install</id>
     <id>crystaldiskmark.portable</id>
     <id>crystaldiskmark</id>
+    <id>crystalmarkretro.install</id>
+    <id>crystalmarkretro.portable</id>
     <id>csound</id>
     <id>csvtk</id>
     <id>ctemplar</id>
@@ -608,6 +610,7 @@
     <id>cyberchef</id>
     <id>cyg-get</id>
     <id>cygwin</id>
+    <id>cynthia</id>
     <id>d2</id>
     <id>dable</id>
     <id>dankerino</id>
@@ -1262,6 +1265,7 @@
     <id>handbrake.portable</id>
     <id>handbrake</id>
     <id>handyimagemapper</id>
+    <id>harboor-sweep</id>
     <id>harddriveindicator</id>
     <id>hardentools</id>
     <id>hardware-freak</id>
@@ -1540,6 +1544,7 @@
     <id>keyferret.portable</id>
     <id>keyferret</id>
     <id>keyfinder</id>
+    <id>keyman</id>
     <id>keys</id>
     <id>keystore-explorer.portable</id>
     <id>khoa.loadouts.dev</id>
@@ -1553,6 +1558,7 @@
     <id>kino.rendezvous</id>
     <id>kitty.portable</id>
     <id>kitty</id>
+    <id>kiwix-desktop</id>
     <id>klatexformula</id>
     <id>klog</id>
     <id>kmttg</id>
@@ -2033,6 +2039,7 @@
     <id>nunit-extension-net60-pluggable-agent</id>
     <id>nunit-extension-net70-pluggable-agent</id>
     <id>nunit-extension-net80-pluggable-agent</id>
+    <id>nunit-extension-net90-pluggable-agent</id>
     <id>nunit-extension-netcore21-pluggable-agent</id>
     <id>nunit-extension-netcore31-pluggable-agent</id>
     <id>nunit-extension-nunit-project-loader</id>
@@ -2180,6 +2187,7 @@
     <id>password-checkup-chrome</id>
     <id>passwordscan</id>
     <id>passwork-chrome</id>
+    <id>pastel</id>
     <id>patchcleaner</id>
     <id>path-copy-copy</id>
     <id>pathed</id>
@@ -10296,7 +10304,7 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>both</architecture>
-      <urlType>6</urlType>
+      <urlType>7</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
@@ -16388,11 +16396,14 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>x64</architecture>
-      <urlType>6</urlType>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
       <argsType>0</argsType>
       <DeEncodeSpace>yes</DeEncodeSpace>
       <removeEXE>yes</removeEXE>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <doubleQuotesChecksum>yes</doubleQuotesChecksum>
+      <replaceFilenames>yes</replaceFilenames>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
@@ -18069,6 +18080,8 @@
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
+      <doubleQuotesChecksum>yes</doubleQuotesChecksum>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -18859,7 +18872,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>0</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
@@ -24469,7 +24482,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>6</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
@@ -26290,6 +26303,7 @@
     <id>3dsmax</id>
     <id>3proxy</id>
     <id>3rvx</id>
+    <id>404skill-cli</id>
     <id>4t-tray-minimizer</id>
     <id>7kaa</id>
     <id>9kw-client</id>
@@ -26382,6 +26396,7 @@
     <id>algolia</id>
     <id>aliengame</id>
     <id>alire</id>
+    <id>alist</id>
     <id>aliyun-cli</id>
     <id>all-to-mp3</id>
     <id>allow-block-remove-firewall</id>
@@ -26553,6 +26568,7 @@
     <id>azahar</id>
     <id>azcopy10</id>
     <id>azdocli</id>
+    <id>azion</id>
     <id>azpazeta</id>
     <id>azshell</id>
     <id>aztfexport</id>
@@ -26641,6 +26657,7 @@
     <id>biber.portable</id>
     <id>biblioteq</id>
     <id>bibox</id>
+    <id>bicep-docs</id>
     <id>bigbyte</id>
     <id>bigstash</id>
     <id>biicode</id>
@@ -27303,6 +27320,7 @@
     <id>doom4-death-foretold</id>
     <id>doomsday</id>
     <id>doomseeker</id>
+    <id>dopamine2</id>
     <id>dopamine3</id>
     <id>dopdf</id>
     <id>dorion.portable</id>
@@ -27469,6 +27487,7 @@
     <id>envycoder</id>
     <id>epanet</id>
     <id>epsdevtools.web</id>
+    <id>epson-iprojection</id>
     <id>epson-perfection-v33-scanner</id>
     <id>equality</id>
     <id>equalizerapo</id>
@@ -27522,6 +27541,7 @@
     <id>exfat7z</id>
     <id>exif-purge</id>
     <id>exifdataview</id>
+    <id>exifglass</id>
     <id>exiftool</id>
     <id>exiftoolgui</id>
     <id>explorersuite</id>
@@ -27674,6 +27694,7 @@
     <id>fjira</id>
     <id>fl2k-win</id>
     <id>flac</id>
+    <id>flakiesadb</id>
     <id>flamegraph</id>
     <id>flare</id>
     <id>flarectl</id>
@@ -27817,6 +27838,7 @@
     <id>gauntlet</id>
     <id>gax2012</id>
     <id>gb.mongodb</id>
+    <id>gbase64</id>
     <id>gbstudio.install</id>
     <id>gbstudio.portable</id>
     <id>gbt</id>
@@ -27844,9 +27866,12 @@
     <id>gfwlive</id>
     <id>ggu-connect</id>
     <id>ggu-footing</id>
+    <id>ggu-korfin</id>
     <id>ggu-seep</id>
+    <id>ggu-slab</id>
     <id>ggu-software-codemeter</id>
     <id>ggu-stability</id>
+    <id>ggu-stratig</id>
     <id>ghb0t</id>
     <id>ghc</id>
     <id>ghidra</id>
@@ -28038,6 +28063,7 @@
     <id>hasklig</id>
     <id>havdetectiontool</id>
     <id>haxm</id>
+    <id>hayase</id>
     <id>hayman.portable</id>
     <id>hazelcast</id>
     <id>hbcd</id>
@@ -28360,6 +28386,7 @@
     <id>jtrim</id>
     <id>juffed</id>
     <id>juicefs</id>
+    <id>jujutsu.portable</id>
     <id>jumplistsview</id>
     <id>jumpshare</id>
     <id>junction-link-magic</id>
@@ -28572,6 +28599,7 @@
     <id>lektor</id>
     <id>leonflix</id>
     <id>letsencrypt-win-simple</id>
+    <id>lexmark-universal-driver-pcl-xl</id>
     <id>lftp</id>
     <id>lg-ultragear-control-center</id>
     <id>lgbridge</id>
@@ -28854,6 +28882,7 @@
     <id>miranda</id>
     <id>mirc</id>
     <id>miro</id>
+    <id>miroirs</id>
     <id>mirth-administrator-launcher.install</id>
     <id>mirth-administrator-launcher.portable</id>
     <id>miru</id>
@@ -28994,6 +29023,7 @@
     <id>multiplicity</id>
     <id>mupen64plus-qt</id>
     <id>mupen64plus</id>
+    <id>museeks</id>
     <id>musicbee</id>
     <id>musique</id>
     <id>mvc</id>
@@ -29053,6 +29083,7 @@
     <id>ndm</id>
     <id>neat</id>
     <id>neck-diagrams</id>
+    <id>nekot</id>
     <id>nelson</id>
     <id>nem</id>
     <id>neo4j-community</id>
@@ -29603,6 +29634,7 @@
     <id>polaris</id>
     <id>polipo</id>
     <id>poly-lens</id>
+    <id>pomodorot</id>
     <id>pomolectron</id>
     <id>pomotime</id>
     <id>poni</id>
@@ -29670,6 +29702,7 @@
     <id>prepros</id>
     <id>presencelight</id>
     <id>presonusuniversalcontrol</id>
+    <id>pretendo-local-mocks</id>
     <id>prettypaste</id>
     <id>pretzel.scriptcs</id>
     <id>pretzel</id>
@@ -30066,6 +30099,7 @@
     <id>rustdesk.portable</id>
     <id>rustic</id>
     <id>rustrover</id>
+    <id>rustscan</id>
     <id>rustup.install</id>
     <id>rutoken-drivers-removal-tool</id>
     <id>rutoken-drivers</id>
@@ -30269,6 +30303,7 @@
     <id>sketchupviewer</id>
     <id>skifree</id>
     <id>skillpipereader</id>
+    <id>skipper</id>
     <id>sktimestamp</id>
     <id>skyfonts</id>
     <id>skype-utility-project</id>
@@ -30770,6 +30805,7 @@
     <id>tfssidekicks2013</id>
     <id>tfssidekicks2015</id>
     <id>tfssidekicks</id>
+    <id>tgstattools</id>
     <id>thebat</id>
     <id>thebrain.install</id>
     <id>thebrain.portable</id>
@@ -31040,6 +31076,7 @@
     <id>video-repair-software</id>
     <id>videocacheview.portable</id>
     <id>videostream</id>
+    <id>videotoascii</id>
     <id>vidi-dc</id>
     <id>viemu-visualstudio2010</id>
     <id>viemu-visualstudio2012</id>
@@ -31523,6 +31560,7 @@
     <id>widelands</id>
     <id>wifiaddcmd</id>
     <id>wifichannelmonitor</id>
+    <id>wifidrop</id>
     <id>wifiinfoview</id>
     <id>wildfly</id>
     <id>wimlib</id>
@@ -31565,6 +31603,7 @@
     <id>windows-adk-winpe</id>
     <id>windows-adk</id>
     <id>windows-app-runtime16</id>
+    <id>windows-app-runtime17</id>
     <id>windows-app-sdk</id>
     <id>windows-iso-downloader</id>
     <id>windows-optimize-debloat</id>
@@ -31753,6 +31792,7 @@
     <id>xhyper-v</id>
     <id>xidel</id>
     <id>xiphqt</id>
+    <id>xmake</id>
     <id>xmind</id>
     <id>xml-copy-editor</id>
     <id>xmlconverter</id>
@@ -31824,6 +31864,7 @@
     <id>zbar</id>
     <id>zeal.portable</id>
     <id>zebar</id>
+    <id>zed-cli-win-unofficial</id>
     <id>zen-browser</id>
     <id>zenarmor</id>
     <id>zentimings</id>

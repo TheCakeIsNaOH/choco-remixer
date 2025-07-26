@@ -135,9 +135,16 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     Remove-Item -Force -EA 0 -Path (Join-Path $obj.VersionDir '*.nupkg')
 
     Expand-Nupkg -Path $obj.OrigPath -Destination $obj.VersionDir -NoAddFilesElement
+
+    # Get tools directory name regardless of case, for case sensitive filesystems
     $foundToolsDir = (Get-Childitem -Path $obj.VersionDir -Filter "tools")
     if ($null -ne $foundToolsDir) {
         $obj.toolsDir = $foundToolsDir.FullName
+    # If install script is put in a different folder, use that as the tools directory.
+    } else {
+        # Already checked we have a install script above, if not, already skipped
+        $installScriptPath = Get-Childitem -Path $obj.VersionDir -Recurse -Filter "chocolateyInstall.ps1"
+        $obj.toolsDir = Split-Path -Path $installScriptPath.FullName
     }
 
     $failed = $false
