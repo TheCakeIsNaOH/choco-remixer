@@ -746,6 +746,7 @@
     <id>dontsleep</id>
     <id>doom-sigil</id>
     <id>doom2-maps-scyte2</id>
+    <id>dopamine</id>
     <id>dos2unix</id>
     <id>dosbox</id>
     <id>dotbrowser</id>
@@ -1330,6 +1331,7 @@
     <id>hwinfo.portable</id>
     <id>hwinfo32</id>
     <id>hwinfo</id>
+    <id>hwmonitor</id>
     <id>hxd</id>
     <id>hydrus-network</id>
     <id>hyper</id>
@@ -3319,6 +3321,7 @@
     <id>wc3270</id>
     <id>wcfservice1</id>
     <id>wcfservice</id>
+    <id>wd-dashboard</id>
     <id>weasel-pageant.portable</id>
     <id>weasel</id>
     <id>weasis</id>
@@ -8205,20 +8208,6 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
-      <id>dopamine</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>6</urlType>
-      <argsType>0</argsType>
-      <DeEncodeSpace>yes</DeEncodeSpace>
-      <removeMSI>yes</removeMSI>
-      <checksumArgsType>7</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
       <id>dosbox-x</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -12048,19 +12037,6 @@
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
-      <id>hwmonitor</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>2</urlType>
-      <argsType>1</argsType>
-      <removeEXE>yes</removeEXE>
-      <checksumArgsType>0</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
       <id>hydrocluster</id>
@@ -24858,19 +24834,6 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <whyNotInternal>licensing</whyNotInternal>
-    </pkg>
-    <pkg>
-      <id>wd-dashboard</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>no</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>7</urlType>
-      <argsType>0</argsType>
-      <removeEXE>yes</removeEXE>
-      <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <id>webex</id>
