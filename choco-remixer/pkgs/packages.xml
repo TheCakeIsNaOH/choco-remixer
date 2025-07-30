@@ -26246,6 +26246,112 @@
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
+    <pkg>
+      <id>1password8</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>ab-download-manager</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>9</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>activeexit</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>yes</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>admobilize-vision-service</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>ampcast</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
+      <doubleQuotesChecksum>yes</doubleQuotesChecksum>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>anchor</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>9</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>anmaniesmp</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>anyvideoconverter</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>6</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>7</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
   </implemented>
   <notImplemented>
     <id>010editor.portable</id>
@@ -26256,7 +26362,6 @@
     <id>1cfresh-client</id>
     <id>1clipboard</id>
     <id>1password-cli</id>
-    <id>1password8</id>
     <id>1password</id>
     <id>2fast</id>
     <id>2gis</id>
@@ -26273,7 +26378,6 @@
     <id>aacgain</id>
     <id>aaclr</id>
     <id>ab-download-manager.portable</id>
-    <id>ab-download-manager</id>
     <id>abaclient</id>
     <id>abastart</id>
     <id>abc-update</id>
@@ -26292,7 +26396,6 @@
     <id>acs-engine</id>
     <id>activate-linux</id>
     <id>active-directory-photos</id>
-    <id>activeexit</id>
     <id>activemq</id>
     <id>activeperl-eqemu-x86</id>
     <id>activeperl</id>
@@ -26317,7 +26420,6 @@
     <id>adinsight</id>
     <id>adminservice</id>
     <id>admobilize-malos-vision</id>
-    <id>admobilize-vision-service</id>
     <id>admprovider</id>
     <id>adobeshockwaveplayer</id>
     <id>adom-classic</id>
@@ -26380,18 +26482,15 @@
     <id>amiri</id>
     <id>amongus-extraroles</id>
     <id>amp-winoff.portable</id>
-    <id>ampcast</id>
     <id>ampfontviewer</id>
     <id>amt</id>
     <id>amule.install</id>
     <id>amule.portable</id>
     <id>amulet</id>
     <id>analyzer2go</id>
-    <id>anchor</id>
     <id>android-ndk</id>
     <id>android-sdk</id>
     <id>ankhsvn</id>
-    <id>anmaniesmp</id>
     <id>annie</id>
     <id>anonymouspro</id>
     <id>anote</id>
@@ -26404,7 +26503,6 @@
     <id>anyquery</id>
     <id>anytoiso</id>
     <id>anytype</id>
-    <id>anyvideoconverter</id>
     <id>apache-cassandra</id>
     <id>apache-fop</id>
     <id>apache-netbeans.portable</id>
