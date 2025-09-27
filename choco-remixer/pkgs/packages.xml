@@ -547,6 +547,7 @@
     <id>control-dashboard</id>
     <id>controlmymonitor</id>
     <id>convertcp</id>
+    <id>converternow</id>
     <id>copyq</id>
     <id>core2d-avalonia-cairo</id>
     <id>core2d-avalonia-direct2d</id>
@@ -589,6 +590,7 @@
     <id>crystaldiskmark</id>
     <id>crystalmarkretro.install</id>
     <id>crystalmarkretro.portable</id>
+    <id>crystalmarkretro</id>
     <id>csound</id>
     <id>csvtk</id>
     <id>ctemplar</id>
@@ -619,6 +621,8 @@
     <id>data-lifeguard-diagnostic.portable</id>
     <id>data-saver-chrome</id>
     <id>database-searcher</id>
+    <id>datatongs-dotnetcore9</id>
+    <id>datatongs-netfx481</id>
     <id>date-reminder</id>
     <id>davmail</id>
     <id>dbachecks</id>
@@ -861,6 +865,7 @@
     <id>eddie</id>
     <id>edit</id>
     <id>editor-services-command-suite</id>
+    <id>editorconfig-checker</id>
     <id>editorconfig.core</id>
     <id>editthiscookie-chrome</id>
     <id>edrawings-viewer-2018</id>
@@ -1255,6 +1260,7 @@
     <id>gzip</id>
     <id>h264tscutter</id>
     <id>hacker-scoper</id>
+    <id>hadolint</id>
     <id>hakchi2-ce</id>
     <id>hakchi2.portable</id>
     <id>haku-neko.install</id>
@@ -1270,6 +1276,7 @@
     <id>harddriveindicator</id>
     <id>hardentools</id>
     <id>hardware-freak</id>
+    <id>harper</id>
     <id>hash-r</id>
     <id>hashcat</id>
     <id>hashcheck</id>
@@ -1445,6 +1452,7 @@
     <id>javaruntime-platformspecific</id>
     <id>javaruntime-preventasktoolbar</id>
     <id>javaruntime</id>
+    <id>javy</id>
     <id>jayhankins.conemuconfig</id>
     <id>jcpicker</id>
     <id>jenkins-set-prefix.hook</id>
@@ -1896,6 +1904,7 @@
     <id>msys2</id>
     <id>msysgit</id>
     <id>mtuner</id>
+    <id>multiicon</id>
     <id>multimc</id>
     <id>multimonitortool</id>
     <id>multipar.install</id>
@@ -2164,6 +2173,7 @@
     <id>ouiguichocolatey</id>
     <id>owinhost</id>
     <id>owncloud-client</id>
+    <id>oxlint</id>
     <id>p4merge</id>
     <id>pack</id>
     <id>package-debug.extension</id>
@@ -2332,6 +2342,7 @@
     <id>processhacker</id>
     <id>procgov</id>
     <id>procrastitracker</id>
+    <id>procs</id>
     <id>product666</id>
     <id>produkey</id>
     <id>proficad</id>
@@ -2734,6 +2745,7 @@
     <id>simple-acme-validation-dns-simply</id>
     <id>simple-acme-validation-dns-tencent</id>
     <id>simple-acme-validation-dns-transip</id>
+    <id>simple-acme-validation-dns-webnames</id>
     <id>simple-acme-validation-http-rest</id>
     <id>simple-acme</id>
     <id>simple-software-restriction-policy</id>
@@ -2932,6 +2944,7 @@
     <id>tagscanner</id>
     <id>taildotnet</id>
     <id>take-command</id>
+    <id>taplo</id>
     <id>tartool</id>
     <id>tartube</id>
     <id>taskbar-never-combine</id>
@@ -3042,6 +3055,7 @@
     <id>tldr-plusplus</id>
     <id>tldr</id>
     <id>tnaspc</id>
+    <id>todocheck</id>
     <id>todolist</id>
     <id>todotxt.net</id>
     <id>toggl</id>
@@ -3084,6 +3098,7 @@
     <id>truglobalprotect</id>
     <id>ttl</id>
     <id>tuff-cards</id>
+    <id>tunarr</id>
     <id>tunnelier.install</id>
     <id>tunnelier</id>
     <id>turnoffxboxcontroller</id>
@@ -3105,6 +3120,8 @@
     <id>twitch-channel-points-aut-chrome</id>
     <id>typegen</id>
     <id>typescript</id>
+    <id>typos-lsp</id>
+    <id>typos</id>
     <id>typst</id>
     <id>uattool</id>
     <id>ublockorigin-chrome</id>
@@ -3415,6 +3432,7 @@
     <id>winja</id>
     <id>winlog32</id>
     <id>winmd</id>
+    <id>winmemorycleaner</id>
     <id>winmute</id>
     <id>winscan2pdf</id>
     <id>winscp.install</id>
@@ -3507,6 +3525,7 @@
     <id>xvid</id>
     <id>xwfim</id>
     <id>xxd</id>
+    <id>yaak</id>
     <id>yabause</id>
     <id>yara</id>
     <id>yeoman</id>
@@ -3546,6 +3565,7 @@
     <id>zotero</id>
     <id>zoxide</id>
     <id>zpaq</id>
+    <id>zypline</id>
   </internal>
   <implemented>
     <!--    <pkg>
@@ -10114,6 +10134,19 @@
       <urlType>7</urlType>
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>flirc</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
@@ -26439,6 +26472,7 @@
     <id>aeroadmin.portable</id>
     <id>ag</id>
     <id>age.portable</id>
+    <id>agenthub</id>
     <id>agentless</id>
     <id>agentransack</id>
     <id>agentsvn</id>
@@ -26480,8 +26514,10 @@
     <id>amethyst</id>
     <id>amiduos</id>
     <id>amiri</id>
+    <id>amneziavpn</id>
     <id>amongus-extraroles</id>
     <id>amp-winoff.portable</id>
+    <id>amp</id>
     <id>ampfontviewer</id>
     <id>amt</id>
     <id>amule.install</id>
@@ -26949,6 +26985,7 @@
     <id>clamsentinel</id>
     <id>clamwin</id>
     <id>clash</id>
+    <id>claude-code</id>
     <id>claude</id>
     <id>clcl.portable</id>
     <id>cleanafterme</id>
@@ -26982,6 +27019,7 @@
     <id>cloudberryexplorer.googlestorage</id>
     <id>cloudberryexplorer.openstackstorage</id>
     <id>cloudberryexplorer.s3</id>
+    <id>cloudcompare</id>
     <id>cloudflare-utils</id>
     <id>cloudflared</id>
     <id>cloudfoundry-cli</id>
@@ -27041,6 +27079,7 @@
     <id>compton.portable</id>
     <id>computesphere</id>
     <id>conadvpass</id>
+    <id>conceal</id>
     <id>concert.env</id>
     <id>concerteenv</id>
     <id>concourse</id>
@@ -27395,6 +27434,7 @@
     <id>dotnet-verification-tool</id>
     <id>dotnet4.6-targetpack</id>
     <id>dotnet4.6.1-devpack</id>
+    <id>dotnetapidiff</id>
     <id>dotnetcore-vs</id>
     <id>dotnetcoresdk</id>
     <id>dotnetdash</id>
@@ -27708,6 +27748,7 @@
     <id>figma</id>
     <id>file-hash-generator</id>
     <id>file-splitter</id>
+    <id>file_conversor</id>
     <id>fileactivitywatch</id>
     <id>filealyzer</id>
     <id>fileassassin</id>
@@ -27771,6 +27812,7 @@
     <id>flightgear</id>
     <id>flink</id>
     <id>flipflip</id>
+    <id>flirc</id>
     <id>floorp</id>
     <id>floss</id>
     <id>flow-launcher</id>
@@ -27925,14 +27967,55 @@
     <id>geupd4</id>
     <id>geupd</id>
     <id>gfwlive</id>
+    <id>ggu-2d-ssflow</id>
+    <id>ggu-2d-transient</id>
+    <id>ggu-atterberg</id>
+    <id>ggu-axpile</id>
+    <id>ggu-borelog</id>
+    <id>ggu-cad</id>
+    <id>ggu-cantilever</id>
+    <id>ggu-compact</id>
     <id>ggu-connect</id>
+    <id>ggu-consolidate</id>
+    <id>ggu-contam-fe</id>
+    <id>ggu-contam-rw</id>
+    <id>ggu-density</id>
+    <id>ggu-directshear</id>
+    <id>ggu-dolphin</id>
+    <id>ggu-drawdown</id>
+    <id>ggu-elastic</id>
+    <id>ggu-enslin</id>
+    <id>ggu-filter-stability</id>
     <id>ggu-footing</id>
+    <id>ggu-gabion</id>
+    <id>ggu-geo-graph</id>
+    <id>ggu-grain-density</id>
     <id>ggu-korfin</id>
+    <id>ggu-labperm</id>
+    <id>ggu-latpile</id>
+    <id>ggu-lime</id>
+    <id>ggu-loi</id>
+    <id>ggu-oedom</id>
+    <id>ggu-plateload</id>
+    <id>ggu-pumptest</id>
+    <id>ggu-retain</id>
     <id>ggu-seep</id>
+    <id>ggu-settle</id>
+    <id>ggu-shrinkage</id>
+    <id>ggu-sieve</id>
     <id>ggu-slab</id>
+    <id>ggu-slugtest</id>
     <id>ggu-software-codemeter</id>
     <id>ggu-stability</id>
     <id>ggu-stratig</id>
+    <id>ggu-time-graph</id>
+    <id>ggu-timeset</id>
+    <id>ggu-trench</id>
+    <id>ggu-triaxial</id>
+    <id>ggu-underpin</id>
+    <id>ggu-uplift</id>
+    <id>ggu-vibration</id>
+    <id>ggu-water</id>
     <id>ghb0t</id>
     <id>ghc</id>
     <id>ghidra</id>
@@ -28152,6 +28235,7 @@
     <id>helix</id>
     <id>helmsman</id>
     <id>help-workshop</id>
+    <id>here-label</id>
     <id>heroesofnewerth</id>
     <id>heroic-games-launcher.install</id>
     <id>heroic-games-launcher.portable</id>
@@ -28287,6 +28371,7 @@
     <id>imageusb</id>
     <id>imagine-full.portable</id>
     <id>imagine.portable</id>
+    <id>imagot</id>
     <id>imazing</id>
     <id>imhex</id>
     <id>immunet</id>
@@ -28370,6 +28455,7 @@
     <id>ipinfo</id>
     <id>ipinfooffline</id>
     <id>ipmicfg</id>
+    <id>ipod-support</id>
     <id>ireboot</id>
     <id>ireport</id>
     <id>iris</id>
@@ -28647,6 +28733,7 @@
     <id>lazpaint</id>
     <id>lazydocker</id>
     <id>lazygit</id>
+    <id>lazytrack</id>
     <id>lc0-cuda</id>
     <id>lcov</id>
     <id>ldapadmin</id>
@@ -28848,6 +28935,7 @@
     <id>mbsa</id>
     <id>mcollective</id>
     <id>mcomix</id>
+    <id>mcp-proxy-tool</id>
     <id>mcr-r2014b</id>
     <id>mcr-r2015a</id>
     <id>mcr-r2015b</id>
@@ -28971,6 +29059,7 @@
     <id>modern7z</id>
     <id>moderncsv</id>
     <id>modgallery</id>
+    <id>modrinth-app</id>
     <id>modsecurity</id>
     <id>modworm-rain</id>
     <id>modworm-soil</id>
@@ -29437,6 +29526,7 @@
     <id>openboard</id>
     <id>openbve</id>
     <id>openchrom</id>
+    <id>opencode</id>
     <id>opencodecs</id>
     <id>opencomic.portable</id>
     <id>opencomic</id>
@@ -29460,6 +29550,7 @@
     <id>openjdk8redhatbuild</id>
     <id>openjdk</id>
     <id>openldap</id>
+    <id>openlist</id>
     <id>opennbs</id>
     <id>openni-x64</id>
     <id>openni-x86</id>
@@ -29635,6 +29726,7 @@
     <id>pgutil</id>
     <id>phalcon</id>
     <id>phantombot</id>
+    <id>phar7z</id>
     <id>phatgit</id>
     <id>photo-demon</id>
     <id>photofiltre-studio-x</id>
@@ -29643,6 +29735,7 @@
     <id>photogimp</id>
     <id>photoguru</id>
     <id>php-manager</id>
+    <id>php-pvm</id>
     <id>phpmyadmin</id>
     <id>phraseapp</id>
     <id>phraseexpress.install</id>
@@ -29805,6 +29898,7 @@
     <id>prometheus-windows-exporter.install</id>
     <id>prometheus</id>
     <id>pronterface</id>
+    <id>protonauth</id>
     <id>protonmail</id>
     <id>protonpass</id>
     <id>prototyper</id>
@@ -29852,6 +29946,7 @@
     <id>purescript</id>
     <id>puretext</id>
     <id>purple-facebook</id>
+    <id>purple-launcher</id>
     <id>purview-information-protection-client</id>
     <id>purview-ir</id>
     <id>pushbullet</id>
@@ -29865,6 +29960,7 @@
     <id>pvc</id>
     <id>pwgen.install</id>
     <id>pwgen.portable</id>
+    <id>py7z</id>
     <id>pydiosync</id>
     <id>pyexiftoolgui</id>
     <id>pygtk-all-in-one_win32_py2.7</id>
@@ -29981,6 +30077,7 @@
     <id>rayman-controlpanel</id>
     <id>razer-synapse-2</id>
     <id>razer-synapse-3</id>
+    <id>razer-synapse-4</id>
     <id>rbac-lookup</id>
     <id>rbatchfiles</id>
     <id>rcforb</id>
@@ -30222,6 +30319,7 @@
     <id>sccmtoolkit</id>
     <id>scenebuilder8</id>
     <id>schemacrawler</id>
+    <id>schiba</id>
     <id>schily-cdrtools</id>
     <id>sciencefair</id>
     <id>scilab</id>
@@ -30281,6 +30379,7 @@
     <id>serviceinsight</id>
     <id>servicepulse</id>
     <id>serviwin.portable</id>
+    <id>servy</id>
     <id>setdefaultprinter</id>
     <id>settingsmanager</id>
     <id>sget</id>
@@ -30304,6 +30403,7 @@
     <id>sharepointdesigner2010x64</id>
     <id>sharepointdesigner2013x32</id>
     <id>sharepointdesigner2013x64</id>
+    <id>sharpcaster</id>
     <id>sharpdevelop</id>
     <id>sharpkeys.portable</id>
     <id>sharpkeys</id>
@@ -30517,6 +30617,7 @@
     <id>sprut-universal-update</id>
     <id>spsf</id>
     <id>spybot</id>
+    <id>spyder</id>
     <id>spydetectfree</id>
     <id>spyex.portable</id>
     <id>spystudio</id>
@@ -31034,6 +31135,7 @@
     <id>uhexen2</id>
     <id>uiforetw</id>
     <id>ukinternationalkeyboard</id>
+    <id>ultracompare</id>
     <id>ultracopier</id>
     <id>ultramon</id>
     <id>ultrasearch.portable</id>
@@ -31131,6 +31233,7 @@
     <id>vh7-cli</id>
     <id>vial-kb.install</id>
     <id>vial-kb.portable</id>
+    <id>vibe</id>
     <id>vibrancegui</id>
     <id>victoria</id>
     <id>vidcutter</id>
@@ -31767,6 +31870,8 @@
     <id>wix35</id>
     <id>wixedit</id>
     <id>wizemo</id>
+    <id>wizfile.portable</id>
+    <id>wizfile</id>
     <id>wizmouse</id>
     <id>wiznote</id>
     <id>wiznotelite</id>
@@ -31856,6 +31961,7 @@
     <id>xmake</id>
     <id>xmind</id>
     <id>xml-copy-editor</id>
+    <id>xml2rfc</id>
     <id>xmlconverter</id>
     <id>xmlexplorer</id>
     <id>xmlstarlet.portable</id>
