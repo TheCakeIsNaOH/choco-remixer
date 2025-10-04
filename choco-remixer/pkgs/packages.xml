@@ -9618,7 +9618,7 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x64</architecture>
-      <urlType>7</urlType>
+      <urlType>5</urlType>
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
       <checksumArgsType>5</checksumArgsType>
@@ -10520,11 +10520,11 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>x64</architecture>
-      <urlType>1</urlType>
+      <architecture>x32</architecture>
+      <urlType>2</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
-      <checksumArgsType>3</checksumArgsType>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>maintainer</whyNotInternal>
     </pkg>
@@ -17530,6 +17530,19 @@
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>md5</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>pdfxchangepro</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>both</architecture>
+      <urlType>2</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>2</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>License</whyNotInternal>
     </pkg>
     <pkg>
       <id>pelles-c-sdk</id>
@@ -29695,7 +29708,6 @@
     <id>pdftk</id>
     <id>pdfxchangeeditor</id>
     <id>pdfxchangelite</id>
-    <id>pdfxchangepro</id>
     <id>pdk</id>
     <id>pe-client-tools</id>
     <id>peach</id>
