@@ -7976,6 +7976,13 @@
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>
+      <functionName>Convert-deno</functionName>
+      <id>deno</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>deluge</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>yes</needsStopAction>
@@ -27298,7 +27305,6 @@
     <id>delprof2</id>
     <id>demohelper</id>
     <id>denemo</id>
-    <id>deno</id>
     <id>dep</id>
     <id>dependabot</id>
     <id>dependencies</id>
@@ -27825,7 +27831,6 @@
     <id>flightgear</id>
     <id>flink</id>
     <id>flipflip</id>
-    <id>flirc</id>
     <id>floorp</id>
     <id>floss</id>
     <id>flow-launcher</id>
