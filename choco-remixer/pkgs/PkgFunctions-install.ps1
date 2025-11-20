@@ -722,7 +722,7 @@ Function Convert-openoffice ([PackageInternalizeInfo]$obj) {
     Function Install-ChocolateyPackage {
         Write-Information "mockup"
     }
-    . $(Join-Path $obj.toolsDir 'ChocolateyInstall.ps1')
+    . $(Get-Childitem -Path $obj.toolsDir -Filter 'chocolateyInstall.ps1').fullname
 
     $request = [System.Net.WebRequest]::Create($url)
     $request.AllowAutoRedirect = $false

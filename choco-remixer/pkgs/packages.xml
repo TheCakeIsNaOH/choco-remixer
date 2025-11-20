@@ -107,6 +107,7 @@
     <id>appease.client.powershell</id>
     <id>appharborcli.install</id>
     <id>applet-runner-pro</id>
+    <id>appswitcher</id>
     <id>appveyor-evu</id>
     <id>appveyor-server</id>
     <id>appveyorbyoc.powershell</id>
@@ -373,6 +374,9 @@
     <id>charissil</id>
     <id>chars</id>
     <id>chart-geany</id>
+    <id>chatterino-7tv.install</id>
+    <id>chatterino-7tv.portable</id>
+    <id>chatterino-7tv</id>
     <id>chatterino7</id>
     <id>chatterino</id>
     <id>chatty</id>
@@ -523,6 +527,7 @@
     <id>comic-dl</id>
     <id>commandwindowhere</id>
     <id>commit</id>
+    <id>commitfusion</id>
     <id>commitmonitor</id>
     <id>compact-timer</id>
     <id>compactgui</id>
@@ -959,6 +964,7 @@
     <id>fastcopy</id>
     <id>fastest-mouse-clicker</id>
     <id>fastfinder</id>
+    <id>fastfsc</id>
     <id>fastresolver</id>
     <id>fbcacheview</id>
     <id>fbreader</id>
@@ -1128,6 +1134,7 @@
     <id>git</id>
     <id>gitahead</id>
     <id>gitbook-editor</id>
+    <id>gitcommit</id>
     <id>gitcomponentversion.portable</id>
     <id>gitdepend.portable</id>
     <id>gitextensions.portable</id>
@@ -2208,6 +2215,7 @@
     <id>pavement.dev</id>
     <id>pavement.standard</id>
     <id>pavement</id>
+    <id>pawnio</id>
     <id>pcsx2-dev</id>
     <id>pcsx2.install</id>
     <id>pcsx2.portable</id>
@@ -2255,6 +2263,7 @@
     <id>php-service</id>
     <id>php</id>
     <id>phraseexpress</id>
+    <id>phwriter</id>
     <id>picard</id>
     <id>picgo</id>
     <id>pickles</id>
@@ -2412,6 +2421,7 @@
     <id>python312</id>
     <id>python313</id>
     <id>python314</id>
+    <id>python315</id>
     <id>python35</id>
     <id>python36</id>
     <id>python37</id>
@@ -3092,6 +3102,7 @@
     <id>trelby</id>
     <id>trello-chrome</id>
     <id>trid</id>
+    <id>tridnet</id>
     <id>triplea</id>
     <id>trojan-remover</id>
     <id>truecrypt-langfiles</id>
@@ -3221,6 +3232,7 @@
     <id>vendir</id>
     <id>vera</id>
     <id>veracode-cli</id>
+    <id>verapack</id>
     <id>verpatch</id>
     <id>vet</id>
     <id>veusz</id>
@@ -13208,10 +13220,10 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x64</architecture>
-      <urlType>6</urlType>
+      <urlType>9</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
-      <checksumArgsType>7</checksumArgsType>
+      <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
@@ -18794,7 +18806,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>0</urlType>
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
@@ -26546,6 +26558,7 @@
     <id>analyzer2go</id>
     <id>android-ndk</id>
     <id>android-sdk</id>
+    <id>anita-terminal</id>
     <id>ankhsvn</id>
     <id>annie</id>
     <id>anonymouspro</id>
@@ -26571,6 +26584,7 @@
     <id>apkrepatcher</id>
     <id>apkshellext</id>
     <id>apktool</id>
+    <id>apollo</id>
     <id>app-shop</id>
     <id>appaudioconfig</id>
     <id>appcharger</id>
@@ -26644,6 +26658,7 @@
     <id>auditbeat</id>
     <id>autenticacaogovpt</id>
     <id>authy-desktop</id>
+    <id>auto-mit</id>
     <id>autocadlt</id>
     <id>autoclicker</id>
     <id>autocomplete</id>
@@ -26869,6 +26884,7 @@
     <id>brutaldoom</id>
     <id>bsnes-hd</id>
     <id>bsnes</id>
+    <id>bsubio</id>
     <id>btopdf</id>
     <id>btprox.install</id>
     <id>btprox.portable</id>
@@ -27064,11 +27080,13 @@
     <id>codeauditor</id>
     <id>codegpt</id>
     <id>codemaid</id>
+    <id>codeprintio</id>
     <id>codeproject-ai</id>
     <id>codeql</id>
     <id>coderush-vs2015</id>
     <id>codeslice</id>
     <id>coffeescript</id>
+    <id>cold-turkey-blocker</id>
     <id>colemak</id>
     <id>collapsesolution</id>
     <id>color-quantizer</id>
@@ -27124,6 +27142,7 @@
     <id>copytranslator</id>
     <id>coq</id>
     <id>coreinfo</id>
+    <id>corretto25jdk</id>
     <id>corvusskk</id>
     <id>cosign</id>
     <id>cosmosdb.odbc</id>
@@ -27201,6 +27220,7 @@
     <id>customexplorertoolbar</id>
     <id>cutter</id>
     <id>cxcli</id>
+    <id>cyberbrick</id>
     <id>cyberduck.install</id>
     <id>cyberduck</id>
     <id>cyberfox</id>
@@ -27388,6 +27408,7 @@
     <id>divvy</id>
     <id>dllexp</id>
     <id>dmg2img</id>
+    <id>dn-dosnav</id>
     <id>dnsdataview</id>
     <id>dnslookupview</id>
     <id>dnspy-netfx</id>
@@ -27657,6 +27678,7 @@
     <id>execs</id>
     <id>executedprogramslist</id>
     <id>exeinfo</id>
+    <id>exelearning</id>
     <id>exercism-io-cli</id>
     <id>exfat7z</id>
     <id>exif-purge</id>
@@ -28015,6 +28037,7 @@
     <id>ggu-loi</id>
     <id>ggu-oedom</id>
     <id>ggu-plateload</id>
+    <id>ggu-plgw</id>
     <id>ggu-pumptest</id>
     <id>ggu-retain</id>
     <id>ggu-seep</id>
@@ -28022,6 +28045,7 @@
     <id>ggu-shrinkage</id>
     <id>ggu-sieve</id>
     <id>ggu-slab</id>
+    <id>ggu-slope-pile</id>
     <id>ggu-slugtest</id>
     <id>ggu-software-codemeter</id>
     <id>ggu-stability</id>
@@ -28200,6 +28224,7 @@
     <id>gulp-cli</id>
     <id>gulpsnippetpack</id>
     <id>gurtle</id>
+    <id>gyb</id>
     <id>gyroflow</id>
     <id>gzdoom</id>
     <id>h-opc-cli</id>
@@ -28550,6 +28575,7 @@
     <id>jtalert</id>
     <id>jtrim</id>
     <id>juffed</id>
+    <id>jugglinglab</id>
     <id>juicefs</id>
     <id>jujutsu.portable</id>
     <id>jumplistsview</id>
@@ -28566,6 +28592,7 @@
     <id>kadu</id>
     <id>kafka</id>
     <id>kafkaexplorer</id>
+    <id>kalanjar</id>
     <id>kamel</id>
     <id>karaf</id>
     <id>karen</id>
@@ -28719,6 +28746,7 @@
     <id>kubetui</id>
     <id>kubeval</id>
     <id>kustomize</id>
+    <id>kustoterminal</id>
     <id>kvrt</id>
     <id>kyverno-cli</id>
     <id>kzip</id>
@@ -28817,6 +28845,7 @@
     <id>linqpad7.portable</id>
     <id>linqpad8.install</id>
     <id>linqpad8.portable</id>
+    <id>liquibase-secure</id>
     <id>liquibase</id>
     <id>listary</id>
     <id>listdlls</id>
@@ -29107,6 +29136,7 @@
     <id>monitorian</id>
     <id>monitorswitcher</id>
     <id>monodevelop</id>
+    <id>moolticute</id>
     <id>mooncoin</id>
     <id>moose.portable</id>
     <id>moq.prig</id>
@@ -29247,9 +29277,11 @@
     <id>ncrunch-vs2017</id>
     <id>ncrunch-vs2019</id>
     <id>ncrunch-vs2022</id>
+    <id>ncrunch-vs2026</id>
     <id>ndi-runtime</id>
     <id>ndm</id>
     <id>neat</id>
+    <id>nebula</id>
     <id>neck-diagrams</id>
     <id>nekot</id>
     <id>nelson</id>
@@ -29354,6 +29386,7 @@
     <id>netfx-4.8.1-devpack</id>
     <id>netfx-pcl-reference-assemblies-4.6</id>
     <id>netfx-repair-tool</id>
+    <id>netgen-ngsuite</id>
     <id>nethermind</id>
     <id>nethor</id>
     <id>netlimiter-infobar</id>
@@ -29370,6 +29403,7 @@
     <id>netstat-agent.portable</id>
     <id>netstat-viewer</id>
     <id>nettraffic</id>
+    <id>network-mapper</id>
     <id>network-miner</id>
     <id>networkconnectlog</id>
     <id>networkinterfacesview</id>
@@ -29462,6 +29496,8 @@
     <id>nuxmv</id>
     <id>nvenc</id>
     <id>nvidia-geforce-now</id>
+    <id>nvidia-rtx-driver</id>
+    <id>nvidia-studio-driver</id>
     <id>nvika</id>
     <id>nvm.install</id>
     <id>nvm.portable</id>
@@ -29840,6 +29876,7 @@
     <id>postgresql15</id>
     <id>postgresql16</id>
     <id>postgresql17</id>
+    <id>postgresql18</id>
     <id>postgresql9</id>
     <id>postman-cli</id>
     <id>postman</id>
@@ -30100,6 +30137,7 @@
     <id>rcforb</id>
     <id>rckskimmer</id>
     <id>rclone-beta</id>
+    <id>rclone-ui</id>
     <id>rclonebrowser</id>
     <id>rclonetray</id>
     <id>rdcman</id>
@@ -30132,6 +30170,7 @@
     <id>recycle</id>
     <id>recyclenow</id>
     <id>red</id>
+    <id>reddit-dl</id>
     <id>redeclipse</id>
     <id>redfox2in1</id>
     <id>redfox</id>
@@ -30936,6 +30975,9 @@
     <id>template-cli</id>
     <id>template</id>
     <id>temple.portable</id>
+    <id>templr</id>
+    <id>temurin25</id>
+    <id>temurin25jre</id>
     <id>tencentdocs</id>
     <id>tencentqq</id>
     <id>tenv</id>
@@ -31446,6 +31488,54 @@
     <id>visualstudio2022testagent</id>
     <id>visualstudio2022testcontroller-preview</id>
     <id>visualstudio2022testcontroller</id>
+    <id>visualstudio2026-preview-workload-azure</id>
+    <id>visualstudio2026-preview-workload-azurebuildtools</id>
+    <id>visualstudio2026-preview-workload-data</id>
+    <id>visualstudio2026-preview-workload-databuildtools</id>
+    <id>visualstudio2026-preview-workload-datascience</id>
+    <id>visualstudio2026-preview-workload-linuxbuildtools</id>
+    <id>visualstudio2026-preview-workload-manageddesktop</id>
+    <id>visualstudio2026-preview-workload-manageddesktopbuildtools</id>
+    <id>visualstudio2026-preview-workload-managedgame</id>
+    <id>visualstudio2026-preview-workload-nativecrossplat</id>
+    <id>visualstudio2026-preview-workload-nativedesktop</id>
+    <id>visualstudio2026-preview-workload-nativegame</id>
+    <id>visualstudio2026-preview-workload-nativemobile</id>
+    <id>visualstudio2026-preview-workload-netcrossplat</id>
+    <id>visualstudio2026-preview-workload-netcrossplatbuildtools</id>
+    <id>visualstudio2026-preview-workload-netweb</id>
+    <id>visualstudio2026-preview-workload-node</id>
+    <id>visualstudio2026-preview-workload-nodebuildtools</id>
+    <id>visualstudio2026-preview-workload-office</id>
+    <id>visualstudio2026-preview-workload-officebuildtools</id>
+    <id>visualstudio2026-preview-workload-python</id>
+    <id>visualstudio2026-preview-workload-universal</id>
+    <id>visualstudio2026-preview-workload-universalbuildtools</id>
+    <id>visualstudio2026-preview-workload-vctools</id>
+    <id>visualstudio2026-preview-workload-visualstudioextension</id>
+    <id>visualstudio2026-preview-workload-webbuildtools</id>
+    <id>visualstudio2026-workload-azure</id>
+    <id>visualstudio2026-workload-data</id>
+    <id>visualstudio2026-workload-datascience</id>
+    <id>visualstudio2026-workload-managedgame</id>
+    <id>visualstudio2026-workload-nativecrossplat</id>
+    <id>visualstudio2026-workload-nativedesktop</id>
+    <id>visualstudio2026-workload-nativegame</id>
+    <id>visualstudio2026-workload-nativemobile</id>
+    <id>visualstudio2026-workload-netcrossplat</id>
+    <id>visualstudio2026-workload-netweb</id>
+    <id>visualstudio2026-workload-node</id>
+    <id>visualstudio2026-workload-office</id>
+    <id>visualstudio2026-workload-python</id>
+    <id>visualstudio2026-workload-universal</id>
+    <id>visualstudio2026-workload-visualstudioextension</id>
+    <id>visualstudio2026buildtools-preview</id>
+    <id>visualstudio2026buildtools</id>
+    <id>visualstudio2026community-preview</id>
+    <id>visualstudio2026enterprise-preview</id>
+    <id>visualstudio2026enterprise</id>
+    <id>visualstudio2026professional-preview</id>
+    <id>visualstudio2026teamexplorer-preview</id>
     <id>visualstudiocode-insiders</id>
     <id>visualstudiocodeinsiders</id>
     <id>visualstudiocommunity2013</id>
@@ -32095,6 +32185,7 @@
     <id>zulu11</id>
     <id>zulu17</id>
     <id>zulu21</id>
+    <id>zulu25</id>
     <id>zulu7</id>
     <id>zulu8</id>
     <id>zulu</id>
