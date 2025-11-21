@@ -15,6 +15,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
         [switch]$noSave,
         [switch]$writeVersion,
         [switch]$noPack,
+        [switch]$copyInternal,
         [parameter(Mandatory = $true)][string]$nupkgFile
     )
     $ErrorActionPreference = 'Stop'
@@ -53,12 +54,21 @@ Function Invoke-InternalizeDownloadedChocoPkg {
         Write-Verbose "$nuspecID is already internal coming from chocolatey.org"
         #quick and dirty, maybe keep already interal packages in list and process (skip and maybe drop) later
         if ($config.useDropPath -eq "yes" -and $config.dropInternal -eq "yes") {
-            Write-Verbose "coping $.nuspecID) to drop path"
+            Write-Verbose "copying $nuspecID to drop path"
             if (-not (Test-Path (Join-Path -Path $config.dropPath -ChildPath (Split-Path $nupkgFile -Leaf) ))) {
                 Copy-Item $nupkgFile $config.dropPath
             }
         }
-
+        if ($copyInternal) {
+            Write-Verbose "copying $nuspecID to work directory"
+            $idDir = (Join-Path $config.workDir $nuspecID)
+            $versionDir = (Join-Path $idDir $nuspecVersion)
+            $newpath = (Join-Path $versionDir (Split-Path $nupkgFile -Leaf))
+            $null = New-Item -Type Directory $versionDir -ea 0
+            if (-not (Test-Path $newpath)) {
+                Copy-Item $nupkgFile $newpath
+            }
+        }
     } elseif ($packagesXMLcontent.packages.implemented.pkg.id -icontains $nuspecID) {
 
         $installScriptDetails = Read-ZippedInstallScript -NupkgPath $nupkgFile

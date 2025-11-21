@@ -240,6 +240,14 @@
         }
     }
 
+    if ($null -eq $config.copyInternal) {
+        #Fallback as this variable was not there from beginning
+    } elseif ("yes", "no" -notcontains $config.copyInternal) {
+        Throw "bad copyInternal value in config xml, must be yes or no"
+    } elseif ($config.copyInternal -eq "yes") {
+        $copyInternal = $true
+    }
+
     if ($null -ne $config.locale) {
         $global:remixerLocale = $config.locale
     } else {

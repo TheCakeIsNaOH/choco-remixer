@@ -14,7 +14,8 @@ Function Invoke-InternalizeChocoPkg {
         [switch]$skipRepoMove,
         [switch]$noSave,
         [switch]$writeVersion,
-        [switch]$noPack
+        [switch]$noPack,
+        [switch]$copyInternal
     )
     $ErrorActionPreference = 'Stop'
 
@@ -69,7 +70,7 @@ Function Invoke-InternalizeChocoPkg {
 
         #todo, add switch here to select from other options to get list of nupkgs
         Write-Verbose "Checking for packages in $($config.searchDir)"
-        if ($thoroughList) {
+        if ($thoroughList -or $copyInternal) {
             $nupkgArray = Get-ChildItem -File $config.searchDir -Filter "*.nupkg" -Recurse
         } else {
             #filters based on folder name, therefore less files to open later and therefore faster, but may not be useful in all circumstances.

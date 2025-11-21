@@ -15,7 +15,6 @@
 	<!-- Yes/No if internal packages should be dropped -->
 	<dropInternal>yes</dropInternal>
 
-
 	<!-- Yes/No to automatically filling out internalized package versions -->
 	<writePerPkgs>yes</writePerPkgs>
 
@@ -44,8 +43,11 @@
 	<!-- specify credentials if needed; format user:pass ; Otherwise if no authentication, put in no; can also specify in params -->
 	<proxyRepoCreds>no</proxyRepoCreds>
 
-	<!-- Attempt to write out the the old and the new version of the package | option is yes or no -->
+	<!-- Attempt to print out the the old and the new version of the package | option is yes or no -->
 	<writeVersion>no</writeVersion>
+
+	<!-- Copy already internal package IDs from the searchDir to the workDir -->
+	<copyInternal>no</copyInternal>
 
 	<!-- Set a locale to use for downloading locale-specific installers (e.g. Firefox). Defaults to en-US if not set -->
 	<locale>en-US</locale>
