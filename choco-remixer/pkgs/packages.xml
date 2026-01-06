@@ -4705,6 +4705,14 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>amd-ryzen-chipset</id>
+      <functionName>Convert-AmdRyzenChipset</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <whyNotInternal>License</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>amp-winoff.install</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -20768,6 +20776,19 @@
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>Size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>simplex</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeMSI>yes</removeMSI>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
@@ -26542,7 +26563,6 @@
     <id>amazon-appstream-usb</id>
     <id>amazon-appstream</id>
     <id>amazon-ecr-credential-helper</id>
-    <id>amd-ryzen-chipset</id>
     <id>amethyst</id>
     <id>amiduos</id>
     <id>amiri</id>
@@ -30503,7 +30523,6 @@
     <id>simpleradiorecorder</id>
     <id>simplesystemtweaker</id>
     <id>simplex.commandline</id>
-    <id>simplex</id>
     <id>simply-weather</id>
     <id>simutrans-pak128</id>
     <id>simutrans-pak64</id>
