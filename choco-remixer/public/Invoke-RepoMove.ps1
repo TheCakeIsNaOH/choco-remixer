@@ -56,7 +56,7 @@
             if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
                 $versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
                 $versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
-                $versionsUntrimmed = ($versionsPage.links | Where-Object href -Match "\d" | Select-Object -expand href)
+                $versionsUntrimmed = ($versionsPage.links | Where-Object href -Match "\d" | Select-Object -expand href | Split-Path -Leaf)
                 if ($versionsUntrimmed) {
                     $versions = $versionsUntrimmed.trim("/")
                 } else {
@@ -101,7 +101,7 @@
             } elseif ($packagesXMLcontent.packages.implemented.pkg.id -icontains $nuspecID) {
                 $versionsURL = $proxyRepoBrowseURL + $nuspecID + "/"
                 $versionsPage = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $versionsURL
-                $versions = ($versionsPage.links | Where-Object href -Match "\d" | Select-Object -expand href).trim("/")
+                $versions = ($versionsPage.links | Where-Object href -Match "\d" | Select-Object -expand href | Split-Path -Leaf)
 
                 $IdSaveDir = Join-Path $config.searchDir $nuspecID
                 if (!(Test-Path $IdSaveDir)) {
