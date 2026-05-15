@@ -4735,6 +4735,14 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>amd-software-adrenalin-edition</id>
+      <functionName>Convert-amd-driver</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x64</architecture>
+      <whyNotInternal>License</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>amd-ryzen-master</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -26656,7 +26664,6 @@
     <id>amazon-appstream</id>
     <id>amazon-ecr-credential-helper</id>
     <id>amd-cleanup-utility</id>
-    <id>amd-software-adrenalin-edition</id>
     <id>amethyst</id>
     <id>amiduos</id>
     <id>amiri</id>
