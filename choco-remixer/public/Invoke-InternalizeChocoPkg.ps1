@@ -33,6 +33,7 @@ Function Invoke-InternalizeChocoPkg {
             configXML        = $configXML
             internalizedXML  = $internalizedXML
             repoCheckXML     = $repoCheckXML
+            privateRepoCreds = $privateRepoCreds
             calledInternally = $true
         }
 

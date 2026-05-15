@@ -7,6 +7,7 @@
         [string]$repoCheckXML,
         [string]$folderXML,
         [string]$proxyRepoCreds,
+        [string]$privateRepoCreds,
         [switch]$calledInternally
     )
     $saveProgPref = $ProgressPreference
@@ -36,6 +37,22 @@
         }
     }
 
+    if ($null -eq $privateRepoCreds) {
+        Throw "privateRepoCreds cannot be empty, please change to an explicit no, base64:<encodedString>, or give the creds"
+    } elseif ($privateRepoCreds -eq "no") {
+        $privateRepoHeaderCreds = @{ }
+        Write-Warning "Not tested yet, if you see this, let us know how it goes"
+    } elseif ($privateRepoCreds -ilike "base64:*") {
+        $privateRepoHeaderCreds = @{
+            Authorization = "Basic $($privateRepoCreds.Replace('base64:',''))"
+        }
+    } else {
+        $privateRepoCredsBase64 = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($privateRepoCreds))
+        $privateRepoHeaderCreds = @{
+            Authorization = "Basic $privateRepoCredsBase64"
+        }
+    }
+
     Test-URL -url $config.proxyRepoURL -name "proxyRepoURL" -headers $proxyRepoHeaderCreds
 
     $proxyRepoName = ($config.proxyRepoURL -split "repository" | Select-Object -Last 1).trim("/")
@@ -44,6 +61,8 @@
     $proxyRepoApiURL = $proxyRepoBaseURL + "service/rest/v1/"
     $proxyRepoBrowsePage = Invoke-WebRequest -UseBasicParsing -Uri $proxyRepoBrowseURL -Headers $proxyRepoHeaderCreds
     $proxyRepoIdList = $proxyRepoBrowsePage.Links.href
+    $privateRepoBaseURL = $config.privateRepoURL -split "repository" | Select-Object -First 1
+    $privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
 
     $saveDir = Join-Path $config.workDir "internal-packages-temp"
     if (!(Test-Path $saveDir)) {
@@ -75,19 +94,32 @@
                         Throw "$nuspecID $_ search returned an array, search URL may have been malformed"
                     }
 
-                    #$heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
-                    #$filename = ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
-                    $filename = $nuspecID + "." + $_ + ".nupkg"
-                    $downloadURL = $searchResults.items.assets.downloadURL
-                    $downloadChecksum = $searchResults.items.assets.checksum.sha512
+                    $privateApiSearch = $privateRepoApiURL + "search?repository=$proxyRepoName&format=nuget&name=$nuspecID&version=$_"
+                    $privateSearchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privateApiSearch
 
-                    Get-File -url $downloadURL -filename $filename -folder $saveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
+                    if ($privateSearchResults.items.Count -eq 0) {
+                        Write-Information "$nuspecID $_ found in the private repo. Deleting in proxy repo." -InformationAction Continue
+                    } else {
+                        #$heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
+                        #$filename = ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
+                        $filename = $nuspecID + "." + $_ + ".nupkg"
+                        $downloadURL = $searchResults.items.assets.downloadURL
+                        $downloadChecksum = $searchResults.items.assets.checksum.sha512
 
-                    $pushArgs = "push " + $filename + " -f -r -s " + $config.moveToRepoURL
-                    $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
+                        if ($null -eq $downloadChecksum) {
+                            Write-Verbose "$nuspecID $_ has no checksum, no local copy in repo. Skipping"
+                        } else {
+                            Get-File -url $downloadURL -filename $filename -folder $saveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
 
-                    if ($pushcode.exitcode -ne "0") {
-                        Throw "pushing $nuspecID $_ failed"
+                            $pushArgs = "push " + $filename + " -f -r -s " + $config.moveToRepoURL
+                            $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
+
+                            if ($pushcode.exitcode -ne "0") {
+                                Throw "pushing $nuspecID $_ failed"
+                            }
+                        }
+
+
                     }
 
                     $apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
@@ -139,9 +171,13 @@
                         $downloadURL = $searchResults.items.assets.downloadURL
                         $downloadChecksum = $searchResults.items.assets.checksum.sha512
 
-                        Get-File -url $downloadURL -filename $filename -folder $IdSaveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
+                        if ($null -eq $downloadChecksum) {
+                            Write-Verbose "$nuspecID $_ has no checksum, no local copy in repo. Skipping"
+                        } else {
+                            Get-File -url $downloadURL -filename $filename -folder $IdSaveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
 
-                        Write-Information "$nuspecID $_ found and downloaded, will be deleted next run if internalization succeeds" -InformationAction Continue
+                            Write-Information "$nuspecID $_ found and downloaded, will be deleted next run if internalization succeeds" -InformationAction Continue
+                        }
                     }
                 }
 
