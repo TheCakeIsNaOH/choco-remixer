@@ -42,29 +42,42 @@
 
     Test-URL -url $config.privateRepoURL -name "privateRepoURL" -Headers $privateRepoHeaderCreds
 
-    Write-Information "Getting information from the Nexus API, this may take a while." -InformationAction Continue
-    $privateRepoName = ($config.privateRepoURL -split "repository" | Select-Object -Last 1).trim("/")
-    $privateRepoBaseURL = $config.privateRepoURL -split "repository" | Select-Object -First 1
-    $privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
-    $privatePageURL = $privateRepoApiURL + 'components?repository=' + $privateRepoName
-    $privatePageURLorig = $privatePageURL
-    do {
-        $privatePage = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privatePageURL
-        [array]$privateInfo += $privatePage.items
+    if ($privateRepoType -eq "sleet") {
+        $privateRepoResources = Invoke-RestMethod -Method Get -Uri $config.privateRepoURL
+        $privateIndexURL = $privateRepoResources.resources | Where-Object '@type' -eq "http://schema.emgarten.com/sleet#PackageIndex/1.0.0" | Select-Object -ExpandProperty '@id'
+        $privateIndex = Invoke-RestMethod -Method Get -Uri $privateIndexURL
+        $privateInfo = $privateIndex.packages
 
-        if ($privatePage.continuationToken) {
-            $privatePageURL = $privatePageURLorig + '&continuationToken=' + $privatePage.continuationToken
-        }
-    }  while ($privatePage.continuationToken)
-    Write-Information "Finished" -InformationAction Continue
+    } else {
+        Write-Information "Getting information from the Nexus API, this may take a while." -InformationAction Continue
+        $privateRepoName = ($config.privateRepoURL -split "repository" | Select-Object -Last 1).trim("/")
+        $privateRepoBaseURL = $config.privateRepoURL -split "repository" | Select-Object -First 1
+        $privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
+        $privatePageURL = $privateRepoApiURL + 'components?repository=' + $privateRepoName
+        $privatePageURLorig = $privatePageURL
+        do {
+            $privatePage = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privatePageURL
+            [array]$privateInfo += $privatePage.items
+
+            if ($privatePage.continuationToken) {
+                $privatePageURL = $privatePageURLorig + '&continuationToken=' + $privatePage.continuationToken
+            }
+        }  while ($privatePage.continuationToken)
+        Write-Information "Finished" -InformationAction Continue
+    }
+
 
     $toSearchToInternalize | ForEach-Object {
         [system.gc]::Collect();
         $nuspecID = $_
         Write-Verbose "Comparing repo versions of $($nuspecID)"
 
-        # Normalize version, as Chocolatey CLI now normalizes versions on pack
-        $privateVersions = $privateInfo | Where-Object { $_.name -eq $nuspecID } | Select-Object -ExpandProperty version | ForEach-Object { [NuGet.Versioning.NuGetVersion]::Parse($_).ToNormalizedString(); }
+        if ($privateRepoType -eq "sleet") {
+            $privateVersions = $privateInfo.PSObject.Properties | Where-Object Name -eq $nuspecID | Select-Object -ExpandProperty Value | ForEach-Object { [NuGet.Versioning.NuGetVersion]::Parse($_).ToNormalizedString(); }
+        } else {
+            # Normalize version, as Chocolatey CLI now normalizes versions on pack
+            $privateVersions = $privateInfo | Where-Object { $_.name -eq $nuspecID } | Select-Object -ExpandProperty version | ForEach-Object { [NuGet.Versioning.NuGetVersion]::Parse($_).ToNormalizedString(); }
+        }
 
         $publicPageURL = $config.publicRepoURL + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $nuspecID + '%27)%20and%20IsLatestVersion'
         [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
@@ -117,8 +130,23 @@
                 if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
                     $stopwatch = [system.diagnostics.stopwatch]::StartNew()
                     $dlwdPath = Join-Path $saveDir $filename
-                    $pushArgs = "push " + $filename + " -f -r -s " + $config.privateRepoURL
-                    $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
+
+                    if ($privateRepoType -eq "sleet") {
+                        $pushArgs = 'push --force --config ' + $config.sleetConfig + " --source " + $config.sleetPrivateRepoName + " " + $dlwdPath
+                        $startProcessArgs = @{
+                            FilePath         = "sleet"
+                            ArgumentList     = $pushArgs
+                            WorkingDirectory = $saveDir
+                            NoNewWindow      = $true
+                            Wait             = $true
+                            PassThru         = $true
+                        }
+
+                        $pushcode = Start-Process @startProcessArgs
+                    } else {
+                        $pushArgs = "push " + $filename + " -f -r -s " + $config.privateRepoURL
+                        $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
+                    }
 
                     if ($pushcode.exitcode -ne "0") {
                         Throw "pushing $nuspecID $_ failed"
@@ -179,8 +207,23 @@
                 if ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
                     $stopwatch = [system.diagnostics.stopwatch]::StartNew()
                     $dlwdPath = Join-Path $saveDir $filename
-                    $pushArgs = "push " + $filename + " -f -r -s " + $config.privateRepoURL
-                    $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
+
+                    if ($privateRepoType -eq "sleet") {
+                        $pushArgs = 'push --force --config ' + $config.sleetConfig + " --source " + $config.sleetPrivateRepoName + " " + $dlwdPath
+                        $startProcessArgs = @{
+                            FilePath         = "sleet"
+                            ArgumentList     = $pushArgs
+                            WorkingDirectory = $saveDir
+                            NoNewWindow      = $true
+                            Wait             = $true
+                            PassThru         = $true
+                        }
+
+                        $pushcode = Start-Process @startProcessArgs
+                    } else {
+                        $pushArgs = "push " + $filename + " -f -r -s " + $config.privateRepoURL
+                        $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
+                    }
 
                     if ($pushcode.exitcode -ne "0") {
                         Throw "pushing $nuspecID $_ failed"

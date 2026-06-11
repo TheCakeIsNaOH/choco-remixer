@@ -66,6 +66,10 @@ Function Format-NuspecForValidation {
         $nuspecXML.package.metadata.iconurl = "https://example.com/"
     }
 
+    if ($nuspecXML.package.metadata.iconurl -like "https://github.com/*/raw*") {
+        $nuspecXML.package.metadata.iconurl = "https://example.com/"
+    }
+
     Try {
         [System.Xml.XmlWriterSettings] $XmlSettings = New-Object System.Xml.XmlWriterSettings
         $XmlSettings.Indent = $true

@@ -23,9 +23,11 @@
 	<!-- Url to push packages too -->
 	<pushURL>https://my.repo/feed/</pushURL>
 
-	<!-- Nexus only -->
+	<!-- Nexus or Sleet only -->
 	<!-- Check if packages ids listed in toInternalize are out of date in the private repo, and download them to be internalized -->
 	<repoCheck>no</repoCheck>
+	<!-- Type of repository in use - nexus or sleet - Defaults to Nexus -->
+	<privateRepoType>nexus</privateRepoType>
 	<!-- specify if the Repack should be skipped  -->
 	<skipRepack>no</skipRepack>
 	<!-- publicRepoURL should normally not need to be changed -->
@@ -34,6 +36,10 @@
 	<privateRepoURL>https://my.repo/private-feed/</privateRepoURL>
 	<!-- specify credentials if needed; format user:pass ; Otherwise if no authentication, put in no; can also specify in params -->
 	<privateRepoCreds>no</privateRepoCreds>
+	<!-- Sleet only, path to config file-->
+	<sleetConfig></sleetConfig>
+	<!-- Sleet only, name of internal repository -->
+	<sleetPrivateRepoName></sleetPrivateRepoName>
 
 	<!-- Nexus only -->
 	<!-- Check the packages on a proxy repository, and either internalize them or push already internal packages to the moveToRepo -->

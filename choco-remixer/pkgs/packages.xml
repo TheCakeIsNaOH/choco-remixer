@@ -16454,11 +16454,11 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x32</architecture>
-      <urlType>0</urlType>
+      <urlType>7</urlType>
       <argsType>1</argsType>
       <removeEXE>yes</removeEXE>
-      <checksumArgsType>0</checksumArgsType>
-      <checksumTypeType>sha512</checksumTypeType>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>licensing</whyNotInternal>
     </pkg>
     <pkg>

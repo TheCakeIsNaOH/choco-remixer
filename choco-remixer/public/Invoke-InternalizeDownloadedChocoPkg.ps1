@@ -211,17 +211,31 @@ Function Invoke-InternalizeDownloadedChocoPkg {
 
         if ($config.pushPkgs -eq "yes") {
             Write-Information "pushing $($obj.nuspecID)" -InformationAction Continue
-            $pushArgs = 'push -f -r -s ' + $config.pushURL
-            $startProcessArgs = @{
-                FilePath         = "choco"
-                ArgumentList     = $pushArgs
-                WorkingDirectory = $obj.versionDir
-                NoNewWindow      = $true
-                Wait             = $true
-                PassThru         = $true
-            }
+            if ($privateRepoType -eq "sleet") {
+                $pushArgs = 'push --force --config ' + $config.sleetConfig + " --source " + $config.sleetPrivateRepoName + " " + $obj.versionDir
+                $startProcessArgs = @{
+                    FilePath         = "sleet"
+                    ArgumentList     = $pushArgs
+                    WorkingDirectory = $obj.versionDir
+                    NoNewWindow      = $true
+                    Wait             = $true
+                    PassThru         = $true
+                }
 
-            $pushcode = Start-Process @startProcessArgs
+                $pushcode = Start-Process @startProcessArgs
+            } else {
+                $pushArgs = 'push -f -r -s ' + $config.pushURL
+                $startProcessArgs = @{
+                    FilePath         = "choco"
+                    ArgumentList     = $pushArgs
+                    WorkingDirectory = $obj.versionDir
+                    NoNewWindow      = $true
+                    Wait             = $true
+                    PassThru         = $true
+                }
+
+                $pushcode = Start-Process @startProcessArgs
+            }
         }
         if (($config.pushPkgs -eq "yes") -and ($pushcode.exitcode -ne "0")) {
             $obj.status = "push failed"

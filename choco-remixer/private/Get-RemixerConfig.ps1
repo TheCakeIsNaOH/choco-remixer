@@ -248,6 +248,21 @@
         $copyInternal = $true
     }
 
+    if ($null -eq $config.privateRepoType) {
+        #Fallback as this variable was not there from beginning
+        $privateRepoType = "nexus"
+    } elseif ("nexus", "sleet", "" -notcontains $config.privateRepoType) {
+        Throw "bad privateRepoType value in config xml, must be nexus or sleet"
+    } elseif ($config.privateRepoType -eq "sleet") {
+        $privateRepoType = "sleet"
+    } else {
+        $privateRepoType = "nexus"
+    }
+
+    if ($privateRepoType -eq "sleet") {
+        #TODO - setup pushing, setup repomove variables
+    }
+
     if ($null -ne $config.locale) {
         $global:remixerLocale = $config.locale
     } else {
