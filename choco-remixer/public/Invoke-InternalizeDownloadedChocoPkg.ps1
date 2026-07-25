@@ -212,7 +212,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
         if ($config.pushPkgs -eq "yes") {
             Write-Information "pushing $($obj.nuspecID)" -InformationAction Continue
             if ($privateRepoType -eq "sleet") {
-                $pushArgs = 'push --force --config ' + $config.sleetConfig + " --source " + $config.sleetPrivateRepoName + " " + $obj.versionDir
+                $pushArgs = 'push --force --verbosity minimal --config ' + $config.sleetConfig + " --source " + $config.sleetPrivateRepoName + " " + $obj.versionDir
                 $startProcessArgs = @{
                     FilePath         = "sleet"
                     ArgumentList     = $pushArgs

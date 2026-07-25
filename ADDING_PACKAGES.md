@@ -101,6 +101,7 @@ This function edits the install script and downloads the installer(s) for standa
 - 7: `'\s+url\s+='`, `'\s+url64\s+='`
 - 8: `'\s+url32\s+='`, `'\s+url64\s+='`
 - 9: `'\s+url\s+='`, `'\s+url64bit\s+='`
+- 10: `'^\$Url\s+='`, `'^\$Url\s+='`
 
 ## `$argsType` sets how to parse the argument splatted for `Install-ChocolateyPackage`
 - 0: for `packageArgs = @{`
@@ -131,4 +132,5 @@ This function edits the install script and downloads the installer(s) for standa
 ## `$versionUrlType` sets what type of version variable to use
 - 0: `$version`, replacing `${version}`
 - 1: `$PackageVersion` with "", replacing `$($PackageVersion)`
-- 0: `$version` with "", replacing `${version}`
+- 2: `$version` with "", replacing `${version}`
+- 2: Found nupkg version, replacing `$version`

@@ -132,7 +132,7 @@
                     $dlwdPath = Join-Path $saveDir $filename
 
                     if ($privateRepoType -eq "sleet") {
-                        $pushArgs = 'push --force --config ' + $config.sleetConfig + " --source " + $config.sleetPrivateRepoName + " " + $dlwdPath
+                        $pushArgs = 'push --force --verbosity minimal --config ' + $config.sleetConfig + " --source " + $config.sleetPrivateRepoName + " " + $dlwdPath
                         $startProcessArgs = @{
                             FilePath         = "sleet"
                             ArgumentList     = $pushArgs

@@ -130,6 +130,15 @@ Function Edit-InstallChocolateyPackage {
             }
             Break
         }
+        10 {
+            if ($x32) {
+                $fullurl32 = ($installScript -split "`n" | Select-String -Pattern '^\$url\s+=').tostring()
+            }
+            if ($x64) {
+                $fullurl64 = ($installScript -split "`n" | Select-String -Pattern '^\$url\s+=').tostring()
+            }
+            Break
+        }
         Default {
             Write-Error "could not find url type"
         }
@@ -183,6 +192,15 @@ Function Edit-InstallChocolateyPackage {
                 }
                 if ($x64) {
                     $url64 = $url64 -replace '\$\{Version\}',$scriptVersionVar
+                }
+                Break
+            }
+            3 {
+                if ($x32) {
+                    $url32 = $url32 -replace '$Version',$version
+                }
+                if ($x64) {
+                    $url64 = $url64 -replace '\$Version',$version
                 }
                 Break
             }

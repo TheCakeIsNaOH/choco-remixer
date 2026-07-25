@@ -408,8 +408,8 @@ Function Convert-firefox ([PackageInternalizeInfo]$obj) {
     $checksums = GetChecksums -language $locale -checksumFile $(Join-Path $obj.toolsDir "LanguageChecksums.csv")
 
 
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$packageArgs.Url64 ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "\s'x86'\s+=").tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "\s'x64'\s+=").tostring()
 
     $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring() -replace '\$\{locale\}', $locale
     $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").tostring() -replace '\$\{locale\}', $locale
@@ -441,8 +441,8 @@ Function Convert-firefoxesr ([PackageInternalizeInfo]$obj) {
     $checksums = GetChecksums -language $locale -checksumFile $(Join-Path $obj.toolsDir "LanguageChecksums.csv")
 
 
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern " Url ").tostring()
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$packageArgs.Url64 ').tostring()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "\s'x86'\s+=").tostring()
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern "\s'x64'\s+=").tostring()
 
     $url32 = ($fullurl32 -split '"' | Select-String -Pattern "http").tostring() -replace '\$\{locale\}', $locale
     $url64 = ($fullurl64 -split '"' | Select-String -Pattern "http").tostring() -replace '\$\{locale\}', $locale

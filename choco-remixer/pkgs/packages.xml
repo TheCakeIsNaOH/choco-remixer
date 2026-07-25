@@ -1096,7 +1096,6 @@
     <id>fwup</id>
     <id>fxgqlc</id>
     <id>fxsound</id>
-    <id>fzf</id>
     <id>g-helper</id>
     <id>galaxian</id>
     <id>gallery-dl</id>
@@ -1169,7 +1168,6 @@
     <id>gitflow-hooks</id>
     <id>gitg.install</id>
     <id>github-build-from-label</id>
-    <id>github-desktop</id>
     <id>github-hovercard-chrome</id>
     <id>github</id>
     <id>githubforwindows</id>
@@ -3221,6 +3219,7 @@
     <id>umlet</id>
     <id>umple</id>
     <id>unciv</id>
+    <id>unzip</id>
     <id>uncrustify</id>
     <id>undark</id>
     <id>undercover10</id>
@@ -8628,6 +8627,13 @@
     </pkg>
     <pkg>
       <functionName>Convert-dotnetcore-general-internalizer</functionName>
+      <id>dotnet-10.0-sdk-3xx</id>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>size</whyNotInternal>
+    </pkg>
+    <pkg>
+      <functionName>Convert-dotnetcore-general-internalizer</functionName>
       <id>dotnet-11.0-aspnetruntime</id>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
@@ -10657,6 +10663,13 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>fzf</id>
+      <functionName>Convert-fzf</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>gajim</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -11054,6 +11067,19 @@
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>github-desktop</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>7</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>Size</whyNotInternal>
     </pkg>
     <pkg>
       <id>gitsh</id>
@@ -16875,6 +16901,19 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>ollama</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x32</architecture>
+      <urlType>2</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>2</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>onedrive</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -17007,6 +17046,26 @@
       <hasVersionUrl>yes</hasVersionUrl>
       <versionUrlType>1</versionUrlType>
       <doubleQuotesUrl>yes</doubleQuotesUrl>
+    </pkg>
+    <pkg>
+      <id>opencode-desktop</id>
+      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <architecture>x64</architecture>
+      <urlType>10</urlType>
+      <argsType>0</argsType>
+      <removeEXE>yes</removeEXE>
+      <checksumArgsType>5</checksumArgsType>
+      <checksumTypeType>sha256</checksumTypeType>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
+      <id>opencode</id>
+      <functionName>Convert-opencode</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
       <id>opencppcoverage</id>
@@ -27702,7 +27761,6 @@
     <id>dotlocal</id>
     <id>dotmemory-console.portable</id>
     <id>dotmemory-unit.portable</id>
-    <id>dotnet-10.0-sdk-3xx</id>
     <id>dotnet-verification-tool</id>
     <id>dotnet4.6-targetpack</id>
     <id>dotnet4.6.1-devpack</id>
@@ -29972,7 +30030,6 @@
     <id>okta</id>
     <id>olex2</id>
     <id>olive</id>
-    <id>ollama</id>
     <id>ollydbg</id>
     <id>omega-data-logger</id>
     <id>omegat</id>
@@ -30001,8 +30058,6 @@
     <id>openboard</id>
     <id>openbve</id>
     <id>openchrom</id>
-    <id>opencode-desktop</id>
-    <id>opencode</id>
     <id>opencodecs</id>
     <id>opencomic.portable</id>
     <id>opencomic</id>
@@ -31749,7 +31804,6 @@
     <id>unrar</id>
     <id>unused-deps</id>
     <id>unxutils</id>
-    <id>unzip</id>
     <id>upackx</id>
     <id>upsource</id>
     <id>uptodatedownloader.portable</id>
