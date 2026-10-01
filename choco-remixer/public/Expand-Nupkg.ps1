@@ -83,7 +83,12 @@ Function Expand-Nupkg {
             $null = New-Item -Type Directory $Destination -ea 0
             $Destination = (Resolve-Path $Destination).Path
 
-            $archive = [System.IO.Compression.ZipFile]::Open($Path, 'read')
+            $archive = $null
+            try {
+                $archive = [System.IO.Compression.ZipFile]::Open($Path, 'read')
+            } catch {
+                Throw "Could not open $Path as a zip archive: $($_.Exception.Message)"
+            }
 
             #Making sure that none of the extra metadata files in the .nupkg are unpacked
             $filteredArchive = $archive.Entries | `
@@ -93,6 +98,20 @@ Function Expand-Nupkg {
 
             $filteredArchive | ForEach-Object {
                 $OutputFile = Join-Path $Destination $_.fullname
+                #Zip slip guard: refuse entries whose resolved path escapes the destination
+                $resolvedOutputFile = [System.IO.Path]::GetFullPath($OutputFile)
+                $resolvedDestination = [System.IO.Path]::GetFullPath($Destination)
+                if (!$resolvedDestination.EndsWith([System.IO.Path]::DirectorySeparatorChar)) {
+                    $resolvedDestination += [System.IO.Path]::DirectorySeparatorChar
+                }
+                $pathComparison = [System.StringComparison]::Ordinal
+                if ($IsWindows -or $PSVersionTable.PSVersion.Major -lt 6) {
+                    $pathComparison = [System.StringComparison]::OrdinalIgnoreCase
+                }
+                if (!$resolvedOutputFile.StartsWith($resolvedDestination, $pathComparison)) {
+                    Write-Warning "Skipping zip entry '$($_.fullname)' which would extract outside the destination directory"
+                    return
+                }
                 $null = New-Item -Type Directory $(Split-Path $OutputFile) -ea 0
                 Write-Verbose "Extracting $($_.fullname) to $OutputFile"
                 [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, $outputFile, $true)
@@ -100,14 +119,20 @@ Function Expand-Nupkg {
 
             if (!$NoAddFilesElement) {
                 $toplevelFiles = $filteredArchive.fullname | ForEach-Object { $_ -split "[/\\]" | Select-Object -First 1 } | Select-Object -Unique
-                $nuspecPath = Join-Path $Destination ($toplevelFiles | Where-Object { $_ -like "*.nuspec" })
+                $nuspecNames = @($toplevelFiles | Where-Object { $_ -like "*.nuspec" })
+                if ($nuspecNames.Count -gt 1) {
+                    Write-Warning "Multiple top-level nuspec files found, using the first one: $($nuspecNames -join ', ')"
+                }
+                $nuspecPath = Join-Path $Destination ($nuspecNames | Select-Object -First 1)
                 [array]$filesElementList = Get-Item ($toplevelFiles | Where-Object { $_ -notlike "*.nuspec" } | ForEach-Object { Join-Path $Destination $_ })
                 Add-NuspecFilesElement -NuspecPath $nuspecPath -FilesList $filesElementList
             }
 
         } Finally {
             #Always be sure to cleanup
-            $archive.dispose()
+            if ($null -ne $archive) {
+                $archive.dispose()
+            }
         }
     }
 }

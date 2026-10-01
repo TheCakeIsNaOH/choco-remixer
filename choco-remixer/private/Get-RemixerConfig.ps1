@@ -1,4 +1,27 @@
-﻿Function Get-RemixerConfig {
+﻿Function Get-RemixerConfigFingerprint {
+    <#
+    .SYNOPSIS
+    Builds a fingerprint from the XML-path parameters of a caller.
+
+    .DESCRIPTION
+    Used together with the $configLoadFingerprint sentinel set by Get-RemixerConfig
+    so dot-sourcing callers can skip reloading config when the same inputs are
+    used, and reload when they change. Only keys shared by all callers are used;
+    internalizedXML is excluded because Invoke-InternalizeChocoPkg synthesizes
+    that parameter for the callee.
+    #>
+    param($BoundParameters)
+
+    $fingerprint = ''
+    foreach ($key in 'configXML', 'repoCheckXML', 'folderXML') {
+        if ($BoundParameters.ContainsKey($key)) {
+            $fingerprint = $fingerprint + "$key=$($BoundParameters[$key])|"
+        }
+    }
+    return $fingerprint
+}
+
+Function Get-RemixerConfig {
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Justification = 'This is dotsourced')]
     Param(
@@ -14,6 +37,11 @@
     if ($null -eq [Environment]::GetEnvironmentVariable("ChocolateyInstall")) {
         Write-Error "Did not find ChocolateyInstall environment variable, please make sure it exists"
         Throw
+    }
+
+    #Raise the TLS floor on .NET Framework so downloads to modern HTTPS endpoints work
+    if ($PSVersionTable.PSVersion.Major -lt 6) {
+        [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
     }
 
     #Check OS to select user profile location
@@ -88,7 +116,7 @@
         }
     }
 
-    if ($upperFunctionBoundParameters['downloadXML']) {
+    if ($upperFunctionBoundParameters.ContainsKey('downloadXML')) {
         $downloadXML = (Resolve-Path $downloadXML).path
     } elseif ($upperFunctionBoundParameters['folderxml']) {
         $downloadXML = Join-Path $folderXML 'download.xml'
@@ -166,7 +194,17 @@
     if (!(Test-Path $config.workDir)) {
         Throw "$($config.workDir) not found, please specify valid workDir"
     }
-    if ($config.workDir.ToLower().StartsWith($config.searchDir.ToLower())) {
+    $pathComparison = [System.StringComparison]::Ordinal
+    if ($IsWindows -or $PSVersionTable.PSVersion.Major -lt 6) {
+        $pathComparison = [System.StringComparison]::OrdinalIgnoreCase
+    }
+    $separator = [IO.Path]::DirectorySeparatorChar
+    $normalizedSearchDir = $config.searchDir.TrimEnd($separator)
+    $normalizedWorkDir = $config.workDir.TrimEnd($separator)
+    if ($normalizedWorkDir.Equals($normalizedSearchDir, $pathComparison)) {
+        Throw "workDir cannot be the same as the searchDir"
+    }
+    if ($normalizedWorkDir.StartsWith($normalizedSearchDir + $separator, $pathComparison)) {
         Throw "workDir cannot be a sub directory of the searchDir"
     }
 
@@ -271,4 +309,7 @@
 
     $versioningDLLPath = [IO.Path]::Combine((Split-Path $PSScriptRoot), "private", "Chocolatey.NuGet.Versioning.3.4.2", "lib", "netstandard2.0", "Chocolatey.NuGet.Versioning.dll")
     Add-Type -Path $versioningDLLPath
+
+    #Sentinel for dot-sourcing callers to detect stale config, see Get-RemixerConfigFingerprint
+    $configLoadFingerprint = Get-RemixerConfigFingerprint -BoundParameters $upperFunctionBoundParameters
 }

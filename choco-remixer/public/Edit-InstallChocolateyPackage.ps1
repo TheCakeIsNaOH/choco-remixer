@@ -197,7 +197,7 @@ Function Edit-InstallChocolateyPackage {
             }
             3 {
                 if ($x32) {
-                    $url32 = $url32 -replace '$Version',$version
+                    $url32 = $url32 -replace '\$Version',$version
                 }
                 if ($x64) {
                     $url64 = $url64 -replace '\$Version',$version

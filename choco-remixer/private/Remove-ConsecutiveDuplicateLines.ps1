@@ -1,7 +1,7 @@
 ﻿
 Function Remove-ConsecutiveDuplicateLines {
     param (
-        [parameter(Mandatory = $true)][string]$str,
+        [parameter(Mandatory = $true)][AllowEmptyString()][string]$str,
         [switch] $Trim
     )
 
@@ -9,6 +9,7 @@ Function Remove-ConsecutiveDuplicateLines {
 
     $newStr = ""
     $lastLine = ""
+    $isFirstLine = $true
     foreach ($line in $lines) {
         if ($Trim) {
             if ($line.Trim() -eq $lastLine.Trim()) {
@@ -20,7 +21,12 @@ Function Remove-ConsecutiveDuplicateLines {
                 continue
             }
         }
-        $newStr = $newStr + "`n" + $line
+        if ($isFirstLine) {
+            $newStr = $line
+            $isFirstLine = $false
+        } else {
+            $newStr = $newStr + "`n" + $line
+        }
         $lastLine = $line
     }
 

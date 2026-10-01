@@ -12,11 +12,15 @@
             $page = Invoke-WebRequest -UseBasicParsing -Uri $url -Method head
         }
     } catch {
-        $page = $_.Exception.Response
+        $response = $_.Exception.Response
+        if ($null -eq $response) {
+            Throw "Testing $name failed: $($_.Exception.Message)"
+        }
+        $page = $response
     }
 
     if ($null -eq $page.StatusCode) {
-        Throw "bad $name in personal-packages.xml"
+        Throw "bad $name, URL test did not return a status code"
     } elseif ($page.StatusCode -eq 200) {
         Write-Verbose "$name valid"
     } else {

@@ -30,14 +30,14 @@ Function Invoke-DownloadChocoPkg {
         $stopwatch = [system.diagnostics.stopwatch]::StartNew()
         $id = $_.id
         if (([string]::IsNullOrEmpty($_.version))) {
-            $publicPageURL = $ccrAPI + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $id + '%27)%20and%20IsLatestVersion'
-            [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
+            $publicPageURL = New-ChocoODataFilterUrl -ApiBase $ccrAPI -PackageId $id -Filter 'IsLatestVersion'
+            [xml]$publicPage = (Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL).Content
             $publicEntry = $publicPage.feed.entry | Select-Object -First 1
             $version = $publicEntry.properties.Version
 
             if ($null -eq $version) {
-                $publicPageURL = $ccrAPI + 'Packages()?$filter=(tolower(Id)%20eq%20%27' + $id + '%27)%20and%20IsAbsoluteLatestVersion'
-                [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
+                $publicPageURL = New-ChocoODataFilterUrl -ApiBase $ccrAPI -PackageId $id -Filter 'IsAbsoluteLatestVersion'
+                [xml]$publicPage = (Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL).Content
                 $publicEntry = $publicPage.feed.entry | Select-Object -First 1
                 $version = $publicEntry.properties.Version
 
@@ -48,9 +48,11 @@ Function Invoke-DownloadChocoPkg {
             Write-Verbose "Found $version of $id available"
         } else {
             $version = $_.version
-            $publicPageURL = $ccrAPI + "Packages(Id='" + $id + "',Version='" + $version + "')"
+            $escapedId = $id.Replace("'", "''")
+            $escapedVersion = $version.Replace("'", "''")
+            $publicPageURL = $ccrAPI + "Packages(Id='" + $escapedId + "',Version='" + $escapedVersion + "')"
             Write-Warning $publicPageUrl
-            [xml]$publicPage = Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL
+            [xml]$publicPage = (Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL).Content
             $publicEntry = $publicPage.entry | Select-Object -First 1
         }
 
@@ -63,13 +65,29 @@ Function Invoke-DownloadChocoPkg {
         #pwsh considers 3xx response codes as an error if redirection is disallowed
         if ($PSVersionTable.PSVersion.major -ge 6) {
             try {
-                Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea Stop
+                $null = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea Stop
+                $dlwdUrl = $srcUrl
             } catch {
-                $dlwdURL = $_.Exception.Response.headers.location.absoluteuri
+                $response = $_.Exception.Response
+                $location = $null
+                if ($null -ne $response) {
+                    $location = $response.headers.location
+                    if ($location -is [Array]) { $location = $location | Select-Object -First 1 }
+                }
+                if ($null -ne $location) {
+                    $dlwdURL = $location.absoluteuri
+                } else {
+                    Write-Warning "Could not resolve redirect for $srcUrl, using the original URL. $($_.Exception.Message)"
+                    $dlwdUrl = $srcUrl
+                }
             }
         } else {
             $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea 0
-            $dlwdURL = $redirectpage.Links.href
+            if ([string]::IsNullOrWhiteSpace($redirectpage.Links.href)) {
+                $dlwdUrl = $srcUrl
+            } else {
+                $dlwdURL = $redirectpage.Links.href
+            }
         }
 
         #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
@@ -79,7 +97,8 @@ Function Invoke-DownloadChocoPkg {
         Get-File -url $dlwdURL -filename $nupkgFileName -folder $config.SearchDir -checksumTypeType $checksumType -checksum $checksum
         $stopwatch.stop()
         if ($stopwatch.ElapsedMilliseconds -lt 3000) {
-            Write-Information "Waiting for $($stopwatch.Elapsed.Seconds) seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
+            $waitSeconds = [Math]::Ceiling((3000 - $stopwatch.ElapsedMilliseconds) / 1000.0)
+            Write-Information "Waiting for $waitSeconds seconds before downloading the next package so as to not get rate limited" -InformationAction Continue
             Start-Sleep -Milliseconds (3000 - $stopwatch.ElapsedMilliseconds)
         }
     }

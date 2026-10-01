@@ -27,7 +27,8 @@ Function Invoke-InternalizeDownloadedChocoPkg {
         }
     }
 
-    if ($null -eq $config) {
+    $desiredConfigFingerprint = Get-RemixerConfigFingerprint -BoundParameters $PSBoundParameters
+    if (($null -eq $config) -or ($configLoadFingerprint -ne $desiredConfigFingerprint)) {
         Try {
             . Get-RemixerConfig -upperFunctionBoundParameters $PSBoundParameters
         } Catch {
@@ -85,7 +86,8 @@ Function Invoke-InternalizeDownloadedChocoPkg {
 
             $idDir = (Join-Path $config.workDir $nuspecID)
             $versionDir = (Join-Path $idDir $nuspecVersion)
-            $newpath = (Join-Path $versionDir $_.name)
+            $nupkgName = Split-Path $nupkgFile -Leaf
+            $newpath = (Join-Path $versionDir $nupkgName)
             $customXml = $packagesXMLcontent.packages.implemented.pkg | Where-Object id -EQ $nuspecID
             $toolsDir = (Join-Path $versionDir "tools")
 
@@ -104,7 +106,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
             }
 
             $obj = [PackageInternalizeInfo]::New(
-                $_.name,
+                $nupkgName,
                 $nupkgFile,
                 $nuspecVersion,
                 $nuspecID,

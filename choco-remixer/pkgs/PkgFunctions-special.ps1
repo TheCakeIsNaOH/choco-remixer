@@ -180,9 +180,9 @@ Function Convert-powershell ([PackageInternalizeInfo]$obj) {
 
     $filePathWin81x86 = '$urlWin81x86             = (Join-Path $toolsDir "' + $fileNameWin81x86 + '")'
     $filePathWin2k12R2andWin81x64 = '$urlWin2k12R2andWin81x64 = (Join-Path $toolsDir "' + $fileNameWin2k12R2andWin81x64 + '")'
-    $filePathWin7x86 = '$urlWinWin7x86           = (Join-Path $toolsDir "' + $fileNameWin7x86 + '")'
+    $filePathWin7x86 = '$urlWin7x86              = (Join-Path $toolsDir "' + $fileNameWin7x86 + '")'
     $filePathWin2k8R2andWin7x64 = '$urlWin2k8R2andWin7x64   = (Join-Path $toolsDir "' + $fileNameWin2k8R2andWin7x64 + '")'
-    $filePathWin2012 = '$urlWinWin2012           = (Join-Path $toolsDir "' + $fileNameWin2012 + '")'
+    $filePathWin2012 = '$urlWin2012              = (Join-Path $toolsDir "' + $fileNameWin2012 + '")'
 
     $obj.installScriptMod = $obj.installScriptMod -replace '\$osversionLookup\s+=', "$filePathWin81x86`n$filePathWin2k12R2andWin81x64`n$filePathWin7x86`n$filePathWin2k8R2andWin7x64`n$filePathWin2012`n`n$&"
     $obj.installScriptMod = $obj.installScriptMod -replace "(\s+)(throw)", "`$1Remove-Item -Force -EA 0 -Path `$toolsDir\*.zip`$1Remove-Item -Force -EA 0 -Path `$toolsDir\*.msu`$1`$2"

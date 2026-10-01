@@ -12,6 +12,7 @@
     )
     $saveProgPref = $ProgressPreference
     $ProgressPreference = 'SilentlyContinue'
+    $ErrorActionPreference = 'Stop'
 
     Try {
         if (!$calledInternally) {
@@ -26,12 +27,16 @@
     }
 
     if ($null -eq $proxyRepoCreds) {
-        Throw "proxyRepoCreds cannot be empty, please change to an explicit no, yes, or give the creds"
+        Throw "proxyRepoCreds cannot be empty, please change to an explicit no, base64:<encodedString>, or give the creds"
     } elseif ($proxyRepoCreds -eq "no") {
         $proxyRepoHeaderCreds = @{ }
         Write-Warning "Not tested yet, if you see this, let us know how it goes"
+    } elseif ($proxyRepoCreds -ilike "base64:*") {
+        $proxyRepoHeaderCreds = @{
+            Authorization = "Basic $($proxyRepoCreds.Replace('base64:',''))"
+        }
     } else {
-        $proxyRepoCredsBase64 = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($proxyRepoCreds))
+        $proxyRepoCredsBase64 = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($proxyRepoCreds))
         $proxyRepoHeaderCreds = @{
             Authorization = "Basic $proxyRepoCredsBase64"
         }
@@ -47,7 +52,7 @@
             Authorization = "Basic $($privateRepoCreds.Replace('base64:',''))"
         }
     } else {
-        $privateRepoCredsBase64 = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($privateRepoCreds))
+        $privateRepoCredsBase64 = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($privateRepoCreds))
         $privateRepoHeaderCreds = @{
             Authorization = "Basic $privateRepoCredsBase64"
         }
@@ -55,14 +60,16 @@
 
     Test-URL -url $config.proxyRepoURL -name "proxyRepoURL" -headers $proxyRepoHeaderCreds
 
-    $proxyRepoName = ($config.proxyRepoURL -split "repository" | Select-Object -Last 1).trim("/")
-    $proxyRepoBaseURL = $config.proxyRepoURL -split "repository" | Select-Object -First 1
+    $proxyRepoParts = Get-NexusRepoParts -RepoUrl $config.proxyRepoURL
+    $proxyRepoName = $proxyRepoParts.RepoName
+    $proxyRepoBaseURL = $proxyRepoParts.BaseURL
     $proxyRepoBrowseURL = $proxyRepoBaseURL + "service/rest/repository/browse/" + $proxyRepoName + "/"
     $proxyRepoApiURL = $proxyRepoBaseURL + "service/rest/v1/"
     $proxyRepoBrowsePage = Invoke-WebRequest -UseBasicParsing -Uri $proxyRepoBrowseURL -Headers $proxyRepoHeaderCreds
     $proxyRepoIdList = $proxyRepoBrowsePage.Links.href
-    $privateRepoBaseURL = $config.privateRepoURL -split "repository" | Select-Object -First 1
-    $privateRepoApiURL = $privateRepoBaseURL + "service/rest/v1/"
+    $privateRepoParts = Get-NexusRepoParts -RepoUrl $config.privateRepoURL
+    $privateRepoApiURL = $privateRepoParts.BaseURL + "service/rest/v1/"
+    $privateRepoName = $privateRepoParts.RepoName
 
     $saveDir = Join-Path $config.workDir "internal-packages-temp"
     if (!(Test-Path $saveDir)) {
@@ -82,51 +89,58 @@
                     $versions = @()
                 }
 
-                $versions | ForEach-Object {
-                    $apiSearchURL = $proxyRepoApiURL + "search?repository=$proxyRepoName&format=nuget&name=$nuspecID&version=$_"
-                    $searchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $proxyRepoHeaderCreds -Uri $apiSearchURL
+$versions | ForEach-Object {
+                    try {
+                        $apiSearchURL = New-NexusSearchUrl -ApiBase $proxyRepoApiURL -RepoName $proxyRepoName -PackageId $nuspecID -Version $_
+                        $searchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $proxyRepoHeaderCreds -Uri $apiSearchURL
 
+                        if ($null -eq $searchResults.items.id) {
+                            Throw "$nuspecID $_ search result null, not supposed to happen"
+                        }
+                        if ($searchResults.items.id -is [Array]) {
+                            Throw "$nuspecID $_ search returned an array, search URL may have been malformed"
+                        }
 
-                    if ($null -eq $searchResults.items.id ) {
-                        Throw "$nuspecID $_ search result null, not supposed to happen"
-                    }
-                    if ($searchResults.items.id -is [Array]) {
-                        Throw "$nuspecID $_ search returned an array, search URL may have been malformed"
-                    }
+                        $privateApiSearch = New-NexusSearchUrl -ApiBase $privateRepoApiURL -RepoName $privateRepoName -PackageId $nuspecID -Version $_
+                        $privateSearchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privateApiSearch
 
-                    $privateApiSearch = $privateRepoApiURL + "search?repository=$proxyRepoName&format=nuget&name=$nuspecID&version=$_"
-                    $privateSearchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $privateRepoHeaderCreds -Uri $privateApiSearch
+                        $filename = $null
+                        if ($privateSearchResults.items.Count -eq 0) {
+                            #Not yet in the private repo - move it, then drop the cached proxy copy
+                            $filename = $nuspecID + "." + $_ + ".nupkg"
+                            $downloadURL = $searchResults.items.assets.downloadURL
+                            $downloadChecksum = $searchResults.items.assets.checksum.sha512
 
-                    if ($privateSearchResults.items.Count -eq 0) {
-                        Write-Information "$nuspecID $_ found in the private repo. Deleting in proxy repo." -InformationAction Continue
-                    } else {
-                        #$heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
-                        #$filename = ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
-                        $filename = $nuspecID + "." + $_ + ".nupkg"
-                        $downloadURL = $searchResults.items.assets.downloadURL
-                        $downloadChecksum = $searchResults.items.assets.checksum.sha512
+                            if ($null -eq $downloadChecksum) {
+                                Write-Warning "$nuspecID $_ has no checksum in the proxy repo, cannot move it. Leaving the cached copy in the proxy repo."
+                                return
+                            }
 
-                        if ($null -eq $downloadChecksum) {
-                            Write-Verbose "$nuspecID $_ has no checksum, no local copy in repo. Skipping"
-                        } else {
-                            Get-File -url $downloadURL -filename $filename -folder $saveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
+                            $authArgs = @{ }
+                            if ($proxyRepoHeaderCreds.ContainsKey('Authorization')) {
+                                $authArgs['authorization'] = $proxyRepoHeaderCreds['Authorization']
+                            }
+                            Get-File -url $downloadURL -filename $filename -folder $saveDir -checksum $downloadChecksum -checksumTypeType 'sha512' @authArgs
 
-                            $pushArgs = "push " + $filename + " -f -r -s " + $config.moveToRepoURL
+                            $pushArgs = 'push "' + $filename + '" -f -r -s "' + $config.moveToRepoURL + '"'
                             $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
 
                             if ($pushcode.exitcode -ne "0") {
                                 Throw "pushing $nuspecID $_ failed"
                             }
+                        } else {
+                            Write-Information "$nuspecID $_ already in the private repo. Deleting cached copy in proxy repo." -InformationAction Continue
                         }
 
+                        $apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
+                        $null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
 
+                        if ($null -ne $filename) {
+                            Remove-Item (Join-Path $saveDir $filename) -ea 0 -Force
+                        }
+                    } catch {
+                        Write-Warning "Moving $nuspecID $_ failed, continuing with the next version. Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
                     }
-
-                    $apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
-                    $null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
-
-                    Remove-Item (Join-Path $saveDir $filename) -ea 0 -Force
-                    $pushcode = $null
                 }
             } elseif ($packagesXMLcontent.packages.notImplemented.id -icontains $nuspecID) {
                 Write-Information "$nuspecID found in the proxy repo and is not implemented. Support has to be added for it, see ADDING_PACKAGES.md" -InformationAction Continue
@@ -143,41 +157,48 @@
                 $internalizedVersions = $internalizedXMLContent.internalized.SelectSingleNode("//pkg[@id=""$($nuspecID.ToLower())""]").version
 
                 $versions | ForEach-Object {
+                    try {
+                        $apiSearchURL = New-NexusSearchUrl -ApiBase $proxyRepoApiURL -RepoName $proxyRepoName -PackageId $nuspecID -Version $_
+                        $searchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $proxyRepoHeaderCreds -Uri $apiSearchURL
 
-                    $apiSearchURL = $proxyRepoApiURL + "search?repository=$proxyRepoName&format=nuget&name=$nuspecID&version=$_"
-                    $searchResults = Invoke-RestMethod -UseBasicParsing -Method Get -Headers $proxyRepoHeaderCreds -Uri $apiSearchURL
-
-                    if ($null -eq $searchResults.items.id ) {
-                        Throw "$nuspecID $_ search result null, not supposed to happen"
-                    }
-                    if ($searchResults.items.id -is [Array]) {
-                        Throw "$nuspecID $_ search returned an array, search URL may have been malformed"
-                    }
-
-                    if ($internalizedVersions -icontains $_) {
-                        Write-Information "$nuspecID $_ already internalized, deleting cached version in proxy repository" -InformationAction Continue
-                        $apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
-                        $null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
-                    } else {
-                        #try {
-                        #    $heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
-                        #} catch {
-                        #    Write-Warning "Failed to get $($searchResults.items.assets.downloadURL)"
-                        #    throw $_
-                        #}
-
-                        #$filename = ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
-                        $filename = $nuspecID + "." + $_ + ".nupkg"
-                        $downloadURL = $searchResults.items.assets.downloadURL
-                        $downloadChecksum = $searchResults.items.assets.checksum.sha512
-
-                        if ($null -eq $downloadChecksum) {
-                            Write-Verbose "$nuspecID $_ has no checksum, no local copy in repo. Skipping"
-                        } else {
-                            Get-File -url $downloadURL -filename $filename -folder $IdSaveDir -checksum $downloadChecksum -checksumTypeType 'sha512' -authorization "Basic $proxyRepoCredsBase64"
-
-                            Write-Information "$nuspecID $_ found and downloaded, will be deleted next run if internalization succeeds" -InformationAction Continue
+                        if ($null -eq $searchResults.items.id ) {
+                            Throw "$nuspecID $_ search result null, not supposed to happen"
                         }
+                        if ($searchResults.items.id -is [Array]) {
+                            Throw "$nuspecID $_ search returned an array, search URL may have been malformed"
+                        }
+
+                        if ($internalizedVersions -icontains $_) {
+                            Write-Information "$nuspecID $_ already internalized, deleting cached version in proxy repository" -InformationAction Continue
+                            $apiDeleteURL = $proxyRepoApiURL + "components/$($searchResults.items.id.tostring())"
+                            $null = Invoke-RestMethod -UseBasicParsing -Method delete -Headers $proxyRepoHeaderCreds -Uri $apiDeleteURL
+                        } else {
+                            #try {
+                            #    $heads = Invoke-WebRequest -UseBasicParsing -Headers $proxyRepoHeaderCreds -Uri $searchResults.items.assets.downloadURL -Method head
+                            #} catch {
+                            #    Write-Warning "Failed to get $($searchResults.items.assets.downloadURL)"
+                            #    throw $_
+                            #}
+
+                            #$filename = ($heads.Headers."Content-Disposition" -split "=" | Select-Object -Last 1).tostring()
+                            $filename = $nuspecID + "." + $_ + ".nupkg"
+                            $downloadURL = $searchResults.items.assets.downloadURL
+                            $downloadChecksum = $searchResults.items.assets.checksum.sha512
+
+                            if ($null -eq $downloadChecksum) {
+                                Write-Verbose "$nuspecID $_ has no checksum, no local copy in repo. Skipping"
+                            } else {
+                                $authArgs = @{ }
+                                if ($proxyRepoHeaderCreds.ContainsKey('Authorization')) {
+                                    $authArgs['authorization'] = $proxyRepoHeaderCreds['Authorization']
+                                }
+                                Get-File -url $downloadURL -filename $filename -folder $IdSaveDir -checksum $downloadChecksum -checksumTypeType 'sha512' @authArgs
+
+                                Write-Information "$nuspecID $_ found and downloaded, will be deleted next run if internalization succeeds" -InformationAction Continue
+                            }
+                        }
+                    } catch {
+                        Write-Warning "Moving $nuspecID $_ failed, continuing with the next version. Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
                     }
                 }
 

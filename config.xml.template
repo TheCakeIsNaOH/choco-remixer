@@ -55,6 +55,10 @@
 	<!-- Copy already internal package IDs from the searchDir to the workDir -->
 	<copyInternal>no</copyInternal>
 
+	<!-- Custom/private package IDs that live in your searchDir and should be skipped by internalization.
+	     Uncomment and adjust if you keep custom packages in the searchDir -->
+	<!-- <personal><id>my-custom-package-id</id></personal> -->
+
 	<!-- Set a locale to use for downloading locale-specific installers (e.g. Firefox). Defaults to en-US if not set -->
 	<locale>en-US</locale>
 </options>
