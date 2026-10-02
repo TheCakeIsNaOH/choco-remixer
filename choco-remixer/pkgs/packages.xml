@@ -15309,6 +15309,14 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>microsoft-openjdk</id>
+      <functionName>Convert-microsoft-openjdk</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <architecture>x64</architecture>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>midi2lr</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -29510,7 +29518,6 @@
     <id>microsoft-openjdk11</id>
     <id>microsoft-openjdk17</id>
     <id>microsoft-openjdk25</id>
-    <id>microsoft-openjdk</id>
     <id>microsoft-r-open</id>
     <id>microsoft-sql-server-migration-assistant-for-access</id>
     <id>microsoft-teams-msix</id>
