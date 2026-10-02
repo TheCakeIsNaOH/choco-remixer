@@ -1454,3 +1454,18 @@ Function Convert-amd-driver ([PackageInternalizeInfo]$obj) {
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern 'checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64 -acceptMIME $accept -referer $referer
 }
+
+Function Convert-microsoft-openjdk ([PackageInternalizeInfo]$obj) {
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url = ').tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    $filePath64 = 'file64      = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    $obj.installScriptMod =$obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
+
+    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum = ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}
