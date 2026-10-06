@@ -188,29 +188,36 @@ Function Get-RemixerConfig {
     }
 
 
-    if (!(Test-Path $config.searchDir)) {
+    if ([string]::IsNullOrWhiteSpace($config.searchDir) -or !(Test-Path -LiteralPath $config.searchDir -PathType Container)) {
         Throw "$($config.searchDir) not found, please specify valid searchDir"
     }
-    if (!(Test-Path $config.workDir)) {
+    if ([string]::IsNullOrWhiteSpace($config.workDir) -or !(Test-Path -LiteralPath $config.workDir -PathType Container)) {
         Throw "$($config.workDir) not found, please specify valid workDir"
     }
+
+    #Make sure paths are full paths before comparing them, so relative paths,
+    #'..' segments and mixed separators cannot get around the overlap checks
+    $config.searchDir = (Resolve-Path -LiteralPath $config.searchDir).ProviderPath
+    $config.workDir = (Resolve-Path -LiteralPath $config.workDir).ProviderPath
+
     $pathComparison = [System.StringComparison]::Ordinal
     if ($IsWindows -or $PSVersionTable.PSVersion.Major -lt 6) {
         $pathComparison = [System.StringComparison]::OrdinalIgnoreCase
     }
     $separator = [IO.Path]::DirectorySeparatorChar
-    $normalizedSearchDir = $config.searchDir.TrimEnd($separator)
-    $normalizedWorkDir = $config.workDir.TrimEnd($separator)
+    $normalizedSearchDir = [IO.Path]::GetFullPath($config.searchDir).TrimEnd($separator, [IO.Path]::AltDirectorySeparatorChar)
+    $normalizedWorkDir = [IO.Path]::GetFullPath($config.workDir).TrimEnd($separator, [IO.Path]::AltDirectorySeparatorChar)
     if ($normalizedWorkDir.Equals($normalizedSearchDir, $pathComparison)) {
         Throw "workDir cannot be the same as the searchDir"
     }
     if ($normalizedWorkDir.StartsWith($normalizedSearchDir + $separator, $pathComparison)) {
         Throw "workDir cannot be a sub directory of the searchDir"
     }
-
-    #Make sure paths are full paths
-    $config.searchDir = (Resolve-Path $config.searchDir).Path
-    $config.workDir = (Resolve-Path $config.workDir).Path
+    #Not an error, as existing setups may use this layout, but a package id that matches
+    #the searchDir folder name would have its work directory created inside the searchDir
+    if ($normalizedSearchDir.StartsWith($normalizedWorkDir + $separator, $pathComparison)) {
+        Write-Warning "searchDir is inside the workDir, keeping them in separate folders is recommended"
+    }
 
     if ($config.useDropPath -eq "yes") {
         if ($config.dropEmpty -eq "yes") {

@@ -6,22 +6,26 @@
         [parameter(Mandatory = $true)][string]$internalizedXMLPath
     )
 
+    #id is used inside an XPath query, version is stored as data
+    Assert-SafePackageId -PackageId $nuspecID
+    Assert-SafePackageVersion -Version $version
+
     $nuspecID = $nuspecID.tolower()
-    [XML]$internalizedXMLcontent = Get-Content $internalizedXMLPath
+    [XML]$internalizedXMLcontent = Get-Content -LiteralPath $internalizedXMLPath -Raw -Encoding UTF8
 
-    if ($internalizedXMLcontent.internalized.pkg.id -notcontains "$nuspecID") {
+    $pkgNode = $internalizedXMLcontent.SelectSingleNode("//pkg[@id=""$nuspecID""]")
+    if ($null -eq $pkgNode) {
         Write-Verbose "adding $nuspecID to internalized IDs"
-        $addID = $internalizedXMLcontent.CreateElement("pkg")
-        $addID.SetAttribute("id", "$nuspecID")
-        $internalizedXMLcontent.SelectSingleNode('//internalized').AppendChild($addID) | Out-Null
-        $internalizedXMLcontent.save($internalizedXMLPath)
-
-        [XML]$internalizedXMLcontent = Get-Content $internalizedXMLPath
+        $pkgNode = $internalizedXMLcontent.CreateElement("pkg")
+        $pkgNode.SetAttribute("id", "$nuspecID")
+        $null = $internalizedXMLcontent.SelectSingleNode('//internalized').AppendChild($pkgNode)
     }
 
     Write-Verbose "adding $nuspecID $version to list of internalized packages"
     $addVersion = $internalizedXMLcontent.CreateElement("version")
     $null = $addVersion.AppendChild($internalizedXMLcontent.CreateTextNode("$version"))
-    $internalizedXMLcontent.SelectSingleNode("//pkg[@id=""$nuspecID""]").appendchild($addVersion) | Out-Null
-    $internalizedXMLcontent.save($internalizedXMLPath)
+    $null = $pkgNode.AppendChild($addVersion)
+
+    #Written atomically so an interrupted run cannot truncate the record of internalized packages
+    Save-XmlDocument -XmlDocument $internalizedXMLcontent -Path $internalizedXMLPath
 }

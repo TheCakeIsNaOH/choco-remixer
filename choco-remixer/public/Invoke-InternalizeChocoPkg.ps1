@@ -94,18 +94,14 @@ Function Invoke-InternalizeChocoPkg {
 
         #unique needed to workaround a bug if accessing searchDir from a samba share where things show up twice if there are directories with the same name but different case.
         foreach ($package in $nupkgArrayDedup) {
-            $parameters = $PSBoundParameters
+            #Copy, so this function's own $PSBoundParameters is not modified
+            $parameters = @{}
+            foreach ($key in $PSBoundParameters.Keys) {
+                $parameters[$key] = $PSBoundParameters[$key]
+            }
             Try {
-                if ($parameters['nupkgFile']) {
-                    $parameters.nupkgFile = $package.fullname
-                } else {
-                    $parameters.Add("nupkgFile", $package.fullname)
-                }
-                if ($parameters['internalizedXML']) {
-                    $parameters.internalizedXML = $internalizedXML
-                } else {
-                    $parameters.Add("internalizedXML", $internalizedXML)
-                }
+                $parameters['nupkgFile'] = $package.fullname
+                $parameters['internalizedXML'] = $internalizedXML
                 $pkgResult = Invoke-InternalizeDownloadedChocoPkg @parameters
                 if (![System.String]::IsNullOrWhiteSpace($pkgResult.id)) {
                     $null = $nupkgResultArray.Add($pkgResult)

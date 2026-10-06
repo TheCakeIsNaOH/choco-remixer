@@ -1,4 +1,4 @@
-﻿Function Invoke-RepoCheck {
+Function Invoke-RepoCheck {
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header', Scope = 'Function')]
     param (
@@ -89,7 +89,7 @@
             $publicVersionrelease = $publicEntry.properties.Version
 
             $publicPageURLpre = New-ChocoODataFilterUrl -ApiBase $config.publicRepoURL -PackageId $nuspecID -Filter 'IsAbsoluteLatestVersion'
-            [xml]$publicPagepre = (Invoke-WebRequest -UseBasicParsing -TimeoutSec 5 -Uri $publicPageURLpre).Content
+            [xml]$publicPagepre = (Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURLpre).Content
             $publicEntrypre = $publicPagepre.feed.entry | Select-Object -First 1
             $publicVersionpre = $publicEntrypre.properties.Version
 
@@ -101,33 +101,7 @@
                     Write-Information "$nuspecID out of date on private repo, found version $publicVersionrelease, downloading" -InformationAction Continue
 
                     $srcUrl = $publicEntry.content.src | Select-Object -First 1
-                    #pwsh considers 3xx response codes as an error if redirection is disallowed
-                    if ($PSVersionTable.PSVersion.major -ge 6) {
-                        try {
-                            $null = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea Stop
-                            $dlwdUrl = $srcUrl
-                        } catch {
-                            $response = $_.Exception.Response
-                            $location = $null
-                            if ($null -ne $response) {
-                                $location = $response.headers.location
-                                if ($location -is [Array]) { $location = $location | Select-Object -First 1 }
-                            }
-                            if ($null -ne $location) {
-                                $dlwdURL = $location.absoluteuri
-                            } else {
-                                Write-Warning "Could not resolve redirect for $srcUrl, using the original URL. $($_.Exception.Message)"
-                                $dlwdUrl = $srcUrl
-                            }
-                        }
-                    } else {
-                        $redirectPage = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea 0
-                        if ([string]::IsNullOrWhiteSpace($redirectPage.Links.href)) {
-                            $dlwdUrl = $srcUrl
-                        } else {
-                            $dlwdURL = $redirectpage.Links.href
-                        }
-                    }
+                    $dlwdURL = Resolve-DownloadRedirect -Url $srcUrl
 
                     #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
                     $checksum = -join ([System.Convert]::FromBase64String($publicEntry.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })
@@ -147,7 +121,7 @@
                         $dlwdPath = Join-Path $saveDir $filename
 
                         if ($privateRepoType -eq "sleet") {
-                            $pushArgs = 'push --force --verbosity minimal --config ' + $config.sleetConfig + " --source " + $config.sleetPrivateRepoName + " " + $dlwdPath
+                            $pushArgs = Join-ProcessArgument -Argument 'push', '--force', '--verbosity', 'minimal', '--config', $config.sleetConfig, '--source', $config.sleetPrivateRepoName, $dlwdPath
                             $startProcessArgs = @{
                                 FilePath         = "sleet"
                                 ArgumentList     = $pushArgs
@@ -159,7 +133,7 @@
 
                             $pushcode = Start-Process @startProcessArgs
                         } else {
-                            $pushArgs = 'push "' + $filename + '" -f -r -s "' + $config.privateRepoURL + '"'
+                            $pushArgs = Join-ProcessArgument -Argument 'push', $filename, '-f', '-r', '-s', $config.privateRepoURL
                             $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
                         }
 
@@ -190,33 +164,7 @@
                     Write-Information "$nuspecID out of date on private repo, found version $publicVersionpre, downloading" -InformationAction Continue
 
                     $srcUrl = $publicEntrypre.content.src | Select-Object -First 1
-                    #pwsh considers 3xx response codes as an error if redirection is disallowed
-                    if ($PSVersionTable.PSVersion.major -ge 6) {
-                        try {
-                            $null = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea Stop
-                            $dlwdUrl = $srcUrl
-                        } catch {
-                            $response = $_.Exception.Response
-                            $location = $null
-                            if ($null -ne $response) {
-                                $location = $response.headers.location
-                                if ($location -is [Array]) { $location = $location | Select-Object -First 1 }
-                            }
-                            if ($null -ne $location) {
-                                $dlwdURL = $location.absoluteuri
-                            } else {
-                                Write-Warning "Could not resolve redirect for $srcUrl, using the original URL. $($_.Exception.Message)"
-                                $dlwdUrl = $srcUrl
-                            }
-                        }
-                    } else {
-                        $redirectPage = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea 0
-                        if ([string]::IsNullOrWhiteSpace($redirectPage.Links.href)) {
-                            $dlwdUrl = $srcUrl
-                        } else {
-                            $dlwdURL = $redirectpage.Links.href
-                        }
-                    }
+                    $dlwdURL = Resolve-DownloadRedirect -Url $srcUrl
 
                     #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
                     $checksum = -join ([System.Convert]::FromBase64String($publicEntrypre.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })
@@ -236,7 +184,7 @@
                         $dlwdPath = Join-Path $saveDir $filename
 
                         if ($privateRepoType -eq "sleet") {
-                            $pushArgs = 'push --force --config ' + $config.sleetConfig + " --source " + $config.sleetPrivateRepoName + " " + $dlwdPath
+                            $pushArgs = Join-ProcessArgument -Argument 'push', '--force', '--verbosity', 'minimal', '--config', $config.sleetConfig, '--source', $config.sleetPrivateRepoName, $dlwdPath
                             $startProcessArgs = @{
                                 FilePath         = "sleet"
                                 ArgumentList     = $pushArgs
@@ -248,7 +196,7 @@
 
                             $pushcode = Start-Process @startProcessArgs
                         } else {
-                            $pushArgs = 'push "' + $filename + '" -f -r -s "' + $config.privateRepoURL + '"'
+                            $pushArgs = Join-ProcessArgument -Argument 'push', $filename, '-f', '-r', '-s', $config.privateRepoURL
                             $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
                         }
 
@@ -272,7 +220,7 @@
                 }
             }
             if (($null -eq $publicVersionrelease) -and ($null -eq $publicVersionpre)) {
-                Write-Warning "$nuspecID does not exist or is unlisted on $config.publicRepoURL"
+                Write-Warning "$nuspecID does not exist or is unlisted on $($config.publicRepoURL)"
             }
         } catch {
             Write-Warning "Checking $nuspecID failed, continuing with the next package. Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"

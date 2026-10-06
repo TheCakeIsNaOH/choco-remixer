@@ -268,14 +268,19 @@ Function Convert-itunes ([PackageInternalizeInfo]$obj) {
 }
 
 Function Convert-rust-ms ([PackageInternalizeInfo]$obj) {
-    $int = 0
-    [array]$installScriptSplit = $obj.installScriptOrig -split "\n"
-
-    while ($installScriptSplit[$int] -notlike "*Updates*") {
-        [string]$installScriptVars += $installScriptSplit[$int] + "`n"
-        $int++
-    }
-    Invoke-Expression $installScriptVars
+    #Read the urls and package args from the install script without running it.
+    #Lenient, as the package args also contain entries such as '$toolsDir' that are not needed here
+    $scriptValues = Get-ScriptAssignedValue -Script ($obj.installScriptOrig -join "`n") -Lenient -Name 'rustcUrl', 'rustcUrl64', 'cargoUrl', 'cargoUrl64', 'stdUrl', 'stdUrl64', 'packageArgs', 'packageSrcArgs', 'packageCargoArgs', 'packageStdArgs'
+    $rustcUrl = $scriptValues.rustcUrl
+    $rustcUrl64 = $scriptValues.rustcUrl64
+    $cargoUrl = $scriptValues.cargoUrl
+    $cargoUrl64 = $scriptValues.cargoUrl64
+    $stdUrl = $scriptValues.stdUrl
+    $stdUrl64 = $scriptValues.stdUrl64
+    $packageArgs = $scriptValues.packageArgs
+    $packageSrcArgs = $scriptValues.packageSrcArgs
+    $packageCargoArgs = $scriptValues.packageCargoArgs
+    $packageStdArgs = $scriptValues.packageStdArgs
 
     $filenamerustcUrl = ($rustcUrl -split "/" | Select-Object -Last 1).tostring()
     $filerustcUrl = 'FileFullPath   = (Join-Path $toolsDir "' + $filenamerustcUrl + '")'
@@ -509,7 +514,8 @@ Function Convert-azure-pipelines-agent([PackageInternalizeInfo]$obj) {
 Function Convert-7zip-zstd ([PackageInternalizeInfo]$obj) {
 
     $dataFile = Join-Path $obj.toolsDir 'packageArgs.ps1'
-    $dataContent = Invoke-Expression $dataFile
+    #Read the data file without running it
+    $dataContent = Get-ScriptLiteralValue -Script (Get-Content -LiteralPath $dataFile -Raw)
 
     $url32 = $dataContent['url']
     $url64 = $dataContent['url64bit']

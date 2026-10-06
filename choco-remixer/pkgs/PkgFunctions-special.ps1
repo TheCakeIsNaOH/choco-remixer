@@ -1,4 +1,4 @@
-﻿[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = 'Couldnt figure out an alternative', Scope = 'Function', Target = 'Convert-kb29992262')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = 'Couldnt figure out an alternative', Scope = 'Function', Target = 'Convert-kb29992262')]
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = 'Couldnt figure out an alternative', Scope = 'Function', Target = 'Convert-KB3033929')]
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = 'Couldnt figure out an alternative', Scope = 'Function', Target = 'Convert-KB3035131')]
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '', Justification = 'Couldnt figure out an alternative', Scope = 'Function', Target = 'Convert-KB3063858')]
@@ -205,10 +205,8 @@ Function Convert-powershell ([PackageInternalizeInfo]$obj) {
 
 
 Function Convert-kb29992262 ([PackageInternalizeInfo]$obj) {
-    $installScriptExec = $obj.installScriptOrig -join "`n"
-    $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
-    $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
-    Invoke-Expression $installScriptExec
+    #Read the msu data from the install script without running it
+    $msudata = (Get-ScriptAssignedValue -Script ($obj.installScriptOrig -join "`n") -Name 'msuData').msuData
 
     $msudata.GetEnumerator() | ForEach-Object {
         if ($_.value.url) {
@@ -240,10 +238,8 @@ Function Convert-kb29992262 ([PackageInternalizeInfo]$obj) {
 
 
 Function Convert-KB3033929 ([PackageInternalizeInfo]$obj) {
-    $installScriptExec = $obj.installScriptOrig -join "`n"
-    $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
-    $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
-    Invoke-Expression $installScriptExec
+    #Read the msu data from the install script without running it
+    $msudata = (Get-ScriptAssignedValue -Script ($obj.installScriptOrig -join "`n") -Name 'msuData').msuData
 
     $msudata.GetEnumerator() | ForEach-Object {
         if ($_.value.url) {
@@ -275,10 +271,8 @@ Function Convert-KB3033929 ([PackageInternalizeInfo]$obj) {
 
 
 Function Convert-KB3035131 ([PackageInternalizeInfo]$obj) {
-    $installScriptExec = $obj.installScriptOrig -join "`n"
-    $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
-    $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
-    Invoke-Expression $installScriptExec
+    #Read the msu data from the install script without running it
+    $msudata = (Get-ScriptAssignedValue -Script ($obj.installScriptOrig -join "`n") -Name 'msuData').msuData
 
     $msudata.GetEnumerator() | ForEach-Object {
         if ($_.value.url) {
@@ -310,10 +304,8 @@ Function Convert-KB3035131 ([PackageInternalizeInfo]$obj) {
 
 
 Function Convert-KB3063858 ([PackageInternalizeInfo]$obj) {
-    $installScriptExec = $obj.installScriptOrig -join "`n"
-    $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
-    $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
-    Invoke-Expression $installScriptExec
+    #Read the msu data from the install script without running it
+    $msudata = (Get-ScriptAssignedValue -Script ($obj.installScriptOrig -join "`n") -Name 'msuData').msuData
 
     #6.0-client and 6.0-server are the same in this case, with the the same URLs.
     #    $msudata.GetEnumerator() | Where-Object { $_.key -notmatch "6.0-client" } | ForEach-Object {
@@ -349,10 +341,8 @@ Function Convert-KB3063858 ([PackageInternalizeInfo]$obj) {
 
 
 Function Convert-KB3118401 ([PackageInternalizeInfo]$obj) {
-    $installScriptExec = $obj.installScriptOrig -join "`n"
-    $installScriptExec = $installScriptExec -replace "chocolateyInstaller\\Install-WindowsUpdate", "#$&"
-    $installScriptExec = $installScriptExec -replace 'Install-WindowsUpdate', "#$&"
-    Invoke-Expression $installScriptExec
+    #Read the msu data from the install script without running it
+    $msudata = (Get-ScriptAssignedValue -Script ($obj.installScriptOrig -join "`n") -Name 'msuData').msuData
 
     $msudata.GetEnumerator() | ForEach-Object {
         if ($_.value.url) {

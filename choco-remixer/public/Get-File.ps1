@@ -11,17 +11,20 @@
         [string]$authorization
     )
 
-    $folder = (Resolve-Path $folder).Path
+    #filename comes from untrusted install scripts, make sure it cannot escape the folder
+    Assert-SafeFileName -FileName $filename
+
+    $folder = (Resolve-Path -LiteralPath $folder).Path
 
     $dlwdFile = (Join-Path "$folder" "$filename")
 
-    if (Test-Path $dlwdFile) {
+    if (Test-Path -LiteralPath $dlwdFile) {
         if ($checksum) {
             Write-Information "$dlwdFile appears to be downloaded, checking checksum" -InformationAction Continue
             $oldFileOK = Confirm-Checksum -fullFilePath $dlwdFile -checksum $checksum -checksumTypeType $checksumTypeType
         } else {
             Write-Warning "$dlwdFile appears to be downloaded, but no checksum available, so deleting"
-            Remove-Item -Force -Path $dlwdFile
+            Remove-Item -Force -LiteralPath $dlwdFile
             $oldFileOK = $false
         }
     } else {
@@ -51,6 +54,8 @@
             $dlwd.DownloadFile($url, $dlwdFile)
         } catch {
             Write-Warning "Url Failed to download: $url"
+            #Do not leave a partial download behind
+            Remove-Item -Force -EA 0 -LiteralPath $dlwdFile
             throw $_
         } finally {
             $dlwd.dispose()

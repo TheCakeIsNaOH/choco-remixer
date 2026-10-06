@@ -13,18 +13,22 @@
         [parameter(Mandatory = $true)][string]$PackageVersion
     )
 
+    #filename comes from untrusted install scripts, validate before it is used in any path.
+    #Outside of the try below, so a bad name is never swallowed as a cache failure.
+    Assert-SafeFileName -FileName $filename
+
     if ($null -ne (Get-Command Get-ChocolateyDownloadCacheUrls -EA 0)) {
         try {
-            $folder = (Resolve-Path $folder).Path
+            $folder = (Resolve-Path -LiteralPath $folder).Path
 
             $dlwdFile = (Join-Path "$folder" "$filename")
 
-            if (Test-Path $dlwdFile) {
+            if (Test-Path -LiteralPath $dlwdFile) {
                 if ($checksum) {
                     $oldFileOK = Confirm-Checksum -fullFilePath $dlwdFile -checksum $checksum -checksumTypeType $checksumTypeType
                 } else {
                     Write-Warning "$dlwdFile appears to be downloaded, but no checksum available, so deleting"
-                    Remove-Item -Force -Path $dlwdFile
+                    Remove-Item -Force -LiteralPath $dlwdFile
                     $oldFileOK = $false
                 }
             } else {

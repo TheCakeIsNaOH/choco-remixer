@@ -6,8 +6,10 @@
     $nuspecStream = $null
     $nuspecReader = $null
     try {
+        #Only a nuspec at the top level of the package is the package manifest,
+        #matching what Expand-Nupkg and choco use
         foreach ($entry in $archive.Entries) {
-            if ($entry.Fullname -Like "*.nuspec") {
+            if (($entry.Fullname -Like "*.nuspec") -and ($entry.FullName -notmatch '[/\\]')) {
                 $nuspecStream = $entry.Open()
                 break
             }

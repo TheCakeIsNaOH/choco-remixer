@@ -1150,8 +1150,8 @@ Function Convert-xming ([PackageInternalizeInfo]$obj) {
 }
 
 Function Convert-conemu ([PackageInternalizeInfo]$obj) {
-    $installScriptExec = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$(version|url) = ') -join "`n"
-    Invoke-Expression $installScriptExec
+    #Read the url from the install script without running it
+    $url = (Get-ScriptAssignedValue -Script ($obj.installScriptOrig -join "`n") -Name 'url').url
 
     $filename = ($url -split "/" | Select-Object -Last 1).tostring()
     $filePath32 = 'file          = (Join-Path $toolsDir "' + $filename + '")'

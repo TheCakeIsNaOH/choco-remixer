@@ -43,10 +43,10 @@ Function Expand-Nupkg {
     param (
         [parameter(Mandatory = $true, Position = 0)]
         [ValidateScript( {
-                if (!(Test-Path -Path $_ -PathType Leaf) ) {
+                if (!(Test-Path -LiteralPath $_ -PathType Leaf) ) {
                     throw "The Path parameter must be a file. Folder paths are not allowed."
                 }
-                if ($_ -notmatch "(\.nupkg)") {
+                if ($_ -notmatch "\.nupkg$") {
                     throw "The file specified in the Path parameter must be .nupkg"
                 }
                 return $true
@@ -72,18 +72,18 @@ Function Expand-Nupkg {
     }
 
     Process {
+        $archive = $null
         Try {
-            $Path = (Resolve-Path $Path).Path
+            $Path = (Resolve-Path -LiteralPath $Path).Path
 
             if (!($PSBoundParameters.ContainsKey('Destination'))) {
                 Write-Verbose "Extracting next to nupkg"
                 $Destination = Split-Path $Path
             }
 
-            $null = New-Item -Type Directory $Destination -ea 0
-            $Destination = (Resolve-Path $Destination).Path
+            $null = [System.IO.Directory]::CreateDirectory($ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($Destination))
+            $Destination = (Resolve-Path -LiteralPath $Destination).Path
 
-            $archive = $null
             try {
                 $archive = [System.IO.Compression.ZipFile]::Open($Path, 'read')
             } catch {
@@ -96,35 +96,52 @@ Function Expand-Nupkg {
                 Where-Object FullName -NotLike 'package/*' | Where-Object Fullname -NotLike '__MACOSX/*' | `
                 Where-Object Fullname -NotLike '_rels*' | Where-Object Name -NE ""
 
-            $filteredArchive | ForEach-Object {
-                $OutputFile = Join-Path $Destination $_.fullname
+            $resolvedDestination = [System.IO.Path]::GetFullPath($Destination)
+            if (!$resolvedDestination.EndsWith([System.IO.Path]::DirectorySeparatorChar)) {
+                $resolvedDestination += [System.IO.Path]::DirectorySeparatorChar
+            }
+            $pathComparison = [System.StringComparison]::Ordinal
+            if ($IsWindows -or $PSVersionTable.PSVersion.Major -lt 6) {
+                $pathComparison = [System.StringComparison]::OrdinalIgnoreCase
+            }
+
+            [System.Collections.Generic.List[string]]$extractedNames = @()
+            foreach ($entry in $filteredArchive) {
+                $OutputFile = Join-Path $Destination $entry.fullname
                 #Zip slip guard: refuse entries whose resolved path escapes the destination
-                $resolvedOutputFile = [System.IO.Path]::GetFullPath($OutputFile)
-                $resolvedDestination = [System.IO.Path]::GetFullPath($Destination)
-                if (!$resolvedDestination.EndsWith([System.IO.Path]::DirectorySeparatorChar)) {
-                    $resolvedDestination += [System.IO.Path]::DirectorySeparatorChar
+                $resolvedOutputFile = $null
+                try {
+                    $resolvedOutputFile = [System.IO.Path]::GetFullPath($OutputFile)
+                } catch {
+                    Write-Verbose "Could not resolve $OutputFile : $($_.Exception.Message)"
                 }
-                $pathComparison = [System.StringComparison]::Ordinal
-                if ($IsWindows -or $PSVersionTable.PSVersion.Major -lt 6) {
-                    $pathComparison = [System.StringComparison]::OrdinalIgnoreCase
+                if (($null -eq $resolvedOutputFile) -or !$resolvedOutputFile.StartsWith($resolvedDestination, $pathComparison)) {
+                    Write-Warning "Skipping zip entry '$($entry.fullname)' which would extract outside the destination directory"
+                    continue
                 }
-                if (!$resolvedOutputFile.StartsWith($resolvedDestination, $pathComparison)) {
-                    Write-Warning "Skipping zip entry '$($_.fullname)' which would extract outside the destination directory"
-                    return
-                }
-                $null = New-Item -Type Directory $(Split-Path $OutputFile) -ea 0
-                Write-Verbose "Extracting $($_.fullname) to $OutputFile"
-                [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, $outputFile, $true)
+                $null = [System.IO.Directory]::CreateDirectory([System.IO.Path]::GetDirectoryName($resolvedOutputFile))
+                Write-Verbose "Extracting $($entry.fullname) to $OutputFile"
+                [System.IO.Compression.ZipFileExtensions]::ExtractToFile($entry, $resolvedOutputFile, $true)
+                $extractedNames.Add($entry.fullname)
             }
 
             if (!$NoAddFilesElement) {
-                $toplevelFiles = $filteredArchive.fullname | ForEach-Object { $_ -split "[/\\]" | Select-Object -First 1 } | Select-Object -Unique
+                #Only entries that were actually extracted, so skipped zip slip entries are never listed
+                $toplevelFiles = $extractedNames | ForEach-Object { $_ -split "[/\\]" | Select-Object -First 1 } | Select-Object -Unique
                 $nuspecNames = @($toplevelFiles | Where-Object { $_ -like "*.nuspec" })
+                if ($nuspecNames.Count -eq 0) {
+                    Throw "No top-level .nuspec file found in $Path"
+                }
                 if ($nuspecNames.Count -gt 1) {
                     Write-Warning "Multiple top-level nuspec files found, using the first one: $($nuspecNames -join ', ')"
                 }
                 $nuspecPath = Join-Path $Destination ($nuspecNames | Select-Object -First 1)
-                [array]$filesElementList = Get-Item ($toplevelFiles | Where-Object { $_ -notlike "*.nuspec" } | ForEach-Object { Join-Path $Destination $_ })
+                $otherTopLevel = @($toplevelFiles | Where-Object { $_ -notlike "*.nuspec" } | ForEach-Object { Join-Path $Destination $_ } |
+                        Where-Object { Test-Path -LiteralPath $_ })
+                [array]$filesElementList = @()
+                if ($otherTopLevel.Count -gt 0) {
+                    [array]$filesElementList = Get-Item -LiteralPath $otherTopLevel
+                }
                 Add-NuspecFilesElement -NuspecPath $nuspecPath -FilesList $filesElementList
             }
 

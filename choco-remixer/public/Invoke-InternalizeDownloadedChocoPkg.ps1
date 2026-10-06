@@ -42,6 +42,10 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     $nuspecVersion = $nuspecDetails[0]
     $nuspecID = $nuspecDetails[1]
 
+    #Both come from the untrusted nuspec and are used in paths and XPath queries below
+    Assert-SafePackageId -PackageId $nuspecID
+    Assert-SafePackageVersion -Version $nuspecVersion
+
     #todo, make this faster, hash table? linq? other?
     [array]$internalizedVersions = $internalizedXMLcontent.SelectSingleNode("//pkg[@id=""$($nuspecID.ToLower())""]").version
 
@@ -56,8 +60,8 @@ Function Invoke-InternalizeDownloadedChocoPkg {
         #quick and dirty, maybe keep already interal packages in list and process (skip and maybe drop) later
         if ($config.useDropPath -eq "yes" -and $config.dropInternal -eq "yes") {
             Write-Verbose "copying $nuspecID to drop path"
-            if (-not (Test-Path (Join-Path -Path $config.dropPath -ChildPath (Split-Path $nupkgFile -Leaf) ))) {
-                Copy-Item $nupkgFile $config.dropPath
+            if (-not (Test-Path -LiteralPath (Join-Path -Path $config.dropPath -ChildPath (Split-Path $nupkgFile -Leaf) ))) {
+                Copy-Item -LiteralPath $nupkgFile -Destination $config.dropPath
             }
         }
         if ($copyInternal) {
@@ -66,8 +70,8 @@ Function Invoke-InternalizeDownloadedChocoPkg {
             $versionDir = (Join-Path $idDir $nuspecVersion)
             $newpath = (Join-Path $versionDir (Split-Path $nupkgFile -Leaf))
             $null = New-Item -Type Directory $versionDir -ea 0
-            if (-not (Test-Path $newpath)) {
-                Copy-Item $nupkgFile $newpath
+            if (-not (Test-Path -LiteralPath $newpath)) {
+                Copy-Item -LiteralPath $nupkgFile -Destination $newpath
             }
         }
     } elseif ($packagesXMLcontent.packages.implemented.pkg.id -icontains $nuspecID) {
@@ -149,14 +153,23 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     Expand-Nupkg -Path $obj.OrigPath -Destination $obj.VersionDir -NoAddFilesElement
 
     # Get tools directory name regardless of case, for case sensitive filesystems
-    $foundToolsDir = (Get-Childitem -Path $obj.VersionDir -Filter "tools")
+    $foundToolsDir = @(Get-Childitem -LiteralPath $obj.VersionDir -Directory | Where-Object Name -EQ "tools") | Select-Object -First 1
     if ($null -ne $foundToolsDir) {
         $obj.toolsDir = $foundToolsDir.FullName
     # If install script is put in a different folder, use that as the tools directory.
     } else {
         # Already checked we have a install script above, if not, already skipped
-        $installScriptPath = Get-Childitem -Path $obj.VersionDir -Recurse -Filter "chocolateyInstall.ps1"
+        $installScriptPath = @(Get-Childitem -LiteralPath $obj.VersionDir -Recurse -File -Filter "chocolateyInstall.ps1") |
+            Sort-Object { ($_.FullName -split '[/\\]').Count } | Select-Object -First 1
+        if ($null -eq $installScriptPath) {
+            Throw "Could not find chocolateyInstall.ps1 in $($obj.VersionDir)"
+        }
         $obj.toolsDir = Split-Path -Path $installScriptPath.FullName
+    }
+
+    #functionName comes from packages.xml, only ever call one of the package converter functions
+    if (($obj.functionName -notlike 'Convert-*') -or ($null -eq (Get-Command -Name $obj.functionName -CommandType Function -EA 0))) {
+        Throw "Converter function '$($obj.functionName)' for $($obj.nuspecID) is not defined"
     }
 
     $failed = $false
@@ -175,7 +188,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
 
     if (!($failed)) {
         Write-UnzippedInstallScript -installScriptMod $obj.installScriptMod -toolsDir $obj.toolsDir
-        $nuspecPath = (Get-ChildItem $obj.VersionDir -Filter "*.nuspec").fullname
+        $nuspecPath = Get-TopLevelNuspecPath -Directory $obj.VersionDir -NuspecID $obj.nuspecID
         Add-NuspecFilesElement -nuspecPath $nuspecPath
         Format-NuspecForValidation -nuspecPath $nuspecPath
 
@@ -208,13 +221,17 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     if (($obj.status -eq "internalized") -and (!($noSave))) {
         if ($config.useDropPath -eq "yes") {
             Write-Verbose "coping $($obj.nuspecID) to drop path"
-            Copy-Item (Get-ChildItem $obj.versionDir -Filter "*.nupkg").fullname $config.dropPath
+            $packedNupkgs = @(Get-ChildItem -LiteralPath $obj.versionDir -File -Filter "*.nupkg")
+            if ($packedNupkgs.Count -eq 0) {
+                Throw "No packed nupkg found in $($obj.versionDir)"
+            }
+            Copy-Item -LiteralPath $packedNupkgs.FullName -Destination $config.dropPath
         }
 
         if ($config.pushPkgs -eq "yes") {
             Write-Information "pushing $($obj.nuspecID)" -InformationAction Continue
             if ($privateRepoType -eq "sleet") {
-                $pushArgs = 'push --force --verbosity minimal --config ' + $config.sleetConfig + " --source " + $config.sleetPrivateRepoName + " " + $obj.versionDir
+                $pushArgs = Join-ProcessArgument -Argument 'push', '--force', '--verbosity', 'minimal', '--config', $config.sleetConfig, '--source', $config.sleetPrivateRepoName, $obj.versionDir
                 $startProcessArgs = @{
                     FilePath         = "sleet"
                     ArgumentList     = $pushArgs
@@ -226,7 +243,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
 
                 $pushcode = Start-Process @startProcessArgs
             } else {
-                $pushArgs = 'push -f -r -s ' + $config.pushURL
+                $pushArgs = Join-ProcessArgument -Argument 'push', '-f', '-r', '-s', $config.pushURL
                 $startProcessArgs = @{
                     FilePath         = "choco"
                     ArgumentList     = $pushArgs

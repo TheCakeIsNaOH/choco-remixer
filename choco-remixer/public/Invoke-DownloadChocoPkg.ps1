@@ -62,33 +62,7 @@ Function Invoke-DownloadChocoPkg {
         $nupkgFileName = "$id.$normalizedVersion.nupkg"
 
         $srcUrl = $publicEntry.content.src | Select-Object -First 1
-        #pwsh considers 3xx response codes as an error if redirection is disallowed
-        if ($PSVersionTable.PSVersion.major -ge 6) {
-            try {
-                $null = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea Stop
-                $dlwdUrl = $srcUrl
-            } catch {
-                $response = $_.Exception.Response
-                $location = $null
-                if ($null -ne $response) {
-                    $location = $response.headers.location
-                    if ($location -is [Array]) { $location = $location | Select-Object -First 1 }
-                }
-                if ($null -ne $location) {
-                    $dlwdURL = $location.absoluteuri
-                } else {
-                    Write-Warning "Could not resolve redirect for $srcUrl, using the original URL. $($_.Exception.Message)"
-                    $dlwdUrl = $srcUrl
-                }
-            }
-        } else {
-            $redirectpage = Invoke-WebRequest -UseBasicParsing -Uri $srcUrl -MaximumRedirection 0 -ea 0
-            if ([string]::IsNullOrWhiteSpace($redirectpage.Links.href)) {
-                $dlwdUrl = $srcUrl
-            } else {
-                $dlwdURL = $redirectpage.Links.href
-            }
-        }
+        $dlwdURL = Resolve-DownloadRedirect -Url $srcUrl
 
         #Ugly, but I'm not sure of a better way to get the hex representation from the base64 representation of the checksum
         $checksum = -join ([System.Convert]::FromBase64String($publicEntry.properties.PackageHash) | ForEach-Object { "{0:X2}" -f $_ })

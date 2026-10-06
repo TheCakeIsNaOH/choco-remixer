@@ -3,7 +3,9 @@ Function Write-UnzippedInstallScript {
         [parameter(Mandatory = $true)][string]$toolsDir,
         [parameter(Mandatory = $true)][string]$installScriptMod
     )
-    (Get-ChildItem $toolsDir -Filter "*chocolateyinstall.ps1").fullname | ForEach-Object { Remove-Item -Force -Recurse -ea 0 -Path $_ } -ea 0
+    #Exact name match (case-insensitive, for case sensitive filesystems) so other scripts such as
+    #'prechocolateyinstall.ps1' are not deleted
+    Get-ChildItem -LiteralPath $toolsDir -File | Where-Object Name -EQ 'chocolateyinstall.ps1' | ForEach-Object { Remove-Item -Force -LiteralPath $_.FullName }
     $scriptPath = Join-Path $toolsDir 'chocolateyinstall.ps1'
 
     #If using pwsh, explicitly write with BOM

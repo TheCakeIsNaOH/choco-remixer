@@ -7,9 +7,9 @@
         [string]$checksumTypeType
     )
 
-    $filehash = (Get-FileHash -Path $fullFilePath -Algorithm $checksumTypeType).hash
-    if ($filehash -ine $checksum) {
-        Remove-Item -Force -EA 0 -Path $fullFilePath
+    $filehash = (Get-FileHash -LiteralPath $fullFilePath -Algorithm $checksumTypeType).hash
+    if ($filehash -ine $checksum.Trim()) {
+        Remove-Item -Force -EA 0 -LiteralPath $fullFilePath
         Write-Warning "Checksum of $fullFilePath invalid, file removed. Wanted $checksum got $filehash"
         $isOk = $false
     } else {

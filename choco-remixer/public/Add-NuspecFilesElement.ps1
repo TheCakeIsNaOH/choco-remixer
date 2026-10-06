@@ -46,34 +46,37 @@ Function Add-NuspecFilesElement {
     param (
         [parameter(Mandatory = $true, Position = 0)]
         [ValidateScript( {
-                if (!(Test-Path -Path $_ -PathType Leaf) ) {
+                if (!(Test-Path -LiteralPath $_ -PathType Leaf) ) {
                     throw "The NuspecPath parameter must be a file. Folder paths are not allowed."
                 }
-                if ($_ -notmatch "(\.nuspec)") {
+                if ($_ -notmatch "\.nuspec$") {
                     throw "The file specified in the NuspecPath parameter must be .nuspec"
                 }
                 return $true
             } )]
         [string]$NuspecPath,
-        [System.IO.FileSystemInfo[]]$FilesList,
+        [AllowEmptyCollection()][System.IO.FileSystemInfo[]]$FilesList,
         [switch]$AuExclude
     )
 
-    $NuspecPath = (Resolve-Path $NuspecPath).path
+    $NuspecPath = (Resolve-Path -LiteralPath $NuspecPath).path
 
     if ($PSVersionTable.PSVersion.major -ge 6) {
-        [xml]$nuspecXML = Get-Content $NuspecPath
+        [xml]$nuspecXML = Get-Content -LiteralPath $NuspecPath -Raw
     } else {
-        [xml]$nuspecXML = Get-Content $NuspecPath -Encoding UTF8
+        [xml]$nuspecXML = Get-Content -LiteralPath $NuspecPath -Raw -Encoding UTF8
     }
 
 
     if (!($PSBoundParameters.ContainsKey('FilesList'))) {
         $packageDir = Split-Path $NuspecPath
+        $excludePatterns = @("*.nupkg", "*.nuspec")
         if ($AuExclude) {
-            $filesList = Get-ChildItem $packageDir -Exclude "*.nupkg", "*.nuspec", "update.ps1", "readme.md"
-        } else {
-            $filesList = Get-ChildItem $packageDir -Exclude "*.nupkg", "*.nuspec"
+            $excludePatterns += "update.ps1", "readme.md"
+        }
+        $filesList = Get-ChildItem -LiteralPath $packageDir | Where-Object {
+            $name = $_.Name
+            -not ($excludePatterns | Where-Object { $name -like $_ })
         }
     }
 
@@ -98,14 +101,5 @@ Function Add-NuspecFilesElement {
 
     $nuspecXML.package.AppendChild($filesElement) | Out-Null
 
-    Try {
-        [System.Xml.XmlWriterSettings] $XmlSettings = New-Object System.Xml.XmlWriterSettings
-        $XmlSettings.Indent = $true
-        # Save without BOM
-        $XmlSettings.Encoding = New-Object System.Text.UTF8Encoding($false)
-        [System.Xml.XmlWriter] $XmlWriter = [System.Xml.XmlWriter]::Create($nuspecPath, $XmlSettings)
-        $nuspecXML.Save($XmlWriter)
-    } Finally {
-        $XmlWriter.Dispose()
-    }
+    Save-XmlDocument -XmlDocument $nuspecXML -Path $NuspecPath
 }

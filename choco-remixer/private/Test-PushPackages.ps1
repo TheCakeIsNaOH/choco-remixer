@@ -2,10 +2,11 @@
 Function Test-PushPackage {
     [CmdletBinding()]
     param (
-        [parameter(Mandatory = $true)][string]$URL,
+        [parameter(Mandatory = $true)][AllowEmptyString()][AllowNull()][string]$URL,
         [parameter(Mandatory = $true)][string]$Name
     )
-    if ($null -eq $URL) {
+    #[string] turns $null into '', so check for empty rather than $null
+    if ([string]::IsNullOrWhiteSpace($URL)) {
         Throw "No $name found"
     }
 

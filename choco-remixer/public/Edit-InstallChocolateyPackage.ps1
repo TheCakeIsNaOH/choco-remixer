@@ -140,7 +140,7 @@ Function Edit-InstallChocolateyPackage {
             Break
         }
         Default {
-            Write-Error "could not find url type"
+            Throw "could not find url type"
         }
     }
 
@@ -205,7 +205,7 @@ Function Edit-InstallChocolateyPackage {
                 Break
             }
             Default {
-                Write-Error "could not find version URL type"
+                Throw "could not find version URL type"
             }
         }
     }
@@ -247,7 +247,7 @@ Function Edit-InstallChocolateyPackage {
         } elseif ($removeMSU) {
             $fileType = 'msu'
         } else {
-            Write-Error "No remove file type specified, this is required when replaceFilenames is specified"
+            Throw "No remove file type specified, this is required when replaceFilenames is specified"
         }
 
         if ($x32) {
@@ -256,6 +256,15 @@ Function Edit-InstallChocolateyPackage {
         if ($x64) {
             $filename64 = "$nuspecID-$version-x64.$fileType"
         }
+    }
+
+    #File names come from URLs in the untrusted install script and are spliced into
+    #the generated script below, so they must be validated before use
+    if ($x32) {
+        Assert-SafeFileName -FileName $filename32
+    }
+    if ($x64) {
+        Assert-SafeFileName -FileName $filename64
     }
 
 
@@ -284,7 +293,7 @@ Function Edit-InstallChocolateyPackage {
             $installScriptMod = $installScriptMod -replace " = @{" , "$&`n    $filePath32`n    $filePath64"
         }
     } else {
-        Write-Error "could not find args type"
+        Throw "could not find args type"
     }
 
 

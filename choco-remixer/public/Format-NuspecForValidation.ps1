@@ -3,10 +3,10 @@ Function Format-NuspecForValidation {
     param (
         [parameter(Mandatory = $true, Position = 0)]
         [ValidateScript( {
-                if (!(Test-Path -Path $_ -PathType Leaf) ) {
+                if (!(Test-Path -LiteralPath $_ -PathType Leaf) ) {
                     throw "The NuspecPath parameter must be a file. Folder paths are not allowed."
                 }
-                if ($_ -notmatch "(\.nuspec)") {
+                if ($_ -notmatch "\.nuspec$") {
                     throw "The file specified in the NuspecPath parameter must be .nuspec"
                 }
                 return $true
@@ -14,12 +14,12 @@ Function Format-NuspecForValidation {
         [string]$NuspecPath
     )
 
-    $NuspecPath = (Resolve-Path $NuspecPath).path
+    $NuspecPath = (Resolve-Path -LiteralPath $NuspecPath).path
 
     if ($PSVersionTable.PSVersion.major -ge 6) {
-        [xml]$nuspecXML = Get-Content $NuspecPath
+        [xml]$nuspecXML = Get-Content -LiteralPath $NuspecPath -Raw
     } else {
-        [xml]$nuspecXML = Get-Content $NuspecPath -Encoding UTF8
+        [xml]$nuspecXML = Get-Content -LiteralPath $NuspecPath -Raw -Encoding UTF8
     }
 
 
@@ -31,8 +31,10 @@ Function Format-NuspecForValidation {
     foreach ($line in ($nuspecXML.package.metadata.description -split "`n")) {
         if ($line -match '^(#+)([^\s#].*)$') {
             Write-Warning "$NuspecPath had invalid markdown headings, spacing out"
-            $updatedLine = $line -replace "#", "# "
-            $nuspecXML.package.metadata.description = $nuspecXML.package.metadata.description -replace [Regex]::Escape($line), $updatedLine
+            # '##Heading' -> '## Heading'
+            $updatedLine = $line -replace '^(#+)', '$1 '
+            # Literal string replacement, so '$' in the description is not treated as a regex substitution
+            $nuspecXML.package.metadata.description = $nuspecXML.package.metadata.description.Replace($line, $updatedLine)
         }
     }
 
@@ -70,14 +72,5 @@ Function Format-NuspecForValidation {
         $nuspecXML.package.metadata.iconurl = "https://example.com/"
     }
 
-    Try {
-        [System.Xml.XmlWriterSettings] $XmlSettings = New-Object System.Xml.XmlWriterSettings
-        $XmlSettings.Indent = $true
-        # Save without BOM
-        $XmlSettings.Encoding = New-Object System.Text.UTF8Encoding($false)
-        [System.Xml.XmlWriter] $XmlWriter = [System.Xml.XmlWriter]::Create($nuspecPath, $XmlSettings)
-        $nuspecXML.Save($XmlWriter)
-    } Finally {
-        $XmlWriter.Dispose()
-    }
+    Save-XmlDocument -XmlDocument $nuspecXML -Path $NuspecPath
 }

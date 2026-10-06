@@ -1,4 +1,4 @@
-﻿Function Invoke-RepoMove {
+Function Invoke-RepoMove {
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '', Justification = 'String needs to be in plain text when used for header', Scope = 'Function')]
     param (
@@ -122,7 +122,7 @@ $versions | ForEach-Object {
                             }
                             Get-File -url $downloadURL -filename $filename -folder $saveDir -checksum $downloadChecksum -checksumTypeType 'sha512' @authArgs
 
-                            $pushArgs = 'push "' + $filename + '" -f -r -s "' + $config.moveToRepoURL + '"'
+                            $pushArgs = Join-ProcessArgument -Argument 'push', $filename, '-f', '-r', '-s', $config.moveToRepoURL
                             $pushcode = Start-Process -FilePath "choco" -ArgumentList $pushArgs -WorkingDirectory $saveDir -NoNewWindow -Wait -PassThru
 
                             if ($pushcode.exitcode -ne "0") {
