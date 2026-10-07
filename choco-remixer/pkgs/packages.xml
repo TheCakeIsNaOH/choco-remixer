@@ -100,6 +100,7 @@
     <id>antelopeio-dune</id>
     <id>antimicro</id>
     <id>any2ico</id>
+    <id>anydesk.portable</id>
     <id>anydesk</id>
     <id>aow</id>
     <id>apache-httpd</id>
@@ -351,6 +352,7 @@
     <id>capnpc-csharp-win-x86</id>
     <id>capnpc-csharp</id>
     <id>capslockx</id>
+    <id>capture</id>
     <id>carbon</id>
     <id>carina</id>
     <id>carotdav.install</id>
@@ -1678,6 +1680,7 @@
     <id>lean</id>
     <id>lecmd</id>
     <id>led</id>
+    <id>ledger-live</id>
     <id>legendary</id>
     <id>leiningen</id>
     <id>lenovo-s145-touchpad-fix</id>
@@ -2220,6 +2223,7 @@
     <id>openjdk17</id>
     <id>openjdk8</id>
     <id>openjdk8jre</id>
+    <id>openlens</id>
     <id>openlivewriter</id>
     <id>openmpt</id>
     <id>openorienteering-mapper.install</id>
@@ -3423,8 +3427,10 @@
     <id>vlc.portable</id>
     <id>vlc</id>
     <id>vmware-converter</id>
+    <id>vmware-horizon-client</id>
     <id>vmware-powercli-psmodule</id>
     <id>vmware-workloadmanagement</id>
+    <id>vmware-workstation-player</id>
     <id>vmwareplayer</id>
     <id>vmwareworkstation</id>
     <id>vnc-viewer-chrome</id>
