@@ -8,7 +8,8 @@
         [string]$checksumTypeType,
         [string]$referer,
         [string]$acceptMIME,
-        [string]$authorization
+        [string]$authorization,
+        [string]$userAgent
     )
 
     #filename comes from untrusted install scripts, make sure it cannot escape the folder
@@ -38,7 +39,13 @@
         #needed to use [Microsoft.PowerShell.Commands.PSUserAgent] when running in pwsh
         Import-Module Microsoft.PowerShell.Utility
         $dlwd = New-Object net.webclient
-        $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
+        #Some download hosts (e.g. tableau, sourceforge) block the default firefox user agent,
+        #so allow a custom one to be set from the package config
+        if ($userAgent) {
+            $dlwd.Headers.Add('user-agent', $userAgent)
+        } else {
+            $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
+        }
         if ($referer) {
             $dlwd.Headers.Add('referer', $referer)
         }

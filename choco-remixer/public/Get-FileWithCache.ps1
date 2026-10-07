@@ -9,6 +9,7 @@
         [string]$referer,
         [string]$acceptMIME,
         [string]$authorization,
+        [string]$userAgent,
         [parameter(Mandatory = $true)][string]$PackageID,
         [parameter(Mandatory = $true)][string]$PackageVersion
     )
@@ -55,5 +56,5 @@
         Write-Verbose "Get-ChocolateyDownloadCacheUrls cmdlet not available, skipping download cache"
     }
 
-    Get-File -url $url -filename $filename -folder $folder -checksum $checksum -checksumTypeType $checksumTypeType -referer $referer -acceptMIME $acceptMIME -authorization $authorization
+    Get-File -url $url -filename $filename -folder $folder -checksum $checksum -checksumTypeType $checksumTypeType -referer $referer -acceptMIME $acceptMIME -authorization $authorization -userAgent $userAgent
 }

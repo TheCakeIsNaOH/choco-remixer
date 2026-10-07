@@ -20,6 +20,7 @@ Function Edit-InstallChocolateyPackage {
         [switch]$doubleQuotesUrl,
         [switch]$doubleQuotesChecksum,
         [switch]$replaceFilenames,
+        [string]$userAgent,
         [parameter(Mandatory = $true)]
         [ValidateSet('md5', 'sha1', 'sha256', 'sha512')]
         [string]$checksumTypeType,
@@ -343,7 +344,7 @@ Function Edit-InstallChocolateyPackage {
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
-            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url32 -filename $filename32 -folder $toolsDir -checksum $checksum32 -checksumTypeType $checksumTypeType
+            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url32 -filename $filename32 -folder $toolsDir -checksum $checksum32 -checksumTypeType $checksumTypeType -userAgent $userAgent
         }
         if ($x64) {
             if ($checksumArgsType -eq 0) {
@@ -365,14 +366,14 @@ Function Edit-InstallChocolateyPackage {
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
-            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url64 -filename $filename64 -folder $toolsDir -checksum $checksum64 -checksumTypeType $checksumTypeType
+            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url64 -filename $filename64 -folder $toolsDir -checksum $checksum64 -checksumTypeType $checksumTypeType -userAgent $userAgent
         }
     } else {
         if ($x32) {
-            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url32 -filename $filename32 -folder $toolsDir
+            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url32 -filename $filename32 -folder $toolsDir -userAgent $userAgent
         }
         if ($x64) {
-            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url64 -filename $filename64 -folder $toolsDir
+            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url64 -filename $filename64 -folder $toolsDir -userAgent $userAgent
         }
     }
 

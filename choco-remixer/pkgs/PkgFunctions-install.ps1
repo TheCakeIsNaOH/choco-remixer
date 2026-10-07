@@ -85,14 +85,20 @@ Function Convert-anaconda3 ([PackageInternalizeInfo]$obj) {
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 Function Convert-miniconda3 ([PackageInternalizeInfo]$obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32 = ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "https").ToString()
+    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url32 = ')
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url64 = ')
 
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$url64 = ').tostring()
-    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "https").ToString()
+    if (!($fullurl64)) {
+        Throw "Could not find the x64 download url for miniconda3, the install script format may have changed"
+    }
+    $url64 = ($fullurl64.tostring() -split "'" | Select-String -Pattern "https").ToString()
 
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = '    -file (Join-Path $pkgToolsDir "' + $filename32 + '")'
+    #Anaconda dropped the x86 installer, so the x86 url is optional now
+    if ($fullurl32) {
+        $url32 = ($fullurl32.tostring() -split "'" | Select-String -Pattern "https").ToString()
+        $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
+        $filePath32 = '    -file (Join-Path $pkgToolsDir "' + $filename32 + '")'
+    }
 
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
     $filePath64 = '    -file64 (Join-Path $pkgToolsDir "' + $filename64 + '")'
@@ -101,14 +107,18 @@ Function Convert-miniconda3 ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
     $obj.installScriptMod = $obj.installScriptMod -replace [regex]::Escape("-ValidExitCodes @(0)") , "-ValidExitCodes @(0) ``"
 
-    $obj.installScriptMod = $obj.InstallScriptMod + $filePath32 + "```n"
+    if ($fullurl32) {
+        $obj.installScriptMod = $obj.InstallScriptMod + $filePath32 + "```n"
+    }
     $obj.installScriptMod = $obj.InstallScriptMod + $filePath64 + "`n"
     $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $pkgToolsDir\*.exe'
 
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum32 = ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+    if ($fullurl32) {
+        $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum32 = ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
+        Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
+    }
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$checksum64 = ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
 
@@ -812,7 +822,19 @@ Function Convert-tailscale ([PackageInternalizeInfo]$obj) {
         Write-Information "mockup"
     }
 
+    #The install script dereferences PROCESSOR_IDENTIFIER to pick its download,
+    #but that variable does not exist on Linux. Pretend to be AMD64 so the script
+    #fills in the x86/x64 package args that are pulled out below.
+    $savedProcessorIdentifier = $env:PROCESSOR_IDENTIFIER
+    if ($null -eq $savedProcessorIdentifier) {
+        $env:PROCESSOR_IDENTIFIER = 'AMD64 Family 6 Model 158 Stepping 9, AuthenticAMD'
+    }
+
     . $((Get-ChildItem $obj.toolsDir | Where-Object Name -ieq "ChocolateyInstall.ps1").Fullname)
+
+    if ($null -eq $savedProcessorIdentifier) {
+        Remove-Item -Path Env:\PROCESSOR_IDENTIFIER -Force -ErrorAction SilentlyContinue
+    }
 
     $url32 = $packageArgs.Url
     $url64 = $packageArgs.Url64Bit

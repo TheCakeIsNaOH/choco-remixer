@@ -22,6 +22,7 @@
         doubleQuotesChecksum = $obj.doubleQuotesChecksum
         hasVersionUrl    = $obj.hasVersionUrl
         versionUrlType   = $obj.versionUrlType
+        userAgent        = $obj.userAgent
     }
 
     $obj.installScriptMod = Edit-InstallChocolateyPackage @editInstallChocolateyPackageArgs

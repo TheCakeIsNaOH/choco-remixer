@@ -34,6 +34,7 @@
         $this.checksumArgsType = $customXml.checksumArgsType
         $this.hasVersionUrl = $customXml.hasVersionUrl -eq "yes"
         $this.versionUrlType = $customXml.versionUrlType
+        $this.userAgent = $customXml.userAgent
     }
 
     [String] $nupkgName
@@ -68,4 +69,5 @@
     [int] $checksumArgsType
     [bool] $hasVersionUrl
     [int] $versionUrlType
+    [String] $userAgent
 }
