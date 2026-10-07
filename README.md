@@ -94,4 +94,4 @@ However, choco-remixer:
 - Generalize and factor out repeated code into functions.
 - Continue adding support for more packages
 
-![Progress](https://progress-bar.dev/1817/?scale=6969&width=400&suffix=/6969)
+![Progress](https://progress-bar.xyz/1855/?scale=8677&width=400&suffix=/8677)
