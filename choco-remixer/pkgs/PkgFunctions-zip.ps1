@@ -100,19 +100,22 @@ Function Convert-adb ([PackageInternalizeInfo]$obj) {
 }
 
 Function Convert-cinebench ([PackageInternalizeInfo]$obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' url ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").tostring()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filePath32 = 'FileFullPath   = (Join-Path $toolsDir "' + $filename32 + '")'
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
+    $fullchecksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring()
+    $fullrefererUrl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$referer ').tostring()
 
-    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
-    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n  $filePath32"
-
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern ' checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    $fullrefererUrl = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$referer ').tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+    $checksum64 = ($fullchecksum64 -split "'" | Select-String -Pattern "hex|[0-9a-f]{64}").tostring()
     $refererUrl = ($fullrefererUrl -split "'" | Select-String -Pattern "http").tostring()
 
-    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksum $checksum32 -checksumTypeType 'sha256' -referer $refererUrl
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyZipPackage" , "Get-ChocolateyUnzip"
+    $obj.installScriptMod = $obj.installScriptMod -replace 'url64bit       = if \(\$isArm64\) \{ \$urlArm64 \} else \{ \$url64 \}', "FileFullPath   = (Join-Path `$toolsDir '$filename64')"
+    $obj.installScriptMod = $obj.installScriptMod -replace 'checksum64     = if \(\$isArm64\) \{ \$checksumArm64 \} else \{ \$checksum64 \}', "Checksum       = '$checksum64'"
+    $obj.installScriptMod = $obj.installScriptMod -replace "checksumType64 = 'sha256'" , "ChecksumType   = 'sha256'"
+
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksum $checksum64 -checksumTypeType 'sha256' -referer $refererUrl
 }
 
 Function Convert-sysinternals ([PackageInternalizeInfo]$obj) {
