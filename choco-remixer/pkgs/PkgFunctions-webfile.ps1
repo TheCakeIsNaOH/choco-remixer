@@ -79,6 +79,9 @@ Function Convert-resharper-platform ([PackageInternalizeInfo]$obj) {
 
     $obj.installScriptMod = $obj.installScriptMod -replace 'Get-ChocolateyWebFile' , '#Get-ChocolateyWebFile'
 
+    $unzipCall = 'Get-ChocolateyUnzip -FileFullPath (Join-Path $packagePath "' + $filename32 + '") -Destination $packagePath'
+    $obj.installScriptMod = $obj.installScriptMod -replace 'Install-ChocolateyZipPackage @packageArgs' , ('#Install-ChocolateyZipPackage @packageArgs' + "`n" + $unzipCall)
+
     $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
 
     $downloadDir = Split-Path $obj.toolsDir

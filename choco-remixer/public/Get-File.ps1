@@ -44,7 +44,7 @@
         if ($userAgent) {
             $dlwd.Headers.Add('user-agent', $userAgent)
         } else {
-            $dlwd.Headers.Add('user-agent', [Microsoft.PowerShell.Commands.PSUserAgent]::firefox)
+            $dlwd.Headers.Add('user-agent', 'Chocolatey Command Line/2.7.5 (Chocolatey CLI) via NuGet Client/6.4.1 (Microsoft Windows NT 10.0.26300.0)')
         }
         if ($referer) {
             $dlwd.Headers.Add('referer', $referer)
