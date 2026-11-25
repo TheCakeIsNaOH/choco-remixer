@@ -1345,6 +1345,7 @@
     <id>harddriveindicator</id>
     <id>hardentools</id>
     <id>hardware-freak</id>
+    <id>harmony-sase</id>
     <id>harper</id>
     <id>hash-r</id>
     <id>hashcat</id>
@@ -10365,7 +10366,7 @@
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x32</architecture>
-      <urlType>7</urlType>
+      <urlType>2</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
@@ -11145,10 +11146,10 @@
     </pkg>
     <pkg>
       <id>glasswire</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <functionName>Convert-glasswire</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>x32</architecture>
+      <architecture>x64</architecture>
       <urlType>7</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
@@ -17109,8 +17110,8 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>yes</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
-      <urlType>0</urlType>
+      <architecture>x64</architecture>
+      <urlType>9</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
@@ -19035,7 +19036,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>1</urlType>
       <argsType>1</argsType>
       <removeMSI>yes</removeMSI>
@@ -21769,7 +21770,7 @@
     </pkg>
     <pkg>
       <id>stackql</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
+      <functionName>Convert-stackql</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
       <architecture>x64</architecture>
@@ -25073,7 +25074,7 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
-      <architecture>both</architecture>
+      <architecture>x64</architecture>
       <urlType>3</urlType>
       <argsType>0</argsType>
       <removeMSI>yes</removeMSI>
@@ -25211,9 +25212,10 @@
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>no</needsToolsDir>
-      <architecture>x32</architecture>
+      <architecture>x64</architecture>
       <urlType>6</urlType>
       <argsType>0</argsType>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
       <removeEXE>yes</removeEXE>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
@@ -26645,6 +26647,7 @@
       <architecture>x32</architecture>
       <urlType>2</urlType>
       <argsType>0</argsType>
+      <doubleQuotesUrl>yes</doubleQuotesUrl>
       <removeMSI>yes</removeMSI>
       <checksumArgsType>5</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
@@ -31239,19 +31242,6 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
-      <id>harmony-sase</id>
-      <functionName>Convert-InstallChocolateyPackage</functionName>
-      <needsStopAction>no</needsStopAction>
-      <needsToolsDir>yes</needsToolsDir>
-      <architecture>x32</architecture>
-      <urlType>7</urlType>
-      <argsType>0</argsType>
-      <removeMSI>yes</removeMSI>
-      <checksumArgsType>5</checksumArgsType>
-      <checksumTypeType>sha256</checksumTypeType>
-      <whyNotInternal>ToDetermine</whyNotInternal>
-    </pkg>
-    <pkg>
       <id>haruna</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -33753,10 +33743,9 @@
       <needsStopAction>no</needsStopAction>
       <needsToolsDir>yes</needsToolsDir>
       <architecture>x64</architecture>
-      <urlType>1</urlType>
+      <urlType>9</urlType>
       <argsType>0</argsType>
       <removeEXE>yes</removeEXE>
-      <doubleQuotesUrl>yes</doubleQuotesUrl>
       <checksumArgsType>3</checksumArgsType>
       <checksumTypeType>sha256</checksumTypeType>
       <hasVersionUrl>yes</hasVersionUrl>

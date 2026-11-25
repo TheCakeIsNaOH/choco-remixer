@@ -138,14 +138,20 @@ Function Convert-azurepowershell ([PackageInternalizeInfo]$obj) {
 }
 
 Function Convert-jq ([PackageInternalizeInfo]$obj) {
-    $fullurl32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url ').tostring()
-    $url32 = ($fullurl32 -split "'" | Select-String -Pattern "http").ToString()
-    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
-    $filepath32 = '(Join-Path $toolsDir "' + $filename32 + '")'
+    #The current script builds the urls from variables, for example
+    #$url = "$releaseBaseUrl/jq-windows-i386.exe", so read the resolved values
+    #straight out of the top level assignments instead of matching lines
+    $scriptValues = Get-ScriptAssignedValue -Script $obj.installScriptOrig -Name 'url', 'url64', 'checksum', 'checksum64'
+    $url32 = [string]$scriptValues['url']
+    $url64 = [string]$scriptValues['url64']
+    $checksum32 = [string]$scriptValues['checksum']
+    $checksum64 = [string]$scriptValues['checksum64']
 
-    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$url64 ').tostring()
-    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").ToString()
+    $filename32 = ($url32 -split "/" | Select-Object -Last 1).tostring()
     $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+    Assert-SafeFileName -FileName $filename32
+    Assert-SafeFileName -FileName $filename64
+    $filepath32 = '(Join-Path $toolsDir "' + $filename32 + '")'
     $filepath64 = '(Join-Path $toolsDir "' + $filename64 + '")'
 
     $obj.installScriptMod = $obj.installScriptMod -replace 'Get-ChocolateyWebFile' , "# $&"
@@ -157,8 +163,6 @@ Function Convert-jq ([PackageInternalizeInfo]$obj) {
     $obj.installScriptMod = $obj.installScriptMod + "`n" + '    Remove-Item -Force -EA 0 -Path ' + $filepath64
     $obj.installScriptMod = $obj.installScriptMod + "`n" + '}'
 
-    $checksum32 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
-    $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum64 ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url32 -filename $filename32 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum32
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }

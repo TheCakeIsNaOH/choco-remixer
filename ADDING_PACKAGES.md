@@ -11,7 +11,7 @@ There can be false positives, as occasionally an internal package will have a UR
 ## Add an internal package
 
 1. Get the `id` of the package. Not the name or `title`, but the `id`. The `id` is available in the `.nuspec`, and it is what is used to install/uninstall the package.
-2. Open up `packages.xml`, and add the `id` to the `internal` section.
+2. Open up `choco-remixer/pkgs/packages.xml`, and add the `id` to the `internal` section.
 3. Commit the updated `packages.xml`
 4. Open a PR
 
@@ -23,7 +23,7 @@ There can be false positives, as occasionally an internal package will have a UR
 4. Check if the install script has defined the `$tooldDir` variable, if not note down
 5. Check what helper is used to download the file(s). `Install-ChocolateyPackage`, `Install-ChocolateyZipPackage`, and `Get-ChocolateyWebfile` are the three most common. If it is a script that uses `Install-ChocolateyPackage`, then `Edit-InstallChocolateyPackage` may be able to be used. See the "Standard Install Type Packages" section below.
 6. Check why the package is not internal. There are three major options: First, the license of the software might not allow redistribution. Second, the package could be over 200mb. Third, the maintainer might have decided to not make the package internal. In the third case, you might be better served by trying to get the maintainer to make the package internal instead of adding support for the package here.
-7. Add an entry in `packages.xml` for the package under `<implemented>`. The `functionName`should normally be in the format `Convert-<package-id>`, the `id` is from step 1, the `needsStopAction` is from step 3, the `needsToolsDir` is from step 4. See the other entries for the formatting. It is (mostly) in alphabetical order according the `id`s.
+7. Add an entry in `choco-remixer/pkgs/packages.xml` for the package under `<implemented>`. The `functionName`should normally be in the format `Convert-<package-id>`, the `id` is from step 1, the `needsStopAction` is from step 3, the `needsToolsDir` is from step 4. Also set the parse options the entry needs, such as `architecture`, `urlType`, `argsType`, `removeEXE`/`removeMSI`/`removeMSU`, `checksumArgsType`, `checksumTypeType`, and `whyNotInternal`; see the commented template at the top of the `<implemented>` section and the other entries for the formatting. It is (mostly) in alphabetical order according the `id`s.
 8. Create the function for the package, the name of the function is `functionName`. See below for which file the function should go in. Look in that file for a general idea of what the function should look like. It should accept one argument called `$obj`. Also, see the sections below for more information on what the function needs to do.
 - For `Install-ChocolateyPackage` it should go in `PkgFunctions-install.ps1`.
 - For `Install-ChocolateyZipPackage`, or other packages extracting archives, it should go in `PkgFunctions-zip.ps1`
@@ -38,9 +38,9 @@ Each convert function has two major things it needs to do. First, it need to dow
 
 If the package uses a fairly standard `Install-ChocolateyPackage` layout, with argument splatting, and no extra things going on, you can use `Edit-InstallChocolateyPackage` via `Convert-InstallChocolateyPackage`. See the standard install package section.
 
-Otherwise, the editing of the install script and getting the url(s) is a fairly manual process. For the actual downloading please use the helper function `Get-File`.
+Otherwise, the editing of the install script and getting the url(s) is a fairly manual process. For the actual downloading please use the helper function `Get-FileWithCache` (all the existing convert functions use it; it wraps `Get-File` and also consults the Chocolatey download cache when available).
 
-For `Get-File`, you need to get the url, the filename (normally the last part of the url, can be something manually defined if needed), the download directory (normally use `$obj.toolsDir`), the checksum of the file, and the checksum type. Normally, you can hardcode the checksum type, as that rarely changes between package versions. However, the url and the checksum normally need to be scraped from the script. See the other functions for how to do so.
+For `Get-FileWithCache`, you need to get the url, the filename (normally the last part of the url, can be something manually defined if needed), the download directory (normally use `$obj.toolsDir`), the checksum of the file, and the checksum type. Normally, you can hardcode the checksum type, as that rarely changes between package versions; note that if the script itself declares a checksum type, that declaration wins over the configured one. However, the url and the checksum normally need to be scraped from the script. See the other functions for how to do so. If the urls are built from top-level script variables instead of being literals, prefer `Get-ScriptAssignedValue` (in `choco-remixer/private`) over ad-hoc `Select-String` splitting; it resolves the variables without executing the script.
 
 If the script does anything with the downloaded file (e.g install, unzip, otherwise run), generally refer to it via a `Join-Path $toolsDir 'file.name'`, don't forget to make sure `$toolsDir` is defined in the script.
 
@@ -101,13 +101,13 @@ This function edits the install script and downloads the installer(s) for standa
 - 7: `'\s+url\s+='`, `'\s+url64\s+='`
 - 8: `'\s+url32\s+='`, `'\s+url64\s+='`
 - 9: `'\s+url\s+='`, `'\s+url64bit\s+='`
-- 10: `'^\$Url\s+='`, `'^\$Url\s+='`
+- 10: `'^\$url\s+='`, `'^\$url\s+='`
 
 ## `$argsType` sets how to parse the argument splatted for `Install-ChocolateyPackage`
 - 0: for `packageArgs = @{`
 - 1: for ` = @{`
 
-## `$checksumArgsType` sets how to parse the url
+## `$checksumArgsType` sets how to parse the checksums
 - 0: `'  Checksum  '`,`'  Checksum64  '`
 - 1: `'^\$checksum32 '`,`'^\$checksum64 '`
 - 2: `'^\$checksum '`,`'^\$checksum64 '`
@@ -125,12 +125,12 @@ This function edits the install script and downloads the installer(s) for standa
 - `$x64NameExt`, to add `_x64` to the 64 bit filename
 - `$removeEXE`, to add a line to the end of the script that removes all `.exe` files from the tools directory
 - `$removeMSI`, to add a line to the end of the script that removes all `.msi` files from the tools directory
-- `$removeMSU`, to add a line to the end of the script that removes all `.msi` files from the tools directory
+- `$removeMSU`, to add a line to the end of the script that removes all `.msu` files from the tools directory
 - `$replaceFilenames`, to use filenames in the format `<id>-<version>-<architecture>.<extension>` instead of filenames parsed from the download urls
 - `$hasVersionUrl`, to use a seperate version variable in the package url
 
 ## `$versionUrlType` sets what type of version variable to use
-- 0: `$version`, replacing `${version}`
-- 1: `$PackageVersion` with "", replacing `$($PackageVersion)`
-- 2: `$version` with "", replacing `${version}`
-- 2: Found nupkg version, replacing `$version`
+- 0: Scrape `$Version` (single-quoted) from the script, replacing `${Version}` in urls
+- 1: Scrape `$PackageVersion` (double-quoted) from the script, replacing `$($PackageVersion)` in urls
+- 2: Scrape `$Version` (double-quoted) from the script, replacing `${Version}` in urls
+- 3: Replace `$Version` in urls with the nupkg version directly (no scraping)

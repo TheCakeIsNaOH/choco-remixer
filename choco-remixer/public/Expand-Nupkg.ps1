@@ -106,6 +106,9 @@ Function Expand-Nupkg {
             }
 
             [System.Collections.Generic.List[string]]$extractedNames = @()
+            #Disk paths extracted during this run, used to tell entries of this
+            #archive apart from files left behind by earlier runs
+            $extractedPaths = [System.Collections.Generic.List[string]]::new()
             foreach ($entry in $filteredArchive) {
                 $OutputFile = Join-Path $Destination $entry.fullname
                 #Zip slip guard: refuse entries whose resolved path escapes the destination
@@ -119,10 +122,26 @@ Function Expand-Nupkg {
                     Write-Warning "Skipping zip entry '$($entry.fullname)' which would extract outside the destination directory"
                     continue
                 }
+                #On case sensitive filesystems a file or folder from an earlier
+                #run (or an older revision of the package) can still exist with
+                #a name that differs from this entry only in case. Chocolatey
+                #treats those as one destination when packing, so remove the
+                #stale copy and let this extraction win.
+                $entryDirectory = [System.IO.Path]::GetDirectoryName($resolvedOutputFile)
+                $caseVariant = Find-CaseVariantFile -Directory $entryDirectory -FileName ([System.IO.Path]::GetFileName($resolvedOutputFile))
+                if ($null -ne $caseVariant) {
+                    if ($extractedPaths -icontains $caseVariant) {
+                        Write-Warning "The archive contains multiple entries differing only in case ('$($entry.fullname)'); keeping both, packing will treat them as one destination"
+                    } else {
+                        Write-Verbose "Removing stale '$caseVariant' which differs only in case from zip entry '$($entry.fullname)'"
+                        Remove-Item -Force -Recurse -LiteralPath $caseVariant
+                    }
+                }
                 $null = [System.IO.Directory]::CreateDirectory([System.IO.Path]::GetDirectoryName($resolvedOutputFile))
                 Write-Verbose "Extracting $($entry.fullname) to $OutputFile"
                 [System.IO.Compression.ZipFileExtensions]::ExtractToFile($entry, $resolvedOutputFile, $true)
                 $extractedNames.Add($entry.fullname)
+                $extractedPaths.Add($resolvedOutputFile)
             }
 
             if (!$NoAddFilesElement) {

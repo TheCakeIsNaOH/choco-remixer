@@ -161,6 +161,17 @@ Function Edit-InstallChocolateyPackage {
         }
     }
 
+    #URLs may be built from top level script variables, for example
+    #$url = "https://host/app-$appVersion-x64.msi". Resolve those references
+    #from the script without executing anything; unresolvable tokens are left
+    #in place and later rejected by Assert-SafeFileName
+    if ($x32) {
+        $url32 = Resolve-InstallScriptUrl -Url $url32 -InstallScript $installScript
+    }
+    if ($x64) {
+        $url64 = Resolve-InstallScriptUrl -Url $url64 -InstallScript $installScript
+    }
+
     if ($hasVersionUrl) {
         switch ($versionUrlType) {
             0 {
@@ -344,7 +355,10 @@ Function Edit-InstallChocolateyPackage {
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
-            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url32 -filename $filename32 -folder $toolsDir -checksum $checksum32 -checksumTypeType $checksumTypeType -userAgent $userAgent
+            #The script's own checksumType declaration wins over the configured
+            #type, see Get-ScriptChecksumType
+            $checksumType32 = Get-ScriptChecksumType -InstallScript $installScript -FallbackType $checksumTypeType
+            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url32 -filename $filename32 -folder $toolsDir -checksum $checksum32 -checksumTypeType $checksumType32 -userAgent $userAgent
         }
         if ($x64) {
             if ($checksumArgsType -eq 0) {
@@ -366,7 +380,8 @@ Function Edit-InstallChocolateyPackage {
             } else {
                 Throw "Invalid checksumArgsType $checksumArgsType"
             }
-            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url64 -filename $filename64 -folder $toolsDir -checksum $checksum64 -checksumTypeType $checksumTypeType -userAgent $userAgent
+            $checksumType64 = Get-ScriptChecksumType -InstallScript $installScript -FallbackType $checksumTypeType -Is64
+            Get-FileWithCache -PackageID $nuspecID -PackageVersion $version -url $url64 -filename $filename64 -folder $toolsDir -checksum $checksum64 -checksumTypeType $checksumType64 -userAgent $userAgent
         }
     } else {
         if ($x32) {

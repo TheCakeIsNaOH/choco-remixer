@@ -1579,3 +1579,55 @@ Function Convert-microsoft-openjdk ([PackageInternalizeInfo]$obj) {
     $checksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksum = ').tostring() -split "'" | Select-Object -Last 1 -Skip 1
     Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
 }
+
+Function Convert-glasswire ([PackageInternalizeInfo]$obj) {
+    #The current script picks the installer in an if/else on OS version and
+    #bits, assigning to members of $packageArgs. The 64 bit current release is
+    #what gets internalized; the legacy 32 bit/Windows 7 branch points at an
+    #old 3.8 installer that is not part of this package version.
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$packageArgs\.url64bit\s+=').tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring() -split "\?" | Select-Object -First 1
+
+    $fullchecksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '\$packageArgs\.checksum64\s+=').tostring()
+    $checksum64 = ($fullchecksum64 -split "'" | Select-Object -Last 1 -Skip 1)
+
+    #download.glasswire.com rejects the default user agent; the script itself
+    #sends a Chrome user agent, so use the same one for the internalize download
+    $fulluserAgent = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$userAgent\s+=').tostring()
+    $userAgent = ($fulluserAgent -split "'" | Select-Object -Last 1 -Skip 1)
+
+    Assert-SafeFileName -FileName $filename64
+    $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    #The script does not define $toolsDir itself, Install-ChocolateyPackage
+    #normally handles the tools directory internally
+    $obj.installScriptMod = '$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"' + "`n" + $obj.installScriptMod
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.exe'
+
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64 -userAgent $userAgent
+}
+
+Function Convert-stackql ([PackageInternalizeInfo]$obj) {
+    #The script selects the msi in a switch on the processor architecture from
+    #per architecture variables; internalize the amd64 one, matching the x64
+    #architecture recorded for this package
+    $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$urlAmd64\s+=').tostring()
+    $url64 = ($fullurl64 -split "'" | Select-String -Pattern "http").tostring()
+    $filename64 = ($url64 -split "/" | Select-Object -Last 1).tostring()
+
+    $fullchecksum64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '^\$checksumAmd64\s+=').tostring()
+    $checksum64 = ($fullchecksum64 -split "'" | Select-Object -Last 1 -Skip 1)
+
+    Assert-SafeFileName -FileName $filename64
+    $filePath64 = 'file64   = (Join-Path $toolsDir "' + $filename64 + '")'
+
+    #The script defines $toolsDir itself
+    $obj.installScriptMod = $obj.installScriptMod -replace "packageArgs = @{" , "$&`n    $filePath64"
+    $obj.installScriptMod = $obj.installScriptMod -replace "Install-ChocolateyPackage" , "Install-ChocolateyInstallPackage"
+    $obj.installScriptMod = $obj.installScriptMod + "`n" + 'Remove-Item -Force -EA 0 -Path $toolsDir\*.msi'
+
+    Get-FileWithCache -PackageID $obj.nuspecID -PackageVersion $obj.version -url $url64 -filename $filename64 -folder $obj.toolsDir -checksumTypeType 'sha256' -checksum $checksum64
+}

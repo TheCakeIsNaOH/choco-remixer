@@ -19,6 +19,14 @@
 
     $dlwdFile = (Join-Path "$folder" "$filename")
 
+    #A file left behind by an earlier run whose name differs only in case
+    #would end up as a second copy in the packed package, so remove it first
+    $caseVariant = Find-CaseVariantFile -Directory $folder -FileName $filename
+    if ($null -ne $caseVariant) {
+        Write-Verbose "Removing stale '$caseVariant' which differs only in case from '$filename'"
+        Remove-Item -Force -Recurse -LiteralPath $caseVariant
+    }
+
     if (Test-Path -LiteralPath $dlwdFile) {
         if ($checksum) {
             Write-Information "$dlwdFile appears to be downloaded, checking checksum" -InformationAction Continue
