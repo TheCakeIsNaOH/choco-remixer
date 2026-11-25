@@ -1,5 +1,12 @@
 ﻿
 Function Remove-ConsecutiveDuplicateLines {
+    <#
+    .SYNOPSIS
+    Returns a copy of the input string with consecutive duplicate lines removed.
+    Pure string helper; it does not change system state, so no ShouldProcess.
+    #>
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '', Justification = 'Pure string helper, returns a new string and does not change system state')]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Plural describes removing duplicate lines; renaming would break callers and tests')]
     param (
         [parameter(Mandatory = $true)][AllowEmptyString()][string]$str,
         [switch] $Trim

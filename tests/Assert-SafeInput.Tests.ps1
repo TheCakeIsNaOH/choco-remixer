@@ -1,4 +1,4 @@
-# Input validators guarding paths, XPath queries and generated install scripts
+﻿# Input validators guarding paths, XPath queries and generated install scripts
 # against values taken from untrusted packages and install scripts.
 Import-Module (Join-Path $PSScriptRoot '..\choco-remixer\choco-remixer.psm1') -Force
 

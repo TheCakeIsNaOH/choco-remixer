@@ -52,7 +52,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
     if ($internalizedVersions -icontains $nuspecVersion) {
         Write-Verbose "$nuspecID $nuspecVersion is already internalized"
     } elseif ($notImplementedIdsTableLower.ContainsKey($nuspecID.ToLower())) {
-        Write-Warning "$nuspecID $nuspecVersion not implemented. Support has to be added for it, see ADDING_PACKAGES.md"
+        #Write-Warning "$nuspecID $nuspecVersion not implemented. Support has to be added for it, see ADDING_PACKAGES.md"
     } elseif ($config.personal.id -icontains $nuspecID) {
         Write-Verbose "$nuspecID is a custom package"
     } elseif ($packagesXMLcontent.packages.internal.id -icontains $nuspecID) {
@@ -129,7 +129,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
             Write-Information "Found $nuspecID $nuspecVersion to internalize" -InformationAction Continue
         }
     } else {
-        Write-Warning "$nuspecID $nuspecVersion is a unknown package ID, ignoring. Support has to be added for it, see ADDING_PACKAGES.md"
+        Write-Warning "$nuspecID $nuspecVersion is an unknown package ID, ignoring. Support has to be added for it, see ADDING_PACKAGES.md"
     }
 
     if ($null -eq $obj) {
@@ -220,7 +220,7 @@ Function Invoke-InternalizeDownloadedChocoPkg {
 
     if (($obj.status -eq "internalized") -and (!($noSave))) {
         if ($config.useDropPath -eq "yes") {
-            Write-Verbose "coping $($obj.nuspecID) to drop path"
+            Write-Verbose "copying $($obj.nuspecID) to drop path"
             $packedNupkgs = @(Get-ChildItem -LiteralPath $obj.versionDir -File -Filter "*.nupkg")
             if ($packedNupkgs.Count -eq 0) {
                 Throw "No packed nupkg found in $($obj.versionDir)"

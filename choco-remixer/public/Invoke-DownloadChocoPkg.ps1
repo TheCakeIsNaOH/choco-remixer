@@ -24,6 +24,10 @@ Function Invoke-DownloadChocoPkg {
         Write-Error "Error details:`n$($PSItem.ToString())`n$($PSItem.InvocationInfo.Line)`n$($PSItem.ScriptStackTrace)"
     }
 
+    if ($null -eq $downloadXMLcontent) {
+        Throw "download.xml not found or unreadable, cannot get the list of packages to download"
+    }
+
     $ccrAPI = "https://community.chocolatey.org/api/v2/"
 
     $downloadXMLcontent.SelectNodes("//pkg") | ForEach-Object {
@@ -42,7 +46,8 @@ Function Invoke-DownloadChocoPkg {
                 $version = $publicEntry.properties.Version
 
                 if ($null -eq $version) {
-                    Write-Error "$id does not exist or is unlisted on $ccrAPI"
+                    Write-Warning "$id does not exist or is unlisted on $ccrAPI, skipping"
+                    return
                 }
             }
             Write-Verbose "Found $version of $id available"
@@ -51,9 +56,13 @@ Function Invoke-DownloadChocoPkg {
             $escapedId = $id.Replace("'", "''")
             $escapedVersion = $version.Replace("'", "''")
             $publicPageURL = $ccrAPI + "Packages(Id='" + $escapedId + "',Version='" + $escapedVersion + "')"
-            Write-Warning $publicPageUrl
+            Write-Verbose $publicPageUrl
             [xml]$publicPage = (Invoke-WebRequest -UseBasicParsing -TimeoutSec 25 -Uri $publicPageURL).Content
             $publicEntry = $publicPage.entry | Select-Object -First 1
+            if ($null -eq $publicEntry) {
+                Write-Warning "$id version $version does not exist or is unlisted on $ccrAPI, skipping"
+                return
+            }
         }
 
         Write-Verbose "Downloading package $id version $version to $($config.searchDir)"

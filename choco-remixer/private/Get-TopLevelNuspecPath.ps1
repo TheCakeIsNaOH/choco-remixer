@@ -9,6 +9,7 @@ Function Get-TopLevelNuspecPath {
     or an array on to the nuspec editing functions.
     #>
     [CmdletBinding()]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', 'NuspecID', Justification = 'False positive: used inside the Where-Object scriptblock to prefer <id>.nuspec')]
     param (
         [parameter(Mandatory = $true)][string]$Directory,
         [string]$NuspecID

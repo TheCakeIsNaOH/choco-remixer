@@ -24,6 +24,7 @@
 Function Get-RemixerConfig {
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Justification = 'This is dotsourced')]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidGlobalVars', '', Justification = 'Set via dot-sourcing so package converter functions in other files can read the locale')]
     Param(
         [Parameter(Mandatory = $true)]$upperFunctionBoundParameters
     )

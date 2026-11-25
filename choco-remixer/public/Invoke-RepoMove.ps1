@@ -203,7 +203,7 @@ $versions | ForEach-Object {
                 }
 
             } else {
-                Write-Information "$nuspecID found in the proxy repo, it is a unknown package ID. Support has to be added for it, see ADDING_PACKAGES.md" -InformationAction Continue
+                Write-Information "$nuspecID found in the proxy repo, it is an unknown package ID. Support has to be added for it, see ADDING_PACKAGES.md" -InformationAction Continue
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Replaces external function, cant change the name', Scope = 'Function', Target = 'Get-PackageParameters')]
+﻿[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidGlobalVars', '', Justification = 'remixerLocale is set by Get-RemixerConfig via dot-sourcing and is intentionally global')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Replaces external function, cant change the name', Scope = 'Function', Target = 'Get-PackageParameters')]
 param()
 
 Function Convert-gotomeeting ([PackageInternalizeInfo]$obj) {
@@ -56,6 +57,8 @@ Function Convert-anaconda3 ([PackageInternalizeInfo]$obj) {
         $url32 = ($fullurl32 -split "'" | Select-String -Pattern "https").ToString()
         $only64 = $false
     } catch {
+        #Intentional fallback: Anaconda dropped the x86 installer, so the 32-bit url may not exist in the script
+        Write-Verbose "No 32-bit url found for $($obj.nuspecID), only downloading the 64-bit installer"
     }
 
     $fullurl64 = ($obj.installScriptOrig -split "`n" | Select-String -Pattern '  url64bit  ').tostring()

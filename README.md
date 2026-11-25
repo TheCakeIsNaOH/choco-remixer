@@ -86,7 +86,6 @@ However, choco-remixer:
 - Comment based help for all public functions, specifically in `Edit-InstallChocolateyPackage` (platyps?)
 - Module metadata creation, module install, other helper scripts
 - Complete the components for module, and publish the module (PowerShell gallery)
-- Add Pester tests
 - Add generic functions for archive, portable download and vscode extension packages.
 
 ## Continuous TODOs
