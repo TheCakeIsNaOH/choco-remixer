@@ -6788,6 +6788,13 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>chezmoi</id>
+      <functionName>Convert-chezmoi</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>no</needsToolsDir>
+      <whyNotInternal>Maintainer</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>chmac</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -39367,7 +39374,6 @@
     <id>cherrysmartcard</id>
     <id>chessigma</id>
     <id>chessx</id>
-    <id>chezmoi</id>
     <id>chgkey</id>
     <id>chimera</id>
     <id>chindeoremote</id>
