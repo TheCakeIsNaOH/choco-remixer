@@ -17072,6 +17072,13 @@
       <whyNotInternal>ToDetermine</whyNotInternal>
     </pkg>
     <pkg>
+      <id>opencode2</id>
+      <functionName>Convert-opencode2</functionName>
+      <needsStopAction>no</needsStopAction>
+      <needsToolsDir>yes</needsToolsDir>
+      <whyNotInternal>ToDetermine</whyNotInternal>
+    </pkg>
+    <pkg>
       <id>opencppcoverage</id>
       <functionName>Convert-InstallChocolateyPackage</functionName>
       <needsStopAction>no</needsStopAction>
@@ -42146,7 +42153,6 @@
     <id>openboard</id>
     <id>openbve</id>
     <id>openchrom</id>
-    <id>opencode2</id>
     <id>opencodecs</id>
     <id>opencodereview</id>
     <id>opencomic.portable</id>
